@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="charazay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="team">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="team_info">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="fanclub">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="name" type="xs:string" />
+												</xs:sequence>
+												<xs:attribute name="mood" type="xs:unsignedByte" use="required" />
+												<xs:attribute name="fans" type="xs:unsignedShort" use="required" />
+												<xs:attribute name="level" type="xs:unsignedByte" use="required" />
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="training">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="group1" type="xs:string" />
+													<xs:element name="group2" type="xs:string" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="chemistry" type="xs:unsignedByte" use="required" />
+									<xs:attribute name="divisionid" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="arenaid" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="rival" type="xs:unsignedShort" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="userid" type="xs:unsignedShort" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

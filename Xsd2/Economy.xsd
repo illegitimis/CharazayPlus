@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="charazay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="economy">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="economy_week">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="income" minOccurs="1" maxOccurs="1"/>
+										<xs:element ref="expences" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="economy_season">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref ="income" />
+										<xs:element ref="expences" />											
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="income">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sponsor" type="xs:unsignedInt" />
+				<xs:element name="tickets" type="xs:unsignedInt" />
+				<xs:element name="sales" type="xs:unsignedInt" />
+				<xs:element name="other" type="xs:unsignedInt" />
+				<xs:element name="merchandise" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="expences">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="salary" type="xs:unsignedInt" />
+				<xs:element name="staff" type="xs:unsignedInt" />
+				<xs:element name="buys" type="xs:unsignedInt" />
+				<xs:element name="maintenance" type="xs:unsignedInt" />
+				<xs:element name="facility" type="xs:unsignedInt" />
+				<xs:element name="other" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

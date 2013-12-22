@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="charazay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="coaches">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="coach">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="basic">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="name" type="xs:string" />
+													<xs:element name="surname" type="xs:string" />
+													<xs:element name="age" type="xs:unsignedByte" />
+													<xs:element name="height" type="xs:unsignedByte" />
+													<xs:element name="weight" type="xs:unsignedByte" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="skills">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="defence" type="xs:unsignedByte" />
+													<xs:element name="freethrow" type="xs:unsignedByte" />
+													<xs:element name="twopoint" type="xs:unsignedByte" />
+													<xs:element name="threepoint" type="xs:unsignedByte" />
+													<xs:element name="dribling" type="xs:unsignedByte" />
+													<xs:element name="speed" type="xs:unsignedByte" />
+													<xs:element name="footwork" type="xs:unsignedByte" />
+													<xs:element name="rebounds" type="xs:unsignedByte" />
+													<xs:element name="passing" type="xs:unsignedByte" />
+													<xs:element name="experience" type="xs:unsignedByte" />
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="price" type="xs:unsignedInt" />
+										<xs:element name="salary" type="xs:unsignedInt" />
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:unsignedInt" use="required" />
+									<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
+									<xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

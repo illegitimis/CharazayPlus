@@ -1,0 +1,74 @@
+﻿======================================
+GENERAL
+APP ICON (ok)
+my division tab erase, my division schedule remains (ok)
+build default cache xml file (ok)
+formLogin: remove superfluous labels (OK)
+about form (OK)
+PlayerInfo: XML FILENAME SPACES (ok)
+implement player cache (ok)
+date conversion (ok)
+======================================
+0) INFO TAB
+these 3 are simplest ((ok))
+league hardiness chart REPLACED BY GRID (ok)
+CountryInfoXml            common (ok)
+CountryDivisionListXml    link with country info (ok)
+image country flag (ok)
+======================================
+1) STATUS TAB
+OK!
+======================================
+2) SKILLS TAB
+not working on first try (ok)
+grouping (ok)
+======================================
+3-7) PG, SG, ...
+======================================
+8) TRAINING TAB (CoachesXml)
+INITTRAININGPROPERTYGRID () NO LINQ (ok)
+MAXCOACHNAME (ok)
+split dist (ok)
+TrainingAdvicePropertyGridObject: fill correct values (OK)
+avg/max/sum (ok)
+property grid linq totals (ok)
+remove name grouping (ok)
+vertical header win7 (ok)
+byte/double columns (ok)
+differentiate active/normal skills (ok)
+link to skill training (ok)
+fullrowselect (ok)
+splitter scale (ok)
+highlight max coach (bold) OK
+======================================
+9) MY team SCHEDULE
+HIGHLIGHT LOSSES/WINS (ok)
+FILTER LEAGUE MATCHES (ok)
+DATE COLUMN (ok)
+played (ok)
+======================================
+10) DIVISION STANDINGS
+======================================
+11) MY DIVISION SCHEDULE
+a match details window , match downloadable upon click (ok)
+olv grouped per rounds (ok)
+rating home/away label (ok)
+rating olv col widths (ok)
+lineup fill (ok)
+match details zone (ok)
+======================================
+12) ECONOMY TAB
+income + expences in parallel (ok)
+REDO GRID POS (ok)
+======================================
+13) TRANSFER LIST TAB
+splitter dist (ok)
+profitability formula (ok)
+profibality groups (ok)
+value index groups (ok)
+score columns groups (ok)
+deadline editable (ok)
+profitability updateable (ok)
+sellteams and buyteams must be cached (ok)
+======================================
+

@@ -1,0 +1,43 @@
+﻿-------------------------------
+Info
+-------------------------------
+->howto schema to code
+xsd Player.xsd /c /n:AndreiPopescu.CharazayPlus.Xsd2
+-------------------------------
+->application stored xml
+"c:\Documents and Settings\Administrator\Local Settings\Application Data\CharazayDoctor" 
+c:\Users\Illegitimis\AppData\Local\CharazayPlus 
+-------------------------------
+prerequisites vertical header
+1) col.IsHeaderVertical = true;
+2) olv.HeaderUsesThemes = false;
+3) olv.RebuildColumns();
+-------------------------------
+->Info Tab
+these 3 are simplest 
+folder:TeamInfo, xsd:team|team_info
+folder:UserInfo, xsd:user
+folder:ArenaInfo 
+ArenaXml link with .. ArenaInfo xsd.arena ?
+CountryInfo xsd.country_info 20111123_5.xml (general)
+CountryInfo xsd.country 20111123_5_1.xml (division list)
+-------------------------------
+-> MY team SCHEDULE
+MyScheduleXml + DivisionStandingsXml
+folder:DivisionInfo, xsd:division + standings
+-------------------------------
+-> EconomyXml
+folder:Economy, xsd:economy_week+economy_season
+-------------------------------
+-> transfer
+folder:teamTransfers, xsd:team_transfers,transfer
+------------------
+-> my division schedule
+directory: DivisionSchedule 
+xsd.schedule+round+match (DivisionSchedule.xsd)
+match inside DivisionSchedule conflicts with match inside schedule
+------------------
+Sorting can be customised either by listening for the BeforeSorting event or by installing a CustomSorter.
+Read more: http://objectlistview.sourceforge.net/cs/features.html#ixzz2R1fF5yvs
+
+                

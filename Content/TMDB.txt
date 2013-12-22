@@ -1,0 +1,40 @@
+﻿v11
+---
+
+--select COUNT(*) from TM
+2098
+
+--unique values
+--data used for interpolation
+--select Age,PosId,AgeValue11,AVG(Sum) as AvgSum,COUNT(*) as cnt from TM group by Age,PosId,AgeValue11
+1107
+
+--missing data
+select x.Age,count(*),x.PosId from 
+(
+select Age,PosId,AgeValue11,AVG(Sum) as AvgSum,COUNT(*) as cnt from TM 
+group by Age,PosId,AgeValue11 
+) x
+group by Age,PosId 
+having  count(*) < 11
+order by age asc, PosId asc
+
+22	10	G
+24	10	G
+25	10	F
+35	8	F
+
+---under-represented
+select age,count(*) as cnt,PosId from TM 
+group by Age,PosId 
+having  count(*) < 15
+order by age asc, PosId asc, cnt desc 
+
+17	13	C
+20	11	F
+21	14	G
+22	10	G
+24	12	F
+25	12	F
+25	14	G
+35	12	F

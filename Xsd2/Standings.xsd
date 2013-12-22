@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="charazay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="division">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="standings">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" name="standing">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="played" type="xs:unsignedByte" />
+													<xs:element name="points_made" type="xs:unsignedShort" />
+													<xs:element name="points_against" type="xs:unsignedShort" />
+													<xs:element name="points" type="xs:unsignedByte" />
+													<xs:element name="wins" type="xs:unsignedByte" />
+													<xs:element name="loss" type="xs:unsignedByte" />
+												</xs:sequence>
+												<xs:attribute name="position" type="xs:unsignedByte" use="required" />
+												<xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+												<xs:attribute name="name" type="xs:string" use="required" />
+												<xs:attribute name="owner" type="xs:unsignedInt" use="required" />
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="level" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="lh" type="xs:unsignedByte" use="required" />
+						<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

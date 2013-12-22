@@ -1,0 +1,128 @@
+﻿======================================
+GENERAL
+different .net framework builds
+only one program instance
+splashscreen
+charazay certified logo
+advertising
+cache matches automaton (ok)
+matches cache - my team schedule + division schedule (ok)
+debug general cache (ok)
+-------------------------------
+0) INFO TAB
+debug xml received (ok)
+versioned xsd schema
+Grid control div history
+league hardiness chart
+-------------------------------
+1) STATUS TAB
+progress fatigue with text (ok)
+-------------------------------
+2) SKILLS TAB
+better layout, eye candy
+hot tracking
+player age/value 
+-------------------------------
+3-7) PG, SG, ...
+player age/value 
+better layout, eye candy 
+-------------------------------
+8) TRAINING TAB
+suggested training combination (CPP)
+replace grid with training
+debug suggested training
+-------------------------------
+9) MY team SCHEDULE
+better filter
+debug xml received  (ok)
+-------------------------------
+10) DIVISION STANDINGS
+debug xml received  (ok)
+more data?
+-----------------------
+11) DIVISION SCHEDULE
+debug xml  (ok)
+chart ?
+bball + vals addition as a total
+reinit away team control
+-----------------------
+12) ECONOMY
+debug  (ok)
+history?
+delete history (cumulative)
+anchor economy control (ok)
+--------------------
+13) TRANSFER LIST TAB
+could even get player info ... 
+and even playerids
+price editable OVERFLOW
+better money per agevalue estimation (centers especially) (OK, moved to TM db)
+data grid, sorting, (ok)
+price groups NOT SORTABLE (ok)
+format 2 decimals grid (ok)
+fancy labels instead of info grid (ok)
+new controls for position / skill (ok)
+------
+DB TM
+------
+CENTERS
+16 >1
+17 >1
+18 >1
+19 >1
+21,23 A,24 A,25 A
+31 <1
+32 <1
+
+FORWARDS
+15 A
+16 A
+18 A
+21 A
+23 A
+24,25,26 A
+
+dark grey title: 51, 51, 51
+light gray bkgrnd2 207, 207, 207
+light gray bkgrnd2 221, 221, 221
+gold 255,192,64
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

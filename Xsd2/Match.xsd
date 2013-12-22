@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="charazay">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="match" maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="match">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="teams" minOccurs="1" maxOccurs="1"/>
+				<xs:element ref="stats" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="bballs" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="lineup" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:unsignedInt" use="required" />
+			<xs:attribute name="date" type="xs:unsignedInt" use="required" />
+			<xs:attribute name="round" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="season" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="spectators" type="xs:unsignedShort" use="required" />
+			<xs:attribute name="vips" type="xs:unsignedShort" use="required" />
+			<xs:attribute name="played" type="xs:string" use="required" />
+			<xs:attribute name="homescore" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="awayscore" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="type" type="xs:unsignedByte" use="required" />
+			<xs:attribute name="leagueid" type="xs:unsignedShort" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="teams">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="hometeam" type="xs:unsignedShort" />
+				<xs:element name="hometeamname" type="xs:string" />
+				<xs:element name="awayteam" type="xs:unsignedShort" />
+				<xs:element name="awayteamname" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="stats">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="home">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" ref="rating" /> 
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="away">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" ref="rating" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bballs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="home">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" ref="bball" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="away">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" ref="bball" />								
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lineup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="home">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="first" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="second" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="third" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="forth" minOccurs="1" maxOccurs="1" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="away">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="first" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="second" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="third" minOccurs="1" maxOccurs="1" />
+							<xs:element ref="forth" minOccurs="1" maxOccurs="1" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rating">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="points" type="xs:unsignedByte" />
+				<xs:element name="o_reb" type="xs:unsignedByte" />
+				<xs:element name="d_reb" type="xs:unsignedByte" />
+				<xs:element name="to" type="xs:unsignedByte" />
+				<xs:element name="assist" type="xs:unsignedByte" />
+				<xs:element name="blocks" type="xs:unsignedByte" />
+				<xs:element name="steals" type="xs:unsignedByte" />
+				<xs:element name="fouls" type="xs:unsignedByte" />
+				<xs:element name="ft_m" type="xs:unsignedByte" />
+				<xs:element name="ft_a" type="xs:unsignedByte" />
+				<xs:element name="pt2_m" type="xs:unsignedByte" />
+				<xs:element name="pt2_a" type="xs:unsignedByte" />
+				<xs:element name="pt3_m" type="xs:unsignedByte" />
+				<xs:element name="pt3_a" type="xs:unsignedByte" />
+				<xs:element name="pld" type="xs:unsignedByte" />
+				<xs:element name="rtg" type="xs:byte" />
+			</xs:sequence>
+			<xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
+			<xs:attribute name="name" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bball">
+		<xs:complexType>
+			<xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
+			<xs:attribute name="bballs" type="xs:decimal" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="first">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pg" type="xs:unsignedInt" />
+				<xs:element name="sg" type="xs:unsignedInt" />
+				<xs:element name="sf" type="xs:unsignedInt" />
+				<xs:element name="pf" type="xs:unsignedInt" />
+				<xs:element name="c" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="second">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pg" type="xs:unsignedInt" />
+				<xs:element name="sg" type="xs:unsignedInt" />
+				<xs:element name="sf" type="xs:unsignedInt" />
+				<xs:element name="pf" type="xs:unsignedInt" />
+				<xs:element name="c" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="third">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pg" type="xs:unsignedInt" />
+				<xs:element name="sg" type="xs:unsignedInt" />
+				<xs:element name="sf" type="xs:unsignedInt" />
+				<xs:element name="pf" type="xs:unsignedInt" />
+				<xs:element name="c" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="forth">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pg" type="xs:unsignedInt" />
+				<xs:element name="sg" type="xs:unsignedInt" />
+				<xs:element name="sf" type="xs:unsignedInt" />
+				<xs:element name="pf" type="xs:unsignedInt" />
+				<xs:element name="c" type="xs:unsignedInt" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
