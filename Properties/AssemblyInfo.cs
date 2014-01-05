@@ -39,3 +39,5 @@ using System.Resources;
 
 
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Charazay+.Tests")]

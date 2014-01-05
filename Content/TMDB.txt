@@ -38,3 +38,23 @@ order by age asc, PosId asc, cnt desc
 25	12	F
 25	14	G
 35	12	F
+
+		A	0.0000128871952	float
+    B	12.4430084	float
+
+    A	0.00000000517109644	float
+		B	19.431963	float
+
+    Intercept	-103.245338	float
+		Slope	105.911255	float
+
+
+    		A	0.00004535423	float
+		B	11.383132	float
+		A	0.00000148620188	float
+    		B	14.3302088	float
++		fit	{slope:173,14 intercept:-174,74 R^20,89}
+
+
+
+
