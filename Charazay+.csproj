@@ -105,20 +105,55 @@
     <Compile Include="Obsolete.cs" />
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="SG.cs" />
-    <Compile Include="UI\Extensions.cs" />
+    <Compile Include="UI\DataGridExtensions.cs" />
+    <Compile Include="UI\DivisionScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DivisionScheduleUserControl.Designer.cs">
+      <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DivisionStandingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DivisionStandingsUserControl.Designer.cs">
+      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\InfoTabUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\InfoTabUserControl.Designer.cs">
+      <DependentUpon>InfoTabUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MyEconomyUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MyEconomyUserControl.Designer.cs">
+      <DependentUpon>MyEconomyUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ObjectListViewExtensions.cs" />
+    <Compile Include="UI\MyTeamScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MyTeamScheduleUserControl.Designer.cs">
+      <DependentUpon>MyTeamScheduleUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PlayerPositionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\PlayerPositionUserControl.Designer.cs">
+      <DependentUpon>PlayerPositionUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StatusUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\StatusUserControl.Designer.cs">
+      <DependentUpon>StatusUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TrainingPlanUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\TrainingPlanUserControl.Designer.cs">
       <DependentUpon>TrainingPlanUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\TransferListTab.cs">
-      <DependentUpon>TheForm.cs</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\TrainingTab.cs">
-      <DependentUpon>TheForm.cs</DependentUpon>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\HorizontalLevelIndicatorLabel.cs">
       <SubType>Component</SubType>
@@ -128,6 +163,18 @@
     </Compile>
     <Compile Include="UI\PlayerSkillsUserControl.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TrainingTabUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TrainingTabUserControl.Designer.cs">
+      <DependentUpon>TrainingTabUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TransferListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TransferListUserControl.Designer.cs">
+      <DependentUpon>TransferListUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\VLabel.cs">
       <SubType>Component</SubType>
@@ -251,11 +298,20 @@
     <EmbeddedResource Include="UI\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
+      <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DivisionStandingsUserControl.resx">
+      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\EconomyUserControl.resx">
       <DependentUpon>EconomyUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InfoTabUserControl.resx">
+      <DependentUpon>InfoTabUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\LabelDescriptionUserControl.resx">
       <DependentUpon>LabelDescriptionUserControl.cs</DependentUpon>
@@ -266,8 +322,20 @@
     <EmbeddedResource Include="UI\MatchDetailsUserControl.resx">
       <DependentUpon>MatchDetailsUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\MyEconomyUserControl.resx">
+      <DependentUpon>MyEconomyUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MyTeamScheduleUserControl.resx">
+      <DependentUpon>MyTeamScheduleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PlayerPositionUserControl.resx">
+      <DependentUpon>PlayerPositionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\RatingBballUserControl.resx">
       <DependentUpon>RatingBballUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StatusUserControl.resx">
+      <DependentUpon>StatusUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TheForm.resx">
       <DependentUpon>TheForm.cs</DependentUpon>
@@ -290,6 +358,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\PlayerSkillsUserControl.resx">
       <DependentUpon>PlayerSkillsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TrainingTabUserControl.resx">
+      <DependentUpon>TrainingTabUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TransferListUserControl.resx">
+      <DependentUpon>TransferListUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>

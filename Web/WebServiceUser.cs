@@ -1,21 +1,21 @@
 ﻿
 namespace AndreiPopescu.CharazayPlus.Web
 {
-  internal class WebServiceUser
+  public class WebServiceUser
   {
-    internal string user;
-    internal string securityCode;
-    internal int divisionId;
-    internal byte countryId;
-    internal int arenaId;
+    public string user;
+    public string securityCode;
+    public int divisionId;
+    public byte countryId;
+    public int arenaId;
 
-    internal WebServiceUser (string u, string pass)
+    public WebServiceUser (string u, string pass)
     {
       user = u;
       securityCode = pass;
     }
 
-    internal WebServiceUser (string u, string pass, int div, byte c, int a)
+    public WebServiceUser (string u, string pass, int div, byte c, int a)
     {
       user = u;
       securityCode = pass;

@@ -53,9 +53,8 @@
     /// Do not change the method contents inside the source code editor. The Forms designer might
     /// not be able to load this method if it was changed manually.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization"
-      , "CA1303:DoNotPassLiteralsAsLocalizedParameters"
-      , MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+      "Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
     private void InitializeComponent ( )
     {
       this.components = new System.ComponentModel.Container();
@@ -238,7 +237,7 @@
       this.olvcFN.Text = "Player";
       this.olvcFN.ToolTipText = "Tooltip for Player column. This was configurated in the IDE. (Hold down Control to see a different tooltip)";
       this.olvcFN.UseInitialLetterForGroup = true;
-      this.olvcFN.Width = 150;
+      this.olvcFN.Width = 180;
       // 
       // olvcDef
       // 
@@ -266,8 +265,8 @@
       // olvcFTA
       // 
       this.olvcFTA.CellPadding = null;
-      this.olvcFTA.GroupWithItemCountFormat = "{0} has {1} birthdays";
-      this.olvcFTA.GroupWithItemCountSingularFormat = "{0} has only {1} birthday";
+      //this.olvcFTA.GroupWithItemCountFormat = "{0} has {1} birthdays";
+      //this.olvcFTA.GroupWithItemCountSingularFormat = "{0} has only {1} birthday";
       this.initActiveColumn(this.olvcFTA, "Freethrows");
       // 
       // olvc2p
@@ -615,27 +614,19 @@
       tlist.GetColumn(6).AspectGetter = delegate(Player x) { return x.Comments; };
       */
 
-      this.olvcFN.AspectToStringConverter = delegate(object cellValue)
-      {
-        return ((String)cellValue).ToUpperInvariant();
-      };
-      // Cooking skill columns
+      this.olvcFN.AspectToStringConverter = delegate(object cellValue) { return ((String)cellValue).ToUpperInvariant(); };
+     
       this.olvcDefA.MakeGroupies(
-        //values
-          new object[] { 6D, 11D, 16D, 21D},
-          //descriptions
-          new string[] { "Really poor", "Bad", "Decent", "Good", "Mega" },
-          //images
-          new string[] { "not", "hamburger", "toast", "beef", "chef" },
-          //subtitles
-          new string[] {
+        new object[] { 6D, 11D, 16D, 21D }                                      //values
+        , new string[] { "Really poor", "Bad", "Decent", "Good", "Mega" }       //descriptions
+        , new string[] { "not", "hamburger", "toast", "beef", "chef" }          //images
+        , new string[] {
                     "This guy won't stop your grandma",
                     "Will stop grandma, have difficulties with grandpa",
                     "Will stop poor attacking play",
                     "Will give a hard time to most players",
-                    "Will give hell even to most threatening attackers" },
-          //tasks
-          new string[] { "Shield now!", "consider Shield", "", "nice", "wow" }
+                    "Will give hell even to most threatening attackers" }       //subtitles
+        , new string[] { "Shield now!", "consider Shield", "", "nice", "wow" }  //tasks
       );
 
       // Hourly rate column
@@ -644,11 +635,11 @@
           new string[] { "Bad", "Decent", "Good", "Mega" });
       
       // Salary indicator column
-      this.olvc2pA.AspectGetter = delegate(object row)
-      {
-        Player p = (Player)row;
-        return (p.TwoPoint < 4) ? "Bad" : ((p.TwoPoint > 7) ? "Good" : "Decent");
-      };
+      //this.olvc2pA.AspectGetter = delegate(object row)
+      //{
+      //  Player p = (Player)row;
+      //  return (p.TwoPoint < 4) ? "Bad" : ((p.TwoPoint > 7) ? "Good" : "Decent");
+      //};
       //this.olvc2pA.Renderer = new MappedImageRenderer(new Object[] { "Little"
       //  ,  AndreiPopescu.CharazayPlus.Properties.Resources.star12 , "Medium"
       //  , AndreiPopescu.CharazayPlus.Properties.Resources.star13, "Lots"
@@ -1024,9 +1015,9 @@ new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
       }
       //if (e.ColumnIndex == 7) {
       //    if (p.CanTellJokes.HasValue && p.CanTellJokes.Value)
-      //        e.SubItem.Decoration = new CellBorderDecoration();
+      //        e.SubItem.Skills = new CellBorderDecoration();
       //    else
-      //        e.SubItem.Decoration = null;
+      //        e.SubItem.Skills = null;
       //}
     }
 

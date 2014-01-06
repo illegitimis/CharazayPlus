@@ -6,7 +6,7 @@
   using System.Windows.Forms;
   using System;
 
-  public static class Extensions
+  public static class ObjectListViewExtensions
   {
     public static void ChangeHotItemStyle (ObjectListView olv
       , HotItemMode hotItemMode
@@ -88,6 +88,26 @@
     {
       listview.OwnerDraw = value;
       listview.BuildList();
+    }
+
+    /// <summary>
+    /// derive group names from markers
+    /// </summary>
+    /// <typeparam name="T">value array type</typeparam>
+    /// <param name="values">array of special group markers</param>
+    public static string[] BuildCustomGroupies<T> (T[] values)
+    {
+      List<string> groupKeys = new List<string>(values.Length + 1);
+      groupKeys.Add(string.Format("< {0}", values[0]));
+
+      for (int i = 0; i < values.Length - 1; i++)
+      {
+        groupKeys.Add(string.Format("[{0} - {1})", values[i], values[i + 1]));
+      }
+
+      groupKeys.Add(string.Format("> {0}", values[values.Length - 1]));
+
+      return groupKeys.ToArray();
     }
   }
 
@@ -181,5 +201,7 @@
     private OLVColumn column;
     private SortOrder sortOrder;
   }
+
+
 
 }
