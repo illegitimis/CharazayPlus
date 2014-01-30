@@ -1,5 +1,5 @@
 ﻿
-namespace CharazayPlus.Tests
+namespace CharazayPlus.MSTest
 {
   using AndreiPopescu.CharazayPlus.Utils;
   using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,5 +1,5 @@
 ﻿
-namespace CharazayPlus.Tests
+namespace CharazayPlus.MSTest
 {
   using System;
 using System.Collections.Generic;

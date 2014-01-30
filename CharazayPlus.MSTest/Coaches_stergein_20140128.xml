@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <coaches>
+    <coach id="2000018"
+           countryid="21"
+           teamid="21191">
+      <basic>
+        <name>Joaquin</name>
+        <surname>Gimenez</surname>
+        <age>54</age>
+        <height>202</height>
+        <weight>99</weight>
+      </basic>
+      <skills>
+        <defence>25</defence>
+        <freethrow>28</freethrow>
+        <twopoint>27</twopoint>
+        <threepoint>28</threepoint>
+        <dribling>29</dribling>
+        <speed>29</speed>
+        <footwork>21</footwork>
+        <rebounds>10</rebounds>
+        <passing>30</passing>
+        <experience>30</experience>
+      </skills>
+      <price>6224400</price>
+      <salary>185250</salary>
+    </coach>
+  </coaches>
+</charazay>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <player id="2459629"
+          transfer="yes"
+          nt="no"
+          u21nt="no"
+          u18nt="no"
+          promoted_on="1189887308"
+          dl="no"
+          countryid="12"
+          teamid="42179"
+          traininggroup="1">
+    <basic>
+      <name>Angel</name>
+      <surname>Corbalán</surname>
+      <age>34</age>
+      <height>187</height>
+      <weight>73.5707</weight>
+      <number show="yes">0</number>
+    </basic>
+    <skills>
+      <defence>15</defence>
+      <freethrow>7</freethrow>
+      <twopoint>4</twopoint>
+      <threepoint>4</threepoint>
+      <dribling>19</dribling>
+      <speed>19</speed>
+      <footwork>1</footwork>
+      <rebounds>6</rebounds>
+      <passing>13</passing>
+      <experience>24</experience>
+    </skills>
+    <status>
+      <injured>0</injured>
+      <fatigue>5</fatigue>
+      <form>4</form>
+      <fame>7</fame>
+      <si>388299</si>
+      <salary>303530</salary>
+    </status>
+  </player>
+</charazay>

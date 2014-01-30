@@ -41,3 +41,5 @@ using System.Resources;
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Charazay+.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("CharazayPlus.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("CharazayPlus.MSTest")]

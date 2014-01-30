@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <team id="21191"
+        countryid="5"
+        userid="33039">
+    <name>Buzau Destroyers</name>
+    <team_info chemistry="5"
+               divisionid="1013"
+               arenaid="21191"
+               rival="13532">
+      <fanclub mood="9"
+               fans="11124"
+               level="11">
+        <name>Seek and destroy</name>
+      </fanclub>
+      <training>
+        <group1>defence</group1>
+        <group2>dribling</group2>
+      </training>
+    </team_info>
+  </team>
+</charazay>

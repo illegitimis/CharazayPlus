@@ -10,6 +10,7 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
   /// <summary>
   /// match 
   /// </summary>
+  /*
   public partial class match
   {
       //[System.Xml.Serialization.XmlElementAttribute("bballs", typeof(bballs))]
@@ -37,8 +38,8 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
       public string AwayTeamName { get { return teams == null ? string.Empty : teams.awayteamname; } }
       public string HomeTeamName { get { return teams == null ? string.Empty : teams.hometeamname; } }
 
-      public ushort HomeTeamId { get { return teams == null ? (ushort)0 : teams.hometeam; } }
-      public ushort AwayTeamId { get { return teams == null ? (ushort)0 : teams.awayteam; } }
+      public uint HomeTeamId { get { return teams == null ? (ushort)0 : teams.hometeam; } }
+      public uint AwayTeamId { get { return teams == null ? (ushort)0 : teams.awayteam; } }
 
       stats stats
       {
@@ -98,6 +99,7 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
 
     public bool Won { get { return (homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId); } }
   }
+    */
 
   /// <summary>
   /// transfer
@@ -183,19 +185,31 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
           return default(T);
       }
 
-      //public matches matches { get { return this.Get<matches>(); } }
+      public matches matches { get { return this.Get<matches>(); } }
 
       public division division { get { return this.Get<division>(); } }
 
-      //public schedule schedule { get { return this.Get<schedule>(); } }
+      public schedule schedule { get { return this.Get<schedule>(); } }
 
       public match match { get { return this.Get<match>(); } }
 
-      public team_transfers transfers { get { return this.Get<team_transfers>(); } }
+      public team_transfers Transfers { get { return this.Get<team_transfers>(); } }
 
       public economy economy { get { return this.Get<economy>(); } }
 
       public player player { get { return this.Get<player>(); } }
+      
+      public user user { get { return this.Get<user>(); } }
+
+      public team team { get { return this.Get<team>(); } }
+
+      public arena arena { get { return this.Get<arena>(); } }
+
+      public coaches coaches { get { return this.Get<coaches>(); } }
+
+      public country Country { get { return this.Get<country>(); } }
+
+      public players Players { get { return this.Get<players>(); } }
   }
 
   public partial class expences

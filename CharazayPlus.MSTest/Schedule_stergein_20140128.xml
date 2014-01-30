@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <matches>
+    <match id="22656273"
+           date="1395156600"
+           round="30"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13532</awayteam>
+        <awayteamname>Outsiderii Sibiu</awayteamname>
+      </teams>
+    </match>
+    <match id="22656271"
+           date="1394897400"
+           round="29"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>3238</awayteam>
+        <awayteamname>BC Oradea</awayteamname>
+      </teams>
+    </match>
+    <match id="22656264"
+           date="1394551800"
+           round="28"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>27862</hometeam>
+        <hometeamname>-Miami Heat-</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656256"
+           date="1394292600"
+           round="27"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>5456</hometeam>
+        <hometeamname>BC Lorantffy</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656248"
+           date="1393947000"
+           round="26"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13524</awayteam>
+        <awayteamname>CSA Steaua</awayteamname>
+      </teams>
+    </match>
+    <match id="22656240"
+           date="1393687800"
+           round="25"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>3323</hometeam>
+        <hometeamname>Sibiu Wariors</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656232"
+           date="1393342200"
+           round="24"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13536</awayteam>
+        <awayteamname>C.S.U Forest Sibiu</awayteamname>
+      </teams>
+    </match>
+    <match id="22656223"
+           date="1393083000"
+           round="23"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>114</hometeam>
+        <hometeamname>BC Virtutii București</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656215"
+           date="1392737400"
+           round="22"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>1721</awayteam>
+        <awayteamname>Constanta Lakers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656207"
+           date="1392478200"
+           round="21"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>13534</hometeam>
+        <hometeamname>steaua marii negre</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656199"
+           date="1392132600"
+           round="20"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>19396</awayteam>
+        <awayteamname>Paul Dunkers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656191"
+           date="1391873400"
+           round="19"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>249</hometeam>
+        <hometeamname>PUMA MOBILTECO CLUJ</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656183"
+           date="1391527800"
+           round="18"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>258</awayteam>
+        <awayteamname>KK Donji Milanovac</awayteamname>
+      </teams>
+    </match>
+    <match id="22656175"
+           date="1391268600"
+           round="17"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>23148</hometeam>
+        <hometeamname> NIGERIA FLYERS</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23490969"
+           date="1391094000"
+           round="3"
+           season="29"
+           spectators="0"
+           vips="0"
+           played="no"
+           homescore="0"
+           awayscore="0"
+           type="5"
+           nationalcupid="2431">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>28409</awayteam>
+        <awayteamname>Magic Life</awayteamname>
+      </teams>
+    </match>
+    <match id="22656167"
+           date="1390923000"
+           round="16"
+           season="29"
+           spectators="18600"
+           vips="608"
+           played="no"
+           homescore="75"
+           awayscore="63"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13589</awayteam>
+        <awayteamname>Transilvania Club</awayteamname>
+      </teams>
+    </match>
+    <match id="23490249"
+           date="1390752000"
+           round="0"
+           season="29"
+           spectators="6200"
+           vips="213"
+           played="yes"
+           homescore="100"
+           awayscore="52"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>17346</awayteam>
+        <awayteamname>Universita Studiorm Andinensis</awayteamname>
+      </teams>
+    </match>
+    <match id="22656153"
+           date="1390663800"
+           round="15"
+           season="29"
+           spectators="19150"
+           vips="850"
+           played="yes"
+           homescore="67"
+           awayscore="59"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>13532</hometeam>
+        <hometeamname>Outsiderii Sibiu</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23480819"
+           date="1390489200"
+           round="2"
+           season="29"
+           spectators="17595"
+           vips="590"
+           played="yes"
+           homescore="147"
+           awayscore="7"
+           type="5"
+           nationalcupid="2431">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13475</awayteam>
+        <awayteamname>SS.Haiduc</awayteamname>
+      </teams>
+    </match>
+    <match id="22656146"
+           date="1390318200"
+           round="14"
+           season="29"
+           spectators="15879"
+           vips="489"
+           played="yes"
+           homescore="69"
+           awayscore="105"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>3238</hometeam>
+        <hometeamname>BC Oradea</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23485833"
+           date="1390129200"
+           round="0"
+           season="29"
+           spectators="6666"
+           vips="250"
+           played="yes"
+           homescore="22"
+           awayscore="129"
+           type="1">
+      <teams>
+        <hometeam>17118</hometeam>
+        <hometeamname>BC Abuls</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656137"
+           date="1390059000"
+           round="13"
+           season="29"
+           spectators="17940"
+           vips="559"
+           played="yes"
+           homescore="128"
+           awayscore="4"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>27862</awayteam>
+        <awayteamname>-Miami Heat-</awayteamname>
+      </teams>
+    </match>
+    <match id="23475870"
+           date="1389891600"
+           round="0"
+           season="29"
+           spectators="6200"
+           vips="213"
+           played="yes"
+           homescore="20"
+           awayscore="0"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>59291</awayteam>
+        <awayteamname>sagesses</awayteamname>
+      </teams>
+    </match>
+    <match id="22656129"
+           date="1389713400"
+           round="12"
+           season="29"
+           spectators="18600"
+           vips="640"
+           played="yes"
+           homescore="112"
+           awayscore="54"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>5456</awayteam>
+        <awayteamname>BC Lorantffy</awayteamname>
+      </teams>
+    </match>
+    <match id="23467282"
+           date="1389499200"
+           round="0"
+           season="29"
+           spectators="6200"
+           vips="213"
+           played="yes"
+           homescore="133"
+           awayscore="11"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>18049</awayteam>
+        <awayteamname>Cantu&amp;#39; Celtics</awayteamname>
+      </teams>
+    </match>
+    <match id="22656121"
+           date="1389454200"
+           round="11"
+           season="29"
+           spectators="17300"
+           vips="700"
+           played="yes"
+           homescore="60"
+           awayscore="71"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>13524</hometeam>
+        <hometeamname>CSA Steaua</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23463373"
+           date="1389294000"
+           round="0"
+           season="29"
+           spectators="5500"
+           vips="200"
+           played="yes"
+           homescore="93"
+           awayscore="71"
+           type="1">
+      <teams>
+        <hometeam>26540</hometeam>
+        <hometeamname>San Antonio Rockets</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656113"
+           date="1389108600"
+           round="10"
+           season="29"
+           spectators="18600"
+           vips="640"
+           played="yes"
+           homescore="102"
+           awayscore="66"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>3323</awayteam>
+        <awayteamname>Sibiu Wariors</awayteamname>
+      </teams>
+    </match>
+    <match id="23461981"
+           date="1388948400"
+           round="0"
+           season="29"
+           spectators="4833"
+           vips="166"
+           played="yes"
+           homescore="48"
+           awayscore="120"
+           type="1">
+      <teams>
+        <hometeam>29461</hometeam>
+        <hometeamname>Milas Sport</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656105"
+           date="1388849400"
+           round="9"
+           season="29"
+           spectators="15211"
+           vips="454"
+           played="yes"
+           homescore="44"
+           awayscore="97"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>13536</hometeam>
+        <hometeamname>C.S.U Forest Sibiu</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23453383"
+           date="1388682000"
+           round="0"
+           season="29"
+           spectators="7369"
+           vips="272"
+           played="yes"
+           homescore="2"
+           awayscore="136"
+           type="1">
+      <teams>
+        <hometeam>20745</hometeam>
+        <hometeamname>Chilapi SA</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="22656098"
+           date="1388503800"
+           round="8"
+           season="29"
+           spectators="18180"
+           vips="564"
+           played="yes"
+           homescore="91"
+           awayscore="68"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>114</awayteam>
+        <awayteamname>BC Virtutii București</awayteamname>
+      </teams>
+    </match>
+    <match id="23446183"
+           date="1388322000"
+           round="0"
+           season="29"
+           spectators="5437"
+           vips="160"
+           played="yes"
+           homescore="131"
+           awayscore="9"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>18239</awayteam>
+        <awayteamname>Zen and Vlou</awayteamname>
+      </teams>
+    </match>
+    <match id="22656090"
+           date="1388244600"
+           round="7"
+           season="29"
+           spectators="17000"
+           vips="546"
+           played="yes"
+           homescore="62"
+           awayscore="96"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>1721</hometeam>
+        <hometeamname>Constanta Lakers</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23444781"
+           date="1388048400"
+           round="0"
+           season="29"
+           spectators="5895"
+           vips="183"
+           played="yes"
+           homescore="90"
+           awayscore="57"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>37554</awayteam>
+        <awayteamname>BC Džiugas</awayteamname>
+      </teams>
+    </match>
+    <match id="22656082"
+           date="1387899000"
+           round="6"
+           season="29"
+           spectators="18600"
+           vips="640"
+           played="yes"
+           homescore="54"
+           awayscore="71"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>13534</awayteam>
+        <awayteamname>steaua marii negre</awayteamname>
+      </teams>
+    </match>
+    <match id="22656074"
+           date="1387639800"
+           round="5"
+           season="29"
+           spectators="14000"
+           vips="587"
+           played="yes"
+           homescore="70"
+           awayscore="95"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>19396</hometeam>
+        <hometeamname>Paul Dunkers</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23436146"
+           date="1387447200"
+           round="0"
+           season="29"
+           spectators="6032"
+           vips="185"
+           played="yes"
+           homescore="124"
+           awayscore="28"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>25609</awayteam>
+        <awayteamname>Оловни Војници</awayteamname>
+      </teams>
+    </match>
+    <match id="22656066"
+           date="1387294200"
+           round="4"
+           season="29"
+           spectators="16748"
+           vips="498"
+           played="yes"
+           homescore="86"
+           awayscore="71"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>249</awayteam>
+        <awayteamname>PUMA MOBILTECO CLUJ</awayteamname>
+      </teams>
+    </match>
+    <match id="23432126"
+           date="1387134000"
+           round="0"
+           season="29"
+           spectators="5324"
+           vips="175"
+           played="yes"
+           homescore="116"
+           awayscore="25"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>25609</awayteam>
+        <awayteamname>Оловни Војници</awayteamname>
+      </teams>
+    </match>
+    <match id="22656058"
+           date="1387035000"
+           round="3"
+           season="29"
+           spectators="9524"
+           vips="361"
+           played="yes"
+           homescore="38"
+           awayscore="87"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>258</hometeam>
+        <hometeamname>KK Donji Milanovac</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+    <match id="23427560"
+           date="1386856800"
+           round="0"
+           season="29"
+           spectators="5228"
+           vips="149"
+           played="yes"
+           homescore="144"
+           awayscore="45"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>27215</awayteam>
+        <awayteamname>BK 2007 Velky Krtis</awayteamname>
+      </teams>
+    </match>
+    <match id="22656050"
+           date="1386689400"
+           round="2"
+           season="29"
+           spectators="18303"
+           vips="551"
+           played="yes"
+           homescore="63"
+           awayscore="96"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>23148</awayteam>
+        <awayteamname> NIGERIA FLYERS</awayteamname>
+      </teams>
+    </match>
+    <match id="23425283"
+           date="1386500400"
+           round="0"
+           season="29"
+           spectators="4829"
+           vips="142"
+           played="yes"
+           homescore="20"
+           awayscore="0"
+           type="1">
+      <teams>
+        <hometeam>21191</hometeam>
+        <hometeamname>Buzau Destroyers</hometeamname>
+        <awayteam>27862</awayteam>
+        <awayteamname>-Miami Heat-</awayteamname>
+      </teams>
+    </match>
+    <match id="22656042"
+           date="1386430200"
+           round="1"
+           season="29"
+           spectators="13811"
+           vips="418"
+           played="yes"
+           homescore="58"
+           awayscore="83"
+           type="3"
+           leagueid="1013">
+      <teams>
+        <hometeam>13589</hometeam>
+        <hometeamname>Transilvania Club</hometeamname>
+        <awayteam>21191</awayteam>
+        <awayteamname>Buzau Destroyers</awayteamname>
+      </teams>
+    </match>
+  </matches>
+</charazay>

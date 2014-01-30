@@ -32,4 +32,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("2.5.1.*")]
 [assembly: AssemblyFileVersion("2.5.1.0")]
+[assembly: AssemblyInformationalVersion ("2.5.1.0-CharazayPlus")]
 [assembly: System.CLSCompliant(true)]

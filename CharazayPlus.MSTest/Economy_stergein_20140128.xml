@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <economy>
+    <economy_week>
+      <income>
+        <sponsor>1540350</sponsor>
+        <tickets>1156450</tickets>
+        <sales>0</sales>
+        <other>0</other>
+        <merchandise>746075</merchandise>
+      </income>
+      <expences>
+        <salary>4819111</salary>
+        <staff>185250</staff>
+        <buys>0</buys>
+        <maintenance>370178</maintenance>
+        <facility>391200</facility>
+        <other>230000</other>
+      </expences>
+    </economy_week>
+    <economy_season>
+      <income>
+        <sponsor>27110160</sponsor>
+        <tickets>10236800</tickets>
+        <sales>6786000</sales>
+        <other>0</other>
+        <merchandise>4975425</merchandise>
+      </income>
+      <expences>
+        <salary>32858556</salary>
+        <staff>1482000</staff>
+        <buys>17988889</buys>
+        <maintenance>2961424</maintenance>
+        <facility>1956000</facility>
+        <other>1840000</other>
+      </expences>
+    </economy_season>
+  </economy>
+</charazay>

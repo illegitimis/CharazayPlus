@@ -6,13 +6,16 @@
     xmlns:mstns="http://tempuri.org/Charazay.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >-->
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <!--MERGED-->
   <xs:element name="charazay">
     <xs:complexType>
       <xs:sequence>
-        <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:choice minOccurs="1"
+                   maxOccurs="unbounded">
           <xs:element ref="arena" />
           <xs:element ref="coaches" />
           <xs:element ref="country" />
@@ -36,11 +39,18 @@
   <xs:element name="arena">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="name" type="xs:string" />
+        <xs:element name="name"
+                    type="xs:string" />
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="spectators" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="vips" type="xs:unsignedShort" use="required" />
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="spectators"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="vips"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -48,7 +58,8 @@
   <xs:element name="coaches">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="coach" />
+        <xs:element maxOccurs="unbounded"
+                    ref="coach" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -57,42 +68,73 @@
       <xs:sequence>
         <xs:element ref="basic" />
         <xs:element ref="skills" />
-        <xs:element name="price" type="xs:unsignedInt" />
-        <xs:element name="salary" type="xs:unsignedInt" />
+        <xs:element name="price"
+                    type="xs:unsignedInt" />
+        <xs:element name="salary"
+                    type="xs:unsignedInt" />
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="countryid"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="teamid"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
   <!--3) country-->
-  <xs:element name="name" type="xs:string" />
-  <xs:element name="flag" type="xs:string" />
+  <xs:element name="name"
+              type="xs:string" />
+  <xs:element name="flag"
+              type="xs:string" />
 
   <xs:element name="country_info">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="ntcoach" minOccurs="0" maxOccurs="1" />
-        <xs:element name="u21ntcoach" minOccurs="0" maxOccurs="1" />
-        <xs:element name="u18ntcoach" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="ntcoach"
+                    minOccurs="0"
+                    maxOccurs="1" />
+        <xs:element name="u21ntcoach"
+                    minOccurs="0"
+                    maxOccurs="1" />
+        <xs:element name="u18ntcoach"
+                    minOccurs="0"
+                    maxOccurs="1" />
       </xs:sequence>
-      <xs:attribute name="active" type="xs:string" use="required" />
-      <xs:attribute name="users" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="teams" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="waiting" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="supporters" type="xs:unsignedByte" use="required" />
+      <xs:attribute name="active"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="users" type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="teams"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="waiting"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="supporters"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="country">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="name" maxOccurs="1"/>
-        <xs:element ref="flag" maxOccurs="1"/>
-        <xs:element maxOccurs="unbounded" ref="division" />
-        <xs:element ref="country_info" maxOccurs="1"/>
+        <xs:element ref="name"
+                    maxOccurs="1"/>
+        <xs:element ref="flag"
+                    maxOccurs="1"/>
+        <xs:element maxOccurs="unbounded"
+                    ref="division" />
+        <xs:element ref="country_info"
+                    maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedByte" use="required" />
+      <xs:attribute name="id"
+                    type="xs:unsignedByte"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -104,7 +146,9 @@
   </xs:group>
   <xs:complexType name="myNtCoach">
     <xs:group ref="ntCoachGroup" />
-    <xs:attribute name="bot" type="xs:string" use="required" />
+    <xs:attribute name="bot"
+                  type="xs:string"
+                  use="required" />
   </xs:complexType>
 
   <xs:element name="ntcoach">
@@ -112,7 +156,9 @@
       <xs:sequence>
         <xs:element ref="user" />
       </xs:sequence>
-      <xs:attribute name="bot" type="xs:string" use="required" />
+      <xs:attribute name="bot"
+                    type="xs:string"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="u21ntcoach">
@@ -120,7 +166,9 @@
       <xs:sequence>
         <xs:element ref="user" />
       </xs:sequence>
-      <xs:attribute name="bot" type="xs:string" use="required" />
+      <xs:attribute name="bot"
+                    type="xs:string"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="u18ntcoach">
@@ -128,7 +176,9 @@
       <xs:sequence>
         <xs:element ref="user" />
       </xs:sequence>
-      <xs:attribute name="bot" type="xs:string" use="required" />
+      <xs:attribute name="bot"
+                    type="xs:string"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -145,7 +195,7 @@
     <xs:complexType>
       <xs:sequence>
         <!--asa e division schedule ptr toata lumea-->
-        <xs:element ref="match" maxOccurs="1"  minOccurs="1"/>
+        <xs:element ref="match" maxOccurs="1" minOccurs="1"/>
         <!--<xs:element ref="match" maxOccurs="unbounded" /> -->
       </xs:sequence>
       <xs:attribute name="number" type="xs:unsignedByte" use="required" />
@@ -165,7 +215,9 @@
   <xs:element name="economy_week">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="income" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="income"
+                    minOccurs="1"
+                    maxOccurs="1"/>
         <xs:element ref="expences" />
       </xs:sequence>
     </xs:complexType>
@@ -181,23 +233,34 @@
   <xs:element name="income">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="sponsor" type="xs:unsignedInt" />
-        <xs:element name="tickets" type="xs:unsignedInt" />
-        <xs:element name="sales" type="xs:unsignedInt" />
-        <xs:element name="other" type="xs:unsignedInt" />
-        <xs:element name="merchandise" type="xs:unsignedInt" />
+        <xs:element name="sponsor"
+                    type="xs:unsignedInt" />
+        <xs:element name="tickets"
+                    type="xs:unsignedInt" />
+        <xs:element name="sales"
+                    type="xs:unsignedInt" />
+        <xs:element name="other"
+                    type="xs:unsignedInt" />
+        <xs:element name="merchandise"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="expences">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="salary" type="xs:unsignedInt" />
-        <xs:element name="staff" type="xs:unsignedInt" />
-        <xs:element name="buys" type="xs:unsignedInt" />
-        <xs:element name="maintenance" type="xs:unsignedInt" />
-        <xs:element name="facility" type="xs:unsignedInt" />
-        <xs:element name="other" type="xs:unsignedInt" />
+        <xs:element name="salary"
+                    type="xs:unsignedInt" />
+        <xs:element name="staff"
+                    type="xs:unsignedInt" />
+        <xs:element name="buys"
+                    type="xs:unsignedInt" />
+        <xs:element name="maintenance"
+                    type="xs:unsignedInt" />
+        <xs:element name="facility"
+                    type="xs:unsignedInt" />
+        <xs:element name="other"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -205,26 +268,93 @@
   <!--6) match-->
   <!--match from division schedule-->
   <!--match from my schedule-->
-  <xs:element name="match">
+  <!--<xs:element name="match">
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
         <xs:element ref="teams"/>
         <xs:element ref="stats"/>
         <xs:element ref="bballs"/>
-        <xs:element ref="lineup"/>  
-      </xs:choice>      
-      <xs:attribute name="id" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="date" type="xs:unsignedInt" use="optional" />
-      <xs:attribute name="round" type="xs:unsignedByte" use="optional" />
-      <xs:attribute name="season" type="xs:unsignedByte" use="optional" />
-      <xs:attribute name="spectators" type="xs:unsignedShort" use="optional" />
-      <xs:attribute name="vips" type="xs:unsignedShort" use="optional" />
-      <xs:attribute name="played" type="xs:string" use="optional" />
-      <xs:attribute name="homescore" type="xs:unsignedByte" use="optional" />
-      <xs:attribute name="awayscore" type="xs:unsignedByte" use="optional" />
-      <xs:attribute name="type" type="xs:unsignedByte" use="optional" />
-      <xs:attribute name="leagueid" type="xs:unsignedShort" use="optional" />
-      <xs:attribute name="nationalcupid" type="xs:unsignedShort" use="optional" />
+        <xs:element ref="lineup"/>
+      </xs:choice>
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="date"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="round"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="season"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="spectators"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="vips"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="played"
+                    type="xs:string"
+                    use="optional" />
+      <xs:attribute name="homescore"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="awayscore"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="type"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="leagueid"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="nationalcupid"
+                    type="xs:unsignedInt"
+                    use="optional" />
+    </xs:complexType>
+  </xs:element>-->
+  <xs:element name="match">
+    <xs:complexType>
+      <xs:sequence minOccurs="0">
+        <xs:element ref="teams" />
+        <xs:element minOccurs="0" ref="stats"></xs:element>
+        <xs:element minOccurs="0" ref="bballs"></xs:element>
+        <xs:element minOccurs="0" ref="lineup"></xs:element>
+      </xs:sequence>
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="date"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="round"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="season"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="spectators"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="vips"
+                    type="xs:unsignedInt"
+                    use="optional" />
+      <xs:attribute name="played"
+                    type="xs:string"
+                    use="optional" />
+      <xs:attribute name="homescore"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="awayscore"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="type"
+                    type="xs:unsignedByte"
+                    use="optional" />
+      <xs:attribute name="leagueid"
+                    type="xs:unsignedInt"
+                    use="optional" />
     </xs:complexType>
   </xs:element>
   <xs:element name="stats">
@@ -243,10 +373,18 @@
         <xs:choice maxOccurs="unbounded">
           <xs:element ref="rating" />
           <xs:element ref="bball" />
-          <xs:element ref="first" minOccurs="1" maxOccurs="1" />
-          <xs:element ref="second" minOccurs="1" maxOccurs="1" />
-          <xs:element ref="third" minOccurs="1" maxOccurs="1" />
-          <xs:element ref="forth" minOccurs="1" maxOccurs="1" />
+          <xs:element ref="first"
+                      minOccurs="1"
+                      maxOccurs="1" />
+          <xs:element ref="second"
+                      minOccurs="1"
+                      maxOccurs="1" />
+          <xs:element ref="third"
+                      minOccurs="1"
+                      maxOccurs="1" />
+          <xs:element ref="forth"
+                      minOccurs="1"
+                      maxOccurs="1" />
         </xs:choice>
       </xs:sequence>
     </xs:complexType>
@@ -288,75 +426,119 @@
   <xs:element name="rating">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="points" type="xs:unsignedByte" />
-        <xs:element name="o_reb" type="xs:unsignedByte" />
-        <xs:element name="d_reb" type="xs:unsignedByte" />
-        <xs:element name="to" type="xs:unsignedByte" />
-        <xs:element name="assist" type="xs:unsignedByte" />
-        <xs:element name="blocks" type="xs:unsignedByte" />
-        <xs:element name="steals" type="xs:unsignedByte" />
-        <xs:element name="fouls" type="xs:unsignedByte" />
-        <xs:element name="ft_m" type="xs:unsignedByte" />
-        <xs:element name="ft_a" type="xs:unsignedByte" />
-        <xs:element name="pt2_m" type="xs:unsignedByte" />
-        <xs:element name="pt2_a" type="xs:unsignedByte" />
-        <xs:element name="pt3_m" type="xs:unsignedByte" />
-        <xs:element name="pt3_a" type="xs:unsignedByte" />
-        <xs:element name="pld" type="xs:unsignedByte" />
-        <xs:element name="rtg" type="xs:byte" />
+        <xs:element name="points"
+                    type="xs:unsignedByte" />
+        <xs:element name="o_reb"
+                    type="xs:unsignedByte" />
+        <xs:element name="d_reb"
+                    type="xs:unsignedByte" />
+        <xs:element name="to"
+                    type="xs:unsignedByte" />
+        <xs:element name="assist"
+                    type="xs:unsignedByte" />
+        <xs:element name="blocks"
+                    type="xs:unsignedByte" />
+        <xs:element name="steals"
+                    type="xs:unsignedByte" />
+        <xs:element name="fouls"
+                    type="xs:unsignedByte" />
+        <xs:element name="ft_m"
+                    type="xs:unsignedByte" />
+        <xs:element name="ft_a"
+                    type="xs:unsignedByte" />
+        <xs:element name="pt2_m"
+                    type="xs:unsignedByte" />
+        <xs:element name="pt2_a"
+                    type="xs:unsignedByte" />
+        <xs:element name="pt3_m"
+                    type="xs:unsignedByte" />
+        <xs:element name="pt3_a"
+                    type="xs:unsignedByte" />
+        <xs:element name="pld"
+                    type="xs:unsignedByte" />
+        <xs:element name="rtg"
+                    type="xs:byte" />
       </xs:sequence>
-      <xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="name" type="xs:string" use="required" />
+      <xs:attribute name="playerid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="name"
+                    type="xs:string"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="bball">
     <xs:complexType>
-      <xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="bballs" type="xs:decimal" use="required" />
+      <xs:attribute name="playerid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="bballs"
+                    type="xs:decimal"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
   <xs:element name="first">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="pg" type="xs:unsignedInt" />
-        <xs:element name="sg" type="xs:unsignedInt" />
-        <xs:element name="sf" type="xs:unsignedInt" />
-        <xs:element name="pf" type="xs:unsignedInt" />
-        <xs:element name="c" type="xs:unsignedInt" />
+        <xs:element name="pg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sf"
+                    type="xs:unsignedInt" />
+        <xs:element name="pf"
+                    type="xs:unsignedInt" />
+        <xs:element name="c"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="second">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="pg" type="xs:unsignedInt" />
-        <xs:element name="sg" type="xs:unsignedInt" />
-        <xs:element name="sf" type="xs:unsignedInt" />
-        <xs:element name="pf" type="xs:unsignedInt" />
-        <xs:element name="c" type="xs:unsignedInt" />
+        <xs:element name="pg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sf"
+                    type="xs:unsignedInt" />
+        <xs:element name="pf"
+                    type="xs:unsignedInt" />
+        <xs:element name="c"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="third">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="pg" type="xs:unsignedInt" />
-        <xs:element name="sg" type="xs:unsignedInt" />
-        <xs:element name="sf" type="xs:unsignedInt" />
-        <xs:element name="pf" type="xs:unsignedInt" />
-        <xs:element name="c" type="xs:unsignedInt" />
+        <xs:element name="pg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sf"
+                    type="xs:unsignedInt" />
+        <xs:element name="pf"
+                    type="xs:unsignedInt" />
+        <xs:element name="c"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="forth">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="pg" type="xs:unsignedInt" />
-        <xs:element name="sg" type="xs:unsignedInt" />
-        <xs:element name="sf" type="xs:unsignedInt" />
-        <xs:element name="pf" type="xs:unsignedInt" />
-        <xs:element name="c" type="xs:unsignedInt" />
+        <xs:element name="pg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sg"
+                    type="xs:unsignedInt" />
+        <xs:element name="sf"
+                    type="xs:unsignedInt" />
+        <xs:element name="pf"
+                    type="xs:unsignedInt" />
+        <xs:element name="c"
+                    type="xs:unsignedInt" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -369,16 +551,36 @@
         <xs:element ref="skills" />
         <xs:element ref="status" />
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="transfer" type="xs:string" use="required" />
-      <xs:attribute name="nt" type="xs:string" use="required" />
-      <xs:attribute name="u21nt" type="xs:string" use="required" />
-      <xs:attribute name="u18nt" type="xs:string" use="required" />
-      <xs:attribute name="promoted_on" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="dl" type="xs:string" use="required" />
-      <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="traininggroup" type="xs:unsignedByte" use="required" />
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="transfer"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="nt"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="u21nt"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="u18nt"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="promoted_on"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="dl"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="countryid"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="teamid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="traininggroup"
+                    type="xs:unsignedByte"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -390,27 +592,43 @@
         <xs:element ref="age"/>
         <xs:element ref="height"/>
         <xs:element ref="weight"/>
-        <xs:element ref="number" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="number"
+                    minOccurs="0"
+                    maxOccurs="1" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="surname" type="xs:string" />
-  <xs:element name="age" type="xs:unsignedByte" />
-  <xs:element name="height" type="xs:unsignedByte" />
-  <xs:element name="weight" type="xs:decimal" />
+  <xs:element name="surname"
+              type="xs:string" />
+  <xs:element name="age"
+              type="xs:unsignedByte" />
+  <xs:element name="height"
+              type="xs:unsignedByte" />
+  <xs:element name="weight"
+              type="xs:decimal" />
 
   <!--skills-->
-  <xs:element name="defence" type="xs:unsignedByte" />
-  <xs:element name="freethrow" type="xs:unsignedByte" />
-  <xs:element name="twopoint" type="xs:unsignedByte" />
-  <xs:element name="threepoint" type="xs:unsignedByte" />
-  <xs:element name="dribling" type="xs:unsignedByte" />
-  <xs:element name="speed" type="xs:unsignedByte" />
-  <xs:element name="footwork" type="xs:unsignedByte" />
-  <xs:element name="rebounds" type="xs:unsignedByte" />
-  <xs:element name="passing" type="xs:unsignedByte" />
-  <xs:element name="experience" type="xs:unsignedByte" />
+  <xs:element name="defence"
+              type="xs:unsignedByte" />
+  <xs:element name="freethrow"
+              type="xs:unsignedByte" />
+  <xs:element name="twopoint"
+              type="xs:unsignedByte" />
+  <xs:element name="threepoint"
+              type="xs:unsignedByte" />
+  <xs:element name="dribling"
+              type="xs:unsignedByte" />
+  <xs:element name="speed"
+              type="xs:unsignedByte" />
+  <xs:element name="footwork"
+              type="xs:unsignedByte" />
+  <xs:element name="rebounds"
+              type="xs:unsignedByte" />
+  <xs:element name="passing"
+              type="xs:unsignedByte" />
+  <xs:element name="experience"
+              type="xs:unsignedByte" />
   <xs:element name="skills">
     <xs:complexType>
       <xs:sequence>
@@ -429,12 +647,18 @@
   </xs:element>
 
   <!--status-->
-  <xs:element name="injured" type="xs:unsignedByte" />
-  <xs:element name="fatigue" type="xs:unsignedByte" />
-  <xs:element name="form" type="xs:unsignedByte" />
-  <xs:element name="fame" type="xs:unsignedByte" />
-  <xs:element name="si" type="xs:unsignedInt" />
-  <xs:element name="salary" type="xs:unsignedInt" />
+  <xs:element name="injured"
+              type="xs:unsignedByte" />
+  <xs:element name="fatigue"
+              type="xs:unsignedByte" />
+  <xs:element name="form"
+              type="xs:unsignedByte" />
+  <xs:element name="fame"
+              type="xs:unsignedByte" />
+  <xs:element name="si"
+              type="xs:unsignedInt" />
+  <xs:element name="salary"
+              type="xs:unsignedInt" />
   <xs:element name="status">
     <xs:complexType>
       <xs:sequence>
@@ -452,7 +676,8 @@
   <xs:element name="players">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="player" />
+        <xs:element maxOccurs="unbounded"
+                    ref="player" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -460,13 +685,15 @@
     <xs:complexType>
       <xs:simpleContent>
         <xs:extension base="xs:unsignedByte">
-          <xs:attribute name="show" type="xs:string" use="required" />
+          <xs:attribute name="show"
+                        type="xs:string"
+                        use="required" />
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
 
-  <!--9) schedule-->
+  <!--9) Schedule has matches element-->
   <xs:element name="matches">
     <xs:complexType>
       <xs:sequence>
@@ -474,10 +701,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="hometeam" type="xs:unsignedShort" />
-  <xs:element name="hometeamname" type="xs:string" />
-  <xs:element name="awayteam" type="xs:unsignedShort" />
-  <xs:element name="awayteamname" type="xs:string" />
+  <xs:element name="hometeam" type="xs:unsignedInt" />
+  <xs:element name="hometeamname"
+              type="xs:string" />
+  <xs:element name="awayteam" type="xs:unsignedInt" />
+  <xs:element name="awayteamname"
+              type="xs:string" />
   <xs:element name="teams">
     <xs:complexType>
       <xs:sequence>
@@ -489,16 +718,21 @@
     </xs:complexType>
   </xs:element>
 
-  <!--10) standings-->
+  <!--10) standings (DivisionInfo)-->
   <xs:element name="division">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="name" />
-        <xs:element ref="standings" minOccurs="0"  maxOccurs="1"/>
+        <xs:element ref="standings"
+                    minOccurs="0"
+                    maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="level" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="lh" type="xs:unsignedByte" use="required" />
+      <xs:attribute name="id" type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="level"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="lh" type="xs:unsignedShort" use="required" />
       <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
     </xs:complexType>
   </xs:element>
@@ -506,7 +740,8 @@
   <xs:element name="standings">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="standing" />
+        <xs:element maxOccurs="unbounded"
+                    ref="standing" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -516,14 +751,22 @@
         <xs:element name="played" type="xs:unsignedByte" />
         <xs:element name="points_made" type="xs:unsignedShort" />
         <xs:element name="points_against" type="xs:unsignedShort" />
-        <xs:element name="points" type="xs:unsignedByte" />
+        <xs:element name="points" type="xs:unsignedShort" />
         <xs:element name="wins" type="xs:unsignedByte" />
         <xs:element name="loss" type="xs:unsignedByte" />
       </xs:sequence>
-      <xs:attribute name="position" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="name" type="xs:string" use="required" />
-      <xs:attribute name="owner" type="xs:unsignedInt" use="required" />
+      <xs:attribute name="position"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="teamid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="name"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="owner"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -534,21 +777,36 @@
         <xs:element ref="name"/>
         <xs:element ref="team_info" />
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="userid" type="xs:unsignedShort" use="required" />
+      <xs:attribute name="id"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="countryid"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="userid"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="team_info">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="fanclub" maxOccurs="1"/>
+        <xs:element ref="fanclub"
+                    maxOccurs="1"/>
         <xs:element ref="training" />
       </xs:sequence>
-      <xs:attribute name="chemistry" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="divisionid" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="arenaid" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="rival" type="xs:unsignedShort" use="required" />
+      <xs:attribute name="chemistry"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="divisionid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="arenaid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="rival"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="fanclub">
@@ -556,16 +814,24 @@
       <xs:sequence>
         <xs:element ref="name" />
       </xs:sequence>
-      <xs:attribute name="mood" type="xs:unsignedByte" use="required" />
-      <xs:attribute name="fans" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="level" type="xs:unsignedByte" use="required" />
+      <xs:attribute name="mood"
+                    type="xs:unsignedByte"
+                    use="required" />
+      <xs:attribute name="fans"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="level"
+                    type="xs:unsignedByte"
+                    use="required" />
     </xs:complexType>
   </xs:element>
   <xs:element name="training">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="group1" type="xs:string" />
-        <xs:element name="group2" type="xs:string" />
+        <xs:element name="group1"
+                    type="xs:string" />
+        <xs:element name="group2"
+                    type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -574,20 +840,29 @@
   <xs:element name="team_transfers">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="transfer" />
+        <xs:element maxOccurs="unbounded"
+                    ref="transfer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="transfer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="sellteam" type="xs:unsignedShort" />
-        <xs:element name="buyteam" type="xs:unsignedShort" />
+        <xs:element name="sellteam" type="xs:unsignedInt" />
+        <xs:element name="buyteam" type="xs:unsignedInt" />
       </xs:sequence>
-      <xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="date" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="si" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="price" type="xs:unsignedInt" use="required" />
+      <xs:attribute name="playerid"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="date"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="si"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="price"
+                    type="xs:unsignedInt"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 
@@ -597,12 +872,20 @@
       <xs:sequence>
         <xs:element ref="name" />
       </xs:sequence>
-      <xs:attribute name="id" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="supporter" type="xs:string" use="required" />
-      <xs:attribute name="registered" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="last_active" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
-      <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />      
+      <xs:attribute name="id" type="xs:unsignedInt" use="required" />
+      <xs:attribute name="supporter"
+                    type="xs:string"
+                    use="required" />
+      <xs:attribute name="registered"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="last_active"
+                    type="xs:unsignedInt"
+                    use="required" />
+      <xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
+      <xs:attribute name="countryid"
+                    type="xs:unsignedByte"
+                    use="required" />
     </xs:complexType>
   </xs:element>
 

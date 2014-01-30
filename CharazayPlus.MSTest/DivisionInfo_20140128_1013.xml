@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <division id="1013"
+            level="1"
+            lh="251"
+            countryid="5">
+    <name>Divizia A</name>
+    <standings>
+      <standing position="1"
+                teamid="13532"
+                name="Outsiderii Sibiu"
+                owner="47621">
+        <played>15</played>
+        <points_made>1140</points_made>
+        <points_against>574</points_against>
+        <points>30</points>
+        <wins>15</wins>
+        <loss>0</loss>
+      </standing>
+      <standing position="2"
+                teamid="23148"
+                name=" NIGERIA FLYERS"
+                owner="27464">
+        <played>15</played>
+        <points_made>1210</points_made>
+        <points_against>803</points_against>
+        <points>28</points>
+        <wins>13</wins>
+        <loss>2</loss>
+      </standing>
+      <standing position="3"
+                teamid="13534"
+                name="steaua marii negre"
+                owner="37714">
+        <played>15</played>
+        <points_made>1279</points_made>
+        <points_against>656</points_against>
+        <points>28</points>
+        <wins>13</wins>
+        <loss>2</loss>
+      </standing>
+      <standing position="4"
+                teamid="21191"
+                name="Buzau Destroyers"
+                owner="33039">
+        <played>15</played>
+        <points_made>1329</points_made>
+        <points_against>898</points_against>
+        <points>27</points>
+        <wins>12</wins>
+        <loss>3</loss>
+      </standing>
+      <standing position="5"
+                teamid="13524"
+                name="CSA Steaua"
+                owner="14423">
+        <played>15</played>
+        <points_made>1138</points_made>
+        <points_against>829</points_against>
+        <points>27</points>
+        <wins>12</wins>
+        <loss>3</loss>
+      </standing>
+      <standing position="6"
+                teamid="3323"
+                name="Sibiu Wariors"
+                owner="123278">
+        <played>15</played>
+        <points_made>1095</points_made>
+        <points_against>1048</points_against>
+        <points>24</points>
+        <wins>9</wins>
+        <loss>6</loss>
+      </standing>
+      <standing position="7"
+                teamid="249"
+                name="PUMA MOBILTECO CLUJ"
+                owner="247">
+        <played>15</played>
+        <points_made>1090</points_made>
+        <points_against>932</points_against>
+        <points>24</points>
+        <wins>9</wins>
+        <loss>6</loss>
+      </standing>
+      <standing position="8"
+                teamid="114"
+                name="BC Virtutii București"
+                owner="12974">
+        <played>15</played>
+        <points_made>1025</points_made>
+        <points_against>952</points_against>
+        <points>23</points>
+        <wins>8</wins>
+        <loss>7</loss>
+      </standing>
+      <standing position="9"
+                teamid="13536"
+                name="C.S.U Forest Sibiu"
+                owner="46794">
+        <played>15</played>
+        <points_made>793</points_made>
+        <points_against>1094</points_against>
+        <points>21</points>
+        <wins>6</wins>
+        <loss>9</loss>
+      </standing>
+      <standing position="10"
+                teamid="5456"
+                name="BC Lorantffy"
+                owner="224688">
+        <played>15</played>
+        <points_made>1009</points_made>
+        <points_against>1310</points_against>
+        <points>20</points>
+        <wins>5</wins>
+        <loss>10</loss>
+      </standing>
+      <standing position="11"
+                teamid="3238"
+                name="BC Oradea"
+                owner="134720">
+        <played>15</played>
+        <points_made>1059</points_made>
+        <points_against>1122</points_against>
+        <points>20</points>
+        <wins>5</wins>
+        <loss>10</loss>
+      </standing>
+      <standing position="12"
+                teamid="13589"
+                name="Transilvania Club"
+                owner="16246">
+        <played>15</played>
+        <points_made>810</points_made>
+        <points_against>921</points_against>
+        <points>19</points>
+        <wins>4</wins>
+        <loss>11</loss>
+      </standing>
+      <standing position="13"
+                teamid="258"
+                name="KK Donji Milanovac"
+                owner="31275">
+        <played>15</played>
+        <points_made>627</points_made>
+        <points_against>844</points_against>
+        <points>18</points>
+        <wins>3</wins>
+        <loss>12</loss>
+      </standing>
+      <standing position="14"
+                teamid="1721"
+                name="Constanta Lakers"
+                owner="1544">
+        <played>15</played>
+        <points_made>877</points_made>
+        <points_against>1224</points_against>
+        <points>18</points>
+        <wins>3</wins>
+        <loss>12</loss>
+      </standing>
+      <standing position="15"
+                teamid="19396"
+                name="Paul Dunkers"
+                owner="47528">
+        <played>15</played>
+        <points_made>928</points_made>
+        <points_against>1089</points_against>
+        <points>18</points>
+        <wins>3</wins>
+        <loss>12</loss>
+      </standing>
+      <standing position="16"
+                teamid="27862"
+                name="-Miami Heat-"
+                owner="38705">
+        <played>15</played>
+        <points_made>241</points_made>
+        <points_against>1354</points_against>
+        <points>14</points>
+        <wins>0</wins>
+        <loss>15</loss>
+      </standing>
+    </standings>
+  </division>
+</charazay>

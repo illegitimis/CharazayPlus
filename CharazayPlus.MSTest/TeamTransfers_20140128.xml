@@ -1,0 +1,2813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <team_transfers>
+    <transfer playerid="2790621"
+              date="1390430159"
+              si="338175"
+              price="1">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4278742"
+              date="1390324259"
+              si="591178"
+              price="6500000">
+      <sellteam>47934</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4113311"
+              date="1388183459"
+              si="447637"
+              price="10060000">
+      <sellteam>46912</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="34548025"
+              date="1387744499"
+              si="15945"
+              price="1950000">
+      <sellteam>21191</sellteam>
+      <buyteam>32736</buyteam>
+    </transfer>
+    <transfer playerid="3442474"
+              date="1386950159"
+              si="562496"
+              price="5590000">
+      <sellteam>21191</sellteam>
+      <buyteam>20762</buyteam>
+    </transfer>
+    <transfer playerid="3465471"
+              date="1386712859"
+              si="554662"
+              price="1428888">
+      <sellteam>18369</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="32184330"
+              date="1385677019"
+              si="44420"
+              price="14320000">
+      <sellteam>21191</sellteam>
+      <buyteam>13697</buyteam>
+    </transfer>
+    <transfer playerid="3832739"
+              date="1385634959"
+              si="482713"
+              price="2990000">
+      <sellteam>21191</sellteam>
+      <buyteam>58901</buyteam>
+    </transfer>
+    <transfer playerid="34574042"
+              date="1385414759"
+              si="8260"
+              price="53000">
+      <sellteam>21191</sellteam>
+      <buyteam>18395</buyteam>
+    </transfer>
+    <transfer playerid="19007007"
+              date="1385155499"
+              si="731071"
+              price="18220000">
+      <sellteam>18284</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1830214"
+              date="1384345799"
+              si="529094"
+              price="13000">
+      <sellteam>21191</sellteam>
+      <buyteam>50321</buyteam>
+    </transfer>
+    <transfer playerid="3442474"
+              date="1383759839"
+              si="575712"
+              price="3520000">
+      <sellteam>19529</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19865866"
+              date="1383529979"
+              si="421397"
+              price="11290075">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3832739"
+              date="1383163739"
+              si="488548"
+              price="860001">
+      <sellteam>17120</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4032996"
+              date="1382908139"
+              si="533673"
+              price="7860000">
+      <sellteam>21191</sellteam>
+      <buyteam>36344</buyteam>
+    </transfer>
+    <transfer playerid="22370371"
+              date="1382906759"
+              si="238021"
+              price="3200000">
+      <sellteam>21191</sellteam>
+      <buyteam>36132</buyteam>
+    </transfer>
+    <transfer playerid="19585045"
+              date="1382906699"
+              si="585605"
+              price="1100000">
+      <sellteam>21191</sellteam>
+      <buyteam>3477</buyteam>
+    </transfer>
+    <transfer playerid="4248816"
+              date="1382729639"
+              si="535182"
+              price="2660000">
+      <sellteam>21191</sellteam>
+      <buyteam>35454</buyteam>
+    </transfer>
+    <transfer playerid="1830214"
+              date="1381628999"
+              si="554669"
+              price="140001">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3849365"
+              date="1379750219"
+              si="510787"
+              price="10400000">
+      <sellteam>21191</sellteam>
+      <buyteam>8381</buyteam>
+    </transfer>
+    <transfer playerid="3535237"
+              date="1378111139"
+              si="511601"
+              price="4000000">
+      <sellteam>38480</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4224530"
+              date="1376987999"
+              si="563311"
+              price="18200000">
+      <sellteam>21191</sellteam>
+      <buyteam>8381</buyteam>
+    </transfer>
+    <transfer playerid="19042378"
+              date="1376160719"
+              si="765039"
+              price="30000000">
+      <sellteam>17131</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2510921"
+              date="1376144939"
+              si="479396"
+              price="3785000">
+      <sellteam>21191</sellteam>
+      <buyteam>19098</buyteam>
+    </transfer>
+    <transfer playerid="22370371"
+              date="1376144819"
+              si="221569"
+              price="3860000">
+      <sellteam>21191</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="33152056"
+              date="1376144759"
+              si="17134"
+              price="1020000">
+      <sellteam>21191</sellteam>
+      <buyteam>29119</buyteam>
+    </transfer>
+    <transfer playerid="19843050"
+              date="1375884899"
+              si="600765"
+              price="10020000">
+      <sellteam>36076</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19071960"
+              date="1374418619"
+              si="379011"
+              price="14300000">
+      <sellteam>21191</sellteam>
+      <buyteam>13940</buyteam>
+    </transfer>
+    <transfer playerid="4032996"
+              date="1370455679"
+              si="492453"
+              price="16000000">
+      <sellteam>4764</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="33152056"
+              date="1369905359"
+              si="13331"
+              price="2500000">
+      <sellteam>42723</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1012393"
+              date="1368815339"
+              si="467827"
+              price="1013000">
+      <sellteam>21191</sellteam>
+      <buyteam>48278</buyteam>
+    </transfer>
+    <transfer playerid="2553912"
+              date="1368814379"
+              si="397690"
+              price="2333333">
+      <sellteam>21191</sellteam>
+      <buyteam>20895</buyteam>
+    </transfer>
+    <transfer playerid="19585045"
+              date="1368603899"
+              si="537790"
+              price="8000000">
+      <sellteam>28260</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4224530"
+              date="1368286379"
+              si="537256"
+              price="15100005">
+      <sellteam>19272</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="756363"
+              date="1367923019"
+              si="340136"
+              price="170000">
+      <sellteam>21191</sellteam>
+      <buyteam>11906</buyteam>
+    </transfer>
+    <transfer playerid="33124940"
+              date="1367825399"
+              si="13016"
+              price="1300000">
+      <sellteam>21191</sellteam>
+      <buyteam>26613</buyteam>
+    </transfer>
+    <transfer playerid="21670253"
+              date="1367776439"
+              si="415839"
+              price="13760000">
+      <sellteam>26916</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2510921"
+              date="1367663699"
+              si="498018"
+              price="4360000">
+      <sellteam>50486</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="31789397"
+              date="1367654399"
+              si="21465"
+              price="9120000">
+      <sellteam>21191</sellteam>
+      <buyteam>45734</buyteam>
+    </transfer>
+    <transfer playerid="756363"
+              date="1366123379"
+              si="349359"
+              price="100007">
+      <sellteam>7277</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3389174"
+              date="1365189059"
+              si="488274"
+              price="7500000">
+      <sellteam>21191</sellteam>
+      <buyteam>53172</buyteam>
+    </transfer>
+    <transfer playerid="1049782"
+              date="1365188339"
+              si="492452"
+              price="6560695">
+      <sellteam>21191</sellteam>
+      <buyteam>20149</buyteam>
+    </transfer>
+    <transfer playerid="32157676"
+              date="1365187379"
+              si="17309"
+              price="4550000">
+      <sellteam>21191</sellteam>
+      <buyteam>58808</buyteam>
+    </transfer>
+    <transfer playerid="19865742"
+              date="1365187319"
+              si="592516"
+              price="4180000">
+      <sellteam>21191</sellteam>
+      <buyteam>32019</buyteam>
+    </transfer>
+    <transfer playerid="32174098"
+              date="1365161639"
+              si="20972"
+              price="9020000">
+      <sellteam>21191</sellteam>
+      <buyteam>12819</buyteam>
+    </transfer>
+    <transfer playerid="2553912"
+              date="1365017159"
+              si="402559"
+              price="6360000">
+      <sellteam>28102</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19071960"
+              date="1365017099"
+              si="347696"
+              price="15020000">
+      <sellteam>18481</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="32165490"
+              date="1364926799"
+              si="20382"
+              price="7150000">
+      <sellteam>21191</sellteam>
+      <buyteam>48678</buyteam>
+    </transfer>
+    <transfer playerid="2059820"
+              date="1364118959"
+              si="511920"
+              price="10400000">
+      <sellteam>21191</sellteam>
+      <buyteam>42935</buyteam>
+    </transfer>
+    <transfer playerid="24371466"
+              date="1363150499"
+              si="248172"
+              price="18200000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1021080"
+              date="1362647339"
+              si="492088"
+              price="6500000">
+      <sellteam>21191</sellteam>
+      <buyteam>56511</buyteam>
+    </transfer>
+    <transfer playerid="18698923"
+              date="1362328019"
+              si="259254"
+              price="1800000">
+      <sellteam>21191</sellteam>
+      <buyteam>42051</buyteam>
+    </transfer>
+    <transfer playerid="32174098"
+              date="1361840879"
+              si="17316"
+              price="3520000">
+      <sellteam>54769</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1295770"
+              date="1361528519"
+              si="352324"
+              price="5200000">
+      <sellteam>21191</sellteam>
+      <buyteam>21190</buyteam>
+    </transfer>
+    <transfer playerid="32165490"
+              date="1361175419"
+              si="16995"
+              price="5000000">
+      <sellteam>36315</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="31789397"
+              date="1361116079"
+              si="16910"
+              price="10080000">
+      <sellteam>26860</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="32157676"
+              date="1360880939"
+              si="14829"
+              price="1600000">
+      <sellteam>26758</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1049782"
+              date="1360858799"
+              si="517678"
+              price="4580000">
+      <sellteam>16399</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22370371"
+              date="1360786079"
+              si="175632"
+              price="9999999">
+      <sellteam>27312</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="18698923"
+              date="1360005299"
+              si="254262"
+              price="1500000">
+      <sellteam>35027</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19077263"
+              date="1359735119"
+              si="500760"
+              price="10060000">
+      <sellteam>21191</sellteam>
+      <buyteam>16733</buyteam>
+    </transfer>
+    <transfer playerid="796138"
+              date="1359388259"
+              si="438315"
+              price="5200000">
+      <sellteam>21191</sellteam>
+      <buyteam>20263</buyteam>
+    </transfer>
+    <transfer playerid="1021080"
+              date="1359165299"
+              si="509358"
+              price="6040000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="741343"
+              date="1358693519"
+              si="506544"
+              price="3900000">
+      <sellteam>21191</sellteam>
+      <buyteam>27705</buyteam>
+    </transfer>
+    <transfer playerid="1295770"
+              date="1357490519"
+              si="366231"
+              price="3400000">
+      <sellteam>5226</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="741343"
+              date="1357201799"
+              si="519620"
+              price="3000000">
+      <sellteam>46950</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="30765781"
+              date="1356947399"
+              si="21308"
+              price="2060000">
+      <sellteam>21191</sellteam>
+      <buyteam>27056</buyteam>
+    </transfer>
+    <transfer playerid="31241494"
+              date="1356946979"
+              si="13292"
+              price="33000">
+      <sellteam>21191</sellteam>
+      <buyteam>54616</buyteam>
+    </transfer>
+    <transfer playerid="31707206"
+              date="1356946919"
+              si="13623"
+              price="53000">
+      <sellteam>21191</sellteam>
+      <buyteam>52479</buyteam>
+    </transfer>
+    <transfer playerid="578583"
+              date="1354700519"
+              si="446226"
+              price="710000">
+      <sellteam>21191</sellteam>
+      <buyteam>23742</buyteam>
+    </transfer>
+    <transfer playerid="1830406"
+              date="1354395419"
+              si="480062"
+              price="5850000">
+      <sellteam>21191</sellteam>
+      <buyteam>15259</buyteam>
+    </transfer>
+    <transfer playerid="31230321"
+              date="1354353539"
+              si="21425"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>29959</buyteam>
+    </transfer>
+    <transfer playerid="3389174"
+              date="1354318739"
+              si="461366"
+              price="15420001">
+      <sellteam>8019</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="30830799"
+              date="1354135439"
+              si="21459"
+              price="8450000">
+      <sellteam>21191</sellteam>
+      <buyteam>33453</buyteam>
+    </transfer>
+    <transfer playerid="2476017"
+              date="1354114739"
+              si="726840"
+              price="27060000">
+      <sellteam>15677</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="29697129"
+              date="1353513599"
+              si="44666"
+              price="3250000">
+      <sellteam>21191</sellteam>
+      <buyteam>56451</buyteam>
+    </transfer>
+    <transfer playerid="3497240"
+              date="1352801519"
+              si="480343"
+              price="18200000">
+      <sellteam>21191</sellteam>
+      <buyteam>22435</buyteam>
+    </transfer>
+    <transfer playerid="30483821"
+              date="1352593139"
+              si="17640"
+              price="8580000">
+      <sellteam>21191</sellteam>
+      <buyteam>43344</buyteam>
+    </transfer>
+    <transfer playerid="578583"
+              date="1351895459"
+              si="457378"
+              price="890000">
+      <sellteam>20761</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="31230321"
+              date="1351017899"
+              si="18249"
+              price="7740000">
+      <sellteam>7843</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="30830799"
+              date="1350659999"
+              si="18724"
+              price="5060000">
+      <sellteam>28364</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="30483821"
+              date="1349298419"
+              si="15336"
+              price="7020000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1830406"
+              date="1349291279"
+              si="466103"
+              price="4520000">
+      <sellteam>41025</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2482708"
+              date="1347375779"
+              si="395501"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>42871</buyteam>
+    </transfer>
+    <transfer playerid="20329618"
+              date="1347375779"
+              si="303039"
+              price="26000000">
+      <sellteam>21191</sellteam>
+      <buyteam>15392</buyteam>
+    </transfer>
+    <transfer playerid="3497240"
+              date="1346966219"
+              si="462341"
+              price="12540000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="29705255"
+              date="1345399019"
+              si="21597"
+              price="5200000">
+      <sellteam>21191</sellteam>
+      <buyteam>40988</buyteam>
+    </transfer>
+    <transfer playerid="3849365"
+              date="1345140059"
+              si="440952"
+              price="25000000">
+      <sellteam>16774</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="796138"
+              date="1344978299"
+              si="494172"
+              price="7000000">
+      <sellteam>44728</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="29704867"
+              date="1344937619"
+              si="18132"
+              price="5850000">
+      <sellteam>21191</sellteam>
+      <buyteam>26683</buyteam>
+    </transfer>
+    <transfer playerid="1737373"
+              date="1344670739"
+              si="399405"
+              price="15600000">
+      <sellteam>21191</sellteam>
+      <buyteam>47509</buyteam>
+    </transfer>
+    <transfer playerid="1017178"
+              date="1344035519"
+              si="469039"
+              price="11700000">
+      <sellteam>21191</sellteam>
+      <buyteam>60314</buyteam>
+    </transfer>
+    <transfer playerid="533805"
+              date="1342947419"
+              si="389866"
+              price="4550000">
+      <sellteam>21191</sellteam>
+      <buyteam>8162</buyteam>
+    </transfer>
+    <transfer playerid="29697129"
+              date="1342887899"
+              si="30024"
+              price="3000000">
+      <sellteam>17399</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="277743"
+              date="1341041579"
+              si="605418"
+              price="3900000">
+      <sellteam>21191</sellteam>
+      <buyteam>27893</buyteam>
+    </transfer>
+    <transfer playerid="2482708"
+              date="1340878559"
+              si="373875"
+              price="9999999">
+      <sellteam>32450</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="29704867"
+              date="1337852819"
+              si="13778"
+              price="3660000">
+      <sellteam>56017</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4248816"
+              date="1337794919"
+              si="365708"
+              price="34000000">
+      <sellteam>36076</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1745582"
+              date="1337255939"
+              si="400842"
+              price="4580000">
+      <sellteam>21191</sellteam>
+      <buyteam>41610</buyteam>
+    </transfer>
+    <transfer playerid="29705255"
+              date="1337068079"
+              si="14744"
+              price="6020000">
+      <sellteam>3238</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="533805"
+              date="1335716459"
+              si="377245"
+              price="4020000">
+      <sellteam>25656</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="600409"
+              date="1334750939"
+              si="558217"
+              price="22160000">
+      <sellteam>21191</sellteam>
+      <buyteam>48398</buyteam>
+    </transfer>
+    <transfer playerid="277743"
+              date="1334493899"
+              si="650051"
+              price="5200000">
+      <sellteam>19940</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19851801"
+              date="1334222519"
+              si="232370"
+              price="53300000">
+      <sellteam>21191</sellteam>
+      <buyteam>44502</buyteam>
+    </transfer>
+    <transfer playerid="20687423"
+              date="1333349099"
+              si="135096"
+              price="2120000">
+      <sellteam>21191</sellteam>
+      <buyteam>28605</buyteam>
+    </transfer>
+    <transfer playerid="1347107"
+              date="1333347359"
+              si="354003"
+              price="4100000">
+      <sellteam>21191</sellteam>
+      <buyteam>13298</buyteam>
+    </transfer>
+    <transfer playerid="1258963"
+              date="1332686819"
+              si="482644"
+              price="5200000">
+      <sellteam>21191</sellteam>
+      <buyteam>53172</buyteam>
+    </transfer>
+    <transfer playerid="20251761"
+              date="1332426899"
+              si="251060"
+              price="18900000">
+      <sellteam>44015</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19077263"
+              date="1332425219"
+              si="370471"
+              price="35020000">
+      <sellteam>21443</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1305959"
+              date="1332184559"
+              si="459693"
+              price="23400000">
+      <sellteam>21191</sellteam>
+      <buyteam>25569</buyteam>
+    </transfer>
+    <transfer playerid="2059820"
+              date="1331644379"
+              si="449669"
+              price="25000000">
+      <sellteam>26709</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1737373"
+              date="1331640539"
+              si="357578"
+              price="18000000">
+      <sellteam>14010</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="600409"
+              date="1330963919"
+              si="545515"
+              price="15040000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22007446"
+              date="1330698779"
+              si="172529"
+              price="16900000">
+      <sellteam>21191</sellteam>
+      <buyteam>22515</buyteam>
+    </transfer>
+    <transfer playerid="749096"
+              date="1329429839"
+              si="342125"
+              price="2100000">
+      <sellteam>21191</sellteam>
+      <buyteam>32634</buyteam>
+    </transfer>
+    <transfer playerid="1347107"
+              date="1327613399"
+              si="340501"
+              price="6000000">
+      <sellteam>27154</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1017178"
+              date="1327578059"
+              si="425070"
+              price="15000000">
+      <sellteam>20954</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="20734707"
+              date="1327571879"
+              si="192007"
+              price="19500000">
+      <sellteam>21191</sellteam>
+      <buyteam>24296</buyteam>
+    </transfer>
+    <transfer playerid="22188855"
+              date="1326488759"
+              si="120094"
+              price="16900000">
+      <sellteam>21191</sellteam>
+      <buyteam>24282</buyteam>
+    </transfer>
+    <transfer playerid="19851801"
+              date="1326475799"
+              si="206133"
+              price="39999999">
+      <sellteam>2826</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="749096"
+              date="1326189359"
+              si="339278"
+              price="2660000">
+      <sellteam>32106</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="26358999"
+              date="1325316239"
+              si="34665"
+              price="390000">
+      <sellteam>21191</sellteam>
+      <buyteam>28378</buyteam>
+    </transfer>
+    <transfer playerid="19948133"
+              date="1324999439"
+              si="212121"
+              price="27320000">
+      <sellteam>21191</sellteam>
+      <buyteam>14482</buyteam>
+    </transfer>
+    <transfer playerid="3809763"
+              date="1324565279"
+              si="279014"
+              price="22100000">
+      <sellteam>21191</sellteam>
+      <buyteam>23795</buyteam>
+    </transfer>
+    <transfer playerid="1258963"
+              date="1324502039"
+              si="457997"
+              price="6000000">
+      <sellteam>13873</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21213472"
+              date="1324282859"
+              si="148852"
+              price="15620000">
+      <sellteam>21191</sellteam>
+      <buyteam>14303</buyteam>
+    </transfer>
+    <transfer playerid="20290379"
+              date="1323426539"
+              si="247320"
+              price="54990000">
+      <sellteam>21191</sellteam>
+      <buyteam>38244</buyteam>
+    </transfer>
+    <transfer playerid="24456487"
+              date="1322136599"
+              si="47743"
+              price="1320000">
+      <sellteam>21191</sellteam>
+      <buyteam>15362</buyteam>
+    </transfer>
+    <transfer playerid="25021448"
+              date="1322136539"
+              si="33822"
+              price="1300000">
+      <sellteam>21191</sellteam>
+      <buyteam>29112</buyteam>
+    </transfer>
+    <transfer playerid="24365717"
+              date="1322136539"
+              si="50837"
+              price="1420000">
+      <sellteam>21191</sellteam>
+      <buyteam>45649</buyteam>
+    </transfer>
+    <transfer playerid="22188855"
+              date="1321727159"
+              si="111176"
+              price="15020000">
+      <sellteam>18436</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19948133"
+              date="1319909759"
+              si="196502"
+              price="22000000">
+      <sellteam>4398</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="26358999"
+              date="1319580359"
+              si="29543"
+              price="400000">
+      <sellteam>48971</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1745582"
+              date="1317484499"
+              si="344485"
+              price="24060000">
+      <sellteam>6856</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1305959"
+              date="1316244359"
+              si="413694"
+              price="23000000">
+      <sellteam>32515</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3809763"
+              date="1315746899"
+              si="257146"
+              price="20000000">
+      <sellteam>40440</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22612488"
+              date="1315564559"
+              si="142831"
+              price="24700000">
+      <sellteam>21191</sellteam>
+      <buyteam>18134</buyteam>
+    </transfer>
+    <transfer playerid="20687423"
+              date="1314803159"
+              si="96306"
+              price="5000000">
+      <sellteam>21196</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19865742"
+              date="1314713759"
+              si="343687"
+              price="18000000">
+      <sellteam>22314</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22946613"
+              date="1314517379"
+              si="134220"
+              price="27640000">
+      <sellteam>21191</sellteam>
+      <buyteam>24752</buyteam>
+    </transfer>
+    <transfer playerid="19845249"
+              date="1313587019"
+              si="251030"
+              price="36420000">
+      <sellteam>21191</sellteam>
+      <buyteam>49732</buyteam>
+    </transfer>
+    <transfer playerid="3928178"
+              date="1312972259"
+              si="196735"
+              price="7520000">
+      <sellteam>21191</sellteam>
+      <buyteam>46485</buyteam>
+    </transfer>
+    <transfer playerid="765438"
+              date="1312969979"
+              si="340938"
+              price="7000000">
+      <sellteam>21191</sellteam>
+      <buyteam>53293</buyteam>
+    </transfer>
+    <transfer playerid="297377"
+              date="1312145099"
+              si="575543"
+              price="15920000">
+      <sellteam>21191</sellteam>
+      <buyteam>45318</buyteam>
+    </transfer>
+    <transfer playerid="20290379"
+              date="1311696059"
+              si="207469"
+              price="32080000">
+      <sellteam>14066</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22007446"
+              date="1311614819"
+              si="114519"
+              price="10020000">
+      <sellteam>42871</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="20695969"
+              date="1311074099"
+              si="113797"
+              price="14300000">
+      <sellteam>21191</sellteam>
+      <buyteam>16270</buyteam>
+    </transfer>
+    <transfer playerid="21213472"
+              date="1308769619"
+              si="112749"
+              price="10000000">
+      <sellteam>34401</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22946613"
+              date="1308319199"
+              si="120416"
+              price="20000000">
+      <sellteam>29466</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2472603"
+              date="1308315599"
+              si="282998"
+              price="20800000">
+      <sellteam>21191</sellteam>
+      <buyteam>36220</buyteam>
+    </transfer>
+    <transfer playerid="610676"
+              date="1308314459"
+              si="296257"
+              price="19500000">
+      <sellteam>21191</sellteam>
+      <buyteam>24928</buyteam>
+    </transfer>
+    <transfer playerid="24364899"
+              date="1307865539"
+              si="26701"
+              price="33000">
+      <sellteam>21191</sellteam>
+      <buyteam>43761</buyteam>
+    </transfer>
+    <transfer playerid="24438238"
+              date="1307865539"
+              si="32160"
+              price="2640000">
+      <sellteam>21191</sellteam>
+      <buyteam>40235</buyteam>
+    </transfer>
+    <transfer playerid="297377"
+              date="1307524859"
+              si="570308"
+              price="13780000">
+      <sellteam>12332</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="25421537"
+              date="1307110439"
+              si="21579"
+              price="6500000">
+      <sellteam>21191</sellteam>
+      <buyteam>1716</buyteam>
+    </transfer>
+    <transfer playerid="24435571"
+              date="1305370679"
+              si="29625"
+              price="4550000">
+      <sellteam>21191</sellteam>
+      <buyteam>32049</buyteam>
+    </transfer>
+    <transfer playerid="20695969"
+              date="1305131339"
+              si="100707"
+              price="12000000">
+      <sellteam>27862</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="501933"
+              date="1304675519"
+              si="277947"
+              price="2520000">
+      <sellteam>21191</sellteam>
+      <buyteam>52408</buyteam>
+    </transfer>
+    <transfer playerid="20734707"
+              date="1304414939"
+              si="128010"
+              price="18500000">
+      <sellteam>40175</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="370704"
+              date="1304172119"
+              si="402880"
+              price="9350000">
+      <sellteam>21191</sellteam>
+      <buyteam>23191</buyteam>
+    </transfer>
+    <transfer playerid="765438"
+              date="1304170079"
+              si="323785"
+              price="3760000">
+      <sellteam>21191</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24862883"
+              date="1304168939"
+              si="22171"
+              price="13000">
+      <sellteam>21191</sellteam>
+      <buyteam>46674</buyteam>
+    </transfer>
+    <transfer playerid="732426"
+              date="1303907279"
+              si="274187"
+              price="10400000">
+      <sellteam>21191</sellteam>
+      <buyteam>23781</buyteam>
+    </transfer>
+    <transfer playerid="22612488"
+              date="1302499199"
+              si="109327"
+              price="10140000">
+      <sellteam>36928</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21172089"
+              date="1302387899"
+              si="157614"
+              price="29940000">
+      <sellteam>21191</sellteam>
+      <buyteam>7614</buyteam>
+    </transfer>
+    <transfer playerid="2472603"
+              date="1302376019"
+              si="278228"
+              price="13020000">
+      <sellteam>19715</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="530963"
+              date="1302283379"
+              si="316174"
+              price="7800000">
+      <sellteam>21191</sellteam>
+      <buyteam>53350</buyteam>
+    </transfer>
+    <transfer playerid="25421537"
+              date="1301250659"
+              si="17217"
+              price="4560000">
+      <sellteam>13531</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="25021448"
+              date="1300650959"
+              si="14979"
+              price="4500000">
+      <sellteam>19554</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24456487"
+              date="1300570259"
+              si="26323"
+              price="5500000">
+      <sellteam>40522</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24365717"
+              date="1300563719"
+              si="26617"
+              price="7000000">
+      <sellteam>55846</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="17976627"
+              date="1300544699"
+              si="114995"
+              price="22100000">
+      <sellteam>21191</sellteam>
+      <buyteam>44805</buyteam>
+    </transfer>
+    <transfer playerid="756876"
+              date="1300361039"
+              si="124413"
+              price="4550000">
+      <sellteam>21191</sellteam>
+      <buyteam>31295</buyteam>
+    </transfer>
+    <transfer playerid="2452052"
+              date="1299151979"
+              si="223474"
+              price="10000000">
+      <sellteam>21191</sellteam>
+      <buyteam>29458</buyteam>
+    </transfer>
+    <transfer playerid="24525370"
+              date="1298630459"
+              si="15565"
+              price="33000">
+      <sellteam>21191</sellteam>
+      <buyteam>29766</buyteam>
+    </transfer>
+    <transfer playerid="19845249"
+              date="1298376179"
+              si="220613"
+              price="25000000">
+      <sellteam>14731</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1273245"
+              date="1298365259"
+              si="206142"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>14523</buyteam>
+    </transfer>
+    <transfer playerid="24530729"
+              date="1298365199"
+              si="15553"
+              price="33000">
+      <sellteam>21191</sellteam>
+      <buyteam>12891</buyteam>
+    </transfer>
+    <transfer playerid="24377974"
+              date="1297252679"
+              si="17217"
+              price="910000">
+      <sellteam>21191</sellteam>
+      <buyteam>23152</buyteam>
+    </transfer>
+    <transfer playerid="20329618"
+              date="1297252019"
+              si="137900"
+              price="25000000">
+      <sellteam>37207</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21172089"
+              date="1297076699"
+              si="139175"
+              price="20020000">
+      <sellteam>22945</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="17976627"
+              date="1296610379"
+              si="108718"
+              price="15060000">
+      <sellteam>20504</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3928178"
+              date="1296588899"
+              si="144815"
+              price="7299990">
+      <sellteam>28884</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="756876"
+              date="1296561479"
+              si="119695"
+              price="4020000">
+      <sellteam>42274</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24400750"
+              date="1296494039"
+              si="16967"
+              price="3900000">
+      <sellteam>21191</sellteam>
+      <buyteam>20992</buyteam>
+    </transfer>
+    <transfer playerid="271266"
+              date="1295863739"
+              si="527066"
+              price="40300000">
+      <sellteam>21191</sellteam>
+      <buyteam>19539</buyteam>
+    </transfer>
+    <transfer playerid="290652"
+              date="1294518779"
+              si="278737"
+              price="20960000">
+      <sellteam>21191</sellteam>
+      <buyteam>12727</buyteam>
+    </transfer>
+    <transfer playerid="501933"
+              date="1294418879"
+              si="258713"
+              price="5020000">
+      <sellteam>13874</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="530963"
+              date="1292483459"
+              si="295153"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="399907"
+              date="1291715579"
+              si="335118"
+              price="19500000">
+      <sellteam>21191</sellteam>
+      <buyteam>23492</buyteam>
+    </transfer>
+    <transfer playerid="120513"
+              date="1290679499"
+              si="389083"
+              price="5200000">
+      <sellteam>21191</sellteam>
+      <buyteam>22770</buyteam>
+    </transfer>
+    <transfer playerid="765438"
+              date="1290519539"
+              si="285978"
+              price="13900000">
+      <sellteam>31932</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24525370"
+              date="1289080619"
+              si="10510"
+              price="50000">
+      <sellteam>20196</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24862883"
+              date="1289076179"
+              si="11908"
+              price="250000">
+      <sellteam>55242</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24530729"
+              date="1288972679"
+              si="11157"
+              price="750000">
+      <sellteam>32204</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19920515"
+              date="1288368599"
+              si="98678"
+              price="14300000">
+      <sellteam>21191</sellteam>
+      <buyteam>18126</buyteam>
+    </transfer>
+    <transfer playerid="4020046"
+              date="1287758999"
+              si="121452"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>24074</buyteam>
+    </transfer>
+    <transfer playerid="24357453"
+              date="1287449939"
+              si="12954"
+              price="2990000">
+      <sellteam>21191</sellteam>
+      <buyteam>40437</buyteam>
+    </transfer>
+    <transfer playerid="120513"
+              date="1285529579"
+              si="383925"
+              price="4000000">
+      <sellteam>42444</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="290652"
+              date="1285524899"
+              si="262109"
+              price="15000000">
+      <sellteam>16754</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24435571"
+              date="1285067879"
+              si="13494"
+              price="5000000">
+      <sellteam>26925</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24438238"
+              date="1285012979"
+              si="13481"
+              price="7380000">
+      <sellteam>23654</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24364899"
+              date="1284322679"
+              si="11079"
+              price="2720000">
+      <sellteam>46538</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24400750"
+              date="1284321779"
+              si="10096"
+              price="3080000">
+      <sellteam>37135</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24377974"
+              date="1283880719"
+              si="10811"
+              price="1660000">
+      <sellteam>8099</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="24357453"
+              date="1283331179"
+              si="11126"
+              price="2160000">
+      <sellteam>13721</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3091109"
+              date="1283191559"
+              si="167409"
+              price="19500000">
+      <sellteam>21191</sellteam>
+      <buyteam>12835</buyteam>
+    </transfer>
+    <transfer playerid="399907"
+              date="1283119319"
+              si="300126"
+              price="10060000">
+      <sellteam>32637</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19908894"
+              date="1282996019"
+              si="69885"
+              price="5220000">
+      <sellteam>21191</sellteam>
+      <buyteam>7931</buyteam>
+    </transfer>
+    <transfer playerid="1321973"
+              date="1282774379"
+              si="191578"
+              price="20800000">
+      <sellteam>21191</sellteam>
+      <buyteam>16773</buyteam>
+    </transfer>
+    <transfer playerid="605113"
+              date="1282206239"
+              si="129673"
+              price="14300000">
+      <sellteam>21191</sellteam>
+      <buyteam>50258</buyteam>
+    </transfer>
+    <transfer playerid="23521159"
+              date="1282205879"
+              si="20450"
+              price="13000">
+      <sellteam>21191</sellteam>
+      <buyteam>35482</buyteam>
+    </transfer>
+    <transfer playerid="19850989"
+              date="1282154219"
+              si="53276"
+              price="6500000">
+      <sellteam>21191</sellteam>
+      <buyteam>23152</buyteam>
+    </transfer>
+    <transfer playerid="45699"
+              date="1281999119"
+              si="324291"
+              price="7800000">
+      <sellteam>21191</sellteam>
+      <buyteam>8853</buyteam>
+    </transfer>
+    <transfer playerid="1012393"
+              date="1281994019"
+              si="319717"
+              price="40000000">
+      <sellteam>24036</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="20821595"
+              date="1281555119"
+              si="45360"
+              price="3900000">
+      <sellteam>21191</sellteam>
+      <buyteam>48462</buyteam>
+    </transfer>
+    <transfer playerid="271266"
+              date="1281207479"
+              si="487728"
+              price="38020000">
+      <sellteam>11444</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4044350"
+              date="1280995319"
+              si="89593"
+              price="9100000">
+      <sellteam>21191</sellteam>
+      <buyteam>32125</buyteam>
+    </transfer>
+    <transfer playerid="1014411"
+              date="1279826159"
+              si="134026"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>47115</buyteam>
+    </transfer>
+    <transfer playerid="2452052"
+              date="1278780959"
+              si="159006"
+              price="15020000">
+      <sellteam>34798</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="45699"
+              date="1277837519"
+              si="320294"
+              price="4880000">
+      <sellteam>14736</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19124574"
+              date="1277584979"
+              si="82165"
+              price="13900000">
+      <sellteam>21191</sellteam>
+      <buyteam>32049</buyteam>
+    </transfer>
+    <transfer playerid="19920515"
+              date="1276556339"
+              si="75429"
+              price="8540000">
+      <sellteam>37027</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21644104"
+              date="1276529279"
+              si="14993"
+              price="30001">
+      <sellteam>21191</sellteam>
+      <buyteam>33210</buyteam>
+    </transfer>
+    <transfer playerid="19850989"
+              date="1276201859"
+              si="46868"
+              price="4500000">
+      <sellteam>12747</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="491340"
+              date="1275921119"
+              si="182166"
+              price="17900000">
+      <sellteam>21191</sellteam>
+      <buyteam>43698</buyteam>
+    </transfer>
+    <transfer playerid="23521159"
+              date="1275914279"
+              si="16988"
+              price="500000">
+      <sellteam>13536</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3091109"
+              date="1275074699"
+              si="148990"
+              price="19000000">
+      <sellteam>40697</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="610676"
+              date="1275053939"
+              si="190462"
+              price="18020000">
+      <sellteam>12340</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19046417"
+              date="1273829219"
+              si="57095"
+              price="8940000">
+      <sellteam>21191</sellteam>
+      <buyteam>29858</buyteam>
+    </transfer>
+    <transfer playerid="23440861"
+              date="1273564919"
+              si="5716"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>40138</buyteam>
+    </transfer>
+    <transfer playerid="2774945"
+              date="1272878039"
+              si="135818"
+              price="25900000">
+      <sellteam>21191</sellteam>
+      <buyteam>41063</buyteam>
+    </transfer>
+    <transfer playerid="22097606"
+              date="1272876059"
+              si="25051"
+              price="99111">
+      <sellteam>21191</sellteam>
+      <buyteam>36494</buyteam>
+    </transfer>
+    <transfer playerid="530777"
+              date="1272704459"
+              si="229375"
+              price="26060000">
+      <sellteam>21191</sellteam>
+      <buyteam>39018</buyteam>
+    </transfer>
+    <transfer playerid="22098869"
+              date="1267399559"
+              si="23555"
+              price="2200000">
+      <sellteam>21191</sellteam>
+      <buyteam>44991</buyteam>
+    </transfer>
+    <transfer playerid="21164328"
+              date="1266315899"
+              si="17671"
+              price="900000">
+      <sellteam>21191</sellteam>
+      <buyteam>45446</buyteam>
+    </transfer>
+    <transfer playerid="1273245"
+              date="1264519499"
+              si="120769"
+              price="18000000">
+      <sellteam>17968</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1014411"
+              date="1263129119"
+              si="112082"
+              price="14500000">
+      <sellteam>30013</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21203151"
+              date="1262288699"
+              si="15491"
+              price="50001">
+      <sellteam>21191</sellteam>
+      <buyteam>53932</buyteam>
+    </transfer>
+    <transfer playerid="21251502"
+              date="1261819259"
+              si="15043"
+              price="99000">
+      <sellteam>21191</sellteam>
+      <buyteam>53932</buyteam>
+    </transfer>
+    <transfer playerid="1732848"
+              date="1261272779"
+              si="153676"
+              price="29000000">
+      <sellteam>21191</sellteam>
+      <buyteam>17803</buyteam>
+    </transfer>
+    <transfer playerid="491340"
+              date="1261167659"
+              si="151909"
+              price="10020000">
+      <sellteam>20173</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22098869"
+              date="1260178859"
+              si="17976"
+              price="20000">
+      <sellteam>27089</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="22097606"
+              date="1260170159"
+              si="14986"
+              price="10000">
+      <sellteam>36515</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21585051"
+              date="1256663819"
+              si="14452"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>45422</buyteam>
+    </transfer>
+    <transfer playerid="4020046"
+              date="1256247539"
+              si="62235"
+              price="6666666">
+      <sellteam>37078</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21236710"
+              date="1255296899"
+              si="11458"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>26050</buyteam>
+    </transfer>
+    <transfer playerid="21084653"
+              date="1255296779"
+              si="13832"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>56387</buyteam>
+    </transfer>
+    <transfer playerid="2774945"
+              date="1255291019"
+              si="104650"
+              price="22750000">
+      <sellteam>19940</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="21663274"
+              date="1254603179"
+              si="9485"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>38695</buyteam>
+    </transfer>
+    <transfer playerid="605113"
+              date="1254341399"
+              si="87564"
+              price="12000000">
+      <sellteam>24176</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="696830"
+              date="1254200339"
+              si="167407"
+              price="29900000">
+      <sellteam>21191</sellteam>
+      <buyteam>18088</buyteam>
+    </transfer>
+    <transfer playerid="21171212"
+              date="1253749379"
+              si="8086"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>41231</buyteam>
+    </transfer>
+    <transfer playerid="21612347"
+              date="1253749379"
+              si="7220"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>41231</buyteam>
+    </transfer>
+    <transfer playerid="19124574"
+              date="1253046839"
+              si="46699"
+              price="7000000">
+      <sellteam>2000</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4242079"
+              date="1252877639"
+              si="60764"
+              price="16900000">
+      <sellteam>21191</sellteam>
+      <buyteam>14887</buyteam>
+    </transfer>
+    <transfer playerid="403072"
+              date="1252785839"
+              si="223472"
+              price="32900000">
+      <sellteam>21191</sellteam>
+      <buyteam>15192</buyteam>
+    </transfer>
+    <transfer playerid="696830"
+              date="1251242519"
+              si="158057"
+              price="26040000">
+      <sellteam>8054</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="301272"
+              date="1250890379"
+              si="165006"
+              price="22900000">
+      <sellteam>21191</sellteam>
+      <buyteam>23539</buyteam>
+    </transfer>
+    <transfer playerid="3857554"
+              date="1250872979"
+              si="59067"
+              price="11900000">
+      <sellteam>21191</sellteam>
+      <buyteam>39979</buyteam>
+    </transfer>
+    <transfer playerid="21129368"
+              date="1249070399"
+              si="7372"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>34355</buyteam>
+    </transfer>
+    <transfer playerid="301272"
+              date="1246478579"
+              si="154706"
+              price="15000000">
+      <sellteam>8094</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3466913"
+              date="1245849779"
+              si="52578"
+              price="9900000">
+      <sellteam>21191</sellteam>
+      <buyteam>18125</buyteam>
+    </transfer>
+    <transfer playerid="20821595"
+              date="1245796979"
+              si="14110"
+              price="2540000">
+      <sellteam>28395</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3857554"
+              date="1244740619"
+              si="51101"
+              price="5000000">
+      <sellteam>16076</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="20684203"
+              date="1244699699"
+              si="10980"
+              price="1">
+      <sellteam>21191</sellteam>
+      <buyteam>31983</buyteam>
+    </transfer>
+    <transfer playerid="20722920"
+              date="1243681259"
+              si="4673"
+              price="10001">
+      <sellteam>21191</sellteam>
+      <buyteam>52388</buyteam>
+    </transfer>
+    <transfer playerid="370704"
+              date="1243533359"
+              si="206287"
+              price="23520000">
+      <sellteam>19577</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="20405643"
+              date="1243135859"
+              si="10662"
+              price="99000">
+      <sellteam>21191</sellteam>
+      <buyteam>18402</buyteam>
+    </transfer>
+    <transfer playerid="367964"
+              date="1242835139"
+              si="167518"
+              price="15000000">
+      <sellteam>21191</sellteam>
+      <buyteam>23845</buyteam>
+    </transfer>
+    <transfer playerid="1732848"
+              date="1242755939"
+              si="107359"
+              price="29560000">
+      <sellteam>17251</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="292803"
+              date="1241638319"
+              si="129180"
+              price="15900000">
+      <sellteam>21191</sellteam>
+      <buyteam>18232</buyteam>
+    </transfer>
+    <transfer playerid="19828707"
+              date="1241638259"
+              si="25582"
+              price="1900000">
+      <sellteam>21191</sellteam>
+      <buyteam>21271</buyteam>
+    </transfer>
+    <transfer playerid="139210"
+              date="1241071859"
+              si="367434"
+              price="27020000">
+      <sellteam>21191</sellteam>
+      <buyteam>10398</buyteam>
+    </transfer>
+    <transfer playerid="19046417"
+              date="1239653579"
+              si="27068"
+              price="5520000">
+      <sellteam>14406</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4242079"
+              date="1238674859"
+              si="41884"
+              price="9999999">
+      <sellteam>19457</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3424768"
+              date="1237756019"
+              si="39410"
+              price="8920000">
+      <sellteam>21191</sellteam>
+      <buyteam>31063</buyteam>
+    </transfer>
+    <transfer playerid="19908894"
+              date="1237196279"
+              si="17343"
+              price="10000000">
+      <sellteam>36032</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3933708"
+              date="1235806079"
+              si="42848"
+              price="13900000">
+      <sellteam>21191</sellteam>
+      <buyteam>12325</buyteam>
+    </transfer>
+    <transfer playerid="1321973"
+              date="1235396399"
+              si="81058"
+              price="27020000">
+      <sellteam>15258</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="176899"
+              date="1235201519"
+              si="189598"
+              price="25900000">
+      <sellteam>21191</sellteam>
+      <buyteam>22290</buyteam>
+    </transfer>
+    <transfer playerid="139210"
+              date="1233751439"
+              si="335952"
+              price="27900000">
+      <sellteam>27862</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="241141"
+              date="1233397079"
+              si="205739"
+              price="14900000">
+      <sellteam>21191</sellteam>
+      <buyteam>16878</buyteam>
+    </transfer>
+    <transfer playerid="732426"
+              date="1232878739"
+              si="101917"
+              price="16040000">
+      <sellteam>6349</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="376860"
+              date="1232375399"
+              si="128016"
+              price="22540000">
+      <sellteam>21191</sellteam>
+      <buyteam>9361</buyteam>
+    </transfer>
+    <transfer playerid="3504370"
+              date="1232114219"
+              si="24843"
+              price="2700000">
+      <sellteam>21191</sellteam>
+      <buyteam>26904</buyteam>
+    </transfer>
+    <transfer playerid="2551517"
+              date="1231486859"
+              si="53708"
+              price="15800000">
+      <sellteam>21191</sellteam>
+      <buyteam>25375</buyteam>
+    </transfer>
+    <transfer playerid="19015844"
+              date="1231182659"
+              si="8648"
+              price="167000">
+      <sellteam>21191</sellteam>
+      <buyteam>13553</buyteam>
+    </transfer>
+    <transfer playerid="19142439"
+              date="1231182599"
+              si="7127"
+              price="60000">
+      <sellteam>21191</sellteam>
+      <buyteam>13650</buyteam>
+    </transfer>
+    <transfer playerid="241141"
+              date="1230803879"
+              si="200018"
+              price="11520000">
+      <sellteam>22514</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="19093741"
+              date="1230588419"
+              si="7640"
+              price="200000">
+      <sellteam>21191</sellteam>
+      <buyteam>13553</buyteam>
+    </transfer>
+    <transfer playerid="19035709"
+              date="1226190479"
+              si="11250"
+              price="190000">
+      <sellteam>21191</sellteam>
+      <buyteam>40530</buyteam>
+    </transfer>
+    <transfer playerid="19123874"
+              date="1223884139"
+              si="17626"
+              price="1290000">
+      <sellteam>21191</sellteam>
+      <buyteam>43147</buyteam>
+    </transfer>
+    <transfer playerid="18650337"
+              date="1223582939"
+              si="9976"
+              price="450000">
+      <sellteam>21191</sellteam>
+      <buyteam>53134</buyteam>
+    </transfer>
+    <transfer playerid="19067308"
+              date="1223027879"
+              si="15107"
+              price="550000">
+      <sellteam>21191</sellteam>
+      <buyteam>18027</buyteam>
+    </transfer>
+    <transfer playerid="403072"
+              date="1222975679"
+              si="147427"
+              price="29000000">
+      <sellteam>19577</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="4297218"
+              date="1222536659"
+              si="20104"
+              price="10000000">
+      <sellteam>21191</sellteam>
+      <buyteam>19417</buyteam>
+    </transfer>
+    <transfer playerid="161639"
+              date="1222030199"
+              si="177302"
+              price="13000000">
+      <sellteam>21191</sellteam>
+      <buyteam>29344</buyteam>
+    </transfer>
+    <transfer playerid="2528279"
+              date="1221064499"
+              si="29528"
+              price="10000000">
+      <sellteam>21191</sellteam>
+      <buyteam>27137</buyteam>
+    </transfer>
+    <transfer playerid="176899"
+              date="1220425199"
+              si="160734"
+              price="25040000">
+      <sellteam>15178</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2473370"
+              date="1220337119"
+              si="12169"
+              price="1000000">
+      <sellteam>21191</sellteam>
+      <buyteam>18820</buyteam>
+    </transfer>
+    <transfer playerid="4227987"
+              date="1220042519"
+              si="17228"
+              price="8500000">
+      <sellteam>21191</sellteam>
+      <buyteam>18186</buyteam>
+    </transfer>
+    <transfer playerid="3809541"
+              date="1219871039"
+              si="8211"
+              price="100000">
+      <sellteam>21191</sellteam>
+      <buyteam>19857</buyteam>
+    </transfer>
+    <transfer playerid="161639"
+              date="1218900779"
+              si="169293"
+              price="11020000">
+      <sellteam>19101</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="380653"
+              date="1218880679"
+              si="91846"
+              price="15000000">
+      <sellteam>21191</sellteam>
+      <buyteam>8960</buyteam>
+    </transfer>
+    <transfer playerid="3457236"
+              date="1218580979"
+              si="11669"
+              price="1000000">
+      <sellteam>21191</sellteam>
+      <buyteam>20906</buyteam>
+    </transfer>
+    <transfer playerid="2511072"
+              date="1218032759"
+              si="11831"
+              price="800000">
+      <sellteam>21191</sellteam>
+      <buyteam>32636</buyteam>
+    </transfer>
+    <transfer playerid="2551517"
+              date="1217773499"
+              si="37337"
+              price="12000000">
+      <sellteam>25355</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="275578"
+              date="1217170979"
+              si="85299"
+              price="16000000">
+      <sellteam>21191</sellteam>
+      <buyteam>26608</buyteam>
+    </transfer>
+    <transfer playerid="4297218"
+              date="1215892559"
+              si="14222"
+              price="4800000">
+      <sellteam>44626</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3933708"
+              date="1215544079"
+              si="21358"
+              price="5560000">
+      <sellteam>25638</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="279334"
+              date="1215343379"
+              si="100295"
+              price="13500000">
+      <sellteam>21191</sellteam>
+      <buyteam>26643</buyteam>
+    </transfer>
+    <transfer playerid="4044350"
+              date="1215034439"
+              si="16722"
+              price="5290000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3809541"
+              date="1213103039"
+              si="6704"
+              price="200001">
+      <sellteam>20784</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="3466913"
+              date="1213024139"
+              si="22142"
+              price="5600000">
+      <sellteam>321</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="278149"
+              date="1212645239"
+              si="91156"
+              price="11020000">
+      <sellteam>21191</sellteam>
+      <buyteam>24212</buyteam>
+    </transfer>
+    <transfer playerid="4227987"
+              date="1212589379"
+              si="12629"
+              price="2560000">
+      <sellteam>37193</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2528279"
+              date="1212084179"
+              si="19428"
+              price="5500000">
+      <sellteam>16770</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="167658"
+              date="1211470319"
+              si="86598"
+              price="12000000">
+      <sellteam>21191</sellteam>
+      <buyteam>17856</buyteam>
+    </transfer>
+    <transfer playerid="376860"
+              date="1210777859"
+              si="82028"
+              price="15060000">
+      <sellteam>3239</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2493849"
+              date="1210342499"
+              si="13059"
+              price="830000">
+      <sellteam>21191</sellteam>
+      <buyteam>34333</buyteam>
+    </transfer>
+    <transfer playerid="2804542"
+              date="1209742319"
+              si="8465"
+              price="550000">
+      <sellteam>21191</sellteam>
+      <buyteam>8104</buyteam>
+    </transfer>
+    <transfer playerid="231824"
+              date="1209741599"
+              si="90444"
+              price="10020000">
+      <sellteam>21191</sellteam>
+      <buyteam>19524</buyteam>
+    </transfer>
+    <transfer playerid="2788854"
+              date="1209162299"
+              si="18619"
+              price="1150000">
+      <sellteam>21191</sellteam>
+      <buyteam>44960</buyteam>
+    </transfer>
+    <transfer playerid="2552741"
+              date="1208874059"
+              si="18800"
+              price="1900000">
+      <sellteam>21191</sellteam>
+      <buyteam>23522</buyteam>
+    </transfer>
+    <transfer playerid="3424768"
+              date="1208810999"
+              si="15290"
+              price="3600000">
+      <sellteam>40547</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2429262"
+              date="1208068739"
+              si="11419"
+              price="650500">
+      <sellteam>21191</sellteam>
+      <buyteam>42815</buyteam>
+    </transfer>
+    <transfer playerid="367964"
+              date="1206888839"
+              si="95113"
+              price="15000000">
+      <sellteam>12318</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2059827"
+              date="1206602219"
+              si="18597"
+              price="1720000">
+      <sellteam>21191</sellteam>
+      <buyteam>24923</buyteam>
+    </transfer>
+    <transfer playerid="2053951"
+              date="1206017399"
+              si="17146"
+              price="1320000">
+      <sellteam>21191</sellteam>
+      <buyteam>34524</buyteam>
+    </transfer>
+    <transfer playerid="3504370"
+              date="1203926039"
+              si="9929"
+              price="1570000">
+      <sellteam>19927</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2823003"
+              date="1203848639"
+              si="15269"
+              price="650000">
+      <sellteam>21191</sellteam>
+      <buyteam>18722</buyteam>
+    </transfer>
+    <transfer playerid="2161642"
+              date="1201174979"
+              si="19715"
+              price="2199000">
+      <sellteam>21191</sellteam>
+      <buyteam>39435</buyteam>
+    </transfer>
+    <transfer playerid="2770772"
+              date="1195371179"
+              si="10385"
+              price="1600000">
+      <sellteam>21191</sellteam>
+      <buyteam>8426</buyteam>
+    </transfer>
+    <transfer playerid="695171"
+              date="1195371119"
+              si="35007"
+              price="4039000">
+      <sellteam>21191</sellteam>
+      <buyteam>11271</buyteam>
+    </transfer>
+    <transfer playerid="2144658"
+              date="1192392539"
+              si="8476"
+              price="233111">
+      <sellteam>21191</sellteam>
+      <buyteam>9656</buyteam>
+    </transfer>
+    <transfer playerid="167658"
+              date="1192381079"
+              si="58948"
+              price="8020000">
+      <sellteam>12105</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1759712"
+              date="1192082999"
+              si="11370"
+              price="1670000">
+      <sellteam>21191</sellteam>
+      <buyteam>20023</buyteam>
+    </transfer>
+    <transfer playerid="1322555"
+              date="1190362679"
+              si="21584"
+              price="2790000">
+      <sellteam>21191</sellteam>
+      <buyteam>14818</buyteam>
+    </transfer>
+    <transfer playerid="2043391"
+              date="1189674599"
+              si="7004"
+              price="770000">
+      <sellteam>21191</sellteam>
+      <buyteam>32822</buyteam>
+    </transfer>
+    <transfer playerid="2405001"
+              date="1189414859"
+              si="13882"
+              price="1465000">
+      <sellteam>21191</sellteam>
+      <buyteam>15320</buyteam>
+    </transfer>
+    <transfer playerid="1081855"
+              date="1189245539"
+              si="13459"
+              price="1350000">
+      <sellteam>21191</sellteam>
+      <buyteam>15133</buyteam>
+    </transfer>
+    <transfer playerid="278149"
+              date="1187786039"
+              si="59850"
+              price="7020000">
+      <sellteam>17456</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1080713"
+              date="1187593259"
+              si="14255"
+              price="2100000">
+      <sellteam>21191</sellteam>
+      <buyteam>21016</buyteam>
+    </transfer>
+    <transfer playerid="852674"
+              date="1185710279"
+              si="25287"
+              price="3566111">
+      <sellteam>21191</sellteam>
+      <buyteam>14692</buyteam>
+    </transfer>
+    <transfer playerid="380653"
+              date="1185317639"
+              si="55960"
+              price="8260000">
+      <sellteam>0</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2072291"
+              date="1185265499"
+              si="11330"
+              price="311111">
+      <sellteam>21191</sellteam>
+      <buyteam>25564</buyteam>
+    </transfer>
+    <transfer playerid="755919"
+              date="1185048659"
+              si="24114"
+              price="3499000">
+      <sellteam>21191</sellteam>
+      <buyteam>10999</buyteam>
+    </transfer>
+    <transfer playerid="1287727"
+              date="1184221979"
+              si="12959"
+              price="1999000">
+      <sellteam>21191</sellteam>
+      <buyteam>27792</buyteam>
+    </transfer>
+    <transfer playerid="1079466"
+              date="1184221919"
+              si="13214"
+              price="2500000">
+      <sellteam>21191</sellteam>
+      <buyteam>25791</buyteam>
+    </transfer>
+    <transfer playerid="1080713"
+              date="1184020799"
+              si="13297"
+              price="1120000">
+      <sellteam>12997</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="2053951"
+              date="1183244279"
+              si="8450"
+              price="20001">
+      <sellteam>40202</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1759712"
+              date="1183224599"
+              si="8785"
+              price="220000">
+      <sellteam>9725</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1716613"
+              date="1182968999"
+              si="11302"
+              price="1999000">
+      <sellteam>21191</sellteam>
+      <buyteam>14804</buyteam>
+    </transfer>
+    <transfer playerid="279334"
+              date="1180905659"
+              si="52176"
+              price="6620000">
+      <sellteam>10323</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="201030"
+              date="1179256919"
+              si="42897"
+              price="2920000">
+      <sellteam>21191</sellteam>
+      <buyteam>17911</buyteam>
+    </transfer>
+    <transfer playerid="1081855"
+              date="1179049439"
+              si="11049"
+              price="280000">
+      <sellteam>24582</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1079466"
+              date="1178998859"
+              si="12130"
+              price="960000">
+      <sellteam>20273</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1287727"
+              date="1178967899"
+              si="11490"
+              price="930000">
+      <sellteam>14539</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="1093507"
+              date="1178957399"
+              si="16295"
+              price="990000">
+      <sellteam>21191</sellteam>
+      <buyteam>19529</buyteam>
+    </transfer>
+    <transfer playerid="1716613"
+              date="1178905979"
+              si="10314"
+              price="640000">
+      <sellteam>20334</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="528960"
+              date="1177332779"
+              si="21311"
+              price="1900000">
+      <sellteam>21191</sellteam>
+      <buyteam>1850</buyteam>
+    </transfer>
+    <transfer playerid="231824"
+              date="1176763139"
+              si="54423"
+              price="8000000">
+      <sellteam>12803</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="693526"
+              date="1176636659"
+              si="36899"
+              price="3500000">
+      <sellteam>21191</sellteam>
+      <buyteam>19144</buyteam>
+    </transfer>
+    <transfer playerid="798095"
+              date="1176500339"
+              si="2231"
+              price="1500000">
+      <sellteam>21191</sellteam>
+      <buyteam>25532</buyteam>
+    </transfer>
+    <transfer playerid="484701"
+              date="1176028919"
+              si="550200"
+              price="980000">
+      <sellteam>21191</sellteam>
+      <buyteam>29823</buyteam>
+    </transfer>
+    <transfer playerid="559865"
+              date="1175518079"
+              si="704360"
+              price="5519000">
+      <sellteam>21191</sellteam>
+      <buyteam>17801</buyteam>
+    </transfer>
+    <transfer playerid="755919"
+              date="1171301699"
+              si="563640"
+              price="4500000">
+      <sellteam>14290</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="835971"
+              date="1168550939"
+              si="520800"
+              price="239000">
+      <sellteam>21191</sellteam>
+      <buyteam>27109</buyteam>
+    </transfer>
+    <transfer playerid="804880"
+              date="1168203239"
+              si="519620"
+              price="110000">
+      <sellteam>21191</sellteam>
+      <buyteam>5150</buyteam>
+    </transfer>
+    <transfer playerid="694634"
+              date="1165384439"
+              si="632300"
+              price="4619000">
+      <sellteam>21191</sellteam>
+      <buyteam>19353</buyteam>
+    </transfer>
+    <transfer playerid="694709"
+              date="1164575339"
+              si="595200"
+              price="2000000">
+      <sellteam>21191</sellteam>
+      <buyteam>12297</buyteam>
+    </transfer>
+    <transfer playerid="204827"
+              date="1164505019"
+              si="734300"
+              price="3000000">
+      <sellteam>21191</sellteam>
+      <buyteam>11760</buyteam>
+    </transfer>
+    <transfer playerid="275578"
+              date="1164300539"
+              si="668200"
+              price="7200000">
+      <sellteam>12305</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="482583"
+              date="1164242579"
+              si="681500"
+              price="3040000">
+      <sellteam>21191</sellteam>
+      <buyteam>15750</buyteam>
+    </transfer>
+    <transfer playerid="781283"
+              date="1160705700"
+              si="461700"
+              price="10000">
+      <sellteam>21191</sellteam>
+      <buyteam>27813</buyteam>
+    </transfer>
+    <transfer playerid="204827"
+              date="1160216161"
+              si="705900"
+              price="1310000">
+      <sellteam>22493</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="764513"
+              date="1159825561"
+              si="457000"
+              price="30000">
+      <sellteam>21191</sellteam>
+      <buyteam>12824</buyteam>
+    </transfer>
+    <transfer playerid="732742"
+              date="1159691820"
+              si="494600"
+              price="10000">
+      <sellteam>21191</sellteam>
+      <buyteam>28053</buyteam>
+    </transfer>
+    <transfer playerid="548530"
+              date="1159438200"
+              si="597500"
+              price="2000000">
+      <sellteam>21191</sellteam>
+      <buyteam>20295</buyteam>
+    </transfer>
+    <transfer playerid="292803"
+              date="1158774120"
+              si="609500"
+              price="5020000">
+      <sellteam>2710</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="476709"
+              date="1156448580"
+              si="505200"
+              price="1090000">
+      <sellteam>21191</sellteam>
+      <buyteam>4081</buyteam>
+    </transfer>
+    <transfer playerid="690917"
+              date="1156447920"
+              si="445800"
+              price="60000">
+      <sellteam>21191</sellteam>
+      <buyteam>14397</buyteam>
+    </transfer>
+    <transfer playerid="694709"
+              date="1156186980"
+              si="524000"
+              price="185000">
+      <sellteam>1850</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="694634"
+              date="1156186680"
+              si="551000"
+              price="2570000">
+      <sellteam>15136</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="693526"
+              date="1155755820"
+              si="568000"
+              price="3670000">
+      <sellteam>23188</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="484701"
+              date="1155029220"
+              si="448000"
+              price="195000">
+      <sellteam>16123</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="316035"
+              date="1153919340"
+              si="603000"
+              price="2020000">
+      <sellteam>21191</sellteam>
+      <buyteam>12298</buyteam>
+    </transfer>
+    <transfer playerid="435277"
+              date="1152366540"
+              si="521900"
+              price="50000">
+      <sellteam>21191</sellteam>
+      <buyteam>23770</buyteam>
+    </transfer>
+    <transfer playerid="201030"
+              date="1151949960"
+              si="615700"
+              price="860000">
+      <sellteam>15093</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="559865"
+              date="1149702960"
+              si="525850"
+              price="1000000">
+      <sellteam>15922</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="548530"
+              date="1148952420"
+              si="507339"
+              price="141000">
+      <sellteam>15761</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="476709"
+              date="1148867340"
+              si="463190"
+              price="120000">
+      <sellteam>14754</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="435277"
+              date="1148857740"
+              si="501110"
+              price="700000">
+      <sellteam>20510</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="545866"
+              date="1148543340"
+              si="352350"
+              price="10000">
+      <sellteam>21191</sellteam>
+      <buyteam>8886</buyteam>
+    </transfer>
+    <transfer playerid="530775"
+              date="1148011140"
+              si="512790"
+              price="90000">
+      <sellteam>21191</sellteam>
+      <buyteam>25823</buyteam>
+    </transfer>
+    <transfer playerid="316035"
+              date="1147957560"
+              si="565800"
+              price="520000">
+      <sellteam>21375</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="482583"
+              date="1147753200"
+              si="546830"
+              price="500000">
+      <sellteam>1618</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+    <transfer playerid="530774"
+              date="1147593900"
+              si="419299"
+              price="10000">
+      <sellteam>21191</sellteam>
+      <buyteam>26726</buyteam>
+    </transfer>
+    <transfer playerid="530781"
+              date="1147593840"
+              si="411280"
+              price="10000">
+      <sellteam>21191</sellteam>
+      <buyteam>19458</buyteam>
+    </transfer>
+    <transfer playerid="528960"
+              date="1147357560"
+              si="439349"
+              price="130000">
+      <sellteam>20452</sellteam>
+      <buyteam>21191</buyteam>
+    </transfer>
+  </team_transfers>
+</charazay>

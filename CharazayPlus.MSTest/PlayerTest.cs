@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace CharazayPlus.Tests
+namespace CharazayPlus.MSTest
 {
 
 

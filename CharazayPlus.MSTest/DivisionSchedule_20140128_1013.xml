@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <schedule>
+    <round number="1"
+           date="1386430200">
+      <match id="22656041"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656042"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656043"/>
+    </round>
+    <round number="1" date="1386430200">
+      <match id="22656044"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656045"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656046"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656047"/>
+    </round>
+    <round number="1"
+           date="1386430200">
+      <match id="22656048"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656049"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656050"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656051"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656052"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656053"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656054"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656055"/>
+    </round>
+    <round number="2"
+           date="1386689400">
+      <match id="22656056"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656057"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656058"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656059"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656060"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656061"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656062"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656063"/>
+    </round>
+    <round number="3"
+           date="1387035000">
+      <match id="22656064"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656065"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656066"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656067"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656068"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656069"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656070"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656071"/>
+    </round>
+    <round number="4"
+           date="1387294200">
+      <match id="22656072"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656073"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656074"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656075"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656076"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656077"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656078"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656079"/>
+    </round>
+    <round number="5"
+           date="1387639800">
+      <match id="22656080"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656081"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656082"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656083"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656084"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656085"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656086"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656087"/>
+    </round>
+    <round number="6"
+           date="1387899000">
+      <match id="22656088"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656089"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656090"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656091"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656092"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656093"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656094"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656095"/>
+    </round>
+    <round number="7"
+           date="1388244600">
+      <match id="22656096"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656097"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656098"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656099"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656100"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656101"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656102"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656103"/>
+    </round>
+    <round number="8"
+           date="1388503800">
+      <match id="22656104"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656105"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656106"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656107"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656108"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656109"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656110"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656111"/>
+    </round>
+    <round number="9"
+           date="1388849400">
+      <match id="22656112"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656113"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656114"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656115"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656116"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656117"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656118"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656119"/>
+    </round>
+    <round number="10"
+           date="1389108600">
+      <match id="22656120"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656121"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656122"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656123"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656124"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656125"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656126"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656127"/>
+    </round>
+    <round number="11"
+           date="1389454200">
+      <match id="22656128"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656129"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656130"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656131"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656132"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656133"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656134"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656135"/>
+    </round>
+    <round number="12"
+           date="1389713400">
+      <match id="22656136"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656137"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656138"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656139"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656140"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656141"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656142"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656143"/>
+    </round>
+    <round number="13"
+           date="1390059000">
+      <match id="22656144"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656145"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656146"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656147"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656148"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656149"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656150"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656151"/>
+    </round>
+    <round number="14"
+           date="1390318200">
+      <match id="22656152"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656153"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656154"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656155"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656156"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656157"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656158"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656159"/>
+    </round>
+    <round number="15"
+           date="1390663800">
+      <match id="22656160"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656161"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656162"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656163"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656164"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656165"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656166"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656167"/>
+    </round>
+    <round number="16"
+           date="1390923000">
+      <match id="22656168"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656169"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656170"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656171"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656172"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656173"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656174"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656175"/>
+    </round>
+    <round number="17"
+           date="1391268600">
+      <match id="22656176"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656177"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656178"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656179"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656180"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656181"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656182"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656183"/>
+    </round>
+    <round number="18"
+           date="1391527800">
+      <match id="22656184"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656185"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656186"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656187"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656188"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656189"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656190"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656191"/>
+    </round>
+    <round number="19"
+           date="1391873400">
+      <match id="22656192"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656193"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656194"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656195"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656196"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656197"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656198"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656199"/>
+    </round>
+    <round number="20"
+           date="1392132600">
+      <match id="22656200"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656201"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656202"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656203"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656204"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656205"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656206"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656207"/>
+    </round>
+    <round number="21"
+           date="1392478200">
+      <match id="22656208"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656209"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656210"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656211"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656212"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656213"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656214"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656215"/>
+    </round>
+    <round number="22"
+           date="1392737400">
+      <match id="22656216"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656217"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656218"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656219"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656220"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656221"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656222"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656223"/>
+    </round>
+    <round number="23"
+           date="1393083000">
+      <match id="22656224"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656225"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656226"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656227"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656228"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656229"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656230"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656231"/>
+    </round>
+    <round number="24"
+           date="1393342200">
+      <match id="22656232"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656233"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656234"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656235"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656236"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656237"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656238"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656239"/>
+    </round>
+    <round number="25"
+           date="1393687800">
+      <match id="22656240"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656241"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656242"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656243"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656244"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656245"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656246"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656247"/>
+    </round>
+    <round number="26"
+           date="1393947000">
+      <match id="22656248"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656249"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656250"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656251"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656252"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656253"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656254"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656255"/>
+    </round>
+    <round number="27"
+           date="1394292600">
+      <match id="22656256"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656257"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656258"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656259"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656260"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656261"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656262"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656263"/>
+    </round>
+    <round number="28"
+           date="1394551800">
+      <match id="22656264"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656265"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656266"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656267"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656268"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656269"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656270"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656271"/>
+    </round>
+    <round number="29"
+           date="1394897400">
+      <match id="22656272"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656273"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656274"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656275"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656276"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656277"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656278"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656279"/>
+    </round>
+    <round number="30"
+           date="1395156600">
+      <match id="22656280"/>
+    </round>
+  </schedule>
+</charazay>
