@@ -66,7 +66,7 @@
 									<xs:attribute name="promoted_on" type="xs:unsignedInt" use="required" />
 									<xs:attribute name="dl" type="xs:string" use="required" />
 									<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-									<xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
 									<xs:attribute name="traininggroup" type="xs:unsignedByte" use="required" />
 								</xs:complexType>
 							</xs:element>

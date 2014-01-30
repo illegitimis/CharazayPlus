@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE charazay SYSTEM "http://www.charazay.com/dtd/charazay.dtd">
+<charazay>
+  <team id="57711" countryid="6" userid="345587">
+    <name>Nocne Marki</name>
+    <team_info chemistry="5" divisionid="1281" arenaid="57711" rival="38088">
+      <fanclub mood="10" fans="5311" level="5">
+        <name>Marek i Orkiestra</name>
+      </fanclub>
+      <training>
+        <group1>defence</group1>
+        <group2>footwork</group2>
+      </training>
+    </team_info>
+  </team>
+</charazay>

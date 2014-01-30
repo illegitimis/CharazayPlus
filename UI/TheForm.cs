@@ -77,7 +77,7 @@ namespace AndreiPopescu.CharazayPlus
     /// <summary>
     /// 
     /// </summary>
-    private readonly Web.WebServiceUser _wsu;
+    private /*readonly*/ Web.WebServiceUser _wsu;
       //new Web.WebServiceUser("stergein", "security_code", 1013, 5, 21191);
 
     #endregion
@@ -765,7 +765,7 @@ namespace AndreiPopescu.CharazayPlus
     private void addMyTeamScheduleToCache()
     {
       //throw new NotImplementedException();
-      foreach (Xsd2.match m in _mySchedule)
+      foreach (var m in _mySchedule)
       {
         CacheManager.Instance.AddTeam(m.HomeTeamId, m.HomeTeamName);
         CacheManager.Instance.AddTeam(m.AwayTeamId, m.AwayTeamName);
@@ -881,15 +881,35 @@ namespace AndreiPopescu.CharazayPlus
       if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(code))
       {
         UI.FormLogin formLogin = new UI.FormLogin();
+        formLogin.CorrectUserInformation += new EventHandler(formLogin_CorrectUserInformation);
         formLogin.ShowDialog(this);
       }
-
+      else
+      {
        _wsu = new Web.WebServiceUser(Properties.Settings.Default.UserName, Properties.Settings.Default.SecurityCode);
-       //
-       // down + deserialize xmls
-       //
-       DownloadMandatoryXmlFiles();
-       DownloadXmlAdditional();             
+        //
+        // down + deserialize xmls
+        //
+        DownloadMandatoryXmlFiles();
+        DownloadXmlAdditional();
+      }
+            
+    }
+
+    void formLogin_CorrectUserInformation (object sender, EventArgs e)
+    {
+      UI.FormLogin formLogin = (UI.FormLogin)sender;
+      _wsu = new Web.WebServiceUser(Properties.Settings.Default.UserName, Properties.Settings.Default.SecurityCode);
+      //
+      // down + deserialize xmls
+      //
+      formLogin.Info("downloading team info");
+      DownloadMandatoryXmlFiles();
+      formLogin.Info("downloading additional data");
+      DownloadXmlAdditional();
+      formLogin.Info("ready...");
+      //     
+      formLogin.Close();
     }
 
     /// <summary>

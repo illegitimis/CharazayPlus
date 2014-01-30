@@ -19,21 +19,21 @@
 			<xs:attribute name="date" type="xs:unsignedInt" use="required" />
 			<xs:attribute name="round" type="xs:unsignedByte" use="required" />
 			<xs:attribute name="season" type="xs:unsignedByte" use="required" />
-			<xs:attribute name="spectators" type="xs:unsignedShort" use="required" />
-			<xs:attribute name="vips" type="xs:unsignedShort" use="required" />
+			<xs:attribute name="spectators" type="xs:unsignedInt" use="required" />
+			<xs:attribute name="vips" type="xs:unsignedInt" use="required" />
 			<xs:attribute name="played" type="xs:string" use="required" />
 			<xs:attribute name="homescore" type="xs:unsignedByte" use="required" />
 			<xs:attribute name="awayscore" type="xs:unsignedByte" use="required" />
 			<xs:attribute name="type" type="xs:unsignedByte" use="required" />
-			<xs:attribute name="leagueid" type="xs:unsignedShort" use="required" />
+			<xs:attribute name="leagueid" type="xs:unsignedInt" use="required" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="teams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="hometeam" type="xs:unsignedShort" />
+				<xs:element name="hometeam" type="xs:unsignedInt" />
 				<xs:element name="hometeamname" type="xs:string" />
-				<xs:element name="awayteam" type="xs:unsignedShort" />
+				<xs:element name="awayteam" type="xs:unsignedInt" />
 				<xs:element name="awayteamname" type="xs:string" />
 			</xs:sequence>
 		</xs:complexType>

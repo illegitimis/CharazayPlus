@@ -437,6 +437,7 @@
     <None Include="Resources\back.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bugs.txt" />
     <Content Include="Content\C.txt" />
     <Content Include="Content\Info.txt" />
     <Content Include="Content\ObsoleteV10.txt" />

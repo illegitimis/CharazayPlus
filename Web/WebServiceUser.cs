@@ -5,9 +5,9 @@ namespace AndreiPopescu.CharazayPlus.Web
   {
     public string user;
     public string securityCode;
-    public int divisionId;
+    public uint divisionId;
     public byte countryId;
-    public int arenaId;
+    public uint arenaId;
 
     public WebServiceUser (string u, string pass)
     {
@@ -15,7 +15,7 @@ namespace AndreiPopescu.CharazayPlus.Web
       securityCode = pass;
     }
 
-    public WebServiceUser (string u, string pass, int div, byte c, int a)
+    public WebServiceUser (string u, string pass, uint div, byte c, uint a)
     {
       user = u;
       securityCode = pass;

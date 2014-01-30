@@ -113,13 +113,13 @@ public partial class player {
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
 public partial class team {
     
-    private ushort idField;
+    private uint idField;
     
     private string nameField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort id {
+    public uint id {
         get {
             return this.idField;
         }

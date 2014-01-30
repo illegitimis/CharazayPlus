@@ -15,7 +15,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// lazily initialized player & team dictionaries
     /// </summary>
     private static Dictionary<ulong, string> _players = null;
-    private static Dictionary<ushort, string> _teams = null;
+    private static Dictionary<uint, string> _teams = null;
     private static Dictionary<uint, string> _matches = null;
 
     private string path()
@@ -44,7 +44,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       // deserialize from cache.xml
       //
       _players = new Dictionary<ulong, string>();
-      _teams = new Dictionary<ushort, string>();
+      _teams = new Dictionary<uint, string>();
       _matches = new Dictionary<uint, string>();
 
       using (FileStream fs = new FileStream(path(), FileMode.Open, FileAccess.Read))
@@ -153,7 +153,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     }
 
-    public void AddTeam(ushort id, string name)
+    public void AddTeam(uint id, string name)
     {
       if (_teams.Count == 0)
         _teams.Add(id, name);
@@ -198,7 +198,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       return _players.ContainsKey(id) ? _players[id] : id.ToString();
     }
 
-    public string TeamName(ushort id)
+    public string TeamName(uint id)
     {
       return _teams.ContainsKey(id) ? _teams[id] : id.ToString();
     }

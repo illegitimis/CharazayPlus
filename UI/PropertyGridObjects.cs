@@ -182,12 +182,12 @@ namespace AndreiPopescu.CharazayPlus
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
     public byte TeamChemistry { get { return _team.team_info.chemistry; } }
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
-    public ushort DivisionId { get { return _team.team_info.divisionid; } }
+    public uint DivisionId { get { return _team.team_info.divisionid; } }
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
-    public ushort Rival { get { return _team.team_info.rival; } }
+    public uint Rival { get { return _team.team_info.rival; } }
 
     [Browsable(true), Description(""), Category("FanClub"), ReadOnly(true)]
-    public ushort Fans { get { return _team.team_info.fanclub.fans; } }
+    public uint Fans { get { return _team.team_info.fanclub.fans; } }
     [Browsable(true), Description(""), Category("FanClub"), ReadOnly(true)]
     //public string Level { get { return Enum.GetName (typeof(Xsd.fanclubLevel), team.team_info.fanclub.level); } }
     public byte Level { get { return _team.team_info.fanclub.level; } }
@@ -213,13 +213,13 @@ namespace AndreiPopescu.CharazayPlus
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
     public string IsActive { get { return _country.country_info.active; } }
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
-    public ushort NoSupporters { get { return _country.country_info.supporters; } }
+    public uint NoSupporters { get { return _country.country_info.supporters; } }
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
-    public ushort NoTeams { get { return _country.country_info.teams; } }
+    public uint NoTeams { get { return _country.country_info.teams; } }
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
-    public ushort NoUsers { get { return _country.country_info.users; } }
+    public uint NoUsers { get { return _country.country_info.users; } }
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
-    public ushort NoWaiting { get { return _country.country_info.waiting; } }
+    public uint NoWaiting { get { return _country.country_info.waiting; } }
 
     /// <summary>
     /// xsd2.user type converted

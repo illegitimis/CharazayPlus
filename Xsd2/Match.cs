@@ -69,9 +69,9 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     private byte seasonField;
 
-    private ushort spectatorsField;
+    private uint spectatorsField;
 
-    private ushort vipsField;
+    private uint vipsField;
 
     private string playedField;
 
@@ -81,7 +81,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     private byte typeField;
 
-    private ushort leagueidField;
+    private uint leagueidField;
 
     /// <remarks/>
     public teams teams
@@ -193,7 +193,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort spectators
+    public uint spectators
     {
       get
       {
@@ -207,7 +207,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort vips
+    public uint vips
     {
       get
       {
@@ -277,7 +277,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public ushort leagueid
+    public uint leagueid
     {
       get
       {
@@ -300,16 +300,16 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   public partial class teams
   {
 
-    private ushort hometeamField;
+    private uint hometeamField;
 
     private string hometeamnameField;
 
-    private ushort awayteamField;
+    private uint awayteamField;
 
     private string awayteamnameField;
 
     /// <remarks/>
-    public ushort hometeam
+    public uint hometeam
     {
       get
       {
@@ -335,7 +335,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     }
 
     /// <remarks/>
-    public ushort awayteam
+    public uint awayteam
     {
       get
       {

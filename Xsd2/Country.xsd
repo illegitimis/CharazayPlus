@@ -13,9 +13,9 @@
                   <xs:sequence>
                     <xs:element name="name" type="xs:string" />
                   </xs:sequence>
-                  <xs:attribute name="id" type="xs:unsignedShort" use="required" />
+                  <xs:attribute name="id" type="xs:unsignedInt" use="required" />
                   <xs:attribute name="level" type="xs:unsignedByte" use="required" />
-                  <xs:attribute name="lh" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="lh" type="xs:unsignedShort" use="required" />
                   <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
                 </xs:complexType>
               </xs:element>
@@ -48,10 +48,10 @@
                     </xs:element>
                   </xs:sequence>
                   <xs:attribute name="active" type="xs:string" use="required" />
-                  <xs:attribute name="users" type="xs:unsignedShort" use="required" />
-                  <xs:attribute name="teams" type="xs:unsignedShort" use="required" />
-                  <xs:attribute name="waiting" type="xs:unsignedShort" use="required" />
-                  <xs:attribute name="supporters" type="xs:unsignedShort" use="required" />
+                  <xs:attribute name="users" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="teams" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="waiting" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="supporters" type="xs:unsignedInt" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -70,7 +70,7 @@
       <xs:attribute name="supporter" type="xs:string" use="required" />
       <xs:attribute name="registered" type="xs:unsignedInt" use="required" />
       <xs:attribute name="last_active" type="xs:unsignedInt" use="required" />
-      <xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+      <xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
       <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
     </xs:complexType>
   </xs:element>

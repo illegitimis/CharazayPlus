@@ -9,8 +9,8 @@
 							<xs:element maxOccurs="unbounded" name="transfer">
 								<xs:complexType>
 									<xs:sequence>
-										<xs:element name="sellteam" type="xs:unsignedShort" />
-										<xs:element name="buyteam" type="xs:unsignedShort" />
+										<xs:element name="sellteam" type="xs:unsignedInt" />
+										<xs:element name="buyteam" type="xs:unsignedInt" />
 									</xs:sequence>
 									<xs:attribute name="playerid" type="xs:unsignedInt" use="required" />
 									<xs:attribute name="date" type="xs:unsignedInt" use="required" />

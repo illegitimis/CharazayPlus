@@ -13,20 +13,20 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     public string HomeTeamName { get { return teams.hometeamname; } }
     public string AwayTeamName { get { return teams.awayteamname; } }
 
-    public ushort HomeTeamId { get { return teams.hometeam; } }
-    public ushort AwayTeamId { get { return teams.awayteam; } }
+    public uint HomeTeamId { get { return teams.hometeam; } }
+    public uint AwayTeamId { get { return teams.awayteam; } }
 
-    public string MatchType 
-    { 
-      get { return System.Enum.GetName ( typeof(MatchType) , (MatchType)typeField); } 
+    public string MatchType
+    {
+      get { return System.Enum.GetName(typeof(MatchType), (MatchType)typeField); }
     }
 
     public bool Played { get { return playedField == "yes"; } }
 
     public System.DateTime Date_ { get { return Compute.EstimatedDateTime(dateField); } }
 
-    [System.Xml.Serialization.XmlIgnore]    
-    public ushort MyTeamId { private get; set; }
+    [System.Xml.Serialization.XmlIgnore]
+    public uint MyTeamId { private get; set; }
 
     public bool Won { get { return (homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId); } }
 
@@ -52,21 +52,37 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   {
     public override string ToString ( )
     {
-      return CacheManager.Instance.MatchName(this.id);      
+      return CacheManager.Instance.MatchName(this.id);
     }
   }
-  
+
   public partial class charazayPlayer
   {
-  public ushort Teamid
+    public ushort Teamid
     {
       get
       {
         ushort result = 0;
-        ushort.TryParse( this.teamidField, out result);
+        ushort.TryParse(this.teamidField, out result);
         return result;
-      }      
+      }
     }
   }
+
+  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+  [System.SerializableAttribute()]
+  [System.Diagnostics.DebuggerStepThroughAttribute()]
+  [System.ComponentModel.DesignerCategoryAttribute("code")]
+  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  public partial class charazay { }
+
+  public partial class income
+  {
+    public uint Total { get { return sponsor + tickets + sales + other + merchandise; } }
+  }
+
+  public partial class expences { public uint Total { get { return salary + staff + buys + other + maintenance + facility; } } }
+
 
 }

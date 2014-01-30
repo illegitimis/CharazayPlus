@@ -16,7 +16,7 @@
 													<xs:element name="name" type="xs:string" />
 												</xs:sequence>
 												<xs:attribute name="mood" type="xs:unsignedByte" use="required" />
-												<xs:attribute name="fans" type="xs:unsignedShort" use="required" />
+												<xs:attribute name="fans" type="xs:unsignedInt" use="required" />
 												<xs:attribute name="level" type="xs:unsignedByte" use="required" />
 											</xs:complexType>
 										</xs:element>
@@ -30,15 +30,15 @@
 										</xs:element>
 									</xs:sequence>
 									<xs:attribute name="chemistry" type="xs:unsignedByte" use="required" />
-									<xs:attribute name="divisionid" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="arenaid" type="xs:unsignedShort" use="required" />
-									<xs:attribute name="rival" type="xs:unsignedShort" use="required" />
+									<xs:attribute name="divisionid" type="xs:unsignedInt" use="required" />
+									<xs:attribute name="arenaid" type="xs:unsignedInt" use="required" />
+									<xs:attribute name="rival" type="xs:unsignedInt" use="required" />
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
-						<xs:attribute name="id" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="id" type="xs:unsignedInt" use="required" />
 						<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-						<xs:attribute name="userid" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="userid" type="xs:unsignedInt" use="required" />
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>

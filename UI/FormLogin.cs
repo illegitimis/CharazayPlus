@@ -238,9 +238,19 @@ namespace AndreiPopescu.CharazayPlus.UI
 
       using (Web.Downloader crawler = new Web.Downloader())
       {
-        Web.DownloadItem di = new Web.MyInfoXml(tbUser.Text, tbSecurityCode.Text);
-        crawler.Add(di);
-        crawler.ForceGet(true);
+        Web.DownloadItem di = null;
+        try
+        {
+          di = new Web.MyInfoXml(tbUser.Text, tbSecurityCode.Text);
+          crawler.Add(di);
+          crawler.ForceGet(true);
+          Info("Charazay user information was downloaded");
+        }
+        catch 
+        { 
+          Info("Could not download user information from Charazay. Most probably user name or associated security code are wrong"); 
+        }
+        
         
         using (System.IO. FileStream fs = new System.IO.FileStream
           (di.m_fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
@@ -249,16 +259,18 @@ namespace AndreiPopescu.CharazayPlus.UI
             (typeof(Xsd2.charazay)).Deserialize(fs));
           if (obj.user == null)
           {
-            txtInfo.Text = "Charazay user name or associated security code are wrong";
+           Info("Charazay user name is invalid");
             btnSet.Enabled = false;
           }
+          
           else
           {
             Properties.Settings cus = Properties.Settings.Default;
             cus.SecurityCode = tbSecurityCode.Text;
             cus.UserName = tbUser.Text;
             cus.Save();
-            txtInfo.Text = "Provided information is correct and was saved";            
+            Info("Provided information is correct and was saved");       
+            OnCorrectUserInformation();
           }
            
         }
@@ -280,12 +292,22 @@ namespace AndreiPopescu.CharazayPlus.UI
       Binding bnd1 = new Binding("Text", Properties.Settings.Default, "SecurityCode", true, DataSourceUpdateMode.OnPropertyChanged);
       tbSecurityCode.DataBindings.Add(bnd1);
 
-      txtInfo.Text = "Enter required info";
+      Info("Enter required info");
       btnSet.Enabled = false;
     }
 
+     public event EventHandler CorrectUserInformation;
+     protected virtual void OnCorrectUserInformation()
+       {
+           if (CorrectUserInformation != null)
+           {
+               CorrectUserInformation(this, new EventArgs());
+           }
+       }
     
-
-    
+     internal void Info (string p)
+     {
+       txtInfo.Text = p;
+     }
   }
 }

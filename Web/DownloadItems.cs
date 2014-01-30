@@ -295,7 +295,7 @@
   //id: division ID
   internal class DivisionStandingsXml : XmlDownloadItem
   {
-    internal DivisionStandingsXml (string user, string pass, int divisionId)
+    internal DivisionStandingsXml (string user, string pass, uint divisionId)
       : base(user, pass, Category.DivisionInfo, (ulong)divisionId) { }
     internal DivisionStandingsXml (WebServiceUser wsu) : this(wsu.user, wsu.securityCode, wsu.divisionId) { }
     //protected internal override Type DeserializationReturnType { get { return typeof(Xsd.division); } }

@@ -8,11 +8,11 @@
 						<xs:sequence>
 							<xs:element name="name" type="xs:string" />
 						</xs:sequence>
-						<xs:attribute name="id" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="id" type="xs:unsignedInt" use="required" />
 						<xs:attribute name="supporter" type="xs:string" use="required" />
 						<xs:attribute name="registered" type="xs:unsignedInt" use="required" />
 						<xs:attribute name="last_active" type="xs:unsignedInt" use="required" />
-						<xs:attribute name="teamid" type="xs:unsignedShort" use="required" />
+						<xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
 						<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
 					</xs:complexType>
 				</xs:element>
