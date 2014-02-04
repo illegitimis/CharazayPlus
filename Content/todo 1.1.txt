@@ -5,18 +5,13 @@ matches cache - my team schedule + division schedule (ok)
 debug general cache (ok)
 different .net framework builds (rest)
 only one program instance (todo)
-splashscreen 
-charazay certified logo 
-advertising
 -------------------------------
 0) INFO TAB
 debug xml received (ok)
-versioned xsd schema
-Grid control div history
-league hardiness chart
 -------------------------------
 1) STATUS TAB
 progress fatigue with text (ok)
+country flag
 -------------------------------
 2) SKILLS TAB
 hot tracking (ok)
@@ -36,7 +31,6 @@ better layout, eye candy
 -------------------------------
 8) TRAINING TAB
 suggested training combination (ok)
-replace grid with training
 debug suggested training
 -------------------------------
 9) MY team SCHEDULE
@@ -49,15 +43,11 @@ more data?
 -----------------------
 11) DIVISION SCHEDULE
 debug xml  (ok)
-chart ?
-bball + vals addition as a total
 reinit away team control
 -----------------------
 12) ECONOMY
 debug  (ok)
 anchor economy control (ok)
-history?
-delete history (cumulative)
 --------------------
 13) TRANSFER LIST TAB
 better money per agevalue estimation (centers especially) (OK, moved to TM db)
@@ -66,6 +56,5 @@ price groups NOT SORTABLE (ok)
 format 2 decimals grid (ok)
 fancy labels instead of info grid (ok)
 new controls for position / skill (ok)
-could even get player info ... 
-and even playerids
 price editable OVERFLOW
+season bug

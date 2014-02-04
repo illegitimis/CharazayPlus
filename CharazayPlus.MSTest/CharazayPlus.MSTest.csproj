@@ -59,7 +59,7 @@
     <Compile Include="XsdMerge.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\PRACTICE\LeastSquaresFitting\LeastSquares\LeastSquares.csproj">
+    <ProjectReference Include="..\..\..\LeastSquaresFitting\LeastSquares\LeastSquares.csproj">
       <Project>{DB9F4DD4-9591-4AD5-B0AF-2AB4DE5B60C1}</Project>
       <Name>LeastSquares</Name>
     </ProjectReference>

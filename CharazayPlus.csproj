@@ -443,6 +443,7 @@
     <Content Include="Content\SF.txt" />
     <Content Include="Content\TMDB.txt" />
     <Content Include="Content\todo 1.1.txt" />
+    <Content Include="Content\todo 1.2.txt" />
     <Content Include="Resources\app.ico" />
     <None Include="Resources\tick16.png" />
     <None Include="Resources\star16.png" />

@@ -74,20 +74,21 @@ namespace CharazayPlus.MSTest
       byte age = 32; 
       char pos = 'C'; 
             
-      List<float[]> actual = TransferMarket.Find(age, pos).ToList();
+      List<double[]> actual = TransferMarket.Find(age, pos).ToList();
       Assert.AreEqual(19, actual.Count);
       
-      float[] actual0 = actual[0];
-      Assert.AreEqual(0.92f, actual0[0]);
-      Assert.AreEqual(0.04f, actual0[1]);
+      //double[] actual0 = actual[0];
+      //Assert.AreEqual(0.92f, actual0[0]);
+      //Assert.AreEqual(0.04f, actual0[1]);
 
-      float[] actual18 = actual[18];
-      Assert.AreEqual(1.17f, actual18[0]);
-      Assert.AreEqual(21.106666f, actual18[1]);
+      //double[] actual18 = actual[18];
+      //Assert.AreEqual(1.17f, actual18[0]);
+      //Assert.AreEqual(21.106666f, actual18[1]);
 
       LeastSquares.Fit fiteo = new LeastSquares.ExponentialOptimum(actual);
       LeastSquares.Fit fite = new LeastSquares.Exponential(actual);
       LeastSquares.Fit fit = new LeastSquares.Linear(actual);
+
     }
 
     [TestMethod()]
@@ -96,20 +97,41 @@ namespace CharazayPlus.MSTest
       byte age = 31;
       char pos = 'C';
 
-      List<float[]> actual = TransferMarket.Find(age, pos).ToList();
+      List<double[]> actual = TransferMarket.Find(age, pos).ToList();
       Assert.AreEqual(22, actual.Count);
 
-      float[] first = actual[0];
-      Assert.AreEqual(0.99f, first[0]);
-      Assert.AreEqual(3.06f, first[1]);
+      //double[] first = actual[0];
+      //Assert.AreEqual(0.99f, first[0]);
+      //Assert.AreEqual(3.06f, first[1]);
 
-      float[] last = actual[21];
-      Assert.AreEqual(1.22f, last[0]);
-      Assert.AreEqual(30f, last[1]);
+      //double[] last = actual[21];
+      //Assert.AreEqual(1.22f, last[0]);
+      //Assert.AreEqual(30f, last[1]);
 
       LeastSquares.Fit fiteo = new LeastSquares.ExponentialOptimum(actual);
       LeastSquares.Fit fite = new LeastSquares.Exponential(actual);
       LeastSquares.Fit fit = new LeastSquares.Linear(actual);
+    }
+
+    [TestMethod()]
+    public void FindTest ( )
+    {
+      char[] pos = new char[]{'C','F','G'};
+      for (byte age= 15; age <= 35; age++)
+      {
+        foreach (char c in pos)
+        {
+          List<double[]> actual = TransferMarket.Find(age, c).ToList();
+          LeastSquares.Fit fiteo = new LeastSquares.ExponentialOptimum(actual);
+          LeastSquares.Fit fite = new LeastSquares.Exponential(actual);
+          LeastSquares.Fit fit = new LeastSquares.Linear(actual);
+          System.Diagnostics.Debug.WriteLine("{0} {1} {2} {3} {4}", age, c, fiteo, fite, fit);
+
+        }
+      }
+      
+    
+      
     }
   }
 }
