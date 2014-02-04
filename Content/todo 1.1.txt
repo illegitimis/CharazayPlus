@@ -1,13 +1,13 @@
 ﻿======================================
 GENERAL
-different .net framework builds
-only one program instance
-splashscreen
-charazay certified logo
-advertising
 cache matches automaton (ok)
 matches cache - my team schedule + division schedule (ok)
 debug general cache (ok)
+different .net framework builds (rest)
+only one program instance (todo)
+splashscreen 
+charazay certified logo 
+advertising
 -------------------------------
 0) INFO TAB
 debug xml received (ok)
@@ -19,22 +19,29 @@ league hardiness chart
 progress fatigue with text (ok)
 -------------------------------
 2) SKILLS TAB
-better layout, eye candy
-hot tracking
-player age/value 
+hot tracking (ok)
+better layout, eye candy (ok)
+player age/value column
+test age/value for young players
+
+colors: 
+dark grey title: 51, 51, 51
+light gray bkgrnd2 207, 207, 207
+light gray bkgrnd2 221, 221, 221
+gold 255,192,64
 -------------------------------
 3-7) PG, SG, ...
 player age/value 
 better layout, eye candy 
 -------------------------------
 8) TRAINING TAB
-suggested training combination (CPP)
+suggested training combination (ok)
 replace grid with training
 debug suggested training
 -------------------------------
 9) MY team SCHEDULE
-better filter
 debug xml received  (ok)
+better filter
 -------------------------------
 10) DIVISION STANDINGS
 debug xml received  (ok)
@@ -48,81 +55,17 @@ reinit away team control
 -----------------------
 12) ECONOMY
 debug  (ok)
+anchor economy control (ok)
 history?
 delete history (cumulative)
-anchor economy control (ok)
 --------------------
 13) TRANSFER LIST TAB
-could even get player info ... 
-and even playerids
-price editable OVERFLOW
 better money per agevalue estimation (centers especially) (OK, moved to TM db)
 data grid, sorting, (ok)
 price groups NOT SORTABLE (ok)
 format 2 decimals grid (ok)
 fancy labels instead of info grid (ok)
 new controls for position / skill (ok)
-------
-DB TM
-------
-CENTERS
-16 >1
-17 >1
-18 >1
-19 >1
-21,23 A,24 A,25 A
-31 <1
-32 <1
-
-FORWARDS
-15 A
-16 A
-18 A
-21 A
-23 A
-24,25,26 A
-
-dark grey title: 51, 51, 51
-light gray bkgrnd2 207, 207, 207
-light gray bkgrnd2 221, 221, 221
-gold 255,192,64
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+could even get player info ... 
+and even playerids
+price editable OVERFLOW
