@@ -268,52 +268,6 @@
   <!--6) match-->
   <!--match from division schedule-->
   <!--match from my schedule-->
-  <!--<xs:element name="match">
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="teams"/>
-        <xs:element ref="stats"/>
-        <xs:element ref="bballs"/>
-        <xs:element ref="lineup"/>
-      </xs:choice>
-      <xs:attribute name="id"
-                    type="xs:unsignedInt"
-                    use="required" />
-      <xs:attribute name="date"
-                    type="xs:unsignedInt"
-                    use="optional" />
-      <xs:attribute name="round"
-                    type="xs:unsignedByte"
-                    use="optional" />
-      <xs:attribute name="season"
-                    type="xs:unsignedByte"
-                    use="optional" />
-      <xs:attribute name="spectators"
-                    type="xs:unsignedInt"
-                    use="optional" />
-      <xs:attribute name="vips"
-                    type="xs:unsignedInt"
-                    use="optional" />
-      <xs:attribute name="played"
-                    type="xs:string"
-                    use="optional" />
-      <xs:attribute name="homescore"
-                    type="xs:unsignedByte"
-                    use="optional" />
-      <xs:attribute name="awayscore"
-                    type="xs:unsignedByte"
-                    use="optional" />
-      <xs:attribute name="type"
-                    type="xs:unsignedByte"
-                    use="optional" />
-      <xs:attribute name="leagueid"
-                    type="xs:unsignedInt"
-                    use="optional" />
-      <xs:attribute name="nationalcupid"
-                    type="xs:unsignedInt"
-                    use="optional" />
-    </xs:complexType>
-  </xs:element>-->
   <xs:element name="match">
     <xs:complexType>
       <xs:sequence minOccurs="0">

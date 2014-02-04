@@ -22,8 +22,13 @@ namespace AndreiPopescu.CharazayPlus.UI
     }
 
     public Web.WebServiceUser User {get; set;}
+#if XSD2
+      readonly IDictionary<TLPlayer,Xsd2.charazayPlayer> _mapTL = new Dictionary<TLPlayer, Xsd2.charazayPlayer>();
+#elif XSDMERGE
+    readonly IDictionary<TLPlayer, XsdMerge.player> _mapTL = new Dictionary<TLPlayer, XsdMerge.player>();
+#else
+#endif
 
-    readonly IDictionary<TLPlayer,Xsd2.charazayPlayer> _mapTL = new Dictionary<TLPlayer, Xsd2.charazayPlayer>();
 
     /// <summary>
     /// serialize the transfer listed players that have been evaluated 
@@ -220,11 +225,21 @@ namespace AndreiPopescu.CharazayPlus.UI
         //btnTLGet.Enabled = true;
 
         FileStream fs = null;
-        Xsd2.charazay obj = null;
+#if XSD2
+          Xsd2.charazay obj = null;
+#elif XSDMERGE
+        XsdMerge.charazay obj = null;
+#else
+#endif
         try
         {
           fs = new FileStream(xmlPlayer.m_fileName, FileMode.Open, FileAccess.ReadWrite);
+#if XSD2
           obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
+#elif XSDMERGE
+          obj = (XsdMerge.charazay)(new XmlSerializer(typeof(XsdMerge.charazay)).Deserialize(fs));
+#else
+#endif
         }
         catch (Exception ex)
         {
@@ -250,7 +265,14 @@ namespace AndreiPopescu.CharazayPlus.UI
 
         //propGridTL.SelectedObject = new TransferListedPlayerPropertyGridObject(obj.player);
         if (obj != null)
-          this.evaluatePlayerUC.SelectedObject = obj.player;
+        {
+#if XSD2
+            this.evaluatePlayerUC.SelectedObject = obj.player;
+#elif XSDMERGE
+            this.evaluatePlayerUC.SelectedObject = obj.Player;
+#else
+#endif
+        }
       }
       else
       {
@@ -261,8 +283,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void olvTL_BeforeSorting (object sender, BeforeSortingEventArgs e)
     {
       ObjectListView olv = sender as ObjectListView;
-      if (olv == null)
-        olv = olvTL;
+      if (olv == null) olv = olvTL;
       olv.ShowGroups = (e.ColumnToGroupBy.Text != "ValueIndex");
     }
 

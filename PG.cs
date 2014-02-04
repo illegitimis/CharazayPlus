@@ -45,11 +45,15 @@ C : Defence>Footwork>Speed
     //  : base(id, name, surname, countryId, age, h, w, si, salary, form, fatigue, fame,
     //          def, ft, p2, p3, spe, pas, dri, ftw, reb, exp) { }
 
-    //public PG(Xsd.player xsdPlayer) : base(xsdPlayer) { }
-    //public PG(Xsd.skills xsdSkills) : base(xsdSkills) { }
+#if XSD2
     public PG (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public PG (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
-
+#elif XSDMERGE
+    public PG(XsdMerge.player xsdPlayer) : base(xsdPlayer) { }
+    public PG(XsdMerge.skills xsdSkills) : base(xsdSkills) { }
+#else
+#endif
+    
     public override string ToString ( ) { return string.Format("PG: {0}", base.ToString()); }
 
     protected internal override byte MinimumBMI { get { return 21; } }

@@ -73,10 +73,7 @@
     /// <summary>
     /// 
     /// </summary>
-    protected Player ( )
-    {
-      ZeroSkills();
-    }
+    protected Player ( ) { ZeroSkills(); }
 
 
     /// <summary>
@@ -159,16 +156,24 @@
     /// copy constructor
     /// </summary>
     /// <param name="p">reference player</param>
-    protected Player (Player p)
-    {
-      throw new NotImplementedException();
-    }
+    protected Player (Player p) { throw new NotImplementedException(); }
 
-    //protected Player (Xsd.player xsdPlayer)
-    protected Player (Xsd2.charazayPlayer xsdPlayer)
+#if XSD2
+      internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
+#elif XSDMERGE
+    internal XsdMerge.player BasePlayer { get { return m_player; } }
+#else
+#endif
+    
+
+#if XSD2
+      protected Player (Xsd2.charazayPlayer xsdPlayer)      
+#elif XSDMERGE
+    protected Player (XsdMerge.player xsdPlayer)    
+#else
+#endif
     {
       m_player = xsdPlayer;
-
       InitSkills();
       ActiveSkills();
     }
@@ -230,17 +235,20 @@
       }
     }
 
-    //protected Player(Xsd.skills xsdSkills)
-    protected Player (Xsd2.charazayPlayerSkills xsdSkills)
+#if XSD2
+      protected Player (Xsd2.charazayPlayerSkills xsdSkills)
+      {
+        m_player = new Xsd2.charazayPlayer();
+#elif XSDMERGE
+    protected Player(XsdMerge.skills xsdSkills)
     {
-      //m_player = new Xsd.player ();
-      m_player = new Xsd2.charazayPlayer();
-      m_player.skills = xsdSkills;
-
-      InitSkills();
-      ActiveSkills();
+        m_player = new XsdMerge.player();
+#else
+#endif
+        m_player.skills = xsdSkills;
+        InitSkills();
+        ActiveSkills();
     }
-
 
     #endregion
 
@@ -280,14 +288,20 @@
     public bool U18NT { get { return (m_player.u18nt == "yes"); } }
 
     public UInt64 Id { get { return m_player.id; } }
-    public ulong TeamId { get { return m_player.Teamid; } }
+    public ulong TeamId { get { return 
+#if XSD2
+    m_player.Teamid
+#elif XSDMERGE
+        m_player.teamid
+#else
+#endif        
+        ; } }
     public byte CountryId { get { return m_player.countryid; } }
 
     public bool Dl { get { return (m_player.dl == /*Xsd.playerDL.*/"yes"); } }
     internal DateTime promotedOn { get { return Compute.EstimatedDateTime(m_player.promoted_on); } }
     //internal TrainingGroup TrainingGroup { get {return } }
-
-    internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
+    
     #endregion
 
     /// <summary>
@@ -566,7 +580,6 @@
 
     #region Fields
 
-
     #region Active skills
     /// <summary>
     /// real values to be displayed
@@ -587,9 +600,12 @@
     /// <summary>
     /// deserialized xsd object
     /// </summary>
-    //protected Xsd.player m_player;
-    protected Xsd2.charazayPlayer m_player;
-
+#if XSD2
+      protected Xsd2.charazayPlayer m_player;
+#elif XSDMERGE
+    protected XsdMerge.player m_player;
+#else
+#endif
     #endregion
 
     #region Implemented protected properties

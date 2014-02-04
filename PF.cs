@@ -10,8 +10,14 @@ namespace AndreiPopescu.CharazayPlus
   public class PF : Player
   {
     public PF ( ) : base() { }
+#if XSD2
     public PF (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public PF (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
+#elif XSDMERGE
+    public PF(XsdMerge.player xsdPlayer) : base(xsdPlayer) { }
+    public PF(XsdMerge.skills xsdSkills) : base(xsdSkills) { }
+#else
+#endif
 
     public override string ToString ( ) { return string.Format("Pf: {0}", base.ToString()); }
 

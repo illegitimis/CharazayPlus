@@ -4,7 +4,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   using System.Collections.Generic;
   using System.IO;
   using System.Xml.Serialization;
-  using AndreiPopescu.CharazayPlus.Utils;
+  //using AndreiPopescu.CharazayPlus.Utils;
     
   /// <summary>
   /// keeps a cache of player & team names
@@ -191,6 +191,24 @@ namespace AndreiPopescu.CharazayPlus.Utils
         else
           _matches.Add(m.id, m.ToString());
       }
+    }
+    
+    /// <summary>
+    /// adds a <see cref="XsdMerge.match"/> to cache
+    /// </summary>
+    /// <param name="m">a <see cref="XsdMerge.match"/></param>
+    /// <remarks>todo: <see cref="XsdMerge.match.ToString()"/></remarks>
+    public void AddMatch(XsdMerge.match m)
+    {
+        if (Extensions.IsNullOrEmpty(_matches))
+            _matches.Add(m.id, m.ToString());
+        else
+        {
+            if (_matches.ContainsKey(m.id))
+                _matches[m.id] = m.ToString();
+            else
+                _matches.Add(m.id, m.ToString());
+        }
     }
 
     public string PlayerName(ulong id)

@@ -726,31 +726,34 @@
       //this.tlp.Visible = false;
     }
 
-    Xsd2.charazayPlayer _p = null;
     PG _pg = null;
     SG _sg = null;
     SF _sf = null;
     PF _pf = null;
     C _c = null;
-   
+
+#if XSD2
+     Xsd2.charazayPlayer _p = null;
     public Xsd2.charazayPlayer SelectedObject 
+#elif XSDMERGE
+    XsdMerge.player _p = null;
+    public XsdMerge.player SelectedObject 
+#else
+#endif    
     { 
       get { return _p; } 
       set 
       {
-        if (value == null || value.skills == null)
-          return;
-        _p = value;
-        if (_p == null)
-          return;
+        if (value == null || value.skills == null) return;
+        _p = value; 
+        if (_p == null) return;
         _pg = new PG(_p);
         _sg = new SG(_p);
         _sf = new SF(_p);
         _pf = new PF(_p);
         _c = new C(_p);
         //
-        if (!this.tlp.Enabled)
-          this.tlp.Enabled = true;
+        if (!this.tlp.Enabled) this.tlp.Enabled = true;
         this.SuspendLayout();
         //
         assignLabelValues();

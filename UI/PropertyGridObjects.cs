@@ -118,6 +118,11 @@ namespace AndreiPopescu.CharazayPlus
     private Xsd2.charazayTeam _team;
     private Xsd2.charazayCountry _country;
     private ImageList _countriesImageList;
+    private XsdMerge.arena _arena_2;
+    private XsdMerge.user _user_2;
+    private XsdMerge.team _team_2;
+    private XsdMerge.country _country_2;
+    private ImageList imageListCountries;
 
     /// <summary>
     /// Public properties will get posted to the grid
@@ -142,6 +147,16 @@ namespace AndreiPopescu.CharazayPlus
       _team = team;
       _country = country;
       _countriesImageList = countries;
+    }
+
+    public InfoPropertyGridObject(XsdMerge.arena _arena_2, XsdMerge.user _user_2, XsdMerge.team _team_2, XsdMerge.country _country_2, ImageList imageListCountries)
+    {
+        // TODO: Complete member initialization
+        this._arena_2 = _arena_2;
+        this._user_2 = _user_2;
+        this._team_2 = _team_2;
+        this._country_2 = _country_2;
+        this.imageListCountries = imageListCountries;
     }
 
     // HAD I USED TYPECONVERTERS
@@ -341,7 +356,13 @@ namespace AndreiPopescu.CharazayPlus
   /// </summary>
   class TransferListedPlayerPropertyGridObject
   {
-    Xsd2.charazayPlayer _plyr;
+#if XSD2
+      Xsd2.charazayPlayer _plyr;
+#elif XSDMERGE
+      XsdMerge.player _plyr;
+#else
+#endif
+
     PG _pg = null;
     SG _sg = null;
     SF _sf = null;
@@ -362,7 +383,13 @@ namespace AndreiPopescu.CharazayPlus
       return null;
     }
 
-    public TransferListedPlayerPropertyGridObject (Xsd2.charazayPlayer plyr)
+#if XSD2
+      public TransferListedPlayerPropertyGridObject (Xsd2.charazayPlayer plyr)
+#elif XSDMERGE
+    public TransferListedPlayerPropertyGridObject(XsdMerge.player plyr)
+#else
+#endif
+    
     {
       _plyr = plyr;
       _pg = new PG(_plyr);

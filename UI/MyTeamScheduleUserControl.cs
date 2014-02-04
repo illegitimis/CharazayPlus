@@ -15,9 +15,16 @@ namespace AndreiPopescu.CharazayPlus.UI
       InitializeComponent();
     }
 
-    public Xsd2.match[] MySchedule { get; set; }
-    public Xsd2.charazayTeam Team { get; set; }
-     
+#if XSD2
+      public Xsd2.charazayTeam Team { get; set; }
+      public Xsd2.match[] MySchedule { get; set; }
+#elif XSDMERGE
+    public XsdMerge.team Team { get; set; }
+    public XsdMerge.match[] MySchedule { get; set; }
+#else
+#endif
+
+
     public void initDgMySchedule ( )
     {
 #if DOTNET30
@@ -66,8 +73,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       // bind
       //
       //initGridEpilogue<Xsd2.match>(dgMySchedule, _mySchedule);  
-      var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<Xsd2.match>();
-      foreach (Xsd2.match m in MySchedule)
+#if XSD2
+        var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<Xsd2.match>();
+#elif XSDMERGE
+      var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<XsdMerge.match>();
+#else
+#endif
+      foreach (var m in MySchedule)
       {
         m.MyTeamId = Team.id;
         fbl.Add(m);

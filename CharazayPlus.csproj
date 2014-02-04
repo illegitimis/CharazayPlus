@@ -52,7 +52,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;XSDMERGE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\CharazayDoctor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="C.cs" />
+    <Compile Include="Coach.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="PF.cs" />
     <Compile Include="PG.cs" />
@@ -290,9 +291,6 @@
       <DependentUpon>Charazay.xsd</DependentUpon>
     </Compile>
     <Compile Include="XsdMerge\Partial.cs" />
-    <Compile Include="XsdMerge\XMLFile1.cs">
-      <DependentUpon>XMLFile1.xsd</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\AboutForm.resx">
@@ -418,9 +416,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="XsdMerge\Charazay.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="XsdMerge\XMLFile1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

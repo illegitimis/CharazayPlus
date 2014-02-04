@@ -8,7 +8,8 @@ namespace AndreiPopescu.CharazayPlus
 
   public static class PlayerFactory
   {
-    static readonly Xsd2.charazayPlayerSkills s_sk15 = new Xsd2.charazayPlayerSkills()
+#if XSD2
+      static readonly Xsd2.charazayPlayerSkills s_sk15 = new Xsd2.charazayPlayerSkills()
     {
       defence = 5
       ,
@@ -28,10 +29,38 @@ namespace AndreiPopescu.CharazayPlus
       ,
       rebounds = 5
     };
-    static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = 15 };
+static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = 15 };
     static readonly Xsd2.charazayPlayer s_15 = new Xsd2.charazayPlayer() { basic = s_basic15, skills = s_sk15 };
+#elif XSDMERGE
+      static readonly XsdMerge.skills s_sk15 = new XsdMerge.skills()
+      {
+          defence = 5
+        ,
+          freethrow = 4
+        ,
+          twopoint = 4
+        ,
+          threepoint = 3
+        ,
+          dribling = 5
+        ,
+          passing = 5
+        ,
+          speed = 5
+        ,
+          footwork = 5
+        ,
+          rebounds = 5
+      };
+      static readonly XsdMerge.basic s_basic15 = new XsdMerge.basic() { age = 15 };
+      static readonly XsdMerge.player s_15 = new XsdMerge.player() { basic = s_basic15, skills = s_sk15 };
+#else
+#endif
 
-    public static Player GetPlayerByPosition (PlayerPosition pos)
+
+
+
+      public static Player GetPlayerByPosition (PlayerPosition pos)
     {
       switch (pos)
       {
