@@ -1003,14 +1003,27 @@ namespace AndreiPopescu.CharazayPlus
             //
             // di.DeserializationObject = obj.arena; 
             //
-            case Web.XmlSerializationType.Arena: _arena = obj.Arena; break;
+            case Web.XmlSerializationType.Arena:
+#if XSD2
+                  _arena = obj.arena;            
+#elif XSDMERGE
+      _arena = obj.Arena;             
+#else
+#endif              
+              break;
             //
             // di.DeserializationObject = obj.team;
             // division id is a mandatory session variable
             //
             case Web.XmlSerializationType.MyTeamInfo:
               {
-                _team = obj.Team;
+#if XSD2
+                _team = obj.team;           
+#elif XSDMERGE
+       _team = obj.Team;
+#else
+#endif
+
                 _wsu.divisionId = _team.team_info.divisionid;
               } break;
             // 
@@ -1020,9 +1033,16 @@ namespace AndreiPopescu.CharazayPlus
             //
             case Web.XmlSerializationType.MyInfo:
               {
-                _user = obj.User;
+#if XSD2
+                _user = obj.user;
+                if (obj.user == null)       
+#elif XSDMERGE
+      _user = obj.User;
                 if (obj.User == null)
-                  throw new Exception("XmlSerializationType.MyInfo");
+#else
+#endif
+
+                throw new Exception("XmlSerializationType.MyInfo");
                 _wsu.countryId = _user.countryid;
                 _wsu.arenaId = _user.teamid;
               } break;
@@ -1039,15 +1059,55 @@ namespace AndreiPopescu.CharazayPlus
             // Coaches
             // di.DeserializationObject = obj.coaches; 
             //
-            case Web.XmlSerializationType.Coaches: initCoachesData(obj.Coaches); break;
+            case Web.XmlSerializationType.Coaches: 
+           #if XSD2
+                initCoachesData(obj.coaches);      
+#elif XSDMERGE
+      initCoachesData(obj.Coaches); 
+#else
+#endif
+
+                break;
             //
-            case Web.XmlSerializationType.MySchedule: _mySchedule = obj.Matches; break;
+            case Web.XmlSerializationType.MySchedule: 
+#if XSD2
+                _mySchedule = obj.matches;            
+#elif XSDMERGE
+      _mySchedule = obj.Matches;  
+#else
+#endif
+
+                break;
             //
-            case Web.XmlSerializationType.DivisionStandings: _myDivisionStandings = obj.Division; break;
+            case Web.XmlSerializationType.DivisionStandings: 
+#if XSD2
+                _myDivisionStandings = obj.division;           
+#elif XSDMERGE
+      _myDivisionStandings = obj.Division;
+#else
+#endif
+
+                break;
             //
-            case Web.XmlSerializationType.DivisionSchedule: _myDivisionFullSchedule = obj.Schedule; break;
+            case Web.XmlSerializationType.DivisionSchedule: 
+#if XSD2
+                _myDivisionFullSchedule = obj.schedule;     
+#elif XSDMERGE
+   _myDivisionFullSchedule = obj.Schedule;    
+#else
+#endif
+              
+              break;
             //
-            case Web.XmlSerializationType.Match: _selectedMatch = obj.Match; break;
+            case Web.XmlSerializationType.Match: 
+#if XSD2
+              _selectedMatch = obj.match;         
+#elif XSDMERGE
+      _selectedMatch = obj.Match;
+#else
+#endif
+
+              break;
             //
             case Web.XmlSerializationType.MyTransfers: 
 #if XSD2
@@ -1058,7 +1118,15 @@ namespace AndreiPopescu.CharazayPlus
 #endif                
                 break;
             // 
-            case Web.XmlSerializationType.Economy: _economy = obj.Economy; break;
+            case Web.XmlSerializationType.Economy: 
+              #if XSD2
+                _economy = obj.economy; 
+#elif XSDMERGE
+      _economy = obj.Economy; 
+#else
+#endif
+              
+              break;
             //
             //case Web.XmlSerializationType.Player:
             //  _player = obj.player;
@@ -1104,8 +1172,13 @@ namespace AndreiPopescu.CharazayPlus
 #else
 #endif    
     {
-        foreach (var plyr in players.player)
-        {
+        #if XSD2
+      foreach (var plyr in players)
+#elif XSDMERGE
+      foreach (var plyr in players.player)
+#else
+#endif
+      {
             PG pg = new PG(plyr); pgs.Add(pg);
             SG sg = new SG(plyr); sgs.Add(sg);
             PF pf = new PF(plyr); pfs.Add(pf);
