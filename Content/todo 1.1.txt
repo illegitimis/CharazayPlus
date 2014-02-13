@@ -11,13 +11,14 @@ debug xml received (ok)
 -------------------------------
 1) STATUS TAB
 progress fatigue with text (ok)
-country flag
+country flag (ok)
 -------------------------------
 2) SKILLS TAB
 hot tracking (ok)
 better layout, eye candy (ok)
-player age/value column
-test age/value for young players
+player age/value column (ok)
+test age/value for young players (ok)
+refactor ObjectListViewExtensions
 
 colors: 
 dark grey title: 51, 51, 51
@@ -26,8 +27,9 @@ light gray bkgrnd2 221, 221, 221
 gold 255,192,64
 -------------------------------
 3-7) PG, SG, ...
-player age/value 
-better layout, eye candy 
+initialization bug (ok)
+player age/value (ok)
+better layout, eye candy
 -------------------------------
 8) TRAINING TAB
 suggested training combination (ok)
@@ -40,6 +42,7 @@ better filter
 10) DIVISION STANDINGS
 debug xml received  (ok)
 more data?
+layout
 -----------------------
 11) DIVISION SCHEDULE
 debug xml  (ok)

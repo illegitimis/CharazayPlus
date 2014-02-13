@@ -20,11 +20,13 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// <summary>
     /// 
     /// </summary>
-    public void initStatus (IEnumerable<Player> _optimumPlayers)
+    public void initStatus (IEnumerable<Player> _optimumPlayers, ImageList il)
     {
       //XmlServiceDownload();
       TypedObjectListView<Player> tlist = new TypedObjectListView<Player>(this.olvStatus);
       tlist.GenerateAspectGetters();
+      this.olvStatus.LargeImageList = il;
+      this.olvStatus.SmallImageList = il;
 
       // Name
       this.olvcFullName.ImageGetter = delegate(object row) { return (int)(((Player)row).CountryId - 1); };

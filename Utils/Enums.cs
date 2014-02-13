@@ -58,6 +58,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     position = 4
   }
 
+  public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
+
   //Form
   //Form is a small factor that reflects hot/cold streaks that players have on a weekly/monthly basis.
   // Form is updated at week update, it's influenced by playing time and some random, 

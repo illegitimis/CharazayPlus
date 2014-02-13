@@ -3,6 +3,7 @@
   using System;
   using System.Xml.Serialization;
   using BrightIdeasSoftware;
+  using AndreiPopescu.CharazayPlus.Utils;
 
   /// <summary>
   /// Small forward

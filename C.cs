@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AndreiPopescu.CharazayPlus.Utils;
 
 namespace AndreiPopescu.CharazayPlus
 {

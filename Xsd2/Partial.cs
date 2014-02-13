@@ -4,6 +4,7 @@
 namespace AndreiPopescu.CharazayPlus.Xsd2
 {
   using AndreiPopescu.CharazayPlus.Utils;
+  using BrightIdeasSoftware;
 
   /// <summary>
   /// match 
@@ -84,5 +85,74 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
   public partial class expences { public uint Total { get { return salary + staff + buys + other + maintenance + facility; } } }
 
+  public partial class charazayDivisionStanding
+  {
+    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Games Played")]
+    public byte GamesPlayed { get { return this.playedField; } }
+    
+    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "#Wins")]
+    public byte Wins { get
+      {
+        return this.winsField;
+      }
+    }
+
+    [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "#Losses")]
+    public byte Losses
+    {
+      get
+      {
+        return this.lossField;
+      }
+    }
+
+   [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Position")]
+    public byte Position
+    {
+      get
+      {
+        return this.positionField;
+      }     
+    }        
+
+   [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 120, MinimumWidth = 80, MaximumWidth = 225, Title = "Name")]
+    public string Name { get { return this.nameField; } }
+
+   [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Points Made")]
+   public ushort PointsMade { get { return this.points_madeField; } }
+
+   [OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Points Against")]
+   public ushort PointsAgainst { get { return this.points_againstField; } }
+
+   [OLVColumn(DisplayIndex = 3, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Points")]
+   public byte Points
+   {
+     get
+     {
+       return this.pointsField;
+     }
+   }
+
+
+
+   [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "TeamID")]
+   public uint TeamID
+   {
+     get
+     {
+       return this.teamidField;
+     }
+   }
+
+
+    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Owner")]
+    public uint Owner
+    {
+      get
+      {
+        return this.ownerField;
+      }
+    }
+  }
 
 }

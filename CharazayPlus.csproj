@@ -116,9 +116,6 @@
     <Compile Include="UI\DivisionStandingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\DivisionStandingsUserControl.Designer.cs">
-      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\InfoTabUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,9 +137,6 @@
     </Compile>
     <Compile Include="UI\PlayerPositionUserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\PlayerPositionUserControl.Designer.cs">
-      <DependentUpon>PlayerPositionUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\StatusUserControl.cs">
       <SubType>UserControl</SubType>
@@ -176,6 +170,9 @@
     </Compile>
     <Compile Include="UI\TransferListUserControl.Designer.cs">
       <DependentUpon>TransferListUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControl1.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\VLabel.cs">
       <SubType>Component</SubType>
@@ -362,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TransferListUserControl.resx">
       <DependentUpon>TransferListUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>

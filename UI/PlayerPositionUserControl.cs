@@ -30,29 +30,21 @@ namespace AndreiPopescu.CharazayPlus.UI
       Generator.GenerateColumns(olv, players);
       olv.HeaderUsesThemes = false;
 
-      double[] scoreMarkers = new double[] { 6, 8, 10, 12, 14, 16 };
+      double[] scoreMarkers = new double[] { 6, 8, 10, 12, 14, 16, 18, 20 };
       string[] descriptions = ObjectListViewExtensions.BuildCustomGroupies<double>(scoreMarkers);
 
       foreach (OLVColumn col in olv.Columns)
       {
         col.IsHeaderVertical = true;
-        //col.MaximumWidth = 80;
-        //col.MinimumWidth = 40;
-        //col.Width = 65;
-
+        /*Custom.TagPosition*/
         string tag = col.Tag as string;
-        if (!tag.Contains(/*Custom.TagPosition*/ "Position"))
+        if (!tag.Contains("Position"))
           col.IsVisible = false;
 
         switch (col.DisplayIndex)
-        {
+        { 
           case 0:
-            {
-              //col.MaximumWidth = 200;
-              //col.MinimumWidth = 100;
-              //col.Width = 130;
-
-
+            { // name column
               col.GroupKeyGetter = delegate(object row) { return ((T)row).HeightForPosition; };
               col.GroupKeyToTitleConverter = delegate(object groupKey)
               {
@@ -67,9 +59,15 @@ namespace AndreiPopescu.CharazayPlus.UI
 
             } break;
 
+          case 28:
+            { // value index
+              double[] avMarks = new double[] { 0.6, 0.8, 0.9, 0.95, 1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.15, 1.2, 1.25, 1.3, 1.4, 1.5};
+              string[] avDescr = ObjectListViewExtensions.BuildCustomGroupies<double>(avMarks);
+              col.MakeGroupies(avMarks, avDescr);
+            } break;
+
           default:
-            {
-              //col.AspectToStringFormat = "{0:F02}";
+            { // 1-27
               col.MakeGroupies(scoreMarkers, descriptions);
             } break;
         }
@@ -84,6 +82,65 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       initOLV<T>(this.olv, players);
     }
+
+    #region Component Designer generated code
+
+    /// <summary> 
+    /// Required method for Designer support - do not modify 
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent ( )
+    {
+      this.olv = new BrightIdeasSoftware.ObjectListView();
+      ((System.ComponentModel.ISupportInitialize)(this.olv)).BeginInit();
+      this.SuspendLayout();
+      // 
+      // olv
+      // 
+      this.olv.AlternateRowBackColor = System.Drawing.Color.DimGray;
+      this.olv.BackColor = System.Drawing.Color.Gray;
+      this.olv.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.olv.ForeColor = System.Drawing.Color.White;
+      this.olv.Location = new System.Drawing.Point(0, 0);
+      this.olv.Name = "olv";
+      this.olv.Size = new System.Drawing.Size(150, 150);
+      this.olv.TabIndex = 1;
+      this.olv.UseAlternatingBackColors = true;
+      this.olv.UseCompatibleStateImageBehavior = false;
+      this.olv.View = System.Windows.Forms.View.Details;
+      // 
+      // PlayerPositionUserControl
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.olv);
+      this.DoubleBuffered = true;
+      this.Name = "PlayerPositionUserControl";
+      ((System.ComponentModel.ISupportInitialize)(this.olv)).EndInit();
+      this.ResumeLayout(false);
+
+    }
+    
+    /// <summary> 
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary> 
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose (bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
+    #endregion
+
+    private BrightIdeasSoftware.ObjectListView olv;
 
   }
 }

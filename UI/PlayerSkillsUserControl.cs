@@ -82,6 +82,9 @@
       this.olvcFtwA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcReb = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcRebA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.olvcValueIndex = new OLVColumn();
+      this.olvcPosSk = new OLVColumn();
+      this.olvcPosH = new OLVColumn();
       this.groupImageList = new System.Windows.Forms.ImageList(this.components);
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -151,6 +154,9 @@
       this.olvComplex.AllColumns.Add(this.olvcFtwA);
       this.olvComplex.AllColumns.Add(this.olvcReb);
       this.olvComplex.AllColumns.Add(this.olvcRebA);
+      this.olvComplex.AllColumns.Add(this.olvcValueIndex);
+      this.olvComplex.AllColumns.Add(this.olvcPosSk);
+      this.olvComplex.AllColumns.Add(this.olvcPosH);
       this.olvComplex.AllowColumnReorder = true;
       this.olvComplex.AllowDrop = true;
       this.olvComplex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -171,6 +177,8 @@
             this.olvcSpe, this.olvcSpeA,
             this.olvcFtw, this.olvcFtwA,
             this.olvcReb, this.olvcRebA,
+            this.olvcValueIndex
+            , this.olvcPosSk, this.olvcPosH
       });
       this.olvComplex.Cursor = System.Windows.Forms.Cursors.Default;
       this.olvComplex.EmptyListMsg = "This list is empty. Press \"Add\" to create some items";
@@ -335,6 +343,27 @@
       // olvcRebA
       // 
       this.initActiveColumn(this.olvcRebA, "Rebounds");
+      //
+      //nkotb
+      //
+      this.olvcValueIndex.AspectName = "ValueIndex";
+      this.olvcValueIndex.AspectToStringFormat = "{0:F02}";
+      this.olvcValueIndex.Text = "Value Index";
+      this.olvcValueIndex.IsHeaderVertical = true;
+      this.olvcValueIndex.IsEditable = false;
+      this.olvcValueIndex.Width = 59;
+      //
+      this.olvcPosSk.AspectName = "PositionEnum";
+      this.olvcPosSk.Text = "Position by skill";
+      this.olvcPosSk.IsHeaderVertical = true;
+      this.olvcPosSk.IsEditable = false;
+      this.olvcPosSk.Width = 59;
+      //
+      this.olvcPosH.AspectName = "PositionHeightBased";
+      this.olvcPosH.Text = "Position by height";
+      this.olvcPosH.IsHeaderVertical = true;
+      this.olvcPosH.IsEditable = false;
+      this.olvcPosH.Width = 59;
       // 
       // groupImageList
       // 
@@ -519,13 +548,16 @@
     private OLVColumn olvcFtwA;
     private OLVColumn olvcReb;
     private OLVColumn olvcRebA;
-    private BrightIdeasSoftware.OLVColumn olvcFT;
-    private BrightIdeasSoftware.OLVColumn olvcDef;
-    private BrightIdeasSoftware.OLVColumn olvc3p;
-    private BrightIdeasSoftware.OLVColumn olvcFN;
-    private BrightIdeasSoftware.OLVColumn olvcDefA;
-    private BrightIdeasSoftware.OLVColumn olvcFTA;
-    private BrightIdeasSoftware.OLVColumn olvc2p;
+    OLVColumn olvcValueIndex;
+    OLVColumn olvcPosSk;
+    OLVColumn olvcPosH;
+    private OLVColumn olvcFT;
+    private OLVColumn olvcDef;
+    private OLVColumn olvc3p;
+    private OLVColumn olvcFN;
+    private OLVColumn olvcDefA;
+    private OLVColumn olvcFTA;
+    private OLVColumn olvc2p;
     private ObjectListView olvComplex;
     private BrightIdeasSoftware.OLVColumn olvc2pA;
     private System.Windows.Forms.ImageList imageList1;
@@ -599,20 +631,6 @@
     void InitializeComplexExample (List<Player> list)
     {
       this.olvComplex.AddDecoration(new EditingCellBorderDecoration(true));
-
-      // The following line makes getting aspect about 10x faster. Since getting the aspect is
-      // the slowest part of building the ListView, it is worthwhile BUT NOT NECESSARY to do.
-      TypedObjectListView<Player> tlist = new TypedObjectListView<Player>(this.olvComplex);
-      tlist.GenerateAspectGetters();
-      /* The line above the equivilent to typing the following:
-      tlist.GetColumn(0).AspectGetter = delegate(Player x) { return x.Name; };
-      tlist.GetColumn(1).AspectGetter = delegate(Player x) { return x.Occupation; };
-      tlist.GetColumn(2).AspectGetter = delegate(Player x) { return x.CulinaryRating; };
-      tlist.GetColumn(3).AspectGetter = delegate(Player x) { return x.YearOfBirth; };
-      tlist.GetColumn(4).AspectGetter = delegate(Player x) { return x.BirthDate; };
-      tlist.GetColumn(5).AspectGetter = delegate(Player x) { return x.GetRate(); };
-      tlist.GetColumn(6).AspectGetter = delegate(Player x) { return x.Comments; };
-      */
 
       this.olvcFN.AspectToStringConverter = delegate(object cellValue) { return ((String)cellValue).ToUpperInvariant(); };
      

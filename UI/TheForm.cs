@@ -43,11 +43,11 @@ namespace AndreiPopescu.CharazayPlus
     }
 
     #region Behavior fields
-    List<PG> pgs = new List<PG>();
-    List<SG> sgs = new List<SG>();
-    List<SF> sfs = new List<SF>();
-    List<PF> pfs = new List<PF>();
-    List<C> cs = new List<C>();
+    List<PG> _pgs = new List<PG>();
+    List<SG> _sgs = new List<SG>();
+    List<SF> _sfs = new List<SF>();
+    List<PF> _pfs = new List<PF>();
+    List<C> _cs = new List<C>();
 
     List<Player> _optimumPlayers = new List<Player>(); 
     List<Coach> _coaches = new List<Coach>();
@@ -145,7 +145,7 @@ namespace AndreiPopescu.CharazayPlus
     private UI.PlayerSkillsUserControl ucPlayerSkills;
     private UI.MyTeamScheduleUserControl ucMyTeamSchedule;
     private UI.InfoTabUserControl ucInfoTab;
-    private StatusUserControl ucStatusTab;
+    private StatusUserControl ucStatus;
     private PlayerPositionUserControl ucPG;
     private PlayerPositionUserControl ucC;
     private PlayerPositionUserControl ucSF;
@@ -153,7 +153,7 @@ namespace AndreiPopescu.CharazayPlus
     private PlayerPositionUserControl ucSG;
     private MyEconomyUserControl ucMyEconomy;
     private DivisionScheduleUserControl ucDivisionSchedule;
-    private DivisionStandingsUserControl ucDivisionStandings;
+    private UserControl1 ucStandings;
     private UI.TransferListUserControl ucTransferList;
     #endregion
 
@@ -214,7 +214,7 @@ namespace AndreiPopescu.CharazayPlus
     /// </summary>
     private void DownloadXmlAdditional()
     {
-      if (pgs != null && pgs.Count != 0) 
+      if (_pgs != null && _pgs.Count != 0) 
         return;
 
       //coachesXml.DeserializationReturnType
@@ -273,7 +273,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageInfo = new System.Windows.Forms.TabPage();
       this.ucInfoTab = new AndreiPopescu.CharazayPlus.UI.InfoTabUserControl();
       this.tabPageStatus = new System.Windows.Forms.TabPage();
-      this.ucStatusTab = new AndreiPopescu.CharazayPlus.UI.StatusUserControl();
+      this.ucStatus = new AndreiPopescu.CharazayPlus.UI.StatusUserControl();
       this.tabPageSkills = new System.Windows.Forms.TabPage();
       this.ucPlayerSkills = new AndreiPopescu.CharazayPlus.UI.PlayerSkillsUserControl();
       this.tabPagePG = new System.Windows.Forms.TabPage();
@@ -291,7 +291,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyTeamSchedule = new System.Windows.Forms.TabPage();
       this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.MyTeamScheduleUserControl();
       this.tabPageMyDivisionStandings = new System.Windows.Forms.TabPage();
-      this.ucDivisionStandings = new AndreiPopescu.CharazayPlus.UI.DivisionStandingsUserControl();
+      this.ucStandings = new AndreiPopescu.CharazayPlus.UI.UserControl1();
       this.tabPageMyDivisionSchedule = new System.Windows.Forms.TabPage();
       this.ucDivisionSchedule = new AndreiPopescu.CharazayPlus.UI.DivisionScheduleUserControl();
       this.tabPageMyEconomy = new System.Windows.Forms.TabPage();
@@ -488,7 +488,7 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // tabPageStatus
       // 
-      this.tabPageStatus.Controls.Add(this.ucStatusTab);
+      this.tabPageStatus.Controls.Add(this.ucStatus);
       this.tabPageStatus.Location = new System.Drawing.Point(4, 4);
       this.tabPageStatus.Name = "tabPageStatus";
       this.tabPageStatus.Padding = new System.Windows.Forms.Padding(3);
@@ -497,13 +497,13 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageStatus.Text = "Status";
       this.tabPageStatus.UseVisualStyleBackColor = true;
       // 
-      // ucStatusTab
+      // ucStatus
       // 
-      this.ucStatusTab.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucStatusTab.Location = new System.Drawing.Point(3, 3);
-      this.ucStatusTab.Name = "ucStatusTab";
-      this.ucStatusTab.Size = new System.Drawing.Size(0, 236);
-      this.ucStatusTab.TabIndex = 0;
+      this.ucStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucStatus.Location = new System.Drawing.Point(3, 3);
+      this.ucStatus.Name = "ucStatus";
+      this.ucStatus.Size = new System.Drawing.Size(0, 236);
+      this.ucStatus.TabIndex = 0;
       // 
       // tabPageSkills
       // 
@@ -634,7 +634,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucTraining.Location = new System.Drawing.Point(0, 0);
       this.ucTraining.Name = "ucTraining";
       this.ucTraining.OptimumPlayers = null;
-      this.ucTraining.Size = new System.Drawing.Size(754, 604);
+      this.ucTraining.Size = new System.Drawing.Size(0, 242);
       this.ucTraining.TabIndex = 0;
       // 
       // tabPageMyTeamSchedule
@@ -660,7 +660,7 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // tabPageMyDivisionStandings
       // 
-      this.tabPageMyDivisionStandings.Controls.Add(this.ucDivisionStandings);
+      this.tabPageMyDivisionStandings.Controls.Add(this.ucStandings);
       this.tabPageMyDivisionStandings.Location = new System.Drawing.Point(4, 4);
       this.tabPageMyDivisionStandings.Name = "tabPageMyDivisionStandings";
       this.tabPageMyDivisionStandings.Size = new System.Drawing.Size(754, 604);
@@ -668,14 +668,13 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyDivisionStandings.Text = "My Division Standings";
       this.tabPageMyDivisionStandings.UseVisualStyleBackColor = true;
       // 
-      // ucDivisionStandings
+      // ucStandings
       // 
-      this.ucDivisionStandings.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucDivisionStandings.ForeColor = System.Drawing.Color.White;
-      this.ucDivisionStandings.Location = new System.Drawing.Point(0, 0);
-      this.ucDivisionStandings.Name = "ucDivisionStandings";
-      this.ucDivisionStandings.Size = new System.Drawing.Size(0, 242);
-      this.ucDivisionStandings.TabIndex = 0;
+      this.ucStandings.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucStandings.Location = new System.Drawing.Point(0, 0);
+      this.ucStandings.Name = "ucStandings";
+      this.ucStandings.Size = new System.Drawing.Size(754, 604);
+      this.ucStandings.TabIndex = 1;
       // 
       // tabPageMyDivisionSchedule
       // 
@@ -844,15 +843,15 @@ namespace AndreiPopescu.CharazayPlus
       {
         case SideTabPage.Status:
           {
-            this.ucStatusTab.initStatus(this._optimumPlayers);
+            this.ucStatus.initStatus(this._optimumPlayers, this.imageListCountries);
             addMyPlayersToCache();
           } break;
 
-        case SideTabPage.PG: ucPG.Init(pgs); break;
-        case SideTabPage.SG: ucSG.Init(sgs); break;
-        case SideTabPage.PF: ucSF.Init(sfs); break;
-        case SideTabPage.SF: ucPF.Init(pfs); break;
-        case SideTabPage.C: ucC.Init(cs); break;
+        case SideTabPage.PG: ucPG.Init(_pgs); break;
+        case SideTabPage.SG: ucSG.Init(_sgs); break;
+        case SideTabPage.PF: ucPF.Init(_pfs); break;
+        case SideTabPage.SF: ucSF.Init(_sfs); break;
+        case SideTabPage.C: ucC.Init(_cs); break;
 
         case SideTabPage.Training:
         {
@@ -885,7 +884,16 @@ namespace AndreiPopescu.CharazayPlus
 
           } break;
 
-        case SideTabPage.MyDivisionStandings: ucDivisionStandings.Init(_myDivisionStandings); break;
+        case SideTabPage.MyDivisionStandings:
+          { 
+            ucStandings.Init(_myDivisionStandings.standings);
+            ucStandings.DivisionName = _myDivisionStandings.name;
+            ucStandings.Hardiness = _myDivisionStandings.lh;
+            ucStandings.DivisionId = _myDivisionStandings.id;
+            ucStandings.Level = _myDivisionStandings.level;
+            //ucStandings.Country = _myDivisionStandings.countryid;
+
+          } break;
 
         case SideTabPage.MyDivisionSchedule:
           this.ucDivisionSchedule.User = this._wsu;
@@ -1179,13 +1187,13 @@ namespace AndreiPopescu.CharazayPlus
 #else
 #endif
       {
-            PG pg = new PG(plyr); pgs.Add(pg);
-            SG sg = new SG(plyr); sgs.Add(sg);
-            PF pf = new PF(plyr); pfs.Add(pf);
-            SF sf = new SF(plyr); sfs.Add(sf);
-            C c = new C(plyr);    cs.Add(c);
-
-            _optimumPlayers.Add(Player.Decide(pg, sg, sf, pf, c));
+            PG pg = new PG(plyr); _pgs.Add(pg);
+            SG sg = new SG(plyr); _sgs.Add(sg);
+            PF pf = new PF(plyr); _pfs.Add(pf);
+            SF sf = new SF(plyr); _sfs.Add(sf);
+            C c = new C(plyr);    _cs.Add(c);
+            Player p = Player.DecideOnValueIndex(pg, sg, sf, pf, c);
+            _optimumPlayers.Add(p);
         }
     }
 

@@ -2,6 +2,7 @@
 {
   using System;
   using System.Windows.Forms;
+  using AndreiPopescu.CharazayPlus.Utils;
 
   public partial class EvaluatePlayerUserControl : UserControl
   {

@@ -24,7 +24,7 @@
     #endregion
   }
 
-  public enum PlayerPosition { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
+  
 
   public abstract partial class Player
   {
@@ -37,7 +37,7 @@
     /// <param name="pf"></param>
     /// <param name="c"></param>
     /// <returns></returns>
-    public static Player Decide (PG pg, SG sg, SF sf, PF pf, C c)
+    public static Player DecideOnTotalScore (PG pg, SG sg, SF sf, PF pf, C c)
     {
       double maxTotalScore = pg.TotalScore;
       Player p = pg;
@@ -65,6 +65,19 @@
         p = c;
         maxTotalScore = c.TotalScore;
       }
+
+      return p;
+    }
+    public static Player DecideOnValueIndex (PG pg, SG sg, SF sf, PF pf, C c)
+    {
+      double maxVI = 0d;
+      Player p = null;
+
+      if (pg.ValueIndex > maxVI) { p = pg; maxVI = pg.ValueIndex; }
+      if (sg.ValueIndex > maxVI) { p = sg; maxVI = sg.ValueIndex; }
+      if (sf.ValueIndex > maxVI) { p = sf; maxVI = sf.ValueIndex; }
+      if (pf.ValueIndex > maxVI) { p = pf; maxVI = pf.ValueIndex; }
+      if (c.ValueIndex > maxVI)  { p = c;  maxVI = c.ValueIndex; }
 
       return p;
     }
@@ -178,63 +191,6 @@
       ActiveSkills();
     }
 
-    public Type PositionType { get; set; }
-    public abstract PlayerPosition PositionEnum { get; }
-     
-    // 15 1  - 0
-    // 15 17 - 16
-    // 16 0  - 17
-    protected int StoredAssessedIndex
-    {
-      get
-      {
-        CharazayDate cd = DateTime.Now;
-        // last week of current season
-        int week = 17 * (Age - 15) + cd.Week - 1;
-        week = Math.Min(week, 288);
-        return week;
-      }
-    }
-
-    public Type PositionHeightBased
-    {
-      get
-      {
-        byte minHeightDifference = (byte)Math.Abs(Height - Defines.AverageHeightPg);
-        Type t = typeof(PG);
-
-        byte heightDelta = (byte)Math.Abs(Height - Defines.AverageHeightSg);
-        if (heightDelta < minHeightDifference)
-        {
-          minHeightDifference = heightDelta;
-          t = typeof(SG);
-        }
-
-        heightDelta = (byte)Math.Abs(Height - Defines.AverageHeightSf);
-        if (heightDelta < minHeightDifference)
-        {
-          minHeightDifference = heightDelta;
-          t = typeof(SF);
-        }
-
-        heightDelta = (byte)Math.Abs(Height - Defines.AverageHeightPf);
-        if (heightDelta < minHeightDifference)
-        {
-          minHeightDifference = heightDelta;
-          t = typeof(PF);
-        }
-
-        heightDelta = (byte)Math.Abs(Height - Defines.AverageHeightC);
-        if (heightDelta < minHeightDifference)
-        {
-          minHeightDifference = heightDelta;
-          t = typeof(C);
-        }
-
-        return t;
-      }
-    }
-
 #if XSD2
       protected Player (Xsd2.charazayPlayerSkills xsdSkills)
       {
@@ -252,6 +208,63 @@
 
     #endregion
 
+      public Type PositionType { get; set; }
+
+      public abstract PlayerPosition PositionEnum { get; }
+
+      public PlayerPosition PositionHeightBased
+      {
+        get
+        {
+          if (Height < Defines.AverageHeightPg)
+            return PlayerPosition.PG;
+          else
+          {
+            if (Height < Defines.AverageHeightSg)
+            {
+              return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? PlayerPosition.PG : PlayerPosition.SG;
+            }
+            else
+            {
+              if (Height < Defines.AverageHeightSf)
+              {
+                return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? PlayerPosition.SG : PlayerPosition.SF;
+              }
+              else
+              {
+                if (Height < Defines.AverageHeightPf)
+                {
+                  return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? PlayerPosition.SF : PlayerPosition.PF;
+                }
+                else
+                {
+                  if (Height < Defines.AverageHeightC)
+                  {
+                    return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? PlayerPosition.PF : PlayerPosition.C;
+                  }
+                  else return PlayerPosition.C;
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+      // 15 1  - 0
+      // 15 17 - 16
+      // 16 0  - 17
+      protected int StoredAssessedIndex
+      {
+        get
+        {
+          CharazayDate cd = DateTime.Now;
+          // last week of current season
+          int week = 17 * (Age - 15) + cd.Week - 1;
+          week = Math.Min(week, 288);
+          return week;
+        }
+      }
 
     #region public read-only properties
     //basic
@@ -304,12 +317,8 @@
     
     #endregion
 
-    /// <summary>
-    /// integer values diplayed on web page are internal values from Xsd.skills
-    /// these will be active skills values
-    /// </summary>
     #region Main skills
-    //skills
+    //skills [1-19]
     [OLVColumn(DisplayIndex = 1, Tag = "Skills")]
     public byte Defence_Display { get { return (m_player == null) ? (byte)0 : m_player.skills.defence; } }
     [OLVColumn(DisplayIndex = 2, Tag = "Skills")]
@@ -328,18 +337,6 @@
     public byte Footwork_Display { get { return (m_player == null) ? (byte)0 : m_player.skills.footwork; } }
     [OLVColumn(DisplayIndex = 9, Tag = "Skills")]
     public byte Rebounds_Display { get { return (m_player == null) ? (byte)0 : m_player.skills.rebounds; } }
-    [OLVColumn(DisplayIndex = 19, Tag = "Skills")]
-    public byte Experience
-    {
-      get
-      {
-        return (m_player == null || m_player.skills == null)
-          ? (byte)Math.Floor(m_dExperience)
-          : m_player.skills.experience;
-
-      }
-    }
-
     [OLVColumn(DisplayIndex = 10, Tag = "Skills", AspectToStringFormat = "{0:F02}")]
     public double Defence { get { return m_dDefence; } }
     [OLVColumn(DisplayIndex = 11, Tag = "Skills", AspectToStringFormat = "{0:F02}")]
@@ -358,6 +355,17 @@
     public double Footwork { get { return m_dFootwork; } }
     [OLVColumn(DisplayIndex = 18, Tag = "Skills", AspectToStringFormat = "{0:F02}")]
     public double Rebounds { get { return m_dRebounds; } }
+    [OLVColumn(DisplayIndex = 19, Tag = "Skills")]
+    public byte Experience
+    {
+      get
+      {
+        return (m_player == null || m_player.skills == null)
+          ? (byte)Math.Floor(m_dExperience)
+          : m_player.skills.experience;
+
+      }
+    }
     #endregion
 
     #region switches
@@ -434,14 +442,28 @@
       }
     }
 
-    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 200
-      , Tag = "Position|Status|Skills")]
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 200, Tag = "Position|Status|Skills")]
     public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
 
     public bool Injury { get { return InjuryDays != 0; } }
     #endregion
 
     #region User Interface Values
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [OLVColumn(DisplayIndex = 20, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public double DefensiveScore
+    {
+      get
+      {
+        return Linear.DotVectorProduct_Normalized(
+          new double[] { PercentageDefense_Defence, PercentageDefense_Footwork, PercentageDefense_Speed }
+        , new double[] { m_dDefence, m_dFootwork, m_dSpeed });
+      }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -457,70 +479,6 @@
       }
     }
 
-    [OLVColumn(DisplayIndex = 23, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double OffensiveScore
-    {
-      get
-      {
-        return Linear.DotVectorProduct_Normalized(
-          new double[] { PercentageOffense_OffensiveAbility, PercentageOffense_Shooting }
-          , new double[] { OffensiveAbilityScore, ShootingScore });
-      }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    [OLVColumn(DisplayIndex = 20, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double DefensiveScore
-    {
-      get
-      {
-        return Linear.DotVectorProduct_Normalized(
-          new double[] { PercentageDefense_Defence, PercentageDefense_Footwork, PercentageDefense_Speed }
-        , new double[] { m_dDefence, m_dFootwork, m_dSpeed });
-      }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    [OLVColumn(DisplayIndex = 25, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double OffensiveReboundsScore
-    {
-      get
-      {
-        return Linear.DotVectorProduct_Normalized(
-          new double[] { OffensiveRebounds_ReboundsPercentage, OffensiveRebounds_FootworkPercentage }
-        , new double[] { m_dRebounds, m_dFootwork });
-      }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    [OLVColumn(DisplayIndex = 24, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double DefensiveReboundsScore
-    {
-      get
-      {
-        return Linear.DotVectorProduct_Normalized(
-          new double[] { DefensiveRebounds_ReboundsPercentage, DefensiveRebounds_DefensePercentage }
-        , new double[] { m_dRebounds, m_dDefence });
-      }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    [OLVColumn(DisplayIndex = 26, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double ReboundScore
-    {
-      get
-      {
-        return Linear.DotVectorProduct_Normalized(
-          new double[] { ReboundScore_OffensiveReboundsPercentage, ReboundScore_DefensiveReboundsPercentage }
-          , new double[] { OffensiveReboundsScore, DefensiveReboundsScore });
-      }
-    }
     /// <summary>
     /// 
     /// </summary>
@@ -538,6 +496,59 @@
             : shootingScore;
       }
     }
+
+    [OLVColumn(DisplayIndex = 23, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public double OffensiveScore
+    {
+      get
+      {
+        return Linear.DotVectorProduct_Normalized(
+          new double[] { PercentageOffense_OffensiveAbility, PercentageOffense_Shooting }
+          , new double[] { OffensiveAbilityScore, ShootingScore });
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [OLVColumn(DisplayIndex = 24, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public double DefensiveReboundsScore
+    {
+      get
+      {
+        return Linear.DotVectorProduct_Normalized(
+          new double[] { DefensiveRebounds_ReboundsPercentage, DefensiveRebounds_DefensePercentage }
+        , new double[] { m_dRebounds, m_dDefence });
+      }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [OLVColumn(DisplayIndex = 25, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public double OffensiveReboundsScore
+    {
+      get
+      {
+        return Linear.DotVectorProduct_Normalized(
+          new double[] { OffensiveRebounds_ReboundsPercentage, OffensiveRebounds_FootworkPercentage }
+        , new double[] { m_dRebounds, m_dFootwork });
+      }
+    }
+   
+    /// <summary>
+    /// 
+    /// </summary>
+    [OLVColumn(DisplayIndex = 26, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public double ReboundScore
+    {
+      get
+      {
+        return Linear.DotVectorProduct_Normalized(
+          new double[] { ReboundScore_OffensiveReboundsPercentage, ReboundScore_DefensiveReboundsPercentage }
+          , new double[] { OffensiveReboundsScore, DefensiveReboundsScore });
+      }
+    }
+    
     [OLVColumn(DisplayIndex = 27, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double TotalScore
     {
@@ -548,7 +559,7 @@
           , new double[] { DefensiveScore, OffensiveScore, ReboundScore });
       }
     }
-
+    [OLVColumn(DisplayIndex = 28, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double ValueIndex
     {
       get
@@ -621,14 +632,15 @@
     #endregion
 
     #region Methods
-    /************************************************************
-     * effect of height, bmi, fatigue, form, experience on skills
-     *Active skills
-     *In addition, height and BMI play a role in the effectiveness of players.
-     * The difference between the players' heights can affect shooting accuracy 
-     * (the taller player will have an easier time shooting and will give a shorter player problems when they shoot)
-     * The skills used in the engine after the impact of height, weight, BMI and form on players are called active skills.     
-*************************************************************/
+    /// <summary>
+    /// Active skills measures the effect of height, bmi, fatigue, form, experience on skills
+    /// </summary>
+    /// <remarks>
+    /// In addition, height and BMI play a role in the effectiveness of players.
+    /// The difference between the players' heights can affect shooting accuracy 
+    /// (the taller player will have an easier time shooting and will give a shorter player problems when they shoot)
+    /// The skills used in the engine after the impact of height, weight, BMI and form on players are called active skills.
+    /// </remarks>
     protected internal void ActiveSkills ( )
     {
       if (IsHW)
@@ -760,13 +772,13 @@
       //Player increasePlayer = (Player)Activator.CreateInstance (this.GetType());
       //Player increasePlayer = (Player)Activator.CreateInstance (Position);
       Player increasePlayer = null;
-      switch (PositionHeightBased.Name)
+      switch (PositionHeightBased)
       {
-        case "PG": increasePlayer = new PG(); break;
-        case "SG": increasePlayer = new SG(); break;
-        case "SF": increasePlayer = new SF(); break;
-        case "PF": increasePlayer = new PF(); break;
-        case "C": increasePlayer = new C(); break;
+        case PlayerPosition.PG: increasePlayer = new PG(); break;
+        case PlayerPosition.SG: increasePlayer = new SG(); break;
+        case PlayerPosition.SF: increasePlayer = new SF(); break;
+        case PlayerPosition.PF: increasePlayer = new PF(); break;
+        case PlayerPosition.C: increasePlayer = new C(); break;
       }
 
 
@@ -817,19 +829,6 @@
       }
     }
 
-    // partition the time per training categories
-    //              pg	sg	sf	pf	c
-    //defense     	4	  4	  3	  3	  3
-    //dribling	    3	  3	  3	  1	  0
-    //passing	      4	  2	  1	  1	  2
-    //speed	        4	  4	  4	  3	  2
-    //footwork	    0	  0	  2	  4	  4
-    //rebounds	    0	  0	  1	  4	  5
-    //inside_sh	    1	  2	  2	  1	  1
-    //outside_sh	  1	  2	  1	  0	  0
-    //              17	17	17	17	17
-    protected internal abstract byte[] TrainingPlan { get; }
-
     /// <summary>
     /// 
     /// </summary>
@@ -873,7 +872,19 @@
     #endregion
 
     #region Abstract protected properties
-
+    // partition the time per training categories
+    //              pg	sg	sf	pf	c
+    //defense     	4	  4	  3	  3	  3
+    //dribling	    3	  3	  3	  1	  0
+    //passing	      4	  2	  1	  1	  2
+    //speed	        4	  4	  4	  3	  2
+    //footwork	    0	  0	  2	  4	  4
+    //rebounds	    0	  0	  1	  4	  5
+    //inside_sh	    1	  2	  2	  1	  1
+    //outside_sh	  1	  2	  1	  0	  0
+    //              17	17	17	17	17
+    protected internal abstract byte[] TrainingPlan { get; }
+   
     #region Skills percentages
 
     /// <summary>

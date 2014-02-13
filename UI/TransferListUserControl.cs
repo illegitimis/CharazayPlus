@@ -295,7 +295,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// that it doesn’m have to do anything else. 
     /// You will also need to call at least RefreshItem() or RefreshObject(), 
     /// so that the changes to the model object are shown in the ObjectListView.
-    /// Read more: http://objectlistview.sourceforge.net/cs/cellEditing.html#cell-editing-label#ixzz1hTD9xwsQ
+    /// Read more: http://objectlistview.sourceforge.net/_cs/cellEditing.html#cell-editing-label#ixzz1hTD9xwsQ
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>

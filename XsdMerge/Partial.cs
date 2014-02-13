@@ -59,12 +59,18 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
 
         public uint HomeTeamId { get { return teams == null ? (ushort)0 : teams.hometeam; } }
         public uint AwayTeamId { get { return teams == null ? (ushort)0 : teams.awayteam; } }
-
+      /*
         public IEnumerable<rating> HomeRatings { get { return stats == null ? null : stats.home.Ratings; } }
         public IEnumerable<rating> AwayRatings { get { return stats == null ? null : stats.away.Ratings; } }
 
         public IEnumerable<bball> HomeBb { get { return bballs == null ? null : bballs.home.Bballs; } }
         public IEnumerable<bball> AwayBb { get { return bballs == null ? null : bballs.away.Bballs; } }
+      */
+        public IEnumerable<rating> HomeRatings { get { return stats == null ? null : stats.home; } }
+        public IEnumerable<rating> AwayRatings { get { return stats == null ? null : stats.away; } }
+
+        public IEnumerable<bball> HomeBb { get { return bballs == null ? null : bballs.home; } }
+        public IEnumerable<bball> AwayBb { get { return bballs == null ? null : bballs.away; } }
 
         public string MatchType
         {
@@ -92,6 +98,7 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
 
     }
 
+  /*
     public partial class home
     {
         object Get(string name)
@@ -151,6 +158,7 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
         public IEnumerable<rating> Ratings { get { return OfType<rating>(); } }
         public IEnumerable<bball> Bballs { get { return OfType<bball>(); } }
     }
+  */
 
     public partial class expences
     {

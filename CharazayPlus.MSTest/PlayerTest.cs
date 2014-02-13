@@ -1,6 +1,7 @@
 ﻿using AndreiPopescu.CharazayPlus;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using AndreiPopescu.CharazayPlus.Utils;
 
 namespace CharazayPlus.MSTest
 {

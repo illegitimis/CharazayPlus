@@ -34,10 +34,10 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
         [System.Xml.Serialization.XmlElementAttribute("division", typeof(division))]
         [System.Xml.Serialization.XmlElementAttribute("economy", typeof(economy))]
         [System.Xml.Serialization.XmlElementAttribute("match", typeof(match))]
-        [System.Xml.Serialization.XmlElementAttribute("matches", typeof(matches))]
+        //[System.Xml.Serialization.XmlElementAttribute("matches", typeof(matches))]
         [System.Xml.Serialization.XmlElementAttribute("player", typeof(player))]
         [System.Xml.Serialization.XmlElementAttribute("players", typeof(players))]
-        [System.Xml.Serialization.XmlElementAttribute("schedule", typeof(schedule))]
+        //[System.Xml.Serialization.XmlElementAttribute("schedule", typeof(schedule))]
         [System.Xml.Serialization.XmlElementAttribute("team", typeof(team))]
         [System.Xml.Serialization.XmlElementAttribute("team_transfers", typeof(team_transfers))]
         [System.Xml.Serialization.XmlElementAttribute("user", typeof(user))]
@@ -1313,324 +1313,6 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class match {
-        
-        private teams teamsField;
-        
-        private stats statsField;
-        
-        private bballs bballsField;
-        
-        private lineup lineupField;
-        
-        private uint idField;
-        
-        private uint dateField;
-        
-        private bool dateFieldSpecified;
-        
-        private byte roundField;
-        
-        private bool roundFieldSpecified;
-        
-        private byte seasonField;
-        
-        private bool seasonFieldSpecified;
-        
-        private uint spectatorsField;
-        
-        private bool spectatorsFieldSpecified;
-        
-        private uint vipsField;
-        
-        private bool vipsFieldSpecified;
-        
-        private string playedField;
-        
-        private byte homescoreField;
-        
-        private bool homescoreFieldSpecified;
-        
-        private byte awayscoreField;
-        
-        private bool awayscoreFieldSpecified;
-        
-        private byte typeField;
-        
-        private bool typeFieldSpecified;
-        
-        private uint leagueidField;
-        
-        private bool leagueidFieldSpecified;
-        
-        /// <remarks/>
-        public teams teams {
-            get {
-                return this.teamsField;
-            }
-            set {
-                this.teamsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public stats stats {
-            get {
-                return this.statsField;
-            }
-            set {
-                this.statsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bballs bballs {
-            get {
-                return this.bballsField;
-            }
-            set {
-                this.bballsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public lineup lineup {
-            get {
-                return this.lineupField;
-            }
-            set {
-                this.lineupField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint date {
-            get {
-                return this.dateField;
-            }
-            set {
-                this.dateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool dateSpecified {
-            get {
-                return this.dateFieldSpecified;
-            }
-            set {
-                this.dateFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte round {
-            get {
-                return this.roundField;
-            }
-            set {
-                this.roundField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool roundSpecified {
-            get {
-                return this.roundFieldSpecified;
-            }
-            set {
-                this.roundFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte season {
-            get {
-                return this.seasonField;
-            }
-            set {
-                this.seasonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool seasonSpecified {
-            get {
-                return this.seasonFieldSpecified;
-            }
-            set {
-                this.seasonFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint spectators {
-            get {
-                return this.spectatorsField;
-            }
-            set {
-                this.spectatorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool spectatorsSpecified {
-            get {
-                return this.spectatorsFieldSpecified;
-            }
-            set {
-                this.spectatorsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint vips {
-            get {
-                return this.vipsField;
-            }
-            set {
-                this.vipsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool vipsSpecified {
-            get {
-                return this.vipsFieldSpecified;
-            }
-            set {
-                this.vipsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string played {
-            get {
-                return this.playedField;
-            }
-            set {
-                this.playedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte homescore {
-            get {
-                return this.homescoreField;
-            }
-            set {
-                this.homescoreField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool homescoreSpecified {
-            get {
-                return this.homescoreFieldSpecified;
-            }
-            set {
-                this.homescoreFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte awayscore {
-            get {
-                return this.awayscoreField;
-            }
-            set {
-                this.awayscoreField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool awayscoreSpecified {
-            get {
-                return this.awayscoreFieldSpecified;
-            }
-            set {
-                this.awayscoreFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool typeSpecified {
-            get {
-                return this.typeFieldSpecified;
-            }
-            set {
-                this.typeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public uint leagueid {
-            get {
-                return this.leagueidField;
-            }
-            set {
-                this.leagueidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool leagueidSpecified {
-            get {
-                return this.leagueidFieldSpecified;
-            }
-            set {
-                this.leagueidFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
     public partial class teams {
         
         private uint hometeamField;
@@ -1682,6 +1364,7 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
         }
     }
     
+  /*
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -1715,7 +1398,9 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
-    
+    */
+
+  /*
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -1743,6 +1428,8 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
+  */
+
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
@@ -2287,7 +1974,8 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
-    
+
+    /*
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -2315,7 +2003,9 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
+    */
     
+    /*
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -2349,7 +2039,9 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
+    */
     
+    /*
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -2383,30 +2075,8 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
         }
     }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class matches {
-        
-        private match[] matchField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("match")]
-        public match[] match {
-            get {
-                return this.matchField;
-            }
-            set {
-                this.matchField = value;
-            }
-        }
-    }
-    
+    */
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
     [System.SerializableAttribute()]
@@ -2684,29 +2354,6 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
             }
             set {
                 this.playerField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class schedule {
-        
-        private round[] roundField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("round")]
-        public round[] round {
-            get {
-                return this.roundField;
-            }
-            set {
-                this.roundField = value;
             }
         }
     }
@@ -3213,5 +2860,1064 @@ namespace AndreiPopescu.CharazayPlus.XsdMerge
                 this.standingField = value;
             }
         }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class stats
+    {
+
+      private rating[] homeField;
+
+      private rating[] awayField;
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlArrayItemAttribute("rating", IsNullable = false)]
+      public rating[] home
+      {
+        get
+        {
+          return this.homeField;
+        }
+        set
+        {
+          this.homeField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlArrayItemAttribute("rating", IsNullable = false)]
+      public rating[] away
+      {
+        get
+        {
+          return this.awayField;
+        }
+        set
+        {
+          this.awayField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class bballs
+    {
+
+      private bball[] homeField;
+
+      private bball[] awayField;
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlArrayItemAttribute("bball", IsNullable = false)]
+      public bball[] home
+      {
+        get
+        {
+          return this.homeField;
+        }
+        set
+        {
+          this.homeField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlArrayItemAttribute("bball", IsNullable = false)]
+      public bball[] away
+      {
+        get
+        {
+          return this.awayField;
+        }
+        set
+        {
+          this.awayField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class lineup
+    {
+
+      private lineupHome homeField;
+
+      private lineupAway awayField;
+
+      /// <remarks/>
+      public lineupHome home
+      {
+        get
+        {
+          return this.homeField;
+        }
+        set
+        {
+          this.homeField = value;
+        }
+      }
+
+      /// <remarks/>
+      public lineupAway away
+      {
+        get
+        {
+          return this.awayField;
+        }
+        set
+        {
+          this.awayField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class lineupHome
+    {
+
+      private first firstField;
+
+      private second secondField;
+
+      private third thirdField;
+
+      private forth forthField;
+
+      /// <remarks/>
+      public first first
+      {
+        get
+        {
+          return this.firstField;
+        }
+        set
+        {
+          this.firstField = value;
+        }
+      }
+
+      /// <remarks/>
+      public second second
+      {
+        get
+        {
+          return this.secondField;
+        }
+        set
+        {
+          this.secondField = value;
+        }
+      }
+
+      /// <remarks/>
+      public third third
+      {
+        get
+        {
+          return this.thirdField;
+        }
+        set
+        {
+          this.thirdField = value;
+        }
+      }
+
+      /// <remarks/>
+      public forth forth
+      {
+        get
+        {
+          return this.forthField;
+        }
+        set
+        {
+          this.forthField = value;
+        }
+      }
+    }
+
+    /*
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class first
+    {
+
+      private uint pgField;
+
+      private uint sgField;
+
+      private uint sfField;
+
+      private uint pfField;
+
+      private uint cField;
+
+      /// <remarks/>
+      public uint pg
+      {
+        get
+        {
+          return this.pgField;
+        }
+        set
+        {
+          this.pgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sg
+      {
+        get
+        {
+          return this.sgField;
+        }
+        set
+        {
+          this.sgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sf
+      {
+        get
+        {
+          return this.sfField;
+        }
+        set
+        {
+          this.sfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint pf
+      {
+        get
+        {
+          return this.pfField;
+        }
+        set
+        {
+          this.pfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint c
+      {
+        get
+        {
+          return this.cField;
+        }
+        set
+        {
+          this.cField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class second
+    {
+
+      private uint pgField;
+
+      private uint sgField;
+
+      private uint sfField;
+
+      private uint pfField;
+
+      private uint cField;
+
+      /// <remarks/>
+      public uint pg
+      {
+        get
+        {
+          return this.pgField;
+        }
+        set
+        {
+          this.pgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sg
+      {
+        get
+        {
+          return this.sgField;
+        }
+        set
+        {
+          this.sgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sf
+      {
+        get
+        {
+          return this.sfField;
+        }
+        set
+        {
+          this.sfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint pf
+      {
+        get
+        {
+          return this.pfField;
+        }
+        set
+        {
+          this.pfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint c
+      {
+        get
+        {
+          return this.cField;
+        }
+        set
+        {
+          this.cField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class third
+    {
+
+      private uint pgField;
+
+      private uint sgField;
+
+      private uint sfField;
+
+      private uint pfField;
+
+      private uint cField;
+
+      /// <remarks/>
+      public uint pg
+      {
+        get
+        {
+          return this.pgField;
+        }
+        set
+        {
+          this.pgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sg
+      {
+        get
+        {
+          return this.sgField;
+        }
+        set
+        {
+          this.sgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sf
+      {
+        get
+        {
+          return this.sfField;
+        }
+        set
+        {
+          this.sfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint pf
+      {
+        get
+        {
+          return this.pfField;
+        }
+        set
+        {
+          this.pfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint c
+      {
+        get
+        {
+          return this.cField;
+        }
+        set
+        {
+          this.cField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class forth
+    {
+
+      private uint pgField;
+
+      private uint sgField;
+
+      private uint sfField;
+
+      private uint pfField;
+
+      private uint cField;
+
+      /// <remarks/>
+      public uint pg
+      {
+        get
+        {
+          return this.pgField;
+        }
+        set
+        {
+          this.pgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sg
+      {
+        get
+        {
+          return this.sgField;
+        }
+        set
+        {
+          this.sgField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint sf
+      {
+        get
+        {
+          return this.sfField;
+        }
+        set
+        {
+          this.sfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint pf
+      {
+        get
+        {
+          return this.pfField;
+        }
+        set
+        {
+          this.pfField = value;
+        }
+      }
+
+      /// <remarks/>
+      public uint c
+      {
+        get
+        {
+          return this.cField;
+        }
+        set
+        {
+          this.cField = value;
+        }
+      }
+    }
+    */
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class lineupAway
+    {
+
+      private first firstField;
+
+      private second secondField;
+
+      private third thirdField;
+
+      private forth forthField;
+
+      /// <remarks/>
+      public first first
+      {
+        get
+        {
+          return this.firstField;
+        }
+        set
+        {
+          this.firstField = value;
+        }
+      }
+
+      /// <remarks/>
+      public second second
+      {
+        get
+        {
+          return this.secondField;
+        }
+        set
+        {
+          this.secondField = value;
+        }
+      }
+
+      /// <remarks/>
+      public third third
+      {
+        get
+        {
+          return this.thirdField;
+        }
+        set
+        {
+          this.thirdField = value;
+        }
+      }
+
+      /// <remarks/>
+      public forth forth
+      {
+        get
+        {
+          return this.forthField;
+        }
+        set
+        {
+          this.forthField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class match
+    {
+
+      private teams teamsField;
+
+      private stats statsField;
+
+      private bballs bballsField;
+
+      private lineup lineupField;
+
+      private uint idField;
+
+      private uint dateField;
+
+      private bool dateFieldSpecified;
+
+      private byte roundField;
+
+      private bool roundFieldSpecified;
+
+      private byte seasonField;
+
+      private bool seasonFieldSpecified;
+
+      private ushort spectatorsField;
+
+      private bool spectatorsFieldSpecified;
+
+      private ushort vipsField;
+
+      private bool vipsFieldSpecified;
+
+      private string playedField;
+
+      private byte homescoreField;
+
+      private bool homescoreFieldSpecified;
+
+      private byte awayscoreField;
+
+      private bool awayscoreFieldSpecified;
+
+      private byte typeField;
+
+      private bool typeFieldSpecified;
+
+      private ushort leagueidField;
+
+      private bool leagueidFieldSpecified;
+
+      /// <remarks/>
+      public teams teams
+      {
+        get
+        {
+          return this.teamsField;
+        }
+        set
+        {
+          this.teamsField = value;
+        }
+      }
+
+      /// <remarks/>
+      public stats stats
+      {
+        get
+        {
+          return this.statsField;
+        }
+        set
+        {
+          this.statsField = value;
+        }
+      }
+
+      /// <remarks/>
+      public bballs bballs
+      {
+        get
+        {
+          return this.bballsField;
+        }
+        set
+        {
+          this.bballsField = value;
+        }
+      }
+
+      /// <remarks/>
+      public lineup lineup
+      {
+        get
+        {
+          return this.lineupField;
+        }
+        set
+        {
+          this.lineupField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public uint id
+      {
+        get
+        {
+          return this.idField;
+        }
+        set
+        {
+          this.idField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public uint date
+      {
+        get
+        {
+          return this.dateField;
+        }
+        set
+        {
+          this.dateField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool dateSpecified
+      {
+        get
+        {
+          return this.dateFieldSpecified;
+        }
+        set
+        {
+          this.dateFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public byte round
+      {
+        get
+        {
+          return this.roundField;
+        }
+        set
+        {
+          this.roundField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool roundSpecified
+      {
+        get
+        {
+          return this.roundFieldSpecified;
+        }
+        set
+        {
+          this.roundFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public byte season
+      {
+        get
+        {
+          return this.seasonField;
+        }
+        set
+        {
+          this.seasonField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool seasonSpecified
+      {
+        get
+        {
+          return this.seasonFieldSpecified;
+        }
+        set
+        {
+          this.seasonFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public ushort spectators
+      {
+        get
+        {
+          return this.spectatorsField;
+        }
+        set
+        {
+          this.spectatorsField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool spectatorsSpecified
+      {
+        get
+        {
+          return this.spectatorsFieldSpecified;
+        }
+        set
+        {
+          this.spectatorsFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public ushort vips
+      {
+        get
+        {
+          return this.vipsField;
+        }
+        set
+        {
+          this.vipsField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool vipsSpecified
+      {
+        get
+        {
+          return this.vipsFieldSpecified;
+        }
+        set
+        {
+          this.vipsFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public string played
+      {
+        get
+        {
+          return this.playedField;
+        }
+        set
+        {
+          this.playedField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public byte homescore
+      {
+        get
+        {
+          return this.homescoreField;
+        }
+        set
+        {
+          this.homescoreField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool homescoreSpecified
+      {
+        get
+        {
+          return this.homescoreFieldSpecified;
+        }
+        set
+        {
+          this.homescoreFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public byte awayscore
+      {
+        get
+        {
+          return this.awayscoreField;
+        }
+        set
+        {
+          this.awayscoreField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool awayscoreSpecified
+      {
+        get
+        {
+          return this.awayscoreFieldSpecified;
+        }
+        set
+        {
+          this.awayscoreFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public byte type
+      {
+        get
+        {
+          return this.typeField;
+        }
+        set
+        {
+          this.typeField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool typeSpecified
+      {
+        get
+        {
+          return this.typeFieldSpecified;
+        }
+        set
+        {
+          this.typeFieldSpecified = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlAttributeAttribute()]
+      public ushort leagueid
+      {
+        get
+        {
+          return this.leagueidField;
+        }
+        set
+        {
+          this.leagueidField = value;
+        }
+      }
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlIgnoreAttribute()]
+      public bool leagueidSpecified
+      {
+        get
+        {
+          return this.leagueidFieldSpecified;
+        }
+        set
+        {
+          this.leagueidFieldSpecified = value;
+        }
+      }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class matches
+    {
+
+      private match[] matchField;
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlElementAttribute("match")]
+      public match[] match
+      {
+        get
+        {
+          return this.matchField;
+        }
+        set
+        {
+          this.matchField = value;
+        }
+      }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public partial class schedule
+    {
+
+      private round[] roundField;
+
+      /// <remarks/>
+      [System.Xml.Serialization.XmlElementAttribute("round")]
+      public round[] round
+      {
+        get
+        {
+          return this.roundField;
+        }
+        set
+        {
+          this.roundField = value;
+        }
+      }
     }
 }

@@ -110,7 +110,7 @@
           delegate(Player p) { return p.SkillTrainingDelta(trainingSkill, maxCoach); };
       }
 
-      //olvSkillIncrease.SetObjects(pgs);      
+      //olvSkillIncrease.SetObjects(_pgs);      
       olvSkillIncrease.SetObjects(OptimumPlayers);
     }
 
@@ -129,7 +129,7 @@
           delegate(Player p) { return p.GetScoreTrainingDelta(tc, maxCoach); };
       }
 
-      //olvTraining.SetObjects(pgs);
+      //olvTraining.SetObjects(_pgs);
       olvTraining.SetObjects(OptimumPlayers);
     }
 
