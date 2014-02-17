@@ -40,23 +40,6 @@ namespace AndreiPopescu.CharazayPlus.UI
       olvMd.SetObjects(_myDivisionFullSchedule);
     }
 
-    public void InitOLV(XsdMerge.schedule _myDivisionFullSchedule)
-    {
-        olvcMd.AspectGetter = delegate(object row) { return (XsdMerge.match)(((XsdMerge.round)row).match); };
-        olvcMd.GroupKeyGetter = delegate(object o)
-        {
-            XsdMerge.round round = (XsdMerge.round)o;
-            return string.Format("Round: {0:D02} {1:yyyy-MMMM-dd}"
-                , round.number
-                , AndreiPopescu.CharazayPlus.Utils.Compute.EstimatedDateTime(round.date));
-        };
-        //this.olvcFullName.GroupKeyToTitleConverter = delegate(object groupKey)
-        //{
-        //  Country country = Defines.Countries[(int)groupKey];
-        //  return string.Format("{0} (id={1})", country.Name, country.Id);
-        //};
-        olvMd.SetObjects(_myDivisionFullSchedule.round);
-    }
 
     //private void olvMd_Click(object sender, EventArgs e)
     //{

@@ -733,14 +733,10 @@
     PF _pf = null;
     C _c = null;
 
-#if XSD2
+
      Xsd2.charazayPlayer _p = null;
     public Xsd2.charazayPlayer SelectedObject 
-#elif XSDMERGE
-    XsdMerge.player _p = null;
-    public XsdMerge.player SelectedObject 
-#else
-#endif    
+   
     { 
       get { return _p; } 
       set 

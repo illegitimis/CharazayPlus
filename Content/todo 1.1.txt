@@ -3,8 +3,8 @@ GENERAL
 cache matches automaton (ok)
 matches cache - my team schedule + division schedule (ok)
 debug general cache (ok)
-different .net framework builds (rest)
-only one program instance (todo)
+only one program instance (OK)
+xsd merge test (OK)
 -------------------------------
 0) INFO TAB
 debug xml received (ok)
@@ -18,13 +18,8 @@ hot tracking (ok)
 better layout, eye candy (ok)
 player age/value column (ok)
 test age/value for young players (ok)
+remove olv UI related controls
 refactor ObjectListViewExtensions
-
-colors: 
-dark grey title: 51, 51, 51
-light gray bkgrnd2 207, 207, 207
-light gray bkgrnd2 221, 221, 221
-gold 255,192,64
 -------------------------------
 3-7) PG, SG, ...
 initialization bug (ok)
@@ -37,12 +32,12 @@ debug suggested training
 -------------------------------
 9) MY team SCHEDULE
 debug xml received  (ok)
+replace with new olv-based control
 better filter
 -------------------------------
 10) DIVISION STANDINGS
 debug xml received  (ok)
-more data?
-layout
+layout new control (ok)
 -----------------------
 11) DIVISION SCHEDULE
 debug xml  (ok)

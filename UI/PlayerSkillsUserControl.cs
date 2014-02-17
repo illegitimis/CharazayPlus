@@ -91,11 +91,9 @@
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.btnAdd = new System.Windows.Forms.Button();
       this.btnRemove = new System.Windows.Forms.Button();
-      this.cmbEditable = new System.Windows.Forms.ComboBox();
       this.btnCopySel = new System.Windows.Forms.Button();
       this.btnRebuild = new System.Windows.Forms.Button();
       this.chkGroups = new System.Windows.Forms.CheckBox();
-      this.lblEditable = new System.Windows.Forms.Label();
       this.chkOwnerDraw = new System.Windows.Forms.CheckBox();
       this.gbxFilter.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).BeginInit();
@@ -220,9 +218,6 @@
       this.olvComplex.UseSubItemCheckBoxes = true;
       this.olvComplex.View = System.Windows.Forms.View.Details;
       this.olvComplex.BeforeCreatingGroups += new System.EventHandler<BrightIdeasSoftware.CreateGroupsEventArgs>(this.olvComplex_BeforeCreatingGroups);
-      this.olvComplex.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditFinishing);
-      this.olvComplex.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditStarting);
-      this.olvComplex.CellEditValidating += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditValidating);
       this.olvComplex.CellOver += new System.EventHandler<BrightIdeasSoftware.CellOverEventArgs>(this.listViewComplex_CellOver);
       this.olvComplex.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.listViewComplex_CellRightClick);
       this.olvComplex.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.listViewComplex_CellToolTip);
@@ -415,22 +410,6 @@
       this.btnRemove.Text = "Remove";
       this.btnRemove.UseVisualStyleBackColor = true;
       // 
-      // cmbEditable
-      // 
-      this.cmbEditable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.cmbEditable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.cmbEditable.FormattingEnabled = true;
-      this.cmbEditable.Items.AddRange(new object[] {
-            "No",
-            "Single Click",
-            "Double Click",
-            "F2 Only"});
-      this.cmbEditable.Location = new System.Drawing.Point(764, 160);
-      this.cmbEditable.Name = "cmbEditable";
-      this.cmbEditable.Size = new System.Drawing.Size(131, 21);
-      this.cmbEditable.TabIndex = 24;
-      this.cmbEditable.SelectedIndexChanged += new System.EventHandler(this.cmbEditable_SelectedIndexChanged);
-      // 
       // btnCopySel
       // 
       this.btnCopySel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -462,16 +441,6 @@
       this.chkGroups.UseVisualStyleBackColor = true;
       this.chkGroups.CheckedChanged += new System.EventHandler(this.chkGroups_CheckedChanged);
       // 
-      // lblEditable
-      // 
-      this.lblEditable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.lblEditable.AutoSize = true;
-      this.lblEditable.Location = new System.Drawing.Point(761, 144);
-      this.lblEditable.Name = "lblEditable";
-      this.lblEditable.Size = new System.Drawing.Size(48, 13);
-      this.lblEditable.TabIndex = 23;
-      this.lblEditable.Text = "Editable:";
-      // 
       // chkOwnerDraw
       // 
       this.chkOwnerDraw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -494,8 +463,6 @@
       this.Controls.Add(this.statusStrip1);
       this.Controls.Add(this.btnAdd);
       this.Controls.Add(this.btnRemove);
-      this.Controls.Add(this.cmbEditable);
-      this.Controls.Add(this.lblEditable);
       this.Controls.Add(this.btnCopySel);
       this.Controls.Add(this.btnRebuild);
       this.Controls.Add(this.chkGroups);
@@ -570,8 +537,6 @@
     private ToolStripStatusLabel toolStripStatusLabel3;
     private Button btnAdd;
     private Button btnRemove;
-    private ComboBox cmbEditable;
-    private Label lblEditable;
     private Button btnCopySel;
     private Button btnRebuild;
     private CheckBox chkOwnerDraw;
@@ -652,25 +617,11 @@
           new byte[] { 4, 7, 10 },
           new string[] { "Bad", "Decent", "Good", "Mega" });
       
-      // Salary indicator column
-      //this.olvc2pA.AspectGetter = delegate(object row)
-      //{
-      //  Player p = (Player)row;
-      //  return (p.TwoPoint < 4) ? "Bad" : ((p.TwoPoint > 7) ? "Good" : "Decent");
-      //};
-      //this.olvc2pA.Renderer = new MappedImageRenderer(new Object[] { "Little"
-      //  ,  AndreiPopescu.CharazayPlus.Properties.Resources.star12 , "Medium"
-      //  , AndreiPopescu.CharazayPlus.Properties.Resources.star13, "Lots"
-      //  , AndreiPopescu.CharazayPlus.Properties.Resources.star16 });        
-
       // Install a custom renderer that draws the Tile view in a special way
       this.olvComplex.ItemRenderer = new PlayerSkillsRenderer();
-
       //
-      cmbHotItem_SelectedIndexChanged();
+      ObjectListViewExtensions.HotItemOverlay(this.olvComplex, new PlayerSkillsOverlay());
       //
-      this.cmbEditable.SelectedIndex = 0;
-
       this.olvComplex.SetObjects(list);
     }
 
@@ -689,155 +640,25 @@
       
     }
 
-    #endregion
-
-    #region Utilities
-
-    void ShowGroupsChecked (ObjectListView olv, CheckBox cb)
+    void chkGroups_CheckedChanged (object sender, System.EventArgs e)
     {
-      if (cb.Checked && olv.View == View.List)
-      {
-        cb.Checked = false;
-        MessageBox.Show("ListView's cannot show groups when in List view.", "Object List View Demo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      }
-      else
-      {
-        olv.ShowGroups = cb.Checked;
-        olv.BuildList();
-      }
+      ObjectListViewExtensions.ShowGroups(this.olvComplex, ((CheckBox)sender).Checked);
     }
 
-    void ShowLabelsOnGroupsChecked (ObjectListView olv, CheckBox cb)
+    void ListViewSelectedIndexChanged (object sender, System.EventArgs e)
     {
-      olv.ShowItemCountOnGroups = cb.Checked;
-      if (olv.ShowGroups)
-        olv.BuildGroups();
-    }
-
-    void HandleSelectionChanged (ObjectListView listView)
-    {
+      ObjectListView listView = (ObjectListView)sender;
       string msg;
       Player p = (Player)listView.SelectedObject;
       if (p == null)
         msg = listView.SelectedIndices.Count.ToString();
       else
-        msg = String.Format("'{0}'", p.Name);
+        msg = String.Format("'{0}'", p.FullName);
       this.toolStripStatusLabel1.Text = String.Format("Selected {0} of {1} items", msg, listView.GetItemCount());
     }
-
-    void ListViewSelectedIndexChanged (object sender, System.EventArgs e)
-    {
-      HandleSelectionChanged((ObjectListView)sender);
-    }
-    
-    void ChangeOwnerDrawn (ObjectListView listview, bool value)
-    {
-      listview.OwnerDraw = value;
-      listview.BuildList();
-    }
-
     #endregion
 
-    #region Complex Tab Event Handlers
-
-    void chkGroups_CheckedChanged (object sender, System.EventArgs e)
-    {
-      ShowGroupsChecked(this.olvComplex, (CheckBox)sender);
-    }
-
-    #endregion
-
-
-    #region Cell editing example
-
-    private void listViewComplex_CellEditStarting (object sender, CellEditEventArgs e)
-    {
-      // We only want to mess with the Cooking Skill column
-      if (e.Column.Text != "Cooking skill")
-        return;
-
-      ComboBox cb = new ComboBox();
-      cb.Bounds = e.CellBounds;
-      cb.Font = ((ObjectListView)sender).Font;
-      cb.DropDownStyle = ComboBoxStyle.DropDownList;
-      cb.Items.AddRange(new String[] { "Pay to eat out", "Suggest take-away", "Passable", "Seek dinner invitation", "Hire as chef" });
-      cb.SelectedIndex = Math.Max(0, Math.Min(cb.Items.Count - 1, ((int)e.Value) / 10));
-      cb.SelectedIndexChanged += new EventHandler(cb_SelectedIndexChanged);
-      cb.Tag = e.RowObject; // remember which Player we are editing
-      e.Control = cb;
-    }
-
-    private void cb_SelectedIndexChanged (object sender, EventArgs e)
-    {
-      ComboBox cb = (ComboBox)sender;
-      //((Player)cb.Tag).CulinaryRating = cb.SelectedIndex * 10;
-    }
-
-    private void listViewComplex_CellEditValidating (object sender, CellEditEventArgs e)
-    {
-      // Disallow professions from starting with "a" or "z" -- just to be arbitrary
-      if (e.Column.Text == "Occupation")
-      {
-        string newValue = ((TextBox)e.Control).Text;
-        if (newValue.ToLowerInvariant().StartsWith("a") || newValue.ToLowerInvariant().StartsWith("z"))
-        {
-          e.Cancel = true;
-          MessageBox.Show(this, "Occupations cannot begin with 'a' or 'z' (just to show cell edit validation at work).", "ObjectListViewDemo",
-              MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-        }
-      }
-
-      // Disallow birthdays from being on the 29th -- just to be arbitrary
-      if (e.Column.Text == "Birthday")
-      {
-        DateTime newValue = ((DateTimePicker)e.Control).Value;
-        if (newValue != null && newValue.Day == 29)
-        {
-          e.Cancel = true;
-          MessageBox.Show(this, "Sorry. Birthdays cannot be on 29th of any month (just to show cell edit validation at work).", "ObjectListViewDemo",
-              MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-        }
-      }
-
-    }
-
-    private void listViewComplex_CellEditFinishing (object sender, CellEditEventArgs e)
-    {
-      // We only want to mess with the Cooking Skill column
-      if (e.Column.Text != "Cooking skill")
-        return;
-
-      // Stop listening for change events
-      ((ComboBox)e.Control).SelectedIndexChanged -= new EventHandler(cb_SelectedIndexChanged);
-
-      // Any updating will have been down in the SelectedIndexChanged event handler
-      // Here we simply make the list redraw the involved ListViewItem
-      ((ObjectListView)sender).RefreshItem(e.ListViewItem);
-
-      // We have updated the model object, so we cancel the auto update
-      e.Cancel = true;
-    }
-
-    private void cmbEditable_SelectedIndexChanged (object sender, EventArgs e)
-    {
-      this.ChangeEditable(this.olvComplex, (ComboBox)sender);
-    }
-
-    private void ChangeEditable (ObjectListView objectListView, ComboBox comboBox)
-    {
-      if (comboBox.Text == "No")
-        objectListView.CellEditActivation = ObjectListView.CellEditActivateMode.None;
-      else if (comboBox.Text == "Single Click")
-        objectListView.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
-      else if (comboBox.Text == "Double Click")
-        objectListView.CellEditActivation = ObjectListView.CellEditActivateMode.DoubleClick;
-      else
-        objectListView.CellEditActivation = ObjectListView.CellEditActivateMode.F2Only;
-    }
-
-    #endregion
-
-
+   
     private void listViewComplex_MouseClick (object sender, MouseEventArgs e)
     {
       //if (e.Button != MouseButtons.Right)
@@ -861,43 +682,6 @@
 
       //ms.Show((Control)sender, e.X, e.Y);
     }
-
-    /*
-    private static void BlendBitmaps(Graphics g, Bitmap b1, Bitmap b2, float transition)
-    {
-        float[][] colorMatrixElements = {
-new float[] {1,  0,  0,  0, 0},        // red scaling factor of 2
-new float[] {0,  1,  0,  0, 0},        // green scaling factor of 1
-new float[] {0,  0,  1,  0, 0},        // blue scaling factor of 1
-new float[] {0,  0,  0,  transition, 0},        // alpha scaling factor of 1
-new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
-
-        ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
-        ImageAttributes imageAttributes = new ImageAttributes();
-        imageAttributes.SetColorMatrix(colorMatrix);
-
-        g.DrawImage(
-           b1,
-           new Rectangle(0, 0, b1.Size.Width, b1.Size.Height),  // destination rectangle
-           0, 0,        // upper-left corner of source rectangle
-           b1.Size.Width,       // width of source rectangle
-           b1.Size.Height,      // height of source rectangle
-           GraphicsUnit.Pixel,
-           imageAttributes);
-
-        colorMatrix.Matrix33 = 1.0f - transition;
-        imageAttributes.SetColorMatrix(colorMatrix);
-
-        g.DrawImage(
-           b2,
-           new Rectangle(0, 0, b2.Size.Width, b2.Size.Height),  // destination rectangle
-           0, 0,        // upper-left corner of source rectangle
-           b2.Size.Width,       // width of source rectangle
-           b2.Size.Height,      // height of source rectangle
-           GraphicsUnit.Pixel,
-           imageAttributes);
-    }
-    */
 
     private void listViewComplex_CellToolTip (object sender, ToolTipShowingEventArgs e)
     {
@@ -1044,78 +828,7 @@ new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
       MessageBox.Show(String.Format("group task click: {0}", e.Group), "OLV Demo", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
-    /// <summary>
-    /// ????
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void cmbHotItem_SelectedIndexChanged ( )
-    {
-      this.ChangeHotItemStyle(this.olvComplex, HotItemMode.Translucent);
-
-
-      // Make the hot item show an overlay when it changes
-      if (this.olvComplex.UseTranslucentHotItem)
-      {
-        this.olvComplex.HotItemStyle.Overlay = new PlayerSkillsOverlay();
-        this.olvComplex.HotItemStyle = this.olvComplex.HotItemStyle;
-      }
-
-      this.olvComplex.UseTranslucentSelection = this.olvComplex.UseTranslucentHotItem;
-
-      this.olvComplex.Invalidate();
-    }
-
-    private void ChangeHotItemStyle (ObjectListView olv, HotItemMode hotItemMode)
-    {
-
-      olv.UseTranslucentHotItem = false;
-      olv.UseHotItem = true;
-      olv.FullRowSelect = olv == this.olvComplex; // olvComplex should be full row select
-      olv.UseExplorerTheme = false;
-
-      switch (hotItemMode)
-      {
-        case HotItemMode.None:
-          olv.UseHotItem = false;
-          break;
-        case HotItemMode.TextColor:
-          HotItemStyle hotItemStyle = new HotItemStyle();
-          hotItemStyle.ForeColor = Color.AliceBlue;
-          hotItemStyle.BackColor = Color.FromArgb(255, 64, 64, 64);
-          olv.HotItemStyle = hotItemStyle;
-          break;
-        case HotItemMode.Border:
-          RowBorderDecoration rbd = new RowBorderDecoration();
-          rbd.BorderPen = new Pen(Color.SeaGreen, 2);
-          rbd.FillBrush = null;
-          rbd.CornerRounding = 4.0f;
-          HotItemStyle hotItemStyle2 = new HotItemStyle();
-          hotItemStyle2.Decoration = rbd;
-          olv.HotItemStyle = hotItemStyle2;
-          break;
-        case HotItemMode.Translucent: //
-          olv.UseTranslucentHotItem = true;
-          break;
-        case HotItemMode.Lightbox:
-          HotItemStyle hotItemStyle3 = new HotItemStyle();
-          hotItemStyle3.Decoration = new LightBoxDecoration();
-          olv.HotItemStyle = hotItemStyle3;
-          break;
-        case HotItemMode.Vista:
-          if (ObjectListView.IsVistaOrLater)
-          {
-            olv.FullRowSelect = true;
-            olv.UseHotItem = false;
-            olv.UseExplorerTheme = true;
-            // Using Explorer theme doesn't work in owner drawn mode
-            if (olv == this.olvComplex)
-              ChangeOwnerDrawn(olv, false);
-          }
-          break;
-      }
-      olv.Invalidate();
-    }
+   
 
     private void textBoxFilterComplex_TextChanged (object sender, EventArgs e)
     {
@@ -1237,167 +950,9 @@ new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
 
     private void chkOwnerDraw_CheckedChanged (object sender, EventArgs e)
     {
-      ChangeOwnerDrawn(this.olvComplex, this.chkOwnerDraw.Checked);
+      ObjectListViewExtensions.ChangeOwnerDrawn(this.olvComplex, this.chkOwnerDraw.Checked);
     }
-
-    #region before new columns
-    /*
-      void InitializeComplexExample (List<Player> list)
-    {
-      this.olvComplex.AddDecoration(new EditingCellBorderDecoration(true));
-
-      // The following line makes getting aspect about 10x faster. Since getting the aspect is
-      // the slowest part of building the ListView, it is worthwhile BUT NOT NECESSARY to do.
-      TypedObjectListView<Player> tlist = new TypedObjectListView<Player>(this.olvComplex);
-      tlist.GenerateAspectGetters();
-      //The line above the equivilent to typing the following:
-      tlist.GetColumn(0).AspectGetter = delegate(Player x) { return x.Name; };
-      tlist.GetColumn(1).AspectGetter = delegate(Player x) { return x.Occupation; };
-      tlist.GetColumn(2).AspectGetter = delegate(Player x) { return x.CulinaryRating; };
-      tlist.GetColumn(3).AspectGetter = delegate(Player x) { return x.YearOfBirth; };
-      tlist.GetColumn(4).AspectGetter = delegate(Player x) { return x.BirthDate; };
-      tlist.GetColumn(5).AspectGetter = delegate(Player x) { return x.GetRate(); };
-      tlist.GetColumn(6).AspectGetter = delegate(Player x) { return x.Comments; };
-      
-
-      this.olvcPlayer.AspectToStringConverter = delegate(object cellValue)
-      {
-        return ((String)cellValue).ToUpperInvariant();
-      };
-      this.olvcPlayer.ImageGetter = delegate(object row)
-      {
-        // People whose names start with a vowel get a star,
-        // the last few letters get music and everyone else gets a Player
-        string name = ((Player)row).Name.ToUpperInvariant();
-        if (name.Length > 0 && "AEIOU".Contains(name.Substring(0, 1)))
-          return "star";
-        if (name.CompareTo("T") < 0)
-          return 2; // Player
-
-        return "music";
-      };
-
-      // Cooking skill columns
-      this.olvcCookingSkill.MakeGroupies(
-          new object[] { 10, 20, 30, 40 },
-          new string[] { "Pay to eat out", "Suggest take-away", "Passable", "Seek dinner invitation", "Hire as chef" },
-          new string[] { "not", "hamburger", "toast", "beef", "chef" },
-          new string[] {
-                    "Pay good money -- or flee the house -- rather than eat their homecooked food",
-                    "Offer to buy takeaway rather than risk what may appear on your plate",
-                    "Neither spectacular nor dangerous",
-                    "Try to visit at dinner time to wrangle an invitation to dinner",
-                    "Do whatever is necessary to procure their services" },
-          new string[] { "Call 911", "Phone PizzaHut", "", "Open calendar", "Check bank balance" }
-      );
-
-      // Hourly rate column
-      this.olvcHourlyRate.MakeGroupies(
-          new Double[] { 100, 1000 },
-          new string[] { "Less than $100", "$100-$1000", "Megabucks" });
-      //this.olvcHourlyRate.AspectPutter = delegate(object x, object newValue) { ((Player)x).ShootingPosition((double)newValue); };
-
-      // Salary indicator column
-      this.olvcMoneyImage.AspectGetter = delegate(object row)
-      {
-        if (((Player)row).Salary < 100000)
-          return "Little";
-        if (((Player)row).Salary > 300000)
-          return "Lots";
-        return "Medium";
-      };
-      this.olvcMoneyImage.Renderer = new MappedImageRenderer(new Object[] { "Little"
-        ,  AndreiPopescu.CharazayPlus.Properties.Resources.star12 , "Medium"
-        , AndreiPopescu.CharazayPlus.Properties.Resources.star13, "Lots"
-        , AndreiPopescu.CharazayPlus.Properties.Resources.star16 });
-
-      // Birthday column
-      this.olvcBirthday.GroupKeyGetter = delegate(object row)
-      {
-        return ((Player)row).Age;
-      };
-      this.olvcBirthday.GroupKeyToTitleConverter = delegate(object key)
-      {
-        return (new DateTime(1, (int)key, 1)).ToString("MMMM");
-      };
-      this.olvcBirthday.ImageGetter = delegate(object row)
-      {
-        Player p = (Player)row;
-        // People born in leap years get an asterisk (yes, the leap year calculation is wrong).
-        if ((p.Age % 4) == 0)
-          return "hidden";
-
-        return -1; // no image
-      };
-      this.olvcBirthday.ClusteringStrategy = new DateTimeClusteringStrategy(DateTimePortion.Month, "MMMM");
-
-      // Use this column to test sorting and group on TimeSpan objects
-      this.olvcDaysSinceBirth.AspectGetter = delegate(object row)
-      {
-        return ((Player)row).BMI;
-      };
-      this.olvcDaysSinceBirth.AspectToStringFormat = "{0:F02}";
-    
-
-      // Install a custom renderer that draws the Tile view in a special way
-      this.olvComplex.ItemRenderer = new PlayerSkillsRenderer();
-
-      // Drag and drop support
-      // You can set up drag and drop explicitly (like this) or, in the IDE, you can set
-      // IsSimpleDropSource and IsSimpleDragSource and respond to CanDrop and Dropped events
-
-      this.olvComplex.DragSource = new SimpleDragSource();
-      SimpleDropSink dropSink = new SimpleDropSink();
-      this.olvComplex.DropSink = dropSink;
-      dropSink.CanDropOnItem = true;
-      //dropSink.CanDropOnSubItem = true;
-      dropSink.FeedbackColor = Color.IndianRed; // just to be different
-
-      dropSink.ModelCanDrop += new EventHandler<ModelDropEventArgs>(delegate(object sender, ModelDropEventArgs e)
-      {
-        Player Player = e.TargetModel as Player;
-        if (Player == null)
-        {
-          e.Effect = DragDropEffects.None;
-        }
-        else
-        {
-          if (Player.ShootingPosition == Utils.ShooterPosition.MostOutside)
-          {
-            e.Effect = DragDropEffects.None;
-            e.InfoMessage = "Can't drop on someone who is already married";
-          }
-          else
-          {
-            e.Effect = DragDropEffects.Move;
-          }
-        }
-      });
-
-      dropSink.ModelDropped += new EventHandler<ModelDropEventArgs>(delegate(object sender, ModelDropEventArgs e)
-      {
-        if (e.TargetModel == null)
-          return;
-
-        // Change the dropped people plus the target Player to be married
-        ((Player)e.TargetModel).PositionType = typeof(PG);
-        foreach (Player p in e.SourceModels)
-          p.PositionType = typeof(PG);
-
-        // Force them to refresh
-        e.ListView.RefreshObject(e.TargetModel);
-        e.ListView.RefreshObjects(e.SourceModels);
-      });
-
-      //
-      cmbHotItem_SelectedIndexChanged();
-      //
-      this.cmbEditable.SelectedIndex = 0;
-
-      this.olvComplex.SetObjects(list);
-    }
-     */
-    #endregion
+   
   }
 
   /// <summary>

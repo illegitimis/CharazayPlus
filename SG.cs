@@ -11,14 +11,10 @@ namespace AndreiPopescu.CharazayPlus
   public class SG : Player
   {
     public SG ( ) : base() { }
-    #if XSD2
+
     public SG (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public SG (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
-#elif XSDMERGE
-    public SG(XsdMerge.player xsdPlayer) : base(xsdPlayer) { }
-    public SG(XsdMerge.skills xsdSkills) : base(xsdSkills) { }
-#else
-#endif
+
 
     public override string ToString ( ) { return string.Format("SG: {0}", base.ToString()); }
 

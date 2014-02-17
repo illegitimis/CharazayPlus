@@ -56,7 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferMarketTest.cs" />
     <Compile Include="Xsd2Test.cs" />
-    <Compile Include="XsdMerge.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\LeastSquaresFitting\LeastSquares\LeastSquares.csproj">
@@ -88,6 +87,15 @@
     <EmbeddedResource Include="TeamTransfers_20140128.xml" />
     <EmbeddedResource Include="UserInfo_20140128.xml" />
     <EmbeddedResource Include="UserInfo_Cvbe.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Error.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fatigue_Minus1_20140215.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

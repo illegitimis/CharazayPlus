@@ -460,7 +460,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2 {
         
         private byte injuredField;
         
-        private byte fatigueField;
+        private int fatigueField;
         
         private byte formField;
         
@@ -481,7 +481,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2 {
         }
         
         /// <remarks/>
-        public byte fatigue {
+        public int fatigue {
             get {
                 return this.fatigueField;
             }

@@ -89,7 +89,7 @@
     
       //UserInfo_Cvbe.xml
     [TestMethod()]
-    public void DeserializeUserInfoCvbe ( )
+    public void Deserialize_UserInfoCvbe ( )
     {
       chrzyobj obj =DeserializeEmbeddedXml("UserInfo_Cvbe.xml");
       Assert.IsNotNull(obj);
@@ -107,7 +107,7 @@
 
     //TeamInfo_Cvbe.xml
     [TestMethod()]
-    public void DeserializeTeamInfoCvbe ( )
+    public void Deserialize_TeamInfoCvbe ( )
     {
       chrzyobj obj =DeserializeEmbeddedXml("TeamInfo_Cvbe.xml");
       Assert.IsNotNull(obj);
@@ -121,11 +121,12 @@
       Assert.IsNotNull(obj.team.team_info.fanclub);
       Assert.IsNotNull(obj.team.team_info.training);
     }
- 
+
+     
 
 //ArenaInfo_20120726_21191.xml
     [TestMethod()]
-    public void DeserializeArenaInfo_20120726_21191()
+    public void Deserialize_ArenaInfo_20120726_21191()
     {
         chrzyobj obj = DeserializeEmbeddedXml("ArenaInfo_20120726_21191.xml");
         Assert.IsNotNull(obj);
@@ -138,7 +139,7 @@
 
       //Coaches_stergein_20140128.xml
     [TestMethod()]
-    public void DeserializeCoaches_stergein_20140128()
+    public void Deserialize_Coaches_stergein_20140128()
     {
         chrzyobj obj = DeserializeEmbeddedXml("Coaches_stergein_20140128.xml");
         Assert.IsNotNull(obj);
@@ -334,5 +335,31 @@
         Assert.IsNotNull(obj.team.team_info.training);
     }
 
+    //ERR
+    [TestMethod()]
+    public void Deserialize_ERROR ( )
+    {
+      chrzyobj obj = DeserializeEmbeddedXml("Error.xml");
+      Assert.IsNotNull(obj);
+      Assert.IsNotNull(obj.error);
+      Assert.IsNotNull(obj.error.message);
+      Assert.AreEqual<string>(obj.error.message, "Missing division id");
+    }
+
+    //Fatigue_Minus1_20140215.xml
+    [TestMethod()]
+    public void Deserialize_Fatigue_Minus1_20140215 ( )
+    {
+      chrzyobj obj = DeserializeEmbeddedXml("Fatigue_Minus1_20140215.xml");
+      Assert.IsNotNull(obj);
+      Assert.IsNotNull(obj.players);
+      Assert.IsNotNull(obj.players[0]);
+      Assert.IsNotNull(obj.players[0].basic);
+      Assert.IsNotNull(obj.players[0].skills);
+      Assert.IsNotNull(obj.players[0].status);
+      //
+      Assert.AreEqual(obj.players[3].status.fatigue, 0);
+      Assert.AreEqual(obj.players[0].status.fatigue, 0);
+    }
   }
 }

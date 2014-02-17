@@ -48,4 +48,137 @@ c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\NETFX 4.0 Tools\xsd.exe 
 c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\x64\xsd.exe 2.0.5
 c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\xsd.exe 2.0.5
 
+--
+// Salary indicator column
+//this.olvc2pA.AspectGetter = delegate(object row)
+//{
+//  Player p = (Player)row;
+//  return (p.TwoPoint < 4) ? "Bad" : ((p.TwoPoint > 7) ? "Good" : "Decent");
+//};
+//this.olvc2pA.Renderer = new MappedImageRenderer(new Object[] { "Little"
+//  ,  AndreiPopescu.CharazayPlus.Properties.Resources.star12 , "Medium"
+//  , AndreiPopescu.CharazayPlus.Properties.Resources.star13, "Lots"
+//  , AndreiPopescu.CharazayPlus.Properties.Resources.star16 });   
+
+----
+#region Cell editing example
+
+    private void listViewComplex_CellEditStarting (object sender, CellEditEventArgs e)
+    {
+      // We only want to mess with the Cooking Skill column
+      if (e.Column.Text != "Cooking skill")
+        return;
+
+      ComboBox cb = new ComboBox();
+      cb.Bounds = e.CellBounds;
+      cb.Font = ((ObjectListView)sender).Font;
+      cb.DropDownStyle = ComboBoxStyle.DropDownList;
+      cb.Items.AddRange(new String[] { "Pay to eat out", "Suggest take-away", "Passable", "Seek dinner invitation", "Hire as chef" });
+      cb.SelectedIndex = Math.Max(0, Math.Min(cb.Items.Count - 1, ((int)e.Value) / 10));
+      cb.SelectedIndexChanged += new EventHandler(cb_SelectedIndexChanged);
+      cb.Tag = e.RowObject; // remember which Player we are editing
+      e.Control = cb;
+    }
+
+    private void cb_SelectedIndexChanged (object sender, EventArgs e)
+    {
+      ComboBox cb = (ComboBox)sender;
+      //((Player)cb.Tag).CulinaryRating = cb.SelectedIndex * 10;
+    }
+
+    private void listViewComplex_CellEditValidating (object sender, CellEditEventArgs e)
+    {
+      // Disallow professions from starting with "a" or "z" -- just to be arbitrary
+      if (e.Column.Text == "Occupation")
+      {
+        string newValue = ((TextBox)e.Control).Text;
+        if (newValue.ToLowerInvariant().StartsWith("a") || newValue.ToLowerInvariant().StartsWith("z"))
+        {
+          e.Cancel = true;
+          MessageBox.Show(this, "Occupations cannot begin with 'a' or 'z' (just to show cell edit validation at work).", "ObjectListViewDemo",
+              MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+      }
+
+      // Disallow birthdays from being on the 29th -- just to be arbitrary
+      if (e.Column.Text == "Birthday")
+      {
+        DateTime newValue = ((DateTimePicker)e.Control).Value;
+        if (newValue != null && newValue.Day == 29)
+        {
+          e.Cancel = true;
+          MessageBox.Show(this, "Sorry. Birthdays cannot be on 29th of any month (just to show cell edit validation at work).", "ObjectListViewDemo",
+              MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+      }
+
+    }
+
+    private void listViewComplex_CellEditFinishing (object sender, CellEditEventArgs e)
+    {
+      // We only want to mess with the Cooking Skill column
+      if (e.Column.Text != "Cooking skill")
+        return;
+
+      // Stop listening for change events
+      ((ComboBox)e.Control).SelectedIndexChanged -= new EventHandler(cb_SelectedIndexChanged);
+
+      // Any updating will have been down in the SelectedIndexChanged event handler
+      // Here we simply make the list redraw the involved ListViewItem
+      ((ObjectListView)sender).RefreshItem(e.ListViewItem);
+
+      // We have updated the model object, so we cancel the auto update
+      e.Cancel = true;
+    }
+
+    private void cmbEditable_SelectedIndexChanged (object sender, EventArgs e)
+    {
+     ObjectListViewExtensions.ChangeEditable(this.olvComplex, ((ComboBox)sender).Text);
+    }
+
+     this.olvComplex.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditFinishing);
+      this.olvComplex.CellEditStarting += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditStarting);
+      this.olvComplex.CellEditValidating += new BrightIdeasSoftware.CellEditEventHandler(this.listViewComplex_CellEditValidating);
+
+    #endregion
+
+    -----------
+      /*
+    private static void BlendBitmaps(Graphics g, Bitmap b1, Bitmap b2, float transition)
+    {
+        float[][] colorMatrixElements = {
+new float[] {1,  0,  0,  0, 0},        // red scaling factor of 2
+new float[] {0,  1,  0,  0, 0},        // green scaling factor of 1
+new float[] {0,  0,  1,  0, 0},        // blue scaling factor of 1
+new float[] {0,  0,  0,  transition, 0},        // alpha scaling factor of 1
+new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
+
+        ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+        ImageAttributes imageAttributes = new ImageAttributes();
+        imageAttributes.SetColorMatrix(colorMatrix);
+
+        g.DrawImage(
+           b1,
+           new Rectangle(0, 0, b1.Size.Width, b1.Size.Height),  // destination rectangle
+           0, 0,        // upper-left corner of source rectangle
+           b1.Size.Width,       // width of source rectangle
+           b1.Size.Height,      // height of source rectangle
+           GraphicsUnit.Pixel,
+           imageAttributes);
+
+        colorMatrix.Matrix33 = 1.0f - transition;
+        imageAttributes.SetColorMatrix(colorMatrix);
+
+        g.DrawImage(
+           b2,
+           new Rectangle(0, 0, b2.Size.Width, b2.Size.Height),  // destination rectangle
+           0, 0,        // upper-left corner of source rectangle
+           b2.Size.Width,       // width of source rectangle
+           b2.Size.Height,      // height of source rectangle
+           GraphicsUnit.Pixel,
+           imageAttributes);
+    }
+    */
+
+
                 

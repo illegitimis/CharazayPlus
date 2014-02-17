@@ -3,6 +3,8 @@ GENERAL
 splashscreen 
 charazay certified logo 
 advertising
+Mono build
+different .net framework builds (rest)
 -------------------------------
 0) INFO TAB
 versioned xsd schema

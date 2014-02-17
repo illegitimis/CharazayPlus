@@ -593,50 +593,5 @@ namespace AndreiPopescu.CharazayPlus
  
     }
 
-//    private void EconomyUserControl_Load(object sender, EventArgs e)
-//    {
-//#if (!DEBUG)
-//      //LabelsInit();
-//#endif
-//      //Localize();
-//    }
-
-//    private void EconomyUserControl_Layout(object sender, LayoutEventArgs e)
-//    {
-//      //LabelsInit();
-//    }
-
-    internal void LabelsInit(XsdMerge.income income, XsdMerge.expences expences, bool isWeek)
-    {   //
-        // income
-        //
-        if (income != null)
-        {
-            label18.Text = income.sponsor.ToString("#,#", CultureInfo.InvariantCulture);
-            label19.Text = income.tickets.ToString("#,#", CultureInfo.InvariantCulture);
-            label20.Text = income.sales.ToString("#,#", CultureInfo.InvariantCulture);
-            label21.Text = income.other.ToString("#,#", CultureInfo.InvariantCulture);
-            label22.Text = income.merchandise.ToString("#,#", CultureInfo.InvariantCulture);
-        }
-        //
-        // expenses
-        //
-        if (expences != null)
-        {
-            label23.Text = expences.staff.ToString("#,#", CultureInfo.InvariantCulture);
-            label24.Text = expences.salary.ToString("#,#", CultureInfo.InvariantCulture);
-            label25.Text = expences.buys.ToString("#,#", CultureInfo.InvariantCulture);
-            label26.Text = expences.maintenance.ToString("#,#", CultureInfo.InvariantCulture);
-            label27.Text = expences.facility.ToString("#,#", CultureInfo.InvariantCulture);
-            label28.Text = expences.other.ToString("#,#", CultureInfo.InvariantCulture);
-        }
-        //
-        // totals/balance
-        //
-        label29.Text = expences.Total.ToString("#,#", CultureInfo.InvariantCulture);
-        label30.Text = income.Total.ToString("#,#", CultureInfo.InvariantCulture);
-        label31.Text = ((int)(income.Total - expences.Total)).ToString("#,#", CultureInfo.InvariantCulture);
-        label1.Text = isWeek ? "Week" : "Season";
-    }
   }
 }

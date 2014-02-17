@@ -53,48 +53,29 @@ namespace AndreiPopescu.CharazayPlus
     List<Coach> _coaches = new List<Coach>();
 
     // info tab
-#if XSD2
+
     Xsd2.charazayArena _arena;
     Xsd2.charazayTeam _team;
     Xsd2.charazayUser _user;
     Xsd2.charazayCountry _country;
-#elif XSDMERGE
-    XsdMerge.arena _arena;
-    XsdMerge.team _team;
-    XsdMerge.user _user;
-    XsdMerge.country _country;
-#else
-#endif
+
 
     // my Schedule tab (comes from Schedule)
-#if XSD2
     Xsd2.charazayDivision _myDivisionStandings;
     Xsd2.match[] _mySchedule;
-#elif XSDMERGE
-    XsdMerge.division _myDivisionStandings;
-    XsdMerge.matches _mySchedule;
-#else
-#endif
+
 
     // my Division tab (comes from DivisionSchedule)
-#if XSD2
+
     Xsd2.charazayRound[] _myDivisionFullSchedule;    
     Xsd2.match _selectedMatch;
-#elif XSDMERGE
-    XsdMerge.schedule _myDivisionFullSchedule;
-    XsdMerge.match _selectedMatch;
-#else
-#endif   
+  
 
     // money
-#if XSD2
+
     Xsd2.charazayEconomy _economy;
     Xsd2.charazayTransfer[] _myTransfers;
-#elif XSDMERGE
-    XsdMerge.economy _economy;
-    XsdMerge.team_transfers _myTransfers;
-#else
-#endif
+
 
     /// <summary>
     /// 
@@ -673,7 +654,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucStandings.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucStandings.Location = new System.Drawing.Point(0, 0);
       this.ucStandings.Name = "ucStandings";
-      this.ucStandings.Size = new System.Drawing.Size(754, 604);
+      this.ucStandings.Size = new System.Drawing.Size(0, 242);
       this.ucStandings.TabIndex = 1;
       // 
       // tabPageMyDivisionSchedule
@@ -785,43 +766,15 @@ namespace AndreiPopescu.CharazayPlus
 
     private void AddMyTeamScheduleToCache()
     {
-#if XSD2
+
       foreach (var m in _mySchedule)
       {
         CacheManager.Instance.AddTeam(m.HomeTeamId, m.HomeTeamName);
         CacheManager.Instance.AddTeam(m.AwayTeamId, m.AwayTeamName);
         CacheManager.Instance.AddMatch(m);
-      }
-#elif XSDMERGE
-        foreach (XsdMerge.match m in _mySchedule.match)
-        {
-            CacheManager.Instance.AddTeam(m.HomeTeamId, m.HomeTeamName);
-            CacheManager.Instance.AddTeam(m.AwayTeamId, m.AwayTeamName);
-            CacheManager.Instance.AddMatch(m);
-        }
-#else
-#endif      
+      }  
     }
 
-    /// <summary>
-    /// unused!
-    /// </summary>
-    private void AddDivisionScheduleToCache()
-    {
-#if XSD2
-      foreach (var rnd in _myDivisionFullSchedule)
-      {
-        //rnd.match
-      }
-#elif XSDMERGE
-        foreach (var rnd in _myDivisionFullSchedule.round)
-        {
-            CacheManager.Instance.AddMatch(rnd.match);
-        }
-#else
-#endif
-
-    }
     #endregion
 
     #region main form
@@ -867,25 +820,17 @@ namespace AndreiPopescu.CharazayPlus
         case SideTabPage.Info: initInfoTab(); break;
         case SideTabPage.MyTeamSchedule:
           {
-#if XSD2
+
             this.ucMyTeamSchedule.MySchedule = this._mySchedule;
             this.ucMyTeamSchedule.Team = this._team;
             this.ucMyTeamSchedule.initTeamScheduleFilter();
             this.ucMyTeamSchedule.initDgMySchedule();
             AddMyTeamScheduleToCache();
-#elif XSDMERGE
-              this.ucMyTeamSchedule.MySchedule = this._mySchedule.match;
-              this.ucMyTeamSchedule.Team = this._team;
-              this.ucMyTeamSchedule.initTeamScheduleFilter();
-              this.ucMyTeamSchedule.initDgMySchedule();
-              AddMyTeamScheduleToCache();
-#else
-#endif
-
           } break;
 
         case SideTabPage.MyDivisionStandings:
           { 
+
             ucStandings.Init(_myDivisionStandings.standings);
             ucStandings.DivisionName = _myDivisionStandings.name;
             ucStandings.Hardiness = _myDivisionStandings.lh;
@@ -981,43 +926,25 @@ namespace AndreiPopescu.CharazayPlus
     {
       using (FileStream fs = new FileStream(di.m_fileName, FileMode.Open, FileAccess.Read))
       {
-#if XSD2
           Xsd2.charazay obj = null;
-#elif XSDMERGE
-          XsdMerge.charazay obj = null;
-#else
-#endif
+
         try
         {
-#if XSD2
-            obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
-#elif XSDMERGE
-            obj = (XsdMerge.charazay)(new XmlSerializer(typeof(XsdMerge.charazay)).Deserialize(fs));
-#else
-#endif
-
+          obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
           switch (di.DeserializationType)
           { //
             // MyPlayers
             //
             case Web.XmlSerializationType.MyPlayers: 
-#if XSD2
-                  initMyPlayers(obj.players); 
-#elif XSDMERGE
-                  initMyPlayers(obj.Players); 
-#else
-#endif
-                  break;
+              initMyPlayers(obj.players); 
+              break;
             //
             // di.DeserializationObject = obj.arena; 
             //
             case Web.XmlSerializationType.Arena:
-#if XSD2
+
                   _arena = obj.arena;            
-#elif XSDMERGE
-      _arena = obj.Arena;             
-#else
-#endif              
+              
               break;
             //
             // di.DeserializationObject = obj.team;
@@ -1025,12 +952,9 @@ namespace AndreiPopescu.CharazayPlus
             //
             case Web.XmlSerializationType.MyTeamInfo:
               {
-#if XSD2
+
                 _team = obj.team;           
-#elif XSDMERGE
-       _team = obj.Team;
-#else
-#endif
+
 
                 _wsu.divisionId = _team.team_info.divisionid;
               } break;
@@ -1041,14 +965,10 @@ namespace AndreiPopescu.CharazayPlus
             //
             case Web.XmlSerializationType.MyInfo:
               {
-#if XSD2
+
                 _user = obj.user;
                 if (obj.user == null)       
-#elif XSDMERGE
-      _user = obj.User;
-                if (obj.User == null)
-#else
-#endif
+
 
                 throw new Exception("XmlSerializationType.MyInfo");
                 _wsu.countryId = _user.countryid;
@@ -1056,83 +976,59 @@ namespace AndreiPopescu.CharazayPlus
               } break;
 
             case Web.XmlSerializationType.CountryDivisionList:
-#if XSD2
+
                 _country = obj.country;
-#elif XSDMERGE
-                _country = obj.Country;
-#else
-#endif
+
                 break;
             //
             // Coaches
             // di.DeserializationObject = obj.coaches; 
             //
             case Web.XmlSerializationType.Coaches: 
-           #if XSD2
+          
                 initCoachesData(obj.coaches);      
-#elif XSDMERGE
-      initCoachesData(obj.Coaches); 
-#else
-#endif
+
 
                 break;
             //
             case Web.XmlSerializationType.MySchedule: 
-#if XSD2
+
                 _mySchedule = obj.matches;            
-#elif XSDMERGE
-      _mySchedule = obj.Matches;  
-#else
-#endif
+
 
                 break;
             //
             case Web.XmlSerializationType.DivisionStandings: 
-#if XSD2
+
                 _myDivisionStandings = obj.division;           
-#elif XSDMERGE
-      _myDivisionStandings = obj.Division;
-#else
-#endif
+
 
                 break;
             //
             case Web.XmlSerializationType.DivisionSchedule: 
-#if XSD2
+
                 _myDivisionFullSchedule = obj.schedule;     
-#elif XSDMERGE
-   _myDivisionFullSchedule = obj.Schedule;    
-#else
-#endif
+
               
               break;
             //
             case Web.XmlSerializationType.Match: 
-#if XSD2
+
               _selectedMatch = obj.match;         
-#elif XSDMERGE
-      _selectedMatch = obj.Match;
-#else
-#endif
+
 
               break;
             //
             case Web.XmlSerializationType.MyTransfers: 
-#if XSD2
+
     _myTransfers = obj.team_transfers; 
-#elif XSDMERGE
-                _myTransfers = obj.Transfers;
-#else
-#endif                
+               
                 break;
             // 
             case Web.XmlSerializationType.Economy: 
-              #if XSD2
+             
                 _economy = obj.economy; 
-#elif XSDMERGE
-      _economy = obj.Economy; 
-#else
-#endif
+
               
               break;
             //
@@ -1158,34 +1054,40 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
+    protected override void WndProc (ref Message m)
+    {
+      if (m.Msg == NativeMethods.WM_SHOWME)
+      {
+        if (this.WindowState == FormWindowState.Minimized)
+        {
+          this.WindowState = FormWindowState.Normal;
+        }
+        //
+        this.Activate();
+        //
+        bool bRestoreTopMost = this.TopMost;
+        this.TopMost = true;
+        this.TopMost = bRestoreTopMost;    
+        //
+        // activate any visible owned modal dialog (Form or not), if any
+        ModalWindowUtil.ActivateWindow(ModalWindowUtil.GetModalWindow(Handle));
+      }
+      base.WndProc(ref m);
+    }
+
     #endregion
 
     private void initInfoTab ( )
     {
       InfoPropertyGridObject ipg = new InfoPropertyGridObject(_arena, _user, _team, _country, imageListCountries);
       this.ucInfoTab.SelectedGridObject = ipg;
-#if XSD2
-        var sbl = new SortableBindingList<Xsd2.charazayCountryDivision>(_country.division);
-#elif XSDMERGE
-      var sbl = new SortableBindingList<XsdMerge.division>(_country.division );
-#else
-#endif
+      var sbl = new SortableBindingList<Xsd2.charazayCountryDivision>(_country.division);
       this.ucInfoTab.DataContext(sbl);
     }
 
-#if XSD2
-      private void initMyPlayers(Xsd2.charazayPlayer[] players)    
-#elif XSDMERGE
-    private void initMyPlayers(XsdMerge.players players)
-#else
-#endif    
+    private void initMyPlayers(Xsd2.charazayPlayer[] players)  
     {
-        #if XSD2
       foreach (var plyr in players)
-#elif XSDMERGE
-      foreach (var plyr in players.player)
-#else
-#endif
       {
             PG pg = new PG(plyr); _pgs.Add(pg);
             SG sg = new SG(plyr); _sgs.Add(sg);
@@ -1198,23 +1100,13 @@ namespace AndreiPopescu.CharazayPlus
     }
 
     // coaches file
-#if XSD2
     private void initCoachesData(Xsd2.charazayCoach[] xsdCoaches)  
-#elif XSDMERGE
-    private void initCoachesData(XsdMerge.coaches xsdCoaches)
-#else
-#endif
     { //
       // alloc max coach (inner struct)
       //      
-#if XSD2
         var maxCoach = new Xsd2.charazayCoach() { skills = new Xsd2.charazayCoachSkills(), basic = new Xsd2.charazayCoachBasic() };
         foreach (Xsd2.charazayCoach xsdCoach in xsdCoaches)
-#elif XSDMERGE
-        var maxCoach = new XsdMerge.coach() { skills = new XsdMerge.skills(), basic = new XsdMerge.basic() };
-        foreach (var xsdCoach in xsdCoaches.coach)
-#else
-#endif      
+     
         { //
           // get maximum skills from al coaches
           //

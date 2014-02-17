@@ -171,36 +171,24 @@
     /// <param name="p">reference player</param>
     protected Player (Player p) { throw new NotImplementedException(); }
 
-#if XSD2
-      internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
-#elif XSDMERGE
-    internal XsdMerge.player BasePlayer { get { return m_player; } }
-#else
-#endif
+
+    internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
+
     
 
-#if XSD2
-      protected Player (Xsd2.charazayPlayer xsdPlayer)      
-#elif XSDMERGE
-    protected Player (XsdMerge.player xsdPlayer)    
-#else
-#endif
+    protected Player (Xsd2.charazayPlayer xsdPlayer)      
+
     {
       m_player = xsdPlayer;
       InitSkills();
       ActiveSkills();
     }
 
-#if XSD2
+
       protected Player (Xsd2.charazayPlayerSkills xsdSkills)
       {
         m_player = new Xsd2.charazayPlayer();
-#elif XSDMERGE
-    protected Player(XsdMerge.skills xsdSkills)
-    {
-        m_player = new XsdMerge.player();
-#else
-#endif
+
         m_player.skills = xsdSkills;
         InitSkills();
         ActiveSkills();
@@ -290,7 +278,7 @@
     public UInt64 Salary { get { return m_player.status.salary; } }
     public byte InjuryDays { get { return m_player.status.injured; } }
     public byte Form { get { return m_player.status.form; } }
-    public byte Fatigue { get { return m_player.status.fatigue; } }
+    public byte Fatigue { get { return m_player.status.fatigue < 0 ? (byte)0 : (byte)m_player.status.fatigue; } }
     public Fame Fame { get { return (Fame)m_player.status.fame; } }
 
     //attributes
@@ -301,14 +289,7 @@
     public bool U18NT { get { return (m_player.u18nt == "yes"); } }
 
     public UInt64 Id { get { return m_player.id; } }
-    public ulong TeamId { get { return 
-#if XSD2
-    m_player.Teamid
-#elif XSDMERGE
-        m_player.teamid
-#else
-#endif        
-        ; } }
+    public ulong TeamId { get { return m_player.Teamid ; } }
     public byte CountryId { get { return m_player.countryid; } }
 
     public bool Dl { get { return (m_player.dl == /*Xsd.playerDL.*/"yes"); } }
@@ -611,12 +592,8 @@
     /// <summary>
     /// deserialized xsd object
     /// </summary>
-#if XSD2
-      protected Xsd2.charazayPlayer m_player;
-#elif XSDMERGE
-    protected XsdMerge.player m_player;
-#else
-#endif
+    protected Xsd2.charazayPlayer m_player;
+
     #endregion
 
     #region Implemented protected properties

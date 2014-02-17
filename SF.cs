@@ -11,14 +11,10 @@
   public class SF : Player
   {
     public SF() : base() { }
-    #if XSD2
+
     public SF (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public SF (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
-#elif XSDMERGE
-    public SF(XsdMerge.player xsdPlayer) : base(xsdPlayer) { }
-    public SF(XsdMerge.skills xsdSkills) : base(xsdSkills) { }
-#else
-#endif
+
 
     public override string ToString() { return string.Format("sf: {0}", base.ToString()); }
 

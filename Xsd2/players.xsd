@@ -1,79 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="charazay">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="players">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element maxOccurs="unbounded" name="player">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="basic">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="name" type="xs:string" />
-													<xs:element name="surname" type="xs:string" />
-													<xs:element name="age" type="xs:unsignedByte" />
-													<xs:element name="height" type="xs:unsignedByte" />
-													<xs:element name="weight" type="xs:decimal" />
-													<xs:element name="number">
-														<xs:complexType>
-															<xs:simpleContent>
-																<xs:extension base="xs:unsignedByte">
-																	<xs:attribute name="show" type="xs:string" use="required" />
-																</xs:extension>
-															</xs:simpleContent>
-														</xs:complexType>
-													</xs:element>
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="skills">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="defence" type="xs:unsignedByte" />
-													<xs:element name="freethrow" type="xs:unsignedByte" />
-													<xs:element name="twopoint" type="xs:unsignedByte" />
-													<xs:element name="threepoint" type="xs:unsignedByte" />
-													<xs:element name="dribling" type="xs:unsignedByte" />
-													<xs:element name="speed" type="xs:unsignedByte" />
-													<xs:element name="footwork" type="xs:unsignedByte" />
-													<xs:element name="rebounds" type="xs:unsignedByte" />
-													<xs:element name="passing" type="xs:unsignedByte" />
-													<xs:element name="experience" type="xs:unsignedByte" />
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="status">
-											<xs:complexType>
-												<xs:sequence>
-													<xs:element name="injured" type="xs:unsignedByte" />
-													<xs:element name="fatigue" type="xs:unsignedByte" />
-													<xs:element name="form" type="xs:unsignedByte" />
-													<xs:element name="fame" type="xs:unsignedByte" />
-													<xs:element name="si" type="xs:unsignedInt" />
-													<xs:element name="salary" type="xs:unsignedInt" />
-												</xs:sequence>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-									<xs:attribute name="id" type="xs:unsignedInt" use="required" />
-									<xs:attribute name="transfer" type="xs:string" use="required" />
-									<xs:attribute name="nt" type="xs:string" use="required" />
-									<xs:attribute name="u21nt" type="xs:string" use="required" />
-									<xs:attribute name="u18nt" type="xs:string" use="required" />
-									<xs:attribute name="promoted_on" type="xs:unsignedInt" use="required" />
-									<xs:attribute name="dl" type="xs:string" use="required" />
-									<xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
-									<xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
-									<xs:attribute name="traininggroup" type="xs:unsignedByte" use="required" />
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+  <xs:element name="charazay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="players">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="player">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="basic">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" type="xs:string" />
+                          <xs:element name="surname" type="xs:string" />
+                          <xs:element name="age" type="xs:unsignedByte" />
+                          <xs:element name="height" type="xs:unsignedByte" />
+                          <xs:element name="weight" type="xs:decimal" />
+                          <xs:element name="number">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:unsignedByte">
+                                  <xs:attribute name="show" type="xs:string" use="required" />
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="skills">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="defence" type="xs:unsignedByte" />
+                          <xs:element name="freethrow" type="xs:unsignedByte" />
+                          <xs:element name="twopoint" type="xs:unsignedByte" />
+                          <xs:element name="threepoint" type="xs:unsignedByte" />
+                          <xs:element name="dribling" type="xs:unsignedByte" />
+                          <xs:element name="speed" type="xs:unsignedByte" />
+                          <xs:element name="footwork" type="xs:unsignedByte" />
+                          <xs:element name="rebounds" type="xs:unsignedByte" />
+                          <xs:element name="passing" type="xs:unsignedByte" />
+                          <xs:element name="experience" type="xs:unsignedByte" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="status">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="injured" type="xs:unsignedByte" />
+                          <xs:element name="fatigue">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer">
+                                <xs:minInclusive value="-1" />
+                                <xs:maxInclusive value="100" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="form" type="xs:unsignedByte" />
+                          <xs:element name="fame" type="xs:unsignedByte" />
+                          <xs:element name="si" type="xs:unsignedInt" />
+                          <xs:element name="salary" type="xs:unsignedInt" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="transfer" type="xs:string" use="required" />
+                  <xs:attribute name="nt" type="xs:string" use="required" />
+                  <xs:attribute name="u21nt" type="xs:string" use="required" />
+                  <xs:attribute name="u18nt" type="xs:string" use="required" />
+                  <xs:attribute name="promoted_on" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="dl" type="xs:string" use="required" />
+                  <xs:attribute name="countryid" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="teamid" type="xs:unsignedInt" use="required" />
+                  <xs:attribute name="traininggroup" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="ST_FATIGUE">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="-1" />
+      <xs:maxInclusive value="100" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="answerType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="selectOne"/>
+      <xs:enumeration value="selectOneOrMore"/>
+      <xs:enumeration value="selectMultiple"/>
+      <xs:enumeration value="selectOneWithOptionalText"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

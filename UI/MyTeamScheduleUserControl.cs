@@ -15,14 +15,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       InitializeComponent();
     }
 
-#if XSD2
       public Xsd2.charazayTeam Team { get; set; }
       public Xsd2.match[] MySchedule { get; set; }
-#elif XSDMERGE
-    public XsdMerge.team Team { get; set; }
-    public XsdMerge.match[] MySchedule { get; set; }
-#else
-#endif
+
 
 
     public void initDgMySchedule ( )
@@ -73,17 +68,14 @@ namespace AndreiPopescu.CharazayPlus.UI
       // bind
       //
       //initGridEpilogue<Xsd2.match>(dgMySchedule, _mySchedule);  
-#if XSD2
-        var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<Xsd2.match>();
-#elif XSDMERGE
-      var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<XsdMerge.match>();
-#else
-#endif
+      var fbl = new AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<Xsd2.match>();
       foreach (var m in MySchedule)
       {
         m.MyTeamId = Team.id;
         fbl.Add(m);
       }
+
+      
       dgMySchedule.DataSource = fbl;
       dgMySchedule.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
     }

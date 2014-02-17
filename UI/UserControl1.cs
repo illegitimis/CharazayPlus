@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Linq;
+
 using System.Text;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -140,6 +140,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private BrightIdeasSoftware.ObjectListView olv;
     private LabelDescriptionUserControl ldLevel;
 
+
     public void Init (Xsd2.charazayDivisionStanding[] standings)
     {
       Generator.GenerateColumns(this.olv, typeof(Xsd2.charazayDivisionStanding)/*, standings*/);
@@ -151,6 +152,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       this.olv.SetObjects(standings);     
     }
+
+
 
     public string DivisionName {set { ldName.Description = value; } }
 

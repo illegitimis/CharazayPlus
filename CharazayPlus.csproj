@@ -52,7 +52,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;XSD2</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;XSDMERGE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\CharazayDoctor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
@@ -253,6 +253,9 @@
       <SubType>code</SubType>
       <DependentUpon>Economy.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Xsd2\Error.cs">
+      <DependentUpon>Error.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Xsd2\match.cs">
       <SubType>code</SubType>
       <DependentUpon>Match.xsd</DependentUpon>
@@ -274,20 +277,20 @@
     </Compile>
     <Compile Include="Xsd2\Standings.cs">
       <SubType>code</SubType>
+      <DependentUpon>Standings.xsd</DependentUpon>
     </Compile>
     <Compile Include="Xsd2\TeamInfo.cs">
       <SubType>code</SubType>
+      <DependentUpon>TeamInfo.xsd</DependentUpon>
     </Compile>
     <Compile Include="Xsd2\Transfers.cs">
       <SubType>code</SubType>
+      <DependentUpon>Transfers.xsd</DependentUpon>
     </Compile>
     <Compile Include="Xsd2\UserInfo.cs">
       <SubType>code</SubType>
+      <DependentUpon>UserInfo.xsd</DependentUpon>
     </Compile>
-    <Compile Include="XsdMerge\Charazay.cs">
-      <DependentUpon>Charazay.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="XsdMerge\Partial.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\AboutForm.resx">
@@ -391,6 +394,9 @@
     <None Include="Xsd2\Economy.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Xsd2\Error.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Xsd2\Match.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -413,9 +419,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Xsd2\UserInfo.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="XsdMerge\Charazay.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

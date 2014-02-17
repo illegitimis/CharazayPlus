@@ -46,7 +46,8 @@
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="injured" type="xs:unsignedByte" />
-										<xs:element name="fatigue" type="xs:unsignedByte" />
+										<!--<xs:element name="fatigue" type="xs:unsignedByte" />-->
+                    <xs:element name="fatigue" type="xs:int" />
 										<xs:element name="form" type="xs:unsignedByte" />
 										<xs:element name="fame" type="xs:unsignedByte" />
 										<xs:element name="si" type="xs:unsignedInt" />

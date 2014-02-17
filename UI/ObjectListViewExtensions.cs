@@ -8,6 +8,13 @@
 
   public static class ObjectListViewExtensions
   {
+    /// <summary>
+    /// USED by <see cref="HotItemOverlay"/>
+    /// </summary>
+    /// <param name="olv"></param>
+    /// <param name="hotItemMode"></param>
+    /// <param name="bFullRowSelect"></param>
+    /// <param name="bExplorerTheme"></param>
     public static void ChangeHotItemStyle (ObjectListView olv
       , HotItemMode hotItemMode
       , bool bFullRowSelect=true
@@ -15,7 +22,7 @@
       )
     {
 
-      olv.UseTranslucentHotItem = false;
+      olv.UseTranslucentHotItem = false;                                                              
       olv.UseHotItem = true;
       olv.FullRowSelect = bFullRowSelect; // olvComplex should be full row select
       olv.UseExplorerTheme = false;
@@ -64,26 +71,10 @@
     }
 
     /// <summary>
-    /// ????
+    /// used by <see cref="ChangeHotItemStyle"/>
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public static void TranslucentHotItemStyle (ObjectListView olv)
-    {
-      ChangeHotItemStyle(olv, HotItemMode.Translucent);
-
-
-      // Make the hot item show an overlay when it changes
-      if (olv.UseTranslucentHotItem)
-      {
-        olv.HotItemStyle.Overlay = new PlayerSkillsOverlay();        
-      }
-
-      olv.UseTranslucentSelection = olv.UseTranslucentHotItem;
-
-      olv.Invalidate();
-    }
-
+    /// <param name="listview"></param>
+    /// <param name="value"></param>
     public static void ChangeOwnerDrawn (ObjectListView listview, bool value)
     {
       listview.OwnerDraw = value;
@@ -108,6 +99,61 @@
       groupKeys.Add(string.Format("> {0}", values[values.Length - 1]));
 
       return groupKeys.ToArray();
+    }
+
+    public static void HotItemOverlay (ObjectListView olvComplex,  IOverlay overlay)
+    {
+      ChangeHotItemStyle(olvComplex, HotItemMode.Translucent);
+
+      // Make the hot item show an overlay when it changes
+      if (olvComplex.UseTranslucentHotItem)
+      {
+        olvComplex.HotItemStyle.Overlay = overlay;
+        // very silly but this removes the old and adds the new overlay
+        olvComplex.HotItemStyle = olvComplex.HotItemStyle;
+      }
+      //
+      olvComplex.UseTranslucentSelection = olvComplex.UseTranslucentHotItem;
+      //
+      olvComplex.Invalidate();
+    }
+
+    public static void ShowGroups (ObjectListView olv, bool active)
+    {
+      if (active && olv.View == View.List)
+      {
+        MessageBox.Show("ListView's cannot show groups when in List view."
+          , "CharazayPlus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      }
+      else
+      {
+        olv.ShowGroups = active;
+        olv.BuildList();
+      }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="olv"></param>
+    /// <param name="active"></param>
+    public static void ShowLabelsOnGroups (ObjectListView olv, bool active)
+    {
+      olv.ShowItemCountOnGroups = active;
+      if (olv.ShowGroups)
+        olv.BuildGroups();
+    }
+
+    public static void ChangeEditable (ObjectListView olv, string text)
+    {
+      if (text == "No")
+        olv.CellEditActivation = ObjectListView.CellEditActivateMode.None;
+      else if (text == "Single Click")
+        olv.CellEditActivation = ObjectListView.CellEditActivateMode.SingleClick;
+      else if (text == "Double Click")
+        olv.CellEditActivation = ObjectListView.CellEditActivateMode.DoubleClick;
+      else
+        olv.CellEditActivation = ObjectListView.CellEditActivateMode.F2Only;
     }
   }
 

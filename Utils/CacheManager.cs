@@ -193,24 +193,6 @@ namespace AndreiPopescu.CharazayPlus.Utils
       }
     }
     
-    /// <summary>
-    /// adds a <see cref="XsdMerge.match"/> to cache
-    /// </summary>
-    /// <param name="m">a <see cref="XsdMerge.match"/></param>
-    /// <remarks>todo: <see cref="XsdMerge.match.ToString()"/></remarks>
-    public void AddMatch(XsdMerge.match m)
-    {
-        if (Extensions.IsNullOrEmpty(_matches))
-            _matches.Add(m.id, m.ToString());
-        else
-        {
-            if (_matches.ContainsKey(m.id))
-                _matches[m.id] = m.ToString();
-            else
-                _matches.Add(m.id, m.ToString());
-        }
-    }
-
     public string PlayerName(ulong id)
     {
       return _players.ContainsKey(id) ? _players[id] : id.ToString();
@@ -245,6 +227,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     //      return tm.name;
     //    } 
     #endregion
+
+
 
     
   }
