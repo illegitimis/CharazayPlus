@@ -133,7 +133,8 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
      }
    }
 
-
+   [OLVColumn(DisplayIndex = 11, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "+/-")]
+   public short PlusMinus { get { return (short)(PointsMade - PointsAgainst); } }
 
    [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "TeamID")]
    public uint TeamID

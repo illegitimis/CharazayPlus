@@ -42,7 +42,7 @@
     protected internal override byte[] TrainingPlan { get { return new byte[] { 3,3,1,4,2,1,2,1 }; } }
     public override PlayerPosition PositionEnum { get { return PlayerPosition.SF; } }
 
-    protected override double[] StoredAssessedValues
+    static double[] StoredAssessedValues
     {
       get
       {
@@ -339,6 +339,8 @@
       };
       }
     }
+
+    public override double ValueIndex { get { return TotalScore / SF.StoredAssessedValues[StoredAssessedIndex]; } }
   }
 
   

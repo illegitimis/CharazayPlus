@@ -113,15 +113,11 @@ namespace AndreiPopescu.CharazayPlus
     private TabPage tabPageTL;
     private TabPage tabPageMyDivisionSchedule;
     private MenuStrip menuStrip1;
-    private ToolStripMenuItem toolsToolStripMenuItem;
-    private ToolStripMenuItem optionsToolStripMenuItem;
-    private ToolStripMenuItem helpToolStripMenuItem;
+    private ToolStripMenuItem tsmiTools;
+    private ToolStripMenuItem tsmiOptions;
+    private ToolStripMenuItem tsmiHelp;
     private TrainingTabUserControl ucTraining;
     private ToolStripMenuItem aboutToolStripMenuItem;
-    //private DataGridViewTextBoxColumn dgColDivId;
-    //private DataGridViewTextBoxColumn dgColDivName;
-    //private DataGridViewTextBoxColumn dgColDivLh;
-    //private DataGridViewTextBoxColumn dgColDivLevel;  
     private TabPage tabPageSkills;
     private UI.PlayerSkillsUserControl ucPlayerSkills;
     private UI.MyTeamScheduleUserControl ucMyTeamSchedule;
@@ -134,7 +130,14 @@ namespace AndreiPopescu.CharazayPlus
     private PlayerPositionUserControl ucSG;
     private MyEconomyUserControl ucMyEconomy;
     private DivisionScheduleUserControl ucDivisionSchedule;
-    private UserControl1 ucStandings;
+    private DivisionStandingsUserControl ucStandings;
+    private ToolStripMenuItem viewToolStripMenuItem;
+    private ToolStripMenuItem tschkShowGroups;
+    private ToolStripMenuItem tschkOwnerDrawn;
+    private ToolStripMenuItem tsmiFilter;
+    private ToolStripTextBox tstxtFilterText;
+    private StatusStrip statusStrip;
+    private ToolStripStatusLabel tsslbl;
     private UI.TransferListUserControl ucTransferList;
     #endregion
 
@@ -246,10 +249,17 @@ namespace AndreiPopescu.CharazayPlus
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       this.imageListCountries = new System.Windows.Forms.ImageList(this.components);
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-      this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.tschkShowGroups = new System.Windows.Forms.ToolStripMenuItem();
+      this.tschkOwnerDrawn = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiFilter = new System.Windows.Forms.ToolStripMenuItem();
+      this.tstxtFilterText = new System.Windows.Forms.ToolStripTextBox();
+      this.tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiOptions = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.statusStrip = new System.Windows.Forms.StatusStrip();
+      this.tsslbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.sideTabControl = new AndreiPopescu.CharazayPlus.UI.SideTabControl();
       this.tabPageInfo = new System.Windows.Forms.TabPage();
       this.ucInfoTab = new AndreiPopescu.CharazayPlus.UI.InfoTabUserControl();
@@ -272,7 +282,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyTeamSchedule = new System.Windows.Forms.TabPage();
       this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.MyTeamScheduleUserControl();
       this.tabPageMyDivisionStandings = new System.Windows.Forms.TabPage();
-      this.ucStandings = new AndreiPopescu.CharazayPlus.UI.UserControl1();
+      this.ucStandings = new AndreiPopescu.CharazayPlus.UI.DivisionStandingsUserControl();
       this.tabPageMyDivisionSchedule = new System.Windows.Forms.TabPage();
       this.ucDivisionSchedule = new AndreiPopescu.CharazayPlus.UI.DivisionScheduleUserControl();
       this.tabPageMyEconomy = new System.Windows.Forms.TabPage();
@@ -280,6 +290,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageTL = new System.Windows.Forms.TabPage();
       this.ucTransferList = new AndreiPopescu.CharazayPlus.UI.TransferListUserControl();
       this.menuStrip1.SuspendLayout();
+      this.statusStrip.SuspendLayout();
       this.sideTabControl.SuspendLayout();
       this.tabPageInfo.SuspendLayout();
       this.tabPageStatus.SuspendLayout();
@@ -379,36 +390,86 @@ namespace AndreiPopescu.CharazayPlus
       // menuStrip1
       // 
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.tsmiTools,
+            this.tsmiHelp});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(872, 24);
       this.menuStrip1.TabIndex = 2;
       this.menuStrip1.Text = "menuStrip1";
       // 
-      // toolsToolStripMenuItem
+      // viewToolStripMenuItem
       // 
-      this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-      this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-      this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-      this.toolsToolStripMenuItem.Text = "&Tools";
+      this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tschkShowGroups,
+            this.tschkOwnerDrawn,
+            this.tsmiFilter});
+      this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+      this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+      this.viewToolStripMenuItem.Text = "&View";
       // 
-      // optionsToolStripMenuItem
+      // tschkShowGroups
       // 
-      this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-      this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-      this.optionsToolStripMenuItem.Text = "&Options";
-      this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+      this.tschkShowGroups.Checked = true;
+      this.tschkShowGroups.CheckOnClick = true;
+      this.tschkShowGroups.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.tschkShowGroups.Name = "tschkShowGroups";
+      this.tschkShowGroups.Size = new System.Drawing.Size(145, 22);
+      this.tschkShowGroups.Text = "Show &Groups";
+      this.tschkShowGroups.CheckedChanged += new System.EventHandler(this.tschkShowGroups_CheckedChanged);
+      this.tschkShowGroups.CheckStateChanged += new System.EventHandler(this.tschkShowGroups_CheckStateChanged);
+      this.tschkShowGroups.Click += new System.EventHandler(this.tschkShowGroups_Click);
       // 
-      // helpToolStripMenuItem
+      // tschkOwnerDrawn
       // 
-      this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.tschkOwnerDrawn.Checked = true;
+      this.tschkOwnerDrawn.CheckOnClick = true;
+      this.tschkOwnerDrawn.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.tschkOwnerDrawn.Name = "tschkOwnerDrawn";
+      this.tschkOwnerDrawn.Size = new System.Drawing.Size(145, 22);
+      this.tschkOwnerDrawn.Text = "&Owner drawn";
+      // 
+      // tsmiFilter
+      // 
+      this.tsmiFilter.CheckOnClick = true;
+      this.tsmiFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tstxtFilterText});
+      this.tsmiFilter.Name = "tsmiFilter";
+      this.tsmiFilter.Size = new System.Drawing.Size(145, 22);
+      this.tsmiFilter.Text = "&Filter";
+      this.tsmiFilter.CheckedChanged += new System.EventHandler(this.tsmiFilter_CheckedChanged);
+      // 
+      // tstxtFilterText
+      // 
+      this.tstxtFilterText.Enabled = false;
+      this.tstxtFilterText.Name = "tstxtFilterText";
+      this.tstxtFilterText.Size = new System.Drawing.Size(152, 23);
+      this.tstxtFilterText.Text = "text";
+      this.tstxtFilterText.TextChanged += new System.EventHandler(this.tstxtFilterText_TextChanged);
+      // 
+      // tsmiTools
+      // 
+      this.tsmiTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiOptions});
+      this.tsmiTools.Name = "tsmiTools";
+      this.tsmiTools.Size = new System.Drawing.Size(48, 20);
+      this.tsmiTools.Text = "&Tools";
+      // 
+      // tsmiOptions
+      // 
+      this.tsmiOptions.Name = "tsmiOptions";
+      this.tsmiOptions.Size = new System.Drawing.Size(116, 22);
+      this.tsmiOptions.Text = "&Options";
+      this.tsmiOptions.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+      // 
+      // tsmiHelp
+      // 
+      this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
-      this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-      this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-      this.helpToolStripMenuItem.Text = "&Help";
+      this.tsmiHelp.Name = "tsmiHelp";
+      this.tsmiHelp.Size = new System.Drawing.Size(44, 20);
+      this.tsmiHelp.Text = "&Help";
       // 
       // aboutToolStripMenuItem
       // 
@@ -416,6 +477,21 @@ namespace AndreiPopescu.CharazayPlus
       this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
       this.aboutToolStripMenuItem.Text = "&About";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+      // 
+      // statusStrip
+      // 
+      this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslbl});
+      this.statusStrip.Location = new System.Drawing.Point(0, 617);
+      this.statusStrip.Name = "statusStrip";
+      this.statusStrip.Size = new System.Drawing.Size(872, 22);
+      this.statusStrip.TabIndex = 3;
+      // 
+      // tsslbl
+      // 
+      this.tsslbl.Name = "tsslbl";
+      this.tsslbl.Size = new System.Drawing.Size(130, 17);
+      this.tsslbl.Text = "                                         ";
       // 
       // sideTabControl
       // 
@@ -461,10 +537,12 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // ucInfoTab
       // 
-      this.ucInfoTab.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucInfoTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.ucInfoTab.Location = new System.Drawing.Point(0, 0);
       this.ucInfoTab.Name = "ucInfoTab";
-      this.ucInfoTab.Size = new System.Drawing.Size(754, 604);
+      this.ucInfoTab.Size = new System.Drawing.Size(754, 583);
       this.ucInfoTab.TabIndex = 0;
       // 
       // tabPageStatus
@@ -483,7 +561,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucStatus.Location = new System.Drawing.Point(3, 3);
       this.ucStatus.Name = "ucStatus";
-      this.ucStatus.Size = new System.Drawing.Size(0, 236);
+      this.ucStatus.Size = new System.Drawing.Size(7, 236);
       this.ucStatus.TabIndex = 0;
       // 
       // tabPageSkills
@@ -498,14 +576,11 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // ucPlayerSkills
       // 
-      this.ucPlayerSkills.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.ucPlayerSkills.AutoSize = true;
+      this.ucPlayerSkills.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucPlayerSkills.Location = new System.Drawing.Point(0, 0);
       this.ucPlayerSkills.Name = "ucPlayerSkills";
       this.ucPlayerSkills.Players = null;
-      this.ucPlayerSkills.Size = new System.Drawing.Size(751, 604);
+      this.ucPlayerSkills.Size = new System.Drawing.Size(13, 242);
       this.ucPlayerSkills.TabIndex = 0;
       // 
       // tabPagePG
@@ -523,7 +598,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucPG.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucPG.Location = new System.Drawing.Point(0, 0);
       this.ucPG.Name = "ucPG";
-      this.ucPG.Size = new System.Drawing.Size(0, 242);
+      this.ucPG.Size = new System.Drawing.Size(13, 242);
       this.ucPG.TabIndex = 0;
       // 
       // tabPageSG
@@ -541,7 +616,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucSG.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucSG.Location = new System.Drawing.Point(0, 0);
       this.ucSG.Name = "ucSG";
-      this.ucSG.Size = new System.Drawing.Size(0, 242);
+      this.ucSG.Size = new System.Drawing.Size(13, 242);
       this.ucSG.TabIndex = 0;
       // 
       // tabPageSF
@@ -559,7 +634,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucSF.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucSF.Location = new System.Drawing.Point(0, 0);
       this.ucSF.Name = "ucSF";
-      this.ucSF.Size = new System.Drawing.Size(0, 242);
+      this.ucSF.Size = new System.Drawing.Size(13, 242);
       this.ucSF.TabIndex = 0;
       // 
       // tabPagePF
@@ -577,7 +652,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucPF.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucPF.Location = new System.Drawing.Point(0, 0);
       this.ucPF.Name = "ucPF";
-      this.ucPF.Size = new System.Drawing.Size(0, 242);
+      this.ucPF.Size = new System.Drawing.Size(13, 242);
       this.ucPF.TabIndex = 0;
       // 
       // tabPageC
@@ -595,7 +670,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucC.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucC.Location = new System.Drawing.Point(0, 0);
       this.ucC.Name = "ucC";
-      this.ucC.Size = new System.Drawing.Size(0, 242);
+      this.ucC.Size = new System.Drawing.Size(13, 242);
       this.ucC.TabIndex = 0;
       // 
       // tabPageTraining
@@ -615,7 +690,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucTraining.Location = new System.Drawing.Point(0, 0);
       this.ucTraining.Name = "ucTraining";
       this.ucTraining.OptimumPlayers = null;
-      this.ucTraining.Size = new System.Drawing.Size(0, 242);
+      this.ucTraining.Size = new System.Drawing.Size(13, 242);
       this.ucTraining.TabIndex = 0;
       // 
       // tabPageMyTeamSchedule
@@ -708,7 +783,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucTransferList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucTransferList.Location = new System.Drawing.Point(0, 0);
       this.ucTransferList.Name = "ucTransferList";
-      this.ucTransferList.Size = new System.Drawing.Size(754, 604);
+      this.ucTransferList.Size = new System.Drawing.Size(0, 242);
       this.ucTransferList.TabIndex = 0;
       this.ucTransferList.User = null;
       // 
@@ -718,6 +793,7 @@ namespace AndreiPopescu.CharazayPlus
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ClientSize = new System.Drawing.Size(872, 639);
+      this.Controls.Add(this.statusStrip);
       this.Controls.Add(this.menuStrip1);
       this.Controls.Add(this.sideTabControl);
       this.DoubleBuffered = true;
@@ -731,11 +807,12 @@ namespace AndreiPopescu.CharazayPlus
       this.Load += new System.EventHandler(this.MainForm_Load);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
+      this.statusStrip.ResumeLayout(false);
+      this.statusStrip.PerformLayout();
       this.sideTabControl.ResumeLayout(false);
       this.tabPageInfo.ResumeLayout(false);
       this.tabPageStatus.ResumeLayout(false);
       this.tabPageSkills.ResumeLayout(false);
-      this.tabPageSkills.PerformLayout();
       this.tabPagePG.ResumeLayout(false);
       this.tabPageSG.ResumeLayout(false);
       this.tabPageSF.ResumeLayout(false);
@@ -756,7 +833,10 @@ namespace AndreiPopescu.CharazayPlus
     #endregion
 
     #region Cache related
-    private void addMyPlayersToCache()
+    /// <summary>
+    /// used on tab change to status
+    /// </summary>
+    private void AddMyPlayersToCache()
     {
       foreach (var op in _optimumPlayers)
       {
@@ -782,7 +862,7 @@ namespace AndreiPopescu.CharazayPlus
     {
       sideTabControl.SelectedTab = tabPageInfo;
       tabPageInfo.Focus();
-      initInfoTab();
+      InitInfoTab();
     }
 
     /// <summary>
@@ -797,7 +877,7 @@ namespace AndreiPopescu.CharazayPlus
         case SideTabPage.Status:
           {
             this.ucStatus.initStatus(this._optimumPlayers, this.imageListCountries);
-            addMyPlayersToCache();
+            AddMyPlayersToCache();
           } break;
 
         case SideTabPage.PG: ucPG.Init(_pgs); break;
@@ -817,7 +897,7 @@ namespace AndreiPopescu.CharazayPlus
           ucTraining.initTrainingEfficiency();
         } break;
 
-        case SideTabPage.Info: initInfoTab(); break;
+        case SideTabPage.Info: InitInfoTab(); break;
         case SideTabPage.MyTeamSchedule:
           {
 
@@ -855,6 +935,10 @@ namespace AndreiPopescu.CharazayPlus
           { 
           ucTransferList.User = _wsu;
           ucTransferList.InitTransferShortList();
+          ucTransferList.PlayerDataUnavailable += (sndr, ev) => { tsslbl.Text = "Player Data Unavailable"; };
+          ucTransferList.BadPlayerId += (sndr, ev) => { tsslbl.Text = "Bad Player Id"; };
+          ucTransferList.DownloadPlayerData += (sndr, ev) => 
+          { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " "+ev.Surname; };
           } break;
 
         case SideTabPage.Skills: ucPlayerSkills.Players = _optimumPlayers; break;
@@ -862,6 +946,7 @@ namespace AndreiPopescu.CharazayPlus
         default: break;
       }
     }
+
     
     public MainForm()
     {
@@ -936,7 +1021,7 @@ namespace AndreiPopescu.CharazayPlus
             // MyPlayers
             //
             case Web.XmlSerializationType.MyPlayers: 
-              initMyPlayers(obj.players); 
+              InitMyPlayers(obj.players); 
               break;
             //
             // di.DeserializationObject = obj.arena; 
@@ -1077,7 +1162,7 @@ namespace AndreiPopescu.CharazayPlus
 
     #endregion
 
-    private void initInfoTab ( )
+    private void InitInfoTab ( )
     {
       InfoPropertyGridObject ipg = new InfoPropertyGridObject(_arena, _user, _team, _country, imageListCountries);
       this.ucInfoTab.SelectedGridObject = ipg;
@@ -1085,7 +1170,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucInfoTab.DataContext(sbl);
     }
 
-    private void initMyPlayers(Xsd2.charazayPlayer[] players)  
+    private void InitMyPlayers(Xsd2.charazayPlayer[] players)  
     {
       foreach (var plyr in players)
       {
@@ -1153,7 +1238,38 @@ namespace AndreiPopescu.CharazayPlus
     {
       this.ucTransferList.SerializePlayersTL();
       GC.WaitForPendingFinalizers();
-    }  
+    }
+
+    #region view menu
+    private void tschkShowGroups_CheckedChanged (object sender, EventArgs e)
+    {
+
+    }
+
+    private void tschkShowGroups_CheckStateChanged (object sender, EventArgs e)
+    {
+
+    }
+
+    private void tschkShowGroups_Click (object sender, EventArgs e)
+    {
+
+    }
+
+    private void tstxtFilterText_TextChanged (object sender, EventArgs e)
+    {
+      
+      if (sideTabControl.SelectedIndex == 2)
+        ucPlayerSkills.ApplyFilter(tstxtFilterText.Text);
+    }   
+
+    private void tsmiFilter_CheckedChanged (object sender, EventArgs e)
+    {
+      tstxtFilterText.Enabled = tsmiFilter.Checked;
+    }
+    #endregion
+
+    
     
    }
 }

@@ -5,6 +5,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   using System.Collections.Generic;
   using System.Text;
   using SB = System.Text.StringBuilder;
+  using System.Diagnostics;
 
   internal static class Defines
   {
@@ -176,4 +177,16 @@ namespace AndreiPopescu.CharazayPlus.Utils
   //    }
   //  }
   //}
+
+  internal static class Duration
+  {
+      public static double StopwatchAction(Action a)
+      {
+        Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+        a();
+        stopWatch.Stop();
+        return stopWatch.ElapsedMilliseconds;
+      }
+  }
 }

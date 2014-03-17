@@ -92,34 +92,58 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void InitializeComponent ( )
     {
       this.olv = new BrightIdeasSoftware.ObjectListView();
+      this.ucEvaluatePlayer = new AndreiPopescu.CharazayPlus.UI.EvaluatePlayerUserControl();
       ((System.ComponentModel.ISupportInitialize)(this.olv)).BeginInit();
       this.SuspendLayout();
       // 
       // olv
       // 
       this.olv.AlternateRowBackColor = System.Drawing.Color.DimGray;
+      this.olv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.olv.BackColor = System.Drawing.Color.Gray;
-      this.olv.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olv.ForeColor = System.Drawing.Color.White;
-      this.olv.Location = new System.Drawing.Point(0, 0);
+      this.olv.FullRowSelect = true;
+      this.olv.Location = new System.Drawing.Point(3, 3);
       this.olv.Name = "olv";
-      this.olv.Size = new System.Drawing.Size(150, 150);
+      this.olv.Size = new System.Drawing.Size(681, 77);
+      this.olv.SortGroupItemsByPrimaryColumn = false;
       this.olv.TabIndex = 1;
       this.olv.UseAlternatingBackColors = true;
       this.olv.UseCompatibleStateImageBehavior = false;
       this.olv.View = System.Windows.Forms.View.Details;
+      this.olv.SelectedIndexChanged += new System.EventHandler(this.olv_SelectedIndexChanged);
+      // 
+      // ucEvaluatePlayer
+      // 
+      this.ucEvaluatePlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucEvaluatePlayer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucEvaluatePlayer.BackColor = System.Drawing.Color.DimGray;
+      this.ucEvaluatePlayer.CausesValidation = false;
+      this.ucEvaluatePlayer.ForeColor = System.Drawing.Color.White;
+      this.ucEvaluatePlayer.Location = new System.Drawing.Point(3, 80);
+      this.ucEvaluatePlayer.Name = "ucEvaluatePlayer";
+      this.ucEvaluatePlayer.SelectedObject = null;
+      this.ucEvaluatePlayer.Size = new System.Drawing.Size(681, 135);
+      this.ucEvaluatePlayer.TabIndex = 2;
       // 
       // PlayerPositionUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.ucEvaluatePlayer);
       this.Controls.Add(this.olv);
       this.DoubleBuffered = true;
       this.Name = "PlayerPositionUserControl";
+      this.Size = new System.Drawing.Size(689, 220);
       ((System.ComponentModel.ISupportInitialize)(this.olv)).EndInit();
       this.ResumeLayout(false);
 
     }
+
+   
     
     /// <summary> 
     /// Required designer variable.
@@ -141,6 +165,24 @@ namespace AndreiPopescu.CharazayPlus.UI
     #endregion
 
     private BrightIdeasSoftware.ObjectListView olv;
+    private EvaluatePlayerUserControl ucEvaluatePlayer;
+
+    private void olv_SelectedIndexChanged (object sender, EventArgs e)
+    {
+      
+      ObjectListView olv = (ObjectListView)sender;
+      Player p = null;
+      if (olv.SelectedObject != null)
+      { 
+        p = (Player)olv.SelectedObject;
+      }
+      else if (olv.SelectedObjects != null && olv.SelectedObjects.Count > 0)
+      {
+        p = (Player)(olv.SelectedObjects[0]);
+      }
+      if (p!=null)
+        ucEvaluatePlayer.SelectedObject = p.BasePlayer;
+    }
 
   }
 }

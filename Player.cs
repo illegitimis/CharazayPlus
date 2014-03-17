@@ -6,36 +6,17 @@
   using AndreiPopescu.CharazayPlus.Utils;
 
 
-
-  /// <summary>
-  /// 
-  /// </summary>
-  public class Players<T> where T : Player
-  {
-    #region Fields
-    /// <summary>
-    /// adapted container
-    /// </summary>
-    private System.Collections.ArrayList m_items = new System.Collections.ArrayList();
-    #endregion
-
-    #region public properties
-    public System.Collections.ArrayList Items { get { return m_items; } }
-    #endregion
-  }
-
-  
-
   public abstract partial class Player
   {
+    #region static
     /// <summary>
-    /// 
+    /// Best position for a player based on total score
     /// </summary>
-    /// <param name="pg"></param>
-    /// <param name="sg"></param>
-    /// <param name="sf"></param>
-    /// <param name="pf"></param>
-    /// <param name="c"></param>
+    /// <param name="pg">PG aspect</param>
+    /// <param name="sg">SG Aspect</param>
+    /// <param name="sf">SF aspect</param>
+    /// <param name="pf">PF aspect</param>
+    /// <param name="c">C aspect</param>
     /// <returns></returns>
     public static Player DecideOnTotalScore (PG pg, SG sg, SF sf, PF pf, C c)
     {
@@ -77,10 +58,11 @@
       if (sg.ValueIndex > maxVI) { p = sg; maxVI = sg.ValueIndex; }
       if (sf.ValueIndex > maxVI) { p = sf; maxVI = sf.ValueIndex; }
       if (pf.ValueIndex > maxVI) { p = pf; maxVI = pf.ValueIndex; }
-      if (c.ValueIndex > maxVI)  { p = c;  maxVI = c.ValueIndex; }
+      if (c.ValueIndex > maxVI) { p = c; maxVI = c.ValueIndex; }
 
       return p;
-    }
+    } 
+    #endregion
 
     #region Constructors
     /// <summary>
@@ -174,10 +156,9 @@
 
     internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
 
-    
 
-    protected Player (Xsd2.charazayPlayer xsdPlayer)      
 
+    protected Player (Xsd2.charazayPlayer xsdPlayer)
     {
       m_player = xsdPlayer;
       InitSkills();
@@ -185,74 +166,31 @@
     }
 
 
-      protected Player (Xsd2.charazayPlayerSkills xsdSkills)
-      {
-        m_player = new Xsd2.charazayPlayer();
+    protected Player (Xsd2.charazayPlayerSkills xsdSkills)
+    {
+      m_player = new Xsd2.charazayPlayer();
 
-        m_player.skills = xsdSkills;
-        InitSkills();
-        ActiveSkills();
+      m_player.skills = xsdSkills;
+      InitSkills();
+      ActiveSkills();
     }
 
     #endregion
 
-      public Type PositionType { get; set; }
-
-      public abstract PlayerPosition PositionEnum { get; }
-
-      public PlayerPosition PositionHeightBased
+    // 15 1  - 0
+    // 15 17 - 16
+    // 16 0  - 17
+    protected int StoredAssessedIndex
+    {
+      get
       {
-        get
-        {
-          if (Height < Defines.AverageHeightPg)
-            return PlayerPosition.PG;
-          else
-          {
-            if (Height < Defines.AverageHeightSg)
-            {
-              return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? PlayerPosition.PG : PlayerPosition.SG;
-            }
-            else
-            {
-              if (Height < Defines.AverageHeightSf)
-              {
-                return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? PlayerPosition.SG : PlayerPosition.SF;
-              }
-              else
-              {
-                if (Height < Defines.AverageHeightPf)
-                {
-                  return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? PlayerPosition.SF : PlayerPosition.PF;
-                }
-                else
-                {
-                  if (Height < Defines.AverageHeightC)
-                  {
-                    return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? PlayerPosition.PF : PlayerPosition.C;
-                  }
-                  else return PlayerPosition.C;
-                }
-              }
-            }
-          }
-
-        }
+        CharazayDate cd = DateTime.Now;
+        // last week of current season
+        int week = 17 * (Age - 15) + cd.Week - 1;
+        week = Math.Min(week, 288);
+        return week;
       }
-
-      // 15 1  - 0
-      // 15 17 - 16
-      // 16 0  - 17
-      protected int StoredAssessedIndex
-      {
-        get
-        {
-          CharazayDate cd = DateTime.Now;
-          // last week of current season
-          int week = 17 * (Age - 15) + cd.Week - 1;
-          week = Math.Min(week, 288);
-          return week;
-        }
-      }
+    }
 
     #region public read-only properties
     //basic
@@ -289,13 +227,13 @@
     public bool U18NT { get { return (m_player.u18nt == "yes"); } }
 
     public UInt64 Id { get { return m_player.id; } }
-    public ulong TeamId { get { return m_player.Teamid ; } }
+    public ulong TeamId { get { return m_player.Teamid; } }
     public byte CountryId { get { return m_player.countryid; } }
 
     public bool Dl { get { return (m_player.dl == /*Xsd.playerDL.*/"yes"); } }
     internal DateTime promotedOn { get { return Compute.EstimatedDateTime(m_player.promoted_on); } }
     //internal TrainingGroup TrainingGroup { get {return } }
-    
+
     #endregion
 
     #region Main skills
@@ -365,8 +303,6 @@
     //string m_strPosition;
     //string m_str2ndPosition;
 
-
-
     #region Implemented public properties
 
     #region Inferences
@@ -423,13 +359,64 @@
       }
     }
 
-    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 200, Tag = "Position|Status|Skills")]
-    public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
+    public PlayerPosition PositionHeightBased
+    {
+      get
+      {
+        if (Height < Defines.AverageHeightPg)
+          return PlayerPosition.PG;
+        else
+        {
+          if (Height < Defines.AverageHeightSg)
+          {
+            return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? PlayerPosition.PG : PlayerPosition.SG;
+          }
+          else
+          {
+            if (Height < Defines.AverageHeightSf)
+            {
+              return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? PlayerPosition.SG : PlayerPosition.SF;
+            }
+            else
+            {
+              if (Height < Defines.AverageHeightPf)
+              {
+                return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? PlayerPosition.SF : PlayerPosition.PF;
+              }
+              else
+              {
+                if (Height < Defines.AverageHeightC)
+                {
+                  return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? PlayerPosition.PF : PlayerPosition.C;
+                }
+                else return PlayerPosition.C;
+              }
+            }
+          }
+        }
+
+      }
+    }
 
     public bool Injury { get { return InjuryDays != 0; } }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="price"></param>
+    /// <returns></returns>
+    public double Profitability (double price)
+    {
+      // price in millions
+      price /= Math.Pow(10, 6);
+      return 10 * Math.Pow(ValueIndex, 5) / price;
+    }
     #endregion
 
     #region User Interface Values
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 200, Tag = "Position|Status|Skills")]
+    public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
+
     /// <summary>
     /// 
     /// </summary>
@@ -515,7 +502,7 @@
         , new double[] { m_dRebounds, m_dFootwork });
       }
     }
-   
+
     /// <summary>
     /// 
     /// </summary>
@@ -529,7 +516,7 @@
           , new double[] { OffensiveReboundsScore, DefensiveReboundsScore });
       }
     }
-    
+
     [OLVColumn(DisplayIndex = 27, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double TotalScore
     {
@@ -541,26 +528,10 @@
       }
     }
     [OLVColumn(DisplayIndex = 28, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double ValueIndex
+    public abstract double ValueIndex
     {
-      get
-      {
-        return TotalScore / StoredAssessedValues [StoredAssessedIndex];
-      }
+      get;     
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="price"></param>
-    /// <returns></returns>
-    public double Profitability (double price)
-    {
-      // price in millions
-      price /= Math.Pow(10, 6);
-      return 10 * Math.Pow(ValueIndex, 5) / price;
-    }
-
 
     public override string ToString ( )
     {
@@ -848,7 +819,7 @@
 
     #endregion
 
-    #region Abstract protected properties
+    #region Abstract properties
     // partition the time per training categories
     //              pg	sg	sf	pf	c
     //defense     	4	  4	  3	  3	  3
@@ -861,7 +832,7 @@
     //outside_sh	  1	  2	  1	  0	  0
     //              17	17	17	17	17
     protected internal abstract byte[] TrainingPlan { get; }
-   
+
     #region Skills percentages
 
     /// <summary>
@@ -899,13 +870,13 @@
     protected abstract double PercentageTotalScore_Offense { get; }
     protected abstract double PercentageTotalScore_Rebounds { get; }
     #endregion
-
-    /// <summary>
-    /// stored values of player development from age 15 to 32
-    /// each week with training contribution
-    /// </summary>
-    protected abstract double[] StoredAssessedValues { get; }
+   
     #endregion
+
+   /// <summary>
+   /// COURT POSITION BASED ON SKILL
+   /// </summary>
+    public abstract PlayerPosition PositionEnum { get; }
 
     #region Suggested body mass index and height
     protected internal abstract byte MinimumBMI { get; }

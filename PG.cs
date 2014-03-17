@@ -81,7 +81,7 @@ C : Defence>Footwork>Speed
 
     public override PlayerPosition PositionEnum { get { return PlayerPosition.PG; } }
 
-    protected override double[] StoredAssessedValues
+    static double[] StoredAssessedValues
     {
       get
       {
@@ -379,5 +379,6 @@ C : Defence>Footwork>Speed
       }
     }
 
+    public override double ValueIndex { get { return TotalScore / PG.StoredAssessedValues[StoredAssessedIndex]; } }
   }
 }

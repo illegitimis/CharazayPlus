@@ -1,4 +1,14 @@
-﻿v11
+﻿select Age,PosId,AgeValue11,
+SUM(Sum* (500-datediff(day,day,GETUTCDATE()))) / SUM( 500-datediff(day,day,GETUTCDATE()) ) as WEIGHTED_PRICE
+,AVG(SUM) AS AVERAGE_PRICE
+,COUNT(*) as COUNT from TM 
+group by Age,PosId,AgeValue11
+HAVING COUNT(*) > 3
+
+select datediff (day,day,GETUTCDATE()) from TM
+
+
+v11
 ---
 
 --select COUNT(*) from TM

@@ -103,18 +103,18 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="PF.cs" />
     <Compile Include="PG.cs" />
-    <Compile Include="Obsolete.cs" />
+    <Compile Include="Obsolete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PlayerFactory.cs" />
     <Compile Include="SG.cs" />
+    <Compile Include="UI\Definitions.cs" />
     <Compile Include="UI\DataGridExtensions.cs" />
     <Compile Include="UI\DivisionScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\DivisionScheduleUserControl.Designer.cs">
       <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\DivisionStandingsUserControl.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\InfoTabUserControl.cs">
       <SubType>UserControl</SubType>
@@ -135,6 +135,7 @@
     <Compile Include="UI\MyTeamScheduleUserControl.Designer.cs">
       <DependentUpon>MyTeamScheduleUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\PlayerEventArgs.cs" />
     <Compile Include="UI\PlayerPositionUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -171,7 +172,7 @@
     <Compile Include="UI\TransferListUserControl.Designer.cs">
       <DependentUpon>TransferListUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserControl1.cs">
+    <Compile Include="UI\DivisionStandingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\VLabel.cs">
@@ -299,9 +300,6 @@
     <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
       <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\DivisionStandingsUserControl.resx">
-      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\EconomyUserControl.resx">
       <DependentUpon>EconomyUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,8 +361,8 @@
     <EmbeddedResource Include="UI\TransferListUserControl.resx">
       <DependentUpon>TransferListUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserControl1.resx">
-      <DependentUpon>UserControl1.cs</DependentUpon>
+    <EmbeddedResource Include="UI\DivisionStandingsUserControl.resx">
+      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>

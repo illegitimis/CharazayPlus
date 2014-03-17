@@ -12,13 +12,6 @@
   using System.Diagnostics;
   using BrightIdeasSoftware;
   
-  internal static class Definitions
-  {
-    public static Color White_230_240_250 = Color.FromArgb(230, 240, 250);
-    public static Color DarkGray60 = Color.FromArgb(60, 60, 60);
-    public static Color DarkGray39 = Color.FromArgb(39, 39, 39);
-    public static Color White_230_220_210 = Color.FromArgb(230, 220, 210);
-  }
   
   /// <summary>
   /// Description of MainForm.
@@ -60,8 +53,6 @@
       this.components = new System.ComponentModel.Container();
       this.imageList1 = new System.Windows.Forms.ImageList(this.components);
       this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-      this.gbxFilter = new System.Windows.Forms.GroupBox();
-      this.txtFilterComplex = new System.Windows.Forms.TextBox();
       this.olvComplex = new BrightIdeasSoftware.ObjectListView();
       this.olvcFN = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcDef = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -82,20 +73,13 @@
       this.olvcFtwA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcReb = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcRebA = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-      this.olvcValueIndex = new OLVColumn();
-      this.olvcPosSk = new OLVColumn();
-      this.olvcPosH = new OLVColumn();
+      this.olvcValueIndex = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.olvcPosSk = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.olvcPosH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.groupImageList = new System.Windows.Forms.ImageList(this.components);
       this.statusStrip1 = new System.Windows.Forms.StatusStrip();
       this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-      this.btnAdd = new System.Windows.Forms.Button();
-      this.btnRemove = new System.Windows.Forms.Button();
-      this.btnCopySel = new System.Windows.Forms.Button();
-      this.btnRebuild = new System.Windows.Forms.Button();
-      this.chkGroups = new System.Windows.Forms.CheckBox();
-      this.chkOwnerDraw = new System.Windows.Forms.CheckBox();
-      this.gbxFilter.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).BeginInit();
       this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
@@ -111,25 +95,6 @@
       this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
       this.imageList2.ImageSize = new System.Drawing.Size(16, 16);
       this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-      // 
-      // gbxFilter
-      // 
-      this.gbxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.gbxFilter.Controls.Add(this.txtFilterComplex);
-      this.gbxFilter.Location = new System.Drawing.Point(757, 12);
-      this.gbxFilter.Name = "gbxFilter";
-      this.gbxFilter.Size = new System.Drawing.Size(138, 44);
-      this.gbxFilter.TabIndex = 18;
-      this.gbxFilter.TabStop = false;
-      this.gbxFilter.Text = "Filter";
-      // 
-      // txtFilterComplex
-      // 
-      this.txtFilterComplex.Location = new System.Drawing.Point(7, 20);
-      this.txtFilterComplex.Name = "txtFilterComplex";
-      this.txtFilterComplex.Size = new System.Drawing.Size(125, 20);
-      this.txtFilterComplex.TabIndex = 0;
-      this.txtFilterComplex.TextChanged += new System.EventHandler(this.textBoxFilterComplex_TextChanged);
       // 
       // olvComplex
       // 
@@ -157,29 +122,36 @@
       this.olvComplex.AllColumns.Add(this.olvcPosH);
       this.olvComplex.AllowColumnReorder = true;
       this.olvComplex.AllowDrop = true;
-      this.olvComplex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.olvComplex.AlternateRowBackColor = Definitions.DarkGray60;
-      this.olvComplex.BackColor = Definitions.DarkGray39;
-      this.olvComplex.ForeColor = Definitions.White_230_220_210;
+      this.olvComplex.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+      this.olvComplex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
       this.olvComplex.CheckedAspectName = "";
       this.olvComplex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcFN,
-            this.olvcDef, this.olvcDefA,
-            this.olvcFT, this.olvcFTA,
-            this.olvc2p, this.olvc2pA,
-            this.olvc3p, this.olvc3pA,
-            this.olvcDri, this.olvcDriA,
-            this.olvcPas, this.olvcPasA,
-            this.olvcSpe, this.olvcSpeA,
-            this.olvcFtw, this.olvcFtwA,
-            this.olvcReb, this.olvcRebA,
-            this.olvcValueIndex
-            , this.olvcPosSk, this.olvcPosH
-      });
+            this.olvcDef,
+            this.olvcDefA,
+            this.olvcFT,
+            this.olvcFTA,
+            this.olvc2p,
+            this.olvc2pA,
+            this.olvc3p,
+            this.olvc3pA,
+            this.olvcDri,
+            this.olvcDriA,
+            this.olvcPas,
+            this.olvcPasA,
+            this.olvcSpe,
+            this.olvcSpeA,
+            this.olvcFtw,
+            this.olvcFtwA,
+            this.olvcReb,
+            this.olvcRebA,
+            this.olvcValueIndex,
+            this.olvcPosSk,
+            this.olvcPosH});
       this.olvComplex.Cursor = System.Windows.Forms.Cursors.Default;
+      this.olvComplex.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olvComplex.EmptyListMsg = "This list is empty. Press \"Add\" to create some items";
+      this.olvComplex.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(220)))), ((int)(((byte)(210)))));
       this.olvComplex.FullRowSelect = true;
       this.olvComplex.GroupImageList = this.groupImageList;
       this.olvComplex.GroupWithItemCountFormat = "{0} ({1} people)";
@@ -188,7 +160,7 @@
       this.olvComplex.HeaderWordWrap = true;
       this.olvComplex.HideSelection = false;
       this.olvComplex.LargeImageList = this.imageList2;
-      this.olvComplex.Location = new System.Drawing.Point(12, 12);
+      this.olvComplex.Location = new System.Drawing.Point(0, 0);
       this.olvComplex.Name = "olvComplex";
       this.olvComplex.OverlayImage.Alignment = System.Drawing.ContentAlignment.BottomLeft;
       this.olvComplex.OverlayText.Alignment = System.Drawing.ContentAlignment.TopRight;
@@ -198,7 +170,7 @@
       this.olvComplex.OverlayText.InsetY = 35;
       this.olvComplex.OverlayText.Rotation = 20;
       this.olvComplex.OverlayText.Text = "";
-      this.olvComplex.OverlayText.TextColor = Color.FromArgb(192,192,192);
+      this.olvComplex.OverlayText.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
       this.olvComplex.OwnerDraw = true;
       this.olvComplex.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.Submenu;
       this.olvComplex.ShowCommandMenuOnRightClick = true;
@@ -206,7 +178,7 @@
       this.olvComplex.ShowImagesOnSubItems = true;
       this.olvComplex.ShowItemCountOnGroups = true;
       this.olvComplex.ShowItemToolTips = true;
-      this.olvComplex.Size = new System.Drawing.Size(739, 337);
+      this.olvComplex.Size = new System.Drawing.Size(907, 374);
       this.olvComplex.SmallImageList = this.imageList1;
       this.olvComplex.TabIndex = 0;
       this.olvComplex.UseAlternatingBackColors = true;
@@ -221,15 +193,11 @@
       this.olvComplex.CellOver += new System.EventHandler<BrightIdeasSoftware.CellOverEventArgs>(this.listViewComplex_CellOver);
       this.olvComplex.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.listViewComplex_CellRightClick);
       this.olvComplex.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.listViewComplex_CellToolTip);
-      this.olvComplex.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.listViewComplex_FormatCell);
-      this.olvComplex.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.listViewComplex_FormatRow);
       this.olvComplex.GroupStateChanged += new System.EventHandler<BrightIdeasSoftware.GroupStateChangedEventArgs>(this.olv_GroupStateChanged);
       this.olvComplex.HeaderToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.listViewComplex_HeaderToolTipShowing);
       this.olvComplex.HotItemChanged += new System.EventHandler<BrightIdeasSoftware.HotItemChangedEventArgs>(this.olv_HotItemChanged);
       this.olvComplex.GroupTaskClicked += new System.EventHandler<BrightIdeasSoftware.GroupTaskClickedEventArgs>(this.listViewComplex_GroupTaskClicked);
-      this.olvComplex.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.olvComplex_ItemChecked);
       this.olvComplex.SelectedIndexChanged += new System.EventHandler(this.ListViewSelectedIndexChanged);
-      this.olvComplex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewComplex_MouseClick);
       // 
       // olvcFN
       // 
@@ -238,127 +206,94 @@
       this.olvcFN.HeaderImageKey = "(none)";
       this.olvcFN.ImageAspectName = "";
       this.olvcFN.Text = "Player";
-      this.olvcFN.ToolTipText = "Tooltip for Player column. This was configurated in the IDE. (Hold down Control to see a different tooltip)";
+      this.olvcFN.ToolTipText = "Tooltip for Player column. This was configurated in the IDE. (Hold down Control t" +
+    "o see a different tooltip)";
       this.olvcFN.UseInitialLetterForGroup = true;
       this.olvcFN.Width = 180;
       // 
       // olvcDef
       // 
       this.olvcDef.CellPadding = null;
-      this.olvcDef.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.olvcDef.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.initDisplayColumn(this.olvcDef, "Defence");
       // 
       // olvcDefA
       // 
       this.olvcDefA.CellPadding = null;
-      this.olvcDefA.GroupWithItemCountFormat = "{0} ({1} candidates)";
-      this.olvcDefA.GroupWithItemCountSingularFormat = "{0} (only {1} candidate)";
-      this.olvcDefA.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-      this.olvcDefA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-      this.olvcDefA.ToolTipText = "Group on this column to see full group formatting possibilities";
-      this.initActiveColumn(this.olvcDefA, "Defence");
       // 
       // olvcFT
       // 
       this.olvcFT.CellPadding = null;
-      this.olvcFT.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-      this.initDisplayColumn(this.olvcFT, "Freethrows");
       // 
       // olvcFTA
       // 
       this.olvcFTA.CellPadding = null;
-      //this.olvcFTA.GroupWithItemCountFormat = "{0} has {1} birthdays";
-      //this.olvcFTA.GroupWithItemCountSingularFormat = "{0} has only {1} birthday";
-      this.initActiveColumn(this.olvcFTA, "Freethrows");
       // 
       // olvc2p
       // 
       this.olvc2p.CellPadding = null;
-      this.initDisplayColumn(this.olvc2p, "TwoPoint");
       // 
       // olvc2pA
       // 
       this.olvc2pA.CellPadding = null;
-      this.initActiveColumn(this.olvc2pA, "TwoPoint");
       // 
       // olvc3p
       // 
       this.olvc3p.CellPadding = null;
-      this.initDisplayColumn(this.olvc3p, "ThreePoint");
       // 
       // olvc3pA
       // 
       this.olvc3pA.CellPadding = null;
-      this.olvc3pA.ToolTipText = "estimation of 3p skill used by engine";
-      this.initActiveColumn(this.olvc3pA, "ThreePoint");
       // 
       // olvcDri
       // 
       this.olvcDri.CellPadding = null;
-      this.olvcDri.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.olvcDri.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.initDisplayColumn(this.olvcDri, "Dribling");
       // 
       // olvcDriA
       // 
       this.olvcDriA.CellPadding = null;
-      this.olvcDriA.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.olvcDriA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.initActiveColumn(this.olvcDriA, "Dribling");
       // 
       // olvcPas
       // 
-      this.initDisplayColumn(this.olvcPas, "Passing");
+      this.olvcPas.CellPadding = null;
       // 
       // olvcPasA
-      //       
-      this.initActiveColumn(this.olvcPasA, "Passing");
+      // 
+      this.olvcPasA.CellPadding = null;
       // 
       // olvcSpe
-      //       
-      this.initDisplayColumn(this.olvcSpe, "Speed");
+      // 
+      this.olvcSpe.CellPadding = null;
       // 
       // olvcSpeA
       // 
-      this.initActiveColumn(this.olvcSpeA, "Speed");
+      this.olvcSpeA.CellPadding = null;
       // 
       // olvcFtw
       // 
-      this.initDisplayColumn(this.olvcFtw, "Footwork");
+      this.olvcFtw.CellPadding = null;
       // 
       // olvcFtwA
       // 
-      this.initActiveColumn(this.olvcFtwA, "Footwork");
+      this.olvcFtwA.CellPadding = null;
       // 
       // olvcReb
       // 
-      this.initDisplayColumn(this.olvcReb, "Rebounds");
+      this.olvcReb.CellPadding = null;
       // 
       // olvcRebA
       // 
-      this.initActiveColumn(this.olvcRebA, "Rebounds");
-      //
-      //nkotb
-      //
-      this.olvcValueIndex.AspectName = "ValueIndex";
-      this.olvcValueIndex.AspectToStringFormat = "{0:F02}";
-      this.olvcValueIndex.Text = "Value Index";
-      this.olvcValueIndex.IsHeaderVertical = true;
-      this.olvcValueIndex.IsEditable = false;
-      this.olvcValueIndex.Width = 59;
-      //
-      this.olvcPosSk.AspectName = "PositionEnum";
-      this.olvcPosSk.Text = "Position by skill";
-      this.olvcPosSk.IsHeaderVertical = true;
-      this.olvcPosSk.IsEditable = false;
-      this.olvcPosSk.Width = 59;
-      //
-      this.olvcPosH.AspectName = "PositionHeightBased";
-      this.olvcPosH.Text = "Position by height";
-      this.olvcPosH.IsHeaderVertical = true;
-      this.olvcPosH.IsEditable = false;
-      this.olvcPosH.Width = 59;
+      this.olvcRebA.CellPadding = null;
+      // 
+      // olvcValueIndex
+      // 
+      this.olvcValueIndex.CellPadding = null;
+      // 
+      // olvcPosSk
+      // 
+      this.olvcPosSk.CellPadding = null;
+      // 
+      // olvcPosH
+      // 
+      this.olvcPosH.CellPadding = null;
       // 
       // groupImageList
       // 
@@ -380,98 +315,25 @@
       // toolStripStatusLabel1
       // 
       this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-      this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+      this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+      this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
       // 
       // toolStripStatusLabel3
       // 
       this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-      this.toolStripStatusLabel3.Size = new System.Drawing.Size(892, 17);
+      this.toolStripStatusLabel3.Size = new System.Drawing.Size(774, 17);
       this.toolStripStatusLabel3.Spring = true;
       this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
       this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
-      // btnAdd
-      // 
-      this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnAdd.Location = new System.Drawing.Point(764, 229);
-      this.btnAdd.Name = "btnAdd";
-      this.btnAdd.Size = new System.Drawing.Size(46, 23);
-      this.btnAdd.TabIndex = 27;
-      this.btnAdd.Text = "Add";
-      this.btnAdd.UseVisualStyleBackColor = true;
-      // 
-      // btnRemove
-      // 
-      this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnRemove.Location = new System.Drawing.Point(764, 258);
-      this.btnRemove.Name = "btnRemove";
-      this.btnRemove.Size = new System.Drawing.Size(57, 23);
-      this.btnRemove.TabIndex = 28;
-      this.btnRemove.Text = "Remove";
-      this.btnRemove.UseVisualStyleBackColor = true;
-      // 
-      // btnCopySel
-      // 
-      this.btnCopySel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnCopySel.Location = new System.Drawing.Point(764, 287);
-      this.btnCopySel.Name = "btnCopySel";
-      this.btnCopySel.Size = new System.Drawing.Size(88, 23);
-      this.btnCopySel.TabIndex = 29;
-      this.btnCopySel.Text = "Copy &Selection";
-      this.btnCopySel.UseVisualStyleBackColor = true;
-      // 
-      // btnRebuild
-      // 
-      this.btnRebuild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnRebuild.Location = new System.Drawing.Point(764, 316);
-      this.btnRebuild.Name = "btnRebuild";
-      this.btnRebuild.Size = new System.Drawing.Size(56, 23);
-      this.btnRebuild.TabIndex = 30;
-      this.btnRebuild.Text = "&Rebuild";
-      this.btnRebuild.UseVisualStyleBackColor = true;
-      // 
-      // chkGroups
-      // 
-      this.chkGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.chkGroups.Location = new System.Drawing.Point(764, 62);
-      this.chkGroups.Name = "chkGroups";
-      this.chkGroups.Size = new System.Drawing.Size(131, 21);
-      this.chkGroups.TabIndex = 21;
-      this.chkGroups.Text = "&Groups";
-      this.chkGroups.UseVisualStyleBackColor = true;
-      this.chkGroups.CheckedChanged += new System.EventHandler(this.chkGroups_CheckedChanged);
-      // 
-      // chkOwnerDraw
-      // 
-      this.chkOwnerDraw.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.chkOwnerDraw.AutoSize = true;
-      this.chkOwnerDraw.Checked = true;
-      this.chkOwnerDraw.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.chkOwnerDraw.Location = new System.Drawing.Point(764, 90);
-      this.chkOwnerDraw.Name = "chkOwnerDraw";
-      this.chkOwnerDraw.Size = new System.Drawing.Size(89, 17);
-      this.chkOwnerDraw.TabIndex = 31;
-      this.chkOwnerDraw.Text = "Owner drawn";
-      this.chkOwnerDraw.UseVisualStyleBackColor = true;
-      this.chkOwnerDraw.CheckedChanged += new System.EventHandler(this.chkOwnerDraw_CheckedChanged);
-      // 
       // PlayerSkillsUserControl
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-      this.Controls.Add(this.chkOwnerDraw);
-      this.Controls.Add(this.gbxFilter);
       this.Controls.Add(this.statusStrip1);
-      this.Controls.Add(this.btnAdd);
-      this.Controls.Add(this.btnRemove);
-      this.Controls.Add(this.btnCopySel);
-      this.Controls.Add(this.btnRebuild);
-      this.Controls.Add(this.chkGroups);
       this.Controls.Add(this.olvComplex);
       this.Name = "PlayerSkillsUserControl";
       this.Size = new System.Drawing.Size(907, 374);
       this.Load += new System.EventHandler(this.MainForm_Load);
-      this.gbxFilter.ResumeLayout(false);
-      this.gbxFilter.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).EndInit();
       this.statusStrip1.ResumeLayout(false);
       this.statusStrip1.PerformLayout();
@@ -480,7 +342,129 @@
 
     }
 
-    private void initDisplayColumn (OLVColumn col, string text)
+    private void OlvColumnsPropertiesInit ( )
+    {
+      // 
+      // olvcDef
+      // 
+      this.olvcDef.CellPadding = null;
+      this.olvcDef.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.olvcDef.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.InitDisplayColumn(this.olvcDef, "Defence");
+      // 
+      // olvcDefA
+      // 
+      this.olvcDefA.CellPadding = null;
+      this.olvcDefA.GroupWithItemCountFormat = "{0} ({1} candidates)";
+      this.olvcDefA.GroupWithItemCountSingularFormat = "{0} (only {1} candidate)";
+      this.olvcDefA.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.olvcDefA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.olvcDefA.ToolTipText = "Group on this column to see full group formatting possibilities";
+      this.InitActiveColumn(this.olvcDefA, "Defence");
+      // 
+      // olvcFT
+      // 
+      this.olvcFT.CellPadding = null;
+      this.olvcFT.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.InitDisplayColumn(this.olvcFT, "Freethrows");
+      // 
+      // olvcFTA
+      // 
+      this.olvcFTA.CellPadding = null;
+      //this.olvcFTA.GroupWithItemCountFormat = "{0} has {1} birthdays";
+      //this.olvcFTA.GroupWithItemCountSingularFormat = "{0} has only {1} birthday";
+      this.InitActiveColumn(this.olvcFTA, "Freethrows");
+      // 
+      // olvc2p
+      // 
+      this.olvc2p.CellPadding = null;
+      this.InitDisplayColumn(this.olvc2p, "TwoPoint");
+      // 
+      // olvc2pA
+      // 
+      this.olvc2pA.CellPadding = null;
+      this.InitActiveColumn(this.olvc2pA, "TwoPoint");
+      // 
+      // olvc3p
+      // 
+      this.olvc3p.CellPadding = null;
+      this.InitDisplayColumn(this.olvc3p, "ThreePoint");
+      // 
+      // olvc3pA
+      // 
+      this.olvc3pA.CellPadding = null;
+      this.olvc3pA.ToolTipText = "estimation of 3p skill used by engine";
+      this.InitActiveColumn(this.olvc3pA, "ThreePoint");
+      // 
+      // olvcDri
+      // 
+      this.olvcDri.CellPadding = null;
+      this.olvcDri.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.olvcDri.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.InitDisplayColumn(this.olvcDri, "Dribling");
+      // 
+      // olvcDriA
+      // 
+      this.olvcDriA.CellPadding = null;
+      this.olvcDriA.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.olvcDriA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.InitActiveColumn(this.olvcDriA, "Dribling");
+      // 
+      // olvcPas
+      // 
+      this.InitDisplayColumn(this.olvcPas, "Passing");
+      // 
+      // olvcPasA
+      //       
+      this.InitActiveColumn(this.olvcPasA, "Passing");
+      // 
+      // olvcSpe
+      //       
+      this.InitDisplayColumn(this.olvcSpe, "Speed");
+      // 
+      // olvcSpeA
+      // 
+      this.InitActiveColumn(this.olvcSpeA, "Speed");
+      // 
+      // olvcFtw
+      // 
+      this.InitDisplayColumn(this.olvcFtw, "Footwork");
+      // 
+      // olvcFtwA
+      // 
+      this.InitActiveColumn(this.olvcFtwA, "Footwork");
+      // 
+      // olvcReb
+      // 
+      this.InitDisplayColumn(this.olvcReb, "Rebounds");
+      // 
+      // olvcRebA
+      // 
+      this.InitActiveColumn(this.olvcRebA, "Rebounds");
+      //
+      //nkotb
+      //
+      this.olvcValueIndex.AspectName = "ValueIndex";
+      this.olvcValueIndex.AspectToStringFormat = "{0:F02}";
+      this.olvcValueIndex.Text = "Value Index";
+      this.olvcValueIndex.IsHeaderVertical = true;
+      this.olvcValueIndex.IsEditable = false;
+      this.olvcValueIndex.Width = 59;
+      //
+      this.olvcPosSk.AspectName = "PositionEnum";
+      this.olvcPosSk.Text = "Position by skill";
+      this.olvcPosSk.IsHeaderVertical = true;
+      this.olvcPosSk.IsEditable = false;
+      this.olvcPosSk.Width = 59;
+      //
+      this.olvcPosH.AspectName = "PositionHeightBased";
+      this.olvcPosH.Text = "Position by height";
+      this.olvcPosH.IsHeaderVertical = true;
+      this.olvcPosH.IsEditable = false;
+      this.olvcPosH.Width = 59;
+    }
+
+    private void InitDisplayColumn (OLVColumn col, string text)
     {
       col.AspectName = text+"_Display";
       col.Text = text;
@@ -490,7 +474,7 @@
       col.Width = 41;
     }
 
-    private void initActiveColumn (OLVColumn col, string text)
+    private void InitActiveColumn (OLVColumn col, string text)
     {
       col.AspectName = text;
       col.AspectToStringFormat = "{0:F02}";
@@ -532,15 +516,7 @@
     private System.Windows.Forms.StatusStrip statusStrip1;
     private ImageList imageList2;
     private OLVColumn olvc3pA;
-    private GroupBox gbxFilter;
-    private TextBox txtFilterComplex;
     private ToolStripStatusLabel toolStripStatusLabel3;
-    private Button btnAdd;
-    private Button btnRemove;
-    private Button btnCopySel;
-    private Button btnRebuild;
-    private CheckBox chkOwnerDraw;
-    private CheckBox chkGroups;
     #endregion
 
    
@@ -548,12 +524,11 @@
     ///
     /// </summary>
     public PlayerSkillsUserControl ()
-    {
-      //
+    { //
       // The InitializeComponent() call is required for Windows Forms designer support.
       //
-      InitializeComponent();      
-      
+      InitializeComponent();
+      OlvColumnsPropertiesInit();
     }
 
     List<Player> masterList;
@@ -623,6 +598,11 @@
       ObjectListViewExtensions.HotItemOverlay(this.olvComplex, new PlayerSkillsOverlay());
       //
       this.olvComplex.SetObjects(list);
+    //
+      ObjectListViewExtensions.ShowGroups(this.olvComplex, true);
+    //
+      ObjectListViewExtensions.ChangeOwnerDrawn(this.olvComplex, true);
+  
     }
 
 
@@ -640,11 +620,6 @@
       
     }
 
-    void chkGroups_CheckedChanged (object sender, System.EventArgs e)
-    {
-      ObjectListViewExtensions.ShowGroups(this.olvComplex, ((CheckBox)sender).Checked);
-    }
-
     void ListViewSelectedIndexChanged (object sender, System.EventArgs e)
     {
       ObjectListView listView = (ObjectListView)sender;
@@ -658,31 +633,7 @@
     }
     #endregion
 
-   
-    private void listViewComplex_MouseClick (object sender, MouseEventArgs e)
-    {
-      //if (e.Button != MouseButtons.Right)
-      //    return;
-
-      //ContextMenuStrip ms = new ContextMenuStrip();
-      //ms.ItemClicked += new ToolStripItemClickedEventHandler(ms_ItemClicked);
-
-      //ObjectListView olv = (ObjectListView)sender;
-      //if (olv.ShowGroups) {
-      //    foreach (ListViewGroup lvg in olv.Groups) {
-      //        ToolStripMenuItem mi = new ToolStripMenuItem(String.Format("Jump to group '{0}'", lvg.Header));
-      //        mi.Tag = lvg;
-      //        ms.Items.Add(mi);
-      //    }
-      //} else {
-      //    ToolStripMenuItem mi = new ToolStripMenuItem("Turn on 'Show Groups' to see this context menu in action");
-      //    mi.Enabled = false;
-      //    ms.Items.Add(mi);
-      //}
-
-      //ms.Show((Control)sender, e.X, e.Y);
-    }
-
+    #region tooltip
     private void listViewComplex_CellToolTip (object sender, ToolTipShowingEventArgs e)
     {
       // Show a long tooltip over cells when the control key is down
@@ -691,40 +642,41 @@
 
       OLVColumn col = e.Column ?? e.ListView.GetColumn(0);
       string stringValue = col.GetStringValue(e.Model);
-      if (stringValue.StartsWith("m", StringComparison.InvariantCultureIgnoreCase))
-      {
-        e.IsBalloon = !ObjectListView.IsVistaOrLater; // balloons don't work reliably on vista
-        e.ToolTipControl.SetMaxWidth(400);
-        e.Title = "WARNING";
-        e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge;
-        e.BackColor = Color.AliceBlue;
-        e.ForeColor = Color.IndianRed;
-        e.AutoPopDelay = 15000;
-        e.Font = new Font("Tahoma", 12.0f);
-        e.Text = "THIS VALUE BEGINS WITH A DANGEROUS LETTER!\r\n\r\n" +
-            "On no account should members of the public attempt to pronounce this word without " +
-            "the assistance of trained vocalization specialists.";
-      }
-      else
-      {
-        e.Text = String.Format("Tool tip for '{0}', column '{1}'\r\nValue shown: '{2}'",
-            ((Player)e.Model).Name, col.Text, stringValue);
-      }
+
+      e.IsBalloon = !ObjectListView.IsVistaOrLater; // balloons don't work reliably on vista
+      e.ToolTipControl.SetMaxWidth(400);
+      e.Title = ((Player)e.Model).FullName;
+      e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge;
+      e.BackColor = Color.AliceBlue;
+      e.ForeColor = Color.IndianRed;
+      e.AutoPopDelay = 15000;
+      e.Font = new Font("Tahoma", 12.0f);
+      e.Text = String.Format("column '{0}'\r\nValue shown: '{1}'", col.Text, stringValue);
     }
 
     private void listViewComplex_HeaderToolTipShowing (object sender, ToolTipShowingEventArgs e)
     {
       if (Control.ModifierKeys != Keys.Control)
         return;
-
-      e.Title = "Information";
+      //
       e.StandardIcon = ToolTipControl.StandardIcons.Info;
       e.AutoPopDelay = 10000;
-      e.Text = String.Format("More details about the '{0}' column\r\n\r\nThis only shows when the control key is down.",
-          e.Column.Text);
-    }
+      e.Title = e.Column.Text;
+      //
+      if (e.Column.Text.StartsWith("Active"))
+        e.Text = string.Format("This is an estimation of the actual value of the player's '{0}' skill used by the engine, taking into account experince, height and BMI.", e.Column.AspectName);
+      else if (e.Column.AspectName.EndsWith("_Display"))
+        e.Text = string.Format("This is the value of the player's '{0}' skill on the player page.", e.Column.Text);
+      else
+      {
+        e.Title = "Player full name";
+        e.Text = "Complete name of the player";
+      }
 
+    } 
+    #endregion
 
+    #region right click
     private void listViewComplex_CellRightClick (object sender, CellRightClickEventArgs e)
     {
       ContextMenuStrip ms = new ContextMenuStrip();
@@ -756,174 +708,19 @@
       ListViewGroup lvg = (ListViewGroup)mi.Tag;
       ObjectListView olv = (ObjectListView)lvg.ListView;
       olv.EnsureGroupVisible(lvg);
-    }
+    } 
+    #endregion
 
+    #region diagnostics
     private void listViewComplex_CellOver (object sender, CellOverEventArgs e)
     {
-      //System.Diagnostics.Trace.WriteLine(String.Format("over ({0}, {1}). model {2}",
-      //    e.RowIndex, e.ColumnIndex, e.Model));
-    }
-
-    private void listViewComplex_HotItemChanged (object sender, HotItemChangedEventArgs e)
-    {
-      //System.Diagnostics.Trace.WriteLine(String.Format("** HOT ITEM ({0}, {1}, {2})",
-      //    e.HotRowIndex, e.HotColumnIndex, e.HotCellHitLocation));
-    }
-
-    private void listViewComplex_FormatRow (object sender, FormatRowEventArgs e)
-    {
-      e.UseCellFormatEvents = true;
-      if (olvComplex.View != View.Details)
-      {
-        if (e.Item.Text.ToLowerInvariant().StartsWith("nicola"))
-        {
-          e.Item.Decoration = new ImageDecoration(AndreiPopescu.CharazayPlus.Properties.Resources.star12, 64);
-        }
-        else
-          e.Item.Decoration = null;
-      }
-    }
-
-    private void listViewComplex_FormatCell (object sender, FormatCellEventArgs e)
-    {
-      Player p = (Player)e.Model;
-
-      // Put a love heart next to Nicola's name :)
-      if (e.ColumnIndex == 0)
-      {
-        if (e.SubItem.Text.ToLowerInvariant().StartsWith("nicola"))
-        {
-          e.SubItem.Decoration = new ImageDecoration(AndreiPopescu.CharazayPlus.Properties.Resources.star12, 64);
-        }
-        else
-          e.SubItem.Decoration = null;
-      }
-
-      // If the occupation is missing a value, put a composite decoration over it
-      // to draw attention to.
-      if (e.ColumnIndex == 1 && e.SubItem.Text == "")
-      {
-        TextDecoration decoration = new TextDecoration("Missing!", 255);
-        decoration.Alignment = ContentAlignment.MiddleCenter;
-        decoration.Font = new Font(this.Font.Name, this.Font.SizeInPoints + 2);
-        decoration.TextColor = Color.Firebrick;
-        decoration.Rotation = -20;
-        e.SubItem.Decoration = decoration;
-        CellBorderDecoration cbd = new CellBorderDecoration();
-        cbd.BorderPen = new Pen(Color.FromArgb(128, Color.Firebrick));
-        cbd.FillBrush = null;
-        cbd.CornerRounding = 4.0f;
-        e.SubItem.Decorations.Add(cbd);
-      }
-      //if (e.ColumnIndex == 7) {
-      //    if (p.CanTellJokes.HasValue && p.CanTellJokes.Value)
-      //        e.SubItem.Skills = new CellBorderDecoration();
-      //    else
-      //        e.SubItem.Skills = null;
-      //}
-    }
-
-    private void listViewComplex_GroupTaskClicked (object sender, GroupTaskClickedEventArgs e)
-    {
-      MessageBox.Show(String.Format("group task click: {0}", e.Group), "OLV Demo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    }
-
-   
-
-    private void textBoxFilterComplex_TextChanged (object sender, EventArgs e)
-    {
-      this.TimedFilter(this.olvComplex, txtFilterComplex.Text);
-    }
-
-    void TimedFilter (ObjectListView olv, string txt)
-    {
-      this.TimedFilter(olv, txt, 0);
-    }
-
-    void TimedFilter (ObjectListView olv, string txt, int matchKind)
-    {
-      TextMatchFilter filter = null;
-      if (!String.IsNullOrEmpty(txt))
-      {
-        switch (matchKind)
-        {
-          case 0:
-          default:
-            filter = TextMatchFilter.Contains(olv, txt);
-            break;
-          case 1:
-            filter = TextMatchFilter.Prefix(olv, txt);
-            break;
-          case 2:
-            filter = TextMatchFilter.Regex(olv, txt);
-            break;
-        }
-      }
-      // Setup a default renderer to draw the filter matches
-      if (filter == null)
-        olv.DefaultRenderer = null;
-      else
-      {
-        olv.DefaultRenderer = new HighlightTextRenderer(filter);
-
-        // Uncomment this line to see how the GDI+ rendering looks
-        //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
-      }
-
-      // Some lists have renderers already installed
-      HighlightTextRenderer highlightingRenderer = olv.GetColumn(0).Renderer as HighlightTextRenderer;
-      if (highlightingRenderer != null)
-        highlightingRenderer.Filter = filter;
-
-      Stopwatch stopWatch = new Stopwatch();
-      stopWatch.Start();
-      olv.AdditionalFilter = filter;
-      //olv.Invalidate();
-      stopWatch.Stop();
-
-      IList objects = olv.Objects as IList;
-      if (objects == null)
-        this.toolStripStatusLabel1.Text =
-            String.Format("Filtered in {0}ms", stopWatch.ElapsedMilliseconds);
-      else
-        this.toolStripStatusLabel1.Text =
-            String.Format("Filtered {0} items down to {1} items in {2}ms",
-                          objects.Count,
-                          olv.Items.Count,
-                          stopWatch.ElapsedMilliseconds);
-    }
-
-
-    private void olvComplex_BeforeCreatingGroups (object sender, CreateGroupsEventArgs e)
-    {
-      if (e.Parameters.PrimarySort == olvcDriA && Control.ModifierKeys == Keys.Control)
-      {
-        e.Parameters.GroupComparer = new StrangeGroupComparer(e.Parameters.PrimarySortOrder);
-        e.Parameters.ItemComparer = new StrangeItemComparer(this.olvComplex.GetColumn(0), e.Parameters.PrimarySortOrder);
-      }
-    }
-
-
-    private void olvComplex_ItemChecked (object sender, ItemCheckedEventArgs e)
-    {
-      System.Diagnostics.Debug.WriteLine("here");
-    }
-
-    private void olv_GroupStateChanged (object sender, GroupStateChangedEventArgs e)
-    {
-      System.Diagnostics.Debug.WriteLine(String.Format("Group '{0}' was {1}{2}{3}{4}{5}{6}",
-          e.Group.Header,
-          e.Selected ? "Selected" : "",
-          e.Focused ? "Focused" : "",
-          e.Collapsed ? "Collapsed" : "",
-          e.Unselected ? "Unselected" : "",
-          e.Unfocused ? "Unfocused" : "",
-          e.Uncollapsed ? "Uncollapsed" : ""));
-
+      System.Diagnostics.Trace.WriteLine(String.Format("over ({0}, {1}). model {2}", e.RowIndex, e.ColumnIndex, e.Model));
     }
 
     private void olv_HotItemChanged (object sender, HotItemChangedEventArgs e)
     {
+      System.Diagnostics.Trace.WriteLine(String.Format("** HOT ITEM ({0}, {1}, {2})", e.HotRowIndex, e.HotColumnIndex, e.HotCellHitLocation));
+      //
       ObjectListView olv = sender as ObjectListView;
       if (sender == null)
       {
@@ -948,10 +745,46 @@
       }
     }
 
-    private void chkOwnerDraw_CheckedChanged (object sender, EventArgs e)
+
+    #endregion
+
+    #region group
+    private void olvComplex_BeforeCreatingGroups (object sender, CreateGroupsEventArgs e)
     {
-      ObjectListViewExtensions.ChangeOwnerDrawn(this.olvComplex, this.chkOwnerDraw.Checked);
+      if (e.Parameters.PrimarySort == olvcDriA && Control.ModifierKeys == Keys.Control)
+      {
+        e.Parameters.GroupComparer = new StrangeGroupComparer(e.Parameters.PrimarySortOrder);
+        e.Parameters.ItemComparer = new StrangeItemComparer(this.olvComplex.GetColumn(0), e.Parameters.PrimarySortOrder);
+      }
     }
+
+    private void olv_GroupStateChanged (object sender, GroupStateChangedEventArgs e)
+    {
+      System.Diagnostics.Debug.WriteLine(String.Format("Group '{0}' was {1}{2}{3}{4}{5}{6}",
+          e.Group.Header,
+          e.Selected ? "Selected" : "",
+          e.Focused ? "Focused" : "",
+          e.Collapsed ? "Collapsed" : "",
+          e.Unselected ? "Unselected" : "",
+          e.Unfocused ? "Unfocused" : "",
+          e.Uncollapsed ? "Uncollapsed" : ""));
+
+    }
+
+    private void listViewComplex_GroupTaskClicked (object sender, GroupTaskClickedEventArgs e)
+    {
+      MessageBox.Show(String.Format("group task click: {0}", e.Group), "OLV Demo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    } 
+    #endregion
+
+   
+
+    public void ApplyFilter (string filter)
+    {
+      ObjectListViewExtensions.TimedFilter(this.olvComplex, filter);
+    }
+
+        
    
   }
 
@@ -960,6 +793,10 @@
   /// </summary>
   internal class PlayerSkillsOverlay : AbstractOverlay
   {
+    const int CardHeight = 250;
+    const int CardWidth = 300;
+    const int CardOffset = 80;
+    //
     public PlayerSkillsOverlay ( )
     {
       businessCardRenderer.HeaderBackBrush = new SolidBrush(Definitions.White_230_240_250);
@@ -979,9 +816,8 @@
       OLVListItem item = olv.GetItem(olv.HotRowIndex);
       if (item == null)
         return;
-
-      var cardSize = new Size(200, 200);
-      var cardBounds = new Rectangle(r.Right - cardSize.Width - 8, r.Bottom - cardSize.Height - 8, cardSize.Width, cardSize.Height);
+      //
+      var cardBounds = new Rectangle(r.Right - CardWidth - CardOffset, r.Bottom - CardHeight - CardOffset, CardWidth, CardHeight);
       businessCardRenderer.DrawBusinessCard(g, cardBounds, item.RowObject, olv, item);
     }
 
@@ -1039,6 +875,9 @@
     internal Brush HeaderTextBrush = new SolidBrush(Color.FromArgb(10,20,30));
     internal Brush HeaderBackBrush = Brushes.Goldenrod;
     internal Brush BackBrush = new SolidBrush(Color.FromArgb(211, 211, 211));
+    //
+    const int spacing = 8;
+    const int rounding = 20;
 
     /// <summary>
     /// draws the player skill decoration
@@ -1050,24 +889,17 @@
     /// <param name="item"></param>
     public void DrawBusinessCard (Graphics g, Rectangle itemBounds, object rowObject, ObjectListView olv, OLVListItem item)
     {
-      const int spacing = 8;
-
       // Allow a border around the card
       itemBounds.Inflate(-2, -2);
-
-      // Draw card background
-      const int rounding = 20;
+      // Draw card background      
       var path = this.GetRoundedRect(itemBounds, rounding);
       g.FillPath(this.BackBrush, path);
       g.DrawPath(this.BorderPen, path);
       g.Clip = new Region(itemBounds);
-
       // Now draw the text portion
       RectangleF textBoxRect = itemBounds;
       itemBounds.Inflate(-spacing, -spacing);
-      //textBoxRect.X += (itemBounds.Width + spacing);
-      //textBoxRect.Width = itemBounds.Right - textBoxRect.X - spacing;
-
+      //
       StringFormat fmt = new StringFormat(StringFormatFlags.NoWrap);
       fmt.Trimming = StringTrimming.EllipsisCharacter;
       fmt.Alignment = StringAlignment.Center;
@@ -1093,6 +925,13 @@
         SizeF size = g.MeasureString("Active Three Point", font, itemBounds.Width, fmt);
         textBoxRect.Height = size.Height;
         fmt.Alignment = StringAlignment.Near;
+        //
+        textBoxRect.Inflate(-5f, 0f);
+        using (Font fontb = new Font(font, FontStyle.Bold | FontStyle.Underline)) 
+        {
+          DrawLine(g, "SKILL", "SITE", "ACTIVE", fmt, fontb, ref size, ref textBoxRect);
+        }
+
 #if TEST
         for (int i = 0; i < olv.Columns.Count; i++)
         {
@@ -1107,72 +946,39 @@
         }
 #endif
         Player p = (Player)rowObject;
-        //olv.GetColumn("olvcDef").GetStringValue(rowObject)
+       //
         
-        g.DrawString("Defence", font, this.TextBrush, textBoxRect, fmt);
-        RectangleF rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Defence_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += + size.Width/5f + spacing;
-        g.DrawString(p.Defence.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
         //
-        g.DrawString("Frethrows", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);        
-        g.DrawString(p.Freethrows_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Freethrows.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Defence", p.Defence_Display.ToString(), p.Defence.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("2P", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.TwoPoint_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.TwoPoint.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Frethrows", p.Freethrows_Display.ToString(), p.Freethrows.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("3P", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.ThreePoint_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.ThreePoint.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "2P", p.TwoPoint_Display.ToString(), p.TwoPoint.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("Dribbling", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Dribling_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Dribling.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "3P", p.ThreePoint_Display.ToString(), p.ThreePoint.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("Passing", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Passing_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Passing.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Dribbling", p.Dribling_Display.ToString(), p.Dribling.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("Speed", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Speed_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Speed.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Passing", p.Passing_Display.ToString(), p.Passing.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("Footwork", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Footwork_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Footwork.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Speed", p.Speed_Display.ToString(), p.Speed.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
-        g.DrawString("Rebounds", font, this.TextBrush, textBoxRect, fmt);
-        rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
-        g.DrawString(p.Rebounds_Display.ToString(), font, Brushes.DarkRed, rVal, fmt);
-        rVal.X += +size.Width / 5f + spacing;
-        g.DrawString(p.Rebounds.ToString("F02"), font, Brushes.DarkGreen, rVal, fmt);
-        textBoxRect.Y += size.Height;
+        DrawLine(g, "Footwork", p.Footwork_Display.ToString(), p.Footwork.ToString("F02"), fmt, font, ref size, ref textBoxRect);
         //
+        DrawLine(g, "Rebounds", p.Rebounds_Display.ToString(), p.Rebounds.ToString("F02"), fmt, font, ref size, ref textBoxRect);
+        //
+
       }
+    }
+
+    private void DrawLine (Graphics g, string description, string value1, string value2, StringFormat fmt, Font font, ref SizeF size, ref RectangleF textBoxRect)
+    {
+      g.DrawString(description, font, this.TextBrush, textBoxRect, fmt);
+      RectangleF rVal = new RectangleF(textBoxRect.X + size.Width + spacing, textBoxRect.Y, textBoxRect.Width, textBoxRect.Height);
+      g.DrawString(value1, font, Brushes.DarkRed, rVal, fmt);
+      rVal.X += (size.Width + spacing);
+      g.DrawString(value2, font, Brushes.DarkGreen, rVal, fmt);
+      textBoxRect.Y += size.Height;     
     }
 
     private System.Drawing.Drawing2D.GraphicsPath GetRoundedRect (RectangleF rect, float diameter)

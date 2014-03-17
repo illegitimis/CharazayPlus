@@ -5,9 +5,14 @@
   using System.Collections.Generic;
   using System.Windows.Forms;
   using System;
+  using AndreiPopescu.CharazayPlus.Utils;
+  using System.Linq;
+  using System.Collections;
 
   public static class ObjectListViewExtensions
   {
+    
+    
     /// <summary>
     /// USED by <see cref="HotItemOverlay"/>
     /// </summary>
@@ -155,6 +160,59 @@
       else
         olv.CellEditActivation = ObjectListView.CellEditActivateMode.F2Only;
     }
+
+    public static double TimedFilter (ObjectListView olv, string txt, int matchKind)
+    {
+      TextMatchFilter filter = null;
+      if (!String.IsNullOrEmpty(txt))
+      {
+        switch (matchKind)
+        {
+          case 0:
+          default:
+            filter = TextMatchFilter.Contains(olv, txt);
+            break;
+          case 1:
+            filter = TextMatchFilter.Prefix(olv, txt);
+            break;
+          case 2:
+            filter = TextMatchFilter.Regex(olv, txt);
+            break;
+        }
+      }
+      // Setup a default renderer to draw the filter matches
+      if (filter == null)
+        olv.DefaultRenderer = null;
+      else
+      {
+        olv.DefaultRenderer = new HighlightTextRenderer(filter);
+
+        // Uncomment this line to see how the GDI+ rendering looks
+        //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
+      }
+
+      // Some lists have renderers already installed
+      HighlightTextRenderer highlightingRenderer = olv.GetColumn(0).Renderer as HighlightTextRenderer;
+      if (highlightingRenderer != null)
+        highlightingRenderer.Filter = filter;
+
+      //
+      return Duration.StopwatchAction(( ) => olv.AdditionalFilter = filter);
+    }
+
+    public static string TimedFilter (ObjectListView olv, string txt)
+    {
+      var d = TimedFilter(olv, txt, 0);
+      //
+      if (olv.Objects == null)
+        return String.Format("Filtered in {0}ms", d);
+      else
+        return String.Format("Filtered {0} items down to {1} items in {2}ms",
+                          ((IList)olv.Objects).Count,
+                          olv.Items.Count,
+                          d);
+     
+    }
   }
 
   public enum HotItemMode
@@ -251,3 +309,91 @@
 
 
 }
+
+#region sample OLV code
+//private void listViewComplex_MouseClick (object sender, MouseEventArgs e)
+//    {
+//      //if (e.Button != MouseButtons.Right)
+//      //    return;
+
+//      //ContextMenuStrip ms = new ContextMenuStrip();
+//      //ms.ItemClicked += new ToolStripItemClickedEventHandler(ms_ItemClicked);
+
+//      //ObjectListView olv = (ObjectListView)sender;
+//      //if (olv.ShowGroups) {
+//      //    foreach (ListViewGroup lvg in olv.Groups) {
+//      //        ToolStripMenuItem mi = new ToolStripMenuItem(String.Format("Jump to group '{0}'", lvg.Header));
+//      //        mi.Tag = lvg;
+//      //        ms.Items.Add(mi);
+//      //    }
+//      //} else {
+//      //    ToolStripMenuItem mi = new ToolStripMenuItem("Turn on 'Show Groups' to see this context menu in action");
+//      //    mi.Enabled = false;
+//      //    ms.Items.Add(mi);
+//      //}
+
+//      //ms.Show((Control)sender, e.X, e.Y);
+//    } 
+
+//this.olvComplex.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.listViewComplex_FormatRow);
+
+/*
+private void listViewComplex_FormatRow (object sender, FormatRowEventArgs e)
+    {
+      e.UseCellFormatEvents = true;
+      if (olvComplex.View != View.Details)
+      {
+        if (e.Item.Text.ToLowerInvariant().StartsWith("nicola"))
+        {
+          e.Item.Decoration = new ImageDecoration(AndreiPopescu.CharazayPlus.Properties.Resources.star12, 64);
+        }
+        else
+          e.Item.Decoration = null;
+      }
+    }*/
+
+/*
+   this.olvComplex.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.listViewComplex_FormatCell);
+   private void listViewComplex_FormatCell (object sender, FormatCellEventArgs e)
+   {
+     Player p = (Player)e.Model;
+
+     // Put a love heart next to Nicola's name :)
+     if (e.ColumnIndex == 0)
+     {
+       if (e.SubItem.Text.ToLowerInvariant().StartsWith("nicola"))
+       {
+         e.SubItem.Decoration = new ImageDecoration(AndreiPopescu.CharazayPlus.Properties.Resources.star12, 64);
+       }
+       else
+         e.SubItem.Decoration = null;
+     }
+
+     // If the occupation is missing a value, put a composite decoration over it
+     // to draw attention to.
+     if (e.ColumnIndex == 1 && e.SubItem.Text == "")
+     {
+       TextDecoration decoration = new TextDecoration("Missing!", 255);
+       decoration.Alignment = ContentAlignment.MiddleCenter;
+       decoration.Font = new Font(this.Font.Name, this.Font.SizeInPoints + 2);
+       decoration.TextColor = Color.Firebrick;
+       decoration.Rotation = -20;
+       e.SubItem.Decoration = decoration;
+       CellBorderDecoration cbd = new CellBorderDecoration();
+       cbd.BorderPen = new Pen(Color.FromArgb(128, Color.Firebrick));
+       cbd.FillBrush = null;
+       cbd.CornerRounding = 4.0f;
+       e.SubItem.Decorations.Add(cbd);
+     }
+     //if (e.ColumnIndex == 7) {
+     //    if (p.CanTellJokes.HasValue && p.CanTellJokes.Value)
+     //        e.SubItem.Skills = new CellBorderDecoration();
+     //    else
+     //        e.SubItem.Skills = null;
+     //}
+   }
+   */
+
+
+
+#endregion

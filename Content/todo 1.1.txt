@@ -5,6 +5,7 @@ matches cache - my team schedule + division schedule (ok)
 debug general cache (ok)
 only one program instance (OK)
 xsd merge test (OK)
+move stored assessed values / training plan to non class / static (ok)
 -------------------------------
 0) INFO TAB
 debug xml received (ok)
@@ -18,13 +19,17 @@ hot tracking (ok)
 better layout, eye candy (ok)
 player age/value column (ok)
 test age/value for young players (ok)
-remove olv UI related controls
-refactor ObjectListViewExtensions
+fix designer (ok)
+remove olv UI related controls (ok)
+refactor ObjectListViewExtensions (ok)
+
 -------------------------------
 3-7) PG, SG, ...
 initialization bug (ok)
 player age/value (ok)
-better layout, eye candy
+better layout, eye candy(ok)
+removed group sorting by promary column (ok)
+player aspect (ok)
 -------------------------------
 8) TRAINING TAB
 suggested training combination (ok)
@@ -38,10 +43,11 @@ better filter
 10) DIVISION STANDINGS
 debug xml received  (ok)
 layout new control (ok)
+plsu minus
 -----------------------
 11) DIVISION SCHEDULE
 debug xml  (ok)
-reinit away team control
+reinit away team control 
 -----------------------
 12) ECONOMY
 debug  (ok)
@@ -54,5 +60,5 @@ price groups NOT SORTABLE (ok)
 format 2 decimals grid (ok)
 fancy labels instead of info grid (ok)
 new controls for position / skill (ok)
-price editable OVERFLOW
-season bug
+price editable OVERFLOW (ok)
+season bug (ok)

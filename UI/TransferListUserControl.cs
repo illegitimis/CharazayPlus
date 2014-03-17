@@ -14,43 +14,53 @@ namespace AndreiPopescu.CharazayPlus.UI
   using System.Xml.Serialization;
   using System.Collections;
 
+  // Getting player from charazay + adding to olv => add to cache
   public partial class TransferListUserControl : UserControl
   {
     public TransferListUserControl ( )
     {
       InitializeComponent();
     }
-
+  
+    // reading from serialized xml, getting players
     public Web.WebServiceUser User {get; set;}
-    readonly IDictionary<TLPlayer,Xsd2.charazayPlayer> _mapTL = new Dictionary<TLPlayer, Xsd2.charazayPlayer>();
-
-
-
+    //
+    public event EventHandler BadPlayerId;
+    public event EventHandler PlayerDataUnavailable;
+    public event EventHandler <PlayerEventArgs> DownloadPlayerData;
+  
     /// <summary>
     /// serialize the transfer listed players that have been evaluated 
     /// </summary>
     public void SerializePlayersTL ( )
     {
       string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);
-      FileStream fs = new FileStream(tlFile, FileMode.Truncate, FileAccess.Write);
-
-      XmlSerializer serializer = new XmlSerializer(typeof(TLPlayers));
-      TLPlayers tlps = new TLPlayers();
-
-      ArrayList arl = olvTL.Objects as ArrayList;
-      if (arl != null)
+      FileStream fs = null;
+      try
       {
-        object o = arl.ToArray(typeof(TLPlayer));
-        tlps.TLPlayer = (TLPlayer[])o;
+        fs = new FileStream(tlFile, FileMode.Truncate, FileAccess.Write);
+
+        XmlSerializer serializer = new XmlSerializer(typeof(TLPlayers));
+        TLPlayers tlps = new TLPlayers();
+
+        ArrayList arl = olvTL.Objects as ArrayList;
+        if (arl != null)
+        {
+          object o = arl.ToArray(typeof(TLPlayer));
+          tlps.TLPlayer = (TLPlayer[])o;
+        }
+        else
+        {
+          tlps.TLPlayer = (TLPlayer[])olvTL.Objects;
+        }
+
+        serializer.Serialize(fs, tlps);
       }
-      else
+      finally
       {
-        tlps.TLPlayer = (TLPlayer[])olvTL.Objects;
+        fs.Close();
       }
-
-      serializer.Serialize(fs, tlps);
-
-      fs.Close();
+      
     }
 
     /// <summary>
@@ -58,109 +68,125 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// </summary>
     public void InitTransferShortList ( )
     {
+      FileStream fs = null;
+      TLPlayers tlPlayers = null;
       try
       { //
         // data source
         //
         string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);
-        FileStream fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
-
+        fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
+        //
         // copy most recent not null file to today null file
+        //
         if (fs.Length == 0)
         {
-          string dir = Path.GetDirectoryName(fs.Name);
-          string fileToday = Path.GetFileName(fs.Name);
+          fs = GetMostRecent(tlFile, fs);
+        }
 
-          string[] files = Directory.GetFiles(dir, "*.xml");
-          if (files.Length > 1)
+        tlPlayers = (TLPlayers)(new XmlSerializer(typeof(TLPlayers)).Deserialize(fs));
+        
+      }
+      catch (Exception) { }
+      finally { fs.Close(); }
+      //
+      // ui
+      //
+      Generator.GenerateColumns(this.olvTL, typeof(TLPlayer));
+      // from the total score column on
+      double[] scoreMarkers = new double[] { 3, 5, 8, 11, 14, 17, 20 };
+      string[] scoreDescriptions = ObjectListViewExtensions.BuildCustomGroupies<double>(scoreMarkers);
+      // value index
+      double[] valueIndices = new double[] { 0.8d, 0.85d, 0.9d, 1d, 1.05d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
+      string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(valueIndices);
+      // profitability
+      double[] profitabilityIndices = new double[] { 0.6d, 0.75d, 0.9d, 1d, 1.1d, 1.25d, 1.5d, 2d, 3d, 5d, 10d };
+      string[] profitabilityDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(profitabilityIndices);
+      //
+      foreach (OLVColumn col in olvTL.Columns)
+      {
+        switch (col.DisplayIndex)
+        {
+          case 0: col.IsHeaderVertical = true; break;
+          case 1: col.Hyperlink = true; col.Groupable = false; break;
+          case 5: col.Groupable = false; break;
+          case 6: 
+          case 7:
+          case 8:
+          case 9:
+          case 10:
+          case 11:
+          case 12:
+          case 13: 
+          col.MakeGroupies(scoreMarkers, scoreDescriptions);
+          col.IsHeaderVertical = true;
+          break;
+          case 4: 
+            col.MakeGroupies(profitabilityIndices, profitabilityDesc);
+            col.IsHeaderVertical = true;
+            break;
+          case 2: 
+            col.MakeGroupies(valueIndices, viDesc);
+            col.IsHeaderVertical = true;
+            break;
+        }
+      }
+      //
+      if (tlPlayers == null || tlPlayers.TLPlayer == null)
+        return;
+      olvTL.SetObjects(tlPlayers.TLPlayer);
+      //      
+      foreach (TLPlayer tlp in tlPlayers.TLPlayer)
+      {
+        if (tlp.Player != null)
+          continue;
+        Xsd2.charazay obj = DownloadPlayer (tlp.PlayerId);
+        Xsd2.charazayPlayer p = obj.player;
+        switch (tlp.Pos)
+        {
+          case PlayerPosition.C: tlp.Player = new C(p); break;
+          case PlayerPosition.PF: tlp.Player = new PF(p); break;
+          case PlayerPosition.SF: tlp.Player = new SF(p);break;
+          case PlayerPosition.PG: tlp.Player = new PG(p); break;
+          case PlayerPosition.SG: tlp.Player = new SG(p); break;
+        }       
+      }
+     
+    }
+
+    private FileStream GetMostRecent (string tlFile, FileStream fs)
+    {
+      string dir = Path.GetDirectoryName(fs.Name);
+      string fileToday = Path.GetFileName(fs.Name);
+
+      string[] files = Directory.GetFiles(dir, "*.xml");
+      if (files.Length > 1)
+      {
+        DateTime dt = DateTime.MinValue;
+        FileInfo mostRecent = null;
+
+        foreach (string file in files)
+        {
+          FileInfo fi = new FileInfo(file);
+          if (fi.Name != fileToday && fi.LastWriteTime > dt)
           {
-            DateTime dt = DateTime.MinValue;
-            FileInfo mostRecent = null;
-
-            foreach (string file in files)
-            {
-              FileInfo fi = new FileInfo(file);
-              if (fi.Name != fileToday && fi.LastWriteTime > dt)
-              {
-                mostRecent = fi;
-                dt = fi.LastWriteTime;
-              }
-            }
-
-            if (mostRecent != null)
-            {
-              fs.Close();
-              File.Delete(tlFile);
-              File.Copy(mostRecent.FullName, tlFile);
-              fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
-            }
+            mostRecent = fi;
+            dt = fi.LastWriteTime;
           }
         }
 
-        TLPlayers tlPlayers = (TLPlayers)(new XmlSerializer(typeof(TLPlayers)).Deserialize(fs));
-        fs.Close();
-        //
-        // ui
-        //
-        TypedObjectListView<TLPlayer> tlist = new TypedObjectListView<TLPlayer>(this.olvTL);
-        tlist.GenerateAspectGetters();
-
-        decimal[] scoreMarkers = new decimal[] { 3, 5, 8, 11, 14, 17, 20 };
-        string[] scoreDescriptions = ObjectListViewExtensions.BuildCustomGroupies<decimal>(scoreMarkers);
-
-        // value index
-        decimal[] valueIndices = new decimal[] { 0.8m, 0.85m, 0.9m, 1m, 1.05m, 1.1m, 1.15m, 1.2m, 1.25m, 1.3m };
-        string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<decimal>(valueIndices);
-        olvcTLValueIndex.MakeGroupies(valueIndices, viDesc);
-
-        // profitability
-        decimal[] profitabilityIndices = new decimal[] { 0.6m, 0.75m, 0.9m, 1m, 1.1m, 1.25m, 1.5m, 2m, 3m, 5m, 10m };
-        string[] profitabilityDesc = ObjectListViewExtensions.BuildCustomGroupies<decimal>(profitabilityIndices);
-        olvcTLProfitability.MakeGroupies(profitabilityIndices, profitabilityDesc);
-
-        // from the total score column on
-        olvcTLTotalScore.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLShoot.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLDefensiveScore.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLOffenseScore.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLOffensiveAbilityScore.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLRebD.MakeGroupies(scoreMarkers, scoreDescriptions);
-        olvcTLRebO.MakeGroupies(scoreMarkers, scoreDescriptions);
-
-        //foreach (OLVColumn col in olvSkills.Columns)
-        //{
-
-        //  switch (col.DisplayIndex)
-        //  {
-        //    case 3:
-        //    { 
-        //    }     
-        //      break;
-        //    case 4:
-        //      { 
-        //      }
-        //      break;
-        //    case 6: 
-        //    case 7:
-        //    case 8:
-        //    case 9:
-        //    case 10:
-        //    case 11:
-        //    case 12:
-        //    case 13:
-
-        //      break;
-
-        //    default: break;
-        //  }
-        //}
-
-        //olvTL.RebuildColumns();
-        olvTL.SetObjects(tlPlayers.TLPlayer);
+        if (mostRecent != null)
+        {
+          fs.Close();
+          File.Delete(tlFile);
+          File.Copy(mostRecent.FullName, tlFile);
+          fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
+        }
       }
-      catch (Exception) { }
+      return fs;
     }
 
+    #region event handlers
     /// <summary>
     /// adds the property grid player to the olvTL list
     /// </summary>
@@ -168,38 +194,33 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// <param name="e"></param>
     private void btnTLAdd_Click (object sender, EventArgs e)
     {
-      PlayerPosition pos = PlayerPosition.Unknown;
-      if (rdC.Checked) pos = PlayerPosition.C;
-      else if (rdPf.Checked) pos = PlayerPosition.PF;
-      else if (rdPg.Checked) pos = PlayerPosition.PG;
-      else if (rdSf.Checked) pos = PlayerPosition.SF;
-      else if (rdSg.Checked) pos = PlayerPosition.SG;
-      else pos = PlayerPosition.Unknown;
+      PlayerPosition pos = GetPosition();
+      //
       Player basePlayer = evaluatePlayerUC.GetPlayer(pos);
       //     
       TLPlayer tlp = new TLPlayer();
       if (basePlayer != null)
-      {
-        //tlp.Date = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
-        tlp.Deadline = dtpDeadline.Value.ToString("yyyy/MM/dd HH:mm");
-        tlp.Def = (decimal)basePlayer.DefensiveScore;
-        tlp.Name = basePlayer.FullName;
-        tlp.OfAb = (decimal)basePlayer.OffensiveAbilityScore;
-        tlp.Off = (decimal)basePlayer.OffensiveScore;
+      { //
+        tlp.Deadline = dtpDeadline.Value.ToString("yyyy/MM/dd HH:mm");      
         tlp.Position = Enum.GetName(typeof(PlayerPosition), pos);
-        tlp.Price = string.IsNullOrEmpty(tbxPrice.Text) ? (uint)Math.Pow(10, 6) : uint.Parse(tbxPrice.Text);
-        tlp.ValueIndex = (decimal)basePlayer.ValueIndex;
-        tlp.Profitability = (decimal)basePlayer.Profitability((double)tlp.Price);
-        tlp.Reb = (decimal)basePlayer.ReboundScore;
-        tlp.RebO = (decimal)basePlayer.OffensiveReboundsScore;
-        tlp.RebD = (decimal)basePlayer.DefensiveReboundsScore;
-        tlp.Shoot = (decimal)basePlayer.ShootingScore;
-        tlp.Total = (decimal)basePlayer.TotalScore;
-
+        tlp.Price = string.IsNullOrEmpty(tbxPrice.Text) ? (uint)Math.Pow(10, 6) : uint.Parse(tbxPrice.Text);      
+        tlp.Profitability = basePlayer.Profitability((double)tlp.Price);
+        //
+        tlp.Player = basePlayer;
+        CacheManager.Instance.AddPlayer(basePlayer.Id, basePlayer.FullName);
+        //
         olvTL.AddObject(tlp);
-      }
-      if (!_mapTL.ContainsKey(tlp))
-        _mapTL.Add(tlp, basePlayer.BasePlayer);
+      }      
+    }
+
+    private PlayerPosition GetPosition ()
+    {
+      if (rdC.Checked) return PlayerPosition.C;
+      else if (rdPf.Checked) return PlayerPosition.PF;
+      else if (rdPg.Checked) return PlayerPosition.PG;
+      else if (rdSf.Checked) return PlayerPosition.SF;
+      else if (rdSg.Checked) return PlayerPosition.SG;
+      else return PlayerPosition.Unknown;
     }
 
     /// <summary>
@@ -213,61 +234,30 @@ namespace AndreiPopescu.CharazayPlus.UI
       ulong playerId;
       if (ulong.TryParse(tbxPlayerId.Text, out playerId))
       {
-        Web.Downloader crawler = new Web.Downloader();
-        Web.PlayerXml xmlPlayer = new Web.PlayerXml(User, playerId);
-        crawler.Add(xmlPlayer);
-        crawler.Get(true);
-
-        //btnTLGet.Enabled = true;
-
-        FileStream fs = null;
-        Xsd2.charazay obj = null;
-
-        try
+        Xsd2.charazay obj = DownloadPlayer(playerId);
+        if (obj != null && obj.player != null)
         {
-          fs = new FileStream(xmlPlayer.m_fileName, FileMode.Open, FileAccess.ReadWrite);
-          obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
-
+          this.evaluatePlayerUC.SelectedObject = obj.player;
+          this.btnTLAdd.Enabled = (GetPosition() != PlayerPosition.Unknown);
+          if (DownloadPlayerData != null) 
+            DownloadPlayerData(null, new PlayerEventArgs() 
+            { 
+              Surname = obj.player.basic.surname
+              , 
+              Name=obj.player.basic.name
+            });
         }
-        catch (Exception ex)
+        else
         {
-          if (ex is InvalidOperationException && ex.InnerException != null && ex.InnerException is FormatException)
-          {
-            string m = ex.Message.Replace("There is an error in XML document", "");
-            string [] tokens = m.Split(new char[] { ' ', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
-            //System.InvalidOperationException was unhandled
-            //Message=There is an error in XML document (3, 126).
-            //InnerException: System.FormatException
-            //Message=Input string was not in a correct format.
-            long errPos = long.Parse(tokens[1]);
-            fs.Seek(errPos + 8, SeekOrigin.Begin);
-            fs.WriteByte(0);
-          }
-        }
-        finally
-        {
-          fs.Close();
-        }
-        if (xmlPlayer.DeserializationType != Web.XmlSerializationType.Player)
-          throw new Exception("Web.XmlSerializationType.Player");
-
-        //propGridTL.SelectedObject = new TransferListedPlayerPropertyGridObject(obj.player);
-        if (obj != null)
-        {
-            this.evaluatePlayerUC.SelectedObject = obj.player;
-        }
+          if (PlayerDataUnavailable != null) PlayerDataUnavailable(this, null);
+          this.btnTLAdd.Enabled = false;
+        }        
       }
       else
-      {
-        //btnTLGet.Enabled = false;
+      { //bad player id
+        if (BadPlayerId != null) BadPlayerId(this, null);
+        this.btnTLAdd.Enabled = false;
       }
-    }
-
-    private void olvTL_BeforeSorting (object sender, BeforeSortingEventArgs e)
-    {
-      ObjectListView olv = sender as ObjectListView;
-      if (olv == null) olv = olvTL;
-      olv.ShowGroups = (e.ColumnToGroupBy.Text != "ValueIndex");
     }
 
     /// <summary>
@@ -288,11 +278,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       {
         switch (e.SubItemIndex)
         {
-          case 2: // price column
+          case 3: // price column
             {
               TLPlayer current = (TLPlayer)e.RowObject;
+              // update profitability, multiply by old price, divide by new price
               current.Profitability *= (uint)e.Value;
               current.Profitability /= (uint)e.NewValue;
+              // update model price
               current.Price = (uint)e.NewValue;
             } break;
 
@@ -316,25 +308,24 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    private void olvTL_CellEditStarting (object sender, CellEditEventArgs e)
+    private void olvTL_CellEditStarting (object sender, CellEditEventArgs e) { }
+
+    private void olvTL_SelectionChanged (object sender, EventArgs e)
     {
-
+      ObjectListView olv = sender as ObjectListView;
+      if (olv == null)
+        olv = olvTL;
+      TLPlayer crt = (TLPlayer)olv.SelectedObject;
+      if (crt != null && crt.Player != null && crt.Player.BasePlayer != null)
+        this.evaluatePlayerUC.SelectedObject = crt.Player.BasePlayer;
+    } 
+    
+    private void rd_CheckedChanged (object sender, EventArgs e)
+    {
+      btnTLAdd.Enabled = true;
     }
+    #endregion
 
-    //private void olvTL_ModelDropped(object sender, ModelDropEventArgs e)
-    //{
-
-    //}
-
-    //private void olvTL_EnabledChanged(object sender, EventArgs e)
-    //{
-
-    //}
-
-    //private void olvTL_Leave(object sender, EventArgs e)
-    //{
-
-    //}
 
     #region Context Menu
     /// <summary>
@@ -368,7 +359,6 @@ namespace AndreiPopescu.CharazayPlus.UI
           olvTL.RemoveObject(ti.Tag);
       }
     }
-    #endregion
 
     private void olvTL_KeyDown (object sender, KeyEventArgs e)
     {
@@ -378,15 +368,69 @@ namespace AndreiPopescu.CharazayPlus.UI
         cmsOlvTLRemove_Click(null, null);
       }
     }
+    #endregion
 
-    private void olvTL_SelectionChanged (object sender, EventArgs e)
+    private Xsd2.charazay DownloadPlayer (ulong playerId)
     {
-      ObjectListView olv = sender as ObjectListView;
-      if (olv == null)
-        olv = olvTL;
-      TLPlayer crt = (TLPlayer)olv.SelectedObject;
-      if (crt != null)
-        this.evaluatePlayerUC.SelectedObject = _mapTL[crt];
+      Web.Downloader crawler = new Web.Downloader();
+      Web.PlayerXml xmlPlayer = new Web.PlayerXml(User, playerId);
+      crawler.Add(xmlPlayer);
+      crawler.Get(true);
+      //
+      FileStream fs = null;
+      Xsd2.charazay obj = null;
+
+      try
+      {
+        fs = new FileStream(xmlPlayer.m_fileName, FileMode.Open, FileAccess.ReadWrite);
+        obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
+      }
+      catch (Exception ex)
+      {
+        if (ex is InvalidOperationException && ex.InnerException != null && ex.InnerException is FormatException)
+        {
+          string m = ex.Message.Replace("There is an error in XML document", "");
+          string [] tokens = m.Split(new char[] { ' ', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
+          //System.InvalidOperationException was unhandled
+          //Message=There is an error in XML document (3, 126).
+          //InnerException: System.FormatException
+          //Message=Input string was not in a correct format.
+          long errPos = long.Parse(tokens[1]);
+          fs.Seek(errPos + 8, SeekOrigin.Begin);
+          fs.WriteByte(0);
+        }
+      }
+      finally
+      {
+        fs.Close();
+      }
+      if (xmlPlayer.DeserializationType != Web.XmlSerializationType.Player)
+        throw new Exception("Web.XmlSerializationType.Player");
+      return obj;
     }
+
+    private void olvTL_IsHyperlink (object sender, IsHyperlinkEventArgs e)
+    {
+      //e.Url
+    }
+
+    private void olvTL_HyperlinkClicked (object sender, HyperlinkClickedEventArgs e)
+    {
+      TLPlayer tlp = (TLPlayer)e.Item.RowObject;
+      if (tlp == null) return;
+      //
+      switch (e.ColumnIndex)
+      {
+        case 1:
+        {
+          Web.CharazayDownoadItem playerLink = new Web.CharazayDownoadItem("player", 1, tlp.PlayerId);
+          e.Url = playerLink.m_uri.AbsoluteUri;
+        } break;       
+        default: break;
+      }
+    }
+
+    
+    
   }
 }

@@ -104,7 +104,7 @@
   }
 
   /// <summary>
-  /// 
+  /// base class for xml pieces returned by the Charazay XML API
   /// </summary>
   internal class XmlDownloadItem : DownloadItem
   {

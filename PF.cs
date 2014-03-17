@@ -42,7 +42,7 @@ namespace AndreiPopescu.CharazayPlus
     protected internal override byte[] TrainingPlan { get { return new byte[] { 3, 1, 1, 3, 4, 4, 1, 0 }; } }
     public override PlayerPosition PositionEnum { get { return PlayerPosition.PF; } }
 
-    protected override double[] StoredAssessedValues
+    static double[] StoredAssessedValues
     {
       get { return new double[] { 
     4.82      
@@ -336,5 +336,7 @@ namespace AndreiPopescu.CharazayPlus
    ,15.64     
       }; }
     }
+
+    public override double ValueIndex { get { return TotalScore / PF.StoredAssessedValues[StoredAssessedIndex]; } }
   }
 }

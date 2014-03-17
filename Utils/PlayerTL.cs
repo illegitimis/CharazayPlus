@@ -14,6 +14,8 @@
 namespace AndreiPopescu.CharazayPlus.Utils
 {
   using System.Xml.Serialization;
+  using System;
+  using BrightIdeasSoftware;
 
 
   /// <remarks/>
@@ -53,42 +55,13 @@ namespace AndreiPopescu.CharazayPlus.Utils
   public partial class TLPlayer
   {
 
+    #region specific difference
     private string positionField;
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 35, MinimumWidth = 25, MaximumWidth = 45, Title = "Position")]
     public PlayerPosition Pos
     {
       get { return (PlayerPosition)System.Enum.Parse(typeof(PlayerPosition), positionField); }
     }
-
-    private string nameField;
-
-    private uint priceField;
-
-    //private string dateField;
-    //public System.DateTime DateTime { get { return System.DateTime.Parse(dateField); } }
-
-    private string deadlineField;
-    public System.DateTime DeadLine { get { return System.DateTime.Parse(deadlineField); } }
-
-    private decimal valueIndexField;
-
-    private decimal profitabilityField;
-
-    private decimal totalField;
-
-    private decimal defField;
-
-    private decimal offField;
-
-    private decimal ofAbField;
-
-    private decimal shootField;
-
-    private decimal rebField;
-
-    private decimal rebOField;
-
-    private decimal rebDField;
-
     /// <remarks/>
     public string Position
     {
@@ -101,8 +74,24 @@ namespace AndreiPopescu.CharazayPlus.Utils
         this.positionField = value;
       }
     }
-
+    //
+    private ulong pidField;
     /// <remarks/>
+    public ulong PlayerId
+    {
+      get
+      {
+        return this.pidField;
+      }
+      set
+      {
+        this.pidField = value;
+      }
+    }
+    //
+    private string nameField;
+    /// <remarks/>
+    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 190, Title = "Player")]
     public string Name
     {
       get
@@ -114,58 +103,30 @@ namespace AndreiPopescu.CharazayPlus.Utils
         this.nameField = value;
       }
     }
-
     /// <remarks/>
+    [OLVColumn(DisplayIndex = 3, IsEditable = true, Width = 70, MinimumWidth = 50, MaximumWidth = 100, Title = "Price", AspectToStringFormat="{0:N0}")]
     public uint Price
     {
-      get
-      {
-        return this.priceField;
-      }
-      set
-      {
-        this.priceField = value;
-      }
+      get { return this.priceField; }
+      set { this.priceField = value; }
     }
+    private uint priceField;
 
-    ///// <remarks/>
-    //public string Date {
-    //    get {
-    //        return this.dateField;
-    //    }
-    //    set {
-    //        this.dateField = value;
-    //    }
-    //}
-
+    private string deadlineField;
+    [OLVColumn(DisplayIndex = 5, IsEditable = true, Width = 100, MinimumWidth = 75, MaximumWidth = 150, Title = "Deadline", AspectToStringFormat="{0:yyyy.MM.dd HH:mm}")]
+    public System.DateTime DeadLine { get { return System.DateTime.Parse(deadlineField); } }
     /// <remarks/>
     public string Deadline
     {
-      get
-      {
-        return this.deadlineField;
-      }
-      set
-      {
-        this.deadlineField = value;
-      }
+      get {  return this.deadlineField;  }
+      set { this.deadlineField = value; }
     }
 
+    //
+    private double profitabilityField;
     /// <remarks/>
-    public decimal ValueIndex
-    {
-      get
-      {
-        return this.valueIndexField;
-      }
-      set
-      {
-        this.valueIndexField = value;
-      }
-    }
-
-    /// <remarks/>
-    public decimal Profitability
+    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 50, MinimumWidth = 35, MaximumWidth = 70, Title = "Profitability", AspectToStringFormat = "{0:F02}")]
+    public double Profitability
     {
       get
       {
@@ -175,110 +136,121 @@ namespace AndreiPopescu.CharazayPlus.Utils
       {
         this.profitabilityField = value;
       }
-    }
+    } 
+
+
+    #endregion
+
+    Player _p;
+    [XmlIgnore()]
+    public Player Player { get { return _p; } set { _p = value; nameField = _p.FullName; pidField = _p.Id; } }
 
     /// <remarks/>
-    public decimal Total
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Age/Value Index", AspectToStringFormat = "{0:F02}")]
+    public double? ValueIndex
     {
       get
       {
-        return this.totalField;
-      }
-      set
-      {
-        this.totalField = value;
-      }
+        if (Player == null) return null; 
+        else return Player.ValueIndex;
+      }      
     }
 
     /// <remarks/>
-    public decimal Def
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Total score", AspectToStringFormat = "{0:F02}")]
+    public double? Total
     {
       get
       {
-        return this.defField;
-      }
-      set
-      {
-        this.defField = value;
-      }
+        if (Player == null) return null;
+        else return Player.TotalScore;
+      }     
     }
 
     /// <remarks/>
-    public decimal Off
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Defensive score", AspectToStringFormat = "{0:F02}")]
+    public double? Def
     {
       get
       {
-        return this.offField;
-      }
-      set
-      {
-        this.offField = value;
-      }
+        if (Player == null) return null;
+        else return Player.DefensiveScore;
+      }      
     }
 
     /// <remarks/>
-    public decimal OfAb
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Offensive score", AspectToStringFormat = "{0:F02}")]
+    public double? Off
     {
       get
       {
-        return this.ofAbField;
-      }
-      set
-      {
-        this.ofAbField = value;
-      }
+        if (Player == null) return null;
+        else return Player.OffensiveScore;
+      }      
     }
 
     /// <remarks/>
-    public decimal Shoot
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Offensive ability", AspectToStringFormat = "{0:F02}")]
+    public double? OfAb
     {
       get
       {
-        return this.shootField;
-      }
-      set
-      {
-        this.shootField = value;
-      }
+        if (Player == null) return null;
+        else return Player.OffensiveAbilityScore;
+      }      
     }
 
     /// <remarks/>
-    public decimal Reb
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Shooting score", AspectToStringFormat = "{0:F02}")]
+    public double? Shoot
     {
       get
       {
-        return this.rebField;
+        if (Player == null) return null;
+        else return Player.ShootingScore;
       }
-      set
+     }
+
+    /// <remarks/>
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 11, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Rebounds score", AspectToStringFormat = "{0:F02}")]
+    public double? Reb
+    {
+      get
       {
-        this.rebField = value;
-      }
+        if (Player == null) return null;
+        else return Player.ReboundScore;
+      }      
     }
 
     /// <remarks/>
-    public decimal RebO
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 12, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Offensive Rebounds score", AspectToStringFormat = "{0:F02}")]
+    public double? RebO
     {
       get
       {
-        return this.rebOField;
-      }
-      set
-      {
-        this.rebOField = value;
-      }
+        if (Player == null) return null;
+        else return Player.OffensiveReboundsScore;
+      }      
     }
 
     /// <remarks/>
-    public decimal RebD
+     [XmlIgnore()]
+     [OLVColumn(DisplayIndex = 13, IsEditable = false, Width = 45, MinimumWidth = 35, MaximumWidth = 60, Title = "Defensive Rebounds score", AspectToStringFormat = "{0:F02}")]
+    public double? RebD
     {
       get
       {
-        return this.rebDField;
-      }
-      set
-      {
-        this.rebDField = value;
-      }
+        if (Player == null) return null;
+        else return Player.DefensiveReboundsScore;
+      }      
     }
   }
 }

@@ -143,8 +143,8 @@ namespace BrightIdeasSoftware
         /// </summary>
         public IntUpDown() {
             this.DecimalPlaces = 0;
-            this.Minimum = -9999999;
-            this.Maximum = 9999999;
+            this.Minimum = int.MinValue;
+            this.Maximum = int.MaxValue;
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace BrightIdeasSoftware
         public UintUpDown() {
             this.DecimalPlaces = 0;
             this.Minimum = 0;
-            this.Maximum = 9999999;
+            this.Maximum = uint.MaxValue;
         }
 
         new public uint Value {

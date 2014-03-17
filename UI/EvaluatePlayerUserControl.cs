@@ -711,32 +711,8 @@
     {
       InitializeComponent();
     }
-
-    private void EvaluatePlayerUserControl_Load (object sender, EventArgs e)
-    {
-      foreach (var child in this.tlp.Controls)
-      {
-        var hli = child as HorizontalLevelIndicatorLabel;
-        if (hli != null)
-        {
-          hli.Level = 0;
-          hli.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        }
-      }
-      this.tlp.Enabled = false;
-      //this.tlp.Visible = false;
-    }
-
-    PG _pg = null;
-    SG _sg = null;
-    SF _sf = null;
-    PF _pf = null;
-    C _c = null;
-
-
-     Xsd2.charazayPlayer _p = null;
-    public Xsd2.charazayPlayer SelectedObject 
-   
+  
+    public Xsd2.charazayPlayer SelectedObject    
     { 
       get { return _p; } 
       set 
@@ -757,6 +733,31 @@
         //
         this.ResumeLayout();
       } 
+    }
+    
+    #region fields
+    PG _pg = null;
+    SG _sg = null;
+    SF _sf = null;
+    PF _pf = null;
+    C _c = null;
+    Xsd2.charazayPlayer _p = null; 
+    #endregion
+
+    #region private
+    private void EvaluatePlayerUserControl_Load (object sender, EventArgs e)
+    {
+      foreach (var child in this.tlp.Controls)
+      {
+        var hli = child as HorizontalLevelIndicatorLabel;
+        if (hli != null)
+        {
+          hli.Level = 0;
+          hli.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        }
+      }
+      this.tlp.Enabled = false;
+      //this.tlp.Visible = false;
     }
 
     private void assignLabelValues ( )
@@ -802,13 +803,14 @@
     private void assignValueIndex (HorizontalLevelIndicatorLabel hli, Player p)
     {
       hli.MaximumLevel = 2f;
-      hli.Level = (float)Math.Round(p.ValueIndex, 2);      
+      hli.Level = (float)Math.Round(p.ValueIndex, 2);
     }
 
     void assignValue (HorizontalLevelIndicatorLabel hli, double val)
     {
       hli.Level = (float)Math.Round(val, 2);
-    }
+    } 
+    #endregion
 
     internal Player GetPlayer (PlayerPosition pos)
     {
