@@ -59,8 +59,8 @@
       // tlpTL
       // 
       this.tlpTL.ColumnCount = 2;
-      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
+      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
       this.tlpTL.Controls.Add(this.olvTL, 1, 1);
       this.tlpTL.Controls.Add(this.evaluatePlayerUC, 0, 0);
       this.tlpTL.Controls.Add(this.flp, 0, 1);
@@ -68,27 +68,30 @@
       this.tlpTL.Location = new System.Drawing.Point(0, 0);
       this.tlpTL.Name = "tlpTL";
       this.tlpTL.RowCount = 2;
-      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
       this.tlpTL.Size = new System.Drawing.Size(703, 642);
       this.tlpTL.TabIndex = 12;
       // 
       // olvTL
       // 
-      this.olvTL.BackColor = System.Drawing.Color.Beige;
+      this.olvTL.AlternateRowBackColor = System.Drawing.Color.Silver;
+      this.olvTL.BackColor = System.Drawing.Color.LightGray;
       this.olvTL.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
       this.olvTL.Cursor = System.Windows.Forms.Cursors.Default;
       this.olvTL.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olvTL.FullRowSelect = true;
       this.olvTL.HeaderUsesThemes = false;
       this.olvTL.HeaderWordWrap = true;
-      this.olvTL.Location = new System.Drawing.Point(120, 195);
+      this.olvTL.Location = new System.Drawing.Point(143, 163);
       this.olvTL.MinimumSize = new System.Drawing.Size(100, 100);
       this.olvTL.Name = "olvTL";
-      this.olvTL.Size = new System.Drawing.Size(580, 444);
+      this.olvTL.Size = new System.Drawing.Size(557, 476);
       this.olvTL.SortGroupItemsByPrimaryColumn = false;
       this.olvTL.TabIndex = 18;
+      this.olvTL.UseAlternatingBackColors = true;
       this.olvTL.UseCompatibleStateImageBehavior = false;
+      this.olvTL.UseHotItem = true;
       this.olvTL.UseHyperlinks = true;
       this.olvTL.View = System.Windows.Forms.View.Details;
       this.olvTL.CellEditFinishing += new BrightIdeasSoftware.CellEditEventHandler(this.olvTL_CellEditFinishing);
@@ -110,12 +113,13 @@
       this.evaluatePlayerUC.Location = new System.Drawing.Point(3, 3);
       this.evaluatePlayerUC.Name = "evaluatePlayerUC";
       this.evaluatePlayerUC.SelectedObject = null;
-      this.evaluatePlayerUC.Size = new System.Drawing.Size(697, 186);
+      this.evaluatePlayerUC.Size = new System.Drawing.Size(697, 154);
       this.evaluatePlayerUC.TabIndex = 16;
       // 
       // flp
       // 
       this.flp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.flp.BackColor = System.Drawing.Color.Gainsboro;
       this.flp.Controls.Add(this.label50);
       this.flp.Controls.Add(this.tbxPlayerId);
       this.flp.Controls.Add(this.btnTLGet);
@@ -127,17 +131,20 @@
       this.flp.Controls.Add(this.btnTLAdd);
       this.flp.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.flp.Location = new System.Drawing.Point(3, 195);
+      this.flp.Location = new System.Drawing.Point(3, 163);
       this.flp.Name = "flp";
-      this.flp.Size = new System.Drawing.Size(111, 444);
+      this.flp.Size = new System.Drawing.Size(134, 476);
       this.flp.TabIndex = 17;
       // 
       // label50
       // 
+      this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.label50.AutoSize = true;
+      this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.label50.Location = new System.Drawing.Point(3, 0);
       this.label50.Name = "label50";
-      this.label50.Size = new System.Drawing.Size(47, 13);
+      this.label50.Size = new System.Drawing.Size(108, 15);
       this.label50.TabIndex = 0;
       this.label50.Text = "Player id";
       this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -146,9 +153,12 @@
       // 
       this.tbxPlayerId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbxPlayerId.Location = new System.Drawing.Point(3, 16);
+      this.tbxPlayerId.CausesValidation = false;
+      this.tbxPlayerId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.tbxPlayerId.Location = new System.Drawing.Point(3, 18);
+      this.tbxPlayerId.MinimumSize = new System.Drawing.Size(108, 25);
       this.tbxPlayerId.Name = "tbxPlayerId";
-      this.tbxPlayerId.Size = new System.Drawing.Size(108, 20);
+      this.tbxPlayerId.Size = new System.Drawing.Size(108, 22);
       this.tbxPlayerId.TabIndex = 1;
       // 
       // btnTLGet
@@ -156,7 +166,8 @@
       this.btnTLGet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.btnTLGet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.btnTLGet.Location = new System.Drawing.Point(3, 42);
+      this.btnTLGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.btnTLGet.Location = new System.Drawing.Point(3, 46);
       this.btnTLGet.Name = "btnTLGet";
       this.btnTLGet.Size = new System.Drawing.Size(108, 53);
       this.btnTLGet.TabIndex = 2;
@@ -169,9 +180,10 @@
       this.label51.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label51.AutoSize = true;
-      this.label51.Location = new System.Drawing.Point(3, 98);
+      this.label51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label51.Location = new System.Drawing.Point(3, 102);
       this.label51.Name = "label51";
-      this.label51.Size = new System.Drawing.Size(108, 13);
+      this.label51.Size = new System.Drawing.Size(108, 15);
       this.label51.TabIndex = 5;
       this.label51.Text = "Price";
       // 
@@ -179,9 +191,10 @@
       // 
       this.tbxPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbxPrice.Location = new System.Drawing.Point(3, 114);
+      this.tbxPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.tbxPrice.Location = new System.Drawing.Point(3, 120);
       this.tbxPrice.Name = "tbxPrice";
-      this.tbxPrice.Size = new System.Drawing.Size(108, 20);
+      this.tbxPrice.Size = new System.Drawing.Size(108, 22);
       this.tbxPrice.TabIndex = 6;
       // 
       // label52
@@ -189,35 +202,38 @@
       this.label52.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label52.AutoSize = true;
-      this.label52.Location = new System.Drawing.Point(3, 137);
+      this.label52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label52.Location = new System.Drawing.Point(3, 145);
       this.label52.Name = "label52";
-      this.label52.Size = new System.Drawing.Size(108, 13);
+      this.label52.Size = new System.Drawing.Size(108, 15);
       this.label52.TabIndex = 7;
       this.label52.Text = "Deadline";
       // 
       // dtpDeadline
       // 
-      this.dtpDeadline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
       this.dtpDeadline.CustomFormat = "yyyy-MM-dd HH:mm";
+      this.dtpDeadline.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dtpDeadline.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.dtpDeadline.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-      this.dtpDeadline.Location = new System.Drawing.Point(3, 153);
+      this.dtpDeadline.Location = new System.Drawing.Point(3, 163);
       this.dtpDeadline.Name = "dtpDeadline";
       this.dtpDeadline.ShowUpDown = true;
-      this.dtpDeadline.Size = new System.Drawing.Size(108, 20);
+      this.dtpDeadline.Size = new System.Drawing.Size(108, 21);
       this.dtpDeadline.TabIndex = 8;
       // 
       // gbxPosition
       // 
+      this.gbxPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.gbxPosition.Controls.Add(this.rdC);
       this.gbxPosition.Controls.Add(this.rdPf);
       this.gbxPosition.Controls.Add(this.rdPg);
       this.gbxPosition.Controls.Add(this.rdSg);
       this.gbxPosition.Controls.Add(this.rdSf);
-      this.gbxPosition.Dock = System.Windows.Forms.DockStyle.Top;
-      this.gbxPosition.Location = new System.Drawing.Point(3, 179);
+      this.gbxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.gbxPosition.Location = new System.Drawing.Point(3, 190);
       this.gbxPosition.Name = "gbxPosition";
-      this.gbxPosition.Size = new System.Drawing.Size(108, 128);
+      this.gbxPosition.Size = new System.Drawing.Size(108, 139);
       this.gbxPosition.TabIndex = 16;
       this.gbxPosition.TabStop = false;
       this.gbxPosition.Text = "Position";
@@ -229,7 +245,7 @@
       this.rdC.AutoSize = true;
       this.rdC.Location = new System.Drawing.Point(6, 108);
       this.rdC.Name = "rdC";
-      this.rdC.Size = new System.Drawing.Size(32, 17);
+      this.rdC.Size = new System.Drawing.Size(33, 19);
       this.rdC.TabIndex = 4;
       this.rdC.TabStop = true;
       this.rdC.Text = "C";
@@ -243,7 +259,7 @@
       this.rdPf.AutoSize = true;
       this.rdPf.Location = new System.Drawing.Point(6, 85);
       this.rdPf.Name = "rdPf";
-      this.rdPf.Size = new System.Drawing.Size(38, 17);
+      this.rdPf.Size = new System.Drawing.Size(40, 19);
       this.rdPf.TabIndex = 3;
       this.rdPf.TabStop = true;
       this.rdPf.Text = "PF";
@@ -257,7 +273,7 @@
       this.rdPg.AutoSize = true;
       this.rdPg.Location = new System.Drawing.Point(6, 16);
       this.rdPg.Name = "rdPg";
-      this.rdPg.Size = new System.Drawing.Size(40, 17);
+      this.rdPg.Size = new System.Drawing.Size(42, 19);
       this.rdPg.TabIndex = 0;
       this.rdPg.TabStop = true;
       this.rdPg.Text = "PG";
@@ -271,7 +287,7 @@
       this.rdSg.AutoSize = true;
       this.rdSg.Location = new System.Drawing.Point(6, 39);
       this.rdSg.Name = "rdSg";
-      this.rdSg.Size = new System.Drawing.Size(40, 17);
+      this.rdSg.Size = new System.Drawing.Size(42, 19);
       this.rdSg.TabIndex = 1;
       this.rdSg.TabStop = true;
       this.rdSg.Text = "SG";
@@ -285,7 +301,7 @@
       this.rdSf.AutoSize = true;
       this.rdSf.Location = new System.Drawing.Point(6, 62);
       this.rdSf.Name = "rdSf";
-      this.rdSf.Size = new System.Drawing.Size(38, 17);
+      this.rdSf.Size = new System.Drawing.Size(40, 19);
       this.rdSf.TabIndex = 2;
       this.rdSf.TabStop = true;
       this.rdSf.Text = "SF";
@@ -294,8 +310,11 @@
       // 
       // btnTLAdd
       // 
+      this.btnTLAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.btnTLAdd.Enabled = false;
-      this.btnTLAdd.Location = new System.Drawing.Point(3, 313);
+      this.btnTLAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.btnTLAdd.Location = new System.Drawing.Point(3, 335);
       this.btnTLAdd.Name = "btnTLAdd";
       this.btnTLAdd.Size = new System.Drawing.Size(108, 52);
       this.btnTLAdd.TabIndex = 16;

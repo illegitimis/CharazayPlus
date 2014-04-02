@@ -82,15 +82,19 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // olv
       // 
+      this.olv.AlternateRowBackColor = System.Drawing.Color.Gainsboro;
       this.olv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.olv.BackColor = System.Drawing.Color.WhiteSmoke;
+      this.olv.FullRowSelect = true;
       this.olv.Location = new System.Drawing.Point(3, 16);
       this.olv.Name = "olv";
       this.olv.ShowGroups = false;
       this.olv.ShowItemToolTips = true;
       this.olv.Size = new System.Drawing.Size(144, 131);
       this.olv.TabIndex = 1;
+      this.olv.UseAlternatingBackColors = true;
       this.olv.UseCompatibleStateImageBehavior = false;
       this.olv.View = System.Windows.Forms.View.Details;
       // 

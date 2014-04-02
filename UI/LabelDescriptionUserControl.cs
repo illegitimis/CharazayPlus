@@ -47,10 +47,11 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // lbl
       // 
+      this.lbl.AutoSize = true;
       this.lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lbl.Location = new System.Drawing.Point(4, 4);
       this.lbl.Name = "lbl";
-      this.lbl.Size = new System.Drawing.Size(74, 13);
+      this.lbl.Size = new System.Drawing.Size(41, 13);
       this.lbl.TabIndex = 0;
       this.lbl.Text = "label1";
       // 
@@ -66,7 +67,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // LabelDescriptionUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
       this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.Controls.Add(this.txtDescription);
       this.Controls.Add(this.lbl);

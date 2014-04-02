@@ -423,7 +423,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       {
         case 1:
         {
-          Web.CharazayDownoadItem playerLink = new Web.CharazayDownoadItem("player", 1, tlp.PlayerId);
+          Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, tlp.PlayerId);
           e.Url = playerLink.m_uri.AbsoluteUri;
         } break;       
         default: break;

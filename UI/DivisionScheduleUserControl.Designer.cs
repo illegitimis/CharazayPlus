@@ -29,10 +29,10 @@
     private void InitializeComponent ( )
     {
       this.tlp = new System.Windows.Forms.TableLayoutPanel();
-      this.ucrHome = new AndreiPopescu.CharazayPlus.UI.RatingBballUserControl();
-      this.ucLineup = new AndreiPopescu.CharazayPlus.UI.LineupHomeAwayUserControl();
       this.olvMd = new BrightIdeasSoftware.ObjectListView();
       this.olvcMd = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.ucrHome = new AndreiPopescu.CharazayPlus.UI.RatingBballUserControl();
+      this.ucLineup = new AndreiPopescu.CharazayPlus.UI.LineupHomeAwayUserControl();
       this.ucrAway = new AndreiPopescu.CharazayPlus.UI.RatingBballUserControl();
       this.ucMatchDetails = new AndreiPopescu.CharazayPlus.UI.MatchDetailsUserControl();
       this.tlp.SuspendLayout();
@@ -60,38 +60,22 @@
       this.tlp.Size = new System.Drawing.Size(619, 556);
       this.tlp.TabIndex = 6;
       // 
-      // ucrHome
-      // 
-      this.ucrHome.AutoSize = true;
-      this.ucrHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ucrHome.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucrHome.Location = new System.Drawing.Point(126, 42);
-      this.ucrHome.Name = "ucrHome";
-      this.ucrHome.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Home;
-      this.ucrHome.Size = new System.Drawing.Size(490, 174);
-      this.ucrHome.TabIndex = 2;
-      // 
-      // ucLineup
-      // 
-      this.ucLineup.AutoSize = true;
-      this.ucLineup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ucLineup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucLineup.Location = new System.Drawing.Point(126, 402);
-      this.ucLineup.Name = "ucLineup";
-      this.ucLineup.Size = new System.Drawing.Size(490, 151);
-      this.ucLineup.TabIndex = 4;
-      // 
       // olvMd
       // 
       this.olvMd.AllColumns.Add(this.olvcMd);
+      this.olvMd.AlternateRowBackColor = System.Drawing.Color.Gainsboro;
+      this.olvMd.BackColor = System.Drawing.Color.WhiteSmoke;
       this.olvMd.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcMd});
       this.olvMd.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.olvMd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.olvMd.FullRowSelect = true;
       this.olvMd.Location = new System.Drawing.Point(3, 3);
       this.olvMd.Name = "olvMd";
       this.tlp.SetRowSpan(this.olvMd, 4);
       this.olvMd.Size = new System.Drawing.Size(117, 550);
       this.olvMd.TabIndex = 0;
+      this.olvMd.UseAlternatingBackColors = true;
       this.olvMd.UseCompatibleStateImageBehavior = false;
       this.olvMd.View = System.Windows.Forms.View.Details;
       this.olvMd.SelectionChanged += new System.EventHandler(this.olvMd_SelectionChanged);
@@ -103,10 +87,37 @@
       this.olvcMd.Text = "Match Id";
       this.olvcMd.Width = 208;
       // 
+      // ucrHome
+      // 
+      this.ucrHome.AutoSize = true;
+      this.ucrHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucrHome.BackColor = System.Drawing.Color.Gainsboro;
+      this.ucrHome.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucrHome.Location = new System.Drawing.Point(126, 42);
+      this.ucrHome.Name = "ucrHome";
+      this.ucrHome.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Home;
+      this.ucrHome.Size = new System.Drawing.Size(490, 174);
+      this.ucrHome.TabIndex = 2;
+      // 
+      // ucLineup
+      // 
+      this.ucLineup.AutoSize = true;
+      this.ucLineup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucLineup.BackColor = System.Drawing.Color.LightGray;
+      this.ucLineup.BackColorAway = System.Drawing.Color.LightGreen;
+      this.ucLineup.BackColorHome = System.Drawing.Color.LightCoral;
+      this.ucLineup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucLineup.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.ucLineup.Location = new System.Drawing.Point(126, 402);
+      this.ucLineup.Name = "ucLineup";
+      this.ucLineup.Size = new System.Drawing.Size(490, 151);
+      this.ucLineup.TabIndex = 4;
+      // 
       // ucrAway
       // 
       this.ucrAway.AutoSize = true;
       this.ucrAway.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucrAway.BackColor = System.Drawing.Color.LightGray;
       this.ucrAway.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucrAway.Location = new System.Drawing.Point(126, 222);
       this.ucrAway.Name = "ucrAway";

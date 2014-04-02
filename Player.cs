@@ -161,6 +161,8 @@
     protected Player (Xsd2.charazayPlayer xsdPlayer)
     {
       m_player = xsdPlayer;
+      if (xsdPlayer.skills == null)
+        return;
       InitSkills();
       ActiveSkills();
     }

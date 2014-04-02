@@ -63,19 +63,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvBmi.MakeGroupies(bmiMarkers, ObjectListViewExtensions.BuildCustomGroupies<double>(bmiMarkers));
 
       //si
-      ulong k = (ulong)Math.Pow(10, 3);
-      ulong k10 = (ulong)Math.Pow(10, 4);
-      ulong k100 = (ulong)Math.Pow(10, 5);
-
-      ulong[] siMarkers = new ulong[] { k10, 2*k10, 35*k, 5*k10, 7*k10, 9*k10, 11*k10, 13*k10
-        , 15*k10 , 175*k, 2*k100, 225*k, 25*k10, 275*k, 3*k100, 325*k, 35*k10, 4*k100, 5*k100, 6*k100
-      };
+      ulong k = 1000ul; ulong m = 10000ul; ulong n = 100000ul;
+      ulong[] siMarkers = new ulong[] { m, 15ul*k, 2*m, 3ul*m, 5*m, 7*m, n, 12*m, 15*m , 175*k, 2*n, 25*m, 3*n, 35*m, 4*n, 5*n, 6*n, 7*n, 8*n};
       this.olvcSI.MakeGroupies(siMarkers, ObjectListViewExtensions.BuildCustomGroupies<ulong>(siMarkers));
 
       //salary
-      ulong[] salaryMarkers = new ulong[] { k10, 2*k10, 3*k10, 4*k10, 6*k10, k100
-        , 125*k, 15*k10 , 175*k, 2*k100, 225*k, 25*k10, 275*k, 3*k100, 35*k10, 4*k100
-      };
+      ulong[] salaryMarkers = new ulong[] { m, 2*m, 3*m, 4*m, 6*m, n, 125*k, 15*m , 175*k, 2*n, 225*k, 25*m, 275*k, 3*n, 35*m, 4*n };
       this.olvcSalary.MakeGroupies(salaryMarkers, ObjectListViewExtensions.BuildCustomGroupies<ulong>(salaryMarkers));
 
       // form     
@@ -117,7 +110,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       //if (p == null)
       //  return;
 
-      //Web.CharazayDownoadItem playerLink = new Web.CharazayDownoadItem("player", 1, p.Id);
+      //Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, p.Id);
       //e.Url = playerLink.m_uri.AbsoluteUri;
     }
 
@@ -132,7 +125,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (p == null)
         return;
 
-      Web.CharazayDownoadItem playerLink = new Web.CharazayDownoadItem("player", 1, p.Id);
+      Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, p.Id);
       e.Url = playerLink.m_uri.AbsoluteUri;
     }
   }

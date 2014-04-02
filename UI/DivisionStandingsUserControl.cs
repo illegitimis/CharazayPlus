@@ -1,5 +1,7 @@
 ﻿using System.Windows.Forms;
 using BrightIdeasSoftware;
+using System;
+using AndreiPopescu.CharazayPlus.Utils;
 
 namespace AndreiPopescu.CharazayPlus.UI
 {
@@ -9,6 +11,24 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       InitializeComponent();
     }
+
+    private FlowLayoutPanel flp;
+    private Label label1;
+    private Label lblName;
+    private Label label2;
+    private Label lblId;
+    private Label label3;
+    private Label lblHardiness;
+    private Label label4;
+    private Label lblLevel;
+    private Label label5;
+    private Label lblUtc;
+    private Label label6;
+    private Label lblSeason;
+    private Label label7;
+    private Label lblWeek;
+    private Label label8;
+    private Label lblDay;
 
     /// <summary> 
     /// Required designer variable.
@@ -37,11 +57,25 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void InitializeComponent ( )
     {
       this.olv = new BrightIdeasSoftware.ObjectListView();
-      this.ldLevel = new AndreiPopescu.CharazayPlus.UI.LabelDescriptionUserControl();
-      this.ldHard = new AndreiPopescu.CharazayPlus.UI.LabelDescriptionUserControl();
-      this.ldId = new AndreiPopescu.CharazayPlus.UI.LabelDescriptionUserControl();
-      this.ldName = new AndreiPopescu.CharazayPlus.UI.LabelDescriptionUserControl();
+      this.flp = new System.Windows.Forms.FlowLayoutPanel();
+      this.label1 = new System.Windows.Forms.Label();
+      this.lblName = new System.Windows.Forms.Label();
+      this.label2 = new System.Windows.Forms.Label();
+      this.lblId = new System.Windows.Forms.Label();
+      this.label3 = new System.Windows.Forms.Label();
+      this.lblHardiness = new System.Windows.Forms.Label();
+      this.label4 = new System.Windows.Forms.Label();
+      this.lblLevel = new System.Windows.Forms.Label();
+      this.label5 = new System.Windows.Forms.Label();
+      this.lblUtc = new System.Windows.Forms.Label();
+      this.label6 = new System.Windows.Forms.Label();
+      this.lblSeason = new System.Windows.Forms.Label();
+      this.label7 = new System.Windows.Forms.Label();
+      this.lblWeek = new System.Windows.Forms.Label();
+      this.label8 = new System.Windows.Forms.Label();
+      this.lblDay = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.olv)).BeginInit();
+      this.flp.SuspendLayout();
       this.SuspendLayout();
       // 
       // olv
@@ -52,11 +86,14 @@ namespace AndreiPopescu.CharazayPlus.UI
             | System.Windows.Forms.AnchorStyles.Right)));
       this.olv.BackColor = System.Drawing.Color.Gray;
       this.olv.Cursor = System.Windows.Forms.Cursors.Default;
-      this.olv.HeaderUsesThemes = false;
-      this.olv.Location = new System.Drawing.Point(4, 108);
+      this.olv.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.olv.ForeColor = System.Drawing.Color.White;
+      this.olv.FullRowSelect = true;
+      this.olv.Location = new System.Drawing.Point(9, 53);
       this.olv.Name = "olv";
       this.olv.ShowGroups = false;
-      this.olv.Size = new System.Drawing.Size(344, 215);
+      this.olv.Size = new System.Drawing.Size(339, 270);
+      this.olv.SortGroupItemsByPrimaryColumn = false;
       this.olv.TabIndex = 3;
       this.olv.UseAlternatingBackColors = true;
       this.olv.UseCompatibleStateImageBehavior = false;
@@ -65,73 +102,209 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olv.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.olv_HyperlinkClicked);
       this.olv.IsHyperlink += new System.EventHandler<BrightIdeasSoftware.IsHyperlinkEventArgs>(this.olv_IsHyperlink);
       // 
-      // ldLevel
+      // flp
       // 
-      this.ldLevel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ldLevel.Description = "name";
-      this.ldLevel.IsMultiline = false;
-      this.ldLevel.Label = "Level";
-      this.ldLevel.Location = new System.Drawing.Point(4, 82);
-      this.ldLevel.Name = "ldLevel";
-      this.ldLevel.Size = new System.Drawing.Size(295, 20);
-      this.ldLevel.TabIndex = 4;
+      this.flp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.flp.Controls.Add(this.label1);
+      this.flp.Controls.Add(this.lblName);
+      this.flp.Controls.Add(this.label2);
+      this.flp.Controls.Add(this.lblId);
+      this.flp.Controls.Add(this.label3);
+      this.flp.Controls.Add(this.lblHardiness);
+      this.flp.Controls.Add(this.label4);
+      this.flp.Controls.Add(this.lblLevel);
+      this.flp.Controls.Add(this.label5);
+      this.flp.Controls.Add(this.lblUtc);
+      this.flp.Controls.Add(this.label6);
+      this.flp.Controls.Add(this.lblSeason);
+      this.flp.Controls.Add(this.label7);
+      this.flp.Controls.Add(this.lblWeek);
+      this.flp.Controls.Add(this.label8);
+      this.flp.Controls.Add(this.lblDay);
+      this.flp.Location = new System.Drawing.Point(3, 3);
+      this.flp.Name = "flp";
+      this.flp.Size = new System.Drawing.Size(345, 44);
+      this.flp.TabIndex = 7;
       // 
-      // ldHard
+      // label1
       // 
-      this.ldHard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ldHard.Description = "name";
-      this.ldHard.IsMultiline = false;
-      this.ldHard.Label = "Hardiness";
-      this.ldHard.Location = new System.Drawing.Point(4, 56);
-      this.ldHard.Name = "ldHard";
-      this.ldHard.Size = new System.Drawing.Size(295, 20);
-      this.ldHard.TabIndex = 2;
+      this.label1.AutoSize = true;
+      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label1.Location = new System.Drawing.Point(3, 0);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(39, 13);
+      this.label1.TabIndex = 0;
+      this.label1.Text = "Name";
       // 
-      // ldId
+      // lblName
       // 
-      this.ldId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ldId.Description = "name";
-      this.ldId.IsMultiline = false;
-      this.ldId.Label = "ID";
-      this.ldId.Location = new System.Drawing.Point(4, 30);
-      this.ldId.Name = "ldId";
-      this.ldId.Size = new System.Drawing.Size(295, 20);
-      this.ldId.TabIndex = 1;
+      this.lblName.AutoSize = true;
+      this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblName.Location = new System.Drawing.Point(48, 0);
+      this.lblName.Name = "lblName";
+      this.lblName.Size = new System.Drawing.Size(16, 15);
+      this.lblName.TabIndex = 1;
+      this.lblName.Text = "...";
       // 
-      // ldName
+      // label2
       // 
-      this.ldName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ldName.Description = "name";
-      this.ldName.IsMultiline = false;
-      this.ldName.Label = "Name";
-      this.ldName.Location = new System.Drawing.Point(4, 4);
-      this.ldName.Name = "ldName";
-      this.ldName.Size = new System.Drawing.Size(295, 20);
-      this.ldName.TabIndex = 0;
+      this.label2.AutoSize = true;
+      this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label2.Location = new System.Drawing.Point(70, 0);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(20, 13);
+      this.label2.TabIndex = 2;
+      this.label2.Text = "ID";
+      // 
+      // lblId
+      // 
+      this.lblId.AutoSize = true;
+      this.lblId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblId.Location = new System.Drawing.Point(96, 0);
+      this.lblId.Name = "lblId";
+      this.lblId.Size = new System.Drawing.Size(16, 15);
+      this.lblId.TabIndex = 3;
+      this.lblId.Text = "...";
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label3.Location = new System.Drawing.Point(118, 0);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(63, 13);
+      this.label3.TabIndex = 4;
+      this.label3.Text = "Hardiness";
+      // 
+      // lblHardiness
+      // 
+      this.lblHardiness.AutoSize = true;
+      this.lblHardiness.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblHardiness.Location = new System.Drawing.Point(187, 0);
+      this.lblHardiness.Name = "lblHardiness";
+      this.lblHardiness.Size = new System.Drawing.Size(16, 15);
+      this.lblHardiness.TabIndex = 5;
+      this.lblHardiness.Text = "...";
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label4.Location = new System.Drawing.Point(209, 0);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(38, 13);
+      this.label4.TabIndex = 6;
+      this.label4.Text = "Level";
+      // 
+      // lblLevel
+      // 
+      this.lblLevel.AutoSize = true;
+      this.lblLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblLevel.Location = new System.Drawing.Point(253, 0);
+      this.lblLevel.Name = "lblLevel";
+      this.lblLevel.Size = new System.Drawing.Size(16, 15);
+      this.lblLevel.TabIndex = 7;
+      this.lblLevel.Text = "...";
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label5.Location = new System.Drawing.Point(275, 0);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(34, 13);
+      this.label5.TabIndex = 8;
+      this.label5.Text = "Date";
+      // 
+      // lblUtc
+      // 
+      this.lblUtc.AutoSize = true;
+      this.lblUtc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblUtc.Location = new System.Drawing.Point(315, 0);
+      this.lblUtc.Name = "lblUtc";
+      this.lblUtc.Size = new System.Drawing.Size(16, 15);
+      this.lblUtc.TabIndex = 9;
+      this.lblUtc.Text = "...";
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label6.Location = new System.Drawing.Point(3, 15);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(49, 13);
+      this.label6.TabIndex = 10;
+      this.label6.Text = "Season";
+      // 
+      // lblSeason
+      // 
+      this.lblSeason.AutoSize = true;
+      this.lblSeason.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblSeason.Location = new System.Drawing.Point(58, 15);
+      this.lblSeason.Name = "lblSeason";
+      this.lblSeason.Size = new System.Drawing.Size(16, 15);
+      this.lblSeason.TabIndex = 11;
+      this.lblSeason.Text = "...";
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label7.Location = new System.Drawing.Point(80, 15);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(40, 13);
+      this.label7.TabIndex = 12;
+      this.label7.Text = "Week";
+      // 
+      // lblWeek
+      // 
+      this.lblWeek.AutoSize = true;
+      this.lblWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblWeek.Location = new System.Drawing.Point(126, 15);
+      this.lblWeek.Name = "lblWeek";
+      this.lblWeek.Size = new System.Drawing.Size(16, 15);
+      this.lblWeek.TabIndex = 13;
+      this.lblWeek.Text = "...";
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label8.Location = new System.Drawing.Point(148, 15);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(29, 13);
+      this.label8.TabIndex = 14;
+      this.label8.Text = "Day";
+      // 
+      // lblDay
+      // 
+      this.lblDay.AutoSize = true;
+      this.lblDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblDay.Location = new System.Drawing.Point(183, 15);
+      this.lblDay.Name = "lblDay";
+      this.lblDay.Size = new System.Drawing.Size(16, 15);
+      this.lblDay.TabIndex = 15;
+      this.lblDay.Text = "...";
       // 
       // DivisionStandingsUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.ldLevel);
+      this.Controls.Add(this.flp);
       this.Controls.Add(this.olv);
-      this.Controls.Add(this.ldHard);
-      this.Controls.Add(this.ldId);
-      this.Controls.Add(this.ldName);
       this.Name = "DivisionStandingsUserControl";
       this.Size = new System.Drawing.Size(351, 326);
       ((System.ComponentModel.ISupportInitialize)(this.olv)).EndInit();
+      this.flp.ResumeLayout(false);
+      this.flp.PerformLayout();
       this.ResumeLayout(false);
 
     }
 
     #endregion
 
-    private LabelDescriptionUserControl ldName;
-    private LabelDescriptionUserControl ldId;
-    private LabelDescriptionUserControl ldHard;
     private BrightIdeasSoftware.ObjectListView olv;
-    private LabelDescriptionUserControl ldLevel;
 
 
     public void Init (Xsd2.charazayDivisionStanding[] standings)
@@ -139,23 +312,31 @@ namespace AndreiPopescu.CharazayPlus.UI
       Generator.GenerateColumns(this.olv, typeof(Xsd2.charazayDivisionStanding)/*, standings*/);
       foreach (OLVColumn col in olv.Columns)
       { 
-        col.IsHeaderVertical = true;
+        col.IsHeaderVertical = false;
         col.Hyperlink = (col.AspectName == "TeamID" || col.AspectName == "Owner");
       }
       //
-      this.olv.SetObjects(standings);     
+      this.olv.SetObjects(standings);    
+      //
+      DateTime now = DateTime.UtcNow;
+      lblUtc.Text = now.ToString("yyyy-MM-dd HH:mm");
+      CharazayDate cd = now;
+      lblSeason.Text = cd.Season.ToString();
+      lblWeek.Text = cd.Week.ToString();
+      lblDay.Text = cd.Day.ToString();
     }
 
 
 
-    public string DivisionName {set { ldName.Description = value; } }
+    public string DivisionName {set { lblName.Text = value; } }
 
-    public ushort Hardiness { set { ldHard.Description = value.ToString(); } }
+    public ushort Hardiness { set { lblHardiness.Text = value.ToString(); } }
 
-    public uint DivisionId {set { ldId.Description = value.ToString(); } }
+    public uint DivisionId {set { lblId.Text = value.ToString(); } }
 
-    public byte Level { set { ldLevel.Description = value.ToString(); } }
+    public byte Level { set { lblLevel.Text = value.ToString(); } }
 
+    
     private void olv_IsHyperlink (object sender, IsHyperlinkEventArgs e)
     {
 
@@ -169,14 +350,14 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       switch (e.ColumnIndex)
       {
-        case 9: 
-          {
-            Web.CharazayDownoadItem teamLink = new Web.CharazayDownoadItem("team", 0, s.TeamID);
+        case 8: 
+          { // team
+            Web.CharazayDownloadItem teamLink = new Web.CharazayDownloadItem("team", 0, s.TeamID);
             e.Url = teamLink.m_uri.AbsoluteUri;
           } break;
-        case 10:
-          {
-            Web.CharazayDownoadItem teamLink = new Web.CharazayDownoadItem("user", 15, s.TeamID);
+        case 9:
+          { // user
+            Web.CharazayDownloadItem teamLink = new Web.CharazayDownloadItem("user", 15, s.TeamID);
             e.Url = teamLink.m_uri.AbsoluteUri;
           } break;
         default: break;

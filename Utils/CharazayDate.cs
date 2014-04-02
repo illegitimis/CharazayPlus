@@ -33,6 +33,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     static readonly DateTime s_start28 = new DateTime(2013, 8, 9);
     //W1.D1 (06/12)
     static readonly DateTime s_start29 = new DateTime(2013, 12, 6);
+    //season30.W1.D1 (2014/04/04)
+    static readonly DateTime s_start30 = new DateTime(2014, 4, 4);
 
     public static implicit operator CharazayDate(DateTime dt)
     {
@@ -46,10 +48,17 @@ namespace AndreiPopescu.CharazayPlus.Utils
         cd._day = (byte)(1 + x.Days % 7);
         cd._week = (byte)(1+ x.Days / 7);
       }
-      else
+      else if (dt < s_start30)
       {
         cd._season = 29;
         var x = dt - s_start29;
+        cd._day = (byte)(1 + x.Days % 7);
+        cd._week = (byte)(1 + x.Days / 7);
+      }
+      else
+      {
+        cd._season = 30;
+        var x = dt - s_start30;
         cd._day = (byte)(1 + x.Days % 7);
         cd._week = (byte)(1 + x.Days / 7);
       }

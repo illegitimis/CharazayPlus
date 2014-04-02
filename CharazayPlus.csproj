@@ -125,9 +125,6 @@
     <Compile Include="UI\MyEconomyUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\MyEconomyUserControl.Designer.cs">
-      <DependentUpon>MyEconomyUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\ObjectListViewExtensions.cs" />
     <Compile Include="UI\MyTeamScheduleUserControl.cs">
       <SubType>UserControl</SubType>
@@ -189,7 +186,7 @@
     <Compile Include="UI\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\EconomyUserControl.cs">
+    <Compile Include="UI\BalanceUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
@@ -203,7 +200,7 @@
     <Compile Include="UI\LabelDescriptionUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\LineupHomeAwayCustomControl.cs">
+    <Compile Include="UI\LineupHomeAwayUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\MatchDetailsUserControl.cs">
@@ -300,8 +297,8 @@
     <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
       <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\EconomyUserControl.resx">
-      <DependentUpon>EconomyUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\BalanceUserControl.resx">
+      <DependentUpon>BalanceUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -312,8 +309,8 @@
     <EmbeddedResource Include="UI\LabelDescriptionUserControl.resx">
       <DependentUpon>LabelDescriptionUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\LineupHomeAwayCustomControl.resx">
-      <DependentUpon>LineupHomeAwayCustomControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\LineupHomeAwayUserControl.resx">
+      <DependentUpon>LineupHomeAwayUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MatchDetailsUserControl.resx">
       <DependentUpon>MatchDetailsUserControl.cs</DependentUpon>

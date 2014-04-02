@@ -598,7 +598,7 @@ namespace AndreiPopescu.CharazayPlus
       this.ucPG.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucPG.Location = new System.Drawing.Point(0, 0);
       this.ucPG.Name = "ucPG";
-      this.ucPG.Size = new System.Drawing.Size(13, 242);
+      this.ucPG.Size = new System.Drawing.Size(754, 604);
       this.ucPG.TabIndex = 0;
       // 
       // tabPageSG
@@ -764,6 +764,7 @@ namespace AndreiPopescu.CharazayPlus
       // 
       this.ucMyEconomy.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucMyEconomy.Location = new System.Drawing.Point(0, 0);
+      this.ucMyEconomy.MyTeamId = ((uint)(0u));
       this.ucMyEconomy.Name = "ucMyEconomy";
       this.ucMyEconomy.Size = new System.Drawing.Size(0, 242);
       this.ucMyEconomy.TabIndex = 0;
@@ -872,7 +873,11 @@ namespace AndreiPopescu.CharazayPlus
     /// <param name="e"></param>
     private void sideTabControl_Selected(object sender, TabControlEventArgs e)
     {
-      switch ((SideTabPage)e.TabPageIndex)
+      SideTabPage currentTab = (SideTabPage)e.TabPageIndex;
+      if (currentTab != SideTabPage.TL && _lastTab == SideTabPage.TL)
+        this.ucTransferList.SerializePlayersTL();
+      //
+      switch (currentTab)
       {
         case SideTabPage.Status:
           {
@@ -927,25 +932,30 @@ namespace AndreiPopescu.CharazayPlus
 
         case SideTabPage.MyEconomy:
           {
-            ucMyEconomy.InitDgMyTransfers(_myTransfers);
+            //ucMyEconomy.InitDgMyTransfers(_myTransfers);
+            this.ucMyEconomy.MyTeamId = this._team.id;
+            ucMyEconomy.InitOLV(_myTransfers);
             ucMyEconomy.InitEconomyUserControls(_economy);
           } break;
 
         case SideTabPage.TL:
-          { 
-          ucTransferList.User = _wsu;
-          ucTransferList.InitTransferShortList();
-          ucTransferList.PlayerDataUnavailable += (sndr, ev) => { tsslbl.Text = "Player Data Unavailable"; };
-          ucTransferList.BadPlayerId += (sndr, ev) => { tsslbl.Text = "Bad Player Id"; };
-          ucTransferList.DownloadPlayerData += (sndr, ev) => 
-          { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " "+ev.Surname; };
+          {
+            ucTransferList.User = _wsu;
+            ucTransferList.InitTransferShortList();
+            ucTransferList.PlayerDataUnavailable += (sndr, ev) => { tsslbl.Text = "Player Data Unavailable"; };
+            ucTransferList.BadPlayerId += (sndr, ev) => { tsslbl.Text = "Bad Player Id"; };
+            ucTransferList.DownloadPlayerData += (sndr, ev) =>
+              { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " " + ev.Surname; };
           } break;
 
         case SideTabPage.Skills: ucPlayerSkills.Players = _optimumPlayers; break;
 
         default: break;
       }
+      // update last selected
+      _lastTab = currentTab;
     }
+    SideTabPage _lastTab = SideTabPage.Info;
 
     
     public MainForm()

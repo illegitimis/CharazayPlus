@@ -42,11 +42,18 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   /// </summary>
   public partial class charazayTransfer
   {
-    public System.DateTime Date { get { return Compute.EstimatedDateTime(dateField); } }
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Seller", Hyperlink=true)]
     public string Seller { get { return CacheManager.Instance.TeamName(sellteam); } }
+    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Buyer", Hyperlink = true)]
     public string Buyer { get { return CacheManager.Instance.TeamName(buyteam); } }
+    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Date", AspectToStringFormat = "{0:yyyy-MM-dd}")]
+    public System.DateTime Date { get { return Compute.EstimatedDateTime(dateField); } }
+    [OLVColumn(DisplayIndex = 3, IsEditable = false, Width = 120, MinimumWidth = 90, MaximumWidth = 160, Title = "Player", Hyperlink = true)]
     public string Player { get { return CacheManager.Instance.PlayerName(playerid); } }
-
+    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Price", AspectToStringFormat="{0:N0}")]
+    public uint Price { get { return this.priceField; }}
+    [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Skills Index", AspectToStringFormat = "{0:N0}")]
+    public uint SkillsIndex { get { return this.siField; } }
   }
 
   public partial class charazayRoundMatch
@@ -115,7 +122,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
       }     
     }        
 
-   [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 120, MinimumWidth = 80, MaximumWidth = 225, Title = "Name")]
+   [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 160, MinimumWidth = 100, MaximumWidth = 225, Title = "Name")]
     public string Name { get { return this.nameField; } }
 
    [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Points Made")]

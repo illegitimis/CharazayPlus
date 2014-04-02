@@ -46,7 +46,7 @@
 
 
   //http://www.charazay.com/index.php?act=player&code=1&id=25829364
-  internal class CharazayDownoadItem : DownloadItem
+  internal class CharazayDownloadItem : DownloadItem
   {
     //internal string m_act = null;
     //internal byte m_code = null;
@@ -96,10 +96,10 @@
       return path;
     }
 
-    internal CharazayDownoadItem (string act, byte code, ulong id) :
+    internal CharazayDownloadItem (string act, byte code, ulong id) :
       base(ConstructUri(act, code, id), ConstructFileName(act, code, id)) { }
 
-    internal CharazayDownoadItem (string act, ulong id) :
+    internal CharazayDownloadItem (string act, ulong id) :
       base(ConstructUri(act, id), ConstructFileName(act, id)) { }
   }
 
