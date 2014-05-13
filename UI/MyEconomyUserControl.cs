@@ -101,6 +101,8 @@
       ucEconomySeason.LabelsInit(_economy.economy_season.income, _economy.economy_season.expences, false);
     }
 
+    private TableLayoutPanel tlp;
+
 
 
     #region Component Designer generated code
@@ -128,24 +130,15 @@
     /// </summary>
     private void InitializeComponent ( )
     {
-      this.label54 = new System.Windows.Forms.Label();
       this.dgTeamTransfers = new System.Windows.Forms.DataGridView();
       this.olv = new BrightIdeasSoftware.ObjectListView();
-      this.label1 = new System.Windows.Forms.Label();
-      this.ucEconomyWeek = new AndreiPopescu.CharazayPlus.EconomyUserControl();
+      this.tlp = new System.Windows.Forms.TableLayoutPanel();
       this.ucEconomySeason = new AndreiPopescu.CharazayPlus.EconomyUserControl();
+      this.ucEconomyWeek = new AndreiPopescu.CharazayPlus.EconomyUserControl();
       ((System.ComponentModel.ISupportInitialize)(this.dgTeamTransfers)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.olv)).BeginInit();
+      this.tlp.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // label54
-      // 
-      this.label54.AutoSize = true;
-      this.label54.Location = new System.Drawing.Point(3, 3);
-      this.label54.Name = "label54";
-      this.label54.Size = new System.Drawing.Size(98, 13);
-      this.label54.TabIndex = 1;
-      this.label54.Text = "My Team Transfers";
       // 
       // dgTeamTransfers
       // 
@@ -156,84 +149,87 @@
       // 
       // olv
       // 
-      this.olv.AlternateRowBackColor = System.Drawing.Color.Gray;
-      this.olv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.olv.BackColor = System.Drawing.Color.DimGray;
+      this.olv.AlternateRowBackColor = System.Drawing.Color.Silver;
+      this.olv.BackColor = System.Drawing.Color.LightGray;
       this.olv.Cursor = System.Windows.Forms.Cursors.Default;
+      this.olv.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olv.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.olv.ForeColor = System.Drawing.Color.White;
       this.olv.FullRowSelect = true;
-      this.olv.Location = new System.Drawing.Point(6, 20);
+      this.olv.Location = new System.Drawing.Point(3, 3);
       this.olv.Name = "olv";
-      this.olv.Size = new System.Drawing.Size(176, 426);
+      this.tlp.SetRowSpan(this.olv, 2);
+      this.olv.Size = new System.Drawing.Size(327, 443);
       this.olv.SortGroupItemsByPrimaryColumn = false;
       this.olv.TabIndex = 2;
+      this.olv.UseAlternatingBackColors = true;
       this.olv.UseCompatibleStateImageBehavior = false;
       this.olv.UseHyperlinks = true;
       this.olv.View = System.Windows.Forms.View.Details;
       this.olv.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.olv_HyperlinkClicked);
       // 
-      // label1
+      // tlp
       // 
-      this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(490, 4);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(93, 13);
-      this.label1.TabIndex = 3;
-      this.label1.Text = "My Team Balance";
-      // 
-      // ucEconomyWeek
-      // 
-      this.ucEconomyWeek.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.ucEconomyWeek.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ucEconomyWeek.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-      this.ucEconomyWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.ucEconomyWeek.Location = new System.Drawing.Point(188, 20);
-      this.ucEconomyWeek.Name = "ucEconomyWeek";
-      this.ucEconomyWeek.Size = new System.Drawing.Size(395, 170);
-      this.ucEconomyWeek.TabIndex = 0;
+      this.tlp.ColumnCount = 2;
+      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.99659F));
+      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.00341F));
+      this.tlp.Controls.Add(this.olv, 0, 0);
+      this.tlp.Controls.Add(this.ucEconomySeason, 1, 1);
+      this.tlp.Controls.Add(this.ucEconomyWeek, 1, 0);
+      this.tlp.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tlp.Location = new System.Drawing.Point(0, 0);
+      this.tlp.Name = "tlp";
+      this.tlp.RowCount = 2;
+      this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tlp.Size = new System.Drawing.Size(586, 449);
+      this.tlp.TabIndex = 3;
       // 
       // ucEconomySeason
       // 
-      this.ucEconomySeason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucEconomySeason.AutoSize = true;
       this.ucEconomySeason.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ucEconomySeason.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+      this.ucEconomySeason.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucEconomySeason.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.ucEconomySeason.Location = new System.Drawing.Point(188, 196);
+      this.ucEconomySeason.Location = new System.Drawing.Point(336, 227);
       this.ucEconomySeason.Name = "ucEconomySeason";
-      this.ucEconomySeason.Size = new System.Drawing.Size(395, 170);
+      this.ucEconomySeason.Size = new System.Drawing.Size(247, 219);
       this.ucEconomySeason.TabIndex = 0;
+      // 
+      // ucEconomyWeek
+      // 
+      this.ucEconomyWeek.AutoSize = true;
+      this.ucEconomyWeek.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucEconomyWeek.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucEconomyWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.ucEconomyWeek.Location = new System.Drawing.Point(336, 3);
+      this.ucEconomyWeek.Name = "ucEconomyWeek";
+      this.ucEconomyWeek.Size = new System.Drawing.Size(247, 218);
+      this.ucEconomyWeek.TabIndex = 0;
       // 
       // MyEconomyUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.label1);
-      this.Controls.Add(this.olv);
-      this.Controls.Add(this.label54);
-      this.Controls.Add(this.ucEconomyWeek);
-      this.Controls.Add(this.ucEconomySeason);
+      this.Controls.Add(this.tlp);
       this.Name = "MyEconomyUserControl";
       this.Size = new System.Drawing.Size(586, 449);
       ((System.ComponentModel.ISupportInitialize)(this.dgTeamTransfers)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.olv)).EndInit();
+      this.tlp.ResumeLayout(false);
+      this.tlp.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 
     #endregion
 
     #region fields
-    private System.Windows.Forms.Label label54;
+
     private System.Windows.Forms.DataGridView dgTeamTransfers;
     private EconomyUserControl ucEconomyWeek;
     private EconomyUserControl ucEconomySeason;
     private BrightIdeasSoftware.ObjectListView olv;
-    private Label label1;
     private  uint _myTeamId;
     #endregion
 

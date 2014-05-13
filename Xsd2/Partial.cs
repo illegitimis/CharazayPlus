@@ -42,9 +42,9 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   /// </summary>
   public partial class charazayTransfer
   {
-    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Seller", Hyperlink=true)]
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 105, MinimumWidth = 80, MaximumWidth = 140, Title = "Seller", Hyperlink=true)]
     public string Seller { get { return CacheManager.Instance.TeamName(sellteam); } }
-    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Buyer", Hyperlink = true)]
+    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 105, MinimumWidth = 80, MaximumWidth = 140, Title = "Buyer", Hyperlink = true)]
     public string Buyer { get { return CacheManager.Instance.TeamName(buyteam); } }
     [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Date", AspectToStringFormat = "{0:yyyy-MM-dd}")]
     public System.DateTime Date { get { return Compute.EstimatedDateTime(dateField); } }
@@ -153,7 +153,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
    }
 
 
-    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Owner")]
+    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 85, MinimumWidth = 60, MaximumWidth = 100, Title = "Owner")]
     public uint Owner
     {
       get

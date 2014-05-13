@@ -138,6 +138,7 @@ namespace AndreiPopescu.CharazayPlus
     private ToolStripTextBox tstxtFilterText;
     private StatusStrip statusStrip;
     private ToolStripStatusLabel tsslbl;
+    private ToolStripStatusLabel tsslblr;
     private UI.TransferListUserControl ucTransferList;
     #endregion
 
@@ -260,6 +261,7 @@ namespace AndreiPopescu.CharazayPlus
       this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
       this.tsslbl = new System.Windows.Forms.ToolStripStatusLabel();
+      this.tsslblr = new System.Windows.Forms.ToolStripStatusLabel();
       this.sideTabControl = new AndreiPopescu.CharazayPlus.UI.SideTabControl();
       this.tabPageInfo = new System.Windows.Forms.TabPage();
       this.ucInfoTab = new AndreiPopescu.CharazayPlus.UI.InfoTabUserControl();
@@ -481,7 +483,8 @@ namespace AndreiPopescu.CharazayPlus
       // statusStrip
       // 
       this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslbl});
+            this.tsslbl,
+            this.tsslblr});
       this.statusStrip.Location = new System.Drawing.Point(0, 617);
       this.statusStrip.Name = "statusStrip";
       this.statusStrip.Size = new System.Drawing.Size(872, 22);
@@ -492,6 +495,13 @@ namespace AndreiPopescu.CharazayPlus
       this.tsslbl.Name = "tsslbl";
       this.tsslbl.Size = new System.Drawing.Size(130, 17);
       this.tsslbl.Text = "                                         ";
+      // 
+      // tsslblr
+      // 
+      this.tsslblr.AutoSize = false;
+      this.tsslblr.Name = "tsslblr";
+      this.tsslblr.Size = new System.Drawing.Size(700, 17);
+      this.tsslblr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // sideTabControl
       // 
@@ -520,7 +530,7 @@ namespace AndreiPopescu.CharazayPlus
       this.sideTabControl.Multiline = true;
       this.sideTabControl.Name = "sideTabControl";
       this.sideTabControl.SelectedIndex = 0;
-      this.sideTabControl.Size = new System.Drawing.Size(866, 612);
+      this.sideTabControl.Size = new System.Drawing.Size(866, 587);
       this.sideTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
       this.sideTabControl.TabIndex = 1;
       this.sideTabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.sideTabControl_Selected);
@@ -530,7 +540,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageInfo.Controls.Add(this.ucInfoTab);
       this.tabPageInfo.Location = new System.Drawing.Point(4, 4);
       this.tabPageInfo.Name = "tabPageInfo";
-      this.tabPageInfo.Size = new System.Drawing.Size(754, 604);
+      this.tabPageInfo.Size = new System.Drawing.Size(754, 579);
       this.tabPageInfo.TabIndex = 8;
       this.tabPageInfo.Text = "Info";
       this.tabPageInfo.UseVisualStyleBackColor = true;
@@ -542,7 +552,7 @@ namespace AndreiPopescu.CharazayPlus
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ucInfoTab.Location = new System.Drawing.Point(0, 0);
       this.ucInfoTab.Name = "ucInfoTab";
-      this.ucInfoTab.Size = new System.Drawing.Size(754, 583);
+      this.ucInfoTab.Size = new System.Drawing.Size(754, 558);
       this.ucInfoTab.TabIndex = 0;
       // 
       // tabPageStatus
@@ -551,7 +561,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageStatus.Location = new System.Drawing.Point(4, 4);
       this.tabPageStatus.Name = "tabPageStatus";
       this.tabPageStatus.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageStatus.Size = new System.Drawing.Size(754, 604);
+      this.tabPageStatus.Size = new System.Drawing.Size(754, 579);
       this.tabPageStatus.TabIndex = 0;
       this.tabPageStatus.Text = "Status";
       this.tabPageStatus.UseVisualStyleBackColor = true;
@@ -569,7 +579,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageSkills.Controls.Add(this.ucPlayerSkills);
       this.tabPageSkills.Location = new System.Drawing.Point(4, 4);
       this.tabPageSkills.Name = "tabPageSkills";
-      this.tabPageSkills.Size = new System.Drawing.Size(754, 604);
+      this.tabPageSkills.Size = new System.Drawing.Size(754, 579);
       this.tabPageSkills.TabIndex = 14;
       this.tabPageSkills.Text = "Skills";
       this.tabPageSkills.UseVisualStyleBackColor = true;
@@ -588,17 +598,21 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPagePG.Controls.Add(this.ucPG);
       this.tabPagePG.Location = new System.Drawing.Point(4, 4);
       this.tabPagePG.Name = "tabPagePG";
-      this.tabPagePG.Size = new System.Drawing.Size(754, 604);
+      this.tabPagePG.Size = new System.Drawing.Size(754, 579);
       this.tabPagePG.TabIndex = 2;
       this.tabPagePG.Text = "PG";
       this.tabPagePG.UseVisualStyleBackColor = true;
       // 
       // ucPG
       // 
-      this.ucPG.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucPG.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucPG.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucPG.Location = new System.Drawing.Point(0, 0);
+      this.ucPG.MinimumSize = new System.Drawing.Size(751, 576);
       this.ucPG.Name = "ucPG";
-      this.ucPG.Size = new System.Drawing.Size(754, 604);
+      this.ucPG.Size = new System.Drawing.Size(751, 576);
       this.ucPG.TabIndex = 0;
       // 
       // tabPageSG
@@ -606,17 +620,21 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageSG.Controls.Add(this.ucSG);
       this.tabPageSG.Location = new System.Drawing.Point(4, 4);
       this.tabPageSG.Name = "tabPageSG";
-      this.tabPageSG.Size = new System.Drawing.Size(754, 604);
+      this.tabPageSG.Size = new System.Drawing.Size(754, 579);
       this.tabPageSG.TabIndex = 3;
       this.tabPageSG.Text = "SG";
       this.tabPageSG.UseVisualStyleBackColor = true;
       // 
       // ucSG
       // 
-      this.ucSG.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucSG.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucSG.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucSG.Location = new System.Drawing.Point(0, 0);
+      this.ucSG.MinimumSize = new System.Drawing.Size(751, 576);
       this.ucSG.Name = "ucSG";
-      this.ucSG.Size = new System.Drawing.Size(13, 242);
+      this.ucSG.Size = new System.Drawing.Size(751, 576);
       this.ucSG.TabIndex = 0;
       // 
       // tabPageSF
@@ -624,17 +642,21 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageSF.Controls.Add(this.ucSF);
       this.tabPageSF.Location = new System.Drawing.Point(4, 4);
       this.tabPageSF.Name = "tabPageSF";
-      this.tabPageSF.Size = new System.Drawing.Size(754, 604);
+      this.tabPageSF.Size = new System.Drawing.Size(754, 579);
       this.tabPageSF.TabIndex = 4;
       this.tabPageSF.Text = "SF";
       this.tabPageSF.UseVisualStyleBackColor = true;
       // 
       // ucSF
       // 
-      this.ucSF.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucSF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucSF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucSF.Location = new System.Drawing.Point(0, 0);
+      this.ucSF.MinimumSize = new System.Drawing.Size(751, 576);
       this.ucSF.Name = "ucSF";
-      this.ucSF.Size = new System.Drawing.Size(13, 242);
+      this.ucSF.Size = new System.Drawing.Size(751, 576);
       this.ucSF.TabIndex = 0;
       // 
       // tabPagePF
@@ -642,17 +664,21 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPagePF.Controls.Add(this.ucPF);
       this.tabPagePF.Location = new System.Drawing.Point(4, 4);
       this.tabPagePF.Name = "tabPagePF";
-      this.tabPagePF.Size = new System.Drawing.Size(754, 604);
+      this.tabPagePF.Size = new System.Drawing.Size(754, 579);
       this.tabPagePF.TabIndex = 5;
       this.tabPagePF.Text = "PF";
       this.tabPagePF.UseVisualStyleBackColor = true;
       // 
       // ucPF
       // 
-      this.ucPF.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucPF.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucPF.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucPF.Location = new System.Drawing.Point(0, 0);
+      this.ucPF.MinimumSize = new System.Drawing.Size(751, 576);
       this.ucPF.Name = "ucPF";
-      this.ucPF.Size = new System.Drawing.Size(13, 242);
+      this.ucPF.Size = new System.Drawing.Size(751, 576);
       this.ucPF.TabIndex = 0;
       // 
       // tabPageC
@@ -660,17 +686,21 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageC.Controls.Add(this.ucC);
       this.tabPageC.Location = new System.Drawing.Point(4, 4);
       this.tabPageC.Name = "tabPageC";
-      this.tabPageC.Size = new System.Drawing.Size(754, 604);
+      this.tabPageC.Size = new System.Drawing.Size(754, 579);
       this.tabPageC.TabIndex = 6;
       this.tabPageC.Text = "C";
       this.tabPageC.UseVisualStyleBackColor = true;
       // 
       // ucC
       // 
-      this.ucC.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucC.Location = new System.Drawing.Point(0, 0);
+      this.ucC.MinimumSize = new System.Drawing.Size(751, 576);
       this.ucC.Name = "ucC";
-      this.ucC.Size = new System.Drawing.Size(13, 242);
+      this.ucC.Size = new System.Drawing.Size(751, 576);
       this.ucC.TabIndex = 0;
       // 
       // tabPageTraining
@@ -678,7 +708,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageTraining.Controls.Add(this.ucTraining);
       this.tabPageTraining.Location = new System.Drawing.Point(4, 4);
       this.tabPageTraining.Name = "tabPageTraining";
-      this.tabPageTraining.Size = new System.Drawing.Size(754, 604);
+      this.tabPageTraining.Size = new System.Drawing.Size(754, 579);
       this.tabPageTraining.TabIndex = 7;
       this.tabPageTraining.Text = "Training";
       this.tabPageTraining.UseVisualStyleBackColor = true;
@@ -698,7 +728,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyTeamSchedule.Controls.Add(this.ucMyTeamSchedule);
       this.tabPageMyTeamSchedule.Location = new System.Drawing.Point(4, 4);
       this.tabPageMyTeamSchedule.Name = "tabPageMyTeamSchedule";
-      this.tabPageMyTeamSchedule.Size = new System.Drawing.Size(754, 604);
+      this.tabPageMyTeamSchedule.Size = new System.Drawing.Size(754, 579);
       this.tabPageMyTeamSchedule.TabIndex = 9;
       this.tabPageMyTeamSchedule.Text = "My Team Schedule";
       this.tabPageMyTeamSchedule.UseVisualStyleBackColor = true;
@@ -719,7 +749,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyDivisionStandings.Controls.Add(this.ucStandings);
       this.tabPageMyDivisionStandings.Location = new System.Drawing.Point(4, 4);
       this.tabPageMyDivisionStandings.Name = "tabPageMyDivisionStandings";
-      this.tabPageMyDivisionStandings.Size = new System.Drawing.Size(754, 604);
+      this.tabPageMyDivisionStandings.Size = new System.Drawing.Size(754, 579);
       this.tabPageMyDivisionStandings.TabIndex = 10;
       this.tabPageMyDivisionStandings.Text = "My Division Standings";
       this.tabPageMyDivisionStandings.UseVisualStyleBackColor = true;
@@ -737,7 +767,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyDivisionSchedule.Controls.Add(this.ucDivisionSchedule);
       this.tabPageMyDivisionSchedule.Location = new System.Drawing.Point(4, 4);
       this.tabPageMyDivisionSchedule.Name = "tabPageMyDivisionSchedule";
-      this.tabPageMyDivisionSchedule.Size = new System.Drawing.Size(754, 604);
+      this.tabPageMyDivisionSchedule.Size = new System.Drawing.Size(754, 579);
       this.tabPageMyDivisionSchedule.TabIndex = 13;
       this.tabPageMyDivisionSchedule.Text = "My division schedule";
       // 
@@ -755,7 +785,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyEconomy.Controls.Add(this.ucMyEconomy);
       this.tabPageMyEconomy.Location = new System.Drawing.Point(4, 4);
       this.tabPageMyEconomy.Name = "tabPageMyEconomy";
-      this.tabPageMyEconomy.Size = new System.Drawing.Size(754, 604);
+      this.tabPageMyEconomy.Size = new System.Drawing.Size(754, 579);
       this.tabPageMyEconomy.TabIndex = 11;
       this.tabPageMyEconomy.Text = "My Economy";
       this.tabPageMyEconomy.UseVisualStyleBackColor = true;
@@ -774,7 +804,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageTL.Controls.Add(this.ucTransferList);
       this.tabPageTL.Location = new System.Drawing.Point(4, 4);
       this.tabPageTL.Name = "tabPageTL";
-      this.tabPageTL.Size = new System.Drawing.Size(754, 604);
+      this.tabPageTL.Size = new System.Drawing.Size(754, 579);
       this.tabPageTL.TabIndex = 12;
       this.tabPageTL.Text = "Transfer List";
       this.tabPageTL.UseVisualStyleBackColor = true;
@@ -948,7 +978,16 @@ namespace AndreiPopescu.CharazayPlus
               { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " " + ev.Surname; };
           } break;
 
-        case SideTabPage.Skills: ucPlayerSkills.Players = _optimumPlayers; break;
+        case SideTabPage.Skills:
+          { 
+            ucPlayerSkills.Players = _optimumPlayers; 
+            this.ucPlayerSkills.SelectionChanged += (sndr,ev) => {
+              this.tsslbl.Text = String.Format("Selected {0} of {1} items", ev.SelectedIndices, ev.ItemCount);
+              this.tsslblr.Text = String.Format("Selected player: {0}", ev.FullName);
+            };
+              
+          }
+          break;
 
         default: break;
       }

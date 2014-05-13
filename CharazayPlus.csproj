@@ -119,9 +119,6 @@
     <Compile Include="UI\InfoTabUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\InfoTabUserControl.Designer.cs">
-      <DependentUpon>InfoTabUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\MyEconomyUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

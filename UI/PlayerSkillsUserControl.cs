@@ -77,11 +77,7 @@
       this.olvcPosSk = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcPosH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.groupImageList = new System.Windows.Forms.ImageList(this.components);
-      this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).BeginInit();
-      this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
       // imageList1
@@ -122,8 +118,8 @@
       this.olvComplex.AllColumns.Add(this.olvcPosH);
       this.olvComplex.AllowColumnReorder = true;
       this.olvComplex.AllowDrop = true;
-      this.olvComplex.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-      this.olvComplex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+      this.olvComplex.AlternateRowBackColor = System.Drawing.Color.LightGray;
+      this.olvComplex.BackColor = System.Drawing.Color.Silver;
       this.olvComplex.CheckedAspectName = "";
       this.olvComplex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvcFN,
@@ -151,7 +147,7 @@
       this.olvComplex.Cursor = System.Windows.Forms.Cursors.Default;
       this.olvComplex.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olvComplex.EmptyListMsg = "This list is empty. Press \"Add\" to create some items";
-      this.olvComplex.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(220)))), ((int)(((byte)(210)))));
+      this.olvComplex.ForeColor = System.Drawing.Color.Black;
       this.olvComplex.FullRowSelect = true;
       this.olvComplex.GroupImageList = this.groupImageList;
       this.olvComplex.GroupWithItemCountFormat = "{0} ({1} people)";
@@ -301,44 +297,15 @@
       this.groupImageList.ImageSize = new System.Drawing.Size(16, 16);
       this.groupImageList.TransparentColor = System.Drawing.Color.Transparent;
       // 
-      // statusStrip1
-      // 
-      this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel3});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 352);
-      this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(907, 22);
-      this.statusStrip1.TabIndex = 3;
-      this.statusStrip1.Text = "statusStrip1";
-      // 
-      // toolStripStatusLabel1
-      // 
-      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-      this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-      this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-      // 
-      // toolStripStatusLabel3
-      // 
-      this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-      this.toolStripStatusLabel3.Size = new System.Drawing.Size(774, 17);
-      this.toolStripStatusLabel3.Spring = true;
-      this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
-      this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
       // PlayerSkillsUserControl
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-      this.Controls.Add(this.statusStrip1);
       this.Controls.Add(this.olvComplex);
       this.Name = "PlayerSkillsUserControl";
       this.Size = new System.Drawing.Size(907, 374);
       this.Load += new System.EventHandler(this.MainForm_Load);
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).EndInit();
-      this.statusStrip1.ResumeLayout(false);
-      this.statusStrip1.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 
@@ -512,11 +479,8 @@
     private ObjectListView olvComplex;
     private BrightIdeasSoftware.OLVColumn olvc2pA;
     private System.Windows.Forms.ImageList imageList1;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-    private System.Windows.Forms.StatusStrip statusStrip1;
     private ImageList imageList2;
     private OLVColumn olvc3pA;
-    private ToolStripStatusLabel toolStripStatusLabel3;
     #endregion
 
    
@@ -605,6 +569,7 @@
   
     }
 
+    public event EventHandler <PlayerSelectionEventArgs> SelectionChanged;
 
     #region Form event handlers
 
@@ -623,13 +588,17 @@
     void ListViewSelectedIndexChanged (object sender, System.EventArgs e)
     {
       ObjectListView listView = (ObjectListView)sender;
-      string msg;
       Player p = (Player)listView.SelectedObject;
-      if (p == null)
-        msg = listView.SelectedIndices.Count.ToString();
-      else
-        msg = String.Format("'{0}'", p.FullName);
-      this.toolStripStatusLabel1.Text = String.Format("Selected {0} of {1} items", msg, listView.GetItemCount());
+
+      if (SelectionChanged != null)
+        SelectionChanged(this, new PlayerSelectionEventArgs()
+        {
+          SelectedIndices = listView.SelectedIndices.Count
+          ,
+          FullName = (p == null) ? "" : p.FullName
+          ,
+          ItemCount = listView.GetItemCount()
+        });    
     }
     #endregion
 
@@ -724,23 +693,23 @@
       ObjectListView olv = sender as ObjectListView;
       if (sender == null)
       {
-        this.toolStripStatusLabel3.Text = "";
+        //this.toolStripStatusLabel3.Text = "";
         return;
       }
 
       switch (e.HotCellHitLocation)
       {
         case HitTestLocation.Nothing:
-          this.toolStripStatusLabel3.Text = "Over nothing";
+          //this.toolStripStatusLabel3.Text = "Over nothing";
           break;
         case HitTestLocation.Group:
-          this.toolStripStatusLabel3.Text = String.Format("Over group '{0}', {1}", e.HotGroup.Header, e.HotCellHitLocationEx);
+          //this.toolStripStatusLabel3.Text = String.Format("Over group '{0}', {1}", e.HotGroup.Header, e.HotCellHitLocationEx);
           break;
         case HitTestLocation.GroupExpander:
-          this.toolStripStatusLabel3.Text = String.Format("Over group expander of '{0}'", e.HotGroup.Header);
+          //this.toolStripStatusLabel3.Text = String.Format("Over group expander of '{0}'", e.HotGroup.Header);
           break;
         default:
-          this.toolStripStatusLabel3.Text = String.Format("Over {0} of ({1}, {2})", e.HotCellHitLocation, e.HotRowIndex, e.HotColumnIndex);
+          //this.toolStripStatusLabel3.Text = String.Format("Over {0} of ({1}, {2})", e.HotCellHitLocation, e.HotRowIndex, e.HotColumnIndex);
           break;
       }
     }

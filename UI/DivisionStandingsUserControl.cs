@@ -310,9 +310,12 @@ namespace AndreiPopescu.CharazayPlus.UI
     public void Init (Xsd2.charazayDivisionStanding[] standings)
     {
       Generator.GenerateColumns(this.olv, typeof(Xsd2.charazayDivisionStanding)/*, standings*/);
+      //
+      olv.HeaderUsesThemes = false;
+      //
       foreach (OLVColumn col in olv.Columns)
       { 
-        col.IsHeaderVertical = false;
+        col.IsHeaderVertical = true;
         col.Hyperlink = (col.AspectName == "TeamID" || col.AspectName == "Owner");
       }
       //
