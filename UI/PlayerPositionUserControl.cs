@@ -30,7 +30,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       Generator.GenerateColumns(olv, players);
       olv.HeaderUsesThemes = false;
 
-      double[] scoreMarkers = new double[] { 6, 8, 10, 12, 14, 16, 18, 20 };
+      double[] scoreMarkers = new double[] { 5, 8, 10, 12, 14, 16, 18, 20 };
       string[] descriptions = ObjectListViewExtensions.BuildCustomGroupies<double>(scoreMarkers);
 
       foreach (OLVColumn col in olv.Columns)
@@ -62,6 +62,13 @@ namespace AndreiPopescu.CharazayPlus.UI
           case 28:
             { // value index
               double[] avMarks = new double[] { 0.6, 0.8, 0.9, 0.95, 1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.15, 1.2, 1.25, 1.3, 1.4, 1.5};
+              string[] avDescr = ObjectListViewExtensions.BuildCustomGroupies<double>(avMarks);
+              col.MakeGroupies(avMarks, avDescr);
+            } break;
+
+          case 29:
+            { // transfer market value
+              double[] avMarks = new double[] { 0.5d, 1d, 2d, 5d, 10d, 15d, 20d, 30d, 50d, 75d, 100d, 150d };
               string[] avDescr = ObjectListViewExtensions.BuildCustomGroupies<double>(avMarks);
               col.MakeGroupies(avMarks, avDescr);
             } break;

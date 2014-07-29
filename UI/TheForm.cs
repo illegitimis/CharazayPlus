@@ -120,7 +120,8 @@ namespace AndreiPopescu.CharazayPlus
     private ToolStripMenuItem aboutToolStripMenuItem;
     private TabPage tabPageSkills;
     private UI.PlayerSkillsUserControl ucPlayerSkills;
-    private UI.MyTeamScheduleUserControl ucMyTeamSchedule;
+    //private UI.MyTeamScheduleUserControl ucMyTeamSchedule;
+    UI.TeamScheduleUserControl ucMyTeamSchedule;
     private UI.InfoTabUserControl ucInfoTab;
     private StatusUserControl ucStatus;
     private PlayerPositionUserControl ucPG;
@@ -282,7 +283,8 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageTraining = new System.Windows.Forms.TabPage();
       this.ucTraining = new AndreiPopescu.CharazayPlus.UI.TrainingTabUserControl();
       this.tabPageMyTeamSchedule = new System.Windows.Forms.TabPage();
-      this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.MyTeamScheduleUserControl();
+      //this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.MyTeamScheduleUserControl();
+      this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.TeamScheduleUserControl();
       this.tabPageMyDivisionStandings = new System.Windows.Forms.TabPage();
       this.ucStandings = new AndreiPopescu.CharazayPlus.UI.DivisionStandingsUserControl();
       this.tabPageMyDivisionSchedule = new System.Windows.Forms.TabPage();
@@ -738,11 +740,11 @@ namespace AndreiPopescu.CharazayPlus
       this.ucMyTeamSchedule.AutoSize = true;
       this.ucMyTeamSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucMyTeamSchedule.Location = new System.Drawing.Point(0, 0);
-      this.ucMyTeamSchedule.MySchedule = null;
+      //this.ucMyTeamSchedule.MySchedule = null;
       this.ucMyTeamSchedule.Name = "ucMyTeamSchedule";
       this.ucMyTeamSchedule.Size = new System.Drawing.Size(0, 242);
       this.ucMyTeamSchedule.TabIndex = 0;
-      this.ucMyTeamSchedule.Team = null;
+      //this.ucMyTeamSchedule.Team = null;
       // 
       // tabPageMyDivisionStandings
       // 
@@ -936,10 +938,13 @@ namespace AndreiPopescu.CharazayPlus
         case SideTabPage.MyTeamSchedule:
           {
 
-            this.ucMyTeamSchedule.MySchedule = this._mySchedule;
-            this.ucMyTeamSchedule.Team = this._team;
-            this.ucMyTeamSchedule.initTeamScheduleFilter();
-            this.ucMyTeamSchedule.initDgMySchedule();
+            //this.ucMyTeamSchedule.MySchedule = this._mySchedule;
+            //this.ucMyTeamSchedule.Team = this._team;
+            //this.ucMyTeamSchedule.initTeamScheduleFilter();
+            //this.ucMyTeamSchedule.initDgMySchedule();
+
+            this.ucMyTeamSchedule.Init(this._mySchedule, this._team.id);
+
             AddMyTeamScheduleToCache();
           } break;
 

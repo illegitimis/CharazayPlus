@@ -51,9 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTest.cs" />
-    <Compile Include="LinearTest.cs" />
+    <Compile Include="LinearAlgebraTest.cs" />
     <Compile Include="PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransferMarket112Test.cs" />
     <Compile Include="TransferMarketTest.cs" />
     <Compile Include="Xsd2Test.cs" />
   </ItemGroup>

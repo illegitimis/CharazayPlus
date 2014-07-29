@@ -28,7 +28,21 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
       
       Generator.GenerateColumns(olv, ratings);
-      olv.SetObjects(ratings);
+      if (Extensions.IsNullOrEmpty(ratings))
+        olv.ClearObjects();
+      else
+      {
+        olv.SetObjects(ratings);
+        //
+        // CacheManager
+        //
+        foreach (Xsd2.rating r in ratings)
+        {
+          CacheManager.Instance.AddPlayer(r.playerid, r.name);
+        }
+      }
+        
+
 
       //olv.Columns.Add("bball");
       //olv.AllColumns[18].AspectPutter = 
@@ -36,13 +50,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       //  {
 
       //  }
-      //
-      // CacheManager
-      //
-      foreach (Xsd2.rating r in ratings )
-      {
-        CacheManager.Instance.AddPlayer(r.playerid, r.name);
-      }
+      
     }
 
     public RatingType RatingType { get; set; }

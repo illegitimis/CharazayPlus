@@ -53,5 +53,16 @@ using AndreiPopescu.CharazayPlus.Utils;
       Assert.AreEqual<byte>(cd.Week, 1);
       Assert.AreEqual<byte>(cd.Day, 1);
     }
+
+    //S30 W6 D5
+    [TestMethod()]
+    public void CharazayDate_20140513 ( )
+    {
+      var dt = new DateTime(2014, 05, 13);
+      CharazayDate cd = dt;
+      Assert.AreEqual<byte>(cd.Season, 30);
+      Assert.AreEqual<byte>(cd.Week, 6);
+      Assert.AreEqual<byte>(cd.Day, 5);
+    }
   }
 }

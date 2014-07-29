@@ -126,9 +126,6 @@
     <Compile Include="UI\MyTeamScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\MyTeamScheduleUserControl.Designer.cs">
-      <DependentUpon>MyTeamScheduleUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\PlayerEventArgs.cs" />
     <Compile Include="UI\PlayerPositionUserControl.cs">
       <SubType>UserControl</SubType>
@@ -138,6 +135,9 @@
     </Compile>
     <Compile Include="UI\StatusUserControl.Designer.cs">
       <DependentUpon>StatusUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TeamScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\TrainingPlanUserControl.cs">
       <SubType>UserControl</SubType>
@@ -187,6 +187,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
+    <Compile Include="Utils\Interpolation112.cs" />
+    <Compile Include="Utils\TransferMarket112.cs" />
     <Compile Include="Utils\TransferMarket.cs" />
     <Compile Include="Utils\Linear.cs" />
     <Compile Include="Utils\TrainingEfficiencyCalculator.cs" />
@@ -326,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StatusUserControl.resx">
       <DependentUpon>StatusUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TeamScheduleUserControl.resx">
+      <DependentUpon>TeamScheduleUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TheForm.resx">
       <DependentUpon>TheForm.cs</DependentUpon>

@@ -100,7 +100,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       double[] valueIndices = new double[] { 0.8d, 0.85d, 0.9d, 1d, 1.05d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
       string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(valueIndices);
       // profitability
-      double[] profitabilityIndices = new double[] { 0.6d, 0.75d, 0.9d, 1d, 1.1d, 1.25d, 1.5d, 2d, 3d, 5d, 10d };
+      double[] profitabilityIndices = new double[] { 0.5d, 0.75d, 0.9d, 1d, 1.1d, 1.25d, 1.5d, 2d, 3d, 5d, 10d, 20d, 50d, 100d };
       string[] profitabilityDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(profitabilityIndices);
       //
       foreach (OLVColumn col in olvTL.Columns)
@@ -204,7 +204,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         tlp.Deadline = dtpDeadline.Value.ToString("yyyy/MM/dd HH:mm");      
         tlp.Position = Enum.GetName(typeof(PlayerPosition), pos);
         tlp.Price = string.IsNullOrEmpty(tbxPrice.Text) ? (uint)Math.Pow(10, 6) : uint.Parse(tbxPrice.Text);      
-        tlp.Profitability = basePlayer.Profitability((double)tlp.Price);
+        tlp.Profitability = Math.Pow(10d,6d)*basePlayer.TransferMarketValue / (double)tlp.Price;
         //
         tlp.Player = basePlayer;
         CacheManager.Instance.AddPlayer(basePlayer.Id, basePlayer.FullName);

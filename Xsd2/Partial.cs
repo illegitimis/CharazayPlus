@@ -11,30 +11,67 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   /// </summary>
   public partial class match
   {
+    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 75, MinimumWidth = 60, MaximumWidth = 90, Title = "Id", Hyperlink = true)]
+    public uint Id { get { return this.idField; } }
+    
+    public uint HomeTeamId { get { return teams.hometeam; } }
+    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 130, MinimumWidth = 80, MaximumWidth = 180, Title = "Home", Hyperlink = true)]
     public string HomeTeamName { get { return teams.hometeamname; } }
+
+    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 50, MinimumWidth = 40, MaximumWidth = 60, Title = "", Hyperlink = false)]
+    public byte HomeTeamScore { get { return this.homescore; } }
+
+    [OLVColumn(DisplayIndex = 3, IsEditable = false, Width = 50, MinimumWidth = 40, MaximumWidth = 60, Title = "", Hyperlink = false)]
+    public byte AwayTeamScore { get { return this.awayscore; } }
+
+    public uint AwayTeamId { get { return teams.awayteam; } }
+    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 130, MinimumWidth = 80, MaximumWidth = 180, Title = "Away", Hyperlink = true)]
     public string AwayTeamName { get { return teams.awayteamname; } }
 
-    public uint HomeTeamId { get { return teams.hometeam; } }
-    public uint AwayTeamId { get { return teams.awayteam; } }
+    [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Type")]
+    public MatchType MatchType { get { return (MatchType)typeField; } }
 
-    public string MatchType
-    {
-      get { return System.Enum.GetName(typeof(MatchType), (MatchType)typeField); }
-    }
-
+    [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Played", CheckBoxes = true)]
     public bool Played { get { return playedField == "yes"; } }
-
-    public System.DateTime Date_ { get { return Compute.EstimatedDateTime(dateField); } }
 
     [System.Xml.Serialization.XmlIgnore]
     public uint MyTeamId { private get; set; }
 
-    public bool Won { get { return (homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId); } }
+    [OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Won", CheckBoxes = true)]
+    public bool Won { get { return Played && ((homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId)); } }
+
+    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 110, MinimumWidth = 60, MaximumWidth = 140, Title = "Date")]
+    public System.DateTime Date_ { get { return Compute.EstimatedDateTime(dateField); } }
+
+    CharazayDate CharazayDate { get { return Date_; } }
+
+    [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Season")]
+    public byte Season { get { return this.CharazayDate.Season; } }
+
+    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Week")]
+    public byte Week { get { return this.CharazayDate.Week; } }
+
+    [OLVColumn(DisplayIndex = 11, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Round")]
+    public byte Round { get { return this.roundField; } }
+
+    [OLVColumn(DisplayIndex = 12, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "+/-")]
+    public int PlusMinus { get {
+      if (Played)
+      {
+        if (HomeTeamId == MyTeamId)
+          return homescore - awayscore;
+        else if (AwayTeamId == MyTeamId)
+          return awayscore - homescore;
+        else return 0;
+      }
+      else
+        return 0;
+       } }
 
     public override string ToString ( )
     {
       return string.Format("{0} {1} - {2} {3}", HomeTeamName, this.homescore, this.awayscore, AwayTeamName);
-    }
+    }    
   }
 
   /// <summary>

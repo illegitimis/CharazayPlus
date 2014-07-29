@@ -11,7 +11,7 @@ namespace CharazayPlus.Tests
     ///to contain all LinearTest Unit Tests
     ///</summary>
   [TestClass()]
-  public class UtilsLinear
+  public class LinearAlgebraTest
   {
     /// <summary>
     ///A test for ArraySum

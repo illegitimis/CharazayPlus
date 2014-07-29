@@ -33,21 +33,22 @@ player aspect (ok)
 -------------------------------
 8) TRAINING TAB
 suggested training combination (ok)
-debug suggested training
+debug suggested training [...]
 -------------------------------
 9) MY team SCHEDULE
 debug xml received  (ok)
-replace with new olv-based control
+replace with new olv-based control [...]
 better filter
+
 -------------------------------
 10) DIVISION STANDINGS
 debug xml received  (ok)
 layout new control (ok)
-plsu minus
+plsu minus (ok)
 -----------------------
 11) DIVISION SCHEDULE
 debug xml  (ok)
-reinit away team control 
+reinit away team control (ok)
 -----------------------
 12) ECONOMY
 debug  (ok)

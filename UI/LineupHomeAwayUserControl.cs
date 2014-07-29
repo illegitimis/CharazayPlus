@@ -1080,70 +1080,93 @@ namespace AndreiPopescu.CharazayPlus.UI
     //public void Lineup(Xsd2.charazayMatchLineup l)
     public void SetData(Xsd2.lineup l)
     {
-      //
-      // home 1st
-      //
-      pgh1.Text = CacheManager.Instance.PlayerName (l.home.first.pg);
-      sgh1.Text = CacheManager.Instance.PlayerName (l.home.first.sg);
-      sfh1.Text = CacheManager.Instance.PlayerName (l.home.first.sf);
-      pfh1.Text = CacheManager.Instance.PlayerName (l.home.first.pf);
-      ch1.Text = CacheManager.Instance.PlayerName(l.home.first.c);
-      //
-      // home 2nd
-      //
-      pgh2.Text = CacheManager.Instance.PlayerName(l.home.second.pg);
-      sgh2.Text = CacheManager.Instance.PlayerName(l.home.second.sg);
-      sfh2.Text = CacheManager.Instance.PlayerName(l.home.second.sf);
-      pfh2.Text = CacheManager.Instance.PlayerName(l.home.second.pf);
-      ch2.Text = CacheManager.Instance.PlayerName(l.home.second.c);
-      //
-      // home 3rd
-      //
-      pgh3.Text = CacheManager.Instance.PlayerName(l.home.third.pg);
-      sgh3.Text = CacheManager.Instance.PlayerName(l.home.third.sg);
-      sfh3.Text = CacheManager.Instance.PlayerName(l.home.third.sf);
-      pfh3.Text = CacheManager.Instance.PlayerName(l.home.third.pf);
-      ch3.Text = CacheManager.Instance.PlayerName(l.home.third.c);
-      //
-      // home 4th
-      //
-      pgh4.Text = CacheManager.Instance.PlayerName(l.home.forth.pg);
-      sgh4.Text = CacheManager.Instance.PlayerName(l.home.forth.sg);
-      sfh4.Text = CacheManager.Instance.PlayerName(l.home.forth.sf);
-      pfh4.Text = CacheManager.Instance.PlayerName(l.home.forth.pf);
-      ch4.Text = CacheManager.Instance.PlayerName(l.home.forth.c);
-      //
-      // away 1st
-      //
-      pga1.Text = CacheManager.Instance.PlayerName(l.away.first.pg);
-      sga1.Text = CacheManager.Instance.PlayerName(l.away.first.sg);
-      sfa1.Text = CacheManager.Instance.PlayerName(l.away.first.sf);
-      pfa1.Text = CacheManager.Instance.PlayerName(l.away.first.pf);
-      ca1.Text = CacheManager.Instance.PlayerName(l.away.first.c);
-      //
-      // away 2nd
-      //
-      pga2.Text = CacheManager.Instance.PlayerName(l.away.second.pg);
-      sga2.Text = CacheManager.Instance.PlayerName(l.away.second.sg);
-      sfa2.Text = CacheManager.Instance.PlayerName(l.away.second.sf);
-      pfa2.Text = CacheManager.Instance.PlayerName(l.away.second.pf);
-      ca2.Text = CacheManager.Instance.PlayerName(l.away.second.c);
-      //
-      // away 3rd
-      //
-      pga3.Text = CacheManager.Instance.PlayerName(l.away.third.pg);
-      sga3.Text = CacheManager.Instance.PlayerName(l.away.third.sg);
-      sfa3.Text = CacheManager.Instance.PlayerName(l.away.third.sf);
-      pfa3.Text = CacheManager.Instance.PlayerName(l.away.third.pf);
-      ca3.Text = CacheManager.Instance.PlayerName(l.away.third.c);
-      //
-      // away 4th
-      //
-      pga4.Text = CacheManager.Instance.PlayerName(l.away.forth.pg);
-      sga4.Text = CacheManager.Instance.PlayerName(l.away.forth.sg);
-      sfa4.Text = CacheManager.Instance.PlayerName(l.away.forth.sf);
-      pfa4.Text = CacheManager.Instance.PlayerName(l.away.forth.pf);
-      ca4.Text = CacheManager.Instance.PlayerName(l.away.forth.c);
+      if (l == null) return;
+      if (l.home == null)
+      {
+        pgh1.Text = string.Empty; sgh1.Text = string.Empty; sfh1.Text = string.Empty; pfh1.Text = string.Empty; ch1.Text = string.Empty;
+        pgh2.Text = string.Empty; sgh2.Text = string.Empty; sfh2.Text = string.Empty; pfh2.Text = string.Empty; ch2.Text = string.Empty;
+        pgh3.Text = string.Empty; sgh3.Text = string.Empty; sfh3.Text = string.Empty; pfh3.Text = string.Empty; ch3.Text = string.Empty;
+        pgh4.Text = string.Empty; sgh4.Text = string.Empty; sfh4.Text = string.Empty; pfh4.Text = string.Empty; ch4.Text = string.Empty;
+      }
+      else
+      {
+        //
+        // home 1st
+        //
+        pgh1.Text = CacheManager.Instance.PlayerName(l.home.first.pg);
+        sgh1.Text = CacheManager.Instance.PlayerName(l.home.first.sg);
+        sfh1.Text = CacheManager.Instance.PlayerName(l.home.first.sf);
+        pfh1.Text = CacheManager.Instance.PlayerName(l.home.first.pf);
+        ch1.Text = CacheManager.Instance.PlayerName(l.home.first.c);
+        //
+        // home 2nd
+        //
+        pgh2.Text = CacheManager.Instance.PlayerName(l.home.second.pg);
+        sgh2.Text = CacheManager.Instance.PlayerName(l.home.second.sg);
+        sfh2.Text = CacheManager.Instance.PlayerName(l.home.second.sf);
+        pfh2.Text = CacheManager.Instance.PlayerName(l.home.second.pf);
+        ch2.Text = CacheManager.Instance.PlayerName(l.home.second.c);
+        //
+        // home 3rd
+        //
+        pgh3.Text = CacheManager.Instance.PlayerName(l.home.third.pg);
+        sgh3.Text = CacheManager.Instance.PlayerName(l.home.third.sg);
+        sfh3.Text = CacheManager.Instance.PlayerName(l.home.third.sf);
+        pfh3.Text = CacheManager.Instance.PlayerName(l.home.third.pf);
+        ch3.Text = CacheManager.Instance.PlayerName(l.home.third.c);
+        //
+        // home 4th
+        //
+        pgh4.Text = CacheManager.Instance.PlayerName(l.home.forth.pg);
+        sgh4.Text = CacheManager.Instance.PlayerName(l.home.forth.sg);
+        sfh4.Text = CacheManager.Instance.PlayerName(l.home.forth.sf);
+        pfh4.Text = CacheManager.Instance.PlayerName(l.home.forth.pf);
+        ch4.Text = CacheManager.Instance.PlayerName(l.home.forth.c);
+      }
+      if (l.away == null)
+      {
+        pga1.Text = string.Empty; sga1.Text = string.Empty; sfa1.Text = string.Empty; pfa1.Text = string.Empty; ca1.Text = string.Empty;
+        pga2.Text = string.Empty; sga2.Text = string.Empty; sfa2.Text = string.Empty; pfa2.Text = string.Empty; ca2.Text = string.Empty;
+        pga3.Text = string.Empty; sga3.Text = string.Empty; sfa3.Text = string.Empty; pfa3.Text = string.Empty; ca3.Text = string.Empty;
+        pga4.Text = string.Empty; sga4.Text = string.Empty; sfa4.Text = string.Empty; pfa4.Text = string.Empty; ca4.Text = string.Empty;
+      }
+      else
+      {
+        //
+        // away 1st
+        //
+        pga1.Text = CacheManager.Instance.PlayerName(l.away.first.pg);
+        sga1.Text = CacheManager.Instance.PlayerName(l.away.first.sg);
+        sfa1.Text = CacheManager.Instance.PlayerName(l.away.first.sf);
+        pfa1.Text = CacheManager.Instance.PlayerName(l.away.first.pf);
+        ca1.Text = CacheManager.Instance.PlayerName(l.away.first.c);
+        //
+        // away 2nd
+        //
+        pga2.Text = CacheManager.Instance.PlayerName(l.away.second.pg);
+        sga2.Text = CacheManager.Instance.PlayerName(l.away.second.sg);
+        sfa2.Text = CacheManager.Instance.PlayerName(l.away.second.sf);
+        pfa2.Text = CacheManager.Instance.PlayerName(l.away.second.pf);
+        ca2.Text = CacheManager.Instance.PlayerName(l.away.second.c);
+        //
+        // away 3rd
+        //
+        pga3.Text = CacheManager.Instance.PlayerName(l.away.third.pg);
+        sga3.Text = CacheManager.Instance.PlayerName(l.away.third.sg);
+        sfa3.Text = CacheManager.Instance.PlayerName(l.away.third.sf);
+        pfa3.Text = CacheManager.Instance.PlayerName(l.away.third.pf);
+        ca3.Text = CacheManager.Instance.PlayerName(l.away.third.c);
+        //
+        // away 4th
+        //
+        pga4.Text = CacheManager.Instance.PlayerName(l.away.forth.pg);
+        sga4.Text = CacheManager.Instance.PlayerName(l.away.forth.sg);
+        sfa4.Text = CacheManager.Instance.PlayerName(l.away.forth.sf);
+        pfa4.Text = CacheManager.Instance.PlayerName(l.away.forth.pf);
+        ca4.Text = CacheManager.Instance.PlayerName(l.away.forth.c);
+      }
+      
+      
     }
 
     [Browsable(true)]

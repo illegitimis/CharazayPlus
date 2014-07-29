@@ -122,11 +122,38 @@ namespace CharazayPlus.MSTest
         foreach (char c in pos)
         {
           List<double[]> actual = TransferMarket.Find(age, c).ToList();
-          LeastSquares.Fit fiteo = new LeastSquares.ExponentialOptimum(actual);
-          LeastSquares.Fit fite = new LeastSquares.Exponential(actual);
-          LeastSquares.Fit fit = new LeastSquares.Linear(actual);
-          System.Diagnostics.Debug.WriteLine("{0} {1} {2} {3} {4}", age, c, fiteo, fite, fit);
-
+          
+          LeastSquares.Fit opt = new LeastSquares.ExponentialOptimum(actual);
+          LeastSquares.Fit exp = new LeastSquares.Exponential(actual);
+          LeastSquares.Fit lin = new LeastSquares.Linear(actual);
+          
+          LeastSquares.Fit fit = null;
+          char method = '-';
+          double r2 = 0d;
+          try
+          {
+            if (opt.R2 > r2)
+            {
+              method = 'o'; r2 = opt.R2; fit = opt;
+            }
+          }
+          catch { }
+          try
+          {
+          if (lin.R2 > r2)
+          {
+            method = 'l'; r2 = lin.R2; fit = lin;
+          }}
+          catch { }
+          try
+          {
+            if (exp.R2 > r2)
+            {
+              method = 'e'; r2 = exp.R2; fit = exp;
+            }
+          }
+          catch { }
+          System.Diagnostics.Debug.WriteLine("{0} {1} {2} {3:F02} {4}", age, c, method, r2, fit);
         }
       }
       

@@ -379,6 +379,10 @@ C : Defence>Footwork>Speed
       }
     }
 
-    public override double ValueIndex { get { return TotalScore / PG.StoredAssessedValues[StoredAssessedIndex]; } }
+    public override double ValueIndex { get { return TotalScore / PG.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double TransferMarketValue
+    {
+      get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
+    }
   }
 }

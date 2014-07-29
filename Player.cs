@@ -179,10 +179,11 @@
 
     #endregion
 
-    // 15 1  - 0
-    // 15 17 - 16
-    // 16 0  - 17
-    protected int StoredAssessedIndex
+    /// <summary>
+    /// gets training week index [0-288] from player age and current charazay date (season, week)
+    /// <example> age: 15 week:1 => index:0, age: 15 w:17 - index:16, age: 16 w:0  - idx:17</example>
+    /// </summary>
+    protected int TrainingWeekIndex
     {
       get
       {
@@ -401,18 +402,7 @@
     }
 
     public bool Injury { get { return InjuryDays != 0; } }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="price"></param>
-    /// <returns></returns>
-    public double Profitability (double price)
-    {
-      // price in millions
-      price /= Math.Pow(10, 6);
-      return 10 * Math.Pow(ValueIndex, 5) / price;
-    }
+       
     #endregion
 
     #region User Interface Values
@@ -529,10 +519,22 @@
           , new double[] { DefensiveScore, OffensiveScore, ReboundScore });
       }
     }
+    
+    /// <summary>
+    /// age/value factor or value index 
+    /// </summary>
     [OLVColumn(DisplayIndex = 28, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public abstract double ValueIndex
     {
       get;     
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [OLVColumn(DisplayIndex = 29, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
+    public abstract double TransferMarketValue
+    {
+      get;
     }
 
     public override string ToString ( )

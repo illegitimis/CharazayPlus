@@ -342,6 +342,10 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    public override double ValueIndex { get { return TotalScore / SG.StoredAssessedValues[StoredAssessedIndex]; } }
+    public override double ValueIndex { get { return TotalScore / SG.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double TransferMarketValue
+    {
+      get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
+    }
   }
 }
