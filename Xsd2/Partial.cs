@@ -28,7 +28,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 130, MinimumWidth = 80, MaximumWidth = 180, Title = "Away", Hyperlink = true)]
     public string AwayTeamName { get { return teams.awayteamname; } }
 
-    [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 100, MinimumWidth = 80, MaximumWidth = 120, Title = "Type")]
+    [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 85, MinimumWidth = 65, MaximumWidth = 105, Title = "Type")]
     public MatchType MatchType { get { return (MatchType)typeField; } }
 
     [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Played", CheckBoxes = true)]
@@ -40,21 +40,21 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     [OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Won", CheckBoxes = true)]
     public bool Won { get { return Played && ((homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId)); } }
 
-    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 110, MinimumWidth = 60, MaximumWidth = 140, Title = "Date")]
+    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 95, MinimumWidth = 60, MaximumWidth = 125, Title = "Date")]
     public System.DateTime Date_ { get { return Compute.EstimatedDateTime(dateField); } }
 
     CharazayDate CharazayDate { get { return Date_; } }
 
-    [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Season")]
+    [OLVColumn(DisplayIndex = 9, IsEditable = false, Width = 35, MinimumWidth = 20, MaximumWidth = 40, Title = "Season")]
     public byte Season { get { return this.CharazayDate.Season; } }
 
-    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Week")]
+    [OLVColumn(DisplayIndex = 10, IsEditable = false, Width = 35, MinimumWidth = 20, MaximumWidth = 40, Title = "Week")]
     public byte Week { get { return this.CharazayDate.Week; } }
 
-    [OLVColumn(DisplayIndex = 11, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Round")]
+    [OLVColumn(DisplayIndex = 11, IsEditable = false, Width = 35, MinimumWidth = 20, MaximumWidth = 40, Title = "Round")]
     public byte Round { get { return this.roundField; } }
 
-    [OLVColumn(DisplayIndex = 12, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "+/-")]
+    [OLVColumn(DisplayIndex = 12, IsEditable = false, Width = 35, MinimumWidth = 20, MaximumWidth = 40, Title = "+/-")]
     public int PlusMinus { get {
       if (Played)
       {

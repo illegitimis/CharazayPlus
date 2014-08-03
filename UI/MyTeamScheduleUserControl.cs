@@ -195,7 +195,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.tableLayoutPanel1.RowCount = 2;
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(1193, 604);
+      this.tableLayoutPanel1.Size = new System.Drawing.Size(1367, 604);
       this.tableLayoutPanel1.TabIndex = 6;
       // 
       // dgMySchedule
@@ -208,7 +208,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.dgMySchedule.Location = new System.Drawing.Point(3, 53);
       this.dgMySchedule.Name = "dgMySchedule";
       this.dgMySchedule.ReadOnly = true;
-      this.dgMySchedule.Size = new System.Drawing.Size(1187, 548);
+      this.dgMySchedule.Size = new System.Drawing.Size(1361, 548);
       this.dgMySchedule.TabIndex = 4;
       this.dgMySchedule.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dg_DataError);
       // 
@@ -218,9 +218,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.gbxWL.Controls.Add(this.rdWLAll);
       this.gbxWL.Controls.Add(this.rdWLWin);
       this.gbxWL.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gbxWL.Location = new System.Drawing.Point(836, 3);
+      this.gbxWL.Location = new System.Drawing.Point(959, 3);
       this.gbxWL.Name = "gbxWL";
-      this.gbxWL.Size = new System.Drawing.Size(354, 44);
+      this.gbxWL.Size = new System.Drawing.Size(405, 44);
       this.gbxWL.TabIndex = 3;
       this.gbxWL.TabStop = false;
       this.gbxWL.Text = "Won/Lost";
@@ -268,7 +268,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.gbxTeamSchedulePlayed.Dock = System.Windows.Forms.DockStyle.Fill;
       this.gbxTeamSchedulePlayed.Location = new System.Drawing.Point(3, 3);
       this.gbxTeamSchedulePlayed.Name = "gbxTeamSchedulePlayed";
-      this.gbxTeamSchedulePlayed.Size = new System.Drawing.Size(351, 44);
+      this.gbxTeamSchedulePlayed.Size = new System.Drawing.Size(404, 44);
       this.gbxTeamSchedulePlayed.TabIndex = 0;
       this.gbxTeamSchedulePlayed.TabStop = false;
       this.gbxTeamSchedulePlayed.Text = "Played";
@@ -312,9 +312,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       this.cbxMatchTypes.Dock = System.Windows.Forms.DockStyle.Fill;
       this.cbxMatchTypes.FormattingEnabled = true;
-      this.cbxMatchTypes.Location = new System.Drawing.Point(479, 3);
+      this.cbxMatchTypes.Location = new System.Drawing.Point(549, 3);
       this.cbxMatchTypes.Name = "cbxMatchTypes";
-      this.cbxMatchTypes.Size = new System.Drawing.Size(351, 21);
+      this.cbxMatchTypes.Size = new System.Drawing.Size(404, 21);
       this.cbxMatchTypes.TabIndex = 2;
       this.cbxMatchTypes.SelectedValueChanged += new System.EventHandler(this.cbxMatchTypes_SelectedValueChanged);
       // 
@@ -322,9 +322,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       this.label1.AutoSize = true;
       this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.label1.Location = new System.Drawing.Point(360, 0);
+      this.label1.Location = new System.Drawing.Point(413, 0);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(113, 50);
+      this.label1.Size = new System.Drawing.Size(130, 50);
       this.label1.TabIndex = 1;
       this.label1.Text = "Match type:";
       this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -336,7 +336,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.AutoSize = true;
       this.Controls.Add(this.tableLayoutPanel1);
       this.Name = "MyTeamScheduleUserControl";
-      this.Size = new System.Drawing.Size(1193, 604);
+      this.Size = new System.Drawing.Size(1367, 604);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.tableLayoutPanel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgMySchedule)).EndInit();
