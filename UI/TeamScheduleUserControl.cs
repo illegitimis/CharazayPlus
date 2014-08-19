@@ -20,6 +20,14 @@ namespace AndreiPopescu.CharazayPlus.UI
     public TeamScheduleUserControl ( )
     {
       InitializeComponent();
+      //
+      this.ucMatchDetails.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
+      this.splitter.Panel2Collapsed = true;
+      this.splitterTB.Panel2Collapsed = true;
+      this.splitterTB.IsSplitterFixed = true;
+      this.splitterTB.FixedPanel = FixedPanel.Panel1;
+      this.splitterLR.IsSplitterFixed = true;
+      this.splitterTB.FixedPanel = FixedPanel.Panel2;      
     }
 
     public void Init (Xsd2.match[] schedule, uint uid)
@@ -27,7 +35,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       foreach(var m in schedule)
         m.MyTeamId = uid;
       foreach (var mt in schedule.Select(m => m.MatchType).Distinct())
-        this.chklstMatchTypes.Items.Add(mt);
+        //this.chklstMatchTypes.Items.Add(mt)
+        ;
 
       //
       Generator.GenerateColumns(this.fdlv, typeof(Xsd2.match));
@@ -101,6 +110,15 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private Label label1;
     private TextBox txtSearch;
+    private FastObjectListView fdlv;
+    private MatchDetailsUserControl ucMatchDetails;
+    private RatingBballUserControl ucRatingHome;
+    private RatingBballUserControl ucRatingAway;
+    private LineupHomeAwayUserControl ucLineup;
+    private SplitContainer splitter;
+    private TableLayoutPanel tlpRating;
+    private SplitContainer splitterLR;
+    private SplitContainer splitterTB;
 
   
 
@@ -130,8 +148,8 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// </summary>
     private void InitializeComponent ( )
     {
-      this.fdlv = new BrightIdeasSoftware.FastObjectListView();
-      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this.label1 = new System.Windows.Forms.Label();
+      this.txtSearch = new System.Windows.Forms.TextBox();
       this.gbxWL = new System.Windows.Forms.GroupBox();
       this.rdWLLost = new System.Windows.Forms.RadioButton();
       this.rdWLAll = new System.Windows.Forms.RadioButton();
@@ -140,68 +158,63 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.rdPlayedNo = new System.Windows.Forms.RadioButton();
       this.rdPlayedYes = new System.Windows.Forms.RadioButton();
       this.rdPlayedAll = new System.Windows.Forms.RadioButton();
-      this.chklstMatchTypes = new System.Windows.Forms.ListBox();
-      this.label1 = new System.Windows.Forms.Label();
-      this.txtSearch = new System.Windows.Forms.TextBox();
-      ((System.ComponentModel.ISupportInitialize)(this.fdlv)).BeginInit();
-      this.tableLayoutPanel1.SuspendLayout();
+      this.fdlv = new BrightIdeasSoftware.FastObjectListView();
+      this.splitter = new System.Windows.Forms.SplitContainer();
+      this.splitterLR = new System.Windows.Forms.SplitContainer();
+      this.splitterTB = new System.Windows.Forms.SplitContainer();
+      this.ucMatchDetails = new AndreiPopescu.CharazayPlus.UI.MatchDetailsUserControl();
+      this.ucLineup = new AndreiPopescu.CharazayPlus.UI.LineupHomeAwayUserControl();
+      this.tlpRating = new System.Windows.Forms.TableLayoutPanel();
+      this.ucRatingHome = new AndreiPopescu.CharazayPlus.UI.RatingBballUserControl();
+      this.ucRatingAway = new AndreiPopescu.CharazayPlus.UI.RatingBballUserControl();
       this.gbxWL.SuspendLayout();
       this.gbxTeamSchedulePlayed.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.fdlv)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
+      this.splitter.Panel1.SuspendLayout();
+      this.splitter.Panel2.SuspendLayout();
+      this.splitter.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitterLR)).BeginInit();
+      this.splitterLR.Panel1.SuspendLayout();
+      this.splitterLR.Panel2.SuspendLayout();
+      this.splitterLR.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitterTB)).BeginInit();
+      this.splitterTB.Panel1.SuspendLayout();
+      this.splitterTB.Panel2.SuspendLayout();
+      this.splitterTB.SuspendLayout();
+      this.tlpRating.SuspendLayout();
       this.SuspendLayout();
       // 
-      // fdlv
+      // label1
       // 
-      this.fdlv.AlternateRowBackColor = System.Drawing.Color.LightGray;
-      this.fdlv.BackColor = System.Drawing.Color.Silver;
-      this.fdlv.CausesValidation = false;
-      this.fdlv.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.fdlv.Location = new System.Drawing.Point(3, 3);
-      this.fdlv.Name = "fdlv";
-      this.tableLayoutPanel1.SetRowSpan(this.fdlv, 5);
-      this.fdlv.ShowGroups = false;
-      this.fdlv.Size = new System.Drawing.Size(323, 332);
-      this.fdlv.SortGroupItemsByPrimaryColumn = false;
-      this.fdlv.Sorting = System.Windows.Forms.SortOrder.Ascending;
-      this.fdlv.TabIndex = 0;
-      this.fdlv.UseAlternatingBackColors = true;
-      this.fdlv.UseCompatibleStateImageBehavior = false;
-      this.fdlv.UseHyperlinks = true;
-      this.fdlv.View = System.Windows.Forms.View.Details;
-      this.fdlv.VirtualMode = true;
-      this.fdlv.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.fdlv_HyperlinkClicked);
+      this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.label1.AutoSize = true;
+      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label1.Location = new System.Drawing.Point(32, 74);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(47, 13);
+      this.label1.TabIndex = 6;
+      this.label1.Text = "Search";
       // 
-      // tableLayoutPanel1
+      // txtSearch
       // 
-      this.tableLayoutPanel1.ColumnCount = 2;
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-      this.tableLayoutPanel1.Controls.Add(this.gbxWL, 1, 1);
-      this.tableLayoutPanel1.Controls.Add(this.fdlv, 0, 0);
-      this.tableLayoutPanel1.Controls.Add(this.gbxTeamSchedulePlayed, 1, 0);
-      this.tableLayoutPanel1.Controls.Add(this.chklstMatchTypes, 1, 2);
-      this.tableLayoutPanel1.Controls.Add(this.label1, 1, 3);
-      this.tableLayoutPanel1.Controls.Add(this.txtSearch, 1, 4);
-      this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-      this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-      this.tableLayoutPanel1.RowCount = 5;
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(454, 338);
-      this.tableLayoutPanel1.TabIndex = 1;
+      this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.txtSearch.Location = new System.Drawing.Point(92, 69);
+      this.txtSearch.Name = "txtSearch";
+      this.txtSearch.Size = new System.Drawing.Size(263, 22);
+      this.txtSearch.TabIndex = 7;
+      this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
       // 
       // gbxWL
       // 
+      this.gbxWL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.gbxWL.Controls.Add(this.rdWLLost);
       this.gbxWL.Controls.Add(this.rdWLAll);
       this.gbxWL.Controls.Add(this.rdWLWin);
-      this.gbxWL.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gbxWL.Location = new System.Drawing.Point(332, 123);
+      this.gbxWL.Location = new System.Drawing.Point(192, 15);
       this.gbxWL.Name = "gbxWL";
-      this.gbxWL.Size = new System.Drawing.Size(119, 114);
+      this.gbxWL.Size = new System.Drawing.Size(163, 48);
       this.gbxWL.TabIndex = 4;
       this.gbxWL.TabStop = false;
       this.gbxWL.Text = "Won/Lost";
@@ -209,7 +222,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // rdWLLost
       // 
       this.rdWLLost.AutoSize = true;
-      this.rdWLLost.Location = new System.Drawing.Point(5, 66);
+      this.rdWLLost.Location = new System.Drawing.Point(103, 19);
       this.rdWLLost.Name = "rdWLLost";
       this.rdWLLost.Size = new System.Drawing.Size(45, 17);
       this.rdWLLost.TabIndex = 2;
@@ -233,7 +246,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // rdWLWin
       // 
       this.rdWLWin.AutoSize = true;
-      this.rdWLWin.Location = new System.Drawing.Point(6, 43);
+      this.rdWLWin.Location = new System.Drawing.Point(49, 19);
       this.rdWLWin.Name = "rdWLWin";
       this.rdWLWin.Size = new System.Drawing.Size(48, 17);
       this.rdWLWin.TabIndex = 0;
@@ -243,13 +256,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // gbxTeamSchedulePlayed
       // 
+      this.gbxTeamSchedulePlayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.gbxTeamSchedulePlayed.Controls.Add(this.rdPlayedNo);
       this.gbxTeamSchedulePlayed.Controls.Add(this.rdPlayedYes);
       this.gbxTeamSchedulePlayed.Controls.Add(this.rdPlayedAll);
-      this.gbxTeamSchedulePlayed.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gbxTeamSchedulePlayed.Location = new System.Drawing.Point(332, 3);
+      this.gbxTeamSchedulePlayed.Location = new System.Drawing.Point(28, 15);
       this.gbxTeamSchedulePlayed.Name = "gbxTeamSchedulePlayed";
-      this.gbxTeamSchedulePlayed.Size = new System.Drawing.Size(119, 114);
+      this.gbxTeamSchedulePlayed.Size = new System.Drawing.Size(158, 48);
       this.gbxTeamSchedulePlayed.TabIndex = 1;
       this.gbxTeamSchedulePlayed.TabStop = false;
       this.gbxTeamSchedulePlayed.Text = "Played";
@@ -257,7 +270,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // rdPlayedNo
       // 
       this.rdPlayedNo.AutoSize = true;
-      this.rdPlayedNo.Location = new System.Drawing.Point(7, 66);
+      this.rdPlayedNo.Location = new System.Drawing.Point(98, 20);
       this.rdPlayedNo.Name = "rdPlayedNo";
       this.rdPlayedNo.Size = new System.Drawing.Size(39, 17);
       this.rdPlayedNo.TabIndex = 2;
@@ -268,7 +281,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // rdPlayedYes
       // 
       this.rdPlayedYes.AutoSize = true;
-      this.rdPlayedYes.Location = new System.Drawing.Point(7, 43);
+      this.rdPlayedYes.Location = new System.Drawing.Point(49, 20);
       this.rdPlayedYes.Name = "rdPlayedYes";
       this.rdPlayedYes.Size = new System.Drawing.Size(43, 17);
       this.rdPlayedYes.TabIndex = 1;
@@ -289,61 +302,186 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.rdPlayedAll.UseVisualStyleBackColor = true;
       this.rdPlayedAll.CheckedChanged += new System.EventHandler(this.rdPlayed_CheckedChanged);
       // 
-      // chklstMatchTypes
+      // fdlv
       // 
-      this.chklstMatchTypes.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.chklstMatchTypes.FormattingEnabled = true;
-      this.chklstMatchTypes.Location = new System.Drawing.Point(332, 243);
-      this.chklstMatchTypes.Name = "chklstMatchTypes";
-      this.chklstMatchTypes.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-      this.chklstMatchTypes.Size = new System.Drawing.Size(119, 37);
-      this.chklstMatchTypes.TabIndex = 5;
-      this.chklstMatchTypes.SelectedValueChanged += new System.EventHandler(this.chklstMatchTypes_SelectedValueChanged);
+      this.fdlv.AlternateRowBackColor = System.Drawing.Color.LightGray;
+      this.fdlv.BackColor = System.Drawing.Color.Silver;
+      this.fdlv.CausesValidation = false;
+      this.fdlv.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.fdlv.FullRowSelect = true;
+      this.fdlv.Location = new System.Drawing.Point(0, 0);
+      this.fdlv.MultiSelect = false;
+      this.fdlv.Name = "fdlv";
+      this.fdlv.ShowGroups = false;
+      this.fdlv.Size = new System.Drawing.Size(416, 318);
+      this.fdlv.SortGroupItemsByPrimaryColumn = false;
+      this.fdlv.Sorting = System.Windows.Forms.SortOrder.Ascending;
+      this.fdlv.TabIndex = 2;
+      this.fdlv.UseAlternatingBackColors = true;
+      this.fdlv.UseCompatibleStateImageBehavior = false;
+      this.fdlv.UseFiltering = true;
+      this.fdlv.UseHotItem = true;
+      this.fdlv.UseHyperlinks = true;
+      this.fdlv.UseTranslucentHotItem = true;
+      this.fdlv.UseTranslucentSelection = true;
+      this.fdlv.View = System.Windows.Forms.View.Details;
+      this.fdlv.VirtualMode = true;
+      this.fdlv.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.fdlv_HyperlinkClicked);
+      this.fdlv.SelectedIndexChanged += new System.EventHandler(this.fdlv_SelectedIndexChanged);
       // 
-      // label1
+      // splitter
       // 
-      this.label1.AutoSize = true;
-      this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.label1.Location = new System.Drawing.Point(332, 283);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(119, 20);
-      this.label1.TabIndex = 6;
-      this.label1.Text = "Search";
+      this.splitter.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitter.Location = new System.Drawing.Point(0, 0);
+      this.splitter.Name = "splitter";
+      this.splitter.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
-      // txtSearch
+      // splitter.Panel1
       // 
-      this.txtSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.txtSearch.Location = new System.Drawing.Point(332, 306);
-      this.txtSearch.Name = "txtSearch";
-      this.txtSearch.Size = new System.Drawing.Size(119, 22);
-      this.txtSearch.TabIndex = 7;
-      this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+      this.splitter.Panel1.Controls.Add(this.splitterLR);
+      // 
+      // splitter.Panel2
+      // 
+      this.splitter.Panel2.Controls.Add(this.tlpRating);
+      this.splitter.Size = new System.Drawing.Size(778, 473);
+      this.splitter.SplitterDistance = 318;
+      this.splitter.TabIndex = 12;
+      // 
+      // splitterLR
+      // 
+      this.splitterLR.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitterLR.Location = new System.Drawing.Point(0, 0);
+      this.splitterLR.Name = "splitterLR";
+      // 
+      // splitterLR.Panel1
+      // 
+      this.splitterLR.Panel1.Controls.Add(this.fdlv);
+      // 
+      // splitterLR.Panel2
+      // 
+      this.splitterLR.Panel2.Controls.Add(this.splitterTB);
+      this.splitterLR.Size = new System.Drawing.Size(778, 318);
+      this.splitterLR.SplitterDistance = 416;
+      this.splitterLR.TabIndex = 12;
+      // 
+      // splitterTB
+      // 
+      this.splitterTB.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitterTB.Location = new System.Drawing.Point(0, 0);
+      this.splitterTB.Name = "splitterTB";
+      this.splitterTB.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitterTB.Panel1
+      // 
+      this.splitterTB.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+      this.splitterTB.Panel1.Controls.Add(this.gbxTeamSchedulePlayed);
+      this.splitterTB.Panel1.Controls.Add(this.gbxWL);
+      this.splitterTB.Panel1.Controls.Add(this.txtSearch);
+      this.splitterTB.Panel1.Controls.Add(this.label1);
+      // 
+      // splitterTB.Panel2
+      // 
+      this.splitterTB.Panel2.BackColor = System.Drawing.Color.LightGray;
+      this.splitterTB.Panel2.Controls.Add(this.ucMatchDetails);
+      this.splitterTB.Panel2.Controls.Add(this.ucLineup);
+      this.splitterTB.Size = new System.Drawing.Size(358, 318);
+      this.splitterTB.SplitterDistance = 98;
+      this.splitterTB.TabIndex = 0;
+      // 
+      // ucMatchDetails
+      // 
+      this.ucMatchDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.ucMatchDetails.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucMatchDetails.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+      this.ucMatchDetails.CausesValidation = false;
+      this.ucMatchDetails.Location = new System.Drawing.Point(3, 0);
+      this.ucMatchDetails.Name = "ucMatchDetails";
+      this.ucMatchDetails.Size = new System.Drawing.Size(352, 27);
+      this.ucMatchDetails.TabIndex = 8;
+      // 
+      // ucLineup
+      // 
+      this.ucLineup.AutoSize = true;
+      this.ucLineup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucLineup.BackColorAway = System.Drawing.Color.LightGreen;
+      this.ucLineup.BackColorHome = System.Drawing.Color.LightCoral;
+      this.ucLineup.Location = new System.Drawing.Point(9, 33);
+      this.ucLineup.Name = "ucLineup";
+      this.ucLineup.Size = new System.Drawing.Size(346, 153);
+      this.ucLineup.TabIndex = 11;
+      // 
+      // tlpRating
+      // 
+      this.tlpRating.ColumnCount = 2;
+      this.tlpRating.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tlpRating.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tlpRating.Controls.Add(this.ucRatingHome, 0, 0);
+      this.tlpRating.Controls.Add(this.ucRatingAway, 1, 0);
+      this.tlpRating.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tlpRating.Location = new System.Drawing.Point(0, 0);
+      this.tlpRating.Name = "tlpRating";
+      this.tlpRating.RowCount = 1;
+      this.tlpRating.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.tlpRating.Size = new System.Drawing.Size(778, 151);
+      this.tlpRating.TabIndex = 11;
+      // 
+      // ucRatingHome
+      // 
+      this.ucRatingHome.AutoSize = true;
+      this.ucRatingHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucRatingHome.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucRatingHome.Location = new System.Drawing.Point(3, 3);
+      this.ucRatingHome.Name = "ucRatingHome";
+      this.ucRatingHome.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Home;
+      this.ucRatingHome.Size = new System.Drawing.Size(383, 145);
+      this.ucRatingHome.TabIndex = 9;
+      // 
+      // ucRatingAway
+      // 
+      this.ucRatingAway.AutoSize = true;
+      this.ucRatingAway.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucRatingAway.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucRatingAway.Location = new System.Drawing.Point(392, 3);
+      this.ucRatingAway.Name = "ucRatingAway";
+      this.ucRatingAway.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Away;
+      this.ucRatingAway.Size = new System.Drawing.Size(383, 145);
+      this.ucRatingAway.TabIndex = 10;
       // 
       // TeamScheduleUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.tableLayoutPanel1);
+      this.Controls.Add(this.splitter);
       this.Name = "TeamScheduleUserControl";
-      this.Size = new System.Drawing.Size(454, 338);
-      ((System.ComponentModel.ISupportInitialize)(this.fdlv)).EndInit();
-      this.tableLayoutPanel1.ResumeLayout(false);
-      this.tableLayoutPanel1.PerformLayout();
+      this.Size = new System.Drawing.Size(778, 473);
       this.gbxWL.ResumeLayout(false);
       this.gbxWL.PerformLayout();
       this.gbxTeamSchedulePlayed.ResumeLayout(false);
       this.gbxTeamSchedulePlayed.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.fdlv)).EndInit();
+      this.splitter.Panel1.ResumeLayout(false);
+      this.splitter.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitter)).EndInit();
+      this.splitter.ResumeLayout(false);
+      this.splitterLR.Panel1.ResumeLayout(false);
+      this.splitterLR.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitterLR)).EndInit();
+      this.splitterLR.ResumeLayout(false);
+      this.splitterTB.Panel1.ResumeLayout(false);
+      this.splitterTB.Panel1.PerformLayout();
+      this.splitterTB.Panel2.ResumeLayout(false);
+      this.splitterTB.Panel2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitterTB)).EndInit();
+      this.splitterTB.ResumeLayout(false);
+      this.tlpRating.ResumeLayout(false);
+      this.tlpRating.PerformLayout();
       this.ResumeLayout(false);
 
     }
 
     #endregion
 
-    private FastObjectListView fdlv;
-    Utils.MatchType[] _matchTypes;
-    private TableLayoutPanel tableLayoutPanel1;
     private GroupBox gbxTeamSchedulePlayed;
     private RadioButton rdPlayedNo;
     private RadioButton rdPlayedYes;
@@ -352,7 +490,6 @@ namespace AndreiPopescu.CharazayPlus.UI
     private RadioButton rdWLLost;
     private RadioButton rdWLAll;
     private RadioButton rdWLWin;
-    private ListBox chklstMatchTypes;
 
     private void rdPlayed_CheckedChanged (object sender, EventArgs e)
     {
@@ -387,12 +524,12 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private void chklstMatchTypes_SelectedValueChanged (object sender, EventArgs e)
     {
-      this.fdlv.UseFiltering = true;
-      this.fdlv.ModelFilter = new ModelFilter((x) => 
-        this.chklstMatchTypes.SelectedItems
-        .Cast<Utils.MatchType>()
-        .Any(y => ((Xsd2.match)x).MatchType == y)
-        );
+      ////this.fdlv.UseFiltering = true;
+      ////this.fdlv.ModelFilter = new ModelFilter((x) => 
+      ////  this.chklstMatchTypes.SelectedItems
+      ////  .Cast<Utils.MatchType>()
+      ////  .Any(y => ((Xsd2.match)x).MatchType == y)
+      ////  );
       
     }
 
@@ -406,6 +543,43 @@ namespace AndreiPopescu.CharazayPlus.UI
        else
         this.fdlv.DefaultRenderer = null;
     }
+
+    private void fdlv_SelectedIndexChanged (object sender, EventArgs e)
+    {
+      this.splitter.Panel2Collapsed = false;
+      this.splitterTB.Panel2Collapsed = false;
+      //
+      Xsd2.match currentMatch = (Xsd2.match)this.fdlv.SelectedObject;
+      //
+      using (Web.Downloader crawler = new Web.Downloader())
+      {
+        try
+        {
+          var SelectedMatch = (Xsd2.match)Utils.Deserializer
+            .GoGetXml(new Web.XmlDownloadItem[] { new Web.MatchXml(Web.WebServiceUser.Instance, (ulong)currentMatch.Id) })
+            .ToArray()[0];
+          
+          //
+          ucMatchDetails.SetData(SelectedMatch);
+          ucRatingHome.RatingType = UI.RatingType.Home;
+          ucRatingHome.SetData(SelectedMatch.stats.home, SelectedMatch.bballs.home);
+          ucRatingAway.RatingType = UI.RatingType.Away;
+          ucRatingAway.SetData(SelectedMatch.stats.away, SelectedMatch.bballs.away);
+          ucLineup.SetData(SelectedMatch.lineup);
+          //
+          AndreiPopescu.CharazayPlus.Utils.CacheManager.Instance.AddMatch(SelectedMatch);
+
+        }
+        catch (Exception ex)
+        {
+          System.Diagnostics.Debug.Write(ex.Message);
+        }
+      }
+    }
+
+   
+
+   
 
   }
 }

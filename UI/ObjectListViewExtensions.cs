@@ -387,9 +387,9 @@ private void listViewComplex_FormatRow (object sender, FormatRowEventArgs e)
      }
      //if (e.ColumnIndex == 7) {
      //    if (p.CanTellJokes.HasValue && p.CanTellJokes.Value)
-     //        e.SubItem.Skills = new CellBorderDecoration();
+     //        e.SubItem.Skill = new CellBorderDecoration();
      //    else
-     //        e.SubItem.Skills = null;
+     //        e.SubItem.Skill = null;
      //}
    }
    */

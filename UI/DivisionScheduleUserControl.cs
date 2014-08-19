@@ -12,6 +12,7 @@ namespace AndreiPopescu.CharazayPlus.UI
   using AndreiPopescu.CharazayPlus.Utils;
   using System.IO;
   using System.Xml.Serialization;
+  using System.Linq;
 
   public partial class DivisionScheduleUserControl : UserControl
   {
@@ -19,8 +20,6 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       InitializeComponent();
     }
-
-    public Web.WebServiceUser User { get; set; }
 
     public void InitOLV (Xsd2.charazayRound[] _myDivisionFullSchedule)
     {
@@ -73,12 +72,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       {
         try
         {
-          Xsd2.match SelectedMatch = null;
-          crawler.Add(new Web.MatchXml(User, (ulong)matchId));
-          crawler.Get(true);
-          //
-          foreach (Web.XmlDownloadItem di in crawler.Items)
-            SelectedMatch = DeserializeXml(di);
+          var SelectedMatch = (Xsd2.match)Utils.Deserializer
+            .GoGetXml(new Web.XmlDownloadItem[] { new Web.MatchXml(Web.WebServiceUser.Instance, (ulong)matchId) })
+            .ToArray()[0];
           //
           ucMatchDetails.SetData(SelectedMatch);
           ucrHome.RatingType = UI.RatingType.Home;
@@ -97,28 +93,6 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    private Xsd2.match DeserializeXml (Web.XmlDownloadItem di)
-    {
-      using (FileStream fs = new FileStream(di.m_fileName, FileMode.Open, FileAccess.Read))
-      {
-        //Xsd.charazay charazayObject = null;
-        Xsd2.charazay obj = null;
-        try
-        {
-          obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
-          switch (di.DeserializationType)
-          {
-            case Web.XmlSerializationType.Match: return obj.match;
-
-            default:
-              throw new Exception("Deserialization return type error!");
-          }
-        }
-        catch (Exception ex)
-        {
-          throw ex;
-        }
-      }
-    }
+  
   }
 }

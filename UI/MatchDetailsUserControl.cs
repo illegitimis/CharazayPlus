@@ -14,7 +14,7 @@ namespace AndreiPopescu.CharazayPlus.UI
   {
     public MatchDetailsUserControl()
     {
-      InitializeComponent();
+      InitializeComponent();      
     }
 
     public void SetData (Xsd2.match m)
@@ -238,5 +238,12 @@ namespace AndreiPopescu.CharazayPlus.UI
     private System.Windows.Forms.Label label11;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.FlowLayoutPanel flowMatchDetails;
+
+    [DefaultValue(FlowDirection.LeftToRight), Description("Flow Direction"), Category("Appearance"), Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
+    public FlowDirection FlowDirection
+    {
+      get { return this.flowMatchDetails.FlowDirection; }
+      set { this.flowMatchDetails.FlowDirection = value; }
+    }
   }
 }

@@ -24,7 +24,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// <typeparam name="T">player type</typeparam>
     /// <param name="olv">object list view</param>
     /// <param name="players">player derived collection</param>
-    private void initOLV<T> (ObjectListView olv, List<T> players)
+    private void initOLV<T> (ObjectListView olv, IList<T> players)
       where T : Player
     {
       Generator.GenerateColumns(olv, players);
@@ -85,7 +85,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       olv.SetObjects(players);
     }
 
-    public void Init<T> (List<T> players) where T : Player
+    public void Init<T> (IList<T> players) where T : Player
     {
       initOLV<T>(this.olv, players);
     }

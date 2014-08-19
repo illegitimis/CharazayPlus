@@ -52,7 +52,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;XSDMERGE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;XSDMERGE, DOTNET30</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\CharazayDoctor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
@@ -100,7 +100,14 @@
   <ItemGroup>
     <Compile Include="C.cs" />
     <Compile Include="Coach.cs" />
+    <Compile Include="Data\PlayersEnvironment.cs" />
+    <Compile Include="Data\TrainingEnvironment.cs" />
+    <Compile Include="Data\XmlTeam.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Objects\InfoPropertyGridObject.cs" />
+    <Compile Include="Objects\TrainingItems.cs" />
+    <Compile Include="Objects\ScoreIncreaseItem.cs" />
+    <Compile Include="Objects\SkillIncreaseItem.cs" />
     <Compile Include="PF.cs" />
     <Compile Include="PG.cs" />
     <Compile Include="Obsolete.cs">
@@ -187,6 +194,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
+    <Compile Include="Utils\Deserializer.cs" />
     <Compile Include="Utils\Interpolation112.cs" />
     <Compile Include="Utils\TransferMarket112.cs" />
     <Compile Include="Utils\TransferMarket.cs" />
@@ -205,7 +213,6 @@
     <Compile Include="UI\MatchDetailsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\PropertyGridObjects.cs" />
     <Compile Include="UI\RatingBballUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -474,6 +481,7 @@
       <Name>ObjectListView2010</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

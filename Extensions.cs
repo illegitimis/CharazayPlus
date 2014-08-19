@@ -14,7 +14,7 @@ namespace AndreiPopescu.CharazayPlus
     }
 
 #if DOTNET30
-        public static bool IsNullOrEmpty<T> (this IEnumerable<T> ar)
+        public static bool IsNullOrEmpty<T> (this System.Collections.Generic.IEnumerable<T> ar)
 #else
     public static bool IsNullOrEmpty<T> (System.Collections.Generic.IEnumerable<T> ar)
 #endif

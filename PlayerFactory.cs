@@ -94,7 +94,7 @@ static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasi
       ushort currentWeek = 0;
       while (currentWeek < week)
       {
-        foreach (TrainingCategories eTc in Enum.GetValues(typeof(TrainingCategories)))
+        foreach (TrainingCategory eTc in Enum.GetValues(typeof(TrainingCategory)))
         {
           if (currentWeek == week)
             break;
@@ -106,30 +106,30 @@ static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasi
             byte age = (byte)((byte)15 + (byte)(currentWeek / 17));
             switch (eTc)
             {
-              case TrainingCategories.defense:
+              case TrainingCategory.defense:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dDefence, age);
                 break;
-              case TrainingCategories.dribling:
+              case TrainingCategory.dribling:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dDribling, age);
                 break;
-              case TrainingCategories.passing:
+              case TrainingCategory.passing:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dPassing, age);
                 break;
-              case TrainingCategories.speed:
+              case TrainingCategory.speed:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dSpeed, age);
                 break;
-              case TrainingCategories.footwork:
+              case TrainingCategory.footwork:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dFootwork, age);
                 break;
-              case TrainingCategories.rebounds:
+              case TrainingCategory.rebounds:
                 Compute.WeeklySkillAddition(ref predictValuePlayer.m_dRebounds, age);
                 break;
-              case TrainingCategories.inside_sh:
+              case TrainingCategory.insideShooting:
                 {
                   Compute.WeeklySkillAddition(ref predictValuePlayer.m_dTwoPoint, age);
                   Compute.WeeklySkillAddition(ref predictValuePlayer.m_dFreethrows, age);
                 } break;
-              case TrainingCategories.outside_sh:
+              case TrainingCategory.outsideShooting:
                 {
                   Compute.WeeklySkillAddition(ref predictValuePlayer.m_dThreePoint, age);
                   Compute.WeeklySkillAddition(ref predictValuePlayer.m_dFreethrows, age);

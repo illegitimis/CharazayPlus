@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
+#if DOTNET30
+using System.Linq; 
+#endif
+
+
 namespace AndreiPopescu.CharazayPlus.Utils
 {
   internal static class Linear
@@ -35,17 +40,22 @@ namespace AndreiPopescu.CharazayPlus.Utils
       if (in1.Length != in2.Length)
         throw new ArgumentException("DotVectorProduct: lengths");
 
+#if DOTNET30
+      return in1.Combine(in2, (a, b) => a * b).Sum();
+#else
       double sum = 0.0;
       for (int i = 0; i < in1.Length; i++)
         sum += in1[i] * in2[i];
       return sum;
+#endif
+
     }
 
 
 #if DOTNET30
-    public static System.Collections.IEnumerable Combine(
-    this System.Collections.IEnumerable first
-    , System.Collections.IEnumerable second
+    public static IEnumerable<double> Combine(
+    this IEnumerable<double> first
+    , IEnumerable<double> second
     , Func<double,double,double> func)
     {
       System.Collections.IEnumerator e1 = first.GetEnumerator(), e2 = second.GetEnumerator();
@@ -57,14 +67,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     }
 
-    public static double DotVectorProduct_Linq(double[] in1, double[] in2)
-    {
-      ExceptionsDotVectorProduct(in1, in2);
-
-      //return in1.Combine(in2, (a, b) => a * b).Sum();
-
-      return in1.Combine(in2, (a, b) => a * b).Sum();
-    }
+   
 #endif
 
 

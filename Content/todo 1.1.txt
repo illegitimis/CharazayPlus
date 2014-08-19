@@ -33,13 +33,20 @@ player aspect (ok)
 -------------------------------
 8) TRAINING TAB
 suggested training combination (ok)
-debug suggested training [...]
+debug suggested training (ok)
+improve left/right splitter aspect ratio (ok)
+fix suggested training (ok)
+repair grid (ok)
+6 decimals on score/skill increase (ok)
+32 over 
 -------------------------------
 9) MY team SCHEDULE
 debug xml received  (ok)
-replace with new olv-based control [...]
-better filter
-
+replace with new olv-based control (ok)
+match details on selection (ok)
+better filter (ok)
+add total ratings
+3pm column
 -------------------------------
 10) DIVISION STANDINGS
 debug xml received  (ok)

@@ -8,6 +8,8 @@ namespace AndreiPopescu.CharazayPlus
   using System.IO;
   using AndreiPopescu.CharazayPlus.Utils;
   using AndreiPopescu.CharazayPlus.UI;
+  using AndreiPopescu.CharazayPlus.Data;
+  using AndreiPopescu.CharazayPlus.Web;
     
   public partial class MainForm : System.Windows.Forms.Form
   {
@@ -41,50 +43,8 @@ namespace AndreiPopescu.CharazayPlus
         , 
       TL = 13
     }
-
-    #region Behavior fields
-    List<PG> _pgs = new List<PG>();
-    List<SG> _sgs = new List<SG>();
-    List<SF> _sfs = new List<SF>();
-    List<PF> _pfs = new List<PF>();
-    List<C> _cs = new List<C>();
-
-    List<Player> _optimumPlayers = new List<Player>(); 
-    List<Coach> _coaches = new List<Coach>();
-
-    // info tab
-
-    Xsd2.charazayArena _arena;
-    Xsd2.charazayTeam _team;
-    Xsd2.charazayUser _user;
-    Xsd2.charazayCountry _country;
-
-
-    // my Schedule tab (comes from Schedule)
-    Xsd2.charazayDivision _myDivisionStandings;
-    Xsd2.match[] _mySchedule;
-
-
-    // my Division tab (comes from DivisionSchedule)
-
-    Xsd2.charazayRound[] _myDivisionFullSchedule;    
-    Xsd2.match _selectedMatch;
-  
-
-    // money
-
-    Xsd2.charazayEconomy _economy;
-    Xsd2.charazayTransfer[] _myTransfers;
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private /*readonly*/ Web.WebServiceUser _wsu;
-      //new Web.WebServiceUser("stergein", "security_code", 1013, 5, 21191);
-
-    #endregion
-
+   
+   
     #region designer fields
 
     /// <summary>
@@ -160,68 +120,7 @@ namespace AndreiPopescu.CharazayPlus
         crawler.Get();
       }
     }
-
-    private void DownloadXmlFiles(Web.DownloadItem[] xmls)
-    {
-      using (Web.Downloader crawler = new Web.Downloader())
-      {
-        foreach (Web.DownloadItem xml in xmls)
-          crawler.Add(xml);   
-        // download items
-        crawler.Get(true);
-
-        try
-        {
-          //foreach (Web.XmlDownloadItem di in m_xmlDownloadItems)
-          foreach (Web.XmlDownloadItem di in crawler.Items)
-            DeserializeXml(di);
-        }
-        catch (Exception ex)
-        {
-          System.Diagnostics.Debug.Write(ex.Message);
-        }
-      }
-    }
-
-    private void DownloadMandatoryXmlFiles () 
-    {   //
-        // mandatory first
-        //
-        Web.DownloadItem[] xmls = new Web.DownloadItem[] {
-            new Web.MyInfoXml(_wsu)
-          , new Web.MyTeamInfoXml(_wsu) 
-        };
-
-        DownloadXmlFiles(xmls);      
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private void DownloadXmlAdditional()
-    {
-      if (_pgs != null && _pgs.Count != 0) 
-        return;
-
-      //coachesXml.DeserializationReturnType
-      //myPlayersXml.m_offline = coachesXml.m_offline = true;
-      //crawler.AddRange(m_xmlDownloadItems);
-
-      Web.DownloadItem[] xmls = new Web.DownloadItem[] {
-      new Web.MyPlayersXml(_wsu)
-      ,new Web.CoachesXml(_wsu)               
-      ,new Web.ArenaXml(_wsu)
-      ,new Web.CountryDivisionListXml(_wsu)
-      ,new Web.MyScheduleXml(_wsu)
-      ,new Web.DivisionStandingsXml(_wsu)
-      ,new Web.DivisionScheduleXml(_wsu)
-      ,new Web.EconomyXml(_wsu)
-      ,new Web.MyTransfersXml(_wsu)
-      };
-
-     DownloadXmlFiles(xmls);
-      
-    }
+        
     #endregion
 
     #region IDisposable
@@ -283,7 +182,6 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageTraining = new System.Windows.Forms.TabPage();
       this.ucTraining = new AndreiPopescu.CharazayPlus.UI.TrainingTabUserControl();
       this.tabPageMyTeamSchedule = new System.Windows.Forms.TabPage();
-      //this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.MyTeamScheduleUserControl();
       this.ucMyTeamSchedule = new AndreiPopescu.CharazayPlus.UI.TeamScheduleUserControl();
       this.tabPageMyDivisionStandings = new System.Windows.Forms.TabPage();
       this.ucStandings = new AndreiPopescu.CharazayPlus.UI.DivisionStandingsUserControl();
@@ -591,7 +489,6 @@ namespace AndreiPopescu.CharazayPlus
       this.ucPlayerSkills.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucPlayerSkills.Location = new System.Drawing.Point(0, 0);
       this.ucPlayerSkills.Name = "ucPlayerSkills";
-      this.ucPlayerSkills.Players = null;
       this.ucPlayerSkills.Size = new System.Drawing.Size(13, 242);
       this.ucPlayerSkills.TabIndex = 0;
       // 
@@ -717,11 +614,9 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // ucTraining
       // 
-      this.ucTraining.Coaches = null;
       this.ucTraining.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucTraining.Location = new System.Drawing.Point(0, 0);
       this.ucTraining.Name = "ucTraining";
-      this.ucTraining.OptimumPlayers = null;
       this.ucTraining.Size = new System.Drawing.Size(13, 242);
       this.ucTraining.TabIndex = 0;
       // 
@@ -740,11 +635,10 @@ namespace AndreiPopescu.CharazayPlus
       this.ucMyTeamSchedule.AutoSize = true;
       this.ucMyTeamSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucMyTeamSchedule.Location = new System.Drawing.Point(0, 0);
-      //this.ucMyTeamSchedule.MySchedule = null;
       this.ucMyTeamSchedule.Name = "ucMyTeamSchedule";
-      this.ucMyTeamSchedule.Size = new System.Drawing.Size(0, 242);
+      this.ucMyTeamSchedule.Size = new System.Drawing.Size(754, 579);
       this.ucMyTeamSchedule.TabIndex = 0;
-      //this.ucMyTeamSchedule.Team = null;
+      
       // 
       // tabPageMyDivisionStandings
       // 
@@ -780,7 +674,6 @@ namespace AndreiPopescu.CharazayPlus
       this.ucDivisionSchedule.Name = "ucDivisionSchedule";
       this.ucDivisionSchedule.Size = new System.Drawing.Size(0, 242);
       this.ucDivisionSchedule.TabIndex = 0;
-      this.ucDivisionSchedule.User = null;
       // 
       // tabPageMyEconomy
       // 
@@ -871,7 +764,7 @@ namespace AndreiPopescu.CharazayPlus
     /// </summary>
     private void AddMyPlayersToCache()
     {
-      foreach (var op in _optimumPlayers)
+      foreach (var op in PlayersEnvironment.OptimumPlayers)
       {
         CacheManager.Instance.AddPlayer(op.Id, op.FullName);
       }
@@ -880,7 +773,7 @@ namespace AndreiPopescu.CharazayPlus
     private void AddMyTeamScheduleToCache()
     {
 
-      foreach (var m in _mySchedule)
+      foreach (var m in MyXmlTeam.Schedule)
       {
         CacheManager.Instance.AddTeam(m.HomeTeamId, m.HomeTeamName);
         CacheManager.Instance.AddTeam(m.AwayTeamId, m.AwayTeamName);
@@ -913,24 +806,21 @@ namespace AndreiPopescu.CharazayPlus
       {
         case SideTabPage.Status:
           {
-            this.ucStatus.initStatus(this._optimumPlayers, this.imageListCountries);
+            this.ucStatus.initStatus(PlayersEnvironment.OptimumPlayers, this.imageListCountries);
             AddMyPlayersToCache();
           } break;
 
-        case SideTabPage.PG: ucPG.Init(_pgs); break;
-        case SideTabPage.SG: ucSG.Init(_sgs); break;
-        case SideTabPage.PF: ucPF.Init(_pfs); break;
-        case SideTabPage.SF: ucSF.Init(_sfs); break;
-        case SideTabPage.C: ucC.Init(_cs); break;
+        case SideTabPage.PG: ucPG.Init(PlayersEnvironment.PointGuards); break;
+        case SideTabPage.SG: ucSG.Init(PlayersEnvironment.ShootingGuards); break;
+        case SideTabPage.PF: ucPF.Init(PlayersEnvironment.PowerForwards); break;
+        case SideTabPage.SF: ucSF.Init(PlayersEnvironment.SmallForwards); break;
+        case SideTabPage.C: ucC.Init(PlayersEnvironment.Centers); break;
 
         case SideTabPage.Training:
         {
-          ucTraining.Coaches = _coaches;
-          ucTraining.OptimumPlayers = _optimumPlayers;
           ucTraining.initCoachesList();
           ucTraining.initTrainingSkillIncrease();
           ucTraining.initTrainingScoreIncrease();
-          ucTraining.initTrainingPropertyGrid();
           ucTraining.initTrainingEfficiency();
         } break;
 
@@ -938,44 +828,43 @@ namespace AndreiPopescu.CharazayPlus
         case SideTabPage.MyTeamSchedule:
           {
 
-            //this.ucMyTeamSchedule.MySchedule = this._mySchedule;
-            //this.ucMyTeamSchedule.Team = this._team;
+            //this.ucMyTeamSchedule.MySchedule = this.MyXmlTeam.Schedule;
+            //this.ucMyTeamSchedule.Team = this.MyXmlTeam.TeamInfo;
             //this.ucMyTeamSchedule.initTeamScheduleFilter();
             //this.ucMyTeamSchedule.initDgMySchedule();
-
-            this.ucMyTeamSchedule.Init(this._mySchedule, this._team.id);
-
+            
+            this.ucMyTeamSchedule.Init(MyXmlTeam.Schedule, MyXmlTeam.TeamInfo.id);
             AddMyTeamScheduleToCache();
+
           } break;
 
         case SideTabPage.MyDivisionStandings:
           { 
 
-            ucStandings.Init(_myDivisionStandings.standings);
-            ucStandings.DivisionName = _myDivisionStandings.name;
-            ucStandings.Hardiness = _myDivisionStandings.lh;
-            ucStandings.DivisionId = _myDivisionStandings.id;
-            ucStandings.Level = _myDivisionStandings.level;
-            //ucStandings.Country = _myDivisionStandings.countryid;
+            ucStandings.Init(MyXmlTeam.Standings.standings);
+            ucStandings.DivisionName = MyXmlTeam.Standings.name;
+            ucStandings.Hardiness = MyXmlTeam.Standings.lh;
+            ucStandings.DivisionId = MyXmlTeam.Standings.id;
+            ucStandings.Level = MyXmlTeam.Standings.level;
+            //ucStandings.Country = MyXmlTeam.Standings.countryid;
 
           } break;
-
+        
         case SideTabPage.MyDivisionSchedule:
-          this.ucDivisionSchedule.User = this._wsu;
-          this.ucDivisionSchedule.InitOLV(_myDivisionFullSchedule);
+          this.ucDivisionSchedule.InitOLV(MyXmlTeam.DivisionSchedule);
           break;
 
         case SideTabPage.MyEconomy:
           {
             //ucMyEconomy.InitDgMyTransfers(_myTransfers);
-            this.ucMyEconomy.MyTeamId = this._team.id;
-            ucMyEconomy.InitOLV(_myTransfers);
-            ucMyEconomy.InitEconomyUserControls(_economy);
+            this.ucMyEconomy.MyTeamId = MyXmlTeam.TeamInfo.id;
+            ucMyEconomy.InitOLV(MyXmlTeam.Transfers);
+            ucMyEconomy.InitEconomyUserControls(MyXmlTeam.Economy);
           } break;
 
         case SideTabPage.TL:
           {
-            ucTransferList.User = _wsu;
+            ucTransferList.User = WebServiceUser.Instance;
             ucTransferList.InitTransferShortList();
             ucTransferList.PlayerDataUnavailable += (sndr, ev) => { tsslbl.Text = "Player Data Unavailable"; };
             ucTransferList.BadPlayerId += (sndr, ev) => { tsslbl.Text = "Bad Player Id"; };
@@ -984,8 +873,8 @@ namespace AndreiPopescu.CharazayPlus
           } break;
 
         case SideTabPage.Skills:
-          { 
-            ucPlayerSkills.Players = _optimumPlayers; 
+          {
+            ucPlayerSkills.Initialize();
             this.ucPlayerSkills.SelectionChanged += (sndr,ev) => {
               this.tsslbl.Text = String.Format("Selected {0} of {1} items", ev.SelectedIndices, ev.ItemCount);
               this.tsslblr.Text = String.Format("Selected player: {0}", ev.FullName);
@@ -1031,7 +920,8 @@ namespace AndreiPopescu.CharazayPlus
       }
       else
       {
-       _wsu = new Web.WebServiceUser(Properties.Settings.Default.UserName, Properties.Settings.Default.SecurityCode);
+       WebServiceUser.Instance.user = Properties.Settings.Default.UserName;
+       WebServiceUser.Instance.securityCode = Properties.Settings.Default.SecurityCode;
         //
         // down + deserialize xmls
         //
@@ -1041,10 +931,31 @@ namespace AndreiPopescu.CharazayPlus
             
     }
 
+    private void DownloadXmlAdditional ( )
+    {
+      if (MyXmlTeam.CountryInfo == null || MyXmlTeam.Arena == null)
+      throw new NotImplementedException();
+      if (MyXmlTeam.Schedule == null || MyXmlTeam.DivisionSchedule == null)
+        throw new NotImplementedException();
+      if (MyXmlTeam.Standings == null)
+        throw new NotImplementedException();
+      if (MyXmlTeam.Economy == null || MyXmlTeam.Transfers == null)
+        throw new NotImplementedException();
+      if (PlayersEnvironment.OptimumPlayers == null || PlayersEnvironment.Coaches == null)
+        throw new NotImplementedException();
+    }
+
+    private void DownloadMandatoryXmlFiles ( )
+    {
+      if (MyXmlTeam.UserInfo == null || MyXmlTeam.TeamInfo == null)
+        throw new ApplicationException();
+    }
+
     void formLogin_CorrectUserInformation (object sender, EventArgs e)
     {
       UI.FormLogin formLogin = (UI.FormLogin)sender;
-      _wsu = new Web.WebServiceUser(Properties.Settings.Default.UserName, Properties.Settings.Default.SecurityCode);
+      WebServiceUser.Instance.user = Properties.Settings.Default.UserName;
+      WebServiceUser.Instance.securityCode = Properties.Settings.Default.SecurityCode;
       //
       // down + deserialize xmls
       //
@@ -1057,141 +968,8 @@ namespace AndreiPopescu.CharazayPlus
       formLogin.Close();
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="di"></param>    
-    private void DeserializeXml(Web.XmlDownloadItem di)
-    {
-      using (FileStream fs = new FileStream(di.m_fileName, FileMode.Open, FileAccess.Read))
-      {
-          Xsd2.charazay obj = null;
-
-        try
-        {
-          obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
-          switch (di.DeserializationType)
-          { //
-            // MyPlayers
-            //
-            case Web.XmlSerializationType.MyPlayers: 
-              InitMyPlayers(obj.players); 
-              break;
-            //
-            // di.DeserializationObject = obj.arena; 
-            //
-            case Web.XmlSerializationType.Arena:
-
-                  _arena = obj.arena;            
-              
-              break;
-            //
-            // di.DeserializationObject = obj.team;
-            // division id is a mandatory session variable
-            //
-            case Web.XmlSerializationType.MyTeamInfo:
-              {
-
-                _team = obj.team;           
-
-
-                _wsu.divisionId = _team.team_info.divisionid;
-              } break;
-            // 
-            // di.DeserializationObject = obj.user; 
-            // country and team id are mandatory session variables
-            // arenaid == teamid
-            //
-            case Web.XmlSerializationType.MyInfo:
-              {
-
-                _user = obj.user;
-                if (obj.user == null)       
-
-
-                throw new Exception("XmlSerializationType.MyInfo");
-                _wsu.countryId = _user.countryid;
-                _wsu.arenaId = _user.teamid;
-              } break;
-
-            case Web.XmlSerializationType.CountryDivisionList:
-
-                _country = obj.country;
-
-                break;
-            //
-            // Coaches
-            // di.DeserializationObject = obj.coaches; 
-            //
-            case Web.XmlSerializationType.Coaches: 
-          
-                initCoachesData(obj.coaches);      
-
-
-                break;
-            //
-            case Web.XmlSerializationType.MySchedule: 
-
-                _mySchedule = obj.matches;            
-
-
-                break;
-            //
-            case Web.XmlSerializationType.DivisionStandings: 
-
-                _myDivisionStandings = obj.division;           
-
-
-                break;
-            //
-            case Web.XmlSerializationType.DivisionSchedule: 
-
-                _myDivisionFullSchedule = obj.schedule;     
-
-              
-              break;
-            //
-            case Web.XmlSerializationType.Match: 
-
-              _selectedMatch = obj.match;         
-
-
-              break;
-            //
-            case Web.XmlSerializationType.MyTransfers: 
-
-    _myTransfers = obj.team_transfers; 
-               
-                break;
-            // 
-            case Web.XmlSerializationType.Economy: 
-             
-                _economy = obj.economy; 
-
-              
-              break;
-            //
-            //case Web.XmlSerializationType.Player:
-            //  _player = obj.player;
-            //  break;
-            //
-            case Web.XmlSerializationType.Unknown:
-            default:
-              throw new Exception("Deserialization return type error!");
-          }
-
-          //charazayObject = (Xsd.charazay)(new XmlSerializer(typeof(Xsd.charazay)).Deserialize(fs));
-          //di.DeserializationObject = charazayObject.Item;
-        }
-        catch (Exception ex)
-        {
-          throw ex;
-        }
-
-        //if (charazayObject.Item.GetType() != di.DeserializationReturnType)
-        //throw new Exception("Deserialization conversion error");
-      }
-    }
+   
+    
 
     protected override void WndProc (ref Message m)
     {
@@ -1218,63 +996,13 @@ namespace AndreiPopescu.CharazayPlus
 
     private void InitInfoTab ( )
     {
-      InfoPropertyGridObject ipg = new InfoPropertyGridObject(_arena, _user, _team, _country, imageListCountries);
+      var ipg = new Objects.InfoPropertyGridObject(MyXmlTeam.Arena, MyXmlTeam.UserInfo, MyXmlTeam.TeamInfo, MyXmlTeam.CountryInfo, imageListCountries);
       this.ucInfoTab.SelectedGridObject = ipg;
-      var sbl = new SortableBindingList<Xsd2.charazayCountryDivision>(_country.division);
+      var sbl = new SortableBindingList<Xsd2.charazayCountryDivision>(MyXmlTeam.CountryInfo.division);
       this.ucInfoTab.DataContext(sbl);
     }
 
-    private void InitMyPlayers(Xsd2.charazayPlayer[] players)  
-    {
-      foreach (var plyr in players)
-      {
-            PG pg = new PG(plyr); _pgs.Add(pg);
-            SG sg = new SG(plyr); _sgs.Add(sg);
-            PF pf = new PF(plyr); _pfs.Add(pf);
-            SF sf = new SF(plyr); _sfs.Add(sf);
-            C c = new C(plyr);    _cs.Add(c);
-            Player p = Player.DecideOnValueIndex(pg, sg, sf, pf, c);
-            _optimumPlayers.Add(p);
-        }
-    }
-
-    // coaches file
-    private void initCoachesData(Xsd2.charazayCoach[] xsdCoaches)  
-    { //
-      // alloc max coach (inner struct)
-      //      
-        var maxCoach = new Xsd2.charazayCoach() { skills = new Xsd2.charazayCoachSkills(), basic = new Xsd2.charazayCoachBasic() };
-        foreach (Xsd2.charazayCoach xsdCoach in xsdCoaches)
      
-        { //
-          // get maximum skills from al coaches
-          //
-        maxCoach.skills.defence = Math.Max(xsdCoach.skills.defence, maxCoach.skills.defence);
-        maxCoach.skills.twopoint = Math.Max(xsdCoach.skills.twopoint, maxCoach.skills.twopoint);
-        maxCoach.skills.threepoint = Math.Max(xsdCoach.skills.threepoint, maxCoach.skills.threepoint);
-        maxCoach.skills.freethrow = Math.Max(xsdCoach.skills.freethrow, maxCoach.skills.freethrow);
-        maxCoach.skills.dribling = Math.Max(xsdCoach.skills.dribling, maxCoach.skills.dribling);
-        maxCoach.skills.passing = Math.Max(xsdCoach.skills.passing, maxCoach.skills.passing);
-        maxCoach.skills.speed = Math.Max(xsdCoach.skills.speed, maxCoach.skills.speed);
-        maxCoach.skills.footwork = Math.Max(xsdCoach.skills.footwork, maxCoach.skills.footwork);
-        maxCoach.skills.rebounds = Math.Max(xsdCoach.skills.rebounds, maxCoach.skills.rebounds);
-        maxCoach.skills.experience = Math.Max(xsdCoach.skills.experience, maxCoach.skills.experience);
-        //
-        maxCoach.price += xsdCoach.price;
-        maxCoach.salary += xsdCoach.salary;
-        //
-        // add current coach to pool
-        //
-        _coaches.Add(new Coach(xsdCoach));
-      }
-      //
-      // common props for active coach
-      //
-      maxCoach.basic.name = "Active";
-      maxCoach.basic.surname = "Coach";
-      maxCoach.id = 0;
-      _coaches.Add(new Coach(maxCoach));
-    }
       
     private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
     {

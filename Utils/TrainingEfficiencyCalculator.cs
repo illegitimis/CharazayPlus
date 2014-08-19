@@ -2,57 +2,91 @@
 using System.Collections.Generic;
 using System.Text;
 using BrightIdeasSoftware;
+using AndreiPopescu.CharazayPlus.Objects;
 #if DOTNET30
 using System.Linq;
 #endif
 
 namespace AndreiPopescu.CharazayPlus.Utils
 {
+  /// <summary>
+  /// computes the best training combination by maximizing score
+  /// </summary>
   internal static class TrainingEfficiencyCalculator
   {
-    internal static IEnumerable<TrainingEfficiencyScoreItem> Go(IEnumerable<Player> optimumPlayers, Coach maxCoach)
+    /// <summary>
+    /// best training for selected player pool
+    /// </summary>
+    /// <param name="playerPool">player collection on which computation should be done</param>
+    /// <param name="coach">trainer</param>
+    /// <param name="TrainingCombinationValues">player training group choices for a selected training category pair</param>
+    /// <param name="TrainingEfficiencyScores">score increases for all training category pairs</param>
+    internal static void Go (IEnumerable<Player> playerPool, Coach coach
+      , ref IDictionary<TrainingCombination,List<TrainingCombinationItem>> TrainingCombinationValues
+      , ref IList<TrainingEfficiencyScoreItem> TrainingEfficiencyScores)
     {
-      byte minTc = (byte)TrainingCategories.defense;
-      byte maxTc = (byte)TrainingCategories.outside_sh;
+      TrainingCombinationValues.Clear();
+      TrainingEfficiencyScores.Clear();
+      //
+      // do not allow duplicate pairs
+      // the training combination should be tranzitive
+      //
+      foreach (var tc1 in (TrainingCategory[])Enum.GetValues(typeof(TrainingCategory)))
+      {
+        foreach (var tc2 in (TrainingCategory[])Enum.GetValues(typeof(TrainingCategory)))
+        {
+          if (tc2==tc1) continue;
 
-      for (byte b1 = minTc; b1<maxTc-1; b1++)
-      {
-        TrainingCategories tc1 = (TrainingCategories)b1;
-        for (byte b2 = (byte)(1+b1); b2<maxTc; b2++)
-      {
-          TrainingCategories tc2 = (TrainingCategories)b2;
-#if DOTNET30
-          optimumPlayers.Sum(p => Math.Max(p.GetScoreTrainingDelta(tc1, maxCoach), p.GetScoreTrainingDelta(tc2, maxCoach)))
-#endif
+          TrainingCombination crtTC = new TrainingCombination(tc1, tc2);
+          if (TrainingCombinationValues.ContainsKey(crtTC))
+            continue;
+          //
           double currentSum = 0d;
-          foreach (var p in optimumPlayers)
-            currentSum += Math.Max(p.GetScoreTrainingDelta(tc1, maxCoach), p.GetScoreTrainingDelta(tc2, maxCoach));
-          yield return new TrainingEfficiencyScoreItem(tc1, tc2, currentSum);
+          List<TrainingCombinationItem> tcis = new List<TrainingCombinationItem>();
+          foreach (var p in playerPool)
+          {
+            double v1 = p.GetScoreTrainingDelta(tc1, coach);
+            double v2 = p.GetScoreTrainingDelta(tc2, coach);
+            currentSum += Math.Max(v1, v2);
+            tcis.Add(new TrainingCombinationItem(p.FullName, v1, v2));
+          }
+          //
+          TrainingCombinationValues.Add(crtTC, tcis);
+          //
+          //if (TrainingEfficiencyScoreItem)
+          TrainingEfficiencyScores.Add( new TrainingEfficiencyScoreItem(tc1, tc2, currentSum));
+        }
       }
-      }
-      
+
     }
 
-    internal static IEnumerable<Player> Over18 (IEnumerable<Player> players)
+    internal static IEnumerable<Player> Under32 (IEnumerable<Player> players)
     {
-      #if DOTNET30
-      return players.Where ( p => p.Age < = 18);
-#endif
+#if DOTNET30
+        return players.Where ( p => p.Age < 32);
+#else
       foreach (var p in players)
         if (p.Age > 18)
           yield return p;
+#endif
+      
     }
 
     #if DOTNET30
     internal static IEnumerable<Player> TopN (IEnumerable<Player> players, int n)
     {
-      return players.OrderByDescending(grade => grade).Take(n);      
+      return players.OrderByDescending(p => p.TotalScore).Take(n);      
     }
     #endif
       
-    //The QuickSelect_kth algorithm quickly finds the k-th smallest element of an unsorted array of n elements
-
-    internal static T QuickSelect_kth<T> (T[] A, int k) where T : IComparable, IComparable<T>
+    /// <summary>
+    /// The QuickSelect_kth algorithm quickly finds the k-th smallest element of an unsorted array of n elements
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="A"></param>
+    /// <param name="k"></param>
+    /// <returns></returns>
+    static T QuickSelect_kth<T> (T[] A, int k) where T : IComparable, IComparable<T>
     {
       //let r be chosen uniformly at random in the range 1 to length(A)
       int r = A.Length / 2;
@@ -90,7 +124,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       
     }
 
-    internal static Player[] TopN (Player[] players, int n)
+    static Player[] TopN (Player[] players, int n)
     {
       if (players.Length > n)
       {
@@ -104,6 +138,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
       else return players;
     }
 
+    /// <summary>
+    /// best <paramref name="n"/> players by score
+    /// </summary>
+    /// <param name="players">list of players</param>
+    /// <param name="n">number of players</param>
+    /// <returns>best <paramref name="n"/> players by score</returns>
     internal static List<Player> TopN (List<Player> players, int n)
     {
       if (players.Count > n)
@@ -118,25 +158,98 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
   }
   
-  internal class TrainingEfficiencyScoreItem 
-  {
-    private readonly TrainingCategories tc1;
-    private readonly TrainingCategories tc2;
-    private readonly double value;
-    
-    public TrainingEfficiencyScoreItem (TrainingCategories tc1_2, TrainingCategories tc2_2, double currentSum)
-    {
-      // TODO: Complete member initialization
-      this.tc1 = tc1_2;
-      this.tc2 = tc2_2;
-      this.value = currentSum;
-    }
-    [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title="Training group 1")] 
-    public TrainingCategories TC1 { get { return tc1; } }
-    [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Training group 2")] 
-    public TrainingCategories TC2 { get { return tc2; } }
-    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, AspectToStringFormat = "{0:F04}", Title="Total score increase")] 
-    public double Value { get { return value; } }
+ 
 
+  /// <summary>
+  /// a pair of training categories
+  /// </summary>
+  internal class TrainingCombination : 
+    IComparable
+    ,
+    IComparable<TrainingCombination>
+    ,
+    IEquatable<TrainingCombination>
+    , 
+    IEqualityComparer<TrainingCombination>
+  {
+    private readonly TrainingCategory tc1;
+    private readonly TrainingCategory tc2;
+
+    public TrainingCategory FirstCategory { get { return (byte)tc1 < (byte)tc2 ? tc1 : tc2; ;} }
+    public TrainingCategory SecondCategory { get { return (byte)tc1 > (byte)tc2 ? tc1 : tc2; ;} }
+    
+    public TrainingCombination (TrainingCategory tc1, TrainingCategory tc2)
+    {
+      this.tc1 = tc1;
+      this.tc2 = tc2;      
+    }
+
+    
+
+    public static bool operator == (TrainingCombination x, TrainingCombination y)
+    {
+      return (x.FirstCategory == y.FirstCategory && x.SecondCategory == y.SecondCategory);
+    }
+    public static bool operator != (TrainingCombination x, TrainingCombination y)
+    {
+      return !(x == y);
+    }
+
+    public bool Equals (TrainingCombination other)
+    {
+      return this == other;
+    }
+
+    public bool Equals (TrainingCombination x, TrainingCombination y)
+    {
+      return x == y;
+    }
+    public override bool Equals (object obj)
+    {
+      return this == (TrainingCombination)obj;
+    }
+
+    public int GetHashCode (TrainingCombination obj)
+    {
+      return obj.GetHashCode();
+    }
+    public override int GetHashCode ( )
+    {
+      return  (int)this.FirstCategory * 10 + (int)this.SecondCategory;
+    }
+
+    public int CompareTo (object obj)
+    {
+      return this.CompareTo(obj as TrainingCombination);
+    }
+
+    public int CompareTo (TrainingCombination other)
+    {
+      return this > other ? 1 : (this == other ? 0 : -1);
+    }
+
+    public static bool operator> (TrainingCombination x, TrainingCombination y) 
+    {
+      return x.GetHashCode()>y.GetHashCode();
+    }
+    public static bool operator < (TrainingCombination x, TrainingCombination y)
+    {
+      return x.GetHashCode() < y.GetHashCode();
+    }
+    public static bool operator >= (TrainingCombination x, TrainingCombination y)
+    {
+      return x.GetHashCode() >= y.GetHashCode();
+    }
+    public static bool operator <= (TrainingCombination x, TrainingCombination y)
+    {
+      return x.GetHashCode() <= y.GetHashCode();
+    }
+    public override string ToString ( )
+    {
+      return string.Format("{0},{1}", tc1, tc2);
+    }
+    
   }
+
+
 }

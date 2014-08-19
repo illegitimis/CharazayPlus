@@ -5,6 +5,12 @@
   using System.Windows.Forms;
   using AndreiPopescu.CharazayPlus.Utils;
   using BrightIdeasSoftware;
+  using AndreiPopescu.CharazayPlus.Objects;
+ using AndreiPopescu.CharazayPlus.Data;
+
+#if DOTNET30
+  using System.Linq; 
+#endif
 
   public partial class TrainingTabUserControl : UserControl
   {
@@ -13,105 +19,33 @@
       InitializeComponent();
     }
 
-    Coach MaxCoach { get { return Coaches[Coaches.Count - 1];} }
-    public List<Coach> Coaches { get; set; }
-    public List<Player> OptimumPlayers { get; set; }
+    #region local data holders for efficiency/training combination    
+    
+    IDictionary<TrainingCombination,List<TrainingCombinationItem>> TrainingCombinationValues = new Dictionary<TrainingCombination,List<TrainingCombinationItem>>();
+    IList<TrainingEfficiencyScoreItem> TrainingEfficiencyScores = new List<TrainingEfficiencyScoreItem>();
 
-    public void initTrainingPropertyGrid ( )
-    {
-      double skIncDef = 0
-      , skIncDri = 0f
-      , skIncFtw = 0f
-      , skIncFt = 0f
-      , skIncPas = 0f
-      , skIncReb = 0f
-      , skIncSpe = 0f
-      , skInc3p = 0f
-      , skInc2p = 0f
-      , trnIncDef = 0f
-      , trnIncDri = 0f
-      , trnIncFtw = 0f
-      , trnIncIn = 0f
-      , trnIncOut = 0f
-      , trnIncPas = 0f
-      , trnIncReb = 0f
-      , trnIncSpe = 0f;
-#if DOTNET30
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sDEFENSE, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sDRIBLING, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sFOOTWORK, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sFREETHROWS, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sPASSING, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sREBOUNDS, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sSPEED, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sTHREEPOINT, maxCoach));
-     OptimumPlayers.Sum(P => P.GetSkillTrainingDelta(Skills.sTWOPOINT, maxCoach));
+    #endregion
 
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.defense, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.dribling, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.footwork, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.inside_sh, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.outside_sh, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.passing, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.rebounds, maxCoach));
-      OptimumPlayers.Sum(P => P.GetScoreTrainingDelta(TrainingCategories.speed, maxCoach));
-#endif
-      foreach (Player P in OptimumPlayers)
-      {
-        skIncDef += P.SkillTrainingDelta(Skills.sDEFENSE, MaxCoach);
-        skIncDri += P.SkillTrainingDelta(Skills.sDRIBLING, MaxCoach);
-        skIncFtw += P.SkillTrainingDelta(Skills.sFOOTWORK, MaxCoach);
-        skIncFt += P.SkillTrainingDelta(Skills.sFREETHROWS, MaxCoach);
-        skIncPas += P.SkillTrainingDelta(Skills.sPASSING, MaxCoach);
-        skIncReb += P.SkillTrainingDelta(Skills.sREBOUNDS, MaxCoach);
-        skIncSpe += P.SkillTrainingDelta(Skills.sSPEED, MaxCoach);
-        skInc3p += P.SkillTrainingDelta(Skills.sTHREEPOINT, MaxCoach);
-        skInc2p += P.SkillTrainingDelta(Skills.sTWOPOINT, MaxCoach);
-        trnIncDef += P.GetScoreTrainingDelta(TrainingCategories.defense, MaxCoach);
-        trnIncDri += P.GetScoreTrainingDelta(TrainingCategories.dribling, MaxCoach);
-        trnIncFtw += P.GetScoreTrainingDelta(TrainingCategories.footwork, MaxCoach);
-        trnIncIn += P.GetScoreTrainingDelta(TrainingCategories.inside_sh, MaxCoach);
-        trnIncOut += P.GetScoreTrainingDelta(TrainingCategories.outside_sh, MaxCoach);
-        trnIncPas += P.GetScoreTrainingDelta(TrainingCategories.passing, MaxCoach);
-        trnIncReb += P.GetScoreTrainingDelta(TrainingCategories.rebounds, MaxCoach);
-        trnIncSpe += P.GetScoreTrainingDelta(TrainingCategories.speed, MaxCoach);
-      }
-
-      TrainingAdvicePropertyGridObject tpg = new TrainingAdvicePropertyGridObject(
-      skIncDef, skIncDri, skIncFtw, skIncFt, skIncPas, skIncReb, skIncSpe, skInc3p, skInc2p,
-      trnIncDef, trnIncDri, trnIncFtw, trnIncIn, trnIncOut, trnIncPas, trnIncReb, trnIncSpe);
-
-      propGrid.SelectedObject = tpg;
-    }
-
+   
     public void initCoachesList ( )
     {
+      this.olvCoaches.HeaderUsesThemes = false;
+      this.olvCoaches.HeaderWordWrap = false;
       //coaches list
-      Generator.GenerateColumns(olvCoaches, Coaches);
+      Generator.GenerateColumns(olvCoaches, PlayersEnvironment.Coaches);
       foreach (OLVColumn col in olvCoaches.Columns)
       {
         if (col.Index != 0)
           col.IsHeaderVertical = true;
       }
-      //olvCoaches.RebuildColumns();
-
-      olvCoaches.SetObjects(Coaches);
+      olvCoaches.SetObjects(PlayersEnvironment.Coaches);
     }
 
     // training skill increase
     public void initTrainingSkillIncrease ( )
     {
-      TypedObjectListView<Player> typedOlv = new TypedObjectListView<Player>(olvSkillIncrease);
-      Coach maxCoach = Coaches[Coaches.Count - 1];
-      for (int index = 1; index < 10; index++)
-      {
-        Skills trainingSkill = (Skills)index;
-        typedOlv.GetColumn(index).AspectGetter =
-          delegate(Player p) { return p.SkillTrainingDelta(trainingSkill, maxCoach); };
-      }
-
-      //olvSkillIncrease.SetObjects(_pgs);      
-      olvSkillIncrease.SetObjects(OptimumPlayers);
+      Generator.GenerateColumns(this.olvSkillIncrease, TrainingEnvironment.SkillIncreaseItems);
+      this.olvSkillIncrease.SetObjects(TrainingEnvironment.SkillIncreaseItems);
     }
 
     /// <summary>
@@ -119,44 +53,121 @@
     /// </summary>
     public void initTrainingScoreIncrease ( )
     {
-      // training score increase
-      TypedObjectListView<Player> typedOlv = new TypedObjectListView<Player>(olvTraining);
-      Coach maxCoach = Coaches[Coaches.Count - 1];
-      for (int index = 1; index < 9; index++)
-      {
-        TrainingCategories tc = (TrainingCategories)(index - 1);
-        typedOlv.GetColumn(index).AspectGetter =
-          delegate(Player p) { return p.GetScoreTrainingDelta(tc, maxCoach); };
-      }
-
-      //olvTraining.SetObjects(_pgs);
-      olvTraining.SetObjects(OptimumPlayers);
+      Generator.GenerateColumns(this.olvTraining, TrainingEnvironment.ScoreIncreaseItems);
+      this.olvTraining.SetObjects(TrainingEnvironment.ScoreIncreaseItems);
     }
 
-    public void initTrainingEfficiency (bool top8 = false)
+     
+
+    public void initTrainingEfficiency ()
     {
       Generator.GenerateColumns(olvTrainingEfficiency, typeof(TrainingEfficiencyScoreItem));
-      olvTrainingEfficiency.RebuildColumns();
-      Coach maxCoach = Coaches[Coaches.Count - 1];
-      var plyrs = top8 ? TrainingEfficiencyCalculator.TopN(OptimumPlayers, 8) : OptimumPlayers;
-      olvTrainingEfficiency.SetObjects(TrainingEfficiencyCalculator.Go(plyrs, maxCoach));
-    }
+      //
+      Generator.GenerateColumns(this.folvTrainComb, typeof(TrainingCombinationItem));
+      foreach (OLVColumn col in this.folvTrainComb.Columns)
+      {
+        if (col.Index != 0)
+          //col.IsHeaderVertical = true;
+          col.WordWrap = true;
+      }
+      //
+      TrainingEfficiencyCalculator.Go (PlayersEnvironment.OptimumPlayers
+        , PlayersEnvironment.MaxCoach
+        , ref TrainingCombinationValues
+        , ref TrainingEfficiencyScores);
+      olvTrainingEfficiency.SetObjects(TrainingEfficiencyScores);
+     }
 
     private void chkTEu18_CheckedChanged (object sender, EventArgs e)
     {
-      initTrainingEfficiency(chkTEu18.Checked);
+      var players = this.chkTEu18.Checked 
+        ? TrainingEfficiencyCalculator.TopN(PlayersEnvironment.OptimumPlayers, 8)
+        : PlayersEnvironment.OptimumPlayers;
+      TrainingEfficiencyCalculator.Go(players
+        , PlayersEnvironment.MaxCoach
+        , ref this.TrainingCombinationValues
+        , ref this.TrainingEfficiencyScores);
+      olvTrainingEfficiency.SetObjects(TrainingEfficiencyScores);
     }
 
+    private void chkRemove32_CheckedChanged (object sender, EventArgs e)
+    {
+      var players = this.chkRemove32.Checked
+        ? TrainingEfficiencyCalculator.Under32(PlayersEnvironment.OptimumPlayers)
+        : PlayersEnvironment.OptimumPlayers;
+      TrainingEfficiencyCalculator.Go(players
+        , PlayersEnvironment.MaxCoach
+        , ref this.TrainingCombinationValues
+        , ref this.TrainingEfficiencyScores);
+      olvTrainingEfficiency.SetObjects(TrainingEfficiencyScores);
+    }
+
+    #region OLV event handlers
     private void olvCoaches_FormatCell (object sender, FormatCellEventArgs e)
     {
       //e.RowIndex == _coaches.Count - 1 &&
       if (e.Item.Text == "Active Coach")
         e.SubItem.Font = new System.Drawing.Font(e.SubItem.Font, System.Drawing.FontStyle.Bold);
     }
-
-    private void olvCoaches_FormatRow (object sender, FormatRowEventArgs e)
+          
+    private void olvSkillIncrease_FormatCell (object sender, FormatCellEventArgs e)
     {
+      if (e.Item.Text.StartsWith("TOTAL"))
+        e.SubItem.Font = new System.Drawing.Font(e.SubItem.Font, System.Drawing.FontStyle.Bold);
+      else
+      {
+        if (e.ColumnIndex > 0)
+        {
+          if ((double)e.CellValue > 0.25d)
+            e.SubItem.ForeColor = System.Drawing.Color.Red;
+          else if ((double)e.CellValue > 0.1d)
+            e.SubItem.ForeColor = System.Drawing.Color.DarkGreen;
+        }
+        
+      }
 
     }
+
+    private void olvTraining_FormatCell (object sender, FormatCellEventArgs e)
+    {
+      if (e.Item.Text.StartsWith("TOTAL"))
+        e.SubItem.Font = new System.Drawing.Font(e.SubItem.Font, System.Drawing.FontStyle.Bold);
+      else
+      {
+        if (e.ColumnIndex > 0)
+        {
+          if ((double)e.CellValue > 0.04d)
+            e.SubItem.ForeColor = System.Drawing.Color.Red;
+          else if ((double)e.CellValue > 0.01d)
+            e.SubItem.ForeColor = System.Drawing.Color.DarkGreen;
+        }
+
+      }
+    }
+
+    private void olvTrainingEfficiency_SelectedIndexChanged (object sender, EventArgs e)
+    {
+      TrainingEfficiencyScoreItem tefsi = (TrainingEfficiencyScoreItem)this.olvTrainingEfficiency.SelectedObject;
+      if (tefsi == null)
+        return;
+      TrainingCombination tc = new TrainingCombination(tefsi.TC1, tefsi.TC2);
+      var tcis = TrainingCombinationValues[tc];
+      this.folvTrainComb.SetObjects(tcis);      
+    }
+
+    private void folvTrainComb_FormatRow (object sender, FormatRowEventArgs e)
+    {
+      var tci = (TrainingCombinationItem)e.Model;
+      if (tci.Category1Increase > tci.Category2Increase)
+        e.Item.SubItems[1].Font = new System.Drawing.Font(e.Item.SubItems[1].Font, System.Drawing.FontStyle.Bold);
+      else
+        e.Item.SubItems[2].Font = new System.Drawing.Font(e.Item.SubItems[2].Font, System.Drawing.FontStyle.Bold);
+    }
+    #endregion
+
+    
+
+   
+    
   }
 }

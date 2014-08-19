@@ -5,6 +5,8 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 {
   using AndreiPopescu.CharazayPlus.Utils;
   using BrightIdeasSoftware;
+  using System;
+  using System.ComponentModel;
 
   /// <summary>
   /// match 
@@ -198,6 +200,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
         return this.ownerField;
       }
     }
-  }
+  } 
+  
 
 }

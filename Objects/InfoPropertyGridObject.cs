@@ -1,113 +1,15 @@
-﻿
-namespace AndreiPopescu.CharazayPlus
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+using System.Drawing;
+using System.Globalization;
+using System.Windows.Forms;
+using AndreiPopescu.CharazayPlus.Utils;
+
+namespace AndreiPopescu.CharazayPlus.Objects
 {
-  using System;
-  using System.ComponentModel;
-  using System.Drawing;
-  using System.Globalization;
-  using System.Windows.Forms;
-  using AndreiPopescu.CharazayPlus.Utils;
-
-  /// <summary>
-  /// training advice
-  /// </summary>
-  class TrainingAdvicePropertyGridObject
-  {
-    public TrainingAdvicePropertyGridObject (
-      double skIncDef,
-      double skIncDri,
-      double skIncFtw,
-      double skIncFt,
-      double skIncPas,
-      double skIncReb,
-      double skIncSpe,
-      double skInc3p,
-      double skInc2p,
-      double trnIncDef,
-      double trnIncDri,
-      double trnIncFtw,
-      double trnIncIn,
-      double trnIncOut,
-      double trnIncPas,
-      double trnIncReb,
-      double trnIncSpe
-      )
-    {
-      SkIncDefence = skIncDef;
-      SkIncFreethrows = skIncFt;
-      SkIncTwoPoint = skInc2p;
-      SkIncThreePoint = skInc3p;
-      SkIncDribling = skIncDri;
-      SkIncPassing = skIncPas;
-      SkIncSpeed = skIncSpe;
-      SkIncFootwork = skIncFtw;
-      SkIncRebounds = skIncReb;
-
-
-      TrnDefence = trnIncDef;
-      TrnInside = trnIncIn;
-      TrnOutside = trnIncOut;
-      TrnDribling = trnIncDri;
-      TrnPassing = trnIncPas;
-      TrnSpeed = trnIncSpe;
-      TrnFootwork = trnIncFtw;
-      TrnRebounds = trnIncReb;
-    }
-
-
-    [CategoryAttribute("Team Weekly Skill Increase"), ReadOnlyAttribute(true)]
-    public double SkIncDefence { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncFreethrows { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncTwoPoint { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncThreePoint { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncDribling { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncPassing { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncSpeed { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncFootwork { get; private set; }
-    [CategoryAttribute("Team Weekly Skill Increase"),
-    ReadOnlyAttribute(true)]
-    public double SkIncRebounds { get; private set; }
-
-    [CategoryAttribute("Training Score Increase "),
-   ReadOnlyAttribute(true)]
-    public double TrnDefence { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnInside { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnOutside { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnDribling { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnPassing { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnSpeed { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnFootwork { get; private set; }
-    [CategoryAttribute("Training Score Increase "),
-    ReadOnlyAttribute(true)]
-    public double TrnRebounds { get; private set; }
-  }
-
   /// <summary>
   /// property grid class for the info tab
   /// </summary>
@@ -118,8 +20,8 @@ namespace AndreiPopescu.CharazayPlus
     private Xsd2.charazayTeam _team;
     private Xsd2.charazayCountry _country;
     private ImageList _countriesImageList;
-  
-   
+
+
 
     /// <summary>
     /// Public properties will get posted to the grid
@@ -146,13 +48,7 @@ namespace AndreiPopescu.CharazayPlus
       _countriesImageList = countries;
     }
 
-    // HAD I USED TYPECONVERTERS
-    //[ReadOnly(true)]
-    //public Xsd.arena Arena { get { return _arena; } }
-    //[ReadOnly(true)]
-    //public Xsd.user User { get { return _user; } }
-    //[ReadOnly(true)]
-    //public Xsd.team Team { get { return _team; } }   
+
 
     [Browsable(true), Description("arena"), Category("arena"), ReadOnly(true)]
     public uint ArenaId { get { return _arena.id; } }
@@ -163,17 +59,8 @@ namespace AndreiPopescu.CharazayPlus
     [Browsable(true), Description("arena"), Category("arena"), ReadOnly(true)]
     public uint Vips { get { return _arena.vips; } }
 
-    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
-    public uint UserId { get { return _user.id; } }
-    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
-    public DateTime LastActive { get { return Compute.EstimatedDateTime(_user.last_active); } }
-    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
-    public string UserName { get { return _user.name; } }
-    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
-    public DateTime Registered { get { return Compute.EstimatedDateTime(_user.registered); } }
-    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
-    //public bool Supporter { get { return User.supporter == Xsd.userSupporter.yes; } }
-    public bool Supporter { get { return _user.supporter == "yes"; } }
+   [Browsable(true), Description("Currently logged on user"), Category("User"), ReadOnly(true), TypeConverter(typeof(ICharazayUserTypeConverter))]
+    public CharazayUserModel CurrentUser { get { return new CharazayUserModel(this._user); } }
 
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
     public uint TeamId { get { return _team.id; } }
@@ -223,61 +110,17 @@ namespace AndreiPopescu.CharazayPlus
     [Browsable(true), Description(""), Category("Country"), ReadOnly(true)]
     public uint NoWaiting { get { return _country.country_info.waiting; } }
 
-    /// <summary>
-    /// xsd2.user type converted
-    /// </summary>
-    #region NT coaches
-    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true)]
-    public Xsd2.user U18Coach { get { return _country.country_info.u18ntcoach.user; } }
-    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true)]
-    public Xsd2.user U21Coach { get { return _country.country_info.u21ntcoach.user; } }
-    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true)]
-    public Xsd2.user UNtCoach { get { return _country.country_info.ntcoach.user; } }
+    #region NT coaches xsd2.user type converted
 
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public byte U18CoachCountryId { get { return _country.country_info.u18ntcoach.user.countryid; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public uint U18CoachId { get { return _country.country_info.u18ntcoach.user.id; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public uint U18CoachLastActive { get { return _country.country_info.u18ntcoach.user.last_active; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public string U18CoachName { get { return _country.country_info.u18ntcoach.user.name; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public uint U18CoachRegistered { get { return _country.country_info.u18ntcoach.user.registered; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public string U18CoachSupporter { get { return _country.country_info.u18ntcoach.user.supporter; } }
-    //[Browsable(true), Description(""), Category("U18"), ReadOnly(true)]
-    //public ushort U18CoachTeamId { get { return _country.country_info.u18ntcoach.user.teamid; } }
+    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true), TypeConverter(typeof(ICharazayUserTypeConverter))]
+    public CharazayUserModel U18Coach { get { return new CharazayUserModel(_country.country_info.u18ntcoach.user); } }
 
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public byte U21CoachCountryId { get { return _country.country_info.u21ntcoach.user.countryid; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public uint U21CoachId { get { return _country.country_info.u21ntcoach.user.id; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public uint U21CoachLastActive { get { return _country.country_info.u21ntcoach.user.last_active; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public string U21CoachName { get { return _country.country_info.u21ntcoach.user.name; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public uint U21CoachRegistered { get { return _country.country_info.u21ntcoach.user.registered; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public string U21CoachSupporter { get { return _country.country_info.u21ntcoach.user.supporter; } }
-    //[Browsable(true), Description(""), Category("U21"), ReadOnly(true)]
-    //public ushort U21CoachTeamId { get { return _country.country_info.u21ntcoach.user.teamid; } }
-
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public byte NTCoachCountryId { get { return _country.country_info.ntcoach.user.countryid; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public uint NTCoachId { get { return _country.country_info.ntcoach.user.id; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public uint NTCoachLastActive { get { return _country.country_info.ntcoach.user.last_active; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public string NTCoachName { get { return _country.country_info.ntcoach.user.name; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public uint NTCoachRegistered { get { return _country.country_info.ntcoach.user.registered; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public string NTCoachSupporter { get { return _country.country_info.ntcoach.user.supporter; } }
-    //[Browsable(true), Description(""), Category("NT"), ReadOnly(true)]
-    //public ushort NTCoachTeamId { get { return _country.country_info.ntcoach.user.teamid; } }
+    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true), TypeConverter(typeof(ICharazayUserTypeConverter))]
+    public CharazayUserModel U21Coach { get { return new CharazayUserModel(_country.country_info.u21ntcoach.user); } }
+    
+    [Browsable(true), Description(""), Category("NT Coaches"), ReadOnly(true), TypeConverter(typeof(ICharazayUserTypeConverter))]
+    public CharazayUserModel UNtCoach { get { return new CharazayUserModel(_country.country_info.ntcoach.user); } }
+    
     #endregion
 
   }
@@ -285,11 +128,13 @@ namespace AndreiPopescu.CharazayPlus
   /// <summary>
   /// for nt country coaches xsd2.user type converter
   /// </summary>
-  public class Xsd2CountryUserTypeConverter : ExpandableObjectConverter
+  public class ICharazayUserTypeConverter : ExpandableObjectConverter
   {
     public override bool CanConvertTo (ITypeDescriptorContext context, System.Type destinationType)
     {
-      if (destinationType == typeof(Xsd2.user))
+      if (destinationType == typeof(Xsd2.user) ||
+        destinationType == typeof(Xsd2.charazayUser) ||
+        destinationType == typeof(CharazayUserModel) )
         return true;
 
       return base.CanConvertTo(context, destinationType);
@@ -300,33 +145,33 @@ namespace AndreiPopescu.CharazayPlus
                                    object value,
                                    System.Type destinationType)
     {
-      if (destinationType == typeof(System.String) && value is Xsd2.user)
+      if (destinationType == typeof(System.String))            
       {
+        if(value is CharazayUserModel)  
+          return (value as CharazayUserModel).ToString();
+        else if (value is Xsd2.user)
+          return (value as Xsd2.user).ToString();
+        else if(value is Xsd2.charazayUser)
+          return (value as Xsd2.charazayUser).ToString();
 
-        Xsd2.user user = (Xsd2.user)value;
-        return user.ToString();
       }
       return base.ConvertTo(context, culture, value, destinationType);
     }
 
-    public override bool CanConvertFrom (ITypeDescriptorContext context,
-                                  System.Type sourceType)
+    public override bool CanConvertFrom (ITypeDescriptorContext context, System.Type sourceType)
     {
-      if (sourceType == typeof(string))
-        return true;
-
+      if (sourceType == typeof(string)) return true;
       return base.CanConvertFrom(context, sourceType);
     }
 
-    public override object ConvertFrom (ITypeDescriptorContext context,
-                                  CultureInfo culture, object value)
+    public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
     {
 
       try
       {
         if (value is string)
         {
-          return (Xsd2.user)value;
+          return (CharazayUserModel)value;
         }
         return base.ConvertFrom(context, culture, value);
       }
@@ -337,6 +182,75 @@ namespace AndreiPopescu.CharazayPlus
     }
 
   }
+
+  internal class CharazayUserModel
+  {
+    readonly string nameField;
+
+    readonly uint idField;
+
+    readonly string supporterField;
+
+    readonly uint registeredField;
+
+    readonly uint last_activeField;
+
+    readonly uint teamidField;
+
+    readonly byte countryidField;
+
+    public CharazayUserModel (Xsd2.user usr)
+    {
+      this.nameField = usr.name;
+      this.idField = usr.id;
+      this.supporterField = usr.supporter;
+      this.registeredField = usr.registered;
+      this.last_activeField = usr.last_active;
+      this.teamidField = usr.teamid;
+      this.countryidField = usr.countryid;
+    }
+
+    public CharazayUserModel (Xsd2.charazayUser usr)
+    {
+      this.nameField = usr.name;
+      this.idField = usr.id;
+      this.supporterField = usr.supporter;
+      this.registeredField = usr.registered;
+      this.last_activeField = usr.last_active;
+      this.teamidField = usr.teamid;
+      this.countryidField = usr.countryid;
+    }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public uint UserId { get { return this.idField; } }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public DateTime LastActive { get { return Compute.EstimatedDateTime(this.last_activeField); } }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public string UserName { get { return this.nameField; } }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public DateTime Registered { get { return Compute.EstimatedDateTime(this.registeredField); } }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public bool Supporter { get { return this.supporterField == "yes"; } }
+
+    [Browsable(true), Description(""), Category("user"), ReadOnly(true)]
+    public string Country
+    {
+      get
+      {
+        return Utils.Defines.Countries[this.countryidField].Name;
+      }
+    }
+
+    public override string ToString ( )
+    {
+      return String.Format("{0},{1}", nameField,idField);
+    }
+  }
+
 
   /// <summary>
   /// property class for a transfer listed player
@@ -366,7 +280,7 @@ namespace AndreiPopescu.CharazayPlus
       return null;
     }
 
-    public TransferListedPlayerPropertyGridObject (Xsd2.charazayPlayer plyr)    
+    public TransferListedPlayerPropertyGridObject (Xsd2.charazayPlayer plyr)
     {
       _plyr = plyr;
       _pg = new PG(_plyr);
@@ -774,5 +688,3 @@ namespace AndreiPopescu.CharazayPlus
   //}
   #endregion
 }
-
-

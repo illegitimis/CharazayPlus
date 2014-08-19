@@ -11,22 +11,22 @@ namespace AndreiPopescu.CharazayPlus
     // coach own raise
     //The coach will train 0,06 every week for the skills he's training (coach own raise is 0,06)
     [Obsolete("replaced by public double SkillTrainingDelta (Skills skill, Coach coach)")]
-    public double GetSkillTrainingDelta (Skills skill, Coach coach)
+    public double GetSkillTrainingDelta (Skill skill, Coach coach)
     {
       // difference between coach skill and player skill
       int delta = 0;
 
       switch (skill)
       {
-        case Skills.sDEFENSE: delta = coach.Defence - Defence_Display; break;
-        case Skills.sDRIBLING: delta = delta = coach.Dribling - Dribling_Display; break;
-        case Skills.sPASSING: delta = coach.Passing - Passing_Display; break;
-        case Skills.sSPEED: delta = coach.Speed - Speed_Display; break;
-        case Skills.sFOOTWORK: delta = coach.Footwork - Footwork_Display; break;
-        case Skills.sREBOUNDS: delta = coach.Rebounds - Rebounds_Display; break;
-        case Skills.sTWOPOINT: delta = coach.TwoPoint - TwoPoint_Display; break;
-        case Skills.sTHREEPOINT: delta = coach.ThreePoint - ThreePoint_Display; break;
-        case Skills.sFREETHROWS: delta = coach.Freethrows - Freethrows_Display; break;
+        case Skill.DEFENSE: delta = coach.Defence - Defence_Display; break;
+        case Skill.DRIBLING: delta = delta = coach.Dribling - Dribling_Display; break;
+        case Skill.PASSING: delta = coach.Passing - Passing_Display; break;
+        case Skill.SPEED: delta = coach.Speed - Speed_Display; break;
+        case Skill.FOOTWORK: delta = coach.Footwork - Footwork_Display; break;
+        case Skill.REBOUNDS: delta = coach.Rebounds - Rebounds_Display; break;
+        case Skill.TWOPOINT: delta = coach.TwoPoint - TwoPoint_Display; break;
+        case Skill.THREEPOINT: delta = coach.ThreePoint - ThreePoint_Display; break;
+        case Skill.FREETHROWS: delta = coach.Freethrows - Freethrows_Display; break;
       }
 
       double weeklySkillRaiseMultiplier = Compute.s_weeklySkillTrainAgeMultiplier[Age - 15];
@@ -47,37 +47,37 @@ namespace AndreiPopescu.CharazayPlus
       {
         double weeklySkillRaiseMultiplier = Compute.s_weeklySkillTrainAgeMultiplier[age];
 
-        foreach (TrainingCategories eTc in Enum.GetValues(typeof(TrainingCategories)))
+        foreach (TrainingCategory eTc in Enum.GetValues(typeof(TrainingCategory)))
         {
           byte noWeeksSkillTraining = TrainingPlan[(int)eTc];
           while (noWeeksSkillTraining > 0)
           {
             switch (eTc)
             {
-              case TrainingCategories.defense:
+              case TrainingCategory.defense:
                 Compute.WeeklySkillAddition(ref pvp.m_dDefence, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.dribling:
+              case TrainingCategory.dribling:
                 Compute.WeeklySkillAddition(ref pvp.m_dDribling, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.passing:
+              case TrainingCategory.passing:
                 Compute.WeeklySkillAddition(ref pvp.m_dPassing, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.speed:
+              case TrainingCategory.speed:
                 Compute.WeeklySkillAddition(ref pvp.m_dSpeed, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.footwork:
+              case TrainingCategory.footwork:
                 Compute.WeeklySkillAddition(ref pvp.m_dFootwork, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.rebounds:
+              case TrainingCategory.rebounds:
                 Compute.WeeklySkillAddition(ref pvp.m_dRebounds, weeklySkillRaiseMultiplier);
                 break;
-              case TrainingCategories.inside_sh:
+              case TrainingCategory.insideShooting:
                 {
                   Compute.WeeklySkillAddition(ref pvp.m_dTwoPoint, weeklySkillRaiseMultiplier);
                   Compute.WeeklySkillAddition(ref pvp.m_dFreethrows, weeklySkillRaiseMultiplier);
                 } break;
-              case TrainingCategories.outside_sh:
+              case TrainingCategory.outsideShooting:
                 {
                   Compute.WeeklySkillAddition(ref pvp.m_dThreePoint, weeklySkillRaiseMultiplier);
                   Compute.WeeklySkillAddition(ref pvp.m_dFreethrows, weeklySkillRaiseMultiplier);

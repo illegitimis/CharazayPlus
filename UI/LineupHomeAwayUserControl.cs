@@ -317,14 +317,14 @@ namespace AndreiPopescu.CharazayPlus.UI
       // pgh1
       // 
       this.pgh1.Location = new System.Drawing.Point(34, 0);
-      this.pgh1.Name = "pgh1";
+      this.pgh1.Text = "-";
       this.pgh1.Size = new System.Drawing.Size(100, 23);
       this.pgh1.TabIndex = 9;
       // 
       // pgh2
       // 
       this.pgh2.Location = new System.Drawing.Point(140, 0);
-      this.pgh2.Name = "pgh2";
+      this.pgh2.Text = "-";
       this.pgh2.Size = new System.Drawing.Size(100, 23);
       this.pgh2.TabIndex = 10;
       // 
@@ -640,7 +640,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pgh1.Name = "pgh1";
       this.pgh1.Size = new System.Drawing.Size(72, 13);
       this.pgh1.TabIndex = 9;
-      this.pgh1.Text = "pgh1";
+      this.pgh1.Text = "-";
       // 
       // pgh2
       // 
@@ -651,7 +651,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pgh2.Name = "pgh2";
       this.pgh2.Size = new System.Drawing.Size(72, 13);
       this.pgh2.TabIndex = 10;
-      this.pgh2.Text = "pgh2";
+      this.pgh2.Text = "-";
       // 
       // pgh3
       // 
@@ -662,7 +662,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pgh3.Name = "pgh3";
       this.pgh3.Size = new System.Drawing.Size(72, 13);
       this.pgh3.TabIndex = 11;
-      this.pgh3.Text = "pgh3";
+      this.pgh3.Text = "-";
       // 
       // pgh4
       // 
@@ -673,7 +673,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pgh4.Name = "pgh4";
       this.pgh4.Size = new System.Drawing.Size(72, 13);
       this.pgh4.TabIndex = 12;
-      this.pgh4.Text = "pgh4";
+      this.pgh4.Text = "-";
       // 
       // pga1
       // 
@@ -684,7 +684,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pga1.Name = "pga1";
       this.pga1.Size = new System.Drawing.Size(72, 13);
       this.pga1.TabIndex = 13;
-      this.pga1.Text = "pga1";
+      this.pga1.Text = "-";
       // 
       // pga2
       // 
@@ -695,7 +695,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pga2.Name = "pga2";
       this.pga2.Size = new System.Drawing.Size(72, 13);
       this.pga2.TabIndex = 14;
-      this.pga2.Text = "pga2";
+      this.pga2.Text = "-";
       // 
       // pga3
       // 
@@ -706,7 +706,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pga3.Name = "pga3";
       this.pga3.Size = new System.Drawing.Size(72, 13);
       this.pga3.TabIndex = 15;
-      this.pga3.Text = "pga3";
+      this.pga3.Text = "-";
       // 
       // pga4
       // 
@@ -717,7 +717,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pga4.Name = "pga4";
       this.pga4.Size = new System.Drawing.Size(72, 13);
       this.pga4.TabIndex = 16;
-      this.pga4.Text = "pga4";
+      this.pga4.Text = "-";
       // 
       // sgh1
       // 
@@ -728,7 +728,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sgh1.Name = "sgh1";
       this.sgh1.Size = new System.Drawing.Size(72, 13);
       this.sgh1.TabIndex = 17;
-      this.sgh1.Text = "sgh1";
+      this.sgh1.Text = "-";
       // 
       // sgh2
       // 
@@ -739,7 +739,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sgh2.Name = "sgh2";
       this.sgh2.Size = new System.Drawing.Size(72, 13);
       this.sgh2.TabIndex = 18;
-      this.sgh2.Text = "sgh2";
+      this.sgh2.Text = "-";
       // 
       // sgh3
       // 
@@ -750,7 +750,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sgh3.Name = "sgh3";
       this.sgh3.Size = new System.Drawing.Size(72, 13);
       this.sgh3.TabIndex = 19;
-      this.sgh3.Text = "sgh3";
+      this.sgh3.Text = "-";
       // 
       // sgh4
       // 
@@ -761,7 +761,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sgh4.Name = "sgh4";
       this.sgh4.Size = new System.Drawing.Size(72, 13);
       this.sgh4.TabIndex = 20;
-      this.sgh4.Text = "sgh4";
+      this.sgh4.Text = "-";
       // 
       // sga1
       // 
@@ -772,7 +772,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sga1.Name = "sga1";
       this.sga1.Size = new System.Drawing.Size(72, 13);
       this.sga1.TabIndex = 21;
-      this.sga1.Text = "sga1";
+      this.sga1.Text = "-";
       // 
       // sga2
       // 
@@ -783,7 +783,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sga2.Name = "sga2";
       this.sga2.Size = new System.Drawing.Size(72, 13);
       this.sga2.TabIndex = 22;
-      this.sga2.Text = "sga2";
+      this.sga2.Text = "-";
       // 
       // sga3
       // 
@@ -794,7 +794,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sga3.Name = "sga3";
       this.sga3.Size = new System.Drawing.Size(72, 13);
       this.sga3.TabIndex = 23;
-      this.sga3.Text = "sga3";
+      this.sga3.Text = "-";
       // 
       // sga4
       // 
@@ -805,7 +805,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sga4.Name = "sga4";
       this.sga4.Size = new System.Drawing.Size(72, 13);
       this.sga4.TabIndex = 24;
-      this.sga4.Text = "sga4";
+      this.sga4.Text = "-";
       // 
       // sfh1
       // 
@@ -816,7 +816,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfh1.Name = "sfh1";
       this.sfh1.Size = new System.Drawing.Size(72, 13);
       this.sfh1.TabIndex = 25;
-      this.sfh1.Text = "sfh1";
+      this.sfh1.Text = "-";
       // 
       // sfh2
       // 
@@ -827,7 +827,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfh2.Name = "sfh2";
       this.sfh2.Size = new System.Drawing.Size(72, 13);
       this.sfh2.TabIndex = 26;
-      this.sfh2.Text = "sfh2";
+      this.sfh2.Text = "-";
       // 
       // sfh3
       // 
@@ -838,7 +838,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfh3.Name = "sfh3";
       this.sfh3.Size = new System.Drawing.Size(72, 13);
       this.sfh3.TabIndex = 27;
-      this.sfh3.Text = "sfh3";
+      this.sfh3.Text = "-";
       // 
       // sfh4
       // 
@@ -849,7 +849,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfh4.Name = "sfh4";
       this.sfh4.Size = new System.Drawing.Size(72, 13);
       this.sfh4.TabIndex = 28;
-      this.sfh4.Text = "sfh4";
+      this.sfh4.Text = "-";
       // 
       // sfa1
       // 
@@ -860,7 +860,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfa1.Name = "sfa1";
       this.sfa1.Size = new System.Drawing.Size(72, 13);
       this.sfa1.TabIndex = 29;
-      this.sfa1.Text = "sfa1";
+      this.sfa1.Text = "-";
       // 
       // sfa2
       // 
@@ -871,7 +871,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfa2.Name = "sfa2";
       this.sfa2.Size = new System.Drawing.Size(72, 13);
       this.sfa2.TabIndex = 30;
-      this.sfa2.Text = "sfa2";
+      this.sfa2.Text = "-";
       // 
       // sfa3
       // 
@@ -882,7 +882,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfa3.Name = "sfa3";
       this.sfa3.Size = new System.Drawing.Size(72, 13);
       this.sfa3.TabIndex = 31;
-      this.sfa3.Text = "sfa3";
+      this.sfa3.Text = "-";
       // 
       // sfa4
       // 
@@ -893,7 +893,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.sfa4.Name = "sfa4";
       this.sfa4.Size = new System.Drawing.Size(72, 13);
       this.sfa4.TabIndex = 32;
-      this.sfa4.Text = "sfa4";
+      this.sfa4.Text = "-";
       // 
       // pfh1
       // 
@@ -904,7 +904,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfh1.Name = "pfh1";
       this.pfh1.Size = new System.Drawing.Size(72, 13);
       this.pfh1.TabIndex = 33;
-      this.pfh1.Text = "pfh1";
+      this.pfh1.Text = "-";
       // 
       // pfh2
       // 
@@ -915,7 +915,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfh2.Name = "pfh2";
       this.pfh2.Size = new System.Drawing.Size(72, 13);
       this.pfh2.TabIndex = 34;
-      this.pfh2.Text = "pfh2";
+      this.pfh2.Text = "-";
       // 
       // pfh3
       // 
@@ -926,7 +926,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfh3.Name = "pfh3";
       this.pfh3.Size = new System.Drawing.Size(72, 13);
       this.pfh3.TabIndex = 35;
-      this.pfh3.Text = "pfh3";
+      this.pfh3.Text = "-";
       // 
       // pfh4
       // 
@@ -937,7 +937,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfh4.Name = "pfh4";
       this.pfh4.Size = new System.Drawing.Size(72, 13);
       this.pfh4.TabIndex = 36;
-      this.pfh4.Text = "pfh4";
+      this.pfh4.Text = "-";
       // 
       // pfa1
       // 
@@ -948,7 +948,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfa1.Name = "pfa1";
       this.pfa1.Size = new System.Drawing.Size(72, 13);
       this.pfa1.TabIndex = 37;
-      this.pfa1.Text = "pfa1";
+      this.pfa1.Text = "-";
       // 
       // pfa2
       // 
@@ -959,7 +959,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfa2.Name = "pfa2";
       this.pfa2.Size = new System.Drawing.Size(72, 13);
       this.pfa2.TabIndex = 38;
-      this.pfa2.Text = "pfa2";
+      this.pfa2.Text = "-";
       // 
       // pfa3
       // 
@@ -970,7 +970,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfa3.Name = "pfa3";
       this.pfa3.Size = new System.Drawing.Size(72, 13);
       this.pfa3.TabIndex = 39;
-      this.pfa3.Text = "pfa3";
+      this.pfa3.Text = "-";
       // 
       // pfa4
       // 
@@ -981,7 +981,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.pfa4.Name = "pfa4";
       this.pfa4.Size = new System.Drawing.Size(72, 13);
       this.pfa4.TabIndex = 40;
-      this.pfa4.Text = "pfa4";
+      this.pfa4.Text = "-";
       // 
       // ch1
       // 
@@ -992,7 +992,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ch1.Name = "ch1";
       this.ch1.Size = new System.Drawing.Size(72, 13);
       this.ch1.TabIndex = 41;
-      this.ch1.Text = "ch1";
+      this.ch1.Text = "-";
       // 
       // ch2
       // 
@@ -1003,7 +1003,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ch2.Name = "ch2";
       this.ch2.Size = new System.Drawing.Size(72, 13);
       this.ch2.TabIndex = 42;
-      this.ch2.Text = "ch2";
+      this.ch2.Text = "-";
       // 
       // ch3
       // 
@@ -1014,7 +1014,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ch3.Name = "ch3";
       this.ch3.Size = new System.Drawing.Size(72, 13);
       this.ch3.TabIndex = 43;
-      this.ch3.Text = "ch3";
+      this.ch3.Text = "-";
       // 
       // ch4
       // 
@@ -1025,7 +1025,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ch4.Name = "ch4";
       this.ch4.Size = new System.Drawing.Size(72, 13);
       this.ch4.TabIndex = 44;
-      this.ch4.Text = "ch4";
+      this.ch4.Text = "-";
       // 
       // ca1
       // 
@@ -1036,7 +1036,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ca1.Name = "ca1";
       this.ca1.Size = new System.Drawing.Size(72, 13);
       this.ca1.TabIndex = 45;
-      this.ca1.Text = "ca1";
+      this.ca1.Text = "-";
       // 
       // ca2
       // 
@@ -1047,7 +1047,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ca2.Name = "ca2";
       this.ca2.Size = new System.Drawing.Size(72, 13);
       this.ca2.TabIndex = 46;
-      this.ca2.Text = "ca2";
+      this.ca2.Text = "-";
       // 
       // ca3
       // 
@@ -1058,7 +1058,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ca3.Name = "ca3";
       this.ca3.Size = new System.Drawing.Size(72, 13);
       this.ca3.TabIndex = 47;
-      this.ca3.Text = "ca3";
+      this.ca3.Text = "-";
       // 
       // ca4
       // 
@@ -1069,7 +1069,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ca4.Name = "ca4";
       this.ca4.Size = new System.Drawing.Size(72, 13);
       this.ca4.TabIndex = 48;
-      this.ca4.Text = "ca4";
+      this.ca4.Text = "-";
     }
 
     protected override void OnPaint(PaintEventArgs pe)

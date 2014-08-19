@@ -1,31 +1,40 @@
 ﻿using System;
 namespace AndreiPopescu.CharazayPlus.Utils
 {
-  internal enum TrainingCategories : byte
+  /// <summary>
+  /// category which a staff member can manage
+  /// </summary>
+  internal enum TrainingCategory : byte
   {
-    defense = 0,
-    dribling = 1,
-    passing = 2,
-    speed = 3,
-    footwork = 4,
-    rebounds = 5,
-    inside_sh = 6,
-    outside_sh = 7
+    defense = 1,
+    dribling = 2,
+    passing = 3,
+    speed = 4,
+    footwork = 5,
+    rebounds = 6,
+    insideShooting = 7,
+    outsideShooting = 8
   }
 
-  public enum Skills : byte
+  /// <summary>
+  /// player skill that can be trained
+  /// </summary>
+  public enum Skill : byte
   {
-    sDEFENSE = 1,
-    sTWOPOINT = 2,
-    sTHREEPOINT = 3,
-    sFREETHROWS = 4,
-    sDRIBLING = 5,
-    sPASSING = 6,
-    sSPEED = 7,
-    sFOOTWORK = 8,
-    sREBOUNDS = 9
+    DEFENSE = 1,
+    TWOPOINT = 2,
+    THREEPOINT = 3,
+    FREETHROWS = 4,
+    DRIBLING = 5,
+    PASSING = 6,
+    SPEED = 7,
+    FOOTWORK = 8,
+    REBOUNDS = 9
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public enum Fame : byte
   {
     UnknownPlayer = 0
@@ -47,9 +56,13 @@ namespace AndreiPopescu.CharazayPlus.Utils
     SuperStar = 8
       ,
     Idol = 9
-      , HallofFame = 10
+      , 
+    HallofFame = 10
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   [Flags]
   internal enum TabType : byte
   {
@@ -58,6 +71,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
     position = 4
   }
 
+  /// <summary>
+  /// 
+  /// </summary>
   public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
 
   //Form
@@ -80,7 +96,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     Great = 6
       ,
     Splendid = 7
-      , OnFire = 8
+      , 
+    OnFire = 8
   }
 
   internal enum ShooterPosition : int 

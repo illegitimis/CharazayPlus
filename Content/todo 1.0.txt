@@ -15,13 +15,16 @@ league hardiness chart REPLACED BY GRID (ok)
 CountryInfoXml            common (ok)
 CountryDivisionListXml    link with country info (ok)
 image country flag (ok)
+nt coach property grid {ok}
 ======================================
 1) STATUS TAB
 OK!
+status bar updates
 ======================================
 2) SKILLS TAB
 not working on first try (ok)
 grouping (ok)
+format row colors
 ======================================
 3-7) PG, SG, ...
 ======================================

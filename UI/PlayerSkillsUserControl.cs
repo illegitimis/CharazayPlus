@@ -11,6 +11,7 @@
   using System.Windows.Forms;
   using System.Diagnostics;
   using BrightIdeasSoftware;
+  using AndreiPopescu.CharazayPlus.Data;
   
   
   /// <summary>
@@ -495,44 +496,20 @@
       OlvColumnsPropertiesInit();
     }
 
-    List<Player> masterList;
-    public List<Player> Players { get { return masterList; }
-      set {
-        if (value != null)
-        {
-          masterList = value;
-
-          List<Player> list = new List<Player>();
-          foreach (Player p in masterList)
-            list.Add(p);
-
-          // Change this value to see the performance on bigger lists.
-          // Each list builds about 1000 rows per second.
-          //while (list.Count < 5000) {
-          //    foreach (Player p in masterList)
-          //        list.Add(new Player(p));
-          //}
-
-          InitializeExamples(list);
-        }
-        
-      }
-    }
-
-    void InitializeExamples ( List<Player> list)
+    public void Initialize ( )
     {
       // Use different font under Vista
       if (ObjectListView.IsVistaOrLater)
         this.Font = new Font("Segoe UI", 9);     
       
-      InitializeComplexExample(list);
+      InitializeComplexExample();
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="list"></param>
-    void InitializeComplexExample (List<Player> list)
+    void InitializeComplexExample ()
     {
       this.olvComplex.AddDecoration(new EditingCellBorderDecoration(true));
 
@@ -561,7 +538,7 @@
       //
       ObjectListViewExtensions.HotItemOverlay(this.olvComplex, new PlayerSkillsOverlay());
       //
-      this.olvComplex.SetObjects(list);
+      this.olvComplex.SetObjects(PlayersEnvironment.OptimumPlayers);
     //
       ObjectListViewExtensions.ShowGroups(this.olvComplex, true);
     //

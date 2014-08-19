@@ -179,22 +179,6 @@
 
     #endregion
 
-    /// <summary>
-    /// gets training week index [0-288] from player age and current charazay date (season, week)
-    /// <example> age: 15 week:1 => index:0, age: 15 w:17 - index:16, age: 16 w:0  - idx:17</example>
-    /// </summary>
-    protected int TrainingWeekIndex
-    {
-      get
-      {
-        CharazayDate cd = DateTime.Now;
-        // last week of current season
-        int week = 17 * (Age - 15) + cd.Week - 1;
-        week = Math.Min(week, 288);
-        return week;
-      }
-    }
-
     #region public read-only properties
     //basic
     public byte Age { get { return m_player.basic.age; } }
@@ -581,6 +565,22 @@
 
     protected double ReboundScore_DefensiveReboundsPercentage { get { return 0.6; } }
     protected double ReboundScore_OffensiveReboundsPercentage { get { return 0.4; } }
+
+    /// <summary>
+    /// gets training week index [0-288] from player age and current charazay date (season, week)
+    /// <example> age: 15 week:1 => index:0, age: 15 w:17 - index:16, age: 16 w:0  - idx:17</example>
+    /// </summary>
+    protected int TrainingWeekIndex
+    {
+      get
+      {
+        CharazayDate cd = DateTime.Now;
+        // last week of current season
+        int week = 17 * (Age - 15) + cd.Week - 1;
+        week = Math.Min(week, 288);
+        return week;
+      }
+    }
     #endregion
 
     #region Methods
@@ -676,39 +676,39 @@
 
     }
 
-    internal double GetScoreTrainingDelta (TrainingCategories eTC, Coach coach)
+    internal double GetScoreTrainingDelta (TrainingCategory eTC, Coach coach)
     {
-      Skills skill = (Skills)eTC;
+      Skill skill = (Skill)eTC;
       double dSkillDelta = SkillTrainingDelta(skill, coach);
-      double dFTDelta = SkillTrainingDelta(Skills.sFREETHROWS, coach);
+      double dFTDelta = SkillTrainingDelta(Skill.FREETHROWS, coach);
 
       #region score increase using player total score formula
       //switch (eTC)
       //{
-      //  case TrainingCategories.defense:
+      //  case TrainingCategory.defense:
       //  return dSkillDelta * PercentageDefense_Defence * TotalScorePercentageDefense;
-      //  case TrainingCategories.dribling:
+      //  case TrainingCategory.dribling:
       //  return dSkillDelta * PercentageOffensiveAbility_Dribbling * TotalScorePercentageOffense;
-      //  case TrainingCategories.passing:
+      //  case TrainingCategory.passing:
       //  return dSkillDelta * PercentageOffensiveAbility_Passing * TotalScorePercentageOffense;
-      //  case TrainingCategories.speed:
+      //  case TrainingCategory.speed:
       //  return dSkillDelta * (PercentageDefense_Speed * TotalScorePercentageDefense
       //                       + PercentageOffensiveAbility_Speed * TotalScorePercentageOffense);
-      //  case TrainingCategories.footwork:
+      //  case TrainingCategory.footwork:
       //  return dSkillDelta * (PercentageDefense_Footwork * TotalScorePercentageDefense +
       //    PercentageOffensiveAbility_Footwork * TotalScorePercentageOffense);
-      //  case TrainingCategories.rebounds:
+      //  case TrainingCategory.rebounds:
       //  return dSkillDelta * TotalScorePercentageRebounds *
       //    (ReboundScore_DefensiveReboundsPercentage * DefensiveRebounds_ReboundsPercentage +
       //    ReboundScore_OffensiveReboundsPercentage * OffensiveRebounds_ReboundsPercentage);
-      //  case TrainingCategories.inside_sh:
+      //  case TrainingCategory.insideShooting:
       //  {
       //    int index = (int)ShootingPosition;
       //    return Compute.DotVectorProduct(
       //      Defines.ShootingPositionPercentages[index]
       //      , new double[] { dFTDelta, dSkillDelta, 0d }) * TotalScorePercentageShooting;
       //  }
-      //  case TrainingCategories.outside_sh:
+      //  case TrainingCategory.outsideShooting:
       //  {
       //    int index = (int)ShootingPosition;
       //    return Compute.DotVectorProduct(
@@ -736,24 +736,24 @@
 
       switch (eTC)
       {
-        case TrainingCategories.defense:
+        case TrainingCategory.defense:
           increasePlayer.m_dDefence = dSkillDelta; break;
-        case TrainingCategories.dribling:
+        case TrainingCategory.dribling:
           increasePlayer.m_dDribling = dSkillDelta; break;
-        case TrainingCategories.passing:
+        case TrainingCategory.passing:
           increasePlayer.m_dPassing = dSkillDelta; break;
-        case TrainingCategories.speed:
+        case TrainingCategory.speed:
           increasePlayer.m_dSpeed = dSkillDelta; break;
-        case TrainingCategories.footwork:
+        case TrainingCategory.footwork:
           increasePlayer.m_dFootwork = dSkillDelta; break;
-        case TrainingCategories.rebounds:
+        case TrainingCategory.rebounds:
           increasePlayer.m_dRebounds = dSkillDelta; break;
-        case TrainingCategories.inside_sh:
+        case TrainingCategory.insideShooting:
           {
             increasePlayer.m_dTwoPoint = dSkillDelta;
             increasePlayer.m_dFreethrows = dFTDelta;
           } break;
-        case TrainingCategories.outside_sh:
+        case TrainingCategory.outsideShooting:
           {
             increasePlayer.m_dThreePoint = dSkillDelta;
             increasePlayer.m_dFreethrows = dFTDelta;
@@ -764,19 +764,19 @@
       return increasePlayer.TotalScore;
     }
 
-    public double SkillTrainingDelta (Skills skill, Coach coach)
+    public double SkillTrainingDelta (Skill skill, Coach coach)
     {
       switch (skill)
       {
-        case Skills.sDEFENSE: return Compute.WeeklySkillRaise(coach.Defence, Defence, Age);
-        case Skills.sDRIBLING: return Compute.WeeklySkillRaise(coach.Dribling, Dribling, Age);
-        case Skills.sPASSING: return Compute.WeeklySkillRaise(coach.Passing, Passing, Age);
-        case Skills.sSPEED: return Compute.WeeklySkillRaise(coach.Speed, Speed, Age);
-        case Skills.sFOOTWORK: return Compute.WeeklySkillRaise(coach.Footwork, Footwork, Age);
-        case Skills.sREBOUNDS: return Compute.WeeklySkillRaise(coach.Rebounds, Rebounds, Age);
-        case Skills.sTWOPOINT: return Compute.WeeklySkillRaise(coach.TwoPoint, TwoPoint, Age);
-        case Skills.sTHREEPOINT: return Compute.WeeklySkillRaise(coach.ThreePoint, ThreePoint, Age);
-        case Skills.sFREETHROWS: return Compute.WeeklySkillRaise(coach.Freethrows, Freethrows, Age);
+        case Skill.DEFENSE: return Compute.WeeklySkillRaise(coach.Defence, Defence, Age);
+        case Skill.DRIBLING: return Compute.WeeklySkillRaise(coach.Dribling, Dribling, Age);
+        case Skill.PASSING: return Compute.WeeklySkillRaise(coach.Passing, Passing, Age);
+        case Skill.SPEED: return Compute.WeeklySkillRaise(coach.Speed, Speed, Age);
+        case Skill.FOOTWORK: return Compute.WeeklySkillRaise(coach.Footwork, Footwork, Age);
+        case Skill.REBOUNDS: return Compute.WeeklySkillRaise(coach.Rebounds, Rebounds, Age);
+        case Skill.TWOPOINT: return Compute.WeeklySkillRaise(coach.TwoPoint, TwoPoint, Age);
+        case Skill.THREEPOINT: return Compute.WeeklySkillRaise(coach.ThreePoint, ThreePoint, Age);
+        case Skill.FREETHROWS: return Compute.WeeklySkillRaise(coach.Freethrows, Freethrows, Age);
         default: return 0;
       }
     }
@@ -832,12 +832,12 @@
     //speed	        4	  4	  4	  3	  2
     //footwork	    0	  0	  2	  4	  4
     //rebounds	    0	  0	  1	  4	  5
-    //inside_sh	    1	  2	  2	  1	  1
-    //outside_sh	  1	  2	  1	  0	  0
+    //insideShooting	    1	  2	  2	  1	  1
+    //outsideShooting	  1	  2	  1	  0	  0
     //              17	17	17	17	17
     protected internal abstract byte[] TrainingPlan { get; }
 
-    #region Skills percentages
+    #region Skill percentages
 
     /// <summary>
     /// defensive ability: defense (avg 60) ftw (avg 20) spe (avg 20)

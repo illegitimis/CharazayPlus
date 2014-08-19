@@ -183,18 +183,12 @@
 
     //protected internal virtual Type DeserializationReturnType { get { return typeof(Xsd.charazay); } }
     protected internal virtual XmlSerializationType DeserializationType { get { return XmlSerializationType.Unknown; } }
-    //internal object DeserializationObject = null;
-
+    
     internal XmlDownloadItem (WebServiceUser wsu, Category category)
       : this(wsu.user, wsu.securityCode, category) { }
 
     internal XmlDownloadItem (string user, string pass, Category category)
-      : base(ConstructUri(user, pass, category), Category2FileName(category))
-    {
-      //m_user = user;
-      //m_securityCode = pass;
-      //m_category = category;           
-    }
+      : base(ConstructUri(user, pass, category), Category2FileName(category)) { }
 
     internal XmlDownloadItem (string user, string pass, Category category, ulong id)
       : base(ConstructUri(user, pass, category, id), Category2FileName(category, id)) { }
@@ -225,7 +219,6 @@
   {
     internal MyPlayersXml (string user, string pass) : base(user, pass, Category.Players) { }
     internal MyPlayersXml (WebServiceUser wsu) : this(wsu.user, wsu.securityCode) { }
-    //protected internal override Type DeserializationReturnType { get { return typeof(Xsd.players); } }
     protected internal override XmlSerializationType DeserializationType { get { return XmlSerializationType.MyPlayers; } }
   }
 
