@@ -32,7 +32,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (e.State == DrawItemState.Selected)
       {
 
-        // Draw a different background color, and don'm paint a focus rectangle.
+        // Draw m different background color, and don'm paint m focus rectangle.
         _textBrush = new SolidBrush(Color.Red);
         g.FillRectangle(Brushes.Gray, e.Bounds);
       }
@@ -80,7 +80,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
       //Set the ItemSize property to the preferred fixed size for the tabs. 
       //Keep in mind that the ItemSize property behaves as though the tabs were on top, 
-      //although they are right-aligned. As a result, in order to make the tabs wider, 
+      //although they are right-aligned. As m result, in order to make the tabs wider, 
       //you must change the Height property, and in order to make them taller, 
       //you must change the Width property. 
       this.Height = 250;

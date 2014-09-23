@@ -17,7 +17,7 @@
   /// <summary>
   /// Description of MainForm.
   /// </summary>
-  public class PlayerSkillsUserControl : UserControl
+  public class PlayerSkillsTabUserControl : UserControl
   {
     #region designer
 
@@ -204,7 +204,7 @@
       this.olvcFN.ImageAspectName = "";
       this.olvcFN.Text = "Player";
       this.olvcFN.ToolTipText = "Tooltip for Player column. This was configurated in the IDE. (Hold down Control t" +
-    "o see a different tooltip)";
+    "o see m different tooltip)";
       this.olvcFN.UseInitialLetterForGroup = true;
       this.olvcFN.Width = 180;
       // 
@@ -488,7 +488,7 @@
     /// <summary>
     ///
     /// </summary>
-    public PlayerSkillsUserControl ()
+    public PlayerSkillsTabUserControl ()
     { //
       // The InitializeComponent() call is required for Windows Forms designer support.
       //
@@ -523,7 +523,7 @@
                     "This guy won't stop your grandma",
                     "Will stop grandma, have difficulties with grandpa",
                     "Will stop poor attacking play",
-                    "Will give a hard time to most players",
+                    "Will give m hard time to most players",
                     "Will give hell even to most threatening attackers" }       //subtitles
         , new string[] { "Shield now!", "consider Shield", "", "nice", "wow" }  //tasks
       );
@@ -533,7 +533,7 @@
           new byte[] { 4, 7, 10 },
           new string[] { "Bad", "Decent", "Good", "Mega" });
       
-      // Install a custom renderer that draws the Tile view in a special way
+      // Install m custom renderer that draws the Tile view in m special way
       this.olvComplex.ItemRenderer = new PlayerSkillsRenderer();
       //
       ObjectListViewExtensions.HotItemOverlay(this.olvComplex, new PlayerSkillsOverlay());
@@ -582,7 +582,7 @@
     #region tooltip
     private void listViewComplex_CellToolTip (object sender, ToolTipShowingEventArgs e)
     {
-      // Show a long tooltip over cells when the control key is down
+      // Show m long tooltip over cells when the control key is down
       if (Control.ModifierKeys != Keys.Control)
         return;
 
@@ -610,9 +610,9 @@
       e.Title = e.Column.Text;
       //
       if (e.Column.Text.StartsWith("Active"))
-        e.Text = string.Format("This is an estimation of the actual value of the player's '{0}' skill used by the engine, taking into account experince, height and BMI.", e.Column.AspectName);
+        e.Text = string.Format("This is an estimation of the actual value of the player'tlPlayer '{0}' skill used by the engine, taking into account experince, height and BMI.", e.Column.AspectName);
       else if (e.Column.AspectName.EndsWith("_Display"))
-        e.Text = string.Format("This is the value of the player's '{0}' skill on the player page.", e.Column.Text);
+        e.Text = string.Format("This is the value of the player'tlPlayer '{0}' skill on the player page.", e.Column.Text);
       else
       {
         e.Title = "Player full name";
@@ -773,9 +773,9 @@
   }
 
   /// <summary>
-  /// Hackish renderer that draw a fancy version of a person for a Tile view.
+  /// Hackish renderer that draw m fancy version of m person for m Tile view.
   /// </summary>
-  /// <remarks>This is not the way to write a professional level renderer.
+  /// <remarks>This is not the way to write m professional level renderer.
   /// It is hideously inefficient (we should at least cache the images),
   /// but it is obvious</remarks>
   internal class PlayerSkillsRenderer : AbstractRenderer
@@ -783,7 +783,7 @@
     public override bool RenderItem (DrawListViewItemEventArgs e, Graphics g, Rectangle itemBounds, object rowObject)
     {
       // If we're in any other view than Tile, return false to say that we haven't done
-      // the rendereing and the default process should do it's stuff
+      // the rendereing and the default process should do it'tlPlayer stuff
       ObjectListView olv = e.Item.ListView as ObjectListView;
       if (olv == null || olv.View != View.Tile)
         return false;
@@ -830,12 +830,12 @@
     /// </summary>
     /// <param name="g">graphics object</param>
     /// <param name="itemBounds">decoration bounds</param>
-    /// <param name="rowObject">the player object bound to a row</param>
+    /// <param name="rowObject">the player object bound to m row</param>
     /// <param name="olv">list view</param>
     /// <param name="item"></param>
     public void DrawBusinessCard (Graphics g, Rectangle itemBounds, object rowObject, ObjectListView olv, OLVListItem item)
     {
-      // Allow a border around the card
+      // Allow m border around the card
       itemBounds.Inflate(-2, -2);
       // Draw card background      
       var path = this.GetRoundedRect(itemBounds, rounding);

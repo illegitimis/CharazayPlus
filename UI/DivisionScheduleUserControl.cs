@@ -68,13 +68,10 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private void MatchRating (uint matchId)
     {
-      using (Web.Downloader crawler = new Web.Downloader())
-      {
+     
         try
         {
-          var SelectedMatch = (Xsd2.match)Utils.Deserializer
-            .GoGetXml(new Web.XmlDownloadItem[] { new Web.MatchXml(Web.WebServiceUser.Instance, (ulong)matchId) })
-            .ToArray()[0];
+          var SelectedMatch = Utils.Deserializer.GoGetMatchXml ((ulong)matchId);
           //
           ucMatchDetails.SetData(SelectedMatch);
           ucrHome.RatingType = UI.RatingType.Home;
@@ -91,7 +88,7 @@ namespace AndreiPopescu.CharazayPlus.UI
           System.Diagnostics.Debug.Write(ex.Message);
         }
       }
-    }
+    
 
   
   }

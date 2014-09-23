@@ -15,7 +15,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     //Formula to calculate weekly skill raise
     //To calculate, how fast our player raises his skills you can use the following formula:
     //X*(1+(coach skill - player skill)*3%)= weekly skill raise
-    //where X=factor, which depends on player's age:
+    //where X=factor, which depends on player'tlPlayer age:
     //NOTICE: These numbers probably aren’m used by the engine, but they are very close and you can count on them.
     //When you don’m have coach at all (even Community Coach) you use only the X factors (not the whole formula)
     public static readonly double[] s_weeklySkillTrainAgeMultiplier = new double[] 
@@ -62,7 +62,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// Experience influnces active skills. each experience point adds an ammount to each skill
     /// This ammount is f(x)=alpha*x^beta, where beta less than 1
     /// formula designed so as function is convex meaning
-    /// a raise in experience from 0 to 10 is much more significant than from 10 to 20
+    /// m raise in experience from 0 to 10 is much more significant than from 10 to 20
     /// </summary>
     /// <param name="experience">actual player experience</param>
     /// <returns>Experience gain per each skill</returns>

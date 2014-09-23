@@ -9,7 +9,7 @@ namespace AndreiPopescu.CharazayPlus
   public abstract partial class Player
   {
     // coach own raise
-    //The coach will train 0,06 every week for the skills he's training (coach own raise is 0,06)
+    //The coach will train 0,06 every week for the skills he'tlPlayer training (coach own raise is 0,06)
     [Obsolete("replaced by public double SkillTrainingDelta (Skills skill, Coach coach)")]
     public double GetSkillTrainingDelta (Skill skill, Coach coach)
     {
@@ -117,7 +117,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     {
       // coach impact?
       //return (1 + Math.Max(0d, (double)delta) * 0.03) * weeklySkillRaiseMultiplier;
-      //The coach will train 0,06 every week for the skills he's training.
+      //The coach will train 0,06 every week for the skills he'tlPlayer training.
       return (1 + Math.Max(0d, (double)delta) * 0.06) * weeklySkillRaiseMultiplier;
     }
 

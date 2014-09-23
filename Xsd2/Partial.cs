@@ -42,7 +42,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     [OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 30, MinimumWidth = 20, MaximumWidth = 40, Title = "Won", CheckBoxes = true)]
     public bool Won { get { return Played && ((homescore > awayscore && HomeTeamId == MyTeamId) || (homescore < awayscore && AwayTeamId == MyTeamId)); } }
 
-    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 95, MinimumWidth = 60, MaximumWidth = 125, Title = "Date")]
+    [OLVColumn(DisplayIndex = 8, IsEditable = false, Width = 95, MinimumWidth = 60, MaximumWidth = 125, Title = "Deadline")]
     public System.DateTime Date_ { get { return Compute.EstimatedDateTime(dateField); } }
 
     CharazayDate CharazayDate { get { return Date_; } }
@@ -85,11 +85,11 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     public string Seller { get { return CacheManager.Instance.TeamName(sellteam); } }
     [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 105, MinimumWidth = 80, MaximumWidth = 140, Title = "Buyer", Hyperlink = true)]
     public string Buyer { get { return CacheManager.Instance.TeamName(buyteam); } }
-    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Date", AspectToStringFormat = "{0:yyyy-MM-dd}")]
+    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Deadline", AspectToStringFormat = "{0:yyyy-MM-dd}")]
     public System.DateTime Date { get { return Compute.EstimatedDateTime(dateField); } }
     [OLVColumn(DisplayIndex = 3, IsEditable = false, Width = 120, MinimumWidth = 90, MaximumWidth = 160, Title = "Player", Hyperlink = true)]
     public string Player { get { return CacheManager.Instance.PlayerName(playerid); } }
-    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Price", AspectToStringFormat="{0:N0}")]
+    [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "StartingPrice", AspectToStringFormat="{0:N0}")]
     public uint Price { get { return this.priceField; }}
     [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 80, MinimumWidth = 70, MaximumWidth = 100, Title = "Skills Index", AspectToStringFormat = "{0:N0}")]
     public uint SkillsIndex { get { return this.siField; } }

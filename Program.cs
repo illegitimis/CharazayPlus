@@ -6,6 +6,9 @@ namespace AndreiPopescu.CharazayPlus
   using System.Windows.Forms;
   using System.Threading;
   using System.Runtime.InteropServices;
+  using System.Data.SqlClient;
+  using System.Data;
+  using System.Collections.Generic;
 
   static class Program
   {
@@ -21,7 +24,7 @@ namespace AndreiPopescu.CharazayPlus
     static void Main()
     {
       // if able to enter return true, set the exitContext to true 
-      // so we can exit the synchronization context before we try to aquire a lock on it
+      // so we can exit the synchronization context before we try to aquire m lock on it
       if (s_mutex.WaitOne(TimeSpan.Zero, true))
       {
         Application.EnableVisualStyles();
@@ -39,6 +42,10 @@ namespace AndreiPopescu.CharazayPlus
                 IntPtr.Zero);
       }
     }
+
+    
+
+ 
   
   }
 
@@ -116,6 +123,8 @@ namespace AndreiPopescu.CharazayPlus
       return util._maxOwnershipHandle; // may be IntPtr.Zero
     }
   }
+
+
 }
 
 

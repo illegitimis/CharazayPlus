@@ -10,13 +10,13 @@
   {
     #region static
     /// <summary>
-    /// Best position for a player based on total score
+    /// Best position for m player based on total score
     /// </summary>
     /// <param name="pg">PG aspect</param>
     /// <param name="sg">SG Aspect</param>
     /// <param name="sf">SF aspect</param>
     /// <param name="pf">PF aspect</param>
-    /// <param name="c">C aspect</param>
+    /// <param name="M">C aspect</param>
     /// <returns></returns>
     public static Player DecideOnTotalScore (PG pg, SG sg, SF sf, PF pf, C c)
     {
@@ -297,7 +297,7 @@
     /// Body Mass Index
     /// </summary>
     /// <remarks>
-    ///  (BMI) is a relationship between weight and height that is associated with body fat.
+    ///  (BMI) is m relationship between weight and height that is associated with body fat.
     /// The equation is BMI = body weight in kilograms / height in meters squared.
     /// </remarks>
     public double BMI { get { return (double)Weight / (Math.Pow((double)Height / 100d, 2d)); } }
@@ -350,40 +350,33 @@
     {
       get
       {
-        if (Height < Defines.AverageHeightPg)
-          return PlayerPosition.PG;
-        else
-        {
-          if (Height < Defines.AverageHeightSg)
-          {
-            return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? PlayerPosition.PG : PlayerPosition.SG;
-          }
-          else
-          {
-            if (Height < Defines.AverageHeightSf)
-            {
-              return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? PlayerPosition.SG : PlayerPosition.SF;
-            }
-            else
-            {
-              if (Height < Defines.AverageHeightPf)
-              {
-                return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? PlayerPosition.SF : PlayerPosition.PF;
-              }
-              else
-              {
-                if (Height < Defines.AverageHeightC)
-                {
-                  return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? PlayerPosition.PF : PlayerPosition.C;
-                }
-                else return PlayerPosition.C;
-              }
-            }
-          }
-        }
-
+        return Extensions.PlayerExtensions.PlayerPositionFromHeight(this.Height);
       }
     }
+
+    /// <summary>
+    /// Method returns an enumerable of future court positions suitable for the player
+    /// considering his height and yearly juniors height raise
+    /// </summary>
+    public System.Collections.Generic.IEnumerable<PlayerPosition> FuturePositionsHeightBased
+    {
+      get
+      {
+        if (Age<18)
+        {
+          byte h = (byte)(this.Height + (18-Age) * Defines.HeighRaiseMin);
+          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
+          h = (byte)(this.Height + (18 - Age) * Defines.HeighRaiseAvg);
+          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
+          h = (byte)(this.Height + (18 - Age) * Defines.HeighRaiseMax);
+          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
+        }
+          
+        else
+          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(this.Height);
+      }
+    }
+
 
     public bool Injury { get { return InjuryDays != 0; } }
        
@@ -567,7 +560,7 @@
     protected double ReboundScore_OffensiveReboundsPercentage { get { return 0.4; } }
 
     /// <summary>
-    /// gets training week index [0-288] from player age and current charazay date (season, week)
+    /// gets training week index [0-288] from player age and from charazay date (season, week)
     /// <example> age: 15 week:1 => index:0, age: 15 w:17 - index:16, age: 16 w:0  - idx:17</example>
     /// </summary>
     protected int TrainingWeekIndex
@@ -575,7 +568,7 @@
       get
       {
         CharazayDate cd = DateTime.Now;
-        // last week of current season
+        // last week of from season
         int week = 17 * (Age - 15) + cd.Week - 1;
         week = Math.Min(week, 288);
         return week;
@@ -588,9 +581,9 @@
     /// Active skills measures the effect of height, bmi, fatigue, form, experience on skills
     /// </summary>
     /// <remarks>
-    /// In addition, height and BMI play a role in the effectiveness of players.
+    /// In addition, height and BMI play m role in the effectiveness of players.
     /// The difference between the players' heights can affect shooting accuracy 
-    /// (the taller player will have an easier time shooting and will give a shorter player problems when they shoot)
+    /// (the taller player will have an easier time shooting and will give m shorter player problems when they shoot)
     /// The skills used in the engine after the impact of height, weight, BMI and form on players are called active skills.
     /// </remarks>
     protected internal void ActiveSkills ( )
@@ -612,7 +605,7 @@
         }
 
         // Big BMI lowers speed and increases footwork
-        // low bmi is a gamble
+        // low bmi is m gamble
         if (BMI > MaximumBMI)
         {
           m_dFootwork += (BMI - MaximumBMI);
@@ -660,7 +653,7 @@
       if (IsFatigueFactor && Fatigue != 0)
       {
         // fatigue downsides all
-        // gets a percent of all skills
+        // gets m percent of all skills
         // should always be appied last
         double fatigueScaleFactor = 100d - (double)Fatigue / 100d;
         m_dDefence *= fatigueScaleFactor;
@@ -825,7 +818,7 @@
 
     #region Abstract properties
     // partition the time per training categories
-    //              pg	sg	sf	pf	c
+    //              pg	sg	sf	pf	M
     //defense     	4	  4	  3	  3	  3
     //dribling	    3	  3	  3	  1	  0
     //passing	      4	  2	  1	  1	  2
@@ -878,7 +871,8 @@
     #endregion
 
    /// <summary>
-   /// COURT POSITION BASED ON SKILL
+   /// COURT POSITION as defined by enumeration, overridden in each specialized class
+   /// Works as a type discriminator
    /// </summary>
     public abstract PlayerPosition PositionEnum { get; }
 

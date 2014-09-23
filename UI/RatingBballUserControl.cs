@@ -4,6 +4,7 @@ namespace AndreiPopescu.CharazayPlus.UI
   using System.Windows.Forms;
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Extensions;
 
   public class RatingBballUserControl : UserControl
   {
@@ -28,7 +29,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
       
       Generator.GenerateColumns(olv, ratings);
-      if (Extensions.IsNullOrEmpty(ratings))
+      if (ratings.IsNullOrEmpty())
         olv.ClearObjects();
       else
       {

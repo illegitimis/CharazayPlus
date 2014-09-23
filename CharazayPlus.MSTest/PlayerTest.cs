@@ -8,7 +8,7 @@ namespace CharazayPlus.MSTest
 
 
   /// <summary>
-  ///This is a test class for PlayerTest and is intended
+  ///This is m test class for PlayerTest and is intended
   ///to contain all PlayerTest Unit Tests
   ///</summary>
   [TestClass()]

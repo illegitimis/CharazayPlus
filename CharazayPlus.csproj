@@ -14,6 +14,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -65,11 +65,11 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>DOTNET30</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,31 +90,66 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleBrowser">
+      <HintPath>include\SimpleBrowser.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="C.cs" />
     <Compile Include="Coach.cs" />
+    <Compile Include="Data\DbEnvironment.cs" />
     <Compile Include="Data\PlayersEnvironment.cs" />
     <Compile Include="Data\TrainingEnvironment.cs" />
+    <Compile Include="Data\TransferBookmarks.cs" />
     <Compile Include="Data\XmlTeam.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\PlayerExtensions.cs" />
+    <Compile Include="Objects\PlayerTL.cs">
+      <DependentUpon>PlayerTL.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferHistoryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferHistory.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransferHistory.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferListedPlayerPropertyGridObject.cs" />
     <Compile Include="Objects\InfoPropertyGridObject.cs" />
     <Compile Include="Objects\TrainingItems.cs" />
     <Compile Include="Objects\ScoreIncreaseItem.cs" />
     <Compile Include="Objects\SkillIncreaseItem.cs" />
+    <Compile Include="Objects\TransferListedPlayer.cs" />
     <Compile Include="PF.cs" />
     <Compile Include="PG.cs" />
     <Compile Include="Obsolete.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PlayerFactory.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SG.cs" />
+    <Compile Include="UI\ButtonHigherLower.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ChartUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Definitions.cs" />
     <Compile Include="UI\DataGridExtensions.cs" />
     <Compile Include="UI\DivisionScheduleUserControl.cs">
@@ -135,6 +170,12 @@
     </Compile>
     <Compile Include="UI\PlayerEventArgs.cs" />
     <Compile Include="UI\PlayerPositionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RangeBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SearchTMUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\StatusUserControl.cs">
@@ -158,7 +199,7 @@
     <Compile Include="UI\EvaluatePlayerUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\PlayerSkillsUserControl.cs">
+    <Compile Include="UI\PlayerSkillsTabUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\TrainingTabUserControl.cs">
@@ -176,8 +217,14 @@
     <Compile Include="UI\DivisionStandingsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\BasicPlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\VLabel.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\WebBrowserUserControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\Assembly.cs" />
     <Compile Include="Utils\Cache.cs">
@@ -196,6 +243,7 @@
     <Compile Include="Utils\CharazayDate.cs" />
     <Compile Include="Utils\Deserializer.cs" />
     <Compile Include="Utils\Interpolation112.cs" />
+    <Compile Include="Utils\MatlabInterpolant.cs" />
     <Compile Include="Utils\TransferMarket112.cs" />
     <Compile Include="Utils\TransferMarket.cs" />
     <Compile Include="Utils\Linear.cs" />
@@ -216,9 +264,6 @@
     <Compile Include="UI\RatingBballUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utils\PlayerTL.cs">
-      <DependentUpon>PlayerTL.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Utils\SortableBindingList.cs" />
     <Compile Include="UI\TheForm.cs">
       <SubType>Form</SubType>
@@ -233,8 +278,12 @@
     <Compile Include="Utils\Compute.cs" />
     <Compile Include="Utils\Defines.cs" />
     <Compile Include="Utils\Enums.cs" />
+    <Compile Include="Web\CharazayDownloadItem.cs" />
+    <Compile Include="Objects\PlayerPageInfo.cs" />
+    <Compile Include="Web\Scrape.cs" />
     <Compile Include="Web\Downloader.cs" />
-    <Compile Include="Web\DownloadItems.cs" />
+    <Compile Include="Objects\SitePlayerTransferHistory.cs" />
+    <Compile Include="Web\XmlDownloadItems.cs" />
     <Compile Include="Web\Enums.cs" />
     <Compile Include="Web\WebServiceUser.cs" />
     <Compile Include="Xsd2\ArenaInfo.cs">
@@ -297,8 +346,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Objects\TransferHistory.dbml.layout">
+      <DependentUpon>TransferHistory.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="UI\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ChartUserControl.resx">
+      <DependentUpon>ChartUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
       <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
@@ -333,6 +388,9 @@
     <EmbeddedResource Include="UI\RatingBballUserControl.resx">
       <DependentUpon>RatingBballUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\SearchTMUserControl.resx">
+      <DependentUpon>SearchTMUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\StatusUserControl.resx">
       <DependentUpon>StatusUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -358,8 +416,8 @@
     <EmbeddedResource Include="UI\TrainingPlanUserControl.resx">
       <DependentUpon>TrainingPlanUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\PlayerSkillsUserControl.resx">
-      <DependentUpon>PlayerSkillsUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="UI\PlayerSkillsTabUserControl.resx">
+      <DependentUpon>PlayerSkillsTabUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TrainingTabUserControl.resx">
       <DependentUpon>TrainingTabUserControl.cs</DependentUpon>
@@ -370,7 +428,32 @@
     <EmbeddedResource Include="UI\DivisionStandingsUserControl.resx">
       <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\BasicPlayerUserControl.resx">
+      <DependentUpon>BasicPlayerUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\WebBrowserUserControl.resx">
+      <DependentUpon>WebBrowserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Objects\PlayerTL.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xsc">
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TransferHistoryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xss">
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Objects\TransferHistory.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TransferHistory.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -378,9 +461,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Utils\Cache.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Utils\PlayerTL.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Xsd2\ArenaInfo.xsd">
@@ -476,12 +556,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LeastSquaresFitting\LeastSquares\LeastSquares.csproj">
+      <Project>{DB9F4DD4-9591-4AD5-B0AF-2AB4DE5B60C1}</Project>
+      <Name>LeastSquares</Name>
+    </ProjectReference>
     <ProjectReference Include="ObjectListView\ObjectListView2010.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView2010</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

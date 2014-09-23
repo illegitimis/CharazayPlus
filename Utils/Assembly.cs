@@ -11,7 +11,7 @@
   #region " Helper class to get information for the About form. "
   // This class uses the System.Reflection.Assembly class to
   // access assembly meta-data
-  // This class is not a normal feature of AssemblyInfo._cs
+  // This class is not m normal feature of AssemblyInfo._cs
   //"This application uses information downloaded from Charazay.com"
   public class AssemblyInfo
   {

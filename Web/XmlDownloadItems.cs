@@ -43,76 +43,12 @@
   }
 
     
-
-
-  //http://www.charazay.com/index.php?act=player&code=1&id=25829364
-  internal class CharazayDownloadItem : DownloadItem
-  {
-    //internal string m_act = null;
-    //internal byte m_code = null;
-    //internal ulong m_id = null;
-
-    private static Uri ConstructUri (string act, byte code, ulong id)
-    {
-      return new Uri(string.Format("http://www.charazay.com/index.php?act={0}&code={1}&id={2}", act, code, id));
-    }
-
-    private static Uri ConstructUri (string act, ulong id)
-    {
-      return new Uri(string.Format("http://www.charazay.com/index.php?act={0}&id={1}", act, id));
-    }
-
-    private static string ConstructFileName (string act, byte code, ulong id)
-    {
-      AssemblyInfo asInfo = new AssemblyInfo();
-      string pathCategory = Path.Combine(asInfo.ApplicationFolder, act);
-      if (!Directory.Exists(pathCategory))
-        Directory.CreateDirectory(pathCategory);
-
-      StringBuilder sb = new StringBuilder();
-      sb.AppendFormat("{0}_{1}.htm", id, code);
-
-      string path = Path.Combine(pathCategory, sb.ToString());
-      if (!File.Exists(path))
-        File.CreateText(path).Close();
-
-      return path;
-    }
-
-    private static string ConstructFileName (string act, ulong id)
-    {
-      AssemblyInfo asInfo = new AssemblyInfo();
-      string pathCategory = Path.Combine(asInfo.ApplicationFolder, act);
-      if (!Directory.Exists(pathCategory))
-        Directory.CreateDirectory(pathCategory);
-
-      StringBuilder sb = new StringBuilder();
-      sb.AppendFormat("{0}.htm", id);
-
-      string path = Path.Combine(pathCategory, sb.ToString());
-      if (!File.Exists(path))
-        File.CreateText(path).Close();
-
-      return path;
-    }
-
-    internal CharazayDownloadItem (string act, byte code, ulong id) :
-      base(ConstructUri(act, code, id), ConstructFileName(act, code, id)) { }
-
-    internal CharazayDownloadItem (string act, ulong id) :
-      base(ConstructUri(act, id), ConstructFileName(act, id)) { }
-  }
-
   /// <summary>
   /// base class for xml pieces returned by the Charazay XML API
   /// </summary>
   internal class XmlDownloadItem : DownloadItem
   {
     private const string baseWebServiceUri = "http://www.charazay.com/xml.php?";
-
-    //private string m_user;
-    //private string m_securityCode;
-    //private Category m_category;
 
     #region Construct file name from category
     private static string Category2FileName (Category category, ulong? id, byte? step, bool supressDate)

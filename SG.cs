@@ -345,7 +345,8 @@ namespace AndreiPopescu.CharazayPlus
     public override double ValueIndex { get { return TotalScore / SG.StoredAssessedValues[TrainingWeekIndex]; } }
     public override double TransferMarketValue
     {
-      get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
+      //get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
+      get { return MatlabInterpolant.GetTMValue(this.Age, 'G', this.ValueIndex); }
     }
   }
 }

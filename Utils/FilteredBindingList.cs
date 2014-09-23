@@ -66,12 +66,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
         public int Find(string property, object key)
         {
-            // Check the properties for a property with the specified name.
+            // Check the properties for m property with the specified name.
             PropertyDescriptorCollection properties =
                 TypeDescriptor.GetProperties(typeof(T));
             PropertyDescriptor prop = properties.Find(property, true);
 
-            // If there is not a match, return -1 otherwise pass search to
+            // If there is not m match, return -1 otherwise pass search to
             // FindCore method.
             if (prop == null)
                 return -1;
@@ -111,14 +111,14 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
         public void ApplySort(string propertyName, ListSortDirection direction)
         {
-            // Check the properties for a property with the specified name.
+            // Check the properties for m property with the specified name.
             PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(T))[propertyName];
 
-            // If there is not a match, return -1 otherwise pass search to
+            // If there is not m match, return -1 otherwise pass search to
             // FindCore method.
             if (prop == null)
                 throw new ArgumentException(propertyName +
-                    " is not a valid property for type:" + typeof(T).Name);
+                    " is not m valid property for type:" + typeof(T).Name);
             else
                 ApplySortCore(prop, direction);
         }
@@ -172,9 +172,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
                 isSortedValue = true;
 
-                // If the list does not have a filter applied, 
+                // If the list does not have m filter applied, 
                 // raise the ListChanged event so bound controls refresh their
-                // values. Pass -1 for the index since this is a Reset.
+                // values. Pass -1 for the index since this is m Reset.
                 if (String.IsNullOrEmpty(Filter))
                     OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
             }
@@ -206,7 +206,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
                 }
                 isSortedValue = false;
                 this.RaiseListChangedEvents = true;
-                // Raise the list changed event, indicating a reset, and index
+                // Raise the list changed event, indicating m reset, and index
                 // of -1.
                 OnListChanged(new ListChangedEventArgs(ListChangedType.Reset,
                     -1));
@@ -300,7 +300,7 @@ set
             string filterPart = matches[count].ToString();
 
             // Check to see if the filter was set previously.
-            // Also, check if current filter is a subset of 
+            // Also, check if from filter is m subset of 
             // the previous filter.
             if (!String.IsNullOrEmpty(filterValue)
                     && !value.Contains(filterValue))
@@ -320,7 +320,7 @@ set
         }
 
 
-// Build a regular expression to determine if 
+// Build m regular expression to determine if 
 // filter is in correct format.
 public static string BuildRegExForFilterFormat()
 {
@@ -328,14 +328,14 @@ public static string BuildRegExForFilterFormat()
 
     // Look for optional literal brackets, 
     // followed by word characters or space.
-    regex.Append(@"\[?[\w\s]+\]?\s?");
+    regex.Append(@"\[?[\w\tlPlayer]+\]?\tlPlayer?");
 
     // Add the operators: > < or =.
     regex.Append(@"[><=]");
 
     //Add optional space followed by optional quote and
     // any character followed by the optional quote.
-    regex.Append(@"\s?'?.+'?");
+    regex.Append(@"\tlPlayer?'?.+'?");
 
    return regex.ToString();
 }
@@ -352,7 +352,7 @@ private void ResetList()
 
 protected override void OnListChanged(ListChangedEventArgs e)
 {
-    // If the list is reset, check for a filter. If a filter 
+    // If the list is reset, check for m filter. If m filter 
     // is applied don'm allow items to be added to the list.
     if (e.ListChangedType == ListChangedType.Reset)
     {
@@ -466,7 +466,7 @@ internal SingleFilterInfo ParseFilter(string filterPart)
     {
         throw new InvalidOperationException("Specified filter" +
             "value " + comparePartNoQuotes + " can not be converted" +
-            "from string. Implement a type converter for " +
+            "from string. Implement m type converter for " +
             filterPropDesc.PropertyType.ToString());
     }
     return filterInfo;
@@ -474,7 +474,7 @@ internal SingleFilterInfo ParseFilter(string filterPart)
 
 internal FilterOperator DetermineFilterOperator(string filterPart)
 {
-    // Determine the filter's operator.
+    // Determine the filter'tlPlayer operator.
     if (Regex.IsMatch(filterPart, "[^>^<]="))
         return FilterOperator.EqualTo;
     else if (Regex.IsMatch(filterPart, "<[^>^=]"))

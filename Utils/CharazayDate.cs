@@ -74,5 +74,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
       }
       return cd;
     }
+
+    public static CharazayDate Parse (string s)
+    {
+      //S25 W4 D5
+      var tokens = s.Split(new char[] { ' ', 'S', 'W', 'D' }, StringSplitOptions.RemoveEmptyEntries);
+      return new CharazayDate() { _season = byte.Parse(tokens[0]), _week = byte.Parse(tokens[1]), _day = byte.Parse(tokens[2]) };
+    }
   }
 }

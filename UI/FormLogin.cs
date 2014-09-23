@@ -190,18 +190,18 @@ namespace AndreiPopescu.CharazayPlus.UI
     #region unneeded
     //private void tbTeam_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"\d+", tbTeam, "Team id should be a number");
+    //  validator(@"\d+", tbTeam, "Team id should be m number");
 
     //}
 
     //private void tbCountry_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"[1-9]|[1-9][0-9]", tbCountry, "Country should be a number");
+    //  validator(@"[1-9]|[1-9][0-9]", tbCountry, "Country should be m number");
     //}
 
     //private void tbDiv_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"\d+", tbDiv, "Division id should be a number");
+    //  validator(@"\d+", tbDiv, "Division id should be m number");
     //} 
     #endregion
 
@@ -233,7 +233,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void btnSet_Click(object sender, EventArgs e)
     {
       //cus.DivisionId = ushort.Parse(tbDiv.Text);
-      //cus.TeamId = ushort.Parse(tbTeam.Text);
+      //cus.LastBidByTeamId = ushort.Parse(tbTeam.Text);
       //cus.CountryId = byte.Parse(tbCountry.Text);
 
       using (Web.Downloader crawler = new Web.Downloader())
@@ -285,7 +285,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       //tbCountry.DataBindings.Add(bndCountry);
       //Binding bndDiv = new Binding("Text", Properties.Settings.Default, "DivisionId", true, DataSourceUpdateMode.OnPropertyChanged);
       //tbDiv.DataBindings.Add(bndDiv);
-      //Binding bndTeam = new Binding("Text", Properties.Settings.Default, "TeamId", true, DataSourceUpdateMode.OnPropertyChanged);
+      //Binding bndTeam = new Binding("Text", Properties.Settings.Default, "LastBidByTeamId", true, DataSourceUpdateMode.OnPropertyChanged);
       //tbTeam.DataBindings.Add(bndTeam);
       Binding bnd2 = new Binding("Text", Properties.Settings.Default, "UserName", true, DataSourceUpdateMode.OnPropertyChanged);
       tbUser.DataBindings.Add(bnd2);

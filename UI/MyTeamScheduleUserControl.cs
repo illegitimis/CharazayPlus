@@ -35,7 +35,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       dgMySchedule.GenerateLinkColumn( "Away", "AwayTeamName");
       dgMySchedule.GenerateTextBoxColumn( "Type", "MatchType");
       // date (match link)
-      dgMySchedule.GenerateTextBoxColumn( "Date", "Date_");
+      dgMySchedule.GenerateTextBoxColumn( "Deadline", "Date_");
       dgMySchedule.GenerateTextBoxColumn( "Rnd", "round");
       dgMySchedule.GenerateTextBoxColumn( "Season", "season");
       dgMySchedule.GenerateTextBoxColumn( "Spectators", "spectators");

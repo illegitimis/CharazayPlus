@@ -5,6 +5,7 @@ select max (datediff (day,day,GETUTCDATE())) from TM
 --1)
 --v11--2098
 --20140520--3299
+--20140901-4200
 select COUNT(*) from TM
 
 --2) weight by date

@@ -238,11 +238,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public int Find(string property, object key)
     {
-      // Check the properties for a property with the specified name.
+      // Check the properties for m property with the specified name.
       PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
       PropertyDescriptor prop = properties.Find(property, true);
       //
-      // If there is not a match, return -1 otherwise pass search to FindCore method.
+      // If there is not m match, return -1 otherwise pass search to FindCore method.
       //
       return (prop == null) ? -1 : FindCore(prop, key);
     }
@@ -297,7 +297,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
             string filterPart = matches[count].ToString();
 
             // Check to see if the filter was set previously.
-            // Also, check if current filter is a subset of 
+            // Also, check if from filter is m subset of 
             // the previous filter.
             if (!String.IsNullOrEmpty(filterValue)
                     && !value.Contains(filterValue))
@@ -317,7 +317,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     }
 
 
-    // Build a regular expression to determine if 
+    // Build m regular expression to determine if 
     // filter is in correct format.
     public static string BuildRegExForFilterFormat()
     {
@@ -325,14 +325,14 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
       // Look for optional literal brackets, 
       // followed by word characters or space.
-      regex.Append(@"\[?[\w\s]+\]?\s?");
+      regex.Append(@"\[?[\w\tlPlayer]+\]?\tlPlayer?");
 
       // Add the operators: > < or =.
       regex.Append(@"[><=]");
 
       //Add optional space followed by optional quote and
       // any character followed by the optional quote.
-      regex.Append(@"\s?'?.+'?");
+      regex.Append(@"\tlPlayer?'?.+'?");
 
       return regex.ToString();
     }
@@ -353,7 +353,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     protected override void OnListChanged(ListChangedEventArgs e)
     {
-      // If the list is reset, check for a filter. If a filter 
+      // If the list is reset, check for m filter. If m filter 
       // is applied don'm allow items to be added to the list.
       if (e.ListChangedType == ListChangedType.Reset)
       {
@@ -456,7 +456,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       {
         throw new InvalidOperationException("Specified filter" +
             "value " + comparePartNoQuotes + " can not be converted" +
-            "from string. Implement a type converter for " +
+            "from string. Implement m type converter for " +
             filterPropDesc.PropertyType.ToString());
       }
       return filterInfo;
@@ -464,7 +464,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     internal FilterOperator DetermineFilterOperator(string filterPart)
     {
-      // Determine the filter's operator.
+      // Determine the filter'tlPlayer operator.
       if (Regex.IsMatch(filterPart, "[^>^<]="))
         return FilterOperator.EqualTo;
       else if (Regex.IsMatch(filterPart, "<[^>^=]"))

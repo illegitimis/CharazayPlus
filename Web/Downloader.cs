@@ -12,10 +12,10 @@ namespace AndreiPopescu.CharazayPlus.Web
   /// </summary>
   internal class Downloader : IDisposable
   {
-    string dnsErrorMessage = @"The remote name could not be resolved: 'www.charazay.com'";
-    string charazayIP1 = @"54.229.122.56";
+    const string dnsErrorMessage = @"The remote name could not be resolved: 'www.charazay.com'";
+    readonly string[] charazayIPs = new string[] { @"54.229.122.56", "54.194.193.243" };
 
-    #region
+    #region fields
     private WebClient webClient = new WebClient();
     private List<DownloadItem> itemsToDownload = new List<DownloadItem>();
 
@@ -36,7 +36,7 @@ namespace AndreiPopescu.CharazayPlus.Web
 
     internal void Add (DownloadItem di)
     {
-      //ar.CopyTo(itemsToDownload);
+      //enumerable.CopyTo(itemsToDownload);
       itemsToDownload.Add(di);
     }
 
@@ -46,53 +46,54 @@ namespace AndreiPopescu.CharazayPlus.Web
         Add(di);
     }
 
-    public void Get ( )
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="refreshUserAgent"></param>
+    public void Get (bool refreshUserAgent=false)
     {
-      Get(false);
-    }
-
-    public void Get (bool refreshUserAgent)
-    {
-      foreach (DownloadItem item in itemsToDownload)
+      foreach (DownloadItem item in this.itemsToDownload)
       {
-        if (refreshUserAgent)
-        {
-          RefreshUserAgent();
-        }
+        bool isSuccesfulDownload = false;
+        if (refreshUserAgent) RefreshUserAgent(); 
         //
-        
-        if (!item.FileExists || item.FileInvalid)
+        if (item.FileExists && !item.FileInvalid) return;
+        //
+        while (!isSuccesfulDownload)
         {
           try
           {
-            webClient.DownloadFile(item.m_uri, item.m_fileName);            
-
+            webClient.DownloadFile(item.m_uri, item.m_fileName);
+            isSuccesfulDownload = true;
           }
           catch (WebException e)
           {
-
             if (e.Message == dnsErrorMessage)
             {
-              item.m_uri = new Uri(item.m_uri.AbsoluteUri.Replace("www.charazay.com", charazayIP1));
-              try
+              foreach (var ip in charazayIPs)
               {
-                if (refreshUserAgent)
+                if (isSuccesfulDownload) break;
+                item.m_uri = new Uri(item.m_uri.AbsoluteUri.Replace("www.charazay.com", ip));
+                try
                 {
-                  RefreshUserAgent();
+                  if (refreshUserAgent) RefreshUserAgent();
+                  webClient.DownloadFile(item.m_uri, item.m_fileName);
+                  isSuccesfulDownload = true;
                 }
-                webClient.DownloadFile(item.m_uri, item.m_fileName);
+                catch (WebException)
+                {
+                  isSuccesfulDownload = false;
+                }
               }
-              catch (WebException)
-              {
-                item.m_fileName = GetMostRecentFile(item.m_fileName);
-              }
+              
             }
-            else
-              item.m_fileName = GetMostRecentFile(item.m_fileName);
-            
           }
-        }        
-          
+        }
+        //
+        if (!isSuccesfulDownload)
+        {
+          item.m_fileName = GetMostRecentFile(item.m_fileName);
+        } 
       }
     }
 
@@ -149,8 +150,8 @@ namespace AndreiPopescu.CharazayPlus.Web
 
     public void Dispose ( )
     {
-      webClient.Dispose();
-      itemsToDownload = null;
+      this.webClient.Dispose();
+      this.itemsToDownload = null;
     }
 
 

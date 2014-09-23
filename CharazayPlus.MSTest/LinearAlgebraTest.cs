@@ -7,7 +7,7 @@ namespace CharazayPlus.Tests
     
     
     /// <summary>
-    ///This is a test class for LinearTest and is intended
+    ///This is m test class for LinearTest and is intended
     ///to contain all LinearTest Unit Tests
     ///</summary>
   [TestClass()]

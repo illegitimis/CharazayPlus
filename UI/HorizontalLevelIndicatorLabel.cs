@@ -88,18 +88,13 @@
     [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
     public override string Text
     {
-      get
-      {
-        return base.Text;
-      }
-      set
-      {
-        base.Text = value;
-      }
+      get { return base.Text; }
+      set { base.Text = value; }
     }
 
 
     private float _level = 30;
+    private float _min = 0f;
     private float _max = float.MaxValue;
     private  bool _show;
 
@@ -110,8 +105,7 @@
       set
       {
         _level = Math.Max(Math.Min(value, float.MaxValue), 0);
-        Text = _show ? string.Format("{0,2} / {1,2}", _level, _max) : string.Format("{0,2}", _level);
-        //TextAlign = ContentAlignment.MiddleRight; 
+        Text = _show ? string.Format("{0,2} / {1,2}", _level, _max) : string.Format("{0,2}", _level);        
       }
     }
 
@@ -126,6 +120,20 @@
       }
     }
 
+    [DefaultValue(0f), Description("Minimum Level"), Category("Data")]
+    public float MinimumLevel
+    {
+      get { return _min; }
+      set
+      {
+        _min = Math.Max(value, 0);
+        if (_min==0f)
+          Text = _show ? string.Format("{0,2} / {1,2}", _level, _max) : string.Format("{0,2}", _level);
+        else
+          Text = _show ? string.Format("{0,2} / {1,2} / {2,2}", _min, _level, _max) : string.Format("{0,2}", _level);
+      }
+    }
+
     [DefaultValue(false), Description("show maximum value in text description"), Category("Appearance")]
     public bool ShowMaximumValueText
     {
@@ -134,7 +142,6 @@
       {
         _show = value;
         Text = string.Format("{0,2}", _level);
-        //TextAlign = ContentAlignment.MiddleRight; 
       }
     }
     #endregion
@@ -171,7 +178,7 @@
       float green = 255f;
       float blue = 0f;
       //
-      float quot = this.Width / MaximumLevel;
+      float quot = this.Width / (MaximumLevel-MinimumLevel);
       // zone width is 2
       float y = 0f;
       float h = (float)this.Height;
@@ -180,7 +187,7 @@
       float c = 255f / (float)this.Width;
       // color increase level
       float inc = c * 2.5f;
-      while (x < quot * Level)
+      while (x < quot * (Level-MinimumLevel))
       {
         gfx.FillRectangle(new SolidBrush(Color.FromArgb((int)red, (int)green, Math.Max(Math.Min((int)blue, 255), 0)))
           , x, y + 0.5f, 2f, h - 1f);

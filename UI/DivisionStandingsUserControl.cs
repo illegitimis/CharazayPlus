@@ -215,7 +215,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(34, 13);
       this.label5.TabIndex = 8;
-      this.label5.Text = "Date";
+      this.label5.Text = "Deadline";
       // 
       // lblUtc
       // 

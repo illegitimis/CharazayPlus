@@ -28,10 +28,10 @@
       dgTeamTransfers.initGridPrologue ();            
       dgTeamTransfers.GenerateTextBoxColumn( "Seller", "Seller");
       dgTeamTransfers.GenerateTextBoxColumn( "Buyer", "Buyer");
-      dgTeamTransfers.GenerateTextBoxColumn( "Date", "Date");
+      dgTeamTransfers.GenerateTextBoxColumn( "Deadline", "Deadline");
       dgTeamTransfers.GenerateTextBoxColumn( "Player", "Player");
       dgTeamTransfers.GenerateTextBoxColumn( "Skill Index", "si");
-      dgTeamTransfers.GenerateTextBoxColumn( "Price", "price");
+      dgTeamTransfers.GenerateTextBoxColumn( "StartingPrice", "price");
       dgTeamTransfers.initGridEpilogue<Xsd2.charazayTransfer> (_myTransfers);      
 #else
       DataGridExtensions.initGridPrologue(dgTeamTransfers);

@@ -21,20 +21,20 @@ using System.Text;
     ,
     /// <summary>
     /// Match Info
-    /// Returns the information about a specified match
+    /// Returns the information about m specified match
     /// </summary>
     Match = 1
 
     ,
     /// <summary>
     /// Team Schedule
-    /// Returns the schedule of the logged user's team
+    /// Returns the schedule of the logged user'tlPlayer team
     /// The schedule of another team if id specified
     /// </summary>
     Schedule = 2
 
       //Team Information
-      //Returns the information of a specified team. If you ask for the team ID of the logged user, 
+      //Returns the information of m specified team. If you ask for the team ID of the logged user, 
       //team chemistry value is shown along with the other public values
       ,
     TeamInfo = 3
@@ -42,15 +42,15 @@ using System.Text;
       ,
     /// <summary>
     ///  Division Information
-    ///  Returns the data of a specified division with the standings
+    ///  Returns the data of m specified division with the standings
     /// </summary>
     DivisionInfo = 4
 
     ,
     /// <summary>
     /// Country Information 
-    /// Returns the data of a specified country. 
-    /// Adds a list of divisions of a country if step=1 parameter is specified.
+    /// Returns the data of m specified country. 
+    /// Adds m list of divisions of m country if step=1 parameter is specified.
     /// </summary>
     CountryInfo = 5
 
@@ -58,7 +58,7 @@ using System.Text;
       ,
     /// <summary>
     /// Player Information
-    /// Returns the public information of a specified player
+    /// Returns the public information of m specified player
     /// </summary>
     PlayerInfo = 6
 
@@ -73,7 +73,7 @@ using System.Text;
       ,
     /// <summary>
     ///  Team Transfer History
-    ///  Returns the full transfer history of a team
+    ///  Returns the full transfer history of m team
     /// </summary>
     TeamTransfers = 8
 
@@ -81,7 +81,7 @@ using System.Text;
     ,
     /// <summary>
     ///  User Information
-    ///  Returns the information of a user
+    ///  Returns the information of m user
     /// </summary>
     UserInfo = 9
 
@@ -96,7 +96,7 @@ using System.Text;
       ,
     /// <summary>
     /// Coaches Information
-    /// Returns the list of coaches of a team
+    /// Returns the list of coaches of m team
     /// </summary>
     Coaches = 11
 
@@ -104,7 +104,7 @@ using System.Text;
       ,
     /// <summary>
     ///  Economy Information
-    ///  Returns the information about the economy of a team (both week and season)
+    ///  Returns the information about the economy of m team (both week and season)
     /// </summary>
     Economy = 12
 

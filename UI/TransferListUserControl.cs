@@ -13,178 +13,149 @@ namespace AndreiPopescu.CharazayPlus.UI
   using System.IO;
   using System.Xml.Serialization;
   using System.Collections;
+  using AndreiPopescu.CharazayPlus.Objects;
+  using System.Linq;
+  using AndreiPopescu.CharazayPlus.Extensions;
 
   // Getting player from charazay + adding to olv => add to cache
   public partial class TransferListUserControl : UserControl
   {
+    static readonly TimeSpan TimeSpan6H = new TimeSpan(6, 0, 0);
+    static readonly TimeSpan TimeSpan30Days = new TimeSpan(30, 0, 0, 0);
+    
     public TransferListUserControl ( )
     {
       InitializeComponent();
     }
-  
-    // reading from serialized xml, getting players
-    public Web.WebServiceUser User {get; set;}
+
+#if DOTNET30
+    //Objects.TransferHistoryDataContext _dcTransfers = null;
+#else
+    Objects.TransferHistoryDataSetTableAdapters.QueriesTableAdapter _qta = null;
+#endif
+
+    #region published events
     //
     public event EventHandler BadPlayerId;
     public event EventHandler PlayerDataUnavailable;
     public event EventHandler <PlayerEventArgs> DownloadPlayerData;
-  
-    /// <summary>
-    /// serialize the transfer listed players that have been evaluated 
-    /// </summary>
-    public void SerializePlayersTL ( )
+    #endregion
+
+    #region private methods
+    private void GenerateOlvColumns ( )
     {
-      string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);
-      FileStream fs = null;
-      try
-      {
-        fs = new FileStream(tlFile, FileMode.Truncate, FileAccess.Write);
-
-        XmlSerializer serializer = new XmlSerializer(typeof(TLPlayers));
-        TLPlayers tlps = new TLPlayers();
-
-        ArrayList arl = olvTL.Objects as ArrayList;
-        if (arl != null)
-        {
-          object o = arl.ToArray(typeof(TLPlayer));
-          tlps.TLPlayer = (TLPlayer[])o;
-        }
-        else
-        {
-          tlps.TLPlayer = (TLPlayer[])olvTL.Objects;
-        }
-
-        serializer.Serialize(fs, tlps);
-      }
-      finally
-      {
-        fs.Close();
-      }
-      
-    }
-
-    /// <summary>
-    /// initializes the olvTL object list view with bookmarked players 
-    /// </summary>
-    public void InitTransferShortList ( )
-    {
-      FileStream fs = null;
-      TLPlayers tlPlayers = null;
-      try
-      { //
-        // data source
-        //
-        string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);
-        fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
-        //
-        // copy most recent not null file to today null file
-        //
-        if (fs.Length == 0)
-        {
-          fs = GetMostRecent(tlFile, fs);
-        }
-
-        tlPlayers = (TLPlayers)(new XmlSerializer(typeof(TLPlayers)).Deserialize(fs));
-        
-      }
-      catch (Exception) { }
-      finally { fs.Close(); }
+      if (this.olvTL.Columns != null && this.olvTL.Columns.Count > 0)
+        return;
+      this.olvTL.ShowItemCountOnGroups = true;
       //
       // ui
       //
       Generator.GenerateColumns(this.olvTL, typeof(TLPlayer));
-      // from the total score column on
-      double[] scoreMarkers = new double[] { 3, 5, 8, 11, 14, 17, 20 };
-      string[] scoreDescriptions = ObjectListViewExtensions.BuildCustomGroupies<double>(scoreMarkers);
-      // value index
-      double[] valueIndices = new double[] { 0.8d, 0.85d, 0.9d, 1d, 1.05d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
-      string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(valueIndices);
-      // profitability
-      double[] profitabilityIndices = new double[] { 0.5d, 0.75d, 0.9d, 1d, 1.1d, 1.25d, 1.5d, 2d, 3d, 5d, 10d, 20d, 50d, 100d };
-      string[] profitabilityDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(profitabilityIndices);
+
       //
       foreach (OLVColumn col in olvTL.Columns)
       {
         switch (col.DisplayIndex)
         {
-          case 0: col.IsHeaderVertical = true; break;
-          case 1: col.Hyperlink = true; col.Groupable = false; break;
-          case 5: col.Groupable = false; break;
-          case 6: 
-          case 7:
-          case 8:
-          case 9:
-          case 10:
-          case 11:
-          case 12:
-          case 13: 
-          col.MakeGroupies(scoreMarkers, scoreDescriptions);
-          col.IsHeaderVertical = true;
-          break;
-          case 4: 
-            col.MakeGroupies(profitabilityIndices, profitabilityDesc);
-            col.IsHeaderVertical = true;
+          case 0: //position
+            //col.IsHeaderVertical = true; 
+            col.Groupable = true;
             break;
-          case 2: 
-            col.MakeGroupies(valueIndices, viDesc);
-            col.IsHeaderVertical = true;
+
+          case 1: // player name 
+            col.Hyperlink = true;
+            col.Groupable = false;
+            col.Sortable = true;
             break;
+
+          case 2: //age value index
+            {
+              double[] valueIndices = new double[] { 0.8d, 0.85d, 0.9d, 1d, 1.05d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
+              string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(valueIndices);
+              col.MakeGroupies(valueIndices, viDesc);
+              //col.IsHeaderVertical = true;
+            } break;
+
+          case 3: //prices
+            {
+              uint[] indices = new uint[] { 10000u, 500000u, 1000000u, 2000000u, 5000000u, 10000000u, 20000000u, 50000000u };
+              col.MakeGroupies(indices, ObjectListViewExtensions.BuildCustomGroupies<uint>(indices));
+            } break;
+
+          case 4: //profitability
+            {
+              double[] profitabilityIndices = new double[] { 0.5d, 0.75d, 0.9d, 1d, 1.1d, 1.25d, 1.5d, 2d, 3d, 5d, 10d, 20d, 50d, 100d };
+              string[] profitabilityDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(profitabilityIndices);
+              col.MakeGroupies(profitabilityIndices, profitabilityDesc);
+              //col.IsHeaderVertical = true;
+            } break;
+
+          case 5: //deadline
+            {
+              col.Sortable = true;
+              col.Groupable = true;
+              col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return tlp.DeadLine.Day; };
+              col.GroupKeyToTitleConverter = delegate(object groupKey)
+              {
+
+                int iDay = (int)groupKey;
+                int currentDay = DateTime.Now.Day;
+                if (iDay < currentDay) return "deadline reached";
+                else if (iDay == currentDay) return "today";
+                else if (iDay == 1 + currentDay) return "tomorrow";
+                else if (iDay == currentDay + 2) return "day after tomorrow";
+                else return "later";
+              };
+            }
+            break;
+
+          case 6: {
+            col.Sortable = true;
+            col.Groupable = true;
+            col.Renderer = new MultiImageRenderer (
+              Properties.Resources.star16 //Object imageSelector
+              , 3//int maxImages
+              , 0//int minValue
+              , 4//int maxValue
+              );
+          } break;
+
+          default: break;
         }
       }
-      //
-      if (tlPlayers == null || tlPlayers.TLPlayer == null)
-        return;
-      olvTL.SetObjects(tlPlayers.TLPlayer);
-      //      
-      foreach (TLPlayer tlp in tlPlayers.TLPlayer)
-      {
-        if (tlp.Player != null)
-          continue;
-        Xsd2.charazay obj = DownloadPlayer (tlp.PlayerId);
-        Xsd2.charazayPlayer p = obj.player;
-        switch (tlp.Pos)
-        {
-          case PlayerPosition.C: tlp.Player = new C(p); break;
-          case PlayerPosition.PF: tlp.Player = new PF(p); break;
-          case PlayerPosition.SF: tlp.Player = new SF(p);break;
-          case PlayerPosition.PG: tlp.Player = new PG(p); break;
-          case PlayerPosition.SG: tlp.Player = new SG(p); break;
-        }       
-      }
-     
     }
 
-    private FileStream GetMostRecent (string tlFile, FileStream fs)
+    private PlayerPosition GetPosition ( )
     {
-      string dir = Path.GetDirectoryName(fs.Name);
-      string fileToday = Path.GetFileName(fs.Name);
-
-      string[] files = Directory.GetFiles(dir, "*.xml");
-      if (files.Length > 1)
-      {
-        DateTime dt = DateTime.MinValue;
-        FileInfo mostRecent = null;
-
-        foreach (string file in files)
-        {
-          FileInfo fi = new FileInfo(file);
-          if (fi.Name != fileToday && fi.LastWriteTime > dt)
-          {
-            mostRecent = fi;
-            dt = fi.LastWriteTime;
-          }
-        }
-
-        if (mostRecent != null)
-        {
-          fs.Close();
-          File.Delete(tlFile);
-          File.Copy(mostRecent.FullName, tlFile);
-          fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
-        }
-      }
-      return fs;
+      if (rdC.Checked) return PlayerPosition.C;
+      else if (rdPf.Checked) return PlayerPosition.PF;
+      else if (rdPg.Checked) return PlayerPosition.PG;
+      else if (rdSf.Checked) return PlayerPosition.SF;
+      else if (rdSg.Checked) return PlayerPosition.SG;
+      else return PlayerPosition.Unknown;
     }
+
+    void SetWaitCursor (Action seqAct)
+    {
+      try
+      {
+        Cursor.Current = Cursors.WaitCursor;
+        seqAct();
+      }
+      catch { }
+      finally
+      {
+        Cursor.Current = Cursors.Default;
+      }
+    }
+
+    void DoScrapeUpdate (TLPlayer tlp)
+    {
+      var st = ScrapeUpdate(tlp);
+      this.lblServertime.Text = st.ToString("yyyy-MM-dd HH:mm:ss");
+      this.olvTL.RefreshObject(tlp);
+    }
+    #endregion
 
     #region event handlers
     /// <summary>
@@ -196,31 +167,28 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       PlayerPosition pos = GetPosition();
       //
-      Player basePlayer = evaluatePlayerUC.GetPlayer(pos);
+      Player basePlayer = ucEvaluatePlayer.GetPlayer(pos);
       //     
-      TLPlayer tlp = new TLPlayer();
       if (basePlayer != null)
       { //
-        tlp.Deadline = dtpDeadline.Value.ToString("yyyy/MM/dd HH:mm");      
-        tlp.Position = Enum.GetName(typeof(PlayerPosition), pos);
-        tlp.Price = string.IsNullOrEmpty(tbxPrice.Text) ? (uint)Math.Pow(10, 6) : uint.Parse(tbxPrice.Text);      
-        tlp.Profitability = Math.Pow(10d,6d)*basePlayer.TransferMarketValue / (double)tlp.Price;
+        TLPlayer tlp = new TLPlayer()
+        {
+          Deadline = dtpDeadline.Value.ToString("yyyy/MM/dd HH:mm"),
+          Position = Enum.GetName(typeof(PlayerPosition), pos),
+          Price = string.IsNullOrEmpty(tbxPrice.Text) ? (uint)Math.Pow(10, 6) : uint.Parse(tbxPrice.Text),
+          AgeValueIndex = basePlayer.ValueIndex,
+          PlayerId = basePlayer.Id,
+          Name = basePlayer.FullName
+        };
+        tlp.Profitability = Math.Pow(10d, 6d) * basePlayer.TransferMarketValue / (double)tlp.Price;
         //
-        tlp.Player = basePlayer;
         CacheManager.Instance.AddPlayer(basePlayer.Id, basePlayer.FullName);
         //
         olvTL.AddObject(tlp);
-      }      
-    }
-
-    private PlayerPosition GetPosition ()
-    {
-      if (rdC.Checked) return PlayerPosition.C;
-      else if (rdPf.Checked) return PlayerPosition.PF;
-      else if (rdPg.Checked) return PlayerPosition.PG;
-      else if (rdSf.Checked) return PlayerPosition.SF;
-      else if (rdSg.Checked) return PlayerPosition.SG;
-      else return PlayerPosition.Unknown;
+        //Data.TransferList.IsDirty = true;
+        //
+        Data.TransferList.Bookmarks.Add(tlp);
+      }
     }
 
     /// <summary>
@@ -234,24 +202,25 @@ namespace AndreiPopescu.CharazayPlus.UI
       ulong playerId;
       if (ulong.TryParse(tbxPlayerId.Text, out playerId))
       {
-        Xsd2.charazay obj = DownloadPlayer(playerId);
-        if (obj != null && obj.player != null)
+        var xsd2p = Deserializer.GoGetPlayerXml(playerId);
+        //
+        if (xsd2p != null)
         {
-          this.evaluatePlayerUC.SelectedObject = obj.player;
+          this.ucEvaluatePlayer.SelectedObject = xsd2p;
           this.btnTLAdd.Enabled = (GetPosition() != PlayerPosition.Unknown);
-          if (DownloadPlayerData != null) 
-            DownloadPlayerData(null, new PlayerEventArgs() 
-            { 
-              Surname = obj.player.basic.surname
-              , 
-              Name=obj.player.basic.name
+          if (DownloadPlayerData != null)
+            DownloadPlayerData(null, new PlayerEventArgs()
+            {
+              Surname = xsd2p.basic.surname
+              ,
+              Name = xsd2p.basic.name
             });
         }
         else
         {
           if (PlayerDataUnavailable != null) PlayerDataUnavailable(this, null);
           this.btnTLAdd.Enabled = false;
-        }        
+        }
       }
       else
       { //bad player id
@@ -279,20 +248,27 @@ namespace AndreiPopescu.CharazayPlus.UI
         switch (e.SubItemIndex)
         {
           case 3: // price column
-            {
-              TLPlayer current = (TLPlayer)e.RowObject;
-              // update profitability, multiply by old price, divide by new price
-              current.Profitability *= (uint)e.Value;
-              current.Profitability /= (uint)e.NewValue;
-              // update model price
-              current.Price = (uint)e.NewValue;
-            } break;
+          {
+            TLPlayer current = (TLPlayer)e.RowObject;
+            // update profitability, multiply by old price, divide by new price
+            current.Profitability *= (uint)e.Value;
+            current.Profitability /= (uint)e.NewValue;
+            // update model price
+            current.Price = (uint)e.NewValue;
+          } break;
 
           case 5: // deadline
-            {
-              TLPlayer current = (TLPlayer)e.RowObject;
-              current.Deadline = e.NewValue as string;
-            } break;
+          {
+            TLPlayer current = (TLPlayer)e.RowObject;
+            current.Deadline = e.NewValue as string;
+          } break;
+
+          case 6: // importance
+          {
+            TLPlayer current = (TLPlayer)e.RowObject;
+            current.Importance = Math.Min((byte)3, Math.Max(byte.Parse (e.NewValue as string), (byte)0));
+          } break;
+
 
           default: break;
         }
@@ -316,97 +292,21 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (olv == null)
         olv = olvTL;
       TLPlayer crt = (TLPlayer)olv.SelectedObject;
-      if (crt != null && crt.Player != null && crt.Player.BasePlayer != null)
-        this.evaluatePlayerUC.SelectedObject = crt.Player.BasePlayer;
-    } 
-    
+      if (crt == null)
+        return;
+      //
+      var xsdp = Deserializer.GoGetPlayerXml(crt.PlayerId);
+      //
+      this.ucEvaluatePlayer.SelectedObject = xsdp;
+      this.ucBasicPlayerInfo.PlayerByScore = this.ucEvaluatePlayer.GetPlayer(crt.Pos);
+      this.ucBasicPlayerInfo.CurrentPrice = crt.Price;
+      if (this.ucBasicPlayerInfo.PlayerByScore != null)
+        this.ucBasicPlayerInfo.Init();
+    }
+
     private void rd_CheckedChanged (object sender, EventArgs e)
     {
       btnTLAdd.Enabled = true;
-    }
-    #endregion
-
-
-    #region Context Menu
-    /// <summary>
-    /// show the context menu on right click
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void olvTL_CellRightClick (object sender, CellRightClickEventArgs e)
-    {
-      e.MenuStrip = cmsOlvTL;
-      cmsOlvTLRemove.Tag = e.Model;
-      cmsOlvTL.Show(e.Location);
-    }
-
-    /// <summary>
-    /// remove player from TL evaluation
-    /// </summary>
-    /// <param name="sender">context menu item Remove</param>
-    /// <param name="e"></param>
-    private void cmsOlvTLRemove_Click (object sender, EventArgs e)
-    {
-      if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
-      {
-        foreach (object tlPlayer in olvTL.SelectedObjects)
-          olvTL.RemoveObject(tlPlayer);
-      }
-      else
-      {
-        ToolStripItem ti = sender as ToolStripItem;
-        if (ti != null && ti.Tag != null)
-          olvTL.RemoveObject(ti.Tag);
-      }
-    }
-
-    private void olvTL_KeyDown (object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Delete)
-      {
-        e.Handled = true;
-        cmsOlvTLRemove_Click(null, null);
-      }
-    }
-    #endregion
-
-    private Xsd2.charazay DownloadPlayer (ulong playerId)
-    {
-      Web.Downloader crawler = new Web.Downloader();
-      Web.PlayerXml xmlPlayer = new Web.PlayerXml(User, playerId);
-      crawler.Add(xmlPlayer);
-      crawler.Get(true);
-      //
-      FileStream fs = null;
-      Xsd2.charazay obj = null;
-
-      try
-      {
-        fs = new FileStream(xmlPlayer.m_fileName, FileMode.Open, FileAccess.ReadWrite);
-        obj = (Xsd2.charazay)(new XmlSerializer(typeof(Xsd2.charazay)).Deserialize(fs));
-      }
-      catch (Exception ex)
-      {
-        if (ex is InvalidOperationException && ex.InnerException != null && ex.InnerException is FormatException)
-        {
-          string m = ex.Message.Replace("There is an error in XML document", "");
-          string [] tokens = m.Split(new char[] { ' ', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
-          //System.InvalidOperationException was unhandled
-          //Message=There is an error in XML document (3, 126).
-          //InnerException: System.FormatException
-          //Message=Input string was not in a correct format.
-          long errPos = long.Parse(tokens[1]);
-          fs.Seek(errPos + 8, SeekOrigin.Begin);
-          fs.WriteByte(0);
-        }
-      }
-      finally
-      {
-        fs.Close();
-      }
-      if (xmlPlayer.DeserializationType != Web.XmlSerializationType.Player)
-        throw new Exception("Web.XmlSerializationType.Player");
-      return obj;
     }
 
     private void olvTL_IsHyperlink (object sender, IsHyperlinkEventArgs e)
@@ -422,15 +322,332 @@ namespace AndreiPopescu.CharazayPlus.UI
       switch (e.ColumnIndex)
       {
         case 1:
-        {
-          Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, tlp.PlayerId);
-          e.Url = playerLink.m_uri.AbsoluteUri;
-        } break;       
+          {
+            Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, tlp.PlayerId);
+            e.Url = playerLink.m_uri.AbsoluteUri;
+          } break;
         default: break;
       }
     }
 
+    private void olvTL_ColumnClick (object sender, ColumnClickEventArgs e)
+    {
+      switch (e.Column)
+      {
+        case 1: // player name
+          ObjectListViewExtensions.ShowGroups(this.olvTL, false);
+          break;
+
+        default:
+          if (this.olvTL.ShowGroups == false)
+          {
+            ObjectListViewExtensions.ShowGroups(this.olvTL, true);
+          }
+          break;
+      }
+    }
+    #endregion
+
+    #region Context Menu
+    /// <summary>
+    /// show the context menu on right click
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void olvTL_CellRightClick (object sender, CellRightClickEventArgs e)
+    {
+      e.MenuStrip = cmsOlvTL;
+      cmsRemove.Tag = e.Model;
+      cmsUpdate.Tag = e.Model;
+      cmsOlvTL.Show(e.Location);
+    }
+
+    /// <summary>
+    /// remove player from TL evaluation
+    /// </summary>
+    /// <param name="sender">context menu item Remove</param>
+    /// <param name="e"></param>
+    private void cmsOlvTLRemove_Click (object sender, EventArgs e)
+    {
+      //Data.TransferList.IsDirty = true;
+      //
+      if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
+      {
+        foreach (object tlPlayer in olvTL.SelectedObjects)
+        {
+          olvTL.RemoveObject(tlPlayer);
+          Data.TransferList.Bookmarks.Remove(tlPlayer as TLPlayer);
+        }
+      }
+      else
+      {
+        ToolStripItem ti = sender as ToolStripItem;
+        if (ti != null && ti.Tag != null)
+        {
+          olvTL.RemoveObject(ti.Tag);
+          Data.TransferList.Bookmarks.Remove(ti.Tag as TLPlayer);
+        }
+      }
+    }
+
+    private void olvTL_KeyDown (object sender, KeyEventArgs e)
+    {
+      if (e.KeyCode == Keys.Delete)
+      {
+        e.Handled = true;
+        cmsOlvTLRemove_Click(null, null);
+      }
+    }
+
+    private void cmsOlvTLUpdate_Click (object sender, EventArgs e)
+    {
+      SetWaitCursor(( ) =>
+      {
+        if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
+        {
+          foreach (object tlPlayer in olvTL.SelectedObjects)
+          {
+            DoScrapeUpdate(tlPlayer as TLPlayer);
+          }
+        }
+        else
+        {
+          ToolStripItem ti = sender as ToolStripItem;
+          if (ti != null && ti.Tag != null)
+          {
+            DoScrapeUpdate(ti.Tag as TLPlayer);
+          }
+        }
+        //
+#if DOTNET30
+        var changeSet = Data.DbEnvironment.Instance.TransferHistoryDC.GetChangeSet();
+        if (!changeSet.Deletes.IsNullOrEmpty() || !changeSet.Inserts.IsNullOrEmpty() || !changeSet.Updates.IsNullOrEmpty())
+          Data.DbEnvironment.Instance.TransferHistoryDC.SubmitChanges(System.Data.Linq.ConflictMode.ContinueOnConflict);
+#else
+
+#endif
+      });
+      
+
+    }
+
+   
+    private DateTime ScrapeUpdate (TLPlayer tlPlayer)
+    {
+      var page = new AndreiPopescu.CharazayPlus.Web.PlayerPageDownloadItem(tlPlayer.PlayerId);
+      var ppi = Web.Scraper.Instance.PlayerPage(page.m_uri);
+      //
+      // bookmarked player with exact court position as in the list
+      //
+      var currentPlayer = Utils.Deserializer.GetPlayerFromIdAndPosition(tlPlayer.PlayerId, tlPlayer.Pos);
+      //
+      if (ppi.IsTransferListed)
+      { //
+        // update TLPlayer with more relevant site info
+        //
+        tlPlayer.Deadline = ppi.Deadline.Value.ToString("yyyy.MM.dd HH:mm");
+        tlPlayer.Price = ppi.Price.Value;
+        //
+        // no more 'regula de 3 simpla'
+        // tlPlayer.Profitability *= (tlPlayer.Price / (double)ppi.Price.Value);
+        //
+        tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;
+      }
+      else
+      { //
+        // deadline is over
+        // transfer details either on player history page or team transfer history
+        //
+#if DOTNET30
+        //if (_dcTransfers == null) _dcTransfers = new TransferHistoryDataContext();
+#else
+        if (_qta == null)
+          _qta = new Objects.TransferHistoryDataSetTableAdapters.QueriesTableAdapter();
+#endif
+        //
+        var pthdi = new AndreiPopescu.CharazayPlus.Web.PlayerTransferHistoryDownloadItem(tlPlayer.PlayerId);
+        var th = Web.Scraper.Instance.ParseTransferHistory(pthdi.m_uri).ToList();
+        //
+        if (th.IsNullOrEmpty())
+        { //
+          // no history whatsoever, not even promoted on, means he got fired
+          // implicitly set tm value to 0
+          //
+          InsertDb(tlPlayer.Pos, currentPlayer.Age, (decimal)0, (decimal)currentPlayer.ValueIndex, tlPlayer.DeadLine);
+          olvTL.RemoveObject(tlPlayer);
+          Data.TransferList.Bookmarks.Remove(tlPlayer);
+        }
+        else
+        { //
+          // there is transfer history (transfer history matches data)
+          // either player is listed with same skills index and in a time window of less than 6hrs
+          // or was marked as deadline reached and most recent deadline hsitory is pretty close to where we stand
+          //
+          var ts = (th[0].TransferDate - tlPlayer.DeadLine);
+          if (ts < TimeSpan.Zero) ts = -ts;
+          var ts2 = th[0].TransferDate - DateTime.UtcNow;
+          if (ts2 < TimeSpan.Zero) ts2 = -ts2;
+          if ((th[0].SkillsIndex == currentPlayer.SkillsIndex && ts < TimeSpan6H) || 
+              (tlPlayer.DeadLine == DateTime.MinValue && ts2<TimeSpan30Days /*&& currentPlayer.SkillsIndex != th[0].SkillsIndex*/))
+          { 
+            decimal priceInMillions = th[0].Price / (decimal)1000000;
+            //
+            // player value index might change in the meantime
+            //
+            var valIdx = (decimal)Math.Min (tlPlayer.AgeValueIndex, currentPlayer.ValueIndex);
+            //if (valIdx > 0)
+            //{
+              InsertDb(tlPlayer.Pos, currentPlayer.Age, priceInMillions, valIdx, th[0].TransferDate);
+              //
+              olvTL.RemoveObject(tlPlayer);
+              Data.TransferList.Bookmarks.Remove(tlPlayer);
+            //}
+
+          }
+          else
+          { //
+            // no matching history found, or slow update
+            // player was transferlisted, not bought and not listed again
+            // update deadline, but do not change price 
+            // profitability updated due to Matlab new interpolation parameters
+            //
+            tlPlayer.Deadline = DateTime.MinValue.ToString("yyyy.MM.dd HH:mm");
+            tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;            
+          }
+        }
+
+      }
+
+      return ppi.Servertime;
+    }
+
+    private void InsertDb (PlayerPosition pos, byte age, decimal priceInMillions, decimal valIdx, DateTime? dt = null)
+    {
+
+#if DOTNET30
+      char posid = ' ';
+#else
+  Action a = null; 
+#endif
+
+      try
+      {
+        
+        switch (pos)
+        {
+          case PlayerPosition.C:
+          case PlayerPosition.PF:
+#if DOTNET30
+            posid = 'C';
+#else
+  a = ()=>_qta.spInsertC(age, valIdx, priceInMillions);
+#endif
+            break;
+
+          case PlayerPosition.PG:
+          case PlayerPosition.SG:
+#if DOTNET30
+            posid = 'G';
+#else
+  a = ()=>_qta.spInsertG(age, valIdx, priceInMillions);
+#endif
+            break;
+
+          case PlayerPosition.SF:
+#if DOTNET30
+            posid = 'F';
+#else
+  _qta.spInsertF(age, valIdx, priceInMillions);
+#endif
+            break;
+        }
+        if (! Data.DbEnvironment.Instance.TransferHistoryDC.Histories.Any (x=>x.Age==age && x.PosId == posid && x.AgeValueIndex == valIdx && x.Price == priceInMillions && x.Day == dt.Value))
+          Data.DbEnvironment.Instance.TransferHistoryDC.Histories.InsertOnSubmit(new History() { Age = age, PosId = posid, AgeValueIndex = valIdx, Price = priceInMillions, Day = dt.Value });
+      }
+      catch { }
+    }
+
+    private void tsmiNone_Click (object sender, EventArgs e)
+    {
+      PlayerImportance_Click(sender, 0);
+    }
+
+    private void PlayerImportance_Click (object sender, byte value)
+    {
+      SetWaitCursor(( ) =>
+      {
+        if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
+        {
+          foreach (object tlPlayer in olvTL.SelectedObjects)
+          {
+            UpdatePlayerImportance(tlPlayer as TLPlayer, value);
+          }
+        }
+        else
+        {
+          ToolStripItem ti = sender as ToolStripItem;
+          if (ti != null && ti.Tag != null)
+          {
+            UpdatePlayerImportance(ti.Tag as TLPlayer, value);
+          }
+        }
+      });
+    }
+
+    private void UpdatePlayerImportance (TLPlayer tLPlayer, byte p)
+    {
+      tLPlayer.Importance = Math.Min((byte)3, Math.Max(p, (byte)0));
+      this.olvTL.RefreshObject(tLPlayer);
+    }
+
+    private void tsmiSmall_Click (object sender, EventArgs e)
+    {
+      PlayerImportance_Click(sender, 1);
+    }
+
+    private void tsmiMedium_Click (object sender, EventArgs e)
+    {
+      PlayerImportance_Click(sender, 2);
+    }
+
+    private void tsmiHigh_Click (object sender, EventArgs e)
+    {
+      PlayerImportance_Click(sender, 3);
+    }
+    #endregion
+
+    #region public methods
+
+
+    /// <summary>
+    /// initializes the olvTL object list view with bookmarked players 
+    /// </summary>
+    public void InitTransferShortList ( )
+    {
+      GenerateOlvColumns();
+      //
+      if (Data.TransferList.Bookmarks.IsNullOrEmpty())
+        return;
+      olvTL.SetObjects(Data.TransferList.Bookmarks);
+      //      
+      foreach (TLPlayer tlp in Data.TransferList.Bookmarks)
+      {
+        // if (tlp.Player != null)
+        //   continue;
+        ////
+        // Xsd2.charazayPlayer p = Deserializer.GoGetPlayerXml(tlp.PlayerId);
+        // switch (tlp.Pos)
+        // {
+        //   case PlayerPosition.C: tlp.Player = new C(p); break;
+        //   case PlayerPosition.PF: tlp.Player = new PF(p); break;
+        //   case PlayerPosition.SF: tlp.Player = new SF(p); break;
+        //   case PlayerPosition.PG: tlp.Player = new PG(p); break;
+        //   case PlayerPosition.SG: tlp.Player = new SG(p); break;
+        // }
+      }
+
+    }
+    #endregion
     
-    
-  }
+   }
 }

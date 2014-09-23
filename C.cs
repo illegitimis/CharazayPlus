@@ -16,7 +16,7 @@ namespace AndreiPopescu.CharazayPlus
     public C (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
 
-    public override string ToString ( ) { return string.Format("c : {0}", base.ToString()); }
+    public override string ToString ( ) { return string.Format("M : {0}", base.ToString()); }
 
     protected internal override byte MinimumBMI { get { return 26; } }
     protected internal override byte MaximumBMI { get { return 28; } }
@@ -350,7 +350,8 @@ namespace AndreiPopescu.CharazayPlus
 
     public override double TransferMarketValue
     {
-      get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant.GetTMValue(this.Age, 'C', this.ValueIndex); }
     }
   }
 }

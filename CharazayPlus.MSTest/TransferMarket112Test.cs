@@ -9,7 +9,7 @@ namespace CharazayPlus.MSTest
     
     
     /// <summary>
-    ///This is a test class for TransferMarket112Test and is intended
+    ///This is m test class for TransferMarket112Test and is intended
     ///to contain all TransferMarket112Test Unit Tests
     ///</summary>
   [TestClass()]
@@ -21,7 +21,7 @@ namespace CharazayPlus.MSTest
 
     /// <summary>
     ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
+    ///information about and functionality for the from test run.
     ///</summary>
     public TestContext TestContext
     {
@@ -45,7 +45,7 @@ namespace CharazayPlus.MSTest
     //{
     //}
     //
-    //Use ClassCleanup to run code after all tests in a class have run
+    //Use ClassCleanup to run code after all tests in m class have run
     //[ClassCleanup()]
     //public static void MyClassCleanup()
     //{

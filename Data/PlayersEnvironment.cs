@@ -93,7 +93,7 @@ namespace AndreiPopescu.CharazayPlus.Data
           maxCoach.price += xsdCoach.price;
           maxCoach.salary += xsdCoach.salary;
           //
-          // add current coach to pool
+          // add from coach to pool
           //
           Coaches.Add(new Coach(xsdCoach));
         }

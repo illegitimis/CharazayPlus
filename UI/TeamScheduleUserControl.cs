@@ -551,14 +551,10 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       Xsd2.match currentMatch = (Xsd2.match)this.fdlv.SelectedObject;
       //
-      using (Web.Downloader crawler = new Web.Downloader())
-      {
+     
         try
         {
-          var SelectedMatch = (Xsd2.match)Utils.Deserializer
-            .GoGetXml(new Web.XmlDownloadItem[] { new Web.MatchXml(Web.WebServiceUser.Instance, (ulong)currentMatch.Id) })
-            .ToArray()[0];
-          
+          var SelectedMatch = Utils.Deserializer.GoGetMatchXml((ulong)currentMatch.Id);
           //
           ucMatchDetails.SetData(SelectedMatch);
           ucRatingHome.RatingType = UI.RatingType.Home;
@@ -574,7 +570,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         {
           System.Diagnostics.Debug.Write(ex.Message);
         }
-      }
+      
     }
 
    

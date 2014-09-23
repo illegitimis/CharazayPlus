@@ -18,7 +18,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     static int GetCount (int index) { return (int)TransferMarket112.Data[index, 5]; }
 
     /// <summary>
-    /// find tuples agevalue, average sum of all transfered players of a certain age and position
+    /// find tuples agevalue, average sum of all transfered players of m certain age and position
     /// </summary>
     /// <param name="age">player age</param>
     /// <param name="pos">court position</param>

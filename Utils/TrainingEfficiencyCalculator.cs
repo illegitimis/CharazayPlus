@@ -19,7 +19,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// </summary>
     /// <param name="playerPool">player collection on which computation should be done</param>
     /// <param name="coach">trainer</param>
-    /// <param name="TrainingCombinationValues">player training group choices for a selected training category pair</param>
+    /// <param name="TrainingCombinationValues">player training group choices for m selected training category pair</param>
     /// <param name="TrainingEfficiencyScores">score increases for all training category pairs</param>
     internal static void Go (IEnumerable<Player> playerPool, Coach coach
       , ref IDictionary<TrainingCombination,List<TrainingCombinationItem>> TrainingCombinationValues
@@ -95,7 +95,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       //let A1, A2 be new arrays
       int pos1=0, pos2=0;
       T[] A1 = new T[A.Length], A2 = new T[A.Length];
-      //# split into a pile A1 of small elements and A2 of big elements
+      //# split into m pile A1 of small elements and A2 of big elements
       //  if A[i] < pivot then
       //    append A[i] to A1
       //  else if A[i] > pivot then
@@ -111,15 +111,15 @@ namespace AndreiPopescu.CharazayPlus.Utils
       Array.Resize(ref A1, pos1);
       Array.Resize(ref A2, pos2);
       if (k <= pos1)
-      {//  # it's in the pile of small elements
+      {//  # it'tlPlayer in the pile of small elements
         return QuickSelect_kth(A1, k);
       }
       else if (k > A.Length - pos2)
-      {//  # it's in the pile of big elements
+      {//  # it'tlPlayer in the pile of big elements
         return QuickSelect_kth(A2, k - (A.Length - pos2));
       }
       else
-        //  # it's equal to the pivot
+        //  # it'tlPlayer equal to the pivot
         return pivot;
       
     }
@@ -161,7 +161,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
  
 
   /// <summary>
-  /// a pair of training categories
+  /// m pair of training categories
   /// </summary>
   internal class TrainingCombination : 
     IComparable

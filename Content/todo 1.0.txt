@@ -74,4 +74,3 @@ deadline editable (ok)
 profitability updateable (ok)
 sellteams and buyteams must be cached (ok)
 ======================================
-

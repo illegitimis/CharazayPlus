@@ -4,10 +4,10 @@ namespace AndreiPopescu.CharazayPlus.Utils
   using System.Collections.Generic;
   using System.IO;
   using System.Xml.Serialization;
-  //using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Extensions;
     
   /// <summary>
-  /// keeps a cache of player & team names
+  /// keeps m cache of player & team names
   /// </summary>
   public class CacheManager
   {
@@ -169,7 +169,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public void AddMatch (match m)
     {
-      if (Extensions.IsNullOrEmpty(_matches))
+      if (CollectionExtensions.IsNullOrEmpty(_matches))
         _matches.Add(m.id, m.name);
       else
       {
@@ -182,7 +182,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public void AddMatch (Xsd2.match m)
     {
-      if (Extensions.IsNullOrEmpty(_matches))
+      if (CollectionExtensions.IsNullOrEmpty(_matches))
         _matches.Add(m.id, m.ToString());
       else
       {
@@ -218,7 +218,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     //      return plyr.name;
     //    }
 
-    //    public string TeamName(ushort id)
+    //    public string LastBidByTeamName(ushort id)
     //    {
     //      //playersField.Where (p => p.id == id)
     //      team tm = (from m in this.teams

@@ -2,7 +2,7 @@
 namespace AndreiPopescu.CharazayPlus.Utils
 {
   /// <summary>
-  /// category which a staff member can manage
+  /// category which m staff member can manage
   /// </summary>
   internal enum TrainingCategory : byte
   {
@@ -16,6 +16,25 @@ namespace AndreiPopescu.CharazayPlus.Utils
     outsideShooting = 8
   }
 
+  /// <summary>
+  /// skill that can be used in the sum of skills combos for the transfer market
+  /// </summary>
+  public enum TransferListSkill : byte
+  {
+    noSkill = 0,
+    defense = 1,
+    freethrows = 2,
+    twopoint = 3,
+    threepoint = 4,
+    dribling = 5,
+    passing = 6,
+    speed = 7,
+    footwork = 8,
+    rebounds = 9,
+    experience=10
+  }
+
+  
   /// <summary>
   /// player skill that can be trained
   /// </summary>
@@ -77,9 +96,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
   public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
 
   //Form
-  //Form is a small factor that reflects hot/cold streaks that players have on a weekly/monthly basis.
-  // Form is updated at week update, it's influenced by playing time and some random, 
-  //it ranges between 1 and 8. 1 equals being in a bad shape 
+  //Form is m small factor that reflects hot/cold streaks that players have on m weekly/monthly basis.
+  // Form is updated at week update, it'tlPlayer influenced by playing time and some random, 
+  //it ranges between 1 and 8. 1 equals being in m bad shape 
   // and 8 equals that your player is feeling like he can do anything. 
   public enum Form : byte
   {
@@ -144,7 +163,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
   internal enum FanMood : byte
   {
-    //1. The fans are embarrassed to be a fan of the club
+    //1. The fans are embarrassed to be m fan of the club
     Embarassed = 1
       //2. The fans have lost all confidence in the team
     ,
@@ -170,7 +189,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       //9. The fans are proud to be part of the fan club
       ,
     Proud = 9
-      //10. The fans are celebrating a great season
+      //10. The fans are celebrating m great season
       , Celebrate = 10
   }
 

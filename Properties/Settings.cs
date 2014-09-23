@@ -1,8 +1,8 @@
 ﻿namespace AndreiPopescu.CharazayPlus.Properties 
 {
     // This class allows you to handle specific events on the settings class:
-    //  The SettingChanging event is raised before a setting's value is changed.
-    //  The PropertyChanged event is raised after a setting's value is changed.
+    //  The SettingChanging event is raised before m setting'tlPlayer value is changed.
+    //  The PropertyChanged event is raised after m setting'tlPlayer value is changed.
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
   [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -62,7 +62,19 @@
             return ((string)(this["SecurityCode"]));
           }
           set { this["SecurityCode"] = value; } 
-        }     
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=CharazayTM;Integrated Security=True")]
+        public string CharazayTM_TDS_ConnectionString
+        {
+          get
+          {
+            return ((string)(this["CharazayTM_TDS_ConnectionString"]));
+          }
+        }
 
     }
 }

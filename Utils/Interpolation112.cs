@@ -19,7 +19,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     static readonly object[,] Data = new object[63, 6] 
     {
  
- {(byte)15   ,'C',    'O',     0.001449407117d ,8.338524707077d ,0.89}
+ {(byte)15   ,'C',    'O',     0.001449407117 ,8.338524707077d ,0.89}
 ,{(byte)15   ,'F',    'L',     85.01 ,-73.46 ,0.49 }
 ,{(byte)15   ,'G',    'L',     44.93 ,-39.91 ,0.40 }
 ,{(byte)16   ,'C',    'L',     54.80 ,-44.63 ,0.49 }
@@ -95,6 +95,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// <returns>interpolated transfer market value</returns>
     public static double GetTMValue (byte age, char pos, double x)
     {
+      age = Math.Min((byte)35, age);
+      //
       for (int i=0; i < 63; i++)
       {
         var a = (byte)Data[i,0]; //age
@@ -110,7 +112,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
             default:
               return m * Math.Exp(n * x);
             case 'L':
-              return m * x + n;
+              return Math.Max(m * x + n, 0);
           }
          
         }

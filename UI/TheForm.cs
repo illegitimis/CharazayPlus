@@ -10,6 +10,11 @@ namespace AndreiPopescu.CharazayPlus
   using AndreiPopescu.CharazayPlus.UI;
   using AndreiPopescu.CharazayPlus.Data;
   using AndreiPopescu.CharazayPlus.Web;
+  
+#if DOTNET30
+  using System.Linq;
+#endif
+  
     
   public partial class MainForm : System.Windows.Forms.Form
   {
@@ -40,8 +45,10 @@ namespace AndreiPopescu.CharazayPlus
       MyDivisionSchedule = 11
         ,
       MyEconomy = 12
-        , 
+        ,
       TL = 13
+        ,
+      WebBrowser = 14
     }
    
    
@@ -79,7 +86,7 @@ namespace AndreiPopescu.CharazayPlus
     private TrainingTabUserControl ucTraining;
     private ToolStripMenuItem aboutToolStripMenuItem;
     private TabPage tabPageSkills;
-    private UI.PlayerSkillsUserControl ucPlayerSkills;
+    private UI.PlayerSkillsTabUserControl ucPlayerSkills;
     //private UI.MyTeamScheduleUserControl ucMyTeamSchedule;
     UI.TeamScheduleUserControl ucMyTeamSchedule;
     private UI.InfoTabUserControl ucInfoTab;
@@ -100,6 +107,11 @@ namespace AndreiPopescu.CharazayPlus
     private StatusStrip statusStrip;
     private ToolStripStatusLabel tsslbl;
     private ToolStripStatusLabel tsslblr;
+    private TabPage tabPageBrowser;
+    private SearchTMUserControl ucSearchTM;
+    private TabPage tabPage1;
+    private ChartUserControl chartUserControl1;
+    //private WebBrowserUserControl ucWebBrowser;
     private UI.TransferListUserControl ucTransferList;
     #endregion
 
@@ -168,7 +180,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageStatus = new System.Windows.Forms.TabPage();
       this.ucStatus = new AndreiPopescu.CharazayPlus.UI.StatusUserControl();
       this.tabPageSkills = new System.Windows.Forms.TabPage();
-      this.ucPlayerSkills = new AndreiPopescu.CharazayPlus.UI.PlayerSkillsUserControl();
+      this.ucPlayerSkills = new AndreiPopescu.CharazayPlus.UI.PlayerSkillsTabUserControl();
       this.tabPagePG = new System.Windows.Forms.TabPage();
       this.ucPG = new AndreiPopescu.CharazayPlus.UI.PlayerPositionUserControl();
       this.tabPageSG = new System.Windows.Forms.TabPage();
@@ -191,6 +203,10 @@ namespace AndreiPopescu.CharazayPlus
       this.ucMyEconomy = new AndreiPopescu.CharazayPlus.UI.MyEconomyUserControl();
       this.tabPageTL = new System.Windows.Forms.TabPage();
       this.ucTransferList = new AndreiPopescu.CharazayPlus.UI.TransferListUserControl();
+      this.tabPageBrowser = new System.Windows.Forms.TabPage();
+      this.ucSearchTM = new AndreiPopescu.CharazayPlus.UI.SearchTMUserControl();
+      this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.chartUserControl1 = new AndreiPopescu.CharazayPlus.UI.ChartUserControl();
       this.menuStrip1.SuspendLayout();
       this.statusStrip.SuspendLayout();
       this.sideTabControl.SuspendLayout();
@@ -208,6 +224,8 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyDivisionSchedule.SuspendLayout();
       this.tabPageMyEconomy.SuspendLayout();
       this.tabPageTL.SuspendLayout();
+      this.tabPageBrowser.SuspendLayout();
+      this.tabPage1.SuspendLayout();
       this.SuspendLayout();
       // 
       // imageListCountries
@@ -239,7 +257,7 @@ namespace AndreiPopescu.CharazayPlus
       this.imageListCountries.Images.SetKeyName(22, "cl.png");
       this.imageListCountries.Images.SetKeyName(23, "pt.png");
       this.imageListCountries.Images.SetKeyName(24, "fi.png");
-      this.imageListCountries.Images.SetKeyName(25, "ar.png");
+      this.imageListCountries.Images.SetKeyName(25, "enumerable.png");
       this.imageListCountries.Images.SetKeyName(26, "au.png");
       this.imageListCountries.Images.SetKeyName(27, "rs.png");
       this.imageListCountries.Images.SetKeyName(28, "hr.png");
@@ -423,6 +441,8 @@ namespace AndreiPopescu.CharazayPlus
       this.sideTabControl.Controls.Add(this.tabPageMyDivisionSchedule);
       this.sideTabControl.Controls.Add(this.tabPageMyEconomy);
       this.sideTabControl.Controls.Add(this.tabPageTL);
+      this.sideTabControl.Controls.Add(this.tabPageBrowser);
+      this.sideTabControl.Controls.Add(this.tabPage1);
       this.sideTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
       this.sideTabControl.ItemSize = new System.Drawing.Size(26, 104);
       this.sideTabControl.Location = new System.Drawing.Point(0, 27);
@@ -452,7 +472,7 @@ namespace AndreiPopescu.CharazayPlus
             | System.Windows.Forms.AnchorStyles.Right)));
       this.ucInfoTab.Location = new System.Drawing.Point(0, 0);
       this.ucInfoTab.Name = "ucInfoTab";
-      this.ucInfoTab.Size = new System.Drawing.Size(754, 558);
+      this.ucInfoTab.Size = new System.Drawing.Size(754, 576);
       this.ucInfoTab.TabIndex = 0;
       // 
       // tabPageStatus
@@ -636,9 +656,8 @@ namespace AndreiPopescu.CharazayPlus
       this.ucMyTeamSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucMyTeamSchedule.Location = new System.Drawing.Point(0, 0);
       this.ucMyTeamSchedule.Name = "ucMyTeamSchedule";
-      this.ucMyTeamSchedule.Size = new System.Drawing.Size(754, 579);
+      this.ucMyTeamSchedule.Size = new System.Drawing.Size(0, 242);
       this.ucMyTeamSchedule.TabIndex = 0;
-      
       // 
       // tabPageMyDivisionStandings
       // 
@@ -711,7 +730,43 @@ namespace AndreiPopescu.CharazayPlus
       this.ucTransferList.Name = "ucTransferList";
       this.ucTransferList.Size = new System.Drawing.Size(0, 242);
       this.ucTransferList.TabIndex = 0;
-      this.ucTransferList.User = null;
+      // 
+      // tabPageBrowser
+      // 
+      this.tabPageBrowser.Controls.Add(this.ucSearchTM);
+      this.tabPageBrowser.Location = new System.Drawing.Point(4, 4);
+      this.tabPageBrowser.Name = "tabPageBrowser";
+      this.tabPageBrowser.Size = new System.Drawing.Size(754, 579);
+      this.tabPageBrowser.TabIndex = 15;
+      this.tabPageBrowser.Text = "Browser";
+      this.tabPageBrowser.UseVisualStyleBackColor = true;
+      // 
+      // ucSearchTM
+      // 
+      this.ucSearchTM.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucSearchTM.ImageListCountries = null;
+      this.ucSearchTM.Location = new System.Drawing.Point(0, 0);
+      this.ucSearchTM.Name = "ucSearchTM";
+      this.ucSearchTM.Size = new System.Drawing.Size(0, 242);
+      this.ucSearchTM.TabIndex = 0;
+      // 
+      // tabPage1
+      // 
+      this.tabPage1.Controls.Add(this.chartUserControl1);
+      this.tabPage1.Location = new System.Drawing.Point(4, 4);
+      this.tabPage1.Name = "tabPage1";
+      this.tabPage1.Size = new System.Drawing.Size(754, 579);
+      this.tabPage1.TabIndex = 16;
+      this.tabPage1.Text = "tabPage1";
+      this.tabPage1.UseVisualStyleBackColor = true;
+      // 
+      // chartUserControl1
+      // 
+      this.chartUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.chartUserControl1.Location = new System.Drawing.Point(0, 0);
+      this.chartUserControl1.Name = "chartUserControl1";
+      this.chartUserControl1.Size = new System.Drawing.Size(754, 579);
+      this.chartUserControl1.TabIndex = 0;
       // 
       // MainForm
       // 
@@ -751,6 +806,8 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageMyDivisionSchedule.ResumeLayout(false);
       this.tabPageMyEconomy.ResumeLayout(false);
       this.tabPageTL.ResumeLayout(false);
+      this.tabPageBrowser.ResumeLayout(false);
+      this.tabPage1.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -799,8 +856,8 @@ namespace AndreiPopescu.CharazayPlus
     private void sideTabControl_Selected(object sender, TabControlEventArgs e)
     {
       SideTabPage currentTab = (SideTabPage)e.TabPageIndex;
-      if (currentTab != SideTabPage.TL && _lastTab == SideTabPage.TL)
-        this.ucTransferList.SerializePlayersTL();
+      //if (currentTab != SideTabPage.TL && _lastTab == SideTabPage.TL)
+        //this.ucTransferList.SerializePlayersTL();
       //
       switch (currentTab)
       {
@@ -817,14 +874,17 @@ namespace AndreiPopescu.CharazayPlus
         case SideTabPage.C: ucC.Init(PlayersEnvironment.Centers); break;
 
         case SideTabPage.Training:
-        {
-          ucTraining.initCoachesList();
-          ucTraining.initTrainingSkillIncrease();
-          ucTraining.initTrainingScoreIncrease();
-          ucTraining.initTrainingEfficiency();
-        } break;
+          {
+            ucTraining.initCoachesList();
+            ucTraining.initTrainingSkillIncrease();
+            ucTraining.initTrainingScoreIncrease();
+            ucTraining.initTrainingEfficiency();
+          } break;
 
-        case SideTabPage.Info: InitInfoTab(); break;
+        case SideTabPage.Info:
+          InitInfoTab();
+          break;
+
         case SideTabPage.MyTeamSchedule:
           {
 
@@ -832,14 +892,14 @@ namespace AndreiPopescu.CharazayPlus
             //this.ucMyTeamSchedule.Team = this.MyXmlTeam.TeamInfo;
             //this.ucMyTeamSchedule.initTeamScheduleFilter();
             //this.ucMyTeamSchedule.initDgMySchedule();
-            
+
             this.ucMyTeamSchedule.Init(MyXmlTeam.Schedule, MyXmlTeam.TeamInfo.id);
             AddMyTeamScheduleToCache();
 
           } break;
 
         case SideTabPage.MyDivisionStandings:
-          { 
+          {
 
             ucStandings.Init(MyXmlTeam.Standings.standings);
             ucStandings.DivisionName = MyXmlTeam.Standings.name;
@@ -849,7 +909,7 @@ namespace AndreiPopescu.CharazayPlus
             //ucStandings.Country = MyXmlTeam.Standings.countryid;
 
           } break;
-        
+
         case SideTabPage.MyDivisionSchedule:
           this.ucDivisionSchedule.InitOLV(MyXmlTeam.DivisionSchedule);
           break;
@@ -864,23 +924,26 @@ namespace AndreiPopescu.CharazayPlus
 
         case SideTabPage.TL:
           {
-            ucTransferList.User = WebServiceUser.Instance;
             ucTransferList.InitTransferShortList();
             ucTransferList.PlayerDataUnavailable += (sndr, ev) => { tsslbl.Text = "Player Data Unavailable"; };
             ucTransferList.BadPlayerId += (sndr, ev) => { tsslbl.Text = "Bad Player Id"; };
-            ucTransferList.DownloadPlayerData += (sndr, ev) =>
-              { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " " + ev.Surname; };
+            ucTransferList.DownloadPlayerData += (sndr, ev) => { tsslbl.Text = "Downloaded Player Data for: " + ev.Name + " " + ev.Surname; };
           } break;
 
         case SideTabPage.Skills:
           {
             ucPlayerSkills.Initialize();
-            this.ucPlayerSkills.SelectionChanged += (sndr,ev) => {
+            this.ucPlayerSkills.SelectionChanged += (sndr, ev) =>
+            {
               this.tsslbl.Text = String.Format("Selected {0} of {1} items", ev.SelectedIndices, ev.ItemCount);
               this.tsslblr.Text = String.Format("Selected player: {0}", ev.FullName);
             };
-              
+
           }
+          break;
+
+        case SideTabPage.WebBrowser:
+          this.ucSearchTM.ImageListCountries = this.imageListCountries;
           break;
 
         default: break;
@@ -888,6 +951,8 @@ namespace AndreiPopescu.CharazayPlus
       // update last selected
       _lastTab = currentTab;
     }
+
+  
     SideTabPage _lastTab = SideTabPage.Info;
 
     
@@ -943,6 +1008,12 @@ namespace AndreiPopescu.CharazayPlus
         throw new NotImplementedException();
       if (PlayersEnvironment.OptimumPlayers == null || PlayersEnvironment.Coaches == null)
         throw new NotImplementedException();
+      if (TransferList.Bookmarks == null)
+        throw new NotImplementedException();
+      //
+      new System.Threading.Thread(( ) => Web.Scraper.Instance.Login()).Start();
+      //
+      
     }
 
     private void DownloadMandatoryXmlFiles ( )
@@ -1015,12 +1086,21 @@ namespace AndreiPopescu.CharazayPlus
       UI.AboutForm aboutForm = new UI.AboutForm();
       aboutForm.Show(this);
     }
-
+    
+    /// <summary>
+    /// called main window closing
+    /// on tab change no more
+    /// </summary>
     private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
     {
-      this.ucTransferList.SerializePlayersTL();
+      // sync this.olvTL.Objects & Data.TransferList.bookmarks
+      //Deserializer.SerializePlayersTL(olvTL.Objects);
+      Deserializer.SerializePlayersTL(Data.TransferList.Bookmarks);
       GC.WaitForPendingFinalizers();
     }
+
+   
+
 
     #region view menu
     private void tschkShowGroups_CheckedChanged (object sender, EventArgs e)

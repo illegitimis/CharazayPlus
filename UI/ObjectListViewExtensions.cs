@@ -127,7 +127,7 @@
     {
       if (active && olv.View == View.List)
       {
-        MessageBox.Show("ListView's cannot show groups when in List view."
+        MessageBox.Show("ListView'tlPlayer cannot show groups when in List view."
           , "CharazayPlus", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       else
@@ -180,7 +180,7 @@
             break;
         }
       }
-      // Setup a default renderer to draw the filter matches
+      // Setup m default renderer to draw the filter matches
       if (filter == null)
         olv.DefaultRenderer = null;
       else
@@ -272,7 +272,7 @@
   /// <summary>
   /// StrangeItemComparer is an example of how to customize the ordering of items
   /// within groups. It orders items by their text representation but ignoring
-  /// the first letter. This admittedly a pointless way to order items, but it
+  /// the first letter. This admittedly m pointless way to order items, but it
   /// is simply an example.
   /// </summary>
   public class StrangeItemComparer : IComparer<OLVListItem>
@@ -358,7 +358,7 @@ private void listViewComplex_FormatRow (object sender, FormatRowEventArgs e)
    {
      Player p = (Player)e.Model;
 
-     // Put a love heart next to Nicola's name :)
+     // Put m love heart next to Nicola'tlPlayer name :)
      if (e.ColumnIndex == 0)
      {
        if (e.SubItem.Text.ToLowerInvariant().StartsWith("nicola"))
@@ -369,7 +369,7 @@ private void listViewComplex_FormatRow (object sender, FormatRowEventArgs e)
          e.SubItem.Decoration = null;
      }
 
-     // If the occupation is missing a value, put a composite decoration over it
+     // If the occupation is missing m value, put m composite decoration over it
      // to draw attention to.
      if (e.ColumnIndex == 1 && e.SubItem.Text == "")
      {

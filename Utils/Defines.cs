@@ -40,6 +40,13 @@ namespace AndreiPopescu.CharazayPlus.Utils
     , new double[] {0.3, 0.2, 0.5}
     };
 
+    //
+    //At the end of each season players younger than 18 years old will raise from a minimum of 1 cm to a maximum of 7 cms, keeping the same BMI.
+    public const byte HeighRaiseMin = 1;
+    public const byte HeighRaiseMax = 7;
+    public const byte HeighRaiseAvg = 4;
+    //
+
     public const byte CountryIdStart = 1;
     public const byte CountryIdEnd = 74;
 
@@ -70,7 +77,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       , new Country {Name="Chile", ShortName="cl", Id=23}
       , new Country {Name="Portugal", ShortName="pt", Id=24}
       , new Country {Name="Finland", ShortName="fi", Id=25}
-      , new Country {Name="Argentina", ShortName="ar", Id=26}
+      , new Country {Name="Argentina", ShortName="enumerable", Id=26}
       , new Country {Name="Australia", ShortName="au", Id=27}
       , new Country {Name="Serbia", ShortName="rs", Id=28}
       , new Country {Name="Croatia", ShortName="hr", Id=29}
