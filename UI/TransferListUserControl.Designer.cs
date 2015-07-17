@@ -31,7 +31,6 @@
       this.components = new System.ComponentModel.Container();
       this.tlpTL = new System.Windows.Forms.TableLayoutPanel();
       this.olvTL = new BrightIdeasSoftware.ObjectListView();
-      this.ucEvaluatePlayer = new AndreiPopescu.CharazayPlus.UI.EvaluatePlayerUserControl();
       this.flp = new System.Windows.Forms.FlowLayoutPanel();
       this.label50 = new System.Windows.Forms.Label();
       this.tbxPlayerId = new System.Windows.Forms.TextBox();
@@ -49,7 +48,6 @@
       this.btnTLAdd = new System.Windows.Forms.Button();
       this.label1 = new System.Windows.Forms.Label();
       this.lblServertime = new System.Windows.Forms.Label();
-      this.ucBasicPlayerInfo = new AndreiPopescu.CharazayPlus.UI.BasicPlayerUserControl();
       this.cmsOlvTL = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.cmsRemove = new System.Windows.Forms.ToolStripMenuItem();
       this.cmsUpdate = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +56,8 @@
       this.tsmiMedium = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiSmall = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiNone = new System.Windows.Forms.ToolStripMenuItem();
+      this.ucEvaluatePlayer = new AndreiPopescu.CharazayPlus.UI.EvaluatePlayerUserControl();
+      this.ucBasicPlayerInfo = new AndreiPopescu.CharazayPlus.UI.BasicPlayerUserControl();
       this.tlpTL.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.olvTL)).BeginInit();
       this.flp.SuspendLayout();
@@ -68,20 +68,20 @@
       // tlpTL
       // 
       this.tlpTL.ColumnCount = 3;
-      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
+      this.tlpTL.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
       this.tlpTL.Controls.Add(this.olvTL, 1, 1);
       this.tlpTL.Controls.Add(this.ucEvaluatePlayer, 0, 0);
       this.tlpTL.Controls.Add(this.flp, 0, 1);
-      this.tlpTL.Controls.Add(this.ucBasicPlayerInfo, 2, 1);
+      this.tlpTL.Controls.Add(this.ucBasicPlayerInfo, 1, 1);
       this.tlpTL.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tlpTL.Location = new System.Drawing.Point(0, 0);
       this.tlpTL.Name = "tlpTL";
       this.tlpTL.RowCount = 2;
-      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-      this.tlpTL.Size = new System.Drawing.Size(703, 642);
+      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+      this.tlpTL.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.tlpTL.Size = new System.Drawing.Size(940, 766);
       this.tlpTL.TabIndex = 12;
       // 
       // olvTL
@@ -96,11 +96,11 @@
       this.olvTL.HeaderWordWrap = true;
       this.olvTL.HighlightBackgroundColor = System.Drawing.Color.LightSlateGray;
       this.olvTL.HighlightForegroundColor = System.Drawing.Color.White;
-      this.olvTL.Location = new System.Drawing.Point(143, 131);
+      this.olvTL.Location = new System.Drawing.Point(433, 153);
       this.olvTL.MinimumSize = new System.Drawing.Size(100, 100);
       this.olvTL.Name = "olvTL";
       this.olvTL.OwnerDraw = true;
-      this.olvTL.Size = new System.Drawing.Size(345, 508);
+      this.olvTL.Size = new System.Drawing.Size(504, 610);
       this.olvTL.SortGroupItemsByPrimaryColumn = false;
       this.olvTL.Sorting = System.Windows.Forms.SortOrder.Descending;
       this.olvTL.TabIndex = 18;
@@ -117,20 +117,6 @@
       this.olvTL.SelectionChanged += new System.EventHandler(this.olvTL_SelectionChanged);
       this.olvTL.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.olvTL_ColumnClick);
       this.olvTL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.olvTL_KeyDown);
-      // 
-      // ucEvaluatePlayer
-      // 
-      this.ucEvaluatePlayer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ucEvaluatePlayer.BackColor = System.Drawing.Color.DimGray;
-      this.ucEvaluatePlayer.CausesValidation = false;
-      this.tlpTL.SetColumnSpan(this.ucEvaluatePlayer, 3);
-      this.ucEvaluatePlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucEvaluatePlayer.ForeColor = System.Drawing.Color.White;
-      this.ucEvaluatePlayer.Location = new System.Drawing.Point(3, 3);
-      this.ucEvaluatePlayer.Name = "ucEvaluatePlayer";
-      this.ucEvaluatePlayer.SelectedObject = null;
-      this.ucEvaluatePlayer.Size = new System.Drawing.Size(697, 122);
-      this.ucEvaluatePlayer.TabIndex = 16;
       // 
       // flp
       // 
@@ -149,9 +135,9 @@
       this.flp.Controls.Add(this.lblServertime);
       this.flp.Dock = System.Windows.Forms.DockStyle.Fill;
       this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.flp.Location = new System.Drawing.Point(3, 131);
+      this.flp.Location = new System.Drawing.Point(3, 153);
       this.flp.Name = "flp";
-      this.flp.Size = new System.Drawing.Size(134, 508);
+      this.flp.Size = new System.Drawing.Size(139, 610);
       this.flp.TabIndex = 17;
       // 
       // label50
@@ -362,17 +348,6 @@
       this.lblServertime.Text = "-";
       this.lblServertime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
-      // ucBasicPlayerInfo
-      // 
-      this.ucBasicPlayerInfo.CurrentPrice = null;
-      this.ucBasicPlayerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucBasicPlayerInfo.Location = new System.Drawing.Point(494, 131);
-      this.ucBasicPlayerInfo.Name = "ucBasicPlayerInfo";
-      this.ucBasicPlayerInfo.PlayerByScore = null;
-      this.ucBasicPlayerInfo.PlayerByValueIndex = null;
-      this.ucBasicPlayerInfo.Size = new System.Drawing.Size(206, 508);
-      this.ucBasicPlayerInfo.TabIndex = 19;
-      // 
       // cmsOlvTL
       // 
       this.cmsOlvTL.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -435,14 +410,41 @@
       this.tsmiNone.Text = "None";
       this.tsmiNone.Click += new System.EventHandler(this.tsmiNone_Click);
       // 
+      // ucEvaluatePlayer
+      // 
+      this.ucEvaluatePlayer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucEvaluatePlayer.BackColor = System.Drawing.Color.DimGray;
+      this.ucEvaluatePlayer.CausesValidation = false;
+      this.tlpTL.SetColumnSpan(this.ucEvaluatePlayer, 3);
+      this.ucEvaluatePlayer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucEvaluatePlayer.ForeColor = System.Drawing.Color.White;
+      this.ucEvaluatePlayer.IsFatigue = false;
+      this.ucEvaluatePlayer.IsForm = false;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = false;
+      this.ucEvaluatePlayer.Location = new System.Drawing.Point(3, 3);
+      this.ucEvaluatePlayer.Name = "ucEvaluatePlayer";
+      this.ucEvaluatePlayer.SelectedObject = null;
+      this.ucEvaluatePlayer.Size = new System.Drawing.Size(934, 144);
+      this.ucEvaluatePlayer.TabIndex = 16;
+      // 
+      // ucBasicPlayerInfo
+      // 
+      this.ucBasicPlayerInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.ucBasicPlayerInfo.Location = new System.Drawing.Point(148, 153);
+      this.ucBasicPlayerInfo.Name = "ucBasicPlayerInfo";
+      this.ucBasicPlayerInfo.Size = new System.Drawing.Size(279, 608);
+      this.ucBasicPlayerInfo.TabIndex = 19;
+      // 
       // TransferListUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.Controls.Add(this.tlpTL);
       this.DoubleBuffered = true;
       this.Name = "TransferListUserControl";
-      this.Size = new System.Drawing.Size(703, 642);
+      this.Size = new System.Drawing.Size(940, 766);
+      this.Load += new System.EventHandler(this.TransferListUserControl_Load);
       this.tlpTL.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.olvTL)).EndInit();
       this.flp.ResumeLayout(false);

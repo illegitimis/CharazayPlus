@@ -203,6 +203,62 @@ namespace AndreiPopescu.CharazayPlus.Xsd2 {
                 this.traininggroupField = value;
             }
         }
+
+        #region national team caps
+        private ushort u19capField;
+        private bool u19capFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ushort u19cap
+        {
+          get { return this.u19capField; }
+          set { this.u19capField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool u19capSpecified
+        {
+          get { return this.u19capFieldSpecified; }
+          set { this.u19capFieldSpecified = value; }
+        }
+
+        private ushort u21capField;
+        private bool u21capFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ushort u21cap
+        {
+          get { return this.u21capField; }
+          set { this.u21capField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool u21capSpecified
+        {
+          get { return this.u21capFieldSpecified; }
+          set { this.u21capFieldSpecified = value; }
+        }
+
+        private ushort ntcapField;
+        private bool ntcapFieldSpecified;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ushort ntcap
+        {
+          get { return this.ntcapField; }
+          set { this.ntcapField = value; }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ntcapSpecified
+        {
+          get { return this.ntcapFieldSpecified; }
+          set { this.ntcapFieldSpecified = value; }
+        } 
+        #endregion
     }
     
     /// <remarks/>

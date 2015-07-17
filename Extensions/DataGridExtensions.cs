@@ -1,6 +1,6 @@
 ﻿
 
-namespace AndreiPopescu.CharazayPlus.UI
+namespace AndreiPopescu.CharazayPlus.Extensions
 {
   using System;
   using System.Collections.Generic;

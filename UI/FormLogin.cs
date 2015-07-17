@@ -253,7 +253,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         
         
         using (System.IO. FileStream fs = new System.IO.FileStream
-          (di.m_fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+          (di.FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
         {
           Xsd2.charazay obj = (Xsd2.charazay)(new System.Xml.Serialization.XmlSerializer
             (typeof(Xsd2.charazay)).Deserialize(fs));

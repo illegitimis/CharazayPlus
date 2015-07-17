@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Utils;
-
-namespace AndreiPopescu.CharazayPlus
+﻿namespace AndreiPopescu.CharazayPlus
 {
+  using AndreiPopescu.CharazayPlus.Utils;
+
   /// <summary>
   /// Power forward
   /// </summary>
   public class PF : Player
   {
     public PF ( ) : base() { }
-
+    public PF (Xsd2.charazayPlayer xsdPlayer, bool ishw, bool isfatigue, bool isform) : base(xsdPlayer, ishw, isfatigue, isform) { }
     public PF (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public PF (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
 
-    public override string ToString ( ) { return string.Format("Pf: {0}", base.ToString()); }
+    public override string ToString ( ) { return string.Format("PF: {0}", base.ToString()); }
 
     protected internal override byte MinimumBMI { get { return 25; } }
     protected internal override byte MaximumBMI { get { return 27; } }
@@ -42,7 +39,7 @@ namespace AndreiPopescu.CharazayPlus
     protected internal override byte[] TrainingPlan { get { return new byte[] { 3, 1, 1, 3, 4, 4, 1, 0 }; } }
     public override PlayerPosition PositionEnum { get { return PlayerPosition.PF; } }
 
-    static double[] StoredAssessedValues
+    internal static double[] StoredAssessedValues
     {
       get { return new double[] { 
     4.82      
@@ -338,10 +335,13 @@ namespace AndreiPopescu.CharazayPlus
     }
 
     public override double ValueIndex { get { return TotalScore / PF.StoredAssessedValues[TrainingWeekIndex]; } }
+
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
-      get { return MatlabInterpolant.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant20150504.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
+
     }
   }
+
 }

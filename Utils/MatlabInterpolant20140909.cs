@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AndreiPopescu.CharazayPlus.Utils
 {
-  internal static class MatlabInterpolant
+  internal sealed class MatlabInterpolant20140909 : MatlabInterpolator
   {
     #region data
     //age, A, B
@@ -84,54 +84,26 @@ namespace AndreiPopescu.CharazayPlus.Utils
     
     #endregion
 
-    public static double GetTMValue (byte age, char pos, double x)
+    #region IInterpolate Members
+
+
+    public override double[,] GetPositionData (char pos)
     {
       double[,] data = null;
       switch (pos)
       {
-        case 'G': data = MatlabInterpolant.G; break;
-        case 'F': data = MatlabInterpolant.F; break;
-        case 'C': data = MatlabInterpolant.C; break;
+        case 'G': data = MatlabInterpolant20140909.G; break;
+        case 'F': data = MatlabInterpolant20140909.F; break;
+        case 'C': data = MatlabInterpolant20140909.C; break;
       }
-      //
-      double dage = Math.Min(35d, (double)age);
-      dage = Math.Max(15d, dage);
-      //
-      for (int i=0; i < 21; i++)
-      {
-        if (data[i, 0] == age)
-        {
-          return data[i, 1] * Math.Exp(data[i, 2] * x);          
-        }
-      }
-      return double.NaN;
+      return data;
     }
 
-    public static void GetAB (byte age, char pos, out double a, out double b)
-    {
-      double[,] data = null;
-      switch (pos)
-      {
-        case 'G': data = MatlabInterpolant.G; break;
-        case 'F': data = MatlabInterpolant.F; break;
-        case 'C': data = MatlabInterpolant.C; break;
-      }
-      a = b = Double.NaN;
-      //
-      double dage = Math.Min(35d, (double)age);
-      dage = Math.Max(15d, dage);
-      //
-      for (int i=0; i < 21; i++)
-      {
-        if (data[i, 0] == age)
-        {
-          a = data[i, 1];
-          b = data[i, 2];
-          return;
-        }
-      }
-     
-    }
 
+
+    #endregion
   }
+
+ 
+
 }

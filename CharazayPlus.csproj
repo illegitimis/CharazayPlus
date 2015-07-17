@@ -104,7 +104,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C.cs" />
+    <Compile Include="Model\C.cs" />
+    <Compile Include="Model\C2014.cs" />
+    <Compile Include="Model\PG2014.cs" />
     <Compile Include="Coach.cs" />
     <Compile Include="Data\DbEnvironment.cs" />
     <Compile Include="Data\PlayersEnvironment.cs" />
@@ -112,7 +114,9 @@
     <Compile Include="Data\TransferBookmarks.cs" />
     <Compile Include="Data\XmlTeam.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\ParsingExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
+    <Compile Include="Extensions\UIExtensions.cs" />
     <Compile Include="Objects\PlayerTL.cs">
       <DependentUpon>PlayerTL.xsd</DependentUpon>
     </Compile>
@@ -132,18 +136,25 @@
     <Compile Include="Objects\ScoreIncreaseItem.cs" />
     <Compile Include="Objects\SkillIncreaseItem.cs" />
     <Compile Include="Objects\TransferListedPlayer.cs" />
-    <Compile Include="PF.cs" />
-    <Compile Include="PG.cs" />
+    <Compile Include="Model\PF.cs" />
+    <Compile Include="Model\PG.cs" />
     <Compile Include="Obsolete.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PlayerFactory.cs" />
+    <Compile Include="Model\PF2014.cs" />
+    <Compile Include="Model\Player2014.cs" />
+    <Compile Include="Model\PlayerFactory.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SG.cs" />
+    <Compile Include="Model\SF2014.cs" />
+    <Compile Include="Model\SG.cs" />
+    <Compile Include="Model\SG2014.cs" />
+    <Compile Include="UI\AssessPlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\ButtonHigherLower.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -151,7 +162,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Definitions.cs" />
-    <Compile Include="UI\DataGridExtensions.cs" />
+    <Compile Include="Extensions\DataGridExtensions.cs" />
     <Compile Include="UI\DivisionScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,7 +175,7 @@
     <Compile Include="UI\MyEconomyUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\ObjectListViewExtensions.cs" />
+    <Compile Include="Extensions\ObjectListViewExtensions.cs" />
     <Compile Include="UI\MyTeamScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -241,9 +252,13 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
+    <Compile Include="Utils\IInterpolate.cs" />
     <Compile Include="Utils\Deserializer.cs" />
     <Compile Include="Utils\Interpolation112.cs" />
-    <Compile Include="Utils\MatlabInterpolant.cs" />
+    <Compile Include="Utils\MatlabInterpolant20140909.cs" />
+    <Compile Include="Utils\MatlabInterpolant20141124.cs" />
+    <Compile Include="Utils\MatlabInterpolant20150504.cs" />
+    <Compile Include="Utils\MatlabInterpolator.cs" />
     <Compile Include="Utils\TransferMarket112.cs" />
     <Compile Include="Utils\TransferMarket.cs" />
     <Compile Include="Utils\Linear.cs" />
@@ -268,8 +283,8 @@
     <Compile Include="UI\TheForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Player.cs" />
-    <Compile Include="SF.cs" />
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\SF.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\SideTabControl.cs">
@@ -280,9 +295,11 @@
     <Compile Include="Utils\Enums.cs" />
     <Compile Include="Web\CharazayDownloadItem.cs" />
     <Compile Include="Objects\PlayerPageInfo.cs" />
+    <Compile Include="Web\CharazayUserData.cs" />
     <Compile Include="Web\Scrape.cs" />
     <Compile Include="Web\Downloader.cs" />
     <Compile Include="Objects\SitePlayerTransferHistory.cs" />
+    <Compile Include="Web\XmlDownloadItemGenerator.cs" />
     <Compile Include="Web\XmlDownloadItems.cs" />
     <Compile Include="Web\Enums.cs" />
     <Compile Include="Web\WebServiceUser.cs" />
@@ -351,6 +368,9 @@
     </None>
     <EmbeddedResource Include="UI\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AssessPlayerUserControl.resx">
+      <DependentUpon>AssessPlayerUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChartUserControl.resx">
       <DependentUpon>ChartUserControl.cs</DependentUpon>
@@ -519,24 +539,17 @@
     <None Include="Resources\back.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Bugs.txt" />
-    <Content Include="Content\C.txt" />
+    <Content Include="Content\Weekly Value Index.txt" />
     <Content Include="Content\Info.txt" />
-    <Content Include="Content\ObsoleteV10.txt" />
-    <Content Include="Content\PF.txt" />
-    <Content Include="Content\PG.txt" />
+    <Content Include="Content\Obsolete Age Value Index V10.txt" />
     <Content Include="Content\PGOlder.txt" />
-    <Content Include="Content\SG.txt" />
-    <Content Include="Content\SF.txt" />
     <Content Include="Content\TMDB.txt" />
-    <Content Include="Content\todo 1.1.txt" />
-    <Content Include="Content\todo 1.2.txt" />
+    <Content Include="Content\TODO.txt" />
     <Content Include="Resources\app.ico" />
     <None Include="Resources\tick16.png" />
     <None Include="Resources\star16.png" />
     <None Include="Resources\down16.png" />
     <None Include="Resources\Charazay+.jpg" />
-    <Content Include="Content\todo 1.0.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

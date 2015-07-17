@@ -95,11 +95,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
   /// </summary>
   public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
 
-  //Form
-  //Form is m small factor that reflects hot/cold streaks that players have on m weekly/monthly basis.
-  // Form is updated at week update, it'tlPlayer influenced by playing time and some random, 
-  //it ranges between 1 and 8. 1 equals being in m bad shape 
-  // and 8 equals that your player is feeling like he can do anything. 
+  /// <summary>
+  /// Form is m small factor that reflects hot/cold streaks that players have on a weekly/monthly basis. 
+  /// Form is updated at week update, influenced by playing time and some random, 
+  /// ranges between 1 and 8. 1 equals being in a bad shape 
+  /// and 8 equals that your player is feeling like he can do anything. 
+  /// </summary>
   public enum Form : byte
   {
     WorstShape = 1
@@ -240,4 +241,21 @@ namespace AndreiPopescu.CharazayPlus.Utils
       , Unknown
 
   }
+
+  /// <summary>
+  /// player instance evaluation type
+  /// </summary>
+  internal enum Evaluation
+  {
+    /// <summary>
+    /// before season 30, only 3 skills compose defense score
+    /// </summary>
+    old
+      , 
+    /// <summary>
+    /// from 2014, 5 skills compose defense score,
+    /// equal importance to offense and defense
+    /// </summary>
+    season30
+  };
 }

@@ -17,7 +17,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   {
     internal static object DeserializeXml (Web.XmlDownloadItem di)
     {
-      return DeserializeXml(di.m_fileName, di.DeserializationType);
+      return DeserializeXml(di.FileName, di.DeserializationType);
     }
 
     internal static object DeserializeXml (string fileName, Web.XmlSerializationType type)
@@ -36,7 +36,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
           if (type == XmlSerializationType.Player && ex is InvalidOperationException && ex.InnerException != null && ex.InnerException is FormatException)
           {
             string m = ex.Message.Replace("There is an error in XML document", "");
-            string [] tokens = m.Split(new char[] { ' ', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] tokens = m.Split(new char[] { ' ', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries);
             //System.InvalidOperationException was unhandled
             //Message=There is an error in XML document (3, 126).
             //InnerException: System.FormatException
@@ -48,78 +48,82 @@ namespace AndreiPopescu.CharazayPlus.Utils
           }
           else throw;
         }
-          switch (type)
-          { //
-            // InitMyPlayers(obj.players);
-            //
-            case Web.XmlSerializationType.MyPlayers: return obj.players; 
-            //
-            // MyXmlTeam.Arena 
-            //
-            case Web.XmlSerializationType.Arena: return obj.arena; 
-            //
-            // division id is m mandatory session variable
-            // MyXmlTeam.TeamInfo
-            //
-            case Web.XmlSerializationType.MyTeamInfo:
+
+        if (obj.error != null)
+          return obj.error;
+
+        switch (type)
+        { //
+          // InitMyPlayers(obj.players);
+          //
+          case Web.XmlSerializationType.MyPlayers: return obj.players;
+          //
+          // MyXmlTeam.Arena 
+          //
+          case Web.XmlSerializationType.Arena: return obj.arena;
+          //
+          // division id is m mandatory session variable
+          // MyXmlTeam.TeamInfo
+          //
+          case Web.XmlSerializationType.MyTeamInfo:
             {
               if (obj.team == null || obj.team.team_info == null) throw new Exception("XmlSerializationType.MyTeamInfo");
-              WebServiceUser.Instance.divisionId = obj.team.team_info.divisionid;
+              WebServiceUsers.Instance.MainUser.DivisionId = obj.team.team_info.divisionid;
               return obj.team;
-            } 
-            // 
-            // country and team id are mandatory session variables
-            // arenaid == teamid
-            // MyXmlTeam.UserInfo =
-            //
-            case Web.XmlSerializationType.MyInfo:
+            }
+          // 
+          // country and team id are mandatory session variables
+          // arenaid == teamid
+          // MyXmlTeam.UserInfo =
+          //
+          case Web.XmlSerializationType.MyInfo:
             {
               if (obj.user == null) throw new Exception("XmlSerializationType.MyInfo");
-              WebServiceUser.Instance.countryId = obj.user.countryid;
-              WebServiceUser.Instance.arenaId = obj.user.teamid;
+              WebServiceUsers.Instance.MainUser.CountryId = obj.user.countryid;
+              WebServiceUsers.Instance.MainUser.ArenaId = obj.user.teamid;
               return obj.user;
-            } 
-            //
-            // MyXmlTeam.CountryInfo =
-            //
-            case Web.XmlSerializationType.CountryDivisionList: return obj.country; 
-            //
-            // Coaches
-            // initCoachesData(todo)
-            //
-            case Web.XmlSerializationType.Coaches: return obj.coaches;
-            // MyXmlTeam.Schedule = 
-            case Web.XmlSerializationType.MySchedule: return obj.matches;
-            //
-            // MyXmlTeam.Standings
-            //
-            case Web.XmlSerializationType.DivisionStandings: return obj.division;
-            //
-            // MyXmlTeam.DivisionSchedule =
-            //
-            case Web.XmlSerializationType.DivisionSchedule: return obj.schedule;
-            //
-              //_selectedMatch =
-              //
-            case Web.XmlSerializationType.Match: return obj.match; 
-            //
-              // MyXmlTeam.Transfers =
-              //
-            case Web.XmlSerializationType.MyTransfers: return obj.team_transfers; 
-            // 
-              //MyXmlTeam.Economy = 
-              //
-            case Web.XmlSerializationType.Economy: return obj.economy;
-            //
-            case Web.XmlSerializationType.Player: return obj.player;
-            //
-            case Web.XmlSerializationType.Unknown:
-            default:
-              throw new Exception("Deserialization return type error!");
-          }
-
+            }
+          //
+          // MyXmlTeam.CountryInfo =
+          //
+          case Web.XmlSerializationType.CountryDivisionList: return obj.country;
+          //
+          // Coaches
+          // InitCoachesData(todo)
+          //
+          case Web.XmlSerializationType.Coaches: return obj.coaches;
+          // MyXmlTeam.Schedule = 
+          case Web.XmlSerializationType.MySchedule: return obj.matches;
+          //
+          // MyXmlTeam.Standings
+          //
+          case Web.XmlSerializationType.DivisionStandings: return obj.division;
+          //
+          // MyXmlTeam.DivisionSchedule =
+          //
+          case Web.XmlSerializationType.DivisionSchedule: return obj.schedule;
+          //
+          //_selectedMatch =
+          //
+          case Web.XmlSerializationType.Match: return obj.match;
+          //
+          // MyXmlTeam.Transfers =
+          //
+          case Web.XmlSerializationType.MyTransfers: return obj.team_transfers;
+          // 
+          //MyXmlTeam.Economy = 
+          //
+          case Web.XmlSerializationType.Economy: return obj.economy;
+          //
+          case Web.XmlSerializationType.Player: return obj.player;
+          //
+          case Web.XmlSerializationType.Unknown:
+          default:
+            throw new Exception("Deserialization return type error!");
         }
-     }
+
+      }
+    }
 
     /// <summary>
     /// download xml and deserialize to objects
@@ -153,9 +157,20 @@ namespace AndreiPopescu.CharazayPlus.Utils
       return GoGetXml(new XmlDownloadItem[] { xml }).First();
     }
 
-    internal static Xsd2.charazayPlayer GoGetPlayerXml (ulong pid) 
+    static readonly TimeSpan ThreeDays = new TimeSpan(3, 0, 0, 0);
+
+    /// <summary>
+    /// Download player xml and deserialize to object model player
+    /// cleanup old unnecessary data
+    /// reassure player data is fresh
+    /// </summary>
+    /// <param name="pid"></param>
+    /// <param name="err"></param>
+    /// <returns></returns>
+    internal static Xsd2.charazayPlayer GoGetPlayerXml (ulong pid, out Xsd2.error err) 
     {
        Xsd2.charazayPlayer xsdp = null;
+       err = null;
       //
       // search local data
       //
@@ -163,24 +178,92 @@ namespace AndreiPopescu.CharazayPlus.Utils
       string pathCategory = Path.Combine(asInfo.ApplicationFolder, Category.PlayerInfo.ToString());
       var files = Directory.GetFiles(pathCategory, string.Format("*{0}*", pid), SearchOption.TopDirectoryOnly);
       if (files.IsNullOrEmpty())
-      {
-        xsdp = GoGetXml(new Web.PlayerXml(WebServiceUser.Instance, pid)) as Xsd2.charazayPlayer;        
+      { //
+        // no previous info
+        //
+        xsdp = GoGetXml(new Web.PlayerXml(WebServiceUsers.Instance.MainUser, pid)) as Xsd2.charazayPlayer;        
+      }
+      else
+      { // 
+        // delete files for players with no skill info
+        // delete files older than three days
+        //
+        var fis = files.Select(f => new FileInfo(f)).OrderByDescending(f=>f.LastWriteTime).ToList();
+        Predicate<FileInfo> pred = fi => fi.Length < 700 || DateTime.Now - fi.LastWriteTime > ThreeDays;
+        foreach (var fileInfo in fis.Where(fi=>pred(fi)))
+        { 
+          fileInfo.Delete(); 
+        }
+        fis.RemoveAll(pred);
+        //
+        if (CollectionExtensions.IsNullOrEmpty(fis))
+        { //
+          // if nothing left reget
+          //          
+          var xmlObject = GoGetXml(new Web.PlayerXml(WebServiceUsers.Instance.MainUser, pid));
+          if (xmlObject is Xsd2.error)
+          {
+            err = xmlObject as Xsd2.error;
+            return null; 
+          }
+          else
+            xsdp = xmlObject as Xsd2.charazayPlayer;            
+        }
+        else
+        { //
+          // use what we got
+          //
+          xsdp = DeserializeXml(fis[0].FullName, XmlSerializationType.Player) as Xsd2.charazayPlayer;
+        }
+      }
+      
+      return xsdp;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    internal static IEnumerable<Tuple<DateTime,Xsd2.charazayEconomy>> GetEconomyHistory ( int days )
+    { 
+      //
+      // search local data
+      //
+      AssemblyInfo asInfo = new AssemblyInfo();
+      string pathCategory = Path.Combine(asInfo.ApplicationFolder, Category.Economy.ToString());
+      var files = Directory.GetFiles(pathCategory, "*", SearchOption.TopDirectoryOnly);
+      if (files.IsNullOrEmpty())
+      { //
+        // no previous info
+        //
+        yield break;
       }
       else
       {
-        var fis = files.Select(f => new FileInfo(f)).ToList();
-        long maxl = fis.Max(fi => fi.Length);
-        var maxfi = fis.FirstOrDefault(fi => fi.Length == maxl);
-        xsdp = DeserializeXml(maxfi.FullName, XmlSerializationType.Player) as Xsd2.charazayPlayer;
+        var fileInfos = files.Select(f => new FileInfo(f))
+                             .OrderByDescending(fi => fi.LastWriteTimeUtc)
+                             .Take(days);
+      
+      
+        foreach (var fi in fileInfos)
+        {
+          Xsd2.charazayEconomy eco = null;
+          try
+          {
+            eco = DeserializeXml(fi.FullName, XmlSerializationType.Economy) as Xsd2.charazayEconomy;            
+          }
+          catch { }
+          if (eco != null)
+            yield return new Tuple<DateTime, Xsd2.charazayEconomy>(
+              new DateTime(fi.LastWriteTimeUtc.Year, fi.LastWriteTimeUtc.Month, fi.LastWriteTimeUtc.Day), eco);
+        }
       }
-      if (xsdp.skills == null)
-      {
-        throw new Exception("player has no skills");
-      }
-      else return xsdp;
     }
 
-    internal static Xsd2.match GoGetMatchXml (ulong matchId) { return GoGetXml(new Web.MatchXml(WebServiceUser.Instance, matchId)) as Xsd2.match; }
+    internal static Xsd2.match GoGetMatchXml (ulong matchId) 
+    { 
+      return GoGetXml(new Web.MatchXml(WebServiceUsers.Instance.MainUser, matchId)) as Xsd2.match; 
+    }
     
     /// <summary>
     /// serialize the transfer listed players that have been evaluated
@@ -226,18 +309,44 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// <param name="pid">player id</param>
     /// <param name="pos">court position</param>
     /// <returns>a <see cref="Player"/></returns>
-    internal static Player GetPlayerFromIdAndPosition (ulong pid, PlayerPosition pos)
+    internal static Player GetPlayerFromIdAndPosition (ulong pid, PlayerPosition pos, Evaluation evaluationType)
     {
-      var xp = Deserializer.GoGetPlayerXml(pid);
-      switch (pos)
+      Xsd2.error err = null;
+      var xp = Deserializer.GoGetPlayerXml(pid, out err);
+
+      if (xp == null || xp.skills == null || err != null)
+        return null;
+
+      switch (evaluationType)
       {
-        case PlayerPosition.PG: return new PG(xp);
-        case PlayerPosition.SG: return new SG(xp);
-        case PlayerPosition.SF: return new SF(xp);
-        case PlayerPosition.PF: return new PF(xp);
-        case PlayerPosition.C: return new C(xp);
+        case Evaluation.old:
+          switch (pos)
+          {
+            case PlayerPosition.PG: return new PG(xp);
+            case PlayerPosition.SG: return new SG(xp);
+            case PlayerPosition.SF: return new SF(xp);
+            case PlayerPosition.PF: return new PF(xp);
+            case PlayerPosition.C: return new C(xp);
+            default: return null;
+          } 
+          
+
+        case Evaluation.season30:
+          switch (pos)
+          {
+            case PlayerPosition.PG: return new PG2014(xp, true, false, false);
+            case PlayerPosition.SG: return new SG2014(xp, true, false, false);
+            case PlayerPosition.SF: return new SF2014(xp, true, false, false);
+            case PlayerPosition.PF: return new PF2014(xp, true, false, false);
+            case PlayerPosition.C: return new C2014(xp, true, false, false);
+            default: return null;
+          }
+
+
         default: return null;
+
       }
+      
     }
     
   }

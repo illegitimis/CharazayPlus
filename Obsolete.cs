@@ -1,11 +1,13 @@
 ﻿#pragma warning disable 0612, 0618
 
+using System;
+using AndreiPopescu.CharazayPlus.Utils;
+using AndreiPopescu.CharazayPlus.Extensions;
+//using System.Linq;
+
 namespace AndreiPopescu.CharazayPlus
 {
-  using System;
-  using AndreiPopescu.CharazayPlus.Utils;
-  //using System.Linq;
-
+  
   public abstract partial class Player
   {
     // coach own raise

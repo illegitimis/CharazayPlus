@@ -127,9 +127,13 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   public partial class income
   {
     public uint Total { get { return sponsor + tickets + sales + other + merchandise; } }
+    public float TotalMillions { get { return Total/1000000f; } }
   }
 
-  public partial class expences { public uint Total { get { return salary + staff + buys + other + maintenance + facility; } } }
+  public partial class expences { 
+    public uint Total { get { return salary + staff + buys + other + maintenance + facility; } }
+    public float TotalMillions { get { return Total / 1000000f; } }
+  }
 
   public partial class charazayDivisionStanding
   {

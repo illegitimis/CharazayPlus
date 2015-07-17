@@ -13,7 +13,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 {
   public partial class ChartUserControl : UserControl
   {
-     #region Component Designer generated code
+    #region Component Designer generated code
     
     /// <summary> 
     /// Required designer variable.
@@ -447,6 +447,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     #endregion
 
+    #region generated members
     private GroupBox groupBox1;
     private RadioButton rdC;
     private RadioButton rdF;
@@ -474,10 +475,13 @@ namespace AndreiPopescu.CharazayPlus.UI
     private RadioButton rd16;
     private RadioButton rd15;
 
-    private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+    private System.Windows.Forms.DataVisualization.Charting.Chart chart; 
+    #endregion
 
+    #region fields
     byte _currentAge = byte.MinValue;
-    char _pos = char.MinValue;
+    char _pos = char.MinValue; 
+    #endregion
     
 
     public ChartUserControl ( )
@@ -486,6 +490,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       
     }
 
+    #region utility
     private void AddData ( )
     {
       foreach (var s in this.chart.Series)
@@ -493,18 +498,18 @@ namespace AndreiPopescu.CharazayPlus.UI
       foreach (var l in this.chart.Legends)
         l.CustomItems.Clear();
 
-      
+
 
 #if DOTNET30
-      
+
       var ths = Data.DbEnvironment.Instance.TransferHistoryDC.Histories.Where(x => x.Age == this._currentAge && x.PosId == this._pos).ToList();
       //
       // set axes ranges
       //
       double xmin = Math.Max(0.7d, (double)ths.Select(x => x.AgeValueIndex).Min());
-      double xmax = Math.Min(1.4d, (double)ths.Select(x => x.AgeValueIndex).Max());      
+      double xmax = Math.Min(1.4d, (double)ths.Select(x => x.AgeValueIndex).Max());
       double ymin = 0d;
-      double ymax = (double)Math.Ceiling (ths.Select(y => y.Price).Max());
+      double ymax = (double)Math.Ceiling(ths.Select(y => y.Price).Max());
       var c1 = this.chart.ChartAreas["ChartArea1"];
       c1.AxisX.Minimum = xmin;
       c1.AxisY.Maximum = xmax;
@@ -515,9 +520,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       foreach (var th in ths)
       {
-        this.chart.Series[0].Points.Add(new System.Windows.Forms.DataVisualization.Charting.DataPoint() 
-        { ToolTip =string.Format("Value Index: {0:F02} Price:{1:F02} Day: {2:yyyy-MM-dd}",th.AgeValueIndex,th.Price,th.Day)
-          , XValue = (double)th.AgeValueIndex, YValues = new double[] { (double)th.Price } });
+        this.chart.Series[0].Points.Add(new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+        {
+          ToolTip = string.Format("Value Index: {0:F02} Price:{1:F02} Day: {2:yyyy-MM-dd}", th.AgeValueIndex, th.Price, th.Day)
+          ,
+          XValue = (double)th.AgeValueIndex,
+          YValues = new double[] { (double)th.Price }
+        });
       }
       //
       // add (weighted) averages from db
@@ -525,43 +534,47 @@ namespace AndreiPopescu.CharazayPlus.UI
       var utcnow = DateTime.UtcNow;
       var maxDateDiff =  ths.Select(x => (utcnow - x.Day).Days).Max();
       var query = from th in ths
-            group th by th.AgeValueIndex into g
-            orderby g.Key ascending
-            select g;
+                  group th by th.AgeValueIndex into g
+                  orderby g.Key ascending
+                  select g;
       //
-      //IList<double> abs = new List<double>();//, ord = new List<double>();
       foreach (var g in query)
       {
         double y = (double)g.Select(th => th.Price).Average();
         this.chart.Series[1].Points.AddXY((double)g.Key, y);
-
+        //
         double yw = (double)g.Select(x => x.Price * (2 * maxDateDiff - (utcnow - x.Day).Days)).Sum()
         / (double)g.Select(x => 2 * maxDateDiff - (utcnow - x.Day).Days).Sum();
-        this.chart.Series[2].Points.Add(new DataPoint()  { Label = yw.ToString("F02"), XValue = (double)g.Key, YValues = new double[] { y } });
-        //
-        //abs.Add((double)g.Key);
-        //ord.Add(yw);
+        this.chart.Series[2].Points.Add(new DataPoint()
+        {
+          Label = yw.ToString("F02"),
+          XValue = (double)g.Key,
+          YValues = new double[] { yw }
+        });
       }
       //
-      //var f1 = new Exponential(abs,ord);
-      //var f2 = new ExponentialOptimum(abs, ord);
-      double a,b;
-      Utils.MatlabInterpolant.GetAB(this._currentAge, this._pos, out a, out b);
+      double a1,b1,a2,b2,a3,b3;
+      var i1 = new Utils.MatlabInterpolant20140909 ();
+      i1.GetAB(this._currentAge, this._pos, out a1, out b1);
+      Utils.MatlabInterpolant20141124.Instance.GetAB(this._currentAge, this._pos, out a2, out b2);
+      Utils.MatlabInterpolant20150504.Instance.GetAB(this._currentAge, this._pos, out a3, out b3);
       //
-      for (double x = xmin; x < xmax+0.01d; x=x+0.01d)
+      for (double x = xmin; x < xmax + 0.01d; x = x + 0.01d)
       {
-        //this.chart.Series[3].Points.AddXY(x, f1.A * Math.Exp(x * f1.B));
-        //this.chart.Series[4].Points.AddXY(x, f2.A * Math.Exp(x * f2.B));
-        this.chart.Series[3].Points.AddXY(x, a * Math.Exp(x * b));
+        this.chart.Series[3].Points.AddXY(x, a1 * Math.Exp(x * b1));
+        this.chart.Series[4].Points.AddXY(x, a2 * Math.Exp(x * b2));
+        this.chart.Series[5].Points.AddXY(x, a3 * Math.Exp(x * b3));
       }
       //AddRectangleAnnotation(f2);
       //AddEllipseAnnotation(f1);
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f1.ToString());
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f2.ToString());
-      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Matlab exponential fit (A*e^(B*x)), A={0} B={1}",a,b));
+      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of September 2014, A={0} B={1}", a1, b1));
+      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of November 2014, A={0} B={1}", a2, b2));
+      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of May 2015, A={0} B={1}", a3, b3));
       this.chart.Legends[0].CustomItems.Add(Color.Tan, string.Format("Series has: {0} data points", ths.Count));
       //
-      
+
 #else
       var ds = new Objects.TransferHistoryDataSet();
       var tam = new Objects.TransferHistoryDataSetTableAdapters.TableAdapterManager();
@@ -577,28 +590,76 @@ namespace AndreiPopescu.CharazayPlus.UI
 
       }
 #endif
-     
-     
 
+
+
+    }
+
+    private void AddRectangleAnnotation (ExponentialOptimum eo)
+    {
+      var annotation = new System.Windows.Forms.DataVisualization.Charting.RectangleAnnotation();
+      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200, 200);
+      annotation.Text = eo.ToString();
+      annotation.ForeColor = Color.Black;
+      annotation.Font = new Font("Arial", 12);
+      annotation.LineWidth = 2;
+      annotation.BackColor = Color.PaleGoldenrod;
+      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+
+      this.chart.Annotations.Add(annotation);
+    }
+
+    private void AddEllipseAnnotation (Exponential e)
+    {
+      var annotation = new System.Windows.Forms.DataVisualization.Charting.EllipseAnnotation();
+      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200, 400);
+      annotation.Text = e.ToString();
+      annotation.ForeColor = Color.Black;
+      annotation.Font = new Font("Arial", 12);
+      annotation.LineWidth = 2;
+      annotation.Height = 35;
+      annotation.Width = 60;
+      annotation.BackColor = Color.PaleTurquoise;
+      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+
+      this.chart.Annotations.Add(annotation);
+    } 
+    #endregion
+
+    #region event handlers
+    private void rdG_CheckedChanged (object sender, EventArgs e)
+    {
+      RadioButton rb = sender as RadioButton;
+      _pos = rb.Text[0];
+      if (this._currentAge != byte.MinValue)
+        AddData();
+    }
+
+    private void rd15_CheckedChanged (object sender, EventArgs e)
+    {
+      RadioButton rb = sender as RadioButton;
+      _currentAge = byte.Parse(rb.Text);
+      if (this._pos != char.MinValue)
+        AddData();
     }
 
     private void ChartUserControl_Load (object sender, EventArgs e)
     { // 0
-      this.chart.Series.Add( new  System.Windows.Forms.DataVisualization.Charting.Series ("Scatter data") 
+      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Scatter data")
       {
         ChartArea = "ChartArea1",
         ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
         MarkerSize = 7,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle 
-      } );
+        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+      });
       // 1
-      this.chart.Series.Add( new System.Windows.Forms.DataVisualization.Charting.Series("Average price")
-        {
-          ChartArea = "ChartArea1",
-          ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
-          MarkerSize = 11,
-          MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Triangle
-        });
+      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Average price")
+      {
+        ChartArea = "ChartArea1",
+        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
+        MarkerSize = 11,
+        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Triangle
+      });
       // 2
       this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Weighted average price")
       {
@@ -607,28 +668,29 @@ namespace AndreiPopescu.CharazayPlus.UI
         MarkerSize = 11,
         MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross
       });
-      //
-      //this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Raw fit")
-      //{
-      //  ChartArea = "ChartArea1",
-      //  ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
-      //  MarkerSize = 10,
-      //  MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Diamond
-      //});
-      //this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Robust fit")
-      //{
-      //  ChartArea = "ChartArea1",
-      //  ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
-      //  MarkerSize = 10,
-      //  MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross
-      //});
       // 3
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Matlab fit")
+      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Sep 2014")
       {
         ChartArea = "ChartArea1",
         ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
         MarkerSize = 10,
         MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star10
+      });
+      //
+      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Nov 2014")
+      {
+        ChartArea = "ChartArea1",
+        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
+        MarkerSize = 10,
+        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Diamond
+      });
+      //5
+      this.chart.Series.Add(new Series("May 2015")
+      {
+        ChartArea = "ChartArea1",
+        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
+        MarkerSize = 10,
+        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square
       });
       //
       // Set auto minimum and maximum values.
@@ -657,7 +719,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       // Set Line Width
       c1.AxisX.MajorGrid.LineWidth = c1.AxisY.MajorGrid.LineWidth = 1;
-      
+
       // title
       c1.AxisX.Title = "Age Value Index";
       c1.AxisY.Title = "Estimated Price";
@@ -666,54 +728,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       c1.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
       //
       this.chart.Titles.Add("Transfer Compare");
-     
+
     }
-
-    private void AddRectangleAnnotation (ExponentialOptimum eo )
-    {
-      var annotation = new System.Windows.Forms.DataVisualization.Charting.RectangleAnnotation();
-      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200, 200);
-      annotation.Text = eo.ToString();
-      annotation.ForeColor = Color.Black;
-      annotation.Font = new Font("Arial", 12); 
-      annotation.LineWidth = 2;
-      annotation.BackColor = Color.PaleGoldenrod;
-      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-
-      this.chart.Annotations.Add(annotation);
-    }
-
-    private void AddEllipseAnnotation ( Exponential e)
-    {
-      var annotation = new System.Windows.Forms.DataVisualization.Charting.EllipseAnnotation();
-      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200,400);
-      annotation.Text = e.ToString();
-      annotation.ForeColor = Color.Black;
-      annotation.Font = new Font("Arial", 12); 
-      annotation.LineWidth = 2;
-      annotation.Height = 35;
-      annotation.Width = 60;
-      annotation.BackColor = Color.PaleTurquoise;
-      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-
-      this.chart.Annotations.Add(annotation);
-    }
-
-    private void rdG_CheckedChanged (object sender, EventArgs e)
-    {
-      RadioButton rb = sender as RadioButton;
-      _pos = rb.Text[0];
-      if (this._currentAge != byte.MinValue)
-        AddData();
-    }
-
-    private void rd15_CheckedChanged (object sender, EventArgs e)
-    {
-      RadioButton rb = sender as RadioButton;
-      _currentAge = byte.Parse (rb.Text);
-      if (this._pos != char.MinValue)
-        AddData();
-    }
+    #endregion
 
 
        

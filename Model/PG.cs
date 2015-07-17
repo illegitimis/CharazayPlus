@@ -5,38 +5,13 @@ using AndreiPopescu.CharazayPlus.Utils;
 
 namespace AndreiPopescu.CharazayPlus
 {
-  /*
-   * Offensive potential
-   * 
-PG : Passing, Dribbling>Speed>Footwork
-SG : Dribbling, Speed>Passing>Footwork
-SF : Speed>Dribbling>Footwork>Passing
-PF : Footwork>Speed>Dribbling>Passing
-C : Footwork>Speed>Passing>Dribbling
-
-   * Defensive potential
-
-PG : Defence>Speed>Footwork
-SG : Defence>Speed>Footwork
-SF : Defence>Speed,Footwork
-PF : Defence>Footwork>Speed
-C : Defence>Footwork>Speed
-   * 
-   * 
-   * Rebound + Defence : helps taking defensive rebounds.
-   * Rebound + Footwork : helps taking offensive rebounds.
-   * */
 
   /// <summary>
   /// Point guard
-  /// </summary>
+  /// </summary>  
   public class PG : Player
   {
-    public PG ( )
-      : base()
-    {
-      //System.Diagnostics.Debug.Write("pg"); 
-    }
+    public PG ( ) : base()  { }
 
     //public PG(UInt64 id, string name, string surname, byte countryId
     //  , byte age, byte h, byte w, UInt64 si, UInt64 salary
@@ -46,8 +21,8 @@ C : Defence>Footwork>Speed
     //  : base(id, name, surname, countryId, age, h, w, si, salary, form, fatigue, fame,
     //          def, ft, p2, p3, spe, pas, dri, ftw, reb, exp) { }
 
-
     public PG (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
+    public PG (Xsd2.charazayPlayer xsdPlayer, bool ishw, bool isfatigue, bool isform) : base(xsdPlayer, ishw, isfatigue, isform) { }
     public PG (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
     
@@ -81,7 +56,7 @@ C : Defence>Footwork>Speed
 
     public override PlayerPosition PositionEnum { get { return PlayerPosition.PG; } }
 
-    static double[] StoredAssessedValues
+    internal static double[] StoredAssessedValues
     {
       get
       {
@@ -380,10 +355,15 @@ C : Defence>Footwork>Speed
     }
 
     public override double ValueIndex { get { return TotalScore / PG.StoredAssessedValues[TrainingWeekIndex]; } }
+
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
-      get { return MatlabInterpolant.GetTMValue(this.Age, 'G', this.ValueIndex); }
+      get { return MatlabInterpolant20150504.Instance.GetTMValue(this.Age, 'G', this.ValueIndex); }
     }
   }
+
+  
+ 
+
 }

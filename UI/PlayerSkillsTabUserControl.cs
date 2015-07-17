@@ -12,6 +12,7 @@
   using System.Diagnostics;
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Data;
+  using AndreiPopescu.CharazayPlus.Extensions;
   
   
   /// <summary>
@@ -298,11 +299,11 @@
       this.groupImageList.ImageSize = new System.Drawing.Size(16, 16);
       this.groupImageList.TransparentColor = System.Drawing.Color.Transparent;
       // 
-      // PlayerSkillsUserControl
+      // PlayerSkillsTabUserControl
       // 
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
       this.Controls.Add(this.olvComplex);
-      this.Name = "PlayerSkillsUserControl";
+      this.Name = "PlayerSkillsTabUserControl";
       this.Size = new System.Drawing.Size(907, 374);
       this.Load += new System.EventHandler(this.MainForm_Load);
       ((System.ComponentModel.ISupportInitialize)(this.olvComplex)).EndInit();
@@ -730,7 +731,7 @@
       ObjectListViewExtensions.TimedFilter(this.olvComplex, filter);
     }
 
-        
+            
    
   }
 

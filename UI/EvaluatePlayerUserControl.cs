@@ -3,6 +3,7 @@
   using System;
   using System.Windows.Forms;
   using AndreiPopescu.CharazayPlus.Utils;
+  using System.Collections.Generic;
 
   public partial class EvaluatePlayerUserControl : UserControl
   {
@@ -579,7 +580,7 @@
       this.label11.Name = "label11";
       this.label11.Size = new System.Drawing.Size(75, 13);
       this.label11.TabIndex = 35;
-      this.label11.Text = "Age / Value";
+      this.label11.Text = "Age/Value Index";
       this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // hli26
@@ -706,42 +707,111 @@
     private HorizontalLevelIndicatorLabel hli29;
     private HorizontalLevelIndicatorLabel hli30; 
     #endregion
-  
+
+    #region interface to the outside world
+    
     public EvaluatePlayerUserControl ( )
     {
       InitializeComponent();
     }
-  
-    public Xsd2.charazayPlayer SelectedObject    
-    { 
-      get { return _p; } 
-      set 
+
+    public Xsd2.charazayPlayer SelectedObject
+    {
+      get { return _p; }
+      set
       {
         if (value == null || value.skills == null) return;
-        _p = value; 
-        if (_p == null) return;
-        _pg = new PG(_p);
-        _sg = new SG(_p);
-        _sf = new SF(_p);
-        _pf = new PF(_p);
-        _c = new C(_p);
+        _p = value;
+        if (_p == null) 
+          return;
         //
         if (!this.tlp.Enabled) this.tlp.Enabled = true;
-        this.SuspendLayout();
         //
-        assignLabelValues();
-        //
-        this.ResumeLayout();
-      } 
+        OnPropertyChange();
+      }
+    }
+
+    public bool IsHeightWeightImpact
+    {
+      get { return this._isHw; }
+      set
+      {
+        if (value != this._isHw)
+        {
+          this._isHw = value;
+          OnPropertyChange();
+        }
+      }
     }
     
+    public bool IsFatigue
+    {
+      get { return this._isFatigue; }
+      set
+      {
+        if (value != this._isFatigue)
+        {
+          this._isFatigue = value;
+          OnPropertyChange();
+        }
+      }
+    }
+
+    public bool IsForm
+    {
+      get { return this._isForm; }
+      set
+      {
+        if (value != this._isForm)
+        {
+          this._isForm = value;
+          OnPropertyChange();
+        }
+      }
+    }
+
+    internal Evaluation EvaluationType
+    {
+      get { return this._evalType; }
+      set { this._evalType = value; }
+    }
+    
+    internal Player GetPlayer (PlayerPosition pos)
+    {
+      switch (pos)
+      {
+        case PlayerPosition.C: return _c;
+        case PlayerPosition.PF: return _pf;
+        case PlayerPosition.SF: return _sf;
+        case PlayerPosition.SG: return _sg;
+        case PlayerPosition.PG: return _pg;
+        default: return null;
+      }
+    }
+
+    internal IEnumerable<Player> GetPlayers ()
+    {
+      
+        yield return _c;
+        yield return _pf;
+        yield return _sf;
+        yield return _sg;
+        yield return _pg;      
+      
+    }
+    #endregion
+    
     #region fields
-    PG _pg = null;
-    SG _sg = null;
-    SF _sf = null;
-    PF _pf = null;
-    C _c = null;
-    Xsd2.charazayPlayer _p = null; 
+    Player _pg = null;
+    Player _sg = null;
+    Player _sf = null;
+    Player _pf = null;
+    Player _c = null;
+    Xsd2.charazayPlayer _p = null;
+    bool _isHw = false;
+    bool _isFatigue = false;
+    bool _isForm = false;
+    Evaluation _evalType = Evaluation.old;
     #endregion
 
     #region private
@@ -760,69 +830,97 @@
       //this.tlp.Visible = false;
     }
 
-    private void assignLabelValues ( )
+    private void AssignLabelValues ( )
     {
       //
-      assignValue(hli1, _pg.DefensiveScore);
-      assignValue(hli2, _sg.DefensiveScore);
-      assignValue(hli3, _sf.DefensiveScore);
-      assignValue(hli4, _pf.DefensiveScore);
-      assignValue(hli5, _c.DefensiveScore);
+      AssignValue(hli1, _pg.DefensiveScore);
+      AssignValue(hli2, _sg.DefensiveScore);
+      AssignValue(hli3, _sf.DefensiveScore);
+      AssignValue(hli4, _pf.DefensiveScore);
+      AssignValue(hli5, _c.DefensiveScore);
       //
-      assignValue(hli6, _pg.OffensiveAbilityScore);
-      assignValue(hli7, _sg.OffensiveAbilityScore);
-      assignValue(hli8, _sf.OffensiveAbilityScore);
-      assignValue(hli9, _pf.OffensiveAbilityScore);
-      assignValue(hli10, _c.OffensiveAbilityScore);
+      AssignValue(hli6, _pg.OffensiveAbilityScore);
+      AssignValue(hli7, _sg.OffensiveAbilityScore);
+      AssignValue(hli8, _sf.OffensiveAbilityScore);
+      AssignValue(hli9, _pf.OffensiveAbilityScore);
+      AssignValue(hli10, _c.OffensiveAbilityScore);
       //
-      assignValue(hli11, _pg.ShootingScore);
-      assignValue(hli12, _sg.ShootingScore);
-      assignValue(hli13, _sf.ShootingScore);
-      assignValue(hli14, _pf.ShootingScore);
-      assignValue(hli15, _c.ShootingScore);
+      AssignValue(hli11, _pg.ShootingScore);
+      AssignValue(hli12, _sg.ShootingScore);
+      AssignValue(hli13, _sf.ShootingScore);
+      AssignValue(hli14, _pf.ShootingScore);
+      AssignValue(hli15, _c.ShootingScore);
       //
-      assignValue(hli16, _pg.OffensiveScore);
-      assignValue(hli17, _sg.OffensiveScore);
-      assignValue(hli18, _sf.OffensiveScore);
-      assignValue(hli19, _pf.OffensiveScore);
-      assignValue(hli20, _c.OffensiveScore);
+      AssignValue(hli16, _pg.OffensiveScore);
+      AssignValue(hli17, _sg.OffensiveScore);
+      AssignValue(hli18, _sf.OffensiveScore);
+      AssignValue(hli19, _pf.OffensiveScore);
+      AssignValue(hli20, _c.OffensiveScore);
       //
-      assignValue(hli21, _pg.TotalScore);
-      assignValue(hli22, _sg.TotalScore);
-      assignValue(hli23, _sf.TotalScore);
-      assignValue(hli24, _pf.TotalScore);
-      assignValue(hli25, _c.TotalScore);
+      AssignValue(hli21, _pg.TotalScore);
+      AssignValue(hli22, _sg.TotalScore);
+      AssignValue(hli23, _sf.TotalScore);
+      AssignValue(hli24, _pf.TotalScore);
+      AssignValue(hli25, _c.TotalScore);
       //
-      assignValueIndex(hli26, _pg);
-      assignValueIndex(hli27, _sg);
-      assignValueIndex(hli28, _sf);
-      assignValueIndex(hli29, _pf);
-      assignValueIndex(hli30, _c);
+      AssignValueIndex(hli26, _pg);
+      AssignValueIndex(hli27, _sg);
+      AssignValueIndex(hli28, _sf);
+      AssignValueIndex(hli29, _pf);
+      AssignValueIndex(hli30, _c);
     }
 
-    private void assignValueIndex (HorizontalLevelIndicatorLabel hli, Player p)
+    private void AssignValueIndex (HorizontalLevelIndicatorLabel hli, Player p)
     {
       hli.MaximumLevel = 2f;
       hli.Level = (float)Math.Round(p.ValueIndex, 2);
     }
 
-    void assignValue (HorizontalLevelIndicatorLabel hli, double val)
+    void AssignValue (HorizontalLevelIndicatorLabel hli, double val)
     {
       hli.Level = (float)Math.Round(val, 2);
     } 
+
+    private void EvaluatePositions ( )
+    {
+      switch (_evalType)
+      {
+        case Evaluation.old:
+          {
+            _pg = new PG(_p, _isHw, _isFatigue, _isForm);
+            _sg = new SG(_p, _isHw, _isFatigue, _isForm);
+            _sf = new SF(_p, _isHw, _isFatigue, _isForm);
+            _pf = new PF(_p, _isHw, _isFatigue, _isForm);
+            _c = new C(_p, _isHw, _isFatigue, _isForm);
+          } break;
+
+        case Evaluation.season30:
+          {
+            _pg = new PG2014(_p, _isHw, _isFatigue, _isForm);
+            _sg = new SG2014(_p, _isHw, _isFatigue, _isForm);
+            _sf = new SF2014(_p, _isHw, _isFatigue, _isForm);
+            _pf = new PF2014(_p, _isHw, _isFatigue, _isForm);
+            _c = new C2014(_p, _isHw, _isFatigue, _isForm);
+          } break;
+      }
+    
+    }
+
+    private void OnPropertyChange ( )
+    {
+      if (_p == null)
+        return;
+
+      EvaluatePositions();
+      //
+      this.SuspendLayout();
+      //
+      AssignLabelValues();
+      //
+      this.ResumeLayout();
+    }
     #endregion
 
-    internal Player GetPlayer (PlayerPosition pos)
-    {
-      switch (pos)
-      {
-        case PlayerPosition.C: return _c;
-        case PlayerPosition.PF: return _pf;
-        case PlayerPosition.SF: return _sf;
-        case PlayerPosition.SG: return _sg;
-        case PlayerPosition.PG: return _pg;
-        default: return null;
-      }
-    }
+    
   }
 }

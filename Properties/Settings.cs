@@ -45,11 +45,26 @@
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UserName
         {
-          get
-          {
-            return ((string)(this["UserName"]));
-          }
+          get { return ((string)(this["UserName"])); }
           set { this["UserName"] = value; } 
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserName2
+        {
+          get { return ((string)(this["UserName2"])); }
+          set { this["UserName2"] = value; }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SecurityCode2
+        {
+          get { return ((string)(this["SecurityCode2"])); }
+          set { this["SecurityCode2"] = value; } 
         }
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
@@ -57,11 +72,8 @@
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SecurityCode
         {
-          get
-          {
-            return ((string)(this["SecurityCode"]));
-          }
-          set { this["SecurityCode"] = value; } 
+          get { return ((string)(this["SecurityCode"])); }
+          set { this["SecurityCode"] = value; }
         }
 
         [global::System.Configuration.ApplicationScopedSettingAttribute()]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 using BrightIdeasSoftware;
+using AndreiPopescu.CharazayPlus.Extensions;
 
 namespace AndreiPopescu.CharazayPlus.Objects
 {
@@ -74,9 +75,11 @@ namespace AndreiPopescu.CharazayPlus.Objects
       PlayerName = pn.Trim();
       OwnerTeamId = TeamId(teamownid);
       OwnerTeamName = TeamName (teamown);
-      SkillsIndex = uint.Parse(si, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
-      StartingPrice = uint.Parse(prc, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
-      Bid = uint.Parse(bid, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
+      //
+      SkillsIndex = ParsingExtensions.GetUInt(si);
+      StartingPrice = ParsingExtensions.GetUInt(prc);
+      Bid = ParsingExtensions.GetUInt(bid);
+      //
       BidHolderTeamId = TeamId(teambidid);
       BidHolderTeamName = TeamName(teambid);
     }
@@ -96,11 +99,8 @@ namespace AndreiPopescu.CharazayPlus.Objects
         ? string.Empty
         : input.Trim();
     }
-
-    internal static uint GetUint (string input)
-    {
-      return uint.Parse(input.Replace("&euro;",string.Empty).Trim(), NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
-    }
+    
+    
 
   }
 }

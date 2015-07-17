@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using AndreiPopescu.CharazayPlus.Utils;
+using AndreiPopescu.CharazayPlus.Extensions;
 
 namespace AndreiPopescu.CharazayPlus.UI
 {
@@ -126,7 +127,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         return;
 
       Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, p.Id);
-      e.Url = playerLink.m_uri.AbsoluteUri;
+      e.Url = playerLink.Uri.AbsoluteUri;
     }
   }
 }

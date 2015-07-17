@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AndreiPopescu.CharazayPlus.Web;
 
-    
+
 
 namespace AndreiPopescu.CharazayPlus.Data
 {
@@ -13,22 +13,22 @@ namespace AndreiPopescu.CharazayPlus.Data
   /// </summary>
   public class MyXmlTeam
   {
-       
-         //private NestedSingleton() { }
-  
-         //public static NestedSingleton Instance
-         //{
-         //    get { return SingletonCreator.PrivateInstance; }
-         //}
 
- #region Behavior fields from main window
+    //private NestedSingleton() { }
+
+    //public static NestedSingleton Instance
+    //{
+    //    get { return SingletonCreator.PrivateInstance; }
+    //}
+
+    #region Behavior fields from main window
 
     public static Xsd2.charazayArena Arena { get { return NestedInfo._arena; } }
     public static Xsd2.charazayCountry CountryInfo { get { return NestedInfo._country; } }
 
     public static Xsd2.charazayTeam TeamInfo { get { return NestedMandatory._team; } }
     public static Xsd2.charazayUser UserInfo { get { return NestedMandatory._user; } }
-   
+
 
     public static Xsd2.charazayDivision Standings { get { return NestedStandings._myDivisionStandings; } }
 
@@ -38,18 +38,18 @@ namespace AndreiPopescu.CharazayPlus.Data
     public static Xsd2.charazayEconomy Economy { get { return NestedMoney._economy; } }
     public static Xsd2.charazayTransfer[] Transfers { get { return NestedMoney._myTransfers; } }
 
- #endregion
+    #endregion
 
     // info tab
     private static class NestedInfo
     {
       static NestedInfo ( )
-      { 
-        var objects = Utils.Deserializer.GoGetXml (new Web.XmlDownloadItem[] {
-          new Web.ArenaXml(WebServiceUser.Instance)
+      {
+        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+          new Web.ArenaXml(WebServiceUsers.Instance.MainUser)
           ,
-          new Web.CountryDivisionListXml(WebServiceUser.Instance) 
-        }).ToArray();  
+          new Web.CountryDivisionListXml(WebServiceUsers.Instance.MainUser) 
+        }).ToArray();
         //
         _arena = objects[0] as Xsd2.charazayArena;
         _country = objects[1] as Xsd2.charazayCountry;
@@ -71,29 +71,41 @@ namespace AndreiPopescu.CharazayPlus.Data
       { //
         // mandatory first
         //
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
-            new Web.MyInfoXml(WebServiceUser.Instance)
-          , new Web.MyTeamInfoXml(WebServiceUser.Instance) 
-        }).ToArray();
+        //var downloadList = XmlDownloadItemGenerator.ProduceDownloadList(new[] { XmlSerializationType.MyInfo, XmlSerializationType.MyTeamInfo });
+        //var downloadItems = downloadList.Select(x => x.DownloadItem);
+        var objects = 
+          //Utils.Deserializer.GoGetXml(downloadItems.ToArray())
+          Utils.Deserializer.GoGetXml(
+            new Web.XmlDownloadItem[] {
+              new Web.MyInfoXml(WebServiceUsers.Instance.MainUser)
+            , new Web.MyTeamInfoXml(WebServiceUsers.Instance.MainUser) 
+        //  ,new Web.MyInfoXml(WebServiceUsers.Instance.AlternateUser)
+        //  , new Web.MyTeamInfoXml(WebServiceUsers.Instance.AlternateUser) 
+        //  ,new Web.MyInfoXml(WebServiceUsers.Instance.SecondTeamUser)
+        //  , new Web.MyTeamInfoXml(WebServiceUsers.Instance.SecondTeamUser) 
+        })
+        .ToArray();
+        //
+        
         //
         _user = objects[0] as Xsd2.charazayUser;
         _team = (Xsd2.charazayTeam)objects[1];
       }
 
-     
+
       internal static readonly Xsd2.charazayTeam _team;
       internal static readonly Xsd2.charazayUser _user;
-     
+
     }
 
     // my division standings
     private static class NestedStandings
     {
-    
-      static NestedStandings () 
+
+      static NestedStandings ( )
       {
         var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
-           new Web.DivisionStandingsXml(WebServiceUser.Instance)
+           new Web.DivisionStandingsXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
         _myDivisionStandings = (Xsd2.charazayDivision)objects[0];
@@ -101,7 +113,7 @@ namespace AndreiPopescu.CharazayPlus.Data
 
       internal static readonly Xsd2.charazayDivision _myDivisionStandings;
     }
-    
+
     // my Schedule tab (comes from Schedule)
     // my Division tab (comes from DivisionSchedule)
     private static class NestedSchedule
@@ -109,12 +121,13 @@ namespace AndreiPopescu.CharazayPlus.Data
       internal static readonly Xsd2.match[] _mySchedule;
       internal static readonly Xsd2.charazayRound[] _myDivisionFullSchedule;
 
-      static NestedSchedule ( ) 
+      static NestedSchedule ( )
       {
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
-          new Web.MyScheduleXml(WebServiceUser.Instance)
+        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] 
+        {
+          new Web.MyScheduleXml(WebServiceUsers.Instance.MainUser)
           ,
-          new Web.DivisionScheduleXml(WebServiceUser.Instance)
+          new Web.DivisionScheduleXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
         _mySchedule = (Xsd2.match[])objects[0];
@@ -129,18 +142,18 @@ namespace AndreiPopescu.CharazayPlus.Data
       internal static readonly Xsd2.charazayEconomy _economy;
       internal static readonly Xsd2.charazayTransfer[] _myTransfers;
 
-      static NestedMoney ( ) 
+      static NestedMoney ( )
       {
         var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
-          new Web.EconomyXml(WebServiceUser.Instance)
-        ,new Web.MyTransfersXml(WebServiceUser.Instance)
+          new Web.EconomyXml(WebServiceUsers.Instance.MainUser)
+        ,new Web.MyTransfersXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
         _economy = objects[0] as Xsd2.charazayEconomy;
         _myTransfers = objects[1] as Xsd2.charazayTransfer[];
-        
+
       }
     }
-       
+
   }
 }

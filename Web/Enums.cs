@@ -112,6 +112,9 @@ using System.Text;
 
   }
 
+  /// <summary>
+  /// controls the type of each derived <see cref="XmlDownloadItem"/> class
+  /// </summary>
   internal enum XmlSerializationType
   {
     Unknown,

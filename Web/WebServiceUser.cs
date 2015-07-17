@@ -2,30 +2,16 @@
 namespace AndreiPopescu.CharazayPlus.Web
 {
   /// <summary>
-  /// charazay xml api user data
+  /// charazay xml api user data manager
   /// </summary>
-  public class WebServiceUser
+  public class WebServiceUsers
   {
 
     #region //LazyDoubleLockedSingleton
-    private static volatile WebServiceUser instance = null;
+    private static volatile WebServiceUsers instance = null;
     private static object sync = new object();
 
-   
-    private WebServiceUser ( ) : this(string.Empty, string.Empty) { }
-    private WebServiceUser (string u, string pass) : this (u, pass, 0, 0, 0) { }
- 
-    //new Web.WebServiceUser("stergein", "security_code", 1013, 5, 21191);
-    private WebServiceUser (string u, string pass, uint div, byte c, uint a)
-    {
-      user = u;
-      securityCode = pass;
-      divisionId = div;
-      countryId = c;
-      arenaId = a;
-    }
-
-    public static WebServiceUser Instance
+    public static WebServiceUsers Instance
     {
       get
       {
@@ -34,7 +20,7 @@ namespace AndreiPopescu.CharazayPlus.Web
           lock (sync)
           {
             if (instance == null)
-              instance = new WebServiceUser();
+              instance = new WebServiceUsers();            
           }
         }
         return instance;
@@ -42,13 +28,13 @@ namespace AndreiPopescu.CharazayPlus.Web
     } 
     #endregion
 
-    
-    public string user {get; internal set;}
-    public string securityCode { get; internal set; }
-    public uint divisionId { get; internal set; }
-    public byte countryId { get; internal set; }
-    public uint arenaId { get; internal set; }
+    public CharazayUserData MainUser { get; internal set; }
+    //public CharazayUserData AlternateUser { get; internal set; }
+    //public CharazayUserData SecondTeamUser { get; internal set; }
 
+    public bool HasMainUser { get { return MainUser!=null && MainUser.Exists; } }
+    //public bool HasAlternateUser { get { return AlternateUser != null && AlternateUser.Exists; } }
+    //public bool HasSecondTeamUser { get { return SecondTeamUser != null && SecondTeamUser.Exists; } }
    
   }
 }

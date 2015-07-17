@@ -6,9 +6,14 @@ using SimpleBrowser;
 using System.IO;
 using AndreiPopescu.CharazayPlus.Objects;
 using System.Globalization;
+using System.Net;
+using AndreiPopescu.CharazayPlus.Extensions;
 
 namespace AndreiPopescu.CharazayPlus.Web
 {
+  /// <summary>
+  /// Navigate and translate data from the Charazay website
+  /// </summary>
   class Scraper
   {
     #region singleton
@@ -29,6 +34,9 @@ namespace AndreiPopescu.CharazayPlus.Web
       internal static readonly Scraper PrivateScraperInstance = null;
     }
 
+    /// <summary>
+    /// private constructor
+    /// </summary>
     Scraper ( )
     {
       this.browser = new Browser();
@@ -42,11 +50,17 @@ namespace AndreiPopescu.CharazayPlus.Web
 
 
       // we'll fake the user agent for websites that alter their content for unrecognised browsers
-      browser.UserAgent = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.224 Safari/534.10";
+      browser.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:32.0) Gecko/20100101 Firefox/32.0";
+
+      //browser.Cookies.Add(new Cookie("__utma", "91201864.1959694309.1356151134.1356231348.1356234562.6", "/", ".charazay.com"));
+      //browser.Cookies.Add(new Cookie("__atuvc", "6%7C51%2C2%7C52", "/", "www.charazay.com"));
+      browser.Cookies.Add(new Cookie("language", "en", "/", ".charazay.com"));
+      browser.Cookies.Add(new Cookie("charazay_unq", "96ff73712d0112586b52587dee44dcf4", "/", ".charazay.com"));
+			//
     }
     #endregion
 
-
+    
     #region simple browser automation
 
     Browser browser = null;
@@ -56,36 +70,48 @@ namespace AndreiPopescu.CharazayPlus.Web
 
       try
       {
-
-
-        // browse to GitHub
+        // browse to 
         browser.Navigate("http://www.charazay.com/");
         if (LastRequestFailed()) return; // always check the last request in case the page failed to load
-
         // click the login link and click it
         browser.Log("First we need to log in, so browse to the login page, fill in the login details and submit the form.");
-        //var loginLink = browser.Find("input", FindBy.Class, "Login");
 
-
-
-        // fill in the form and click the login button - the fields are easy to locate because they have ID attributes
 
         //<input class="form_small" name="username" type="text" size="7" maxlength="30">
-        //browser.Find("login_field").Value = "youremail@domain.com";
-        browser.Find(ElementType.TextField, "name", "username").Value = "stergein";
+        //<input name="username" size="7" maxlength="30" placeholder="Username" type="text">
+        var user = browser.Find(ElementType.TextField, "name", "username");
+        if (!user.Exists || user.TotalElementsFound > 1)
+        {
+          user = browser.Find("input", new { name = "username", placeholder = "Username", size =7, maxlength=30});
+        }
+        // 
+        if (!user.Exists) return;
+        user.Value = "elphy";
 
         //<input class="form_small" name="password" type="password" size="7" maxlength="30">
-        //browser.Find("password").Value = "yourpassword";
-        browser.Find(ElementType.TextField, "name", "password").Value = "charaz_4intr";
+        //<input name="password" size="7" maxlength="30" placeholder="Password" type="password">
+        var pasw = browser.Find(ElementType.TextField, "name", "password");
+        if (!pasw.Exists || pasw.TotalElementsFound > 1)
+        {
+          pasw = browser.Find("input", new { name = "password", placeholder = "Password", size = 7, maxlength = 30 });
+        }
+        //
+        if (!pasw.Exists) return;
+        pasw.Value = "zdreanta123";
 
         //<input class="form_small" type="submit" value="Login">
-        //browser.Find(ElementType.Button, "value", "Login").Click();
+        //<input value="" type="submit">
         var loginLink = browser.Find("input", FindBy.Value, "Login");
-        if (LastRequestFailed()) return;
+        if (!loginLink.Exists)
+          loginLink = browser.Find("input", new { type = "submit" });
+
         if (!loginLink.Exists)
           browser.Log("Can't find the login link! Perhaps the site is down for maintenance?");
         else
           loginLink.Click();
+        
+        if (LastRequestFailed()) return;
+
         // see if the login succeeded - ContainsText() is very forgiving, so don't worry about whitespace, casing, html tags separating the text, etc.
         if (browser.ContainsText("Incorrect login or password"))
         {
@@ -145,7 +171,15 @@ namespace AndreiPopescu.CharazayPlus.Web
 
     private IEnumerable<Objects.TransferListedPlayer> ParseClassicTransferMarket (bool allowPagination, IDictionary<int, Uri> paginationUris)
     { //
-      var trs = browser.Select("table").Select("tr");
+      var divmcfs = browser.Select("div.mc-fs");
+      if (!divmcfs.Exists)
+        yield break;
+      
+      var tbl = divmcfs.Select("table");
+      if (!tbl.Exists)
+        yield break;
+
+      var trs = tbl.Select("tr");
       foreach (var tr in trs)
       {
         var tds = tr.Select("td");
@@ -348,7 +382,7 @@ namespace AndreiPopescu.CharazayPlus.Web
             , "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             //
             string current_bid = form.Select("span#current_bid").Value;
-            ppi.CurrentBid = TransferListedPlayer.GetUint(current_bid);
+            ppi.CurrentBid = ParsingExtensions.GetUInt(current_bid);
             //
             var last_bidby = form.Select("span#last_bidby");
             if (last_bidby.Exists)
@@ -361,7 +395,7 @@ namespace AndreiPopescu.CharazayPlus.Web
             {
               if (td.GetAttribute("class") == "right" && td.GetAttribute("style") == "width: 15em;")
               {
-                ppi.StartingPrice = TransferListedPlayer.GetUint(td.Value);
+                ppi.StartingPrice = ParsingExtensions.GetUInt(td.Value);
                 break;
               }
             }
@@ -405,7 +439,7 @@ namespace AndreiPopescu.CharazayPlus.Web
       }
     }
 
-
+    
   }
 
 }

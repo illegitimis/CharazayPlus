@@ -74,6 +74,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
       return alpha * Math.Pow(experience, beta);
     }
 
+    public static void FitSkill (ref double skillValue)
+    {
+      skillValue = Math.Min(30d, Math.Max(0d, skillValue));
+    }
+
     /// <summary>
     /// penalty scale factor for bmi not in the given interval    
     /// </summary>

@@ -68,16 +68,19 @@ namespace AndreiPopescu.CharazayPlus.Utils
       foreach (var p in players)
         if (p.Age > 18)
           yield return p;
-#endif
-      
+#endif      
     }
 
-    #if DOTNET30
+    
     internal static IEnumerable<Player> TopN (IEnumerable<Player> players, int n)
     {
-      return players.OrderByDescending(p => p.TotalScore).Take(n);      
+#if DOTNET30
+      return players.OrderByDescending(p => p.TotalScore).Take(n);
+#else
+      return TopN (players.ToArray(), n);
+#endif
     }
-    #endif
+    
       
     /// <summary>
     /// The QuickSelect_kth algorithm quickly finds the k-th smallest element of an unsorted array of n elements
@@ -161,7 +164,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
  
 
   /// <summary>
-  /// m pair of training categories
+  /// a pair of training categories
   /// </summary>
   internal class TrainingCombination : 
     IComparable

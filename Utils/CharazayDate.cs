@@ -38,40 +38,55 @@ namespace AndreiPopescu.CharazayPlus.Utils
     //W1.D1 (01/08): LH calculated, fatigue reset, fan club mood reset. 
     //Candidates to be the National Team coaches can set their candidature.
     static readonly DateTime s_start31 = new DateTime(2014, 8, 1);
+    // 
+    static readonly DateTime s_start32 = new DateTime(2014, 11, 28);
+    //W1.D1 (27/03): LH calculated, fatigue reset, fan club mood reset. Candidates to be the National Team coaches can set their candidature.
+    static readonly DateTime s_start33 = new DateTime(2015, 03, 27);
+    //
+    // season is 17 weeks = 119 days
+    //
+    static readonly int daysInSeason = 119;
 
     public static implicit operator CharazayDate(DateTime dt)
     {
       CharazayDate cd = new CharazayDate();
+      TimeSpan x = new TimeSpan();
+      //
       if (dt < s_start28)
         cd._season = 0;
       else if (dt < s_start29)
       {
         cd._season = 28;
-        var x = dt - s_start28;
-        cd._day = (byte)(1 + x.Days % 7);
-        cd._week = (byte)(1+ x.Days / 7);
+        x = dt - s_start28;        
       }
       else if (dt < s_start30)
       {
         cd._season = 29;
-        var x = dt - s_start29;
-        cd._day = (byte)(1 + x.Days % 7);
-        cd._week = (byte)(1 + x.Days / 7);
+        x = dt - s_start29;
       }
       else if (dt < s_start31)
       {
         cd._season = 30;
-        var x = dt - s_start30;
-        cd._day = (byte)(1 + x.Days % 7);
-        cd._week = (byte)(1 + x.Days / 7);
+        x = dt - s_start30;
       }
-      else
+      else if (dt < s_start32)
       {
         cd._season = 31;
-        var x = dt - s_start31;
-        cd._day = (byte)(1 + x.Days % 7);
-        cd._week = (byte)(1 + x.Days / 7);
+        x = dt - s_start31;
       }
+      else
+      { //
+        // seasons should be well alligned from now on
+        //
+        int noSeasons = (int) ((dt - s_start32).TotalDays) / daysInSeason;
+        cd._season = (byte)(32 + noSeasons);
+        DateTime seasonStart = s_start32 + TimeSpan.FromDays(daysInSeason * noSeasons);
+        x = dt - seasonStart;
+      }
+      //
+      cd._day = (byte)(1 + x.Days % 7);
+      cd._week = (byte)(1 + x.Days / 7);
+      //
       return cd;
     }
 

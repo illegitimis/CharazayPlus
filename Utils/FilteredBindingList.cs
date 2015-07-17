@@ -408,7 +408,7 @@ internal void ApplyFilter(SingleFilterInfo filterParts)
                 compareValue.CompareTo(filterParts.CompareValue);
             if (filterParts.OperatorValue == 
                 FilterOperator.EqualTo && result == 0)
-                results.Add(item);
+                results.Add(item); 
             if (filterParts.OperatorValue == 
                 FilterOperator.GreaterThan && result > 0)
                 results.Add(item);

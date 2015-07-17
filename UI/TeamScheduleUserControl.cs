@@ -90,17 +90,17 @@ namespace AndreiPopescu.CharazayPlus.UI
         case 1:
           { // team
             Web.CharazayDownloadItem teamLink = new Web.CharazayDownloadItem("team", 0, s.HomeTeamId);
-            e.Url = teamLink.m_uri.AbsoluteUri;
+            e.Url = teamLink.Uri.AbsoluteUri;
           } break;
         case 4:
           { // team
             Web.CharazayDownloadItem teamLink = new Web.CharazayDownloadItem("team", 0, s.AwayTeamId);
-            e.Url = teamLink.m_uri.AbsoluteUri;
+            e.Url = teamLink.Uri.AbsoluteUri;
           } break;
         case 0:
           { // user
             Web.CharazayDownloadItem matchLink = new Web.CharazayDownloadItem("match", 0, s.Id);
-            e.Url = matchLink.m_uri.AbsoluteUri;
+            e.Url = matchLink.Uri.AbsoluteUri;
           } break;
 
       default: break;

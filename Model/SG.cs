@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Utils;
-
+﻿
 namespace AndreiPopescu.CharazayPlus
 {
+  using AndreiPopescu.CharazayPlus.Utils;
+
+
   /// <summary>
   /// Shooting guard
   /// </summary>
   public class SG : Player
   {
     public SG ( ) : base() { }
-
     public SG (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
+    public SG (Xsd2.charazayPlayer xsdPlayer, bool ishw, bool isfatigue, bool isform) : base(xsdPlayer, ishw, isfatigue, isform) { }
     public SG (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
 
@@ -43,7 +42,7 @@ namespace AndreiPopescu.CharazayPlus
 
     public override PlayerPosition PositionEnum { get { return PlayerPosition.SG; } }
 
-    static double[] StoredAssessedValues
+    internal static double[] StoredAssessedValues
     {
       get
       {
@@ -346,7 +345,8 @@ namespace AndreiPopescu.CharazayPlus
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
-      get { return MatlabInterpolant.GetTMValue(this.Age, 'G', this.ValueIndex); }
+      get { return MatlabInterpolant20150504.Instance.GetTMValue(this.Age, 'G', this.ValueIndex); }
     }
   }
+
 }

@@ -11,11 +11,11 @@ namespace AndreiPopescu.CharazayPlus.Data
   /// </summary>
   class PlayersEnvironment
   {
-    public static IList<PG> PointGuards { get { return Nested.PGs; } }
-    public static IList<SG> ShootingGuards { get { return Nested.SGs; } }
-    public static IList<SF> SmallForwards { get { return Nested.SFs; } }
-    public static IList<PF> PowerForwards { get { return Nested.PFs; } }
-    public static IList<C> Centers { get { return Nested.Cs; } }
+    public static IList<PG2014> PointGuards { get { return Nested.PGs; } }
+    public static IList<SG2014> ShootingGuards { get { return Nested.SGs; } }
+    public static IList<SF2014> SmallForwards { get { return Nested.SFs; } }
+    public static IList<PF2014> PowerForwards { get { return Nested.PFs; } }
+    public static IList<C2014> Centers { get { return Nested.Cs; } }
 
     public static IList<Player> OptimumPlayers { get { return Nested.OptimumPlayers; } }
     
@@ -25,52 +25,52 @@ namespace AndreiPopescu.CharazayPlus.Data
 
     private class Nested
     {
-      internal static readonly IList<PG> PGs;
-      internal static readonly IList<SG> SGs;
-      internal static readonly IList<SF> SFs;
-      internal static readonly IList<PF> PFs;
-      internal static readonly IList<C> Cs;
+      internal static readonly IList<PG2014> PGs;
+      internal static readonly IList<SG2014> SGs;
+      internal static readonly IList<SF2014> SFs;
+      internal static readonly IList<PF2014> PFs;
+      internal static readonly IList<C2014> Cs;
       internal static readonly IList<Player> OptimumPlayers;
       internal static readonly  IList<Coach> Coaches;
       
       static Nested ()
       {
-        PGs = new List<PG>();
-        SGs = new List<SG>();
-        PFs = new List<PF>();
-        SFs = new List<SF>();
-        Cs = new List<C>();
+        PGs = new List<PG2014>();
+        SGs = new List<SG2014>();
+        PFs = new List<PF2014>();
+        SFs = new List<SF2014>();
+        Cs = new List<C2014>();
         OptimumPlayers = new List<Player>();
         Coaches = new List<Coach>();
 
         //
         //init from charazay xml
         //
-         var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
-          new Web.MyPlayersXml(WebServiceUser.Instance)
-        ,new Web.CoachesXml(WebServiceUser.Instance)
+        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+          new Web.MyPlayersXml(WebServiceUsers.Instance.MainUser)
+        , new Web.CoachesXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
         var players = (Xsd2.charazayPlayer[])objects[0];
         var coaches = (Xsd2.charazayCoach[])objects[1];
         //
-        foreach (var plyr in players)
+        foreach (var p in players)
         {
-            PGs.Add(new PG(plyr));
-            SGs.Add(new SG(plyr));
-            PFs.Add(new PF(plyr));
-            SFs.Add(new SF(plyr));
-            Cs.Add(new C(plyr));
-            Player p = Player.DecideOnValueIndex(PGs.Last(), SGs.Last(), SFs.Last(), PFs.Last(), Cs.Last());
-            OptimumPlayers.Add(p);
+          PG2014 pg = new PG2014(p); PGs.Add(pg);
+          SG2014 sg = new SG2014(p); SGs.Add(sg);
+          SF2014 sf = new SF2014(p); SFs.Add(sf);
+          PF2014 pf = new PF2014(p); PFs.Add(pf);
+          C2014 c = new C2014(p); Cs.Add(c);
+          Player opt = Extensions.PlayerExtensions.DecideOnTotalScore(new Player[]{pg, sg, sf, pf, c});
+          OptimumPlayers.Add(opt);
         }
         // 
-        initCoachesData(coaches);
+        InitCoachesData(coaches);
         
       }
 
       // coaches file
-      private static void initCoachesData (Xsd2.charazayCoach[] xsdCoaches)
+      private static void InitCoachesData (Xsd2.charazayCoach[] xsdCoaches)
       { //
         // alloc max coach (inner struct)
         //      

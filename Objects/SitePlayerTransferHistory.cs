@@ -8,46 +8,15 @@ namespace AndreiPopescu.CharazayPlus.Objects
   using System.Text;
   using System.Globalization;
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Extensions;
 
-
+  /// <summary>
+  /// an abstractization for a player transfer as shown by the site, e.g.
+  /// S11 W3 D1, 2008-02-08 19:25 	8th Wonder of the World 	Mpempides 	14,487 	8,000,000
+  /// S10 W16 D6, 2008-01-16 12:15 	Promoted to the first team 		
+  /// </summary>
   internal class SitePlayerTransferHistory
   {
-    //[OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 100, MinimumWidth = 75, MaximumWidth = 150, Title = "Deadline", AspectToStringFormat = "{0:yyyy.MM.dd HH:mm}")]
-    //public DateTime Deadline { get; private set; }
-
-    ////Player Name 	
-    //[OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 130, MinimumWidth = 40, MaximumWidth = 200, Title = "Player", Hyperlink = true)]
-    //public string PlayerName { get; private set; }
-    //public uint PlayerId { get; private set; }
-
-    ////Team Name 	
-    //[OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 130, MinimumWidth = 40, MaximumWidth = 200, Title = "Owner", Hyperlink = true)]
-    //public string OwnerTeamName { get; private set; }
-    //public uint OwnerTeamId { get; private set; }
-
-    ////Skills Index 	
-    //[OLVColumn(DisplayIndex = 3, IsEditable = false, Width = 75, MinimumWidth = 40, MaximumWidth = 100, AspectToStringFormat = "{0:N0}", Title = "Skills Index")]
-    //public uint SkillsIndex { get; private set; }
-
-    ////StartingPrice 
-    //[OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 95, MinimumWidth = 50, MaximumWidth = 120, Title = "Starting Price", AspectToStringFormat = "{0:N0}")]
-    //public uint StartingPrice { get; private set; }
-
-    ////Current Bid 	
-    //[OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 95, MinimumWidth = 50, MaximumWidth = 120, Title = "Current Bid", AspectToStringFormat = "{0:N0}")]
-    //public uint Bid { get; private set; }
-
-    ////Current Bid 	
-    //[OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 95, MinimumWidth = 50, MaximumWidth = 120, Title = "Current Price", AspectToStringFormat = "{0:N0}")]
-    //public uint CurrentPrice { get { return Math.Max(StartingPrice, Bid); } }
-
-    ////Current Bid holder
-    //[OLVColumn(DisplayIndex = 7, IsEditable = false, Width = 130, MinimumWidth = 40, MaximumWidth = 200, Title = "Bid holder", Hyperlink = true)]
-    //public string BidHolderTeamName { get; private set; }
-    //public uint BidHolderTeamId { get; private set; }
-    
-   
-
     public SitePlayerTransferHistory (string date, string from, string fromid, string to, string toid, string si, string price)
     {
       //S25 W4 D5, 2012-09-11 19:03
@@ -58,10 +27,8 @@ namespace AndreiPopescu.CharazayPlus.Objects
       FromTeamId = TransferListedPlayer.TeamId(fromid);
       FromTeamName = TransferListedPlayer.TeamName(from);
       //
-      SkillsIndex = String.IsNullOrWhiteSpace(si)
-        ? 0
-        : uint.Parse(si, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);      
-      Price = uint.Parse(price, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
+      SkillsIndex = ParsingExtensions.GetUInt (si);
+      Price = ParsingExtensions.GetUInt(price);
       //
       ToTeamId = TransferListedPlayer.TeamId(toid);
       ToTeamName = TransferListedPlayer.TeamName(to);
@@ -71,10 +38,9 @@ namespace AndreiPopescu.CharazayPlus.Objects
     {
       int i=date.IndexOf(',');
       CharazayTransferDate = CharazayDate.Parse(date.Substring(0, i));
-      TransferDate = DateTime.ParseExact(date.Substring(i + 2), "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+      TransferDate = ParsingExtensions.GetDate(date.Substring(i + 2));
       FromTeamName = from;
-      SkillsIndex = String.IsNullOrWhiteSpace(si) ? 0 
-        : uint.Parse(si, NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);      
+      SkillsIndex = ParsingExtensions.GetUInt(si);      
     }
 
  

@@ -94,6 +94,7 @@
       this.olvStatus.OwnerDraw = true;
       this.olvStatus.ShowItemToolTips = true;
       this.olvStatus.Size = new System.Drawing.Size(986, 416);
+      this.olvStatus.SortGroupItemsByPrimaryColumn = false;
       this.olvStatus.TabIndex = 1;
       this.olvStatus.UseAlternatingBackColors = true;
       this.olvStatus.UseCompatibleStateImageBehavior = false;

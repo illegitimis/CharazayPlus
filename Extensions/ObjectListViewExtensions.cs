@@ -1,4 +1,4 @@
-﻿namespace AndreiPopescu.CharazayPlus.UI
+﻿namespace AndreiPopescu.CharazayPlus.Extensions
 {
   using BrightIdeasSoftware;
   using System.Drawing;

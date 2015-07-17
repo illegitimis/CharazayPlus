@@ -57,13 +57,14 @@ namespace AndreiPopescu.CharazayPlus.Web
         bool isSuccesfulDownload = false;
         if (refreshUserAgent) RefreshUserAgent(); 
         //
-        if (item.FileExists && !item.FileInvalid) return;
+        if (item.FileExists && !item.FileInvalid) 
+          continue;
         //
         while (!isSuccesfulDownload)
         {
           try
           {
-            webClient.DownloadFile(item.m_uri, item.m_fileName);
+            webClient.DownloadFile(item.Uri, item.FileName);
             isSuccesfulDownload = true;
           }
           catch (WebException e)
@@ -73,11 +74,11 @@ namespace AndreiPopescu.CharazayPlus.Web
               foreach (var ip in charazayIPs)
               {
                 if (isSuccesfulDownload) break;
-                item.m_uri = new Uri(item.m_uri.AbsoluteUri.Replace("www.charazay.com", ip));
+                item.Uri = new Uri(item.Uri.AbsoluteUri.Replace("www.charazay.com", ip));
                 try
                 {
                   if (refreshUserAgent) RefreshUserAgent();
-                  webClient.DownloadFile(item.m_uri, item.m_fileName);
+                  webClient.DownloadFile(item.Uri, item.FileName);
                   isSuccesfulDownload = true;
                 }
                 catch (WebException)
@@ -92,7 +93,7 @@ namespace AndreiPopescu.CharazayPlus.Web
         //
         if (!isSuccesfulDownload)
         {
-          item.m_fileName = GetMostRecentFile(item.m_fileName);
+          item.FileName = GetMostRecentFile(item.FileName);
         } 
       }
     }
@@ -105,21 +106,21 @@ namespace AndreiPopescu.CharazayPlus.Web
         {
           RefreshUserAgent();
         }
-        bool bFileExists = File.Exists(item.m_fileName);
+        bool bFileExists = File.Exists(item.FileName);
 
         if (bFileExists)
         {
-          File.Delete(item.m_fileName);
+          File.Delete(item.FileName);
         }
 
         try
         {
-          webClient.DownloadFile(item.m_uri, item.m_fileName);
+          webClient.DownloadFile(item.Uri, item.FileName);
         }
         catch (WebException)
         {
           //if (item.m_offline)
-            item.m_fileName = GetMostRecentFile(item.m_fileName);
+            item.FileName = GetMostRecentFile(item.FileName);
         }
 
       }

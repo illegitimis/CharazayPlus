@@ -29,14 +29,20 @@ namespace AndreiPopescu.CharazayPlus
       rebounds = 5
     };
 
-static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = 15 };
-    static readonly Xsd2.charazayPlayer s_15 = new Xsd2.charazayPlayer() { basic = s_basic15, skills = s_sk15 };
+    static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = 15 };
+
+    static readonly Xsd2.charazayPlayer s_15 = new Xsd2.charazayPlayer()
+    {
+      basic = s_basic15
+      ,
+      skills = s_sk15
+    };
 
 
 
 
 
-      public static Player GetPlayerByPosition (PlayerPosition pos)
+    public static Player GetPlayerByPosition (PlayerPosition pos)
     {
       switch (pos)
       {
@@ -59,10 +65,10 @@ static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasi
       switch (pos)
       {
         case PlayerPosition.PG: p = new PG(s_15); break;
-        case PlayerPosition.SG: p= new SG(s_15); break;
-        case PlayerPosition.SF: p= new SF(s_15); break;
-        case PlayerPosition.PF: p= new PF(s_15); break;
-        case PlayerPosition.C: p= new C(s_15); break;
+        case PlayerPosition.SG: p = new SG(s_15); break;
+        case PlayerPosition.SF: p = new SF(s_15); break;
+        case PlayerPosition.PF: p = new PF(s_15); break;
+        case PlayerPosition.C: p = new C(s_15); break;
         default: throw new NotSupportedException("GetPlayerByPosition");
       }
       p.IsHW = false;
@@ -147,6 +153,7 @@ static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasi
       predictValuePlayer.IsFormFactor = false;
       // compute active skills at the end
       predictValuePlayer.ActiveSkills();
+
 #if DEBUG
       System.Diagnostics.Debug.WriteLine(string.Format("{0,-10}{1,-10}", week, predictValuePlayer));
 #endif

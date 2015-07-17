@@ -25,6 +25,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
     public const double HeightReboundsScaleFactor = 0.1;
     public const double HeightFootworkScaleFactor = 0.075;
 
+    /// <summary>
+    /// lose a speed skill point for 10 kg above <see cref="ActiveWeight"/>
+    /// </summary>
     public const double WeightSpeedScaleFactor = 0.1;
 
 

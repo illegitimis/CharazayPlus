@@ -1,8 +1,5 @@
 ﻿namespace AndreiPopescu.CharazayPlus
 {
-  using System;
-  using System.Xml.Serialization;
-  using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Utils;
 
   /// <summary>
@@ -11,12 +8,12 @@
   public class SF : Player
   {
     public SF() : base() { }
-
     public SF (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
+    public SF (Xsd2.charazayPlayer xsdPlayer, bool ishw, bool isfatigue, bool isform) : base(xsdPlayer, ishw, isfatigue, isform) { }
     public SF (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
 
-    public override string ToString() { return string.Format("sf: {0}", base.ToString()); }
+    public override string ToString() { return string.Format("SF: {0}", base.ToString()); }
 
     protected internal override byte MinimumBMI { get { return 24; } }
     protected internal override byte MaximumBMI { get { return 26; } }
@@ -335,19 +332,18 @@
           ,15.06  // 285             
           ,15.07  // 286             
           ,15.08  // 287             
-          ,15.10// 288          
+          ,15.10  // 288          
       };
       }
     }
 
     public override double ValueIndex { get { return TotalScore / SF.StoredAssessedValues[TrainingWeekIndex]; } }
+
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'F', this.ValueIndex); }
-      get { return MatlabInterpolant.GetTMValue(this.Age, 'F', this.ValueIndex); }
+      get { return MatlabInterpolant20150504.Instance.GetTMValue(this.Age, 'F', this.ValueIndex); }
     }
   }
 
-  
-
-} // namespace
+} 

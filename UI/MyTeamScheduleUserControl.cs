@@ -4,6 +4,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 {
   using System;
   using System.Windows.Forms;
+  using AndreiPopescu.CharazayPlus.Extensions;
   using MatchType = AndreiPopescu.CharazayPlus.Utils.MatchType;
   using MatchFilteredBindingList = AndreiPopescu.CharazayPlus.Utils.FilteredBindingList<Xsd2.match>;
 

@@ -7,8 +7,10 @@ namespace AndreiPopescu.CharazayPlus.UI
   using System.Drawing;
   using System.Data;
   using System.Text;
+  using System.Linq;
   using System.Windows.Forms;
   using BrightIdeasSoftware;
+  using AndreiPopescu.CharazayPlus.Extensions;
   using AndreiPopescu.CharazayPlus.Utils;
 
   public partial class PlayerPositionUserControl : UserControl
@@ -98,9 +100,13 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// </summary>
     private void InitializeComponent ( )
     {
+      this.components = new System.ComponentModel.Container();
       this.olv = new BrightIdeasSoftware.ObjectListView();
       this.ucEvaluatePlayer = new AndreiPopescu.CharazayPlus.UI.EvaluatePlayerUserControl();
+      this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.tsmiTransferBookmark = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.olv)).BeginInit();
+      this.cms.SuspendLayout();
       this.SuspendLayout();
       // 
       // olv
@@ -118,6 +124,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olv.UseAlternatingBackColors = true;
       this.olv.UseCompatibleStateImageBehavior = false;
       this.olv.View = System.Windows.Forms.View.Details;
+      this.olv.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(this.olv_CellRightClick);
       this.olv.SelectedIndexChanged += new System.EventHandler(this.olv_SelectedIndexChanged);
       // 
       // ucEvaluatePlayer
@@ -127,11 +134,28 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucEvaluatePlayer.CausesValidation = false;
       this.ucEvaluatePlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.ucEvaluatePlayer.ForeColor = System.Drawing.Color.White;
+      this.ucEvaluatePlayer.IsFatigue = false;
+      this.ucEvaluatePlayer.IsForm = false;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = false;
       this.ucEvaluatePlayer.Location = new System.Drawing.Point(0, 155);
       this.ucEvaluatePlayer.Name = "ucEvaluatePlayer";
       this.ucEvaluatePlayer.SelectedObject = null;
       this.ucEvaluatePlayer.Size = new System.Drawing.Size(662, 130);
       this.ucEvaluatePlayer.TabIndex = 2;
+      // 
+      // cms
+      // 
+      this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiTransferBookmark});
+      this.cms.Name = "cms";
+      this.cms.Size = new System.Drawing.Size(175, 26);
+      // 
+      // tsmiTransferBookmark
+      // 
+      this.tsmiTransferBookmark.Name = "tsmiTransferBookmark";
+      this.tsmiTransferBookmark.Size = new System.Drawing.Size(174, 22);
+      this.tsmiTransferBookmark.Text = "Transfer Bookmark";
+      this.tsmiTransferBookmark.Click += new System.EventHandler(this.tsmiTransferBookmark_Click);
       // 
       // PlayerPositionUserControl
       // 
@@ -142,10 +166,15 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.DoubleBuffered = true;
       this.Name = "PlayerPositionUserControl";
       this.Size = new System.Drawing.Size(662, 285);
+      this.Load += new System.EventHandler(this.PlayerPositionUserControl_Load);
       ((System.ComponentModel.ISupportInitialize)(this.olv)).EndInit();
+      this.cms.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
+
+    private ContextMenuStrip cms;
+    private ToolStripMenuItem tsmiTransferBookmark;
 
    
     
@@ -186,6 +215,54 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
       if (p!=null)
         ucEvaluatePlayer.SelectedObject = p.BasePlayer;
+    }
+
+    private void PlayerPositionUserControl_Load (object sender, EventArgs e)
+    {
+      this.ucEvaluatePlayer.IsHeightWeightImpact = true;
+      this.ucEvaluatePlayer.EvaluationType = Evaluation.season30;
+    }
+
+    private void tsmiTransferBookmark_Click (object sender, EventArgs e)
+    {
+      // object type attached is Player
+      var crtPlayer = (Player)this.olv.SelectedObject;
+      if (crtPlayer == null) return;
+      //
+      // search for bookmarks with same id and court position
+      //
+      var found = Data.TransferList.Bookmarks.FirstOrDefault(tlp => tlp.PlayerId == crtPlayer.Id && tlp.Pos == crtPlayer.PositionEnum);
+      if (found == null)
+      { //
+        // not found => add
+        //
+        Data.TransferList.Bookmarks.Add(new Objects.TLPlayer()
+        {
+          Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm"),
+          AgeValueIndex = crtPlayer.ValueIndex,
+          Price = 1000000u,
+          Profitability = Math.Pow(10d, 6d) * crtPlayer.TransferMarketValue / 1000000d,
+          Position = crtPlayer.PositionEnum.ToString(),
+          Name = crtPlayer.FullName,
+          PlayerId = crtPlayer.Id
+        });
+      }
+      else
+      { //
+        // found => update
+        //
+        found.Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm");
+        found.AgeValueIndex = crtPlayer.ValueIndex;
+        found.Price = 1000000u;
+        found.Profitability = Math.Pow(10d, 6d) * crtPlayer.TransferMarketValue / 1000000d;
+      }
+      
+    }
+
+    private void olv_CellRightClick (object sender, CellRightClickEventArgs e)
+    {
+      e.MenuStrip = cms;
+      cms.Show(e.Location);    
     }
 
   }

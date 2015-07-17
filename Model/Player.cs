@@ -4,66 +4,13 @@
   //using System.Linq;
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Utils;
+  using System.Collections.Generic;
 
-
+  /// <summary>
+  /// The base model class for a Charazay player
+  /// </summary>
   public abstract partial class Player
   {
-    #region static
-    /// <summary>
-    /// Best position for m player based on total score
-    /// </summary>
-    /// <param name="pg">PG aspect</param>
-    /// <param name="sg">SG Aspect</param>
-    /// <param name="sf">SF aspect</param>
-    /// <param name="pf">PF aspect</param>
-    /// <param name="M">C aspect</param>
-    /// <returns></returns>
-    public static Player DecideOnTotalScore (PG pg, SG sg, SF sf, PF pf, C c)
-    {
-      double maxTotalScore = pg.TotalScore;
-      Player p = pg;
-
-      if (sg.TotalScore > maxTotalScore)
-      {
-        p = sg;
-        maxTotalScore = sg.TotalScore;
-      }
-
-      if (sf.TotalScore > maxTotalScore)
-      {
-        p = sf;
-        maxTotalScore = sf.TotalScore;
-      }
-
-      if (pf.TotalScore > maxTotalScore)
-      {
-        p = pf;
-        maxTotalScore = pf.TotalScore;
-      }
-
-      if (c.TotalScore > maxTotalScore)
-      {
-        p = c;
-        maxTotalScore = c.TotalScore;
-      }
-
-      return p;
-    }
-    public static Player DecideOnValueIndex (PG pg, SG sg, SF sf, PF pf, C c)
-    {
-      double maxVI = 0d;
-      Player p = null;
-
-      if (pg.ValueIndex > maxVI) { p = pg; maxVI = pg.ValueIndex; }
-      if (sg.ValueIndex > maxVI) { p = sg; maxVI = sg.ValueIndex; }
-      if (sf.ValueIndex > maxVI) { p = sf; maxVI = sf.ValueIndex; }
-      if (pf.ValueIndex > maxVI) { p = pf; maxVI = pf.ValueIndex; }
-      if (c.ValueIndex > maxVI) { p = c; maxVI = c.ValueIndex; }
-
-      return p;
-    } 
-    #endregion
-
     #region Constructors
     /// <summary>
     /// 
@@ -120,62 +67,79 @@
       , byte reb
       , byte exp
       )
-    {
-      // Name = name;
-      //Surname = surname;
-      //CountryId = countryId;
-      //Age = age;
-      //Height = h;
-      //Weight = w;
-      //SkillsIndex = si;
-      //Salary = salary;
-      //Form = form;
-      //Fatigue = fatigue;
-      //Fame = fame;
-      //Defence = def;
-      //Freethrows = ft;
-      //TwoPoint = p2;
-      //ThreePoint = p3;
-      //Speed = spe;
-      //Passing = pas;
-      //Dribling = dri;
-      //Footwork = ftw;
-      //Rebounds = reb;
-      //Experience = exp;
-
-      InitSkills();
-      ActiveSkills();
-    }
+      : this(new Xsd2.charazayPlayer()
+      {
+        skills = new Xsd2.charazayPlayerSkills()
+        {
+          defence = def,
+          dribling = dri,
+          experience = exp,
+          footwork = ftw,
+          freethrow = ft,
+          passing = pas,
+          rebounds = reb,
+          speed = spe,
+          threepoint = p3,
+          twopoint = p2,
+        }
+        ,
+        status = new Xsd2.charazayPlayerStatus()
+        {
+          fame = (byte)fame,
+          fatigue = fatigue,
+          form = form,
+          salary = (uint)salary,
+          si = (uint)si
+        }
+        ,
+        basic = new Xsd2.charazayPlayerBasic()
+        {
+          age = age,
+          height = h,
+          weight = w,
+          name = name,
+          surname = surname,
+        }
+        ,
+        countryid = countryId
+        ,
+        id = (uint)id
+      }
+      ) { }
 
     /// <summary>
     /// copy constructor
     /// </summary>
     /// <param name="p">reference player</param>
-    protected Player (Player p) { throw new NotImplementedException(); }
+    protected Player (Player p) : this (p.BasePlayer) { }
 
 
     internal Xsd2.charazayPlayer BasePlayer { get { return m_player; } }
 
 
-
-    protected Player (Xsd2.charazayPlayer xsdPlayer)
+    /// <summary>
+    /// universal constructor
+    /// </summary>
+    /// <param name="xsdPlayer"></param>
+    protected Player (Xsd2.charazayPlayer xsdPlayer, bool isHW = false, bool isFatigue=false, bool isForm = false)
     {
       m_player = xsdPlayer;
       if (xsdPlayer.skills == null)
         return;
+      //
+      this.IsHW = isHW;
+      this.IsFatigueFactor = isFatigue;
+      this.IsFormFactor = isForm;
+      //
       InitSkills();
       ActiveSkills();
     }
 
-
-    protected Player (Xsd2.charazayPlayerSkills xsdSkills)
-    {
-      m_player = new Xsd2.charazayPlayer();
-
-      m_player.skills = xsdSkills;
-      InitSkills();
-      ActiveSkills();
-    }
+    /// <summary>
+    /// skills only constructor
+    /// </summary>
+    /// <param name="xsdSkills">player skills</param>
+    protected Player (Xsd2.charazayPlayerSkills xsdSkills) : this(new Xsd2.charazayPlayer() { skills = xsdSkills }) { }
 
     #endregion
 
@@ -275,20 +239,26 @@
     #endregion
 
     #region switches
-    public bool IsFormFactor { get; set; }
-    public bool IsFatigueFactor { get; set; }
     /// <summary>
-    /// height impact on shooting score
+    /// take form into consideration when computing active skills ?
+    /// </summary>
+    public bool IsFormFactor { get; set; }
+
+    /// <summary>
+    /// take fatigue into consideration when computing active skills ?
+    /// </summary>
+    public bool IsFatigueFactor { get; set; }
+   
+    /// <summary>
+    /// height impact on shooting score, default true
     /// </summary>
     public bool IsPositionHeightAdequacy { get; set; }
+
     /// <summary>
-    /// height & weight impact on active skills
+    /// height and weight impact on active skills
     /// </summary>
     public bool IsHW { get; set; }
     #endregion
-
-    //string m_strPosition;
-    //string m_str2ndPosition;
 
     #region Implemented public properties
 
@@ -391,7 +361,7 @@
     /// </summary>
     /// <returns></returns>
     [OLVColumn(DisplayIndex = 20, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public double DefensiveScore
+    public virtual double DefensiveScore
     {
       get
       {
@@ -429,8 +399,9 @@
           Defines.ShootingPositionPercentages[index]
           , new double[] { m_dFreethrows, m_dTwoPoint, m_dThreePoint });
 
-        return (IsPositionHeightAdequacy) ? shootingScore * HeightShootingInfluence()
-            : shootingScore;
+        return (IsPositionHeightAdequacy) 
+          ? shootingScore * HeightShootingInfluence()
+          : shootingScore;
       }
     }
 
@@ -446,7 +417,7 @@
     }
 
     /// <summary>
-    /// 
+    /// Rebound + Defence : helps taking defensive rebounds.
     /// </summary>
     [OLVColumn(DisplayIndex = 24, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double DefensiveReboundsScore
@@ -459,7 +430,7 @@
       }
     }
     /// <summary>
-    /// 
+    /// Rebound + Footwork : helps taking offensive rebounds.
     /// </summary>
     [OLVColumn(DisplayIndex = 25, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double OffensiveReboundsScore
@@ -486,6 +457,9 @@
       }
     }
 
+    /// <summary>
+    /// General measure for the modeled player value
+    /// </summary>
     [OLVColumn(DisplayIndex = 27, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public double TotalScore
     {
@@ -590,32 +564,34 @@
     {
       if (IsHW)
       {
-        //Big Height increases footwork and rebound but decrease dribbling
-        //Small Height increases dribbling but decreases footwork and rebound
-        double heightDelta = (double)(Defines.ActiveHeight - Height);
+        // 1) Big Height increases footwork and rebound but decrease dribbling
+        // 2) Small Height increases dribbling but decreases footwork and rebound
+        //double heightDelta = (double)(Defines.ActiveHeight - Height);
+        double heightDelta = (double)(this.AverageHeight - this.Height);
         m_dDribling += heightDelta * Defines.HeightDribblingScaleFactor;
         m_dFootwork -= heightDelta * Defines.HeightFootworkScaleFactor;
         m_dRebounds -= heightDelta * Defines.HeightReboundsScaleFactor;
 
-        //Big Weight lowers speed
-        if (Weight > Defines.ActiveWeight)
+        // 3) Big Weight lowers speed
+        //if (Weight > Defines.ActiveWeight)
+        if (this.Weight > this.AverageWeight)
         {
-          double weightDelta = (double)(Weight - Defines.ActiveWeight);
+          double weightDelta = (double)(this.Weight - this.AverageWeight);
           m_dSpeed -= weightDelta * Defines.WeightSpeedScaleFactor;
         }
 
-        // Big BMI lowers speed and increases footwork
-        // low bmi is m gamble
-        if (BMI > MaximumBMI)
+        // 4) Big BMI lowers speed and increases footwork
+        if (this.BMI > this.AverageBMI)
         {
-          m_dFootwork += (BMI - MaximumBMI);
-          m_dSpeed -= (BMI - MaximumBMI);
+          m_dFootwork += (this.BMI - this.AverageBMI);
+          m_dSpeed -= (this.BMI - this.AverageBMI);
         }
-        if (BMI < MinimumBMI)
-        {
-          m_dFootwork -= (MinimumBMI - BMI) * 0.5;
-          m_dSpeed += (MinimumBMI - BMI) * 0.33;
-        }
+        // low bmi is a gamble
+        //if (BMI < MinimumBMI)
+        //{
+        //  m_dFootwork -= (MinimumBMI - BMI) * 0.5;
+        //  m_dSpeed += (MinimumBMI - BMI) * 0.33;
+        //}
       }
 
       //experience gain
@@ -666,6 +642,16 @@
         m_dFootwork *= fatigueScaleFactor;
         m_dRebounds *= fatigueScaleFactor;
       }
+
+      Compute.FitSkill(ref m_dDefence);
+      Compute.FitSkill(ref m_dDribling);
+      Compute.FitSkill(ref m_dFootwork);
+      Compute.FitSkill(ref m_dFreethrows);
+      Compute.FitSkill(ref m_dPassing);
+      Compute.FitSkill(ref m_dRebounds);
+      Compute.FitSkill(ref m_dSpeed);
+      Compute.FitSkill(ref m_dThreePoint);
+      Compute.FitSkill(ref m_dTwoPoint);
 
     }
 
@@ -806,7 +792,12 @@
     }
 
 
-    // height influences shooting accuracy
+    /// <summary>
+    /// small height influences shooting accuracy
+    /// if taller than respective position, no influence
+    /// otherwise weigh down, e.g. a PG played as a SF will shoot worse
+    /// </summary>
+    /// <returns>weight of height corresponding to position on shooting</returns>
     private double HeightShootingInfluence ( )
     {
       byte averageHeight = (byte)((MaximumHeight + MinimumHeight) / 2);
@@ -817,17 +808,22 @@
     #endregion
 
     #region Abstract properties
-    // partition the time per training categories
-    //              pg	sg	sf	pf	M
-    //defense     	4	  4	  3	  3	  3
-    //dribling	    3	  3	  3	  1	  0
-    //passing	      4	  2	  1	  1	  2
-    //speed	        4	  4	  4	  3	  2
-    //footwork	    0	  0	  2	  4	  4
-    //rebounds	    0	  0	  1	  4	  5
+    ///////////////////////////////////////////////////////////////////////////
+    // partition the time (no weeks of skill training) per training categories
+    //////////////////////////////////////////////////////////////////////////
+    //POSITION            PG	SG	SF	PF	C
+    //////////////////////////////////////////////////////////////////////////
+    //defense     	      4	  4	  3	  3	  3
+    //dribling	          3	  3	  3	  1	  0
+    //passing	            4	  2	  1	  1	  2
+    //speed	              4	  4	  4	  3	  2
+    //footwork	          0	  0	  2	  4	  4
+    //rebounds	          0	  0	  1	  4	  5
     //insideShooting	    1	  2	  2	  1	  1
-    //outsideShooting	  1	  2	  1	  0	  0
-    //              17	17	17	17	17
+    //outsideShooting	    1	  2	  1	  0	  0
+    //////////////////////////////////////////////////////////////////////////
+    //TOTAL               17	17	17	17	17
+    //////////////////////////////////////////////////////////////////////////
     protected internal abstract byte[] TrainingPlan { get; }
 
     #region Skill percentages
@@ -870,7 +866,7 @@
    
     #endregion
 
-   /// <summary>
+    /// <summary>
    /// COURT POSITION as defined by enumeration, overridden in each specialized class
    /// Works as a type discriminator
    /// </summary>
@@ -879,15 +875,19 @@
     #region Suggested body mass index and height
     protected internal abstract byte MinimumBMI { get; }
     protected internal abstract byte MaximumBMI { get; }
+    protected byte AverageBMI { get { return (byte)((UInt16)(MinimumBMI + MaximumBMI) / 2); } }
+    //
     protected internal abstract byte MinimumHeight { get; }
     protected internal abstract byte MaximumHeight { get; }
-    protected byte AverageHeight { get { return (byte)((decimal)(MinimumHeight + MaximumHeight) / 2m); } }
+    protected byte AverageHeight { get { return (byte)((UInt16)(MinimumHeight + MaximumHeight) / 2); } }
+    //
+    protected byte AverageWeight { get { double ah = AverageHeight / 100d; return (byte)(Math.Pow(ah, 2) * AverageBMI); } }
+
     #endregion
 
     #endregion
 
   }
-
 
 
 }

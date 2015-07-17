@@ -8,20 +8,24 @@ namespace AndreiPopescu.CharazayPlus.UI
   using System.Data;
   using System.Text;
   using System.Windows.Forms;
-  using AndreiPopescu.CharazayPlus.Utils;
-  using BrightIdeasSoftware;
   using System.IO;
   using System.Xml.Serialization;
   using System.Collections;
-  using AndreiPopescu.CharazayPlus.Objects;
   using System.Linq;
+
+
+  using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Objects;
   using AndreiPopescu.CharazayPlus.Extensions;
 
-  // Getting player from charazay + adding to olv => add to cache
+
+  using BrightIdeasSoftware;
+
   public partial class TransferListUserControl : UserControl
   {
     static readonly TimeSpan TimeSpan6H = new TimeSpan(6, 0, 0);
     static readonly TimeSpan TimeSpan30Days = new TimeSpan(30, 0, 0, 0);
+    static readonly TimeSpan TimeSpan1Day = new TimeSpan(24, 0, 0);
     
     public TransferListUserControl ( )
     {
@@ -36,8 +40,14 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     #region published events
     //
+    /// <summary>
+    /// in case of a non-integer
+    /// </summary>
     public event EventHandler BadPlayerId;
-    public event EventHandler PlayerDataUnavailable;
+    /// <summary>
+    /// missing id, fired, no skills ...
+    /// </summary>
+    public event EventHandler <PlayerEventArgs> PlayerDataUnavailable;
     public event EventHandler <PlayerEventArgs> DownloadPlayerData;
     #endregion
 
@@ -70,7 +80,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
           case 2: //age value index
             {
-              double[] valueIndices = new double[] { 0.8d, 0.85d, 0.9d, 1d, 1.05d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
+              double[] valueIndices = new double[] { 0.75d, 0.85d, 0.9d, 0.95d, 1d, 1.05d, 1.08d, 1.1d, 1.15d, 1.2d, 1.25d, 1.3d };
               string[] viDesc = ObjectListViewExtensions.BuildCustomGroupies<double>(valueIndices);
               col.MakeGroupies(valueIndices, viDesc);
               //col.IsHeaderVertical = true;
@@ -94,17 +104,39 @@ namespace AndreiPopescu.CharazayPlus.UI
             {
               col.Sortable = true;
               col.Groupable = true;
-              col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return tlp.DeadLine.Day; };
+              //col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return tlp.DeadLine == DateTime.MinValue ? 0 : tlp.DeadLine.Day; };
+              col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return new DateTime(tlp.DeadLine.Year, tlp.DeadLine.Month, tlp.DeadLine.Day); };
               col.GroupKeyToTitleConverter = delegate(object groupKey)
               {
-
-                int iDay = (int)groupKey;
-                int currentDay = DateTime.Now.Day;
-                if (iDay < currentDay) return "deadline reached";
-                else if (iDay == currentDay) return "today";
-                else if (iDay == 1 + currentDay) return "tomorrow";
-                else if (iDay == currentDay + 2) return "day after tomorrow";
-                else return "later";
+                DateTime dt = (DateTime)groupKey;
+                // tbd, replace with servertime
+                DateTime now = DateTime.UtcNow;
+                if (dt == DateTime.MinValue) return "formerly transfer listed";
+                else
+                {
+                  if (dt < now) 
+                  {
+                    if ( now-dt > TimeSpan1Day)
+                      return "deadline reached";
+                    else
+                    {
+                      if (dt.Day == now.Day)
+                        return "today";
+                      else
+                        return "yesterday";
+                    }
+                  }                    
+                  else
+                  { //
+                    // deadline in the future
+                    //
+                    if (dt.Day == now.Day)
+                      return "today";
+                    if (dt - now < TimeSpan1Day)
+                      return "tomorrow";
+                    else return "later";                    
+                  }
+                }              
               };
             }
             break;
@@ -135,24 +167,15 @@ namespace AndreiPopescu.CharazayPlus.UI
       else return PlayerPosition.Unknown;
     }
 
-    void SetWaitCursor (Action seqAct)
-    {
-      try
-      {
-        Cursor.Current = Cursors.WaitCursor;
-        seqAct();
-      }
-      catch { }
-      finally
-      {
-        Cursor.Current = Cursors.Default;
-      }
-    }
-
+    /// <summary>
+    /// Updates the UI for all changes to the current transfer listed player (<paramref name="tlp"/>) 
+    /// </summary>
+    /// <param name="tlp"></param>
     void DoScrapeUpdate (TLPlayer tlp)
     {
       var st = ScrapeUpdate(tlp);
       this.lblServertime.Text = st.ToString("yyyy-MM-dd HH:mm:ss");
+      this.lblServertime.Invalidate();
       this.olvTL.RefreshObject(tlp);
     }
     #endregion
@@ -200,25 +223,30 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void btnTLGet_Click (object sender, EventArgs e)
     {
       ulong playerId;
+      Xsd2.error err = null;
+
       if (ulong.TryParse(tbxPlayerId.Text, out playerId))
       {
-        var xsd2p = Deserializer.GoGetPlayerXml(playerId);
+        var xsd2p = Deserializer.GoGetPlayerXml(playerId, out err);
         //
-        if (xsd2p != null)
+        if (err != null)
+        {
+          if (PlayerDataUnavailable != null)
+            PlayerDataUnavailable(this, new PlayerEventArgs() { ErrorMessage = err.message });
+          return;
+        }
+        //
+        if (xsd2p != null && xsd2p.skills != null)
         {
           this.ucEvaluatePlayer.SelectedObject = xsd2p;
           this.btnTLAdd.Enabled = (GetPosition() != PlayerPosition.Unknown);
           if (DownloadPlayerData != null)
-            DownloadPlayerData(null, new PlayerEventArgs()
-            {
-              Surname = xsd2p.basic.surname
-              ,
-              Name = xsd2p.basic.name
-            });
+            DownloadPlayerData(null, new PlayerEventArgs() { Surname = xsd2p.basic.surname, Name = xsd2p.basic.name });
         }
         else
         {
-          if (PlayerDataUnavailable != null) PlayerDataUnavailable(this, null);
+          if (PlayerDataUnavailable != null) 
+            PlayerDataUnavailable(this, null);
           this.btnTLAdd.Enabled = false;
         }
       }
@@ -295,13 +323,28 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (crt == null)
         return;
       //
-      var xsdp = Deserializer.GoGetPlayerXml(crt.PlayerId);
+      Xsd2.error err = null;
+      var xsdp = Deserializer.GoGetPlayerXml(crt.PlayerId, out err);
+      if (err != null)
+      {
+        cmsOlvTLRemove_Click(null, null);
+       
+        if (PlayerDataUnavailable != null)
+          PlayerDataUnavailable(this, new PlayerEventArgs() { ErrorMessage = err.message });
+        return;
+      }
       //
-      this.ucEvaluatePlayer.SelectedObject = xsdp;
-      this.ucBasicPlayerInfo.PlayerByScore = this.ucEvaluatePlayer.GetPlayer(crt.Pos);
-      this.ucBasicPlayerInfo.CurrentPrice = crt.Price;
-      if (this.ucBasicPlayerInfo.PlayerByScore != null)
-        this.ucBasicPlayerInfo.Init();
+      if (xsdp == null || xsdp.skills == null)
+      {
+        this.ucBasicPlayerInfo.Init();        
+      }
+      else
+      {
+        this.ucBasicPlayerInfo.CurrentPrice = crt.Price;
+        this.ucEvaluatePlayer.SelectedObject = xsdp;
+        this.ucBasicPlayerInfo.Init(this.ucEvaluatePlayer.GetPlayer(crt.Pos));
+      }
+              
     }
 
     private void rd_CheckedChanged (object sender, EventArgs e)
@@ -324,7 +367,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         case 1:
           {
             Web.CharazayDownloadItem playerLink = new Web.CharazayDownloadItem("player", 1, tlp.PlayerId);
-            e.Url = playerLink.m_uri.AbsoluteUri;
+            e.Url = playerLink.Uri.AbsoluteUri;
           } break;
         default: break;
       }
@@ -401,7 +444,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private void cmsOlvTLUpdate_Click (object sender, EventArgs e)
     {
-      SetWaitCursor(( ) =>
+      FormsExtensions.SetWaitCursor(( ) =>
       {
         if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
         {
@@ -433,92 +476,146 @@ namespace AndreiPopescu.CharazayPlus.UI
 
    
     private DateTime ScrapeUpdate (TLPlayer tlPlayer)
-    {
-      var page = new AndreiPopescu.CharazayPlus.Web.PlayerPageDownloadItem(tlPlayer.PlayerId);
-      var ppi = Web.Scraper.Instance.PlayerPage(page.m_uri);
-      //
+    { //
       // bookmarked player with exact court position as in the list
       //
-      var currentPlayer = Utils.Deserializer.GetPlayerFromIdAndPosition(tlPlayer.PlayerId, tlPlayer.Pos);
-      //
-      if (ppi.IsTransferListed)
+      var currentPlayer = Utils.Deserializer.GetPlayerFromIdAndPosition(tlPlayer.PlayerId, tlPlayer.Pos, Evaluation.season30);
+      if (currentPlayer == null)
       { //
-        // update TLPlayer with more relevant site info
+        // since player info older than 3 days is deleted since 1.1.5
+        // maybe player just got transfered and xml with skills got deleted
         //
-        tlPlayer.Deadline = ppi.Deadline.Value.ToString("yyyy.MM.dd HH:mm");
-        tlPlayer.Price = ppi.Price.Value;
-        //
-        // no more 'regula de 3 simpla'
-        // tlPlayer.Profitability *= (tlPlayer.Price / (double)ppi.Price.Value);
-        //
-        tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;
+        var pthdi = new AndreiPopescu.CharazayPlus.Web.PlayerTransferHistoryDownloadItem(tlPlayer.PlayerId);
+        var th = Web.Scraper.Instance.ParseTransferHistory(pthdi.Uri).ToList();
+        if (!th.IsNullOrEmpty())
+        {
+          Xsd2.error err = null;
+          var xsdp = Deserializer.GoGetPlayerXml(tlPlayer.PlayerId, out err);
+          //
+          if (err != null)
+          { 
+            olvTL.RemoveObject(tlPlayer);
+            Data.TransferList.Bookmarks.Remove(tlPlayer);
+            return DateTime.UtcNow;
+          }
+          //
+          var ts = (th[0].TransferDate - tlPlayer.DeadLine);
+          if (ts < TimeSpan.Zero) 
+            ts = -ts;
+          var ts2 = th[0].TransferDate - DateTime.UtcNow;
+          if (ts2 < TimeSpan.Zero) 
+            ts2 = -ts2;
+          
+          if ((th[0].SkillsIndex == xsdp.status.si && ts < TimeSpan6H) || (tlPlayer.DeadLine == DateTime.MinValue && ts2 < TimeSpan30Days))
+          {
+            decimal priceInMillions = th[0].Price / (decimal)1000000;            
+            InsertDb(tlPlayer.Pos, xsdp.basic.age , priceInMillions, (decimal)tlPlayer.AgeValueIndex, th[0].TransferDate);
+            //
+            olvTL.RemoveObject(tlPlayer);
+            Data.TransferList.Bookmarks.Remove(tlPlayer);
+          }
+          else
+          { 
+            tlPlayer.Deadline = DateTime.MinValue.ToString("yyyy.MM.dd HH:mm");
+          }
+        }
+        else
+        {
+          tlPlayer.Deadline = DateTime.MinValue.ToString("yyyy.MM.dd HH:mm");
+        }
+
+        return DateTime.UtcNow;
       }
       else
       { //
-        // deadline is over
-        // transfer details either on player history page or team transfer history
+        // get updated player page info from Charazay site
         //
+        var page = new AndreiPopescu.CharazayPlus.Web.PlayerPageDownloadItem(tlPlayer.PlayerId);
+        var ppi = Web.Scraper.Instance.PlayerPage(page.Uri);
+        //
+        if (ppi.IsTransferListed)
+        { //
+          // update TLPlayer with more relevant site info
+          //
+          tlPlayer.Deadline = ppi.Deadline.Value.ToString("yyyy.MM.dd HH:mm");
+          tlPlayer.Price = ppi.Price.Value;
+          tlPlayer.AgeValueIndex = currentPlayer.ValueIndex;
+          //
+          // no more 'regula de 3 simpla'
+          // tlPlayer.Profitability *= (tlPlayer.Price / (double)ppi.Price.Value);
+          //
+          tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;
+        }
+        else
+        { //
+          // deadline is over
+          // transfer details either on player history page or team transfer history
+          //
 #if DOTNET30
-        //if (_dcTransfers == null) _dcTransfers = new TransferHistoryDataContext();
+          //if (_dcTransfers == null) _dcTransfers = new TransferHistoryDataContext();
 #else
         if (_qta == null)
           _qta = new Objects.TransferHistoryDataSetTableAdapters.QueriesTableAdapter();
 #endif
-        //
-        var pthdi = new AndreiPopescu.CharazayPlus.Web.PlayerTransferHistoryDownloadItem(tlPlayer.PlayerId);
-        var th = Web.Scraper.Instance.ParseTransferHistory(pthdi.m_uri).ToList();
-        //
-        if (th.IsNullOrEmpty())
-        { //
-          // no history whatsoever, not even promoted on, means he got fired
-          // implicitly set tm value to 0
           //
-          InsertDb(tlPlayer.Pos, currentPlayer.Age, (decimal)0, (decimal)currentPlayer.ValueIndex, tlPlayer.DeadLine);
-          olvTL.RemoveObject(tlPlayer);
-          Data.TransferList.Bookmarks.Remove(tlPlayer);
-        }
-        else
-        { //
-          // there is transfer history (transfer history matches data)
-          // either player is listed with same skills index and in a time window of less than 6hrs
-          // or was marked as deadline reached and most recent deadline hsitory is pretty close to where we stand
+          var pthdi = new AndreiPopescu.CharazayPlus.Web.PlayerTransferHistoryDownloadItem(tlPlayer.PlayerId);
+          var th = Web.Scraper.Instance.ParseTransferHistory(pthdi.Uri).ToList();
           //
-          var ts = (th[0].TransferDate - tlPlayer.DeadLine);
-          if (ts < TimeSpan.Zero) ts = -ts;
-          var ts2 = th[0].TransferDate - DateTime.UtcNow;
-          if (ts2 < TimeSpan.Zero) ts2 = -ts2;
-          if ((th[0].SkillsIndex == currentPlayer.SkillsIndex && ts < TimeSpan6H) || 
-              (tlPlayer.DeadLine == DateTime.MinValue && ts2<TimeSpan30Days /*&& currentPlayer.SkillsIndex != th[0].SkillsIndex*/))
-          { 
-            decimal priceInMillions = th[0].Price / (decimal)1000000;
+          if (th.IsNullOrEmpty())
+          { //
+            // no history whatsoever, not even promoted on, means he got fired
+            // implicitly set tm value to 0
             //
-            // player value index might change in the meantime
+            InsertDb(tlPlayer.Pos, currentPlayer.Age, (decimal)0, (decimal)currentPlayer.ValueIndex, tlPlayer.DeadLine);
+            olvTL.RemoveObject(tlPlayer);
+            Data.TransferList.Bookmarks.Remove(tlPlayer);
+          }
+          else
+          { //
+            // there is transfer history (transfer history matches data)
+            // either player is listed with same skills index and in a time window of less than 6hrs
+            // or was marked as deadline reached and most recent deadline hsitory is pretty close to where we stand
             //
-            var valIdx = (decimal)Math.Min (tlPlayer.AgeValueIndex, currentPlayer.ValueIndex);
-            //if (valIdx > 0)
-            //{
+            var ts = (th[0].TransferDate - tlPlayer.DeadLine);
+            if (ts < TimeSpan.Zero) ts = -ts;
+            var ts2 = th[0].TransferDate - DateTime.UtcNow;
+            if (ts2 < TimeSpan.Zero) ts2 = -ts2;
+            if ((th[0].SkillsIndex == currentPlayer.SkillsIndex && ts < TimeSpan6H) ||
+                (tlPlayer.DeadLine == DateTime.MinValue && ts2 < TimeSpan30Days /*&& currentPlayer.SkillsIndex != th[0].SkillsIndex*/))
+            {
+              decimal priceInMillions = th[0].Price / (decimal)1000000;
+              //
+              // player value index might change in the meantime
+              //
+              var valIdx = (decimal)Math.Min(tlPlayer.AgeValueIndex, currentPlayer.ValueIndex);
+              //if (valIdx > 0)
+              //{
               InsertDb(tlPlayer.Pos, currentPlayer.Age, priceInMillions, valIdx, th[0].TransferDate);
               //
               olvTL.RemoveObject(tlPlayer);
               Data.TransferList.Bookmarks.Remove(tlPlayer);
-            //}
+              //}
 
+            }
+            else
+            { //
+              // no matching history found, or slow update
+              // player was transferlisted, not bought and not listed again
+              // update deadline, but do not change price 
+              // profitability updated due to Matlab new interpolation parameters
+              //
+              tlPlayer.Deadline = DateTime.MinValue.ToString("yyyy.MM.dd HH:mm");
+              tlPlayer.AgeValueIndex = currentPlayer.ValueIndex;
+              tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;
+            }
           }
-          else
-          { //
-            // no matching history found, or slow update
-            // player was transferlisted, not bought and not listed again
-            // update deadline, but do not change price 
-            // profitability updated due to Matlab new interpolation parameters
-            //
-            tlPlayer.Deadline = DateTime.MinValue.ToString("yyyy.MM.dd HH:mm");
-            tlPlayer.Profitability = currentPlayer.TransferMarketValue * Math.Pow(10, 6) / tlPlayer.Price;            
-          }
+
         }
 
+        return ppi.Servertime;
       }
 
-      return ppi.Servertime;
+      
     }
 
     private void InsertDb (PlayerPosition pos, byte age, decimal priceInMillions, decimal valIdx, DateTime? dt = null)
@@ -574,7 +671,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private void PlayerImportance_Click (object sender, byte value)
     {
-      SetWaitCursor(( ) =>
+      FormsExtensions.SetWaitCursor(( ) =>
       {
         if (olvTL.MultiSelect && olvTL.SelectedObjects != null && olvTL.SelectedObjects.Count > 0)
         {
@@ -648,6 +745,12 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     }
     #endregion
+
+    private void TransferListUserControl_Load (object sender, EventArgs e)
+    {
+      this.ucEvaluatePlayer.EvaluationType = Utils.Evaluation.season30;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = true;
+    }
     
    }
 }

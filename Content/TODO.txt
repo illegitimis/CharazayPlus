@@ -1,0 +1,201 @@
+﻿=========================================
+=========================================
+===          VERSION 1.2              ===
+=========================================
+=========================================
+GENERAL
+splashscreen 
+charazay certified logo 
+advertising
+Mono build
+different .net framework builds (rest)
+MULTIPLE USERS v1.1.6.2
+-------------------------------
+0) INFO TAB
+versioned xsd schema
+Grid control div history
+league hardiness chart
+-------------------------------
+1) STATUS TAB
+-------------------------------
+2) SKILLS TAB
+-------------------------------
+3-7) PG, SG, ...
+-------------------------------
+8) TRAINING TAB
+new layout?
+-------------------------------
+9) MY team SCHEDULE
+-------------------------------
+10) DIVISION STANDINGS
+-----------------------
+11) DIVISION SCHEDULE
+chart ?
+bball + vals addition as a total
+-----------------------
+12) ECONOMY
+history?
+delete history (cumulative)
+--------------------
+13) TRANSFER LIST TAB
+moving averages transfers, see tmdb
+new data
+
+=========================================
+=========================================
+===          VERSION 1.1              ===
+=========================================
+=========================================
+GENERAL
+cache matches automaton (ok)
+matches cache - my team schedule + division schedule (ok)
+debug general cache (ok)
+only one program instance (OK)
+xsd merge test (OK)
+move stored assessed values / training plan to non class / static (ok)
+-------------------------------
+0) INFO TAB
+debug xml received (ok)
+-------------------------------
+1) STATUS TAB
+progress fatigue with text (ok)
+country flag (ok)
+-------------------------------
+2) SKILLS TAB
+hot tracking (ok)
+better layout, eye candy (ok)
+player age/value column (ok)
+test age/value for young players (ok)
+fix designer (ok)
+remove olv UI related controls (ok)
+refactor ObjectListViewExtensions (ok)
+
+-------------------------------
+3-7) PG, SG, ...
+initialization bug (ok)
+player age/value (ok)
+better layout, eye candy(ok)
+removed group sorting by promary column (ok)
+player aspect (ok)
+-------------------------------
+8) TRAINING TAB
+suggested training combination (ok)
+debug suggested training (ok)
+improve left/right splitter aspect ratio (ok)
+fix suggested training (ok)
+repair grid (ok)
+6 decimals on score/skill increase (ok)
+32 over 
+-------------------------------
+9) MY team SCHEDULE
+debug xml received  (ok)
+replace with new olv-based control (ok)
+match details on selection (ok)
+better filter (ok)
+add total ratings
+3pm column
+-------------------------------
+10) DIVISION STANDINGS
+debug xml received  (ok)
+layout new control (ok)
+plsu minus (ok)
+-----------------------
+11) DIVISION SCHEDULE
+debug xml  (ok)
+reinit away team control (ok)
+-----------------------
+12) ECONOMY
+debug  (ok)
+anchor economy control (ok)
+--------------------
+13) TRANSFER LIST TAB
+better money per agevalue estimation (centers especially) (OK, moved to TM db)
+data grid, sorting, (ok)
+price groups NOT SORTABLE (ok)
+format 2 decimals grid (ok)
+fancy labels instead of info grid (ok)
+new controls for position / skill (ok)
+price editable OVERFLOW (ok)
+season bug (ok)
+status messages (ok)
+
+=========================================
+=========================================
+===          VERSION 1.0              ===
+=========================================
+=========================================
+GENERAL
+APP ICON (ok)
+my division tab erase, my division schedule remains (ok)
+build default cache xml file (ok)
+formLogin: remove superfluous labels (OK)
+about form (OK)
+PlayerInfo: XML FILENAME SPACES (ok)
+implement player cache (ok)
+date conversion (ok)
+======================================
+0) INFO TAB
+these 3 are simplest ((ok))
+league hardiness chart REPLACED BY GRID (ok)
+CountryInfoXml            common (ok)
+CountryDivisionListXml    link with country info (ok)
+image country flag (ok)
+nt coach property grid {ok}
+======================================
+1) STATUS TAB
+OK!
+status bar updates
+======================================
+2) SKILLS TAB
+not working on first try (ok)
+grouping (ok)
+format row colors
+======================================
+3-7) PG, SG, ...
+======================================
+8) TRAINING TAB (CoachesXml)
+INITTRAININGPROPERTYGRID () NO LINQ (ok)
+MAXCOACHNAME (ok)
+split dist (ok)
+TrainingAdvicePropertyGridObject: fill correct values (OK)
+avg/max/sum (ok)
+property grid linq totals (ok)
+remove name grouping (ok)
+vertical header win7 (ok)
+byte/double columns (ok)
+differentiate active/normal skills (ok)
+link to skill training (ok)
+fullrowselect (ok)
+splitter scale (ok)
+highlight max coach (bold) OK
+======================================
+9) MY team SCHEDULE
+HIGHLIGHT LOSSES/WINS (ok)
+FILTER LEAGUE MATCHES (ok)
+DATE COLUMN (ok)
+played (ok)
+======================================
+10) DIVISION STANDINGS
+======================================
+11) MY DIVISION SCHEDULE
+a match details window , match downloadable upon click (ok)
+olv grouped per rounds (ok)
+rating home/away label (ok)
+rating olv col widths (ok)
+lineup fill (ok)
+match details zone (ok)
+======================================
+12) ECONOMY TAB
+income + expences in parallel (ok)
+REDO GRID POS (ok)
+======================================
+13) TRANSFER LIST TAB
+splitter dist (ok)
+profitability formula (ok)
+profibality groups (ok)
+value index groups (ok)
+score columns groups (ok)
+deadline editable (ok)
+profitability updateable (ok)
+sellteams and buyteams must be cached (ok)
+======================================

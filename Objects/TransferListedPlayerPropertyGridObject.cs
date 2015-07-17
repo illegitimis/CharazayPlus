@@ -8,9 +8,10 @@ using AndreiPopescu.CharazayPlus.Utils;
 namespace AndreiPopescu.CharazayPlus.Objects
 {
   /// <summary>
-  /// property class for m transfer listed player
+  /// property class for a transfer listed player
   /// as of 1.1.4 not used anymore
   /// </summary>
+  [Obsolete]
   class TransferListedPlayerPropertyGridObject
   {
     Xsd2.charazayPlayer _plyr;

@@ -18,6 +18,9 @@ namespace AndreiPopescu.CharazayPlus.UI
   /// </summary>
   public partial class SearchTMUserControl : UserControl
   {
+    public event EventHandler<PlayerEventArgs> PlayerError;
+    public event EventHandler<PlayerEventArgs> DownloadPlayerData;
+
     #region init
     public SearchTMUserControl ( )
     {
@@ -64,11 +67,12 @@ namespace AndreiPopescu.CharazayPlus.UI
         rb.DivisionNum = 45;
       }
       //
-
-
       InitSkillCombos();
       //
       Generator.GenerateColumns(this.folvTM, typeof(Objects.TransferListedPlayer));
+      //
+      this.ucEvaluatePlayer.EvaluationType = Evaluation.season30;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = true;
     }
 
     void InitSkillCombos ( )
@@ -194,121 +198,134 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void GetXmlApiPlayer ( )
     {
       Objects.TransferListedPlayer tlp = (Objects.TransferListedPlayer)this.folvTM.SelectedObject;
       if (tlp == null) return;
       //
-      var xsdp = Utils.Deserializer.GoGetPlayerXml(tlp.PlayerId);
+      Xsd2.error err = null;
+      var xsdp = Utils.Deserializer.GoGetPlayerXml(tlp.PlayerId, out err);
+      if (PlayerError != null && err != null)
+        PlayerError(this, new PlayerEventArgs() { ErrorMessage = err.message });
+      else if (DownloadPlayerData != null)
+        DownloadPlayerData(null, new PlayerEventArgs() { Surname = xsdp.basic.surname, Name = xsdp.basic.name });
       //
       this.ucEvaluatePlayer.SelectedObject = xsdp;
-      //
-      PG pg = this.ucEvaluatePlayer.GetPlayer(Utils.PlayerPosition.PG) as PG;
-      var sg = this.ucEvaluatePlayer.GetPlayer(Utils.PlayerPosition.SG) as SG;
-      var sf = this.ucEvaluatePlayer.GetPlayer(Utils.PlayerPosition.SF) as SF;
-      var pf = this.ucEvaluatePlayer.GetPlayer(Utils.PlayerPosition.PF) as PF;
-      var c = this.ucEvaluatePlayer.GetPlayer(Utils.PlayerPosition.C) as C;
-      //
-      this.ucBasicPlayer.PlayerByScore = Player.DecideOnTotalScore(pg, sg, sf, pf, c);
-      this.ucBasicPlayer.PlayerByValueIndex = Player.DecideOnValueIndex(pg, sg, sf, pf, c);
-      this.ucBasicPlayer.CurrentPrice = tlp.CurrentPrice;
-      this.ucBasicPlayer.Init(this.ImageListCountries);
+
+      if (xsdp.skills == null)
+      {
+        //throw new Exception("player has no skills");
+        this.ucBasicPlayer.Init();
+        this.btnShortlist.Enabled = false;
+      }
+      else
+      {
+        this.ucBasicPlayer.CurrentPrice = tlp.CurrentPrice;
+        //
+        var evaluatedPlayers = this.ucEvaluatePlayer.GetPlayers().ToArray();
+        var top2facets = TrainingEfficiencyCalculator.TopN(evaluatedPlayers, 2).ToArray();
+        _playerFacets = FacetsDeduction(top2facets[0], top2facets[1]).ToArray();
+        //        
+        this.ucBasicPlayer.Init(
+          //Player.DecideOnTotalScore(evaluatedPlayers)
+          _playerFacets[0]
+          , this.ImageListCountries);
+        //
+        this.btnShortlist.Enabled = true;
+      }
     } 
 
     /// <summary>
-    /// Intelligence on shortlist
+    /// Best position for a player, called on shortlist
+    /// taller player may qualify for smaller position
     /// </summary>
-    /// <param name="p1">player by value index</param>
-    /// <param name="p2">player by score</param>
-    private IEnumerable<Player> DecideCourtPosition (Player p1, Player p2)
-    {
-      if (p1.Id != p2.Id)
-        throw new ApplicationException("Player instances must be facets of the same player!");
+    private IEnumerable<Player> DecideCourtPosition ()
+    { //
+      var futurePositions = _playerFacets[0].FuturePositionsHeightBased.Distinct().ToArray();
       //
-      var futurePos = p1.FuturePositionsHeightBased.Distinct().ToArray();
-      //
-      if (p1.PositionEnum == p2.PositionEnum)
+      if (_playerFacets.Length == 1)
       { //
         // strong indicator for that pos, as skillset is concerned
+        // a single court position for the current player
         //
-        if (futurePos.Contains(p1.PositionEnum))
-          yield return p1;
+        if (futurePositions.Contains(_playerFacets[0].PositionEnum))
+          yield return _playerFacets[0];
         else
-        { 
-          switch (futurePos.Length)
-          {
-            case 1:
-              foreach (var x in FillInTheBlanks(p1, Deserializer.GetPlayerFromIdAndPosition(p1.Id, futurePos[0])).ToList())
-                yield return x; 
-              break;
-              
-            case 2: // to the left or to the right
-            case 3:
-              PlayerPosition pp = (p1.PositionEnum<futurePos[0])?futurePos[0]:futurePos[1];
-              foreach (var x in FillInTheBlanks(p1, Deserializer.GetPlayerFromIdAndPosition(p1.Id, pp)).ToList())
-                yield return x;                
-              break;              
-
-            default: 
-              yield break;
-          }
+        { //
+          // current player facet is not a future viable position
+          // for instance facet is C and future positions are PG, SG, SF
+          // or facet is PF and future positions are PG, SG
+          // or facet is PG and future position is SF
+          //
+          foreach (var p in FrontBackCourtDeduction(futurePositions))
+            yield return p;
         }
       }
       else
       { //
         // multiple positions returned
         //
-        bool is1 = futurePos.Contains(p1.PositionEnum);
-        bool is2 = futurePos.Contains(p2.PositionEnum);
+        bool is1 = futurePositions.Contains(_playerFacets[0].PositionEnum);
+        bool is2 = futurePositions.Contains(_playerFacets[1].PositionEnum);
         if (is1 || is2)
         { // 
           // pinpoint positions from score & value index as most relevant
           //
-          if (is1) yield return p1;
-          if (is2) yield return p2;
+          if (is1) yield return _playerFacets[0];
+          if (is2) yield return _playerFacets[1];
         }
         else
         { //
-          // to the left or to the right
+          // no facets inside the contiguous future positions zone, e.g.
+          // future position PG, facets SF, PF
+          // future positions PF, C facet PG, SF
+          // future positions SG,SF,PF facets PG, C
           //
-          Player pmin = (p1.PositionEnum<p2.PositionEnum) ? p1:p2;
-          Player pmax = (p1.PositionEnum>p2.PositionEnum) ? p1:p2;
-          //
-          // find closest
-          //
-          Player p = (pmax.PositionEnum < futurePos[0]) ? pmax : pmin;
-          switch (futurePos.Length)
-          {
-            case 1:
-              foreach (var x in FillInTheBlanks(p, Deserializer.GetPlayerFromIdAndPosition(p1.Id, futurePos[0])).ToList())
-                yield return x;
-              break;
-
-            case 2:
-              { 
-              int idx = (pmax.PositionEnum < futurePos[0]) ? 0 : 1;
-              foreach (var x in FillInTheBlanks(p, Deserializer.GetPlayerFromIdAndPosition(p1.Id, futurePos[idx])).ToList())
-                yield return x;
-              }break;
-
-            case 3:
-              {
-                int idx = (pmax.PositionEnum < futurePos[0]) ? 0 : 2;
-                foreach (var x in FillInTheBlanks(p, Deserializer.GetPlayerFromIdAndPosition(p1.Id, futurePos[idx])).ToList())
-                  yield return x;
-              } break;
-
-            default:
-              yield break;
-          }
+          foreach (var p in FrontBackCourtDeduction(futurePositions))
+            yield return p;          
         }
 
       }
     }
 
-
-    IEnumerable <Player> FillInTheBlanks (Player p1, Player p2)
+    private IEnumerable<Player> FrontBackCourtDeduction (IEnumerable <PlayerPosition> futureCourtPositions)
     {
+      var allPositions = _playerFacets.Select(facet => facet.PositionEnum).Union(futureCourtPositions).ToList();
+      var min = allPositions.Min();
+      var max = allPositions.Max();
+      foreach (var pos in (PlayerPosition[])Enum.GetValues(typeof(PlayerPosition)))
+      {
+        if (pos >= min && pos <= max)
+        {
+          yield return Deserializer.GetPlayerFromIdAndPosition(_playerFacets[0].Id, pos, Evaluation.season30);
+        }
+      }
+      
+      //if (_playerFacets[idx].PositionEnum < ppmin)
+      //  //score for backcourt, height for frontcourt
+      //  return _playerFacets[0];                      
+      //else if (_playerFacets[0].PositionEnum > ppmax)
+      //  // score for frontcourt, height for backcourt
+      //  return Deserializer.GetPlayerFromIdAndPosition(_playerFacets[0].Id, ppmax, Evaluation.season30);
+      //else
+      //  throw new Exception("FrontBackCourtDeduction");
+    }
+     
+
+    /// <summary>
+    /// infers possible facets for a player, maximum 2 court positions
+    /// </summary>
+    /// <param name="p1">best player facet by score</param>
+    /// <param name="p2">2nd best player facet by score</param>
+    /// <returns>all player facets</returns>
+    IEnumerable <Player> FacetsDeduction (Player p1, Player p2)
+    {
+      if (p1.Id != p2.Id)
+        throw new ArgumentException("Facets of the same player");
+
       double div = p1.ValueIndex / p2.ValueIndex;
       if (div < 0.94)
       {
@@ -338,6 +355,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void InitializeComponent ( )
     {
       this.split1 = new System.Windows.Forms.SplitContainer();
+      this.btnReset = new System.Windows.Forms.Button();
       this.btnSearch = new System.Windows.Forms.Button();
       this.gbx2 = new System.Windows.Forms.GroupBox();
       this.rangeBarSum2 = new AndreiPopescu.CharazayPlus.UI.RangeBar();
@@ -397,6 +415,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // split1.Panel1
       // 
+      this.split1.Panel1.Controls.Add(this.btnReset);
       this.split1.Panel1.Controls.Add(this.btnSearch);
       this.split1.Panel1.Controls.Add(this.gbx2);
       this.split1.Panel1.Controls.Add(this.label16);
@@ -441,16 +460,28 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.split1.Panel2.Controls.Add(this.ucEvaluatePlayer);
       this.split1.Panel2.Controls.Add(this.folvTM);
       this.split1.Panel2.DoubleClick += new System.EventHandler(this.split1_Panel2_DoubleClick);
-      this.split1.Size = new System.Drawing.Size(993, 866);
+      this.split1.Size = new System.Drawing.Size(993, 903);
       this.split1.SplitterDistance = 301;
       this.split1.TabIndex = 0;
       // 
+      // btnReset
+      // 
+      this.btnReset.Location = new System.Drawing.Point(10, 808);
+      this.btnReset.Name = "btnReset";
+      this.btnReset.Size = new System.Drawing.Size(288, 23);
+      this.btnReset.TabIndex = 40;
+      this.btnReset.Text = "Reset search parameters";
+      this.btnReset.UseVisualStyleBackColor = true;
+      this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+      // 
       // btnSearch
       // 
+      this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.btnSearch.Location = new System.Drawing.Point(10, 808);
+      this.btnSearch.Location = new System.Drawing.Point(11, 840);
       this.btnSearch.Name = "btnSearch";
-      this.btnSearch.Size = new System.Drawing.Size(290, 23);
+      this.btnSearch.Size = new System.Drawing.Size(287, 59);
       this.btnSearch.TabIndex = 38;
       this.btnSearch.Text = "Search now!";
       this.btnSearch.UseVisualStyleBackColor = true;
@@ -950,7 +981,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.btnShortlist.BackColor = System.Drawing.SystemColors.ControlLight;
       this.btnShortlist.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.btnShortlist.ForeColor = System.Drawing.Color.DimGray;
-      this.btnShortlist.Location = new System.Drawing.Point(474, 553);
+      this.btnShortlist.Location = new System.Drawing.Point(474, 621);
       this.btnShortlist.Name = "btnShortlist";
       this.btnShortlist.Size = new System.Drawing.Size(210, 40);
       this.btnShortlist.TabIndex = 45;
@@ -961,12 +992,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       // ucBasicPlayer
       // 
       this.ucBasicPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.ucBasicPlayer.CurrentPrice = null;
       this.ucBasicPlayer.Location = new System.Drawing.Point(474, 7);
       this.ucBasicPlayer.Name = "ucBasicPlayer";
-      this.ucBasicPlayer.PlayerByScore = null;
-      this.ucBasicPlayer.PlayerByValueIndex = null;
-      this.ucBasicPlayer.Size = new System.Drawing.Size(210, 585);
+      this.ucBasicPlayer.Size = new System.Drawing.Size(210, 608);
       this.ucBasicPlayer.TabIndex = 2;
       // 
       // ucEvaluatePlayer
@@ -977,7 +1005,10 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucEvaluatePlayer.BackColor = System.Drawing.Color.DimGray;
       this.ucEvaluatePlayer.CausesValidation = false;
       this.ucEvaluatePlayer.ForeColor = System.Drawing.Color.White;
-      this.ucEvaluatePlayer.Location = new System.Drawing.Point(3, 727);
+      this.ucEvaluatePlayer.IsFatigue = false;
+      this.ucEvaluatePlayer.IsForm = false;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = false;
+      this.ucEvaluatePlayer.Location = new System.Drawing.Point(3, 764);
       this.ucEvaluatePlayer.Name = "ucEvaluatePlayer";
       this.ucEvaluatePlayer.SelectedObject = null;
       this.ucEvaluatePlayer.Size = new System.Drawing.Size(681, 135);
@@ -997,7 +1028,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.folvTM.MultiSelect = false;
       this.folvTM.Name = "folvTM";
       this.folvTM.ShowGroups = false;
-      this.folvTM.Size = new System.Drawing.Size(465, 716);
+      this.folvTM.Size = new System.Drawing.Size(465, 753);
       this.folvTM.TabIndex = 0;
       this.folvTM.UseAlternatingBackColors = true;
       this.folvTM.UseCompatibleStateImageBehavior = false;
@@ -1016,7 +1047,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this.split1);
       this.Name = "SearchTMUserControl";
-      this.Size = new System.Drawing.Size(993, 866);
+      this.Size = new System.Drawing.Size(993, 903);
       this.Load += new System.EventHandler(this.SearchTMUserControl_Load);
       this.split1.Panel1.ResumeLayout(false);
       this.split1.Panel1.PerformLayout();
@@ -1031,6 +1062,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     }
 
     private Button btnShortlist;
+    private Button btnReset;
 
     /// <summary> 
     /// Required designer variable.
@@ -1107,44 +1139,44 @@ namespace AndreiPopescu.CharazayPlus.UI
     #region local event handlers
     private void btnSearch_Click (object sender, EventArgs e)
     {
-      //this.rangeBarDef.RangeMinimum
-      var uri = Web.CharazayDownloadItem.ConstructUri (true, //isTransferMarket
-        null, //byte? countryId
-        GetTextBoxValue<uint> (this.tbPriceL),//, uint? price_l
-        GetTextBoxValue<uint> (this.tbPriceH), //uint? price_h
-      GetTextBoxValue<uint> (this.tbSiL), //uint? value_l
-      GetTextBoxValue<uint> (this.tbSiH), //uint? value_h
-      GetRangeMin(this.rangeBarAge,15), GetRangeMax(this.rangeBarAge,40), //byte? age_l, byte? age_h
-      GetRangeMin(this.rangeBarHeight,160), GetRangeMax(this.rangeBarHeight,230), //byte? height_l, byte? height_h
-      GetRangeMin(this.rangeBarDef,0), GetRangeMax(this.rangeBarDef,30), //byte? defence_l, byte? defence_h
-      GetRangeMin(this.rangeBarFT,0), GetRangeMax(this.rangeBarFT,30), //byte? ft_l, byte? ft_h
-      GetRangeMin(this.rangeBar2p,0), GetRangeMax(this.rangeBar2p,30), //byte? tpt_l, byte? tpt_h
-      GetRangeMin(this.rangeBar3p,0), GetRangeMax(this.rangeBar3p,30), //byte? thpt_l, byte? thpt_h
-      GetRangeMin(this.rangeBarDrib,0), GetRangeMax(this.rangeBarDrib,30), //byte? dribbling_l, byte? dribbling_h
-      GetRangeMin(this.rangeBarPas,0), GetRangeMax(this.rangeBarPas,30), //byte? passing_l, byte? passing_h
-      GetRangeMin(this.rangeBarSpe,0), GetRangeMax(this.rangeBarSpe,30), //byte? speed_l, byte? speed_h
-      GetRangeMin(this.rangeBarFtw,0), GetRangeMax(this.rangeBarFtw,30), //byte? footwork_l, byte? footwork_h
-      GetRangeMin(this.rangeBarReb,0), GetRangeMax(this.rangeBarReb,30), //byte? rebound_l, byte? rebound_h
-      GetRangeMin(this.rangeBarExp,0), GetRangeMax(this.rangeBarExp,30), //byte? experience_l, byte? experience_h
-      (byte)(TransferListSkill)this.scb11.SelectedValue, //byte skill1a
-      (byte)(TransferListSkill)this.scb12.SelectedValue, //byte skill1b
-      (byte)(TransferListSkill)this.scb13.SelectedValue, //byte skill1c
-      (byte)(TransferListSkill)this.scb14.SelectedValue, //byte skill1d           
-      GetRangeMin(this.rangeBarSum1,0), GetRangeMax(this.rangeBarSum1,30), //byte? skill1_l, byte? skill1_h
-       (byte)(TransferListSkill)this.scb21.SelectedValue,//, byte skill2a,  
-       (byte)(TransferListSkill)this.scb22.SelectedValue,//byte skill2b, ,
-       (byte)(TransferListSkill)this.scb23.SelectedValue,//byte skill2c, 
-       (byte)(TransferListSkill)this.scb24.SelectedValue,//byte skill2d
-      GetRangeMin(this.rangeBarSum2,0), GetRangeMax(this.rangeBarSum2,30), //byte? skill2_l, byte? skill2_h
-      true//bool isClassicView
-      );
-      try
-      {
-        var tlps = Web.Scraper.Instance.ClassicTransferMarket(uri).ToList();
-        this.folvTM.SetObjects(tlps);
-      }
-      catch { }
-      
+      Extensions.FormsExtensions.SetWaitCursor( ( ) => {
+          var uri = Web.CharazayDownloadItem.ConstructUri(true,                     //isTransferMarket
+            null,                                                                   //byte? countryId
+            GetTextBoxValue<uint>(this.tbPriceL),                                   //, uint? price_l
+            GetTextBoxValue<uint>(this.tbPriceH),                                   //uint? price_h
+            GetTextBoxValue<uint>(this.tbSiL),                                      //uint? value_l
+            GetTextBoxValue<uint>(this.tbSiH),                                      //uint? value_h
+            GetRangeMin(this.rangeBarAge, 15),                                      //byte? age_l, 
+            GetRangeMax(this.rangeBarAge, 40),                                      //byte? age_h
+            GetRangeMin(this.rangeBarHeight, 160),                                  //byte? height_l
+            GetRangeMax(this.rangeBarHeight, 230),                                  //, byte? height_h
+            GetRangeMin(this.rangeBarDef, 0), GetRangeMax(this.rangeBarDef, 30),    //byte? defence_l, byte? defence_h
+            GetRangeMin(this.rangeBarFT, 0), GetRangeMax(this.rangeBarFT, 30),      //byte? ft_l, byte? ft_h
+            GetRangeMin(this.rangeBar2p, 0), GetRangeMax(this.rangeBar2p, 30),      //byte? tpt_l, byte? tpt_h
+            GetRangeMin(this.rangeBar3p, 0), GetRangeMax(this.rangeBar3p, 30),      //byte? thpt_l, byte? thpt_h
+            GetRangeMin(this.rangeBarDrib, 0), GetRangeMax(this.rangeBarDrib, 30),  //byte? dribbling_l, byte? dribbling_h
+            GetRangeMin(this.rangeBarPas, 0), GetRangeMax(this.rangeBarPas, 30),    //byte? passing_l, byte? passing_h
+            GetRangeMin(this.rangeBarSpe, 0), GetRangeMax(this.rangeBarSpe, 30),    //byte? speed_l, byte? speed_h
+            GetRangeMin(this.rangeBarFtw, 0), GetRangeMax(this.rangeBarFtw, 30),    //byte? footwork_l, byte? footwork_h
+            GetRangeMin(this.rangeBarReb, 0), GetRangeMax(this.rangeBarReb, 30),    //byte? rebound_l, byte? rebound_h
+            GetRangeMin(this.rangeBarExp, 0), GetRangeMax(this.rangeBarExp, 30),    //byte? experience_l, byte? experience_h
+            (byte)(TransferListSkill)this.scb11.SelectedValue,                      //byte skill1a
+            (byte)(TransferListSkill)this.scb12.SelectedValue,                      //byte skill1b
+            (byte)(TransferListSkill)this.scb13.SelectedValue,                      //byte skill1c
+            (byte)(TransferListSkill)this.scb14.SelectedValue,                      //byte skill1d           
+            GetRangeMin(this.rangeBarSum1, 0), GetRangeMax(this.rangeBarSum1, 30),  //byte? skill1_l, byte? skill1_h
+            (byte)(TransferListSkill)this.scb21.SelectedValue,                      //, byte skill2a,  
+            (byte)(TransferListSkill)this.scb22.SelectedValue,                      //byte skill2b, ,
+            (byte)(TransferListSkill)this.scb23.SelectedValue,                      //byte skill2c, 
+            (byte)(TransferListSkill)this.scb24.SelectedValue,                      //byte skill2d
+            GetRangeMin(this.rangeBarSum2, 0), GetRangeMax(this.rangeBarSum2, 30),  //byte? skill2_l, byte? skill2_h
+            true                                                                    //bool isClassicView
+          );
+
+          var tlps = Web.Scraper.Instance.ClassicTransferMarket(uri).ToList();
+          this.folvTM.SetObjects(tlps);
+        } );
+
     }
 
     void folvTM_HyperlinkClicked (object sender, HyperlinkClickedEventArgs e)
@@ -1165,14 +1197,15 @@ namespace AndreiPopescu.CharazayPlus.UI
           cdi = new Web.CharazayDownloadItem("team", 0, tlPlayer.OwnerTeamId);
           break;
 
-        case 6: // bidder
+        case 7: // bidder
           cdi = new Web.CharazayDownloadItem("team", 0, tlPlayer.BidHolderTeamId);
           break;
 
         default: break;
       }
-
-      e.Url = cdi.m_uri.AbsoluteUri;
+      
+      if (cdi != null)
+        e.Url = cdi.Uri.AbsoluteUri;
 
     }
 
@@ -1206,7 +1239,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       // search for bookmarks with same id and court position
       //
-      foreach (var p in DecideCourtPosition (this.ucBasicPlayer.PlayerByValueIndex, this.ucBasicPlayer.PlayerByScore).ToList())
+      //foreach (var p in DecideCourtPosition (this.ucBasicPlayer.PlayerByValueIndex, this.ucBasicPlayer.PlayerByScore).ToList())
+      foreach (var p in DecideCourtPosition().Distinct().ToList())
       {
         var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && x.Pos == p.PositionEnum);
         if (found == null)
@@ -1238,8 +1272,58 @@ namespace AndreiPopescu.CharazayPlus.UI
      
       
     }
+
+    private void btnReset_Click (object sender, EventArgs e)
+    {
+      this.SuspendLayout();
+      //
+      foreach (var x in this.split1.Panel1.Controls)
+      {
+        if (x is RangeBar)
+        {
+          RangeBar rb = (x as RangeBar);
+          rb.SelectRange(rb.TotalMinimum, rb.TotalMaximum);          
+        }
+        else if (x is TextBox)
+        {
+          (x as TextBox).Text = String.Empty;
+        }
+      }
+      //
+      foreach (var x in this.gbx1.Controls)
+      {
+        if (x is SkillComboBox)
+        {
+          (x as SkillComboBox).SelectedItem = TransferListSkill.noSkill;
+        }
+        else if (x is RangeBar)
+        {
+          RangeBar rb = (x as RangeBar);
+          rb.SelectRange(rb.TotalMinimum, rb.TotalMaximum);
+        }
+      }
+      foreach (var x in this.gbx2.Controls)
+      {
+        if (x is SkillComboBox)
+        {
+          (x as SkillComboBox).SelectedItem = TransferListSkill.noSkill;
+        }
+        else if (x is RangeBar)
+        {
+          RangeBar rb = (x as RangeBar);
+          rb.SelectRange(rb.TotalMinimum, rb.TotalMaximum);
+        }
+      }
+      //
+      this.ResumeLayout(false);
+
+    }
     #endregion    
 
+    /// <summary>
+    /// Player facets By Score
+    /// </summary>
+    Player[] _playerFacets = null;
   }
 
 

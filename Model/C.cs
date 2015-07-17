@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Utils;
+﻿
 
 namespace AndreiPopescu.CharazayPlus
 {
+  using AndreiPopescu.CharazayPlus.Utils;
+
   /// <summary>
   /// Center
-  /// </summary>
+  /// [Obsolete("Use C2014 instead")]
+  /// </summary>  
   public class C : Player
   {
     public C ( ) : base() { }
-
+    public C (Xsd2.charazayPlayer xsdPlayer, bool ishw, bool isfatigue, bool isform) : base(xsdPlayer, ishw, isfatigue, isform) { }
     public C (Xsd2.charazayPlayer xsdPlayer) : base(xsdPlayer) { }
     public C (Xsd2.charazayPlayerSkills xsdSkills) : base(xsdSkills) { }
 
 
-    public override string ToString ( ) { return string.Format("M : {0}", base.ToString()); }
+    public override string ToString ( ) { return string.Format(" C: {0}", base.ToString()); }
 
     protected internal override byte MinimumBMI { get { return 26; } }
     protected internal override byte MaximumBMI { get { return 28; } }
@@ -42,12 +42,7 @@ namespace AndreiPopescu.CharazayPlus
     protected override internal byte[] TrainingPlan { get { return new byte[] { 3, 0, 2, 2, 4, 5, 1, 0 }; } }
     public override PlayerPosition PositionEnum { get { return PlayerPosition.C; } }
 
-    #region assessed total player values for 289 weeks of training
-    /// <summary>
-    /// stored values of player development from age 15 to 32
-    /// each week with training contribution
-    /// </summary>
-    static double[] StoredAssessedValues
+    internal static double[] StoredAssessedValues
     {
       get
       {
@@ -344,14 +339,18 @@ namespace AndreiPopescu.CharazayPlus
       };
       }
     } 
-    #endregion
+   
 
-    public override double ValueIndex { get { return TotalScore / C.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double ValueIndex { get { 
+      return TotalScore / C.StoredAssessedValues[TrainingWeekIndex]; 
+    } }
 
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
-      get { return MatlabInterpolant.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant20141124.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
     }
   }
+
+  
 }
