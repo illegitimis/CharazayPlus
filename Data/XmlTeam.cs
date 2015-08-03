@@ -11,7 +11,7 @@ namespace AndreiPopescu.CharazayPlus.Data
   /// <summary>
   /// own team related data as received from the Charazay XML API
   /// </summary>
-  public class MyXmlTeam
+  public static class MyXmlTeam
   {
 
     //private NestedSingleton() { }
@@ -73,7 +73,7 @@ namespace AndreiPopescu.CharazayPlus.Data
         //
         //var downloadList = XmlDownloadItemGenerator.ProduceDownloadList(new[] { XmlSerializationType.MyInfo, XmlSerializationType.MyTeamInfo });
         //var downloadItems = downloadList.Select(x => x.DownloadItem);
-        var objects = 
+        var objects =   
           //Utils.Deserializer.GoGetXml(downloadItems.ToArray())
           Utils.Deserializer.GoGetXml(
             new Web.XmlDownloadItem[] {

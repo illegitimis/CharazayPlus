@@ -26,26 +26,32 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// </summary>
     byte _day;
     public byte Day { get { return _day; } }
-  
+
+    #region static readonly
     /// <summary>
     /// august 9th, first friday, season start
     /// </summary>
     static readonly DateTime s_start28 = new DateTime(2013, 8, 9);
+
     //W1.D1 (06/12)
     static readonly DateTime s_start29 = new DateTime(2013, 12, 6);
+
     //season30.W1.D1 (2014/04/04)
     static readonly DateTime s_start30 = new DateTime(2014, 4, 4);
+
     //W1.D1 (01/08): LH calculated, fatigue reset, fan club mood reset. 
     //Candidates to be the National Team coaches can set their candidature.
     static readonly DateTime s_start31 = new DateTime(2014, 8, 1);
+
     // 
     static readonly DateTime s_start32 = new DateTime(2014, 11, 28);
+
     //W1.D1 (27/03): LH calculated, fatigue reset, fan club mood reset. Candidates to be the National Team coaches can set their candidature.
     static readonly DateTime s_start33 = new DateTime(2015, 03, 27);
-    //
-    // season is 17 weeks = 119 days
-    //
-    static readonly int daysInSeason = 119;
+
+    //S33.W17.D7 (23/07): Players ageing. Last day to choose your sponsor for next season
+    static readonly DateTime s_end33 = new DateTime(2015, 07, 23); 
+    #endregion
 
     public static implicit operator CharazayDate(DateTime dt)
     {
@@ -78,9 +84,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
       { //
         // seasons should be well alligned from now on
         //
-        int noSeasons = (int) ((dt - s_start32).TotalDays) / daysInSeason;
+        int noSeasons = (int) ((dt - s_start32).TotalDays) / Defines.DaysInSeason;
         cd._season = (byte)(32 + noSeasons);
-        DateTime seasonStart = s_start32 + TimeSpan.FromDays(daysInSeason * noSeasons);
+        DateTime seasonStart = s_start32 + TimeSpan.FromDays(Defines.DaysInSeason * noSeasons);
         x = dt - seasonStart;
       }
       //
@@ -96,5 +102,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
       var tokens = s.Split(new char[] { ' ', 'S', 'W', 'D' }, StringSplitOptions.RemoveEmptyEntries);
       return new CharazayDate() { _season = byte.Parse(tokens[0]), _week = byte.Parse(tokens[1]), _day = byte.Parse(tokens[2]) };
     }
+
+    /// <summary>
+    /// on last day of the season players age
+    /// their value index is computed as if they aged, yet season remains current
+    /// fixes <see cref="Player.TrainingWeekIndex"/> issue 
+    /// </summary>
+    public bool IsLastSeasonDay { get { return Day == Defines.DaysInWeek && Week == Defines.WeeksInSeason; } }
   }
 }

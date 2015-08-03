@@ -9,6 +9,15 @@
       <Column Name="Day" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.Outliers" Member="Outliers">
+    <Type Name="Outliers">
+      <Column Name="Age" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AgeValueIndex" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PosId" Type="System.Char" DbType="Char(1) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Day" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.spCreateTableMapping" Method="spCreateTableMapping">
     <ElementType Name="spCreateTableMappingResult">
       <Column Name="week" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
@@ -19,7 +28,9 @@
       <Column Name="r" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.spUpdateTM" Method="spUpdateTM" />
+  <Function Name="dbo.spUpdateTM" Method="spUpdateTM" IsComposable="true">
+    <Return Type="object" />
+  </Function>
   <Function Name="dbo.spInsertC" Method="spInsertC">
     <Parameter Name="age" Type="System.Byte" DbType="TinyInt" />
     <Parameter Name="agevalueindex" Type="System.Decimal" DbType="Decimal(4,2)" />
@@ -45,5 +56,27 @@
     <Parameter Name="posid" Type="System.Char" DbType="Char(1)" />
     <Parameter Name="day" Type="System.DateTime" DbType="Date" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetWeightedPrices" Method="GetWeightedPrices">
+    <Parameter Name="Position" Parameter="position" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="ForVisualStudio" Parameter="forVisualStudio" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="GetWeightedPricesResult">
+      <Column Name="Age" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PosId" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="AgeValueIndex" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="WEIGHTED_PRICE" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="COUNT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetAveragePrices" Method="GetAveragePrices">
+    <Parameter Name="Position" Parameter="position" Type="System.Char" DbType="Char(1)" />
+    <Parameter Name="ForVisualStudio" Parameter="forVisualStudio" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="GetAveragePricesResult">
+      <Column Name="Age" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PosId" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="AgeValueIndex" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="AVERAGE_PRICE" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="COUNT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

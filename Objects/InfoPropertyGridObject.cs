@@ -201,6 +201,9 @@ namespace AndreiPopescu.CharazayPlus.Objects
 
     public CharazayUserModel (Xsd2.user usr)
     {
+      if (usr == null)
+        return;
+
       this.nameField = usr.name;
       this.idField = usr.id;
       this.supporterField = usr.supporter;

@@ -348,7 +348,7 @@ namespace AndreiPopescu.CharazayPlus
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
-      get { return MatlabInterpolant20141124.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant201507.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
     }
   }
 

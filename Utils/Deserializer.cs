@@ -268,7 +268,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// <summary>
     /// serialize the transfer listed players that have been evaluated
     /// </summary>
-    /// <param name="TLObjects">transfer listed assessed players from olv</param>
+    /// <param name="TLObjects">transfer listed assessed players from _olv</param>
     internal static void SerializePlayersTL ( IEnumerable TLObjects)
     {
       string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);

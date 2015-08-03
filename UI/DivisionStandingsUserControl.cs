@@ -78,7 +78,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.flp.SuspendLayout();
       this.SuspendLayout();
       // 
-      // olv
+      // _olv
       // 
       this.olv.AlternateRowBackColor = System.Drawing.Color.DimGray;
       this.olv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -90,7 +90,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olv.ForeColor = System.Drawing.Color.White;
       this.olv.FullRowSelect = true;
       this.olv.Location = new System.Drawing.Point(9, 53);
-      this.olv.Name = "olv";
+      this.olv.Name = "_olv";
       this.olv.ShowGroups = false;
       this.olv.Size = new System.Drawing.Size(339, 270);
       this.olv.SortGroupItemsByPrimaryColumn = false;
@@ -127,12 +127,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.flp.Size = new System.Drawing.Size(345, 44);
       this.flp.TabIndex = 7;
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.label1.Location = new System.Drawing.Point(3, 0);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(39, 13);
       this.label1.TabIndex = 0;
       this.label1.Text = "Name";

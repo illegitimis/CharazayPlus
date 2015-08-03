@@ -4,12 +4,11 @@
 =========================================
 =========================================
 GENERAL
-splashscreen 
 charazay certified logo 
 advertising
 Mono build
 different .net framework builds (rest)
-MULTIPLE USERS v1.1.6.2
+TIME ZONE!
 -------------------------------
 0) INFO TAB
 versioned xsd schema
@@ -24,8 +23,10 @@ league hardiness chart
 -------------------------------
 8) TRAINING TAB
 new layout?
+32 over 
 -------------------------------
 9) MY team SCHEDULE
+add total ratings
 -------------------------------
 10) DIVISION STANDINGS
 -----------------------
@@ -40,6 +41,17 @@ delete history (cumulative)
 13) TRANSFER LIST TAB
 moving averages transfers, see tmdb
 new data
+tmdb sync, xml ?
+outlier detection
+
+=========================================
+=========================================
+===        VERSION 1.1.6.5            ===
+=========================================
+=========================================
+GENERAL 
+splashscreen (copied from SPM manager)
+MULTIPLE USERS v1.1.6.2 (give up)
 
 =========================================
 =========================================
@@ -69,7 +81,6 @@ test age/value for young players (ok)
 fix designer (ok)
 remove olv UI related controls (ok)
 refactor ObjectListViewExtensions (ok)
-
 -------------------------------
 3-7) PG, SG, ...
 initialization bug (ok)
@@ -85,15 +96,14 @@ improve left/right splitter aspect ratio (ok)
 fix suggested training (ok)
 repair grid (ok)
 6 decimals on score/skill increase (ok)
-32 over 
 -------------------------------
 9) MY team SCHEDULE
 debug xml received  (ok)
 replace with new olv-based control (ok)
 match details on selection (ok)
 better filter (ok)
-add total ratings
-3pm column
+3pm column (ok)
+team name xml decode
 -------------------------------
 10) DIVISION STANDINGS
 debug xml received  (ok)

@@ -24,7 +24,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// Position based list customizer
     /// </summary>
     /// <typeparam name="T">player type</typeparam>
-    /// <param name="olv">object list view</param>
+    /// <param name="_olv">object list view</param>
     /// <param name="players">player derived collection</param>
     private void initOLV<T> (ObjectListView olv, IList<T> players)
       where T : Player
@@ -109,7 +109,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.cms.SuspendLayout();
       this.SuspendLayout();
       // 
-      // olv
+      // _olv
       // 
       this.olv.AlternateRowBackColor = System.Drawing.Color.DimGray;
       this.olv.BackColor = System.Drawing.Color.Gray;
@@ -117,7 +117,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olv.ForeColor = System.Drawing.Color.White;
       this.olv.FullRowSelect = true;
       this.olv.Location = new System.Drawing.Point(0, 0);
-      this.olv.Name = "olv";
+      this.olv.Name = "_olv";
       this.olv.Size = new System.Drawing.Size(662, 285);
       this.olv.SortGroupItemsByPrimaryColumn = false;
       this.olv.TabIndex = 1;

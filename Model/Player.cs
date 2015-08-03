@@ -542,10 +542,12 @@
       get
       {
         CharazayDate cd = DateTime.Now;
-        // last week of from season
-        int week = 17 * (Age - 15) + cd.Week - 1;
-        week = Math.Min(week, 288);
-        return week;
+        // ON last day of last week of season players age, yet season remains current
+        int week = (cd.IsLastSeasonDay) 
+          ? Defines.WeeksInSeason * ((Age - 1) - Defines.RookieAge) + cd.Week - 1
+          : Defines.WeeksInSeason * (Age - Defines.RookieAge) + cd.Week - 1;
+
+        return Math.Min(week, Defines.MaxArrayWeekIndex);        
       }
     }
     #endregion

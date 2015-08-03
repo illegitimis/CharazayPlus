@@ -327,11 +327,11 @@
       this.btnTLAdd.UseVisualStyleBackColor = true;
       this.btnTLAdd.Click += new System.EventHandler(this.btnTLAdd_Click);
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(3, 390);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(57, 13);
       this.label1.TabIndex = 17;
       this.label1.Text = "Servertime";

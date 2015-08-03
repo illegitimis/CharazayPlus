@@ -104,7 +104,7 @@ namespace AndreiPopescu.CharazayPlus.UI
             {
               col.Sortable = true;
               col.Groupable = true;
-              //col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return tlp.DeadLine == DateTime.MinValue ? 0 : tlp.DeadLine.Day; };
+              //col.GroupKeyGetter = delegate(object h) { TLPlayer tlp = (TLPlayer)h; return tlp.DeadLine == DateTime.MinValue ? 0 : tlp.DeadLine.Day; };
               col.GroupKeyGetter = delegate(object o) { TLPlayer tlp = (TLPlayer)o; return new DateTime(tlp.DeadLine.Year, tlp.DeadLine.Month, tlp.DeadLine.Day); };
               col.GroupKeyToTitleConverter = delegate(object groupKey)
               {
@@ -658,8 +658,8 @@ namespace AndreiPopescu.CharazayPlus.UI
 #endif
             break;
         }
-        if (! Data.DbEnvironment.Instance.TransferHistoryDC.Histories.Any (x=>x.Age==age && x.PosId == posid && x.AgeValueIndex == valIdx && x.Price == priceInMillions && x.Day == dt.Value))
-          Data.DbEnvironment.Instance.TransferHistoryDC.Histories.InsertOnSubmit(new History() { Age = age, PosId = posid, AgeValueIndex = valIdx, Price = priceInMillions, Day = dt.Value });
+        if (! Data.DbEnvironment.Instance.TransferHistoryDC.History.Any (x=>x.Age==age && x.PosId == posid && x.AgeValueIndex == valIdx && x.Price == priceInMillions && x.Day == dt.Value))
+          Data.DbEnvironment.Instance.TransferHistoryDC.History.InsertOnSubmit(new History() { Age = age, PosId = posid, AgeValueIndex = valIdx, Price = priceInMillions, Day = dt.Value });
       }
       catch { }
     }

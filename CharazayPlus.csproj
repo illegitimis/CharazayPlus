@@ -104,10 +104,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201507.cs" />
     <Compile Include="Model\C.cs" />
     <Compile Include="Model\C2014.cs" />
     <Compile Include="Model\PG2014.cs" />
-    <Compile Include="Coach.cs" />
+    <Compile Include="Model\Coach.cs" />
     <Compile Include="Data\DbEnvironment.cs" />
     <Compile Include="Data\PlayersEnvironment.cs" />
     <Compile Include="Data\TrainingEnvironment.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Extensions\ParsingExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="Objects\TransferHistory.partial.cs" />
     <Compile Include="Objects\PlayerTL.cs">
       <DependentUpon>PlayerTL.xsd</DependentUpon>
     </Compile>
@@ -152,6 +155,14 @@
     <Compile Include="Model\SF2014.cs" />
     <Compile Include="Model\SG.cs" />
     <Compile Include="Model\SG2014.cs" />
+    <Compile Include="Splash\EnironmentValidators.cs" />
+    <Compile Include="Splash\MandatoryInfoValidators.cs" />
+    <Compile Include="Splash\XmlValidators.cs" />
+    <Compile Include="Splash\BaseValidator.cs" />
+    <Compile Include="Splash\PreflightController.cs" />
+    <Compile Include="Splash\ValidationService.cs" />
+    <Compile Include="Splash\ValidatorCollection.cs" />
+    <Compile Include="Splash\ValidatorExcpetion.cs" />
     <Compile Include="UI\AssessPlayerUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,9 +176,6 @@
     <Compile Include="Extensions\DataGridExtensions.cs" />
     <Compile Include="UI\DivisionScheduleUserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\DivisionScheduleUserControl.Designer.cs">
-      <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\InfoTabUserControl.cs">
       <SubType>UserControl</SubType>
@@ -189,20 +197,17 @@
     <Compile Include="UI\SearchTMUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\StatusUserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\StatusUserControl.Designer.cs">
-      <DependentUpon>StatusUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TeamScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\TrainingPlanUserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\TrainingPlanUserControl.Designer.cs">
-      <DependentUpon>TrainingPlanUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\HorizontalLevelIndicatorLabel.cs">
       <SubType>Component</SubType>
@@ -215,9 +220,6 @@
     </Compile>
     <Compile Include="UI\TrainingTabUserControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\TrainingTabUserControl.Designer.cs">
-      <DependentUpon>TrainingTabUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TransferListUserControl.cs">
       <SubType>UserControl</SubType>
@@ -252,19 +254,19 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
-    <Compile Include="Utils\IInterpolate.cs" />
+    <Compile Include="Interpolate\IInterpolate.cs" />
     <Compile Include="Utils\Deserializer.cs" />
     <Compile Include="Utils\Interpolation112.cs" />
-    <Compile Include="Utils\MatlabInterpolant20140909.cs" />
-    <Compile Include="Utils\MatlabInterpolant20141124.cs" />
-    <Compile Include="Utils\MatlabInterpolant20150504.cs" />
-    <Compile Include="Utils\MatlabInterpolator.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20140909.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20141124.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20150504.cs" />
+    <Compile Include="Interpolate\MatlabInterpolator.cs" />
     <Compile Include="Utils\TransferMarket112.cs" />
     <Compile Include="Utils\TransferMarket.cs" />
     <Compile Include="Utils\Linear.cs" />
     <Compile Include="Utils\TrainingEfficiencyCalculator.cs" />
     <Compile Include="Utils\FilteredBindingList.cs" />
-    <Compile Include="UI\FormLogin.cs">
+    <Compile Include="UI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\LabelDescriptionUserControl.cs">
@@ -381,8 +383,8 @@
     <EmbeddedResource Include="UI\BalanceUserControl.resx">
       <DependentUpon>BalanceUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FormLogin.resx">
-      <DependentUpon>FormLogin.cs</DependentUpon>
+    <EmbeddedResource Include="UI\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\InfoTabUserControl.resx">
       <DependentUpon>InfoTabUserControl.cs</DependentUpon>
@@ -410,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SearchTMUserControl.resx">
       <DependentUpon>SearchTMUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StatusUserControl.resx">
       <DependentUpon>StatusUserControl.cs</DependentUpon>

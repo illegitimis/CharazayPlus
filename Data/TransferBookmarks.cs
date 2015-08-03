@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Objects;
-using System.IO;
-
+﻿
 namespace AndreiPopescu.CharazayPlus.Data
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using AndreiPopescu.CharazayPlus.Objects;
+  using System.IO;
+
   class TransferList
   {
     public static IList<TLPlayer> Bookmarks { get { return Nested.TLPlayers; } }

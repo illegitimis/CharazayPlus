@@ -29,7 +29,7 @@ namespace AndreiPopescu.CharazayPlus
       rebounds = 5
     };
 
-    static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = 15 };
+    static readonly Xsd2.charazayPlayerBasic s_basic15 = new Xsd2.charazayPlayerBasic() { age = Defines.RookieAge };
 
     static readonly Xsd2.charazayPlayer s_15 = new Xsd2.charazayPlayer()
     {
@@ -109,7 +109,7 @@ namespace AndreiPopescu.CharazayPlus
           {
             if (currentWeek == week)
               break;
-            byte age = (byte)((byte)15 + (byte)(currentWeek / 17));
+            byte age = (byte)(Defines.RookieAge + (byte)(currentWeek / Defines.WeeksInSeason));
             switch (eTc)
             {
               case TrainingCategory.defense:

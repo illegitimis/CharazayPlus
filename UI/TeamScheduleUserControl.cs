@@ -34,7 +34,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       foreach(var m in schedule)
         m.MyTeamId = uid;
-      foreach (var mt in schedule.Select(m => m.MatchType).Distinct())
+      //foreach (var mt in schedule.Select(m => m.MatchType).Distinct())
         //this.chklstMatchTypes.Items.Add(mt)
         ;
 
@@ -185,13 +185,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.tlpRating.SuspendLayout();
       this.SuspendLayout();
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.label1.AutoSize = true;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.label1.Location = new System.Drawing.Point(32, 74);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(47, 13);
       this.label1.TabIndex = 6;
       this.label1.Text = "Search";
@@ -517,7 +517,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         //       fdlv.DefaultRenderer = new HighlightTextRenderer(filter);
  
                  // Uncomment this line to see how the GDI+ rendering looks
-                 //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
+                 //_olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
              //}
       
     }

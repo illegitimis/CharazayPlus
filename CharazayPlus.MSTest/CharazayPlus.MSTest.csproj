@@ -64,6 +64,7 @@
     <Compile Include="TransferListedPlayerTest.cs" />
     <Compile Include="TransferMarket112Test.cs" />
     <Compile Include="TransferMarketTest.cs" />
+    <Compile Include="OutliersTest.cs" />
     <Compile Include="Xsd2Test.cs" />
   </ItemGroup>
   <ItemGroup>

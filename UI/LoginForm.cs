@@ -5,10 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
+using AndreiPopescu.CharazayPlus.Splash;
+using AndreiPopescu.CharazayPlus.Extensions;
 
 namespace AndreiPopescu.CharazayPlus.UI
 {
-  public partial class FormLogin : Form
+  public partial class LoginForm : Form
   {
     /// <summary>
     /// Required designer variable.
@@ -37,84 +40,63 @@ namespace AndreiPopescu.CharazayPlus.UI
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      this.label1 = new System.Windows.Forms.Label();
+      this._lblTitle = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
-      this.label3 = new System.Windows.Forms.Label();
       this.tbUser = new System.Windows.Forms.TextBox();
       this.tbSecurityCode = new System.Windows.Forms.TextBox();
-      this.tbSecurityCodeRepeat = new System.Windows.Forms.TextBox();
-      this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+      this._errProvider = new System.Windows.Forms.ErrorProvider(this.components);
       this.btnSet = new System.Windows.Forms.Button();
       this.txtInfo = new System.Windows.Forms.TextBox();
-      ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this._errProvider)).BeginInit();
       this.SuspendLayout();
       // 
-      // label1
+      // _lblTitle
       // 
-      this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(13, 13);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(63, 13);
-      this.label1.TabIndex = 0;
-      this.label1.Text = "User Name:";
+      this._lblTitle.AutoSize = true;
+      this._lblTitle.Location = new System.Drawing.Point(138, 7);
+      this._lblTitle.Name = "_lblTitle";
+      this._lblTitle.Size = new System.Drawing.Size(63, 13);
+      this._lblTitle.TabIndex = 0;
+      this._lblTitle.Text = "User Name:";
       // 
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(13, 41);
+      this.label2.Location = new System.Drawing.Point(128, 30);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(73, 13);
       this.label2.TabIndex = 2;
       this.label2.Text = "Security Code";
       // 
-      // label3
-      // 
-      this.label3.AutoSize = true;
-      this.label3.Location = new System.Drawing.Point(13, 69);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(111, 13);
-      this.label3.TabIndex = 4;
-      this.label3.Text = "Repeat Security Code";
-      // 
       // tbUser
       // 
       this.tbUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbUser.Location = new System.Drawing.Point(132, 10);
+      this.tbUser.Location = new System.Drawing.Point(207, 4);
       this.tbUser.Name = "tbUser";
-      this.tbUser.Size = new System.Drawing.Size(181, 20);
+      this.tbUser.Size = new System.Drawing.Size(141, 20);
       this.tbUser.TabIndex = 1;
       this.tbUser.Validated += new System.EventHandler(this.tbUser_Validated);
       // 
       // tbSecurityCode
       // 
       this.tbSecurityCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbSecurityCode.Location = new System.Drawing.Point(132, 38);
+      this.tbSecurityCode.Location = new System.Drawing.Point(207, 27);
       this.tbSecurityCode.Name = "tbSecurityCode";
-      this.tbSecurityCode.Size = new System.Drawing.Size(181, 20);
+      this.tbSecurityCode.Size = new System.Drawing.Size(141, 20);
       this.tbSecurityCode.TabIndex = 3;
       this.tbSecurityCode.UseSystemPasswordChar = true;
       this.tbSecurityCode.Validated += new System.EventHandler(this.tbSecurityCode_Validated);
       // 
-      // tbSecurityCodeRepeat
+      // _errProvider
       // 
-      this.tbSecurityCodeRepeat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.tbSecurityCodeRepeat.Location = new System.Drawing.Point(132, 65);
-      this.tbSecurityCodeRepeat.Name = "tbSecurityCodeRepeat";
-      this.tbSecurityCodeRepeat.Size = new System.Drawing.Size(181, 20);
-      this.tbSecurityCodeRepeat.TabIndex = 5;
-      this.tbSecurityCodeRepeat.UseSystemPasswordChar = true;
-      this.tbSecurityCodeRepeat.Validated += new System.EventHandler(this.tbSecurityCodeRepeat_Validated);
-      // 
-      // errProvider
-      // 
-      this.errProvider.ContainerControl = this;
+      this._errProvider.ContainerControl = this;
       // 
       // btnSet
       // 
-      this.btnSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnSet.Location = new System.Drawing.Point(228, 125);
+      this.btnSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+      this.btnSet.Location = new System.Drawing.Point(100, 111);
       this.btnSet.Name = "btnSet";
-      this.btnSet.Size = new System.Drawing.Size(85, 23);
+      this.btnSet.Size = new System.Drawing.Size(58, 23);
       this.btnSet.TabIndex = 6;
       this.btnSet.Text = "Set";
       this.btnSet.UseVisualStyleBackColor = true;
@@ -122,32 +104,38 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // txtInfo
       // 
-      this.txtInfo.Location = new System.Drawing.Point(16, 92);
+      this.txtInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.txtInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.txtInfo.Location = new System.Drawing.Point(162, 113);
       this.txtInfo.Name = "txtInfo";
       this.txtInfo.ReadOnly = true;
-      this.txtInfo.Size = new System.Drawing.Size(297, 20);
+      this.txtInfo.Size = new System.Drawing.Size(264, 20);
       this.txtInfo.TabIndex = 7;
       // 
-      // FormLogin
+      // LoginForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
       this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.ClientSize = new System.Drawing.Size(338, 160);
+      this.BackgroundImage = global::AndreiPopescu.CharazayPlus.Properties.Resources.Charazay_;
+      this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.ClientSize = new System.Drawing.Size(428, 135);
       this.Controls.Add(this.txtInfo);
       this.Controls.Add(this.btnSet);
-      this.Controls.Add(this.tbSecurityCodeRepeat);
       this.Controls.Add(this.tbSecurityCode);
       this.Controls.Add(this.tbUser);
-      this.Controls.Add(this.label3);
       this.Controls.Add(this.label2);
-      this.Controls.Add(this.label1);
-      this.Name = "FormLogin";
+      this.Controls.Add(this._lblTitle);
+      this.DoubleBuffered = true;
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.Name = "LoginForm";
       this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.Text = "FormLogin";
       this.Load += new System.EventHandler(this.FormLogin_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this._errProvider)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -155,13 +143,11 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     #endregion
 
-    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label _lblTitle;
     private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label3;
     private System.Windows.Forms.TextBox tbUser;
     private System.Windows.Forms.TextBox tbSecurityCode;
-    private System.Windows.Forms.TextBox tbSecurityCodeRepeat;
-    private System.Windows.Forms.ErrorProvider errProvider;
+    private System.Windows.Forms.ErrorProvider _errProvider;
     private TextBox txtInfo;
     private System.Windows.Forms.Button btnSet;
 
@@ -169,19 +155,27 @@ namespace AndreiPopescu.CharazayPlus.UI
     //private System.Windows.Forms.TextBox tbTeam;
     //private System.Windows.Forms.TextBox tbCountry;
     //private System.Windows.Forms.TextBox tbDiv; 
-    #endregion
     //private Common.UserSettings cus = new Common.UserSettings();
+    #endregion
 
-    public FormLogin()
+
+    public LoginForm (/*Func<LoginForm, ValidationResult> setup = null*/)
     {
+      Trace.WriteLine("LoginForm constructor");
+      //
       InitializeComponent();
+      //
+      /*  
+      if (setup != null && setup != DefaultSetup)
+        SplashScreenConstructor(setup);
+       */
     }
 
-    private void validator (string regex, Control c, string err)
+    private void RegexValidator (string regex, Control c, string err)
     {
       Regex r = new Regex(regex);
       bool ok = r.IsMatch(c.Text);
-      errProvider.SetError(c, ok ? "" : err);
+      _errProvider.SetError(c, ok ? String.Empty : err);
       if (!ok)
         txtInfo.Text = err;
       btnSet.Enabled = ok;      
@@ -190,39 +184,29 @@ namespace AndreiPopescu.CharazayPlus.UI
     #region unneeded
     //private void tbTeam_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"\d+", tbTeam, "Team id should be m number");
+    //  RegexValidator(@"\d+", tbTeam, "Team id should be m number");
 
     //}
 
     //private void tbCountry_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"[1-9]|[1-9][0-9]", tbCountry, "Country should be m number");
+    //  RegexValidator(@"[1-9]|[1-9][0-9]", tbCountry, "Country should be m number");
     //}
 
     //private void tbDiv_Validated(object sender, EventArgs e)
     //{
-    //  validator(@"\d+", tbDiv, "Division id should be m number");
+    //  RegexValidator(@"\d+", tbDiv, "Division id should be m number");
     //} 
     #endregion
 
     private void tbSecurityCode_Validated(object sender, EventArgs e)
     {
-      validator(@"\w+", tbSecurityCode, "Security code has improper characters");
+      RegexValidator(@"\w+", tbSecurityCode, "Security code has improper characters");
     }
 
-    private void tbSecurityCodeRepeat_Validated(object sender, EventArgs e)
+      private void tbUser_Validated(object sender, EventArgs e)
     {
-      //validator(@"\w+", tbSecurityCodeRepeat, "Repeated security code has improper characters");
-      if (tbSecurityCodeRepeat.Text != tbSecurityCode.Text)
-      { 
-        errProvider.SetError(tbSecurityCodeRepeat, "Codes do not match");
-        btnSet.Enabled = false;
-      }
-    }
-
-    private void tbUser_Validated(object sender, EventArgs e)
-    {
-      validator(@"\w+", tbUser, "User code has improper charcters");
+      RegexValidator(@"\w+", tbUser, "User code has improper charcters");
     }
 
     /// <summary>
@@ -235,6 +219,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       //cus.DivisionId = ushort.Parse(tbDiv.Text);
       //cus.LastBidByTeamId = ushort.Parse(tbTeam.Text);
       //cus.CountryId = byte.Parse(tbCountry.Text);
+
+      Info("Modifying login info for Charazay web services ...");
 
       using (Web.Downloader crawler = new Web.Downloader())
       {
@@ -287,17 +273,17 @@ namespace AndreiPopescu.CharazayPlus.UI
       //tbDiv.DataBindings.Add(bndDiv);
       //Binding bndTeam = new Binding("Text", Properties.Settings.Default, "LastBidByTeamId", true, DataSourceUpdateMode.OnPropertyChanged);
       //tbTeam.DataBindings.Add(bndTeam);
-      Binding bnd2 = new Binding("Text", Properties.Settings.Default, "UserName", true, DataSourceUpdateMode.OnPropertyChanged);
-      tbUser.DataBindings.Add(bnd2);
-      Binding bnd1 = new Binding("Text", Properties.Settings.Default, "SecurityCode", true, DataSourceUpdateMode.OnPropertyChanged);
-      tbSecurityCode.DataBindings.Add(bnd1);
 
-      Info("Enter required info");
+      tbUser.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "UserName", true, DataSourceUpdateMode.OnPropertyChanged));
+
+      tbSecurityCode.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "SecurityCode", true, DataSourceUpdateMode.OnPropertyChanged));
+            
       btnSet.Enabled = false;
     }
 
      public event EventHandler CorrectUserInformation;
-     protected virtual void OnCorrectUserInformation()
+     
+    protected virtual void OnCorrectUserInformation()
        {
            if (CorrectUserInformation != null)
            {
@@ -308,6 +294,70 @@ namespace AndreiPopescu.CharazayPlus.UI
      internal void Info (string p)
      {
        txtInfo.Text = p;
+       //
+       //Application.DoEvents();
      }
+
+   
+
+    #region splash functionality
+
+    /* 
+     
+    Func<LoginForm, ValidationResult> DefaultSetup = delegate(LoginForm lf) { return ValidationResult.Inconclusive; };
+
+    Func<LoginForm, ValidationResult> _setup;
+    ValidationResult _validationResult;
+
+    public void SplashScreenConstructor (Func<LoginForm, ValidationResult> setup)
+    {
+      Trace.WriteLine("SplashScreenConstructor");
+      //
+      InitializeComponent();
+      //
+      //var asmInfo = new AndreiPopescu.CharazayPlus.Utils.AssemblyInfo();
+      //this.Text = asmInfo.Product + ", " + asmInfo.Title;
+      //
+      _setup = setup;
+      //
+      Shown += delegate(object sender, EventArgs e)
+      {
+        Trace.WriteLine("Splash Shown");
+        Application.DoEvents();
+        try
+        {
+          _validationResult = _setup.Invoke(this);
+        }
+        catch (Exception ex)
+        {
+          ex.DumpException();
+        }
+        finally
+        {
+          this.Close();
+        }
+      };
+      //
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+    }
+
+    
+    
+    public static ValidationResult ShowSplashScreen (Func<LoginForm, ValidationResult> setup)
+    {
+      Trace.WriteLine("ShowSplashScreen");
+
+      var screen = new LoginForm(setup);
+      
+      Application.Run(screen);
+      
+      return screen._validationResult;
+    }
+        
+     */
+    #endregion
+
+
+
   }
 }

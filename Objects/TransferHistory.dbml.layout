@@ -8,5 +8,11 @@
         <elementListCompartment Id="c0e4ace0-0374-4090-af69-853e8dc3b9b4" absoluteBounds="0.63999999999999968, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="b22f1db2-adbd-4bce-8b3a-5f83ba5b9d31" absoluteBounds="3.75, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/TransferHistoryDataContext/Outliers" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4d198acc-d686-4cb8-8b86-529c14e31689" absoluteBounds="3.7649999999999997, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

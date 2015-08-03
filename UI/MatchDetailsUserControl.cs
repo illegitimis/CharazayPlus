@@ -19,18 +19,18 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     public void SetData (Xsd2.match m)
     {
-      label1.Text = m.teams.hometeamname;
+      label1.Text = m.HomeTeamName;
       label2.Text = m.homescore.ToString();
 
-      label5.Text = m.teams.awayteamname;
+      label5.Text = m.AwayTeamName;
       label4.Text = m.awayscore.ToString();
 
       label9.Text = ((MatchType)m.type).ToString();
       label7.Text = m.spectators.ToString();
       label11.Text = m.vips.ToString();
       //
-      CacheManager.Instance.AddTeam(m.teams.hometeam, m.teams.hometeamname);
-      CacheManager.Instance.AddTeam(m.teams.awayteam, m.teams.awayteamname);
+      CacheManager.Instance.AddTeam(m.teams.hometeam, m.HomeTeamName);
+      CacheManager.Instance.AddTeam(m.teams.awayteam, m.AwayTeamName);
       //
       CacheManager.Instance.AddMatch(m);
     }
@@ -74,13 +74,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.flowMatchDetails.SuspendLayout();
       this.SuspendLayout();
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.AutoSize = true;
       this.label1.BackColor = System.Drawing.Color.Transparent;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.label1.Location = new System.Drawing.Point(3, 0);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(0, 13);
       this.label1.TabIndex = 0;
       // 

@@ -7,6 +7,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
   using BrightIdeasSoftware;
   using System;
   using System.ComponentModel;
+  using System.Xml;
 
   /// <summary>
   /// match 
@@ -18,7 +19,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     
     public uint HomeTeamId { get { return teams.hometeam; } }
     [OLVColumn(DisplayIndex = 1, IsEditable = false, Width = 130, MinimumWidth = 80, MaximumWidth = 180, Title = "Home", Hyperlink = true)]
-    public string HomeTeamName { get { return teams.hometeamname; } }
+    public string HomeTeamName { get { return System.Net.WebUtility.HtmlDecode(teams.hometeamname); } }
 
     [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 50, MinimumWidth = 40, MaximumWidth = 60, Title = "", Hyperlink = false)]
     public byte HomeTeamScore { get { return this.homescore; } }
@@ -28,7 +29,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
 
     public uint AwayTeamId { get { return teams.awayteam; } }
     [OLVColumn(DisplayIndex = 4, IsEditable = false, Width = 130, MinimumWidth = 80, MaximumWidth = 180, Title = "Away", Hyperlink = true)]
-    public string AwayTeamName { get { return teams.awayteamname; } }
+    public string AwayTeamName { get { return System.Net.WebUtility.HtmlDecode(teams.awayteamname); } }
 
     [OLVColumn(DisplayIndex = 5, IsEditable = false, Width = 85, MinimumWidth = 65, MaximumWidth = 105, Title = "Type")]
     public MatchType MatchType { get { return (MatchType)typeField; } }
@@ -166,7 +167,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
     }        
 
    [OLVColumn(DisplayIndex = 2, IsEditable = false, Width = 160, MinimumWidth = 100, MaximumWidth = 225, Title = "Name")]
-    public string Name { get { return this.nameField; } }
+   public string Name { get { return System.Net.WebUtility.HtmlDecode(this.nameField); } }
 
    [OLVColumn(DisplayIndex = 6, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Title = "Points Made")]
    public ushort PointsMade { get { return this.points_madeField; } }

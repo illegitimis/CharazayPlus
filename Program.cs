@@ -9,6 +9,9 @@ namespace AndreiPopescu.CharazayPlus
   using System.Data.SqlClient;
   using System.Data;
   using System.Collections.Generic;
+  using System.Diagnostics;
+  using AndreiPopescu.CharazayPlus.UI;
+  using AndreiPopescu.CharazayPlus.Splash;
 
   static class Program
   {
@@ -18,7 +21,13 @@ namespace AndreiPopescu.CharazayPlus
     static Mutex s_mutex = new Mutex(true, "{5EDF70B6-F80D-4C2F-A313-E4084D681195}");
 
     /// <summary>
+    /// 
+    /// </summary>
+    public static MainForm Window = null;
+
+    /// <summary>
     /// The main entry point for the application.
+    /// Mutex for single application instance
     /// </summary>
     [STAThread]
     static void Main()
@@ -27,9 +36,39 @@ namespace AndreiPopescu.CharazayPlus
       // so we can exit the synchronization context before we try to aquire m lock on it
       if (s_mutex.WaitOne(TimeSpan.Zero, true))
       {
+
+        Trace.WriteLine("Application started");
+
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
-        Application.Run(new MainForm());
+        //
+        Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+        //
+        try
+        {
+#if DEBUG
+          NativeMethods.AllocConsole();
+#endif
+          var result = SplashScreen.ShowSplashScreen(Setup);
+          //var result = LoginForm.ShowSplashScreen(Setup);
+
+          if (result == ValidationResult.Success)
+          {
+            Application.Run(Window);
+          }
+          Trace.WriteLine("Application ended");
+        }
+        catch (Exception ex)
+        {
+          Trace.WriteLine(ex.Message);
+        }
+        finally
+        {
+#if DEBUG
+          NativeMethods.FreeConsole();
+#endif
+        }
+        //
         s_mutex.ReleaseMutex();
       }
       // notify my running instance that someone forgot that it was already running
@@ -43,10 +82,54 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    
+    static ValidationResult Setup (SplashScreen splashScreen)
+    {
+      //var RegexValidator = new SPFInstalledValidator();
 
- 
-  
+      //if (RegexValidator.RunValidator() == ValidationResult.Error)
+      //{
+      //  MessageBox.Show(RegexValidator.ErrorString + Environment.NewLine + Environment.NewLine + RegexValidator.QuestionString, " Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      //  return ValidationResult.Error;
+      //}
+
+      var engine = new PreflightController(splashScreen);
+      if (! engine.Validate())
+      {
+        return ValidationResult.Error;
+      }
+      //
+      Window = new MainForm();
+      //
+      Window.SplashScreenLoad(splashScreen);
+
+      return ValidationResult.Success;
+    }
+
+    static ValidationResult Setup (LoginForm splashScreen)
+    {
+      var engine = new PreflightController(splashScreen);
+      if (!engine.Validate())
+      {
+        return ValidationResult.Error;
+      }
+      //
+      Window = new MainForm();
+      //
+      Window.SplashScreenLoad(splashScreen);
+
+      return ValidationResult.Success;
+    }
+    
+    static void Application_ThreadException (object sender, System.Threading.ThreadExceptionEventArgs e)
+    {
+      Cursor.Current = Cursors.Default;
+#if DEBUG
+      MessageBox.Show(e.Exception.Message + " : " + e.Exception.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#else
+      MessageBox.Show(e.Exception.Message, SPMLocalization.GetString("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+    }
+
   }
 
   internal class NativeMethods
@@ -57,6 +140,13 @@ namespace AndreiPopescu.CharazayPlus
     public static extern bool PostMessage (IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
     [DllImport("user32")]
     public static extern int RegisterWindowMessage (string message);
+
+    
+    [DllImport("kernel32.dll")]
+    public static extern Boolean AllocConsole ( );
+    [DllImport("kernel32.dll")]
+    public static extern Boolean FreeConsole ( );
+    
   }
 
   internal class ModalWindowUtil
@@ -123,8 +213,6 @@ namespace AndreiPopescu.CharazayPlus
       return util._maxOwnershipHandle; // may be IntPtr.Zero
     }
   }
-
-
 }
 
 

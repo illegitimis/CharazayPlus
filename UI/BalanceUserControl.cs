@@ -81,14 +81,14 @@ namespace AndreiPopescu.CharazayPlus
       this.label31 = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.label1.BackColor = System.Drawing.Color.DarkGray;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.label1.Location = new System.Drawing.Point(3, 0);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(256, 15);
       this.label1.TabIndex = 5;
       this.label1.Text = "Week / season";

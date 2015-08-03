@@ -319,12 +319,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.cbxMatchTypes.TabIndex = 2;
       this.cbxMatchTypes.SelectedValueChanged += new System.EventHandler(this.cbxMatchTypes_SelectedValueChanged);
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.AutoSize = true;
       this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.label1.Location = new System.Drawing.Point(413, 0);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(130, 50);
       this.label1.TabIndex = 1;
       this.label1.Text = "Match type:";

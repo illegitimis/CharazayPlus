@@ -13,6 +13,7 @@ namespace AndreiPopescu.CharazayPlus
   
 #if DOTNET30
   using System.Linq;
+  using System.Diagnostics;
 #endif
   
   /// <summary>
@@ -62,8 +63,13 @@ namespace AndreiPopescu.CharazayPlus
 
     public MainForm ( )
     {
+      Trace.WriteLine("MainForm constructor");
+      //
       InitializeComponent();
-
+      //
+      Shown += MainWindow_Shown;
+      Load += new EventHandler(MainWindow_Load);
+      //
       //Size sz = new Size ((int) (olvSkills.Size.Width / 2 - 1), lblSkillsDisplay.Height);
       //lblSkillsDisplay.Size = lblSkillsActive.Size = sz;
       string user = null;
@@ -83,42 +89,79 @@ namespace AndreiPopescu.CharazayPlus
       }
       if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(code))
       {
-        UI.FormLogin formLogin = new UI.FormLogin();
+        UI.LoginForm formLogin = new UI.LoginForm();
         formLogin.CorrectUserInformation += new EventHandler(formLogin_CorrectUserInformation);
         formLogin.ShowDialog(this);
       }
       else
       {
-        AssignWebServiceManager();
+        //AssignWebServiceManager();
         //
         // down + deserialize xmls
         //
-        DownloadMandatoryXmlFiles();
-        DownloadXmlAdditional();
+        //DownloadMandatoryXmlFiles();
+        //DownloadXmlAdditional();
       }
 
     }
 
-    /// <summary>
-    /// Method assigns Charazay xml web service  user information from serialized 
-    /// application data to the internal <see cref="WebServiceUsers"/> singleton manager
-    /// </summary>
-    private static void AssignWebServiceManager ( )
+    public void SplashScreenLoad (/*SplashScreen*/ System.Windows.Forms.Form splashScreen)
     {
-      if (WebServiceUsers.Instance.MainUser == null && !String.IsNullOrEmpty(Properties.Settings.Default.UserName))
-      {
-        WebServiceUsers.Instance.MainUser = new CharazayUserData();        
-      }
-      WebServiceUsers.Instance.MainUser.User = Properties.Settings.Default.UserName;
-      WebServiceUsers.Instance.MainUser.SecurityCode = Properties.Settings.Default.SecurityCode;
-      /*
-      if (WebServiceUsers.Instance.AlternateUser == null && !String.IsNullOrEmpty(Properties.Settings.Default.UserName2))
-      {
-        WebServiceUsers.Instance.AlternateUser = new CharazayUserData();
-      }
-      WebServiceUsers.Instance.AlternateUser.User = Properties.Settings.Default.UserName2;     
-      WebServiceUsers.Instance.AlternateUser.SecurityCode = Properties.Settings.Default.SecurityCode2;
-      */
+      Trace.WriteLine("SplashScreenLoad()");
+      //
+      if (splashScreen is LoginForm) 
+        (splashScreen as LoginForm).Info("Loading...");
+      if (splashScreen is SplashScreen)
+        (splashScreen as SplashScreen).UpdateProgress("Loading ...");      
+    }
+
+    void MainWindow_Shown (object sender, EventArgs e)
+    {
+      Application.DoEvents();
+      //if (Explorer != null && Explorer.SelectedNode != null)
+      //  ExplorerClick(Explorer.SelectedNode as SPTreeNode);
+    }
+
+    public void MainWindow_Load (object sender, EventArgs e)
+    {
+      //SetLanguage(SPMLocalization.C_CULTURE_EN);
+
+      //this.MainMenuStrip = IoCContainer.Resolve<MainMenuStrip>();
+      //this.Controls.Add(this.MainMenuStrip);
+
+      //var statusStrip = IoCContainer.Resolve<MainWindowStatusStrip>();
+      //this.Controls.Add(statusStrip);
+
+      //string language = SPMRegistry.GetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID) as string;
+      //if (language == null)
+      //{
+      //    SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_EN);
+      //}
+      //else
+      //{
+      /* NEW LANGUAGE INSTRUCTIONS
+       * - Add a new constant in Library-SPMLocalization.cs  (public const string C_CULTURE_XX = "XX";)
+       * - Add a new sub-menu ("Xxxxx") in the MainForm.cs under "Languages", and his Click Event
+       * - Add two rows code to the Event of the sub-menu:
+       *             SPMRegistry.SetValue(SPMLocalization.C_REGKEY_CULTURE, SPMLocalization.C_REGKEY_CULTUREID, SPMLocalization.C_CULTURE_XX);
+       *             this.MainWindow_Load(null, null);
+       * - Add a new case in the switch statement in the Load event of MainForm.cs (from row 57)
+       *                     case SPMLocalization.C_CULTURE_XX:
+       *                         xxxxxToolStripMenuItem.Checked = true;
+       *                         break;
+       * - Add a row in the function InitializeInterfaceStrings (MainForm.cs):
+       *                  xxxxxToolStripMenuItem.Text = SPMLocalization.GetString("Interface_xxxxxLanguage");
+       * - Add a row in each SPManagerLanguage.xx.resx file:
+       *                  Interface_xxxxxLanguage	    NameOfLanguageIn-resx-File	    MainForm
+       * - Add a new resources file to the project ("SPManagerLanguage.xx.resx")
+       * - Copy all from SPManagerLanguage.resx to the new SPManagerLanguage.xx.resx file
+       * - Change the "Value" of each string in the new file
+       */
+
+      //Uncheck everything in the Language Menu
+
+      ////}
+
     }
 
     #region designer fields
@@ -208,31 +251,31 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    private void DownloadXmlAdditional ( )
-    {
-      if (MyXmlTeam.CountryInfo == null || MyXmlTeam.Arena == null)
-        throw new NotImplementedException();
-      if (MyXmlTeam.Schedule == null || MyXmlTeam.DivisionSchedule == null)
-        throw new NotImplementedException();
-      if (MyXmlTeam.Standings == null)
-        throw new NotImplementedException();
-      if (MyXmlTeam.Economy == null || MyXmlTeam.Transfers == null)
-        throw new NotImplementedException();
-      if (PlayersEnvironment.OptimumPlayers == null || PlayersEnvironment.Coaches == null)
-        throw new NotImplementedException();
-      if (TransferList.Bookmarks == null)
-        throw new NotImplementedException();
-      //
-      new System.Threading.Thread(( ) => Web.Scraper.Instance.Login()).Start();
-      //
+    //private void DownloadXmlAdditional ( )
+    //{
+    //  //if (MyXmlTeam.CountryInfo == null || MyXmlTeam.Arena == null)
+    //  //  throw new NotImplementedException();
+    //  //if (MyXmlTeam.Schedule == null || MyXmlTeam.DivisionSchedule == null)
+    //  //  throw new NotImplementedException();
+    //  //if (MyXmlTeam.Standings == null)
+    //  //  throw new NotImplementedException();
+    //  //if (MyXmlTeam.Economy == null || MyXmlTeam.Transfers == null)
+    //  //  throw new NotImplementedException();
+    //  if (PlayersEnvironment.OptimumPlayers == null || PlayersEnvironment.Coaches == null)
+    //    throw new NotImplementedException();
+    //  if (TransferList.Bookmarks == null)
+    //    throw new NotImplementedException();
+    //  //
+    //  new System.Threading.Thread(( ) => Web.Scraper.Instance.Login()).Start();
+    //  //
 
-    }
+    //}
 
-    private void DownloadMandatoryXmlFiles ( )
-    {
-      if (MyXmlTeam.UserInfo == null || MyXmlTeam.TeamInfo == null)
-        throw new ApplicationException();
-    }
+    //private void DownloadMandatoryXmlFiles ( )
+    //{
+    //  if (MyXmlTeam.UserInfo == null || MyXmlTeam.TeamInfo == null)
+    //    throw new ApplicationException();
+    //}
     #endregion
 
     #region IDisposable
@@ -1047,19 +1090,22 @@ namespace AndreiPopescu.CharazayPlus
       // update last selected
       _lastTab = currentTab;
     }
-           
+
     void formLogin_CorrectUserInformation (object sender, EventArgs e)
     {
-      UI.FormLogin formLogin = (UI.FormLogin)sender;
+      UI.LoginForm formLogin = (UI.LoginForm)sender;
       //
-      AssignWebServiceManager();
+      //AssignWebServiceManager();
       //
       // down + deserialize xmls
       //
       formLogin.Info("downloading team info");
-      DownloadMandatoryXmlFiles();
+      //DownloadMandatoryXmlFiles();
+        if (MyXmlTeam.UserInfo == null || MyXmlTeam.TeamInfo == null)
+          throw new ApplicationException();
+
       formLogin.Info("downloading additional data");
-      DownloadXmlAdditional();
+      //DownloadXmlAdditional();
       formLogin.Info("ready...");
       //     
       formLogin.Close();
@@ -1185,7 +1231,8 @@ namespace AndreiPopescu.CharazayPlus
 
     private void optionsToolStripMenuItem_Click (object sender, EventArgs e)
     {
-      UI.FormLogin loginForm = new UI.FormLogin();
+      UI.LoginForm loginForm = new UI.LoginForm();
+      loginForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
       loginForm.Show(this);
     }
 
@@ -1198,4 +1245,7 @@ namespace AndreiPopescu.CharazayPlus
 
        
    }
+
+
+ 
 }

@@ -16,7 +16,7 @@
     /// <summary>
     /// USED by <see cref="HotItemOverlay"/>
     /// </summary>
-    /// <param name="olv"></param>
+    /// <param name="_olv"></param>
     /// <param name="hotItemMode"></param>
     /// <param name="bFullRowSelect"></param>
     /// <param name="bExplorerTheme"></param>
@@ -140,7 +140,7 @@
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="olv"></param>
+    /// <param name="_olv"></param>
     /// <param name="active"></param>
     public static void ShowLabelsOnGroups (ObjectListView olv, bool active)
     {
@@ -188,7 +188,7 @@
         olv.DefaultRenderer = new HighlightTextRenderer(filter);
 
         // Uncomment this line to see how the GDI+ rendering looks
-        //olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
+        //_olv.DefaultRenderer = new HighlightTextRenderer { Filter = filter, UseGdiTextRendering = false };
       }
 
       // Some lists have renderers already installed
@@ -319,9 +319,9 @@
 //      //ContextMenuStrip ms = new ContextMenuStrip();
 //      //ms.ItemClicked += new ToolStripItemClickedEventHandler(ms_ItemClicked);
 
-//      //ObjectListView olv = (ObjectListView)sender;
-//      //if (olv.ShowGroups) {
-//      //    foreach (ListViewGroup lvg in olv.Groups) {
+//      //ObjectListView _olv = (ObjectListView)sender;
+//      //if (_olv.ShowGroups) {
+//      //    foreach (ListViewGroup lvg in _olv.Groups) {
 //      //        ToolStripMenuItem mi = new ToolStripMenuItem(String.Format("Jump to group '{0}'", lvg.Header));
 //      //        mi.Tag = lvg;
 //      //        ms.Items.Add(mi);

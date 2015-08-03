@@ -576,7 +576,7 @@ namespace AndreiPopescu.CharazayPlus.Xsd2
       }
     }
 
-    [OLVColumn("2pa", DisplayIndex = 15, ToolTipText = "2p made", Width = 39)]
+    [OLVColumn("3pa", DisplayIndex = 15, ToolTipText = "3p attempted", Width = 39)]
     public byte pt3_a
     {
       get

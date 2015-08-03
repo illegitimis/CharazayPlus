@@ -9,7 +9,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   {
     #region data
     //age, A, B
-    static double[,] C = new double[21, 3] {
+    static double[,] Center = new double[21, 3] {
 {15, 0.0077067,   7.0558 },
 {16, 0.0039195,   7.097  },
 {17, 2.5022e-005, 11.156 },
@@ -34,7 +34,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     };
 
     //f
-    static double[,] F = new double[21, 3] {
+    static double[,] Fwd = new double[21, 3] {
 {15, 0.016218,    6.2627  },
 {16, 4.7853e-006, 13.063  },
 {17, 5.1939e-005, 10.4259 },
@@ -58,7 +58,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 {35, 8.8147e-007, 12.1012 },
     };
     //g
-    static double[,] G = new double[21, 3] {
+    static double[,] Guard = new double[21, 3] {
 {15, 0.00073661,  8.2863  },
 {16, 1.7843e-006, 13.5505 },
 {17, 2.6712e-006, 12.643  },
@@ -86,21 +86,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     #region IInterpolate Members
 
+    public override double[,] G { get { return MatlabInterpolant20140909.Guard; } }
 
-    public override double[,] GetPositionData (char pos)
-    {
-      double[,] data = null;
-      switch (pos)
-      {
-        case 'G': data = MatlabInterpolant20140909.G; break;
-        case 'F': data = MatlabInterpolant20140909.F; break;
-        case 'C': data = MatlabInterpolant20140909.C; break;
-      }
-      return data;
-    }
+    public override double[,] F { get { return MatlabInterpolant20140909.Fwd; } }
 
-
-
+    public override double[,] C { get { return MatlabInterpolant20140909.Center; } }
+    
     #endregion
   }
 

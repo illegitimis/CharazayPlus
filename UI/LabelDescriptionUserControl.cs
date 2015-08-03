@@ -53,7 +53,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.lbl.Name = "lbl";
       this.lbl.Size = new System.Drawing.Size(41, 13);
       this.lbl.TabIndex = 0;
-      this.lbl.Text = "label1";
+      this.lbl.Text = "_lblTitle";
       // 
       // txtDescription
       // 

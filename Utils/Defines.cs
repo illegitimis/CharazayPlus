@@ -9,6 +9,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
   internal static class Defines
   {
+    public const string InternetConnection = "Please ensure internet connection is up and running";
+
     public const string ImagesDirectory = "http://www.charazay.com/images/language/";
     public const string ImagesExtension = ".png";
 
@@ -52,6 +54,29 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public const byte CountryIdStart = 1;
     public const byte CountryIdEnd = 74;
+
+
+    #region age / date
+
+    public const byte RookieAge = 15;
+    public const byte StartSkillDropAge = 32;
+    public const byte YouthMinimumAge = 13;
+    
+    //
+    // season is 17 weeks = 119 days
+    //
+    public const int DaysInSeason = 119;
+    
+    public const int DaysInWeek = 7;
+
+    public const int WeeksInSeason = 17;
+
+    // = StartSkillDropAge - RookieAge
+    //public const int SkillRaiseSeasons = 17;
+    public static readonly int MaxArrayWeekIndex = (Defines.StartSkillDropAge - Defines.RookieAge) * Defines.WeeksInSeason - 1;
+
+
+    #endregion
 
     public static readonly Country[] Countries = new Country[] {
       new Country {Name="Padding", ShortName="xx", Id=0}

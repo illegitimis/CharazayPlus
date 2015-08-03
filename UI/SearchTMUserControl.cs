@@ -966,11 +966,11 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.label3.TabIndex = 2;
       this.label3.Text = "Height";
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(30, 15);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(31, 13);
       this.label1.TabIndex = 0;
       this.label1.Text = "Price";

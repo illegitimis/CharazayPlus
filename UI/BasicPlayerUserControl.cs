@@ -256,13 +256,13 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.lnkLblPlayer.Text = "Player Name";
       this.lnkLblPlayer.VisitedLinkColor = System.Drawing.Color.ForestGreen;
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.BackColor = System.Drawing.Color.DimGray;
       this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.label1.ForeColor = System.Drawing.Color.White;
       this.label1.Location = new System.Drawing.Point(3, 234);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(68, 23);
       this.label1.TabIndex = 2;
       this.label1.Text = "Defense";

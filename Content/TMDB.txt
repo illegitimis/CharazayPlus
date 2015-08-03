@@ -1,6 +1,22 @@
-﻿--0)
-select max (datediff (day,day,GETUTCDATE())) from TM
+﻿----------------------------------------------------------------------------------------------------------------------------
+all this has been abstracted out by stored procedures
+[GetWeightedPrices] & [GetAveragePrices]
 
+exec GetWeightedPrices 'G', 0
+exec GetWeightedPrices 'F', 0
+exec GetWeightedPrices 'C', 0
+I run the queries and save them in "d:\PROJECTS\Charazay\Transfer Market\dbTrace" as yyyyMM.Position.txt
+
+I am importing generated data Matlab->Import Data and saving that as variables g,f,c
+
+Matlab:
+fit(g,15:35,'Guard')
+fit(f,15:35,'Forward')
+fit(c,15:35,'Center')
+
+----------------------------------------------------------------------------------------------------------------------------
+--0)
+select max (datediff (day,day,GETUTCDATE())) from TM
 
 --1)
 --v11--2098
@@ -21,7 +37,6 @@ group by Age,PosId,AgeValue11
 --1107-v11
 --1422-20140520
 select Age,PosId,AgeValue11,AVG(Sum) as AvgSum,COUNT(*) as cnt from TM group by Age,PosId,AgeValue11
-
 
 --4) missing data
 --25	14	F

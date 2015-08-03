@@ -5,6 +5,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   using System.IO;
   using System.Xml.Serialization;
   using AndreiPopescu.CharazayPlus.Extensions;
+  using System.Xml;
     
   /// <summary>
   /// keeps m cache of player & team names
@@ -200,7 +201,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public string TeamName(uint id)
     {
-      return _teams.ContainsKey(id) ? _teams[id] : id.ToString();
+      return _teams.ContainsKey(id) ? System.Net.WebUtility.HtmlDecode(_teams[id]) : id.ToString();
     }
 
     internal string MatchName (uint mid)

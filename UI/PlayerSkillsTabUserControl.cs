@@ -205,7 +205,7 @@
       this.olvcFN.ImageAspectName = "";
       this.olvcFN.Text = "Player";
       this.olvcFN.ToolTipText = "Tooltip for Player column. This was configurated in the IDE. (Hold down Control t" +
-    "o see m different tooltip)";
+    "h see m different tooltip)";
       this.olvcFN.UseInitialLetterForGroup = true;
       this.olvcFN.Width = 180;
       // 
@@ -832,7 +832,7 @@
     /// <param name="g">graphics object</param>
     /// <param name="itemBounds">decoration bounds</param>
     /// <param name="rowObject">the player object bound to m row</param>
-    /// <param name="olv">list view</param>
+    /// <param name="_olv">list view</param>
     /// <param name="item"></param>
     public void DrawBusinessCard (Graphics g, Rectangle itemBounds, object rowObject, ObjectListView olv, OLVListItem item)
     {

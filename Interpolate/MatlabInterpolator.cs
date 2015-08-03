@@ -42,6 +42,37 @@ namespace AndreiPopescu.CharazayPlus.Utils
       }
     }
 
-    public abstract double[,] GetPositionData (char pos);
+    //public abstract double[,] GetPositionData (char pos);
+
+
+    public double[,] GetPositionData (char pos)
+    {
+      double[,] data = null;
+      switch (pos)
+      {
+        case 'G':
+        case 'g':
+          data = G; 
+          break;
+
+        case 'F': 
+        case 'f':
+          data = F; 
+          break;
+
+        case 'C':
+        case 'c': 
+          data = C; 
+          break;
+
+        default:
+          throw new ArgumentException("Position");
+      }
+      return data;
+    }
+
+    public abstract double[,] G { get; }
+    public abstract double[,] F { get; }
+    public abstract double[,] C { get; }
   }
 }

@@ -339,7 +339,7 @@
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
-      get { return MatlabInterpolant20150504.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant201507.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
 
     }
   }

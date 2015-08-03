@@ -13,8 +13,10 @@ namespace AndreiPopescu.CharazayPlus.UI
 {
   public partial class ChartUserControl : UserControl
   {
+    const string CHART_AREA_NAME = "Chart Area Main";
+
     #region Component Designer generated code
-    
+
     /// <summary> 
     /// Required designer variable.
     /// </summary>
@@ -33,7 +35,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       base.Dispose(disposing);
     }
 
-   
+
 
     /// <summary> 
     /// Required method for Designer support - do not modify 
@@ -41,9 +43,10 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// </summary>
     private void InitializeComponent ( )
     {
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-      System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-      this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+      this._chartArea = new ChartArea();
+      this.legend1 = new Legend();
+      this.chart = new Chart();
+
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.rdC = new System.Windows.Forms.RadioButton();
       this.rdF = new System.Windows.Forms.RadioButton();
@@ -77,17 +80,22 @@ namespace AndreiPopescu.CharazayPlus.UI
       // 
       // chart
       // 
-      this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.chart.BackColor = System.Drawing.Color.DimGray;
-      this.chart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-      chartArea1.Name = "ChartArea1";
-      this.chart.ChartAreas.Add(chartArea1);
-      legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Top;
-      legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+      this.chart.BackGradientStyle = GradientStyle.DiagonalLeft;
+      _chartArea.Name = CHART_AREA_NAME;
+      this.chart.ChartAreas.Add(_chartArea);
+      //
+      legend1.Docking = Docking.Top;
+      legend1.LegendStyle = LegendStyle.Row;
       legend1.Name = "Legend1";
       this.chart.Legends.Add(legend1);
+      //
+      this.legend2 = new Legend() { Docking = Docking.Top, LegendStyle = LegendStyle.Row, Name = "Legend2" };
+      this.chart.Legends.Add(legend2);
+      //
       this.chart.Location = new System.Drawing.Point(0, 0);
       this.chart.Name = "chart";
       this.chart.Size = new System.Drawing.Size(617, 603);
@@ -448,6 +456,10 @@ namespace AndreiPopescu.CharazayPlus.UI
     #endregion
 
     #region generated members
+    ChartArea _chartArea;
+    Legend legend1;
+    Legend legend2;
+
     private GroupBox groupBox1;
     private RadioButton rdC;
     private RadioButton rdF;
@@ -475,19 +487,27 @@ namespace AndreiPopescu.CharazayPlus.UI
     private RadioButton rd16;
     private RadioButton rd15;
 
-    private System.Windows.Forms.DataVisualization.Charting.Chart chart; 
+    private Chart chart;
+    Series series0;
+    Series series1;
+    Series series2;
+    Series series3;
+    Series series4;
+    Series series5;
+    Series series6;
+    //Series series7;
     #endregion
 
     #region fields
     byte _currentAge = byte.MinValue;
-    char _pos = char.MinValue; 
+    char _pos = char.MinValue;
     #endregion
-    
+
 
     public ChartUserControl ( )
     {
       InitializeComponent();
-      
+
     }
 
     #region utility
@@ -502,7 +522,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
 #if DOTNET30
 
-      var ths = Data.DbEnvironment.Instance.TransferHistoryDC.Histories.Where(x => x.Age == this._currentAge && x.PosId == this._pos).ToList();
+      var ths = Data.DbEnvironment.Instance.TransferHistoryDC.History.Where(x => x.Age == this._currentAge && x.PosId == this._pos).ToList();
       //
       // set axes ranges
       //
@@ -510,20 +530,19 @@ namespace AndreiPopescu.CharazayPlus.UI
       double xmax = Math.Min(1.4d, (double)ths.Select(x => x.AgeValueIndex).Max());
       double ymin = 0d;
       double ymax = (double)Math.Ceiling(ths.Select(y => y.Price).Max());
-      var c1 = this.chart.ChartAreas["ChartArea1"];
-      c1.AxisX.Minimum = xmin;
-      c1.AxisY.Maximum = xmax;
-      c1.AxisY.Minimum = ymin;
-      c1.AxisY.Maximum = ymax;
+      //
+      this._chartArea.AxisX.Minimum = xmin;
+      this._chartArea.AxisY.Maximum = xmax;
+      this._chartArea.AxisY.Minimum = ymin;
+      this._chartArea.AxisY.Maximum = ymax;
       //
       // add scatter data
       //
       foreach (var th in ths)
       {
-        this.chart.Series[0].Points.Add(new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+        series0.Points.Add(new DataPoint()
         {
-          ToolTip = string.Format("Value Index: {0:F02} Price:{1:F02} Day: {2:yyyy-MM-dd}", th.AgeValueIndex, th.Price, th.Day)
-          ,
+          ToolTip = string.Format("Value Index: {0:F02} Price:{1:F02} Day: {2:yyyy-MM-dd}", th.AgeValueIndex, th.Price, th.Day),
           XValue = (double)th.AgeValueIndex,
           YValues = new double[] { (double)th.Price }
         });
@@ -532,7 +551,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       // add (weighted) averages from db
       //
       var utcnow = DateTime.UtcNow;
-      var maxDateDiff =  ths.Select(x => (utcnow - x.Day).Days).Max();
+      var maxDateDiff = ths.Select(x => (utcnow - x.Day).Days).Max();
       var query = from th in ths
                   group th by th.AgeValueIndex into g
                   orderby g.Key ascending
@@ -541,11 +560,11 @@ namespace AndreiPopescu.CharazayPlus.UI
       foreach (var g in query)
       {
         double y = (double)g.Select(th => th.Price).Average();
-        this.chart.Series[1].Points.AddXY((double)g.Key, y);
+        series1.Points.AddXY((double)g.Key, y);
         //
         double yw = (double)g.Select(x => x.Price * (2 * maxDateDiff - (utcnow - x.Day).Days)).Sum()
         / (double)g.Select(x => 2 * maxDateDiff - (utcnow - x.Day).Days).Sum();
-        this.chart.Series[2].Points.Add(new DataPoint()
+        series2.Points.Add(new DataPoint()
         {
           Label = yw.ToString("F02"),
           XValue = (double)g.Key,
@@ -553,26 +572,31 @@ namespace AndreiPopescu.CharazayPlus.UI
         });
       }
       //
-      double a1,b1,a2,b2,a3,b3;
-      var i1 = new Utils.MatlabInterpolant20140909 ();
+      // add historic interpolation data 
+      //
+      double a1, b1, a2, b2, a3, b3, a4, b4;
+      var i1 = new Utils.MatlabInterpolant20140909();
       i1.GetAB(this._currentAge, this._pos, out a1, out b1);
       Utils.MatlabInterpolant20141124.Instance.GetAB(this._currentAge, this._pos, out a2, out b2);
       Utils.MatlabInterpolant20150504.Instance.GetAB(this._currentAge, this._pos, out a3, out b3);
+      Utils.MatlabInterpolant201507.Instance.GetAB(this._currentAge, this._pos, out a4, out b4);
       //
       for (double x = xmin; x < xmax + 0.01d; x = x + 0.01d)
       {
-        this.chart.Series[3].Points.AddXY(x, a1 * Math.Exp(x * b1));
-        this.chart.Series[4].Points.AddXY(x, a2 * Math.Exp(x * b2));
-        this.chart.Series[5].Points.AddXY(x, a3 * Math.Exp(x * b3));
+        series3.Points.AddXY(x, a1 * Math.Exp(x * b1));
+        series4.Points.AddXY(x, a2 * Math.Exp(x * b2));
+        series5.Points.AddXY(x, a3 * Math.Exp(x * b3));
+        series6.Points.AddXY(x, a4 * Math.Exp(x * b4));
       }
       //AddRectangleAnnotation(f2);
       //AddEllipseAnnotation(f1);
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f1.ToString());
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f2.ToString());
-      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of September 2014, A={0} B={1}", a1, b1));
-      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of November 2014, A={0} B={1}", a2, b2));
-      this.chart.Legends[0].CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of May 2015, A={0} B={1}", a3, b3));
-      this.chart.Legends[0].CustomItems.Add(Color.Tan, string.Format("Series has: {0} data points", ths.Count));
+      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of September 2014, A={0} B={1}", a1, b1));
+      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of November 2014, A={0} B={1}", a2, b2));
+      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of May 2015, A={0} B={1}", a3, b3));
+      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of July 2015, A={0} B={1}", a4, b4));
+      this.legend1.CustomItems.Add(Color.Tan, string.Format("Series has: {0} data points", ths.Count));
       //
 
 #else
@@ -597,22 +621,22 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     private void AddRectangleAnnotation (ExponentialOptimum eo)
     {
-      var annotation = new System.Windows.Forms.DataVisualization.Charting.RectangleAnnotation();
-      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200, 200);
+      var annotation = new RectangleAnnotation();
+      annotation.AnchorDataPoint = new DataPoint(200, 200);
       annotation.Text = eo.ToString();
       annotation.ForeColor = Color.Black;
       annotation.Font = new Font("Arial", 12);
       annotation.LineWidth = 2;
       annotation.BackColor = Color.PaleGoldenrod;
-      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+      annotation.LineDashStyle = ChartDashStyle.Dash;
 
       this.chart.Annotations.Add(annotation);
     }
 
     private void AddEllipseAnnotation (Exponential e)
     {
-      var annotation = new System.Windows.Forms.DataVisualization.Charting.EllipseAnnotation();
-      annotation.AnchorDataPoint = new System.Windows.Forms.DataVisualization.Charting.DataPoint(200, 400);
+      var annotation = new EllipseAnnotation();
+      annotation.AnchorDataPoint = new DataPoint(200, 400);
       annotation.Text = e.ToString();
       annotation.ForeColor = Color.Black;
       annotation.Font = new Font("Arial", 12);
@@ -620,10 +644,10 @@ namespace AndreiPopescu.CharazayPlus.UI
       annotation.Height = 35;
       annotation.Width = 60;
       annotation.BackColor = Color.PaleTurquoise;
-      annotation.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+      annotation.LineDashStyle = ChartDashStyle.Solid;
 
       this.chart.Annotations.Add(annotation);
-    } 
+    }
     #endregion
 
     #region event handlers
@@ -644,88 +668,50 @@ namespace AndreiPopescu.CharazayPlus.UI
     }
 
     private void ChartUserControl_Load (object sender, EventArgs e)
-    { // 0
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Scatter data")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
-        MarkerSize = 7,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-      });
-      // 1
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Average price")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
-        MarkerSize = 11,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Triangle
-      });
-      // 2
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Weighted average price")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point,
-        MarkerSize = 11,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross
-      });
-      // 3
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Sep 2014")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
-        MarkerSize = 10,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Star10
-      });
+    { // 
+      series0 = new Series("Scatter data") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 7, MarkerStyle = MarkerStyle.Circle };
+      series1 = new Series("Average price") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 10, MarkerStyle = MarkerStyle.Triangle };
+      series2 = new Series("Weighted average price") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 11, MarkerStyle = MarkerStyle.Cross };
+      series3 = new Series("Sep 2014") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Star10 };
+      series4 = new Series("Nov 2014") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Diamond };
+      series5 = new Series("May 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Square };
+      series6 = new Series("July 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 10, MarkerStyle = MarkerStyle.Star4 };
+      
+      foreach (var s in new[] { series0, series1, series2, series3, series4, series5, series6 })
+        this.chart.Series.Add(s);
       //
-      this.chart.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series("Nov 2014")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
-        MarkerSize = 10,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Diamond
-      });
-      //5
-      this.chart.Series.Add(new Series("May 2015")
-      {
-        ChartArea = "ChartArea1",
-        ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline,
-        MarkerSize = 10,
-        MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square
-      });
-      //
-      // Set auto minimum and maximum values.
-      var c1 = this.chart.ChartAreas["ChartArea1"];
+      // Set auto minimum and maximum values.    
       // Enable all elements
-      c1.AxisX.MinorGrid.Enabled = true;
-      c1.AxisX.MinorTickMark.Enabled = false;
-      c1.AxisY.MinorGrid.Enabled = true;
-      c1.AxisY.MinorTickMark.Enabled = false;
+      _chartArea.AxisX.MinorGrid.Enabled = true;
+      _chartArea.AxisX.MinorTickMark.Enabled = false;
+      _chartArea.AxisY.MinorGrid.Enabled = true;
+      _chartArea.AxisY.MinorTickMark.Enabled = false;
       // Set Grid lines and tick marks interval
-      c1.AxisX.MajorGrid.Interval = 0.05;
-      c1.AxisX.MajorTickMark.Interval = 0.05;
-      c1.AxisX.MinorGrid.Interval = 0.01;
-      c1.AxisX.MinorTickMark.Interval = 0.01;
-      c1.AxisY.MajorGrid.Interval = 5;
-      c1.AxisY.MajorTickMark.Interval = 5;
-      c1.AxisY.MinorGrid.Interval = 1;
-      c1.AxisY.MinorTickMark.Interval = 1;
+      _chartArea.AxisX.MajorGrid.Interval = 0.05;
+      _chartArea.AxisX.MajorTickMark.Interval = 0.05;
+      _chartArea.AxisX.MinorGrid.Interval = 0.01;
+      _chartArea.AxisX.MinorTickMark.Interval = 0.01;
+      _chartArea.AxisY.MajorGrid.Interval = 5;
+      _chartArea.AxisY.MajorTickMark.Interval = 5;
+      _chartArea.AxisY.MinorGrid.Interval = 1;
+      _chartArea.AxisY.MinorTickMark.Interval = 1;
       // Set Line Color
-      c1.AxisY.MinorGrid.LineColor = Color.DimGray;
-      c1.AxisX.MinorGrid.LineColor = Color.DimGray;
+      _chartArea.AxisY.MinorGrid.LineColor = Color.DimGray;
+      _chartArea.AxisX.MinorGrid.LineColor = Color.DimGray;
       // Set Line Style
-      c1.AxisX.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-      c1.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-      c1.AxisY.MinorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+      _chartArea.AxisX.MajorTickMark.LineDashStyle = ChartDashStyle.Solid;
+      _chartArea.AxisY.MajorTickMark.LineDashStyle = ChartDashStyle.Solid;
+      _chartArea.AxisY.MinorTickMark.LineDashStyle = ChartDashStyle.Dot;
       //
       // Set Line Width
-      c1.AxisX.MajorGrid.LineWidth = c1.AxisY.MajorGrid.LineWidth = 1;
+      _chartArea.AxisX.MajorGrid.LineWidth = _chartArea.AxisY.MajorGrid.LineWidth = 1;
 
       // title
-      c1.AxisX.Title = "Age Value Index";
-      c1.AxisY.Title = "Estimated Price";
+      _chartArea.AxisX.Title = "Age Value Index";
+      _chartArea.AxisY.Title = "Estimated Price";
       //
-      c1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-      c1.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+      _chartArea.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+      _chartArea.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
       //
       this.chart.Titles.Add("Transfer Compare");
 
@@ -733,7 +719,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     #endregion
 
 
-       
+
   }
 
   public class PlotHelper
@@ -754,7 +740,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private object PlotXYAppend (Chart chart, Series dataSeries, double x, double y)
     {
       return chart.Invoke(new PlotXYDelegate(dataSeries.Points.AddXY), new Object[] { x, y });
-      
+
       //return chart.Series[0].Points.AddXY(x, y);
     }// this line invokes a Delegate which pass in the addXY method defined in Points, so that it can plot a new point on a chart.
 

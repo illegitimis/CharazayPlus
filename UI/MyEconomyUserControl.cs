@@ -39,7 +39,7 @@
     #region public
     /// <summary>
     /// my team transfer history
-    /// tab: My Economy
+    /// ta/*B:*/ , My Economy
     /// </summary>
     [Obsolete("OLV instead of grid")]
     public void InitDgMyTransfers (Xsd2.charazayTransfer[] _myTransfers)
@@ -172,7 +172,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
       this.SuspendLayout();
       // 
-      // olv
+      // _olv
       // 
       this.olv.AlternateRowBackColor = System.Drawing.Color.Silver;
       this.olv.BackColor = System.Drawing.Color.LightGray;
@@ -182,7 +182,7 @@
       this.olv.ForeColor = System.Drawing.Color.White;
       this.olv.FullRowSelect = true;
       this.olv.Location = new System.Drawing.Point(0, 0);
-      this.olv.Name = "olv";
+      this.olv.Name = "_olv";
       this.olv.Size = new System.Drawing.Size(330, 674);
       this.olv.SortGroupItemsByPrimaryColumn = false;
       this.olv.TabIndex = 4;
@@ -284,12 +284,12 @@
       this.chart.TabIndex = 0;
       this.chart.Text = "chart1";
       // 
-      // label1
+      // _lblTitle
       // 
       this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.label1.AutoSize = true;
       this.label1.Location = new System.Drawing.Point(542, 115);
-      this.label1.Name = "label1";
+      this.label1.Name = "_lblTitle";
       this.label1.Size = new System.Drawing.Size(73, 13);
       this.label1.TabIndex = 2;
       this.label1.Text = "Interval (days)";

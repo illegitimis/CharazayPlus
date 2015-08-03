@@ -24,20 +24,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
       }
     }
 
-    public override double[,] GetPositionData (char pos)
-    {
-      double[,] data = null;
-      switch (pos)
-      {
-        case 'G': data = MatlabInterpolant20150504.G; break;
-        case 'F': data = MatlabInterpolant20150504.F; break;
-        case 'C': data = MatlabInterpolant20150504.C; break;
-      }
-      return data;
-    }
-
-// center
-    static double[,] C = new double[21, 4] {
+   
+    static double[,] _C = new double[21, 4] {
+  
 { 15	 ,0.0172214	 ,6.54221	 ,6545.62        },
 { 16	 ,0.0213729	 ,5.9738	 ,1658.43        },
 { 17	 ,0.000347706	 ,9.28483	 ,1398.64      },
@@ -59,10 +48,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
 { 33	 ,3.76771e-006	 ,13.1362	 ,90.5679    },
 { 34	 ,4.88563e-007	 ,14.3686	 ,23.2511    },
 { 35	 ,1.12229e-007	 ,15.5533	 ,41.3593    },
+
 };
 
     //forward
-    static double[,] F = new double[21, 4] {
+    static double[,] _F = new double[21, 4] {
 { 15	 ,0.0287921	 ,5.81247	 ,6113.9         },
 { 16	 ,4.35311e-005	 ,10.9165	 ,1850.64    },
 { 17	 ,0.000571219	 ,8.63356	 ,1328.51      },
@@ -87,7 +77,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 };
 
     //guard
-    static double[,] G = new double[21, 4] {
+    static double[,] _G = new double[21, 4] {
 { 15	 ,0.0017815	 ,7.62094	 ,1086.4         },
 { 16	 ,0.00116148	 ,7.79547	 ,1719.77      },
 { 17	 ,5.15559e-005	 ,10.4195	 ,297.091    },
@@ -110,6 +100,13 @@ namespace AndreiPopescu.CharazayPlus.Utils
 { 34	 ,2.78351e-008	 ,17.3703	 ,104.512    },
 { 35	 ,1.49951e-009	 ,20.0242	 ,87.5953    },
 };
+
+
+    public override double[,] G { get { return MatlabInterpolant20150504._G; } }
+
+    public override double[,] F { get { return MatlabInterpolant20150504._F; } }
+
+    public override double[,] C { get { return MatlabInterpolant20150504._C; } }
 
 
   }
