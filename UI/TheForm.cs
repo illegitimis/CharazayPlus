@@ -208,7 +208,7 @@ namespace AndreiPopescu.CharazayPlus
     private TabPage tabPageBrowser;
     private SearchTMUserControl ucSearchTM;
     private TabPage tabPageChartTM;
-    private ChartUserControl chartUserControl1;
+    private ChartUserControl _chartTransferHistory;
     private TabPage tabPageAssessPlayer;
     private ImageList imageListCountries;
     private ToolStripStatusLabel tsslbl;
@@ -358,7 +358,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageBrowser = new System.Windows.Forms.TabPage();
       this.ucSearchTM = new AndreiPopescu.CharazayPlus.UI.SearchTMUserControl();
       this.tabPageChartTM = new System.Windows.Forms.TabPage();
-      this.chartUserControl1 = new AndreiPopescu.CharazayPlus.UI.ChartUserControl();
+      this._chartTransferHistory = new AndreiPopescu.CharazayPlus.UI.ChartUserControl();
       this.tabPageAssessPlayer = new System.Windows.Forms.TabPage();
       this.imageListCountries = new System.Windows.Forms.ImageList(this.components);
       this.tsslbl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -810,7 +810,7 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // tabPageChartTM
       // 
-      this.tabPageChartTM.Controls.Add(this.chartUserControl1);
+      this.tabPageChartTM.Controls.Add(this._chartTransferHistory);
       this.tabPageChartTM.Location = new System.Drawing.Point(4, 4);
       this.tabPageChartTM.Name = "tabPageChartTM";
       this.tabPageChartTM.Size = new System.Drawing.Size(754, 579);
@@ -818,13 +818,13 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageChartTM.Text = "Transfer Chart";
       this.tabPageChartTM.UseVisualStyleBackColor = true;
       // 
-      // chartUserControl1
+      // _chartTransferHistory
       // 
-      this.chartUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.chartUserControl1.Location = new System.Drawing.Point(0, 0);
-      this.chartUserControl1.Name = "chartUserControl1";
-      this.chartUserControl1.Size = new System.Drawing.Size(754, 579);
-      this.chartUserControl1.TabIndex = 0;
+      this._chartTransferHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._chartTransferHistory.Location = new System.Drawing.Point(0, 0);
+      this._chartTransferHistory.Name = "_chartTransferHistory";
+      this._chartTransferHistory.Size = new System.Drawing.Size(754, 579);
+      this._chartTransferHistory.TabIndex = 0;
       // 
       // tabPageAssessPlayer
       // 

@@ -18,8 +18,8 @@ league hardiness chart
 1) STATUS TAB
 -------------------------------
 2) SKILLS TAB
--------------------------------
-3-7) PG, SG, ...
+PlayerSkillsTabUserControl: multiple player selection status bar 
+
 -------------------------------
 8) TRAINING TAB
 new layout?
@@ -46,12 +46,28 @@ outlier detection
 
 =========================================
 =========================================
+===        VERSION 1.1.6.6            ===
+=========================================
+=========================================
+3-7) PG, SG, ...
+PlayerPositionUserControl: default sort value index (ok)
+-----------------------
+12) ECONOMY
+fix chart border
+--------------------
+13) TRANSFER LIST TAB
+sort deadline after update (ok)
+
+=========================================
+=========================================
 ===        VERSION 1.1.6.5            ===
 =========================================
 =========================================
 GENERAL 
 splashscreen (copied from SPM manager)
 MULTIPLE USERS v1.1.6.2 (give up)
+matlab interpolant may 2015 (ok)
+
 
 =========================================
 =========================================

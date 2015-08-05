@@ -2,24 +2,16 @@
 namespace AndreiPopescu.CharazayPlus.UI
 {
   using System;
-  using System.Collections.Generic;
-  using System.ComponentModel;
-  using System.Drawing;
-  using System.Data;
-  using System.Text;
   using System.Windows.Forms;
-  using System.IO;
-  using System.Xml.Serialization;
-  using System.Collections;
-  using System.Linq;
-
-
   using AndreiPopescu.CharazayPlus.Utils;
   using AndreiPopescu.CharazayPlus.Objects;
   using AndreiPopescu.CharazayPlus.Extensions;
-
-
   using BrightIdeasSoftware;
+
+#if DOTNET30
+  using System.Linq;
+  using System.Collections.Generic;
+#endif  
 
   public partial class TransferListUserControl : UserControl
   {
@@ -389,6 +381,12 @@ namespace AndreiPopescu.CharazayPlus.UI
           break;
       }
     }
+
+    private void TransferListUserControl_Load (object sender, EventArgs e)
+    {
+      this.ucEvaluatePlayer.EvaluationType = Utils.Evaluation.season30;
+      this.ucEvaluatePlayer.IsHeightWeightImpact = true;
+    }
     #endregion
 
     #region Context Menu
@@ -442,6 +440,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
+    private IEnumerable <string> GetSelectedItemsGroupIds ()
+    {
+      foreach (ListViewItem si in this.olvTL.SelectedItems)
+        yield return si.Group.Header;
+    }
+
     private void cmsOlvTLUpdate_Click (object sender, EventArgs e)
     {
       FormsExtensions.SetWaitCursor(( ) =>
@@ -470,8 +474,12 @@ namespace AndreiPopescu.CharazayPlus.UI
 
 #endif
       });
-      
-
+      //
+      if (olvTL.ShowGroups && olvTL.PrimarySortColumn.Name == "DeadLine")
+      {
+        this.olvTL.Sort(olvTL.AllColumns.FirstOrDefault(c => c.Name == "DeadLine"), SortOrder.Ascending);
+        olvTL.OLVGroups[0].Collapsed = true;      
+      }        
     }
 
    
@@ -726,7 +734,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (Data.TransferList.Bookmarks.IsNullOrEmpty())
         return;
       olvTL.SetObjects(Data.TransferList.Bookmarks);
-      //      
+      //
+      olvTL.Sort(olvTL.AllColumns.FirstOrDefault(c=>c.Name=="DeadLine"),SortOrder.Ascending);
+      //
       foreach (TLPlayer tlp in Data.TransferList.Bookmarks)
       {
         // if (tlp.Player != null)
@@ -744,13 +754,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
 
     }
-    #endregion
-
-    private void TransferListUserControl_Load (object sender, EventArgs e)
-    {
-      this.ucEvaluatePlayer.EvaluationType = Utils.Evaluation.season30;
-      this.ucEvaluatePlayer.IsHeightWeightImpact = true;
-    }
+    #endregion    
     
    }
 }

@@ -82,9 +82,10 @@ namespace AndreiPopescu.CharazayPlus.UI
         }
       }
       olv.RebuildColumns();
-
-      // either call works
+      //
       olv.SetObjects(players);
+      //
+      olv.Sort(olv.AllColumns.FirstOrDefault(c => c.AspectName == "ValueIndex"), SortOrder.Descending);
     }
 
     public void Init<T> (IList<T> players) where T : Player

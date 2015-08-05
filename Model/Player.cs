@@ -475,18 +475,12 @@
     /// age/value factor or value index 
     /// </summary>
     [OLVColumn(DisplayIndex = 28, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public abstract double ValueIndex
-    {
-      get;     
-    }
+    public abstract double ValueIndex { get; }
     /// <summary>
     /// 
     /// </summary>
     [OLVColumn(DisplayIndex = 29, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
-    public abstract double TransferMarketValue
-    {
-      get;
-    }
+    public abstract double TransferMarketValue { get; }
 
     public override string ToString ( )
     {
