@@ -4,30 +4,38 @@ namespace AndreiPopescu.CharazayPlus.Data
   using System;
   using System.Collections.Generic;
   using System.Linq;
-  using AndreiPopescu.CharazayPlus.Objects;
+  using AndreiPopescu.CharazayPlus.Model;
   using System.IO;
 
   class TransferList
   {
-    public static IList<TLPlayer> Bookmarks { get { return Nested.TLPlayers; } }
+    //public static IList<TLPlayer> Bookmarks { get { return Nested.TLPlayers; } }
     //public static TLPlayers Bookmarks { get { return Nested.TLPlayers; } }
-
-    public void Add (TLPlayer tlp) { Nested.TLPlayers.Add(tlp); }
+    public static List<CT_TransferBookmark> Bookmarks { get { return Nested.TransferBookmarks; } }
 
     //public static bool IsDirty { get { return Nested.isDirty; } set { Nested.isDirty = value; } }
+    //public void Add (TLPlayer tlp) { Nested.TLPlayers.Add(tlp); }
 
     private class Nested
     {
-      internal static readonly IList<TLPlayer> TLPlayers;
+      //internal static readonly IList<TLPlayer> TLPlayers;
       //internal static readonly TLPlayers TLPlayers;
+      internal static readonly List<CT_TransferBookmark> TransferBookmarks;
 
       internal static bool isDirty = false;
 
       static Nested ( )
       {
-        TLPlayers = new List<TLPlayer>();
+        TransferBookmarks = DeserializeTransferBookmarks();
+      }
+
+      [Obsolete("Replaced by DeserializeTransferBookmarks")]
+      private static List<TLPlayer> DeserializeTLPlayers ( )
+      {
+        var o = new List<TLPlayer>();
+
         FileStream fs = null;
-        //TLPlayers = null;
+        
         try
         { //
           // data source
@@ -43,11 +51,42 @@ namespace AndreiPopescu.CharazayPlus.Data
           }
 
           var x = (TLPlayers)(new System.Xml.Serialization.XmlSerializer(typeof(TLPlayers)).Deserialize(fs));
-          TLPlayers = x.TLPlayer.ToList();
+          o = x.TLPlayer.ToList();
         }
-        catch (Exception) { }
-        finally { fs.Close(); }
+        catch  
+        { 
+        }
+        finally 
+        { 
+          fs.Close(); 
+        }
 
+        return o;
+      }
+
+      private static List<CT_TransferBookmark> DeserializeTransferBookmarks ( )
+      {       
+        FileStream fs = null;
+
+        try
+        { //
+          // data source
+          //
+          string tlFile = Web.XmlDownloadItem.NotDailyCategoryFileName(Web.Category.TransferBookmarks);
+          fs = new FileStream(tlFile, FileMode.Open, FileAccess.Read);
+
+          var root = (CT_TransferBookmarks)(new System.Xml.Serialization.XmlSerializer(typeof(CT_TransferBookmarks)).Deserialize(fs));
+          return root.Items;
+        }
+        catch
+        {
+        }
+        finally
+        {
+          fs.Close();
+        }
+
+        return new List<CT_TransferBookmark>();
       }
 
       static private FileStream GetMostRecent (string tlFile, FileStream fs)

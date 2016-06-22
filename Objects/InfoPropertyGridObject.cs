@@ -66,8 +66,10 @@ namespace AndreiPopescu.CharazayPlus.Objects
     public uint TeamId { get { return _team.id; } }
     //[Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
     //public string CupRank { get { return team.cuprank; } }
+    
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
-    public string TeamName { get { return _team.name; } }
+    public string TeamName { get { return  System.Xml.XmlConvert.DecodeName(_team.name); } }
+
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]
     public byte TeamChemistry { get { return _team.team_info.chemistry; } }
     [Browsable(true), Description(""), Category("Team"), ReadOnly(true)]

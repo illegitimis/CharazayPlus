@@ -3,6 +3,8 @@
 namespace AndreiPopescu.CharazayPlus
 {
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Interpolate;
+  using AndreiPopescu.CharazayPlus.Model;
 
   /// <summary>
   /// Center
@@ -40,7 +42,7 @@ namespace AndreiPopescu.CharazayPlus
     protected override double PercentageOffense_Shooting { get { return 0.25; } }
 
     protected override internal byte[] TrainingPlan { get { return new byte[] { 3, 0, 2, 2, 4, 5, 1, 0 }; } }
-    public override PlayerPosition PositionEnum { get { return PlayerPosition.C; } }
+    public override ST_PlayerPositionEnum PositionEnum { get { return ST_PlayerPositionEnum.C; } }
 
     internal static double[] StoredAssessedValues
     {
@@ -341,14 +343,13 @@ namespace AndreiPopescu.CharazayPlus
     } 
    
 
-    public override double ValueIndex { get { 
-      return TotalScore / C.StoredAssessedValues[TrainingWeekIndex]; 
-    } }
+    public override double ValueIndex { get { return TotalScore / C.StoredAssessedValues[TrainingWeekIndex]; } }
 
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'C', this.ValueIndex); }
-      get { return MatlabInterpolant201507.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      //get { return MatlabInterpolant201601.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
+      get { return MatlabInterpolant201606.Instance.GetTMValue(this.Age, 'C', this.ValueIndex); }
     }
   }
 

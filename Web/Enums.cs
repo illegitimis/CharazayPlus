@@ -108,7 +108,13 @@ using System.Text;
     /// </summary>
     Economy = 12
 
+    , 
+    /// <summary>
+    /// The way I serialize transfer bookmarks
+    /// </summary>
+    TransferBookmarks = 131
     , MyPlayersTL = 130
+
 
   }
 

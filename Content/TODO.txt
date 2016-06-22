@@ -9,6 +9,7 @@ advertising
 Mono build
 different .net framework builds (rest)
 TIME ZONE!
+PLAYER DEVELOPMENT IN TIME, TRAINING OUTCOMES
 -------------------------------
 0) INFO TAB
 versioned xsd schema
@@ -29,10 +30,11 @@ new layout?
 add total ratings
 -------------------------------
 10) DIVISION STANDINGS
+chart?
 -----------------------
 11) DIVISION SCHEDULE
 chart ?
-bball + vals addition as a total
+
 -----------------------
 12) ECONOMY
 history?
@@ -46,6 +48,45 @@ outlier detection
 
 =========================================
 =========================================
+===        VERSION 1.1.6.10           ===
+=========================================
+=========================================
+change xml namespaces and remove xsd boilerplate (ok)
+check web scraper and new site design (ok)
+move transfer listed xml from folder to file (ok)
+fix season align date after season 35 crash (ok)
+TL, cache, development recovery
+also refactor cache and player development
+
+=========================================
+=========================================
+===        VERSION 1.1.6.8            ===
+=========================================
+=========================================
+remove outliers Nov 2015 (ok)
+11) DIVISION SCHEDULE bball + vals addition as a total (done in some previous version)
+11) DIVISION SCHEDULE fix match name (ok)
+1) STATUS TAB experience column (ok)
+
+=========================================
+=========================================
+===        VERSION 1.1.6.7            ===
+=========================================
+=========================================
+Splash: Cache manager validator (ok)
+BROWSER XML TEAM NAMES (ok)
+development history save on exit (ok)
+development history build model (ok)
+development history validator (ok)
+development history control (ok)
+development history control seasons 2ndary axis(?)
+time zone (?)
+Cache manager threadsafe double locked?
+database update for other users
+delete daily player data menu 
+
+=========================================
+=========================================
 ===        VERSION 1.1.6.6            ===
 =========================================
 =========================================
@@ -53,7 +94,7 @@ outlier detection
 PlayerPositionUserControl: default sort value index (ok)
 -----------------------
 12) ECONOMY
-fix chart border
+fix chart border (ok)
 --------------------
 13) TRANSFER LIST TAB
 sort deadline after update (ok)

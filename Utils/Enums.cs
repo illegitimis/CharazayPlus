@@ -91,9 +91,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
   }
 
   /// <summary>
-  /// 
+  /// replaced by ST_PlayerPositionEnum
   /// </summary>
-  public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown };
+  //public enum PlayerPosition : byte { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown=255 };
 
   /// <summary>
   /// Form is m small factor that reflects hot/cold streaks that players have on a weekly/monthly basis. 

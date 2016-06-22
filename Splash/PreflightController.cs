@@ -36,9 +36,12 @@ namespace AndreiPopescu.CharazayPlus.Splash
       //service.AddRange(validators);
       service.AddRange(new BaseValidator[]
       {
+        //
         new WebServiceUserValidator(),
-        
+        new DevelopmentHistoryValidator(),
+        //
         new WebScraperValidator(),
+        new CacheManagerValidator(),
 
         new UserInfoXmlValidator(),
         new TeamInfoXmlValidator(),

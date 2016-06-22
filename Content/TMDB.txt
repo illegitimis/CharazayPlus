@@ -1,18 +1,22 @@
 ﻿----------------------------------------------------------------------------------------------------------------------------
 all this has been abstracted out by stored procedures
-[GetWeightedPrices] & [GetAveragePrices]
+[GetWeightedPrices] & [GetAveragePrices] 
+db is CharazayTM
 
 exec GetWeightedPrices 'G', 0
 exec GetWeightedPrices 'F', 0
 exec GetWeightedPrices 'C', 0
-I run the queries and save them in "d:\PROJECTS\Charazay\Transfer Market\dbTrace" as yyyyMM.Position.txt
+I run the queries and save them in "d:\PROJECTS\Charazay\Transfer Market\dbTrace" as yyMM.Position.txt
+File encodings change from UTF8 to ansi.
 
 I am importing generated data Matlab->Import Data and saving that as variables g,f,c
+G = dlmread('d:\PROJECTS\Charazay\Transfer Market\dbTrace\1604G.csv',';')
 
 Matlab:
-fit(g,15:35,'Guard')
-fit(f,15:35,'Forward')
-fit(c,15:35,'Center')
+1) Figure -> CharazayFit (G, 15, 'G')
+2) figure -> CharazayFit (G, 15:18, 'G')
+3) fit.txt -> CharazayDump (F, 15:35, 'Forwards'); CharazayDump (C, 15:35, 'Centers')
+
 
 ----------------------------------------------------------------------------------------------------------------------------
 --0)

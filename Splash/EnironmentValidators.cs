@@ -88,6 +88,8 @@ namespace AndreiPopescu.CharazayPlus.Splash
   /// </summary>
   public class WebScraperValidator : BaseValidator
   {
+    public static TimeSpan LocalTimeZoneVersusCharazayOffset { get; private set; }
+
     public WebScraperValidator ( )
       : base()
     {
@@ -100,7 +102,12 @@ namespace AndreiPopescu.CharazayPlus.Splash
     {
       try
       { // fire and forget
-        new System.Threading.Thread(( ) => Web.Scraper.Instance.Login()).Start();
+        new System.Threading.Thread( ( ) => { 
+          Web.Scraper.Instance.Login();
+          DateTime server = Web.Scraper.Instance.GetServerTime();
+          ServerTimeInfo sti = new ServerTimeInfo(DateTime.Now, server);
+          LocalTimeZoneVersusCharazayOffset = sti.Offset;
+        }).Start();
         return  ValidationResult.Success;
       }
       catch (Exception ex)
@@ -109,7 +116,43 @@ namespace AndreiPopescu.CharazayPlus.Splash
       }
     }
 
-    protected override bool CanRun { get { return ! TransferList.Bookmarks.IsNullOrEmpty(); } }
+    /// <summary>
+    /// was moved to 2nd position in array since it's fire and forget
+    /// </summary>
+    protected override bool CanRun { get { 
+      //return ! TransferList.Bookmarks.IsNullOrEmpty(); 
+      return WebServiceUsers.Instance.MainUser != null;
+    } }
+  }
+
+
+  public class DevelopmentHistoryValidator : BaseValidator
+  {
+    public DevelopmentHistoryValidator ( )
+      : base()
+    {
+      this.QuestionString = Defines.InternetConnection;
+      this.SuccessString = "Deserializing development history ...";
+      this.ErrorString = "Deserializing development history failure";
+    }
+
+    protected override ValidationResult Validate ( )
+    {
+      try
+      { // fire and forget
+        new System.Threading.Thread(( ) => DevelopmentHistory.Instance.Validate() ).Start();
+        return ValidationResult.Success;
+      }
+      catch (Exception ex)
+      {
+        throw new ValidatorExcpetion(ex.Message, ex);
+      }
+    }
+
+    /// <summary>
+    /// was moved to 3rd position in array since it's fire and forget
+    /// </summary>
+    protected override bool CanRun { get { return WebServiceUsers.Instance.MainUser != null; } }
   }
 
   public class WebServiceUserValidator : BaseValidator
@@ -158,5 +201,33 @@ namespace AndreiPopescu.CharazayPlus.Splash
       WebServiceUsers.Instance.AlternateUser.SecurityCode = Properties.Settings.Default.SecurityCode2;
       */
     }
+  }
+  
+  public class CacheManagerValidator : BaseValidator
+  {
+    public CacheManagerValidator ( )
+      : base()
+    {
+      this.QuestionString = "Please check cache data integrity";
+      this.SuccessString = "Cached player, teams and matches loaded.";
+      this.ErrorString = "Charazay web services user data failure";
+    }
+
+    protected override ValidationResult Validate ( )
+    {
+      try
+      {
+        new System.Threading.Thread(( ) => CacheManager.Instance.GetType()).Start();
+        return ValidationResult.Success;
+        //should be a double locked singleton
+        //return (CacheManager.Instance == null) ? ValidationResult.Error : ValidationResult.Success;
+      }
+      catch (Exception ex)
+      {
+        throw new ValidatorExcpetion(ex.Message, ex);
+      }
+    }
+
+    protected override bool CanRun { get { return true; } }    
   }
 }

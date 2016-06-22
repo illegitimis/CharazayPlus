@@ -174,7 +174,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
         {
           result = 0;
         }
-        /* Values don'm implement IComparer and are not equivalent, so compare as string values */
+        /* ItemValues don'm implement IComparer and are not equivalent, so compare as string values */
         else result = xValue.ToString().CompareTo(yValue.ToString());
 
         /* Return result */

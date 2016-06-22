@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <!--
+  public enum PlayerPosition : byte 
+  { PG = 0, SG = 1, SF = 2, PF = 3, C = 4, Unknown
+  -->
+  <xs:simpleType name="ST_PlayerPositionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PG" />
+      <xs:enumeration value="SG" />
+      <xs:enumeration value="SF" />
+      <xs:enumeration value="PF" />
+      <xs:enumeration value="C" />
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_Importance">
+    <xs:restriction base="xs:string">
+      <!--3-->
+      <xs:enumeration value="High" />
+      <!--2-->
+      <xs:enumeration value="Medium" />
+      <!--1-->
+      <xs:enumeration value="Small" />
+      <!--0-->
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="CT_TransferBookmark">
+    <xs:sequence>
+      <!--Position-->
+      <xs:element name="e" type="ST_PlayerPositionEnum" />
+      <!--Name-->
+      <xs:element name="n" type="xs:string" />
+      <!--Price-->
+      <xs:element name="x" type="xs:unsignedInt" />
+      <!--Date / Deadline-->
+      <xs:element name="d" type="xs:dateTime" />
+      <!--AgeValueIndex-->
+      <xs:element name="v" type="xs:double" />
+      <!--Profitability-->
+      <xs:element name="r" type="xs:double" />
+      <!--PlayerId-->
+      <xs:element name="id" type="xs:unsignedLong" />
+      <!--Importance-->
+      <xs:element name="m" type="ST_Importance" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CT_TransferBookmarks">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="p" type="CT_TransferBookmark" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--<xs:element name="TLPlayers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="TLPlayer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>-->
+
+  <xs:element name="root" type="CT_TransferBookmarks" />
+
+  <!--<xs:element name="TLPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Position" type="xs:string" />
+        <xs:element name="Name" type="xs:string" />
+        <xs:element name="Price" type="xs:unsignedInt" />
+        <xs:element name="Date" type="xs:string" />
+        <xs:element name="Deadline" type="xs:string" />
+        <xs:element name="ValueIndex" type="xs:decimal" />
+        <xs:element name="Profitability" type="xs:decimal" />
+        <xs:element name="Total" type="xs:decimal" />
+        <xs:element name="Def" type="xs:decimal" />
+        <xs:element name="Off" type="xs:decimal" />
+        <xs:element name="OfAb" type="xs:decimal" />
+        <xs:element name="Shoot" type="xs:decimal" />
+        <xs:element name="Reb" type="xs:decimal" />
+        <xs:element name="RebO" type="xs:decimal" />
+        <xs:element name="RebD" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>-->
+
+</xs:schema>

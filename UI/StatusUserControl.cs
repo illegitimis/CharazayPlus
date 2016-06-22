@@ -93,9 +93,15 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvcFatigue.MakeGroupies(fatigueMarkers, ObjectListViewExtensions.BuildCustomGroupies<byte>(fatigueMarkers));
       this.olvcFatigue.Renderer = new BarTextRenderer(0, 100, Pens.Black, Color.Green, Color.Red) { UseStandardBar = false };
       this.olvcFatigue.AspectGetter = (row) => { return ((Player)row).Fatigue; };
-      this.olvcFatigue.AspectName = "Fatigue";
+      //this.olvcFatigue.AspectName = "Fatigue";
       //this.olvcFatigue.AspectToStringConverter = (row) => { return ((Player)row).Fatigue.ToString()+"%"; };
       this.olvcFatigue.AspectToStringFormat = "{0}%";
+
+      //experience
+      byte[] expMarkers = new byte[] { 3, 6, 10, 15, 20, 25, 30 };
+      this.olvcExp.MakeGroupies(expMarkers, ObjectListViewExtensions.BuildCustomGroupies<byte>(expMarkers));
+      this.olvcExp.Renderer = new BarTextRenderer(0, 100, Pens.Black, Color.Green, Color.Red) { UseStandardBar = false };
+      this.olvcExp.AspectGetter = (row) => { return ((Player)row).Experience; };
 
       // fill
       this.olvStatus.SetObjects(_optimumPlayers);
@@ -152,6 +158,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     private BrightIdeasSoftware.OLVColumn olvcInjuryDays;
     private BrightIdeasSoftware.OLVColumn olvcNt;
     private BrightIdeasSoftware.OLVColumn olvcNtU21;
+    private OLVColumn olvcExp;
     private BrightIdeasSoftware.OLVColumn olvcNtU18;
 
     /// <summary> 
@@ -189,6 +196,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvcNt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcNtU21 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       this.olvcNtU18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+      this.olvcExp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
       ((System.ComponentModel.ISupportInitialize)(this.olvStatus)).BeginInit();
       this.SuspendLayout();
       // 
@@ -209,6 +217,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvStatus.AllColumns.Add(this.olvcNt);
       this.olvStatus.AllColumns.Add(this.olvcNtU21);
       this.olvStatus.AllColumns.Add(this.olvcNtU18);
+      this.olvStatus.AllColumns.Add(this.olvcExp);
       this.olvStatus.AllowColumnReorder = true;
       this.olvStatus.AlternateRowBackColor = System.Drawing.Color.DimGray;
       this.olvStatus.BackColor = System.Drawing.Color.Gray;
@@ -227,7 +236,8 @@ namespace AndreiPopescu.CharazayPlus.UI
             this.olvcInjuryDays,
             this.olvcNt,
             this.olvcNtU21,
-            this.olvcNtU18});
+            this.olvcNtU18,
+            this.olvcExp});
       this.olvStatus.Cursor = System.Windows.Forms.Cursors.Default;
       this.olvStatus.Dock = System.Windows.Forms.DockStyle.Fill;
       this.olvStatus.ForeColor = System.Drawing.Color.White;
@@ -404,6 +414,16 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvcNtU18.Text = "U18 NT?";
       this.olvcNtU18.ToolTipText = "under 18 national team member";
       this.olvcNtU18.Width = 40;
+      // 
+      // olvcExp
+      // 
+      this.olvcExp.AspectName = "Experience";
+      this.olvcExp.CellPadding = null;
+      this.olvcExp.IsEditable = false;
+      this.olvcExp.MaximumWidth = 100;
+      this.olvcExp.MinimumWidth = 50;
+      this.olvcExp.Text = "Experience";
+      this.olvcExp.Width = 70;
       // 
       // StatusUserControl
       // 

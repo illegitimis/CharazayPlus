@@ -554,7 +554,7 @@ namespace AndreiPopescu.CharazayPlus.UI
      
         try
         {
-          var SelectedMatch = Utils.Deserializer.GoGetMatchXml((ulong)currentMatch.Id);
+          var SelectedMatch = Utils.SerializeHelper.GoGetMatchXml((ulong)currentMatch.Id);
           //
           ucMatchDetails.SetData(SelectedMatch);
           ucRatingHome.RatingType = UI.RatingType.Home;

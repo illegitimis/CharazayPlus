@@ -28,7 +28,6 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    public override double ValueIndex { get { return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; } }
 
     /*
     *********************************************************************************************
@@ -73,6 +72,10 @@ namespace AndreiPopescu.CharazayPlus
 
     protected override double PercentageOffense_OffensiveAbility { get { return 0.7; } }
     protected override double PercentageOffense_Shooting { get { return 0.3; } }
+
+    public override double ValueIndex { get { 
+      return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; 
+    } }
 
   }
 }

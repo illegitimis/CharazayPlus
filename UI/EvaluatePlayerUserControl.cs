@@ -4,6 +4,7 @@
   using System.Windows.Forms;
   using AndreiPopescu.CharazayPlus.Utils;
   using System.Collections.Generic;
+  using AndreiPopescu.CharazayPlus.Model;
 
   public partial class EvaluatePlayerUserControl : UserControl
   {
@@ -770,28 +771,23 @@
       }
     }
 
-    internal Evaluation EvaluationType
-    {
-      get { return this._evalType; }
-      set { this._evalType = value; }
-    }
-    
-    internal Player GetPlayer (PlayerPosition pos)
+    internal Evaluation EvaluationType { get; set; }
+
+    internal Player GetPlayer (ST_PlayerPositionEnum pos)
     {
       switch (pos)
       {
-        case PlayerPosition.C: return _c;
-        case PlayerPosition.PF: return _pf;
-        case PlayerPosition.SF: return _sf;
-        case PlayerPosition.SG: return _sg;
-        case PlayerPosition.PG: return _pg;
+        case ST_PlayerPositionEnum.C: return _c;
+        case ST_PlayerPositionEnum.PF: return _pf;
+        case ST_PlayerPositionEnum.SF: return _sf;
+        case ST_PlayerPositionEnum.SG: return _sg;
+        case ST_PlayerPositionEnum.PG: return _pg;
         default: return null;
       }
     }
 
     internal IEnumerable<Player> GetPlayers ()
     {
-      
         yield return _c;
         yield return _pf;
         yield return _sf;
@@ -802,16 +798,19 @@
     #endregion
     
     #region fields
+    
     Player _pg = null;
     Player _sg = null;
     Player _sf = null;
     Player _pf = null;
     Player _c = null;
+    
     Xsd2.charazayPlayer _p = null;
+    
     bool _isHw = false;
     bool _isFatigue = false;
     bool _isForm = false;
-    Evaluation _evalType = Evaluation.old;
+
     #endregion
 
     #region private
@@ -883,7 +882,7 @@
 
     private void EvaluatePositions ( )
     {
-      switch (_evalType)
+      switch (EvaluationType)
       {
         case Evaluation.old:
           {

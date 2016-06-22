@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="development">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded"
+                    name="playerItem">
+          <xs:complexType>
+            <xs:sequence minOccurs="0">
+              <xs:element maxOccurs="unbounded" ref="v" />
+            </xs:sequence>
+
+            <xs:attribute name="id"
+                          type="xs:unsignedInt"
+                          use="required" />
+            <xs:attribute name="name"
+                          type="xs:string"
+                          use="required" />
+            <xs:attribute name="surname"
+                          type="xs:string"
+                          use="required" />
+            
+            <xs:attribute name="promoted_on"
+                          type="xs:unsignedInt"
+                          use="optional" />
+            <xs:attribute name="countryid"
+                          type="xs:unsignedByte"
+                          use="optional" />
+            <xs:attribute name="active"
+                          type="xs:boolean"
+                          use="optional" default="false" />
+            
+            
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:attribute name="t" type="ST_VALUE_TYPE" />
+  
+  <xs:simpleType name="ST_VALUE_TYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value ="age"/>
+      <xs:enumeration value ="h"/>
+      <xs:enumeration value ="w"/>
+      <xs:enumeration value ="def"/>
+      <xs:enumeration value ="exp"/>
+      <xs:enumeration value ="p1"/>
+      <xs:enumeration value ="p2"/>
+      <xs:enumeration value ="p3"/>
+      <xs:enumeration value ="dri"/>
+      <xs:enumeration value ="spe"/>
+      <xs:enumeration value ="ftw"/>
+      <xs:enumeration value ="reb"/>
+      <xs:enumeration value ="pas"/>
+      <xs:enumeration value ="inj"/>
+      <xs:enumeration value ="fatg"/>
+      <xs:enumeration value ="form"/>
+      <xs:enumeration value ="fame"/>
+      <xs:enumeration value ="si"/>
+      <xs:enumeration value ="sal"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ST_DATE">
+    <xs:restriction base="xs:string">
+      <!--<xs:whiteSpace value="preserve"/>-->
+      <xs:pattern value="[0-9]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attribute name="d" type="ST_DATE" />
+
+  <xs:complexType name="CT_VALUE_AT_DATE">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="t" use="required" />
+        <xs:attribute ref="d" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="v" type="CT_VALUE_AT_DATE" />
+
+</xs:schema>

@@ -215,6 +215,8 @@ namespace AndreiPopescu.CharazayPlus
     private ToolStripStatusLabel tsslblr;
     private StatusStrip statusStrip;
     private AssessPlayerUserControl assessPlayerUserControl1;
+    private TabPage tabPageDevelopHistory;
+    private DevelopmentHistoryUserControl ucDevelopmentHistory;
    
   
 
@@ -299,8 +301,11 @@ namespace AndreiPopescu.CharazayPlus
     private void MainForm_FormClosing (object sender, FormClosingEventArgs e)
     {
       // sync this.olvTL.Objects & Data.TransferList.bookmarks
-      //Deserializer.SerializePlayersTL(olvTL.Objects);
-      Deserializer.SerializePlayersTL(Data.TransferList.Bookmarks);
+      //SerializeHelper.SerializePlayersTL(olvTL.Objects);
+      //SerializeHelper.SerializePlayersTL(Data.TransferList.Bookmarks);
+
+      SerializeHelper.SerializeTransferBookmarks();
+
       GC.WaitForPendingFinalizers();
     }
 
@@ -360,11 +365,13 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageChartTM = new System.Windows.Forms.TabPage();
       this._chartTransferHistory = new AndreiPopescu.CharazayPlus.UI.ChartUserControl();
       this.tabPageAssessPlayer = new System.Windows.Forms.TabPage();
+      this.assessPlayerUserControl1 = new AndreiPopescu.CharazayPlus.UI.AssessPlayerUserControl();
+      this.tabPageDevelopHistory = new System.Windows.Forms.TabPage();
+      this.ucDevelopmentHistory = new AndreiPopescu.CharazayPlus.UI.DevelopmentHistoryUserControl();
       this.imageListCountries = new System.Windows.Forms.ImageList(this.components);
       this.tsslbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.tsslblr = new System.Windows.Forms.ToolStripStatusLabel();
       this.statusStrip = new System.Windows.Forms.StatusStrip();
-      this.assessPlayerUserControl1 = new AndreiPopescu.CharazayPlus.UI.AssessPlayerUserControl();
       this.menuStrip1.SuspendLayout();
       this.tabPageMyDivisionStandings.SuspendLayout();
       this.tabPageMyTeamSchedule.SuspendLayout();
@@ -384,6 +391,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageBrowser.SuspendLayout();
       this.tabPageChartTM.SuspendLayout();
       this.tabPageAssessPlayer.SuspendLayout();
+      this.tabPageDevelopHistory.SuspendLayout();
       this.statusStrip.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -723,6 +731,7 @@ namespace AndreiPopescu.CharazayPlus
       this.sideTabControl.Controls.Add(this.tabPageBrowser);
       this.sideTabControl.Controls.Add(this.tabPageChartTM);
       this.sideTabControl.Controls.Add(this.tabPageAssessPlayer);
+      this.sideTabControl.Controls.Add(this.tabPageDevelopHistory);
       this.sideTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
       this.sideTabControl.ItemSize = new System.Drawing.Size(26, 104);
       this.sideTabControl.Location = new System.Drawing.Point(0, 27);
@@ -783,6 +792,7 @@ namespace AndreiPopescu.CharazayPlus
       // 
       // ucTransferList
       // 
+      this.ucTransferList.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucTransferList.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucTransferList.Location = new System.Drawing.Point(0, 0);
       this.ucTransferList.Name = "ucTransferList";
@@ -836,6 +846,32 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageAssessPlayer.Size = new System.Drawing.Size(754, 579);
       this.tabPageAssessPlayer.TabIndex = 17;
       this.tabPageAssessPlayer.Text = "Assess Player";
+      // 
+      // assessPlayerUserControl1
+      // 
+      this.assessPlayerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.assessPlayerUserControl1.Location = new System.Drawing.Point(0, 0);
+      this.assessPlayerUserControl1.Name = "assessPlayerUserControl1";
+      this.assessPlayerUserControl1.Size = new System.Drawing.Size(754, 579);
+      this.assessPlayerUserControl1.TabIndex = 0;
+      // 
+      // tabPageDevelopHistory
+      // 
+      this.tabPageDevelopHistory.Controls.Add(this.ucDevelopmentHistory);
+      this.tabPageDevelopHistory.Location = new System.Drawing.Point(4, 4);
+      this.tabPageDevelopHistory.Name = "tabPageDevelopHistory";
+      this.tabPageDevelopHistory.Size = new System.Drawing.Size(754, 579);
+      this.tabPageDevelopHistory.TabIndex = 18;
+      this.tabPageDevelopHistory.Text = "Development History";
+      this.tabPageDevelopHistory.UseVisualStyleBackColor = true;
+      // 
+      // ucDevelopmentHistory
+      // 
+      this.ucDevelopmentHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.ucDevelopmentHistory.Location = new System.Drawing.Point(0, 0);
+      this.ucDevelopmentHistory.Name = "ucDevelopmentHistory";
+      this.ucDevelopmentHistory.Size = new System.Drawing.Size(754, 579);
+      this.ucDevelopmentHistory.TabIndex = 0;
       // 
       // imageListCountries
       // 
@@ -939,14 +975,6 @@ namespace AndreiPopescu.CharazayPlus
       this.statusStrip.Size = new System.Drawing.Size(872, 22);
       this.statusStrip.TabIndex = 3;
       // 
-      // assessPlayerUserControl1
-      // 
-      this.assessPlayerUserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.assessPlayerUserControl1.Location = new System.Drawing.Point(0, 0);
-      this.assessPlayerUserControl1.Name = "assessPlayerUserControl1";
-      this.assessPlayerUserControl1.Size = new System.Drawing.Size(754, 579);
-      this.assessPlayerUserControl1.TabIndex = 0;
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -986,6 +1014,7 @@ namespace AndreiPopescu.CharazayPlus
       this.tabPageBrowser.ResumeLayout(false);
       this.tabPageChartTM.ResumeLayout(false);
       this.tabPageAssessPlayer.ResumeLayout(false);
+      this.tabPageDevelopHistory.ResumeLayout(false);
       this.statusStrip.ResumeLayout(false);
       this.statusStrip.PerformLayout();
       this.ResumeLayout(false);

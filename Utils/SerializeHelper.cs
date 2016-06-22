@@ -1,20 +1,25 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Xml.Serialization;
-using AndreiPopescu.CharazayPlus.Web;
-using System.Collections.Generic;
-using AndreiPopescu.CharazayPlus.Objects;
-using System.Collections;
-using AndreiPopescu.CharazayPlus.Extensions;
-
+﻿
 namespace AndreiPopescu.CharazayPlus.Utils
 {
+  using System;
+  using System.IO;
+  using System.Linq;
+  using System.Xml.Serialization;
+  using AndreiPopescu.CharazayPlus.Web;
+  using System.Collections.Generic;
+  using AndreiPopescu.CharazayPlus.Objects;
+  using System.Collections;
+  using AndreiPopescu.CharazayPlus.Extensions;
+  using AndreiPopescu.CharazayPlus.Model;
+
+
   /// <summary>
   /// deserialize helper for charazay xml 
   /// </summary>
-  public static class Deserializer
+  public static class SerializeHelper
   {
+    static readonly TimeSpan ThreeDays = new TimeSpan(3, 0, 0, 0);
+    
     internal static object DeserializeXml (Web.XmlDownloadItem di)
     {
       return DeserializeXml(di.FileName, di.DeserializationType);
@@ -142,7 +147,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
         //try
         //{
         foreach (Web.XmlDownloadItem di in crawler.Items)
-          yield return Utils.Deserializer.DeserializeXml(di);
+          yield return Utils.SerializeHelper.DeserializeXml(di);
         //}
         //catch (Exception ex)
         //{
@@ -156,9 +161,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     {
       return GoGetXml(new XmlDownloadItem[] { xml }).First();
     }
-
-    static readonly TimeSpan ThreeDays = new TimeSpan(3, 0, 0, 0);
-
+    
     /// <summary>
     /// Download player xml and deserialize to object model player
     /// cleanup old unnecessary data
@@ -267,11 +270,14 @@ namespace AndreiPopescu.CharazayPlus.Utils
     
     /// <summary>
     /// serialize the transfer listed players that have been evaluated
+    /// taxonomy is transfer bookmarks from version 1.1.6.10
     /// </summary>
     /// <param name="TLObjects">transfer listed assessed players from _olv</param>
+    [Obsolete]
     internal static void SerializePlayersTL ( IEnumerable TLObjects)
     {
       string tlFile = Web.XmlDownloadItem.Category2FileName(Web.Category.MyPlayersTL);
+      
       FileStream fs = null;
       try
       {
@@ -300,7 +306,37 @@ namespace AndreiPopescu.CharazayPlus.Utils
       {
         fs.Close();
       }
+      
+    }
 
+    internal static void SerializeTransferBookmarks ( )
+    {
+      string transferBookmarksFileName = Web.XmlDownloadItem.NotDailyCategoryFileName(Web.Category.TransferBookmarks);
+
+      using (var fs = new FileStream(transferBookmarksFileName, FileMode.Truncate, FileAccess.Write))
+      {
+        XmlSerializer serializer = new XmlSerializer(typeof(CT_TransferBookmarks));
+
+        var o = new CT_TransferBookmarks()
+        {
+          //Items = Data.TransferList.Bookmarks.Select(x =>
+          //  new CT_TransferBookmark()
+          //  {
+          //    AgeValueIndex = Math.Round (x.AgeValueIndex, 2),
+          //    Deadline = x.DeadLine,
+          //    Importance = (ST_Importance)x.Importance,
+          //    Name = x.Name,
+          //    PlayerId = x.PlayerId,
+          //    Position = (ST_PlayerPositionEnum)(byte)x.Pos,
+          //    Price = x.Price,
+          //    Profitability = Math.Round(x.Profitability, 2)
+          //  }
+          //).ToArray()
+          Items = Data.TransferList.Bookmarks
+        };
+          
+        serializer.Serialize(fs, o);
+      }
     }
 
     /// <summary>
@@ -309,10 +345,10 @@ namespace AndreiPopescu.CharazayPlus.Utils
     /// <param name="pid">player id</param>
     /// <param name="pos">court position</param>
     /// <returns>a <see cref="Player"/></returns>
-    internal static Player GetPlayerFromIdAndPosition (ulong pid, PlayerPosition pos, Evaluation evaluationType)
+    internal static Player GetPlayerFromIdAndPosition (ulong pid, ST_PlayerPositionEnum pos, Evaluation evaluationType)
     {
       Xsd2.error err = null;
-      var xp = Deserializer.GoGetPlayerXml(pid, out err);
+      var xp = SerializeHelper.GoGetPlayerXml(pid, out err);
 
       if (xp == null || xp.skills == null || err != null)
         return null;
@@ -322,11 +358,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
         case Evaluation.old:
           switch (pos)
           {
-            case PlayerPosition.PG: return new PG(xp);
-            case PlayerPosition.SG: return new SG(xp);
-            case PlayerPosition.SF: return new SF(xp);
-            case PlayerPosition.PF: return new PF(xp);
-            case PlayerPosition.C: return new C(xp);
+            case ST_PlayerPositionEnum.PG: return new PG(xp);
+            case ST_PlayerPositionEnum.SG: return new SG(xp);
+            case ST_PlayerPositionEnum.SF: return new SF(xp);
+            case ST_PlayerPositionEnum.PF: return new PF(xp);
+            case ST_PlayerPositionEnum.C: return new C(xp);
             default: return null;
           } 
           
@@ -334,11 +370,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
         case Evaluation.season30:
           switch (pos)
           {
-            case PlayerPosition.PG: return new PG2014(xp, true, false, false);
-            case PlayerPosition.SG: return new SG2014(xp, true, false, false);
-            case PlayerPosition.SF: return new SF2014(xp, true, false, false);
-            case PlayerPosition.PF: return new PF2014(xp, true, false, false);
-            case PlayerPosition.C: return new C2014(xp, true, false, false);
+            case ST_PlayerPositionEnum.PG: return new PG2014(xp, true, false, false);
+            case ST_PlayerPositionEnum.SG: return new SG2014(xp, true, false, false);
+            case ST_PlayerPositionEnum.SF: return new SF2014(xp, true, false, false);
+            case ST_PlayerPositionEnum.PF: return new PF2014(xp, true, false, false);
+            case ST_PlayerPositionEnum.C: return new C2014(xp, true, false, false);
             default: return null;
           }
 
@@ -348,6 +384,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
       }
       
     }
+
+
     
   }
 }

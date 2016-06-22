@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<development>
+  <!--<playerItem id="19865742"
+              name="Demetrio"
+              surname="Batallán"
+              promoted_on="1232104738"
+              countryid="12">
+
+
+    <ages>
+      <age d="121008">30</age>
+      <age d="121008">31</age>
+    </ages>
+    
+    <hs>
+      <h d="121008">182</h>
+      <h d="121028">183</h>
+    </hs>
+    <ws>
+      <w d="121008">80.7662</w>
+      <w d="150101">80.7698</w>
+    </ws>
+
+    <defs>
+      <def d="121008">14</def>
+      <def d="150101">15</def>
+    </defs>
+
+    <exps>
+      <exp d="121008">14</exp>
+      <exp d="150101">15</exp>
+    </exps>
+
+    <p1s>
+      <p1 d="121008">14</p1>
+      <p1 d="150101">15</p1>
+    </p1s>
+
+    <p2s>
+      <p2 d="121008">14</p2>
+      <p2 d="150101">15</p2>
+    </p2s>
+
+    <p3s>
+      <p3 d="121008">14</p3>
+      <p3 d="150101">15</p3>
+    </p3s>
+
+    <dris>
+      <dri d="121008">14</dri>
+      <dri d="150101">15</dri>
+    </dris>
+
+    <spes>
+      <spe d="121008">14</spe>
+      <spe d="150101">15</spe>
+    </spes>
+
+    <ftws>
+      <ftw d="121008">14</ftw>
+      <ftw d="150101">15</ftw>
+    </ftws>
+
+    <rebs>
+      <reb d="121008">14</reb>
+      <reb d="150101">15</reb>
+    </rebs>
+
+    <pass>
+      <pas d="121008">14</pas>
+      <pas d="150101">15</pas>
+    </pass>
+
+
+    <injured d="120908" />
+    <injured d="120908" />
+
+    <fgs>
+      <fg d="121008">14</fg>
+      <fg d="150101">15</fg>
+    </fgs>
+
+    <fms>
+      <fm d="121008">14</fm>
+      <fm d="150101">15</fm>
+    </fms>
+    --><!--fame--><!--
+    <fes>
+      <fe d="121008">14</fe>
+      <fe d="150101">15</fe>
+    </fes>
+
+    <sis>
+      <si d="121008">563196</si>
+      <si d="150101">563196</si>
+    </sis>
+
+    <sals>
+      <sal d="121008">434429</sal>
+      <sal d="150101">434429</sal>
+    </sals>
+
+
+
+  </playerItem>
+  <playerItem />-->
+
+  <playerItem id="19865742" name="Demetrio" promoted_on="1232104738" countryid="12">
+      <v t="age" d="121008">30</v>
+      <v t="age" d="121008">30</v>
+      <v t="h" d="121008">182</v>
+      <v t="h" d="121028">183</v>      
+      <v t="w" d="121008">80.7662</v>
+      <v t="w" d="150101">80.7698</v>    
+      <v t="def" d="121008">14</v>
+      <v t="def" d="150101">15</v>
+      <v t="exp" d="121008">14</v>
+      <v t="exp" d="150101">15</v>
+      <v t="p1" d="121008">14</v>
+      <v t="p1" d="150101">15</v>    
+      <v t="p2" d="121008">14</v>
+      <v t="p2" d="150101">15</v>
+      <v t="p3" d="121008">14</v>
+      <v t="p3" d="150101">15</v>
+      <v t="dri" d="121008">14</v>
+      <v t="dri" d="150101">15</v>
+      <v t="spe" d="121008">14</v>
+      <v t="spe" d="150101">15</v>    
+      <v t="ftw" d="121008">14</v>
+      <v t="ftw" d="150101">15</v>    
+      <v t="reb" d="121008">14</v>
+      <v t="reb" d="150101">15</v>    
+      <v t="pas" d="121008">14</v>
+      <v t="pas" d="150101">15</v>
+      <v t="inj"  d="120908" />
+      <v t="inj" d="120908" />
+      <v t="fatg" d="121008">14</v>
+      <v t="fatg" d="150101">15</v>
+      <v t="form" d="121008">14</v>
+      <v t="form" d="150101">15</v>
+      <v t="fame" d="121008">14</v>
+      <v t="fame" d="150101">15</v>
+      <v t="si" d="121008">563196</v>
+      <v t="si" d="150101">563196</v>
+      <v t="sal" d="121008">434429</v>
+      <v t="sal" d="150101">434429</v>
+  </playerItem>
+  <playerItem id="123"/>
+  
+</development>

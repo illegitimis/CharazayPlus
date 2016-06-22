@@ -219,7 +219,10 @@ new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
     }
     */
 
-
-                
-
-              
+<img src="images/FAPercent_back.gif" alt="10 %" title="10 %" class="FAPercent" style="background-position: -70px 0pt;">		
+<img src="images/FAPercent_back.gif" alt="13 %" title="13 %" class="FAPercent" style="background-position: -67.6px 0pt;">	
+<img src="images/FAPercent_back.gif" alt="14 %" title="14 %" class="FAPercent" style="background-position: -66.8px 0pt;">
+<img src="images/FAPercent_back.gif" alt="16 %" title="16 %" class="FAPercent" style="background-position: -65.2px 0pt;">
+	(-79 0) (0	100) mx+n, m=0.79, n=-79 
+	
+	

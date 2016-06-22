@@ -71,7 +71,7 @@ namespace AndreiPopescu.CharazayPlus.UI
      
         try
         {
-          var SelectedMatch = Utils.Deserializer.GoGetMatchXml ((ulong)matchId);
+          var SelectedMatch = Utils.SerializeHelper.GoGetMatchXml ((ulong)matchId);
           //
           ucMatchDetails.SetData(SelectedMatch);
           ucrHome.RatingType = UI.RatingType.Home;
@@ -131,8 +131,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       // tlp
       // 
       this.tlp.ColumnCount = 2;
-      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+      this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
       this.tlp.Controls.Add(this.ucrHome, 1, 1);
       this.tlp.Controls.Add(this.ucLineup, 1, 3);
       this.tlp.Controls.Add(this.olvMd, 0, 0);
@@ -162,7 +162,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.olvMd.Location = new System.Drawing.Point(3, 3);
       this.olvMd.Name = "olvMd";
       this.tlp.SetRowSpan(this.olvMd, 4);
-      this.olvMd.Size = new System.Drawing.Size(117, 550);
+      this.olvMd.Size = new System.Drawing.Size(148, 550);
       this.olvMd.TabIndex = 0;
       this.olvMd.UseAlternatingBackColors = true;
       this.olvMd.UseCompatibleStateImageBehavior = false;
@@ -172,9 +172,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       // olvcMd
       // 
       this.olvcMd.CellPadding = null;
-      this.olvcMd.FillsFreeSpace = true;
-      this.olvcMd.Text = "Match Id";
-      this.olvcMd.Width = 208;
+      this.olvcMd.IsEditable = false;
+      this.olvcMd.MaximumWidth = 500;
+      this.olvcMd.MinimumWidth = 200;
+      this.olvcMd.Text = "Match Id/Name";
+      this.olvcMd.Width = 350;
+      this.olvcMd.WordWrap = true;
       // 
       // ucrHome
       // 
@@ -182,10 +185,10 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucrHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucrHome.BackColor = System.Drawing.Color.Gainsboro;
       this.ucrHome.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucrHome.Location = new System.Drawing.Point(126, 42);
+      this.ucrHome.Location = new System.Drawing.Point(157, 42);
       this.ucrHome.Name = "ucrHome";
       this.ucrHome.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Home;
-      this.ucrHome.Size = new System.Drawing.Size(490, 174);
+      this.ucrHome.Size = new System.Drawing.Size(459, 174);
       this.ucrHome.TabIndex = 2;
       // 
       // ucLineup
@@ -197,9 +200,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucLineup.BackColorHome = System.Drawing.Color.IndianRed;
       this.ucLineup.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ucLineup.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-      this.ucLineup.Location = new System.Drawing.Point(126, 402);
+      this.ucLineup.Location = new System.Drawing.Point(157, 402);
       this.ucLineup.Name = "ucLineup";
-      this.ucLineup.Size = new System.Drawing.Size(490, 151);
+      this.ucLineup.Size = new System.Drawing.Size(459, 151);
       this.ucLineup.TabIndex = 4;
       // 
       // ucrAway
@@ -208,10 +211,10 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucrAway.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.ucrAway.BackColor = System.Drawing.Color.LightGray;
       this.ucrAway.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucrAway.Location = new System.Drawing.Point(126, 222);
+      this.ucrAway.Location = new System.Drawing.Point(157, 222);
       this.ucrAway.Name = "ucrAway";
       this.ucrAway.RatingType = AndreiPopescu.CharazayPlus.UI.RatingType.Away;
-      this.ucrAway.Size = new System.Drawing.Size(490, 174);
+      this.ucrAway.Size = new System.Drawing.Size(459, 174);
       this.ucrAway.TabIndex = 3;
       // 
       // ucMatchDetails
@@ -221,9 +224,9 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucMatchDetails.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
       this.ucMatchDetails.CausesValidation = false;
       this.ucMatchDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.ucMatchDetails.Location = new System.Drawing.Point(126, 3);
+      this.ucMatchDetails.Location = new System.Drawing.Point(157, 3);
       this.ucMatchDetails.Name = "ucMatchDetails";
-      this.ucMatchDetails.Size = new System.Drawing.Size(490, 33);
+      this.ucMatchDetails.Size = new System.Drawing.Size(459, 33);
       this.ucMatchDetails.TabIndex = 5;
       // 
       // DivisionScheduleUserControl

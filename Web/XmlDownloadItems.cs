@@ -92,8 +92,13 @@
       if (step != null)
         sb.AppendFormat("_{0}", step);
       sb.Append(".xml");
+      
+      // extension only vs path in subfolder
+      string path = (sb.Length == 4) 
+        ? pathCategory + sb.ToString()
+        : Path.Combine(pathCategory, sb.ToString());
       //
-      string path = Path.Combine(pathCategory, sb.ToString());
+      
       if (!File.Exists(path))
         File.CreateText(path).Close();
       //
@@ -108,6 +113,12 @@
     {
       return Category2FileName(category, null, null, false, userName);
     }
+
+    public static string NotDailyCategoryFileName (Category category)
+    {
+      return Category2FileName (category, null, null, true, null);
+    }
+
     #endregion
 
     #region Construct uri

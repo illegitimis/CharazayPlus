@@ -23,19 +23,19 @@ namespace AndreiPopescu.CharazayPlus.Objects
     PF _pf = null;
     C _c = null;
 
-    public Player GetPlayer (PlayerPosition pos)
-    {
-      switch (pos)
-      {
-        case PlayerPosition.C: return _c;
-        case PlayerPosition.PF: return _pf;
-        case PlayerPosition.SF: return _sf;
-        case PlayerPosition.SG: return _sg;
-        case PlayerPosition.PG: return _pg;
-      }
+    //public Player GetPlayer (PlayerPosition pos)
+    //{
+    //  switch (pos)
+    //  {
+    //    case ST_PlayerPositionEnum.C: return _c;
+    //    case ST_PlayerPositionEnum.PF: return _pf;
+    //    case ST_PlayerPositionEnum.SF: return _sf;
+    //    case ST_PlayerPositionEnum.SG: return _sg;
+    //    case ST_PlayerPositionEnum.PG: return _pg;
+    //  }
 
-      return null;
-    }
+    //  return null;
+    //}
 
     public TransferListedPlayerPropertyGridObject (Xsd2.charazayPlayer plyr)
     {

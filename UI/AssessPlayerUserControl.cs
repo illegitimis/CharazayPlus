@@ -65,11 +65,11 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       Player[] olds = this.ucEvaluatePlayer.GetPlayers().ToArray();
       var oldp = Extensions.PlayerExtensions.DecideOnTotalScore(olds);
-      this.lblValOld.Text = String.Format("Position: {0}\r\nValue: {1:F02}€\r\n", oldp.PositionEnum, oldp.TransferMarketValue);
+      this.lblValOld.Text = String.Format("BEFORE SEASON 30\r\nPosition: {0}\r\nValue: {1:F02}€\r\n", oldp.PositionEnum, oldp.TransferMarketValue);
       //
       Player[] news = this.ucEvaluatePlayer2014.GetPlayers().ToArray();
       var newp = Extensions.PlayerExtensions.DecideOnTotalScore(news);
-      this.lblValNew.Text = String.Format("Position: {0}\r\nValue: {1:F02}€\r\n", newp.PositionEnum, newp.TransferMarketValue);
+      this.lblValNew.Text = String.Format("AFTER SEASON 30\r\nPosition: {0}\r\nValue: {1:F02}€\r\n", newp.PositionEnum, newp.TransferMarketValue);
     }
 
     #region trackbar scroll events

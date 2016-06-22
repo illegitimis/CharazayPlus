@@ -13,1288 +13,691 @@
 // 
 namespace AndreiPopescu.CharazayPlus.Xsd2
 {
-  using System.Xml.Serialization;
   using BrightIdeasSoftware;
-
+  using System.Xml.Serialization;
+  using System.Diagnostics;
+  using System.CodeDom.Compiler;
+  using System;
+  using System.ComponentModel;
 
   ///// <remarks/>
-  //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  //[System.SerializableAttribute()]
-  //[System.Diagnostics.DebuggerStepThroughAttribute()]
-  //[System.ComponentModel.DesignerCategoryAttribute("code")]
-  //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+  //[GeneratedCode("xsd", "4.0.30319.1")]
+  //[Serializable]
+  //[DebuggerStepThrough]
+  //[DesignerCategory("code")]
+  //[XmlType(AnonymousType=true)]
   //[System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
   public partial class charazay
   {
 
-    private match matchField;
-
     /// <remarks/>
     public match match
     {
-      get
-      {
-        return this.matchField;
-      }
-      set
-      {
-        this.matchField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class match
   {
-
-    private teams teamsField;
-
-    private stats statsField;
-
-    private bballs bballsField;
-
-    private lineup lineupField;
-
-    private uint idField;
-
-    private uint dateField;
-
-    private byte roundField;
-
-    private byte seasonField;
-
-    private uint spectatorsField;
-
-    private uint vipsField;
-
-    private string playedField;
-
-    private byte homescoreField;
-
-    private byte awayscoreField;
-
-    private byte typeField;
-
-    private uint leagueidField;
 
     /// <remarks/>
     public teams teams
     {
-      get
-      {
-        return this.teamsField;
-      }
-      set
-      {
-        this.teamsField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public stats stats
     {
-      get
-      {
-        return this.statsField;
-      }
-      set
-      {
-        this.statsField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public bballs bballs
     {
-      get
-      {
-        return this.bballsField;
-      }
-      set
-      {
-        this.bballsField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public lineup lineup
     {
-      get
-      {
-        return this.lineupField;
-      }
-      set
-      {
-        this.lineupField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint id
     {
-      get
-      {
-        return this.idField;
-      }
-      set
-      {
-        this.idField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint date
     {
-      get
-      {
-        return this.dateField;
-      }
-      set
-      {
-        this.dateField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public byte round
     {
-      get
-      {
-        return this.roundField;
-      }
-      set
-      {
-        this.roundField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public byte season
     {
-      get
-      {
-        return this.seasonField;
-      }
-      set
-      {
-        this.seasonField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint spectators
     {
-      get
-      {
-        return this.spectatorsField;
-      }
-      set
-      {
-        this.spectatorsField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint vips
     {
-      get
-      {
-        return this.vipsField;
-      }
-      set
-      {
-        this.vipsField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public string played
     {
-      get
-      {
-        return this.playedField;
-      }
-      set
-      {
-        this.playedField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public byte homescore
     {
-      get
-      {
-        return this.homescoreField;
-      }
-      set
-      {
-        this.homescoreField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public byte awayscore
     {
-      get
-      {
-        return this.awayscoreField;
-      }
-      set
-      {
-        this.awayscoreField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public byte type
     {
-      get
-      {
-        return this.typeField;
-      }
-      set
-      {
-        this.typeField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint leagueid
     {
-      get
-      {
-        return this.leagueidField;
-      }
-      set
-      {
-        this.leagueidField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class teams
   {
-
-    private uint hometeamField;
-
-    private string hometeamnameField;
-
-    private uint awayteamField;
-
-    private string awayteamnameField;
 
     /// <remarks/>
     public uint hometeam
     {
-      get
-      {
-        return this.hometeamField;
-      }
-      set
-      {
-        this.hometeamField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public string hometeamname
     {
-      get
-      {
-        return this.hometeamnameField;
-      }
-      set
-      {
-        this.hometeamnameField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint awayteam
     {
-      get
-      {
-        return this.awayteamField;
-      }
-      set
-      {
-        this.awayteamField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public string awayteamname
     {
-      get
-      {
-        return this.awayteamnameField;
-      }
-      set
-      {
-        this.awayteamnameField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class rating
   {
 
-    private byte pointsField;
-
-    private byte o_rebField;
-
-    private byte d_rebField;
-
-    private byte toField;
-
-    private byte assistField;
-
-    private byte blocksField;
-
-    private byte stealsField;
-
-    private byte foulsField;
-
-    private byte ft_mField;
-
-    private byte ft_aField;
-
-    private byte pt2_mField;
-
-    private byte pt2_aField;
-
-    private byte pt3_mField;
-
-    private byte pt3_aField;
-
-    private byte pldField;
-
-    private sbyte rtgField;
-
-    private uint playeridField;
-
-    private string nameField;
 
     [OLVColumn("Pt", DisplayIndex = 2, ToolTipText = "Points", Width = 39)]
     public byte points
     {
-      get
-      {
-        return this.pointsField;
-      }
-      set
-      {
-        this.pointsField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Ro", DisplayIndex = 3, ToolTipText = "Offensive Rebounds", Width = 39)]
     public byte o_reb
     {
-      get
-      {
-        return this.o_rebField;
-      }
-      set
-      {
-        this.o_rebField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Rd", DisplayIndex = 4, ToolTipText = "Defensive Rebounds", Width = 39)]
     public byte d_reb
     {
-      get
-      {
-        return this.d_rebField;
-      }
-      set
-      {
-        this.d_rebField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("To", DisplayIndex = 5, ToolTipText = "Turnovers", Width = 39)]
     public byte to
     {
-      get
-      {
-        return this.toField;
-      }
-      set
-      {
-        this.toField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("As", DisplayIndex = 6, ToolTipText = "Assists", Width = 39)]
     public byte assist
     {
-      get
-      {
-        return this.assistField;
-      }
-      set
-      {
-        this.assistField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Bl", DisplayIndex = 7, ToolTipText = "Blocks", Width = 39)]
     public byte blocks
     {
-      get
-      {
-        return this.blocksField;
-      }
-      set
-      {
-        this.blocksField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("St", DisplayIndex = 8, ToolTipText = "Steals", Width = 39)]
     public byte steals
     {
-      get
-      {
-        return this.stealsField;
-      }
-      set
-      {
-        this.stealsField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Fo", DisplayIndex = 9, ToolTipText = "Fouls", Width = 39)]
     public byte fouls
     {
-      get
-      {
-        return this.foulsField;
-      }
-      set
-      {
-        this.foulsField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Ftm", DisplayIndex = 10, ToolTipText = "Freethrows made", Width = 39)]
     public byte ft_m
     {
-      get
-      {
-        return this.ft_mField;
-      }
-      set
-      {
-        this.ft_mField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Fta", DisplayIndex = 11, ToolTipText = "Freethrows attempted", Width = 39)]
     public byte ft_a
     {
-      get
-      {
-        return this.ft_aField;
-      }
-      set
-      {
-        this.ft_aField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("2pm", DisplayIndex = 12, ToolTipText = "2p made", Width = 39)]
     public byte pt2_m
     {
-      get
-      {
-        return this.pt2_mField;
-      }
-      set
-      {
-        this.pt2_mField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("2pa", DisplayIndex = 13, ToolTipText = "2p attempted", Width = 39)]
     public byte pt2_a
     {
-      get
-      {
-        return this.pt2_aField;
-      }
-      set
-      {
-        this.pt2_aField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("3pm", DisplayIndex = 14, ToolTipText = "3p made", Width = 39)]
     public byte pt3_m
     {
-      get
-      {
-        return this.pt3_mField;
-      }
-      set
-      {
-        this.pt3_mField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("3pa", DisplayIndex = 15, ToolTipText = "3p attempted", Width = 39)]
     public byte pt3_a
     {
-      get
-      {
-        return this.pt3_aField;
-      }
-      set
-      {
-        this.pt3_aField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Pld", DisplayIndex = 16, ToolTipText = "Played", Width = 39)]
     public byte pld
     {
-      get
-      {
-        return this.pldField;
-      }
-      set
-      {
-        this.pldField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Rtg", DisplayIndex = 1, ToolTipText = "Rating", Width = 39)]
     public sbyte rtg
     {
-      get
-      {
-        return this.rtgField;
-      }
-      set
-      {
-        this.rtgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint playerid
     {
-      get
-      {
-        return this.playeridField;
-      }
-      set
-      {
-        this.playeridField = value;
-      }
+      get;
+      set;
     }
 
     [OLVColumn("Player", DisplayIndex = 0, Width = 130)]
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public string name
     {
-      get
-      {
-        return this.nameField;
-      }
-      set
-      {
-        this.nameField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class bball
   {
 
-    private uint playeridField;
-
-    private decimal bballsField;
-
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public uint playerid
     {
-      get
-      {
-        return this.playeridField;
-      }
-      set
-      {
-        this.playeridField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [XmlAttribute]
     public decimal bballs
     {
-      get
-      {
-        return this.bballsField;
-      }
-      set
-      {
-        this.bballsField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class stats
   {
 
-    private rating[] homeField;
-
-    private rating[] awayField;
-
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("rating", IsNullable = false)]
+    [XmlArrayItem("rating", IsNullable = false)]
     public rating[] home
     {
-      get
-      {
-        return this.homeField;
-      }
-      set
-      {
-        this.homeField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("rating", IsNullable = false)]
+    [XmlArrayItem("rating", IsNullable = false)]
     public rating[] away
     {
-      get
-      {
-        return this.awayField;
-      }
-      set
-      {
-        this.awayField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class bballs
   {
 
-    private bball[] homeField;
-
-    private bball[] awayField;
-
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("bball", IsNullable = false)]
+    [XmlArrayItem("bball", IsNullable = false)]
     public bball[] home
     {
-      get
-      {
-        return this.homeField;
-      }
-      set
-      {
-        this.homeField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlArrayItemAttribute("bball", IsNullable = false)]
+    [XmlArrayItem("bball", IsNullable = false)]
     public bball[] away
     {
-      get
-      {
-        return this.awayField;
-      }
-      set
-      {
-        this.awayField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class lineup
   {
-
-    private lineupHome homeField;
-
-    private lineupAway awayField;
-
     /// <remarks/>
     public lineupHome home
     {
-      get
-      {
-        return this.homeField;
-      }
-      set
-      {
-        this.homeField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public lineupAway away
     {
-      get
-      {
-        return this.awayField;
-      }
-      set
-      {
-        this.awayField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
   public partial class lineupHome
   {
-
-    private first firstField;
-
-    private second secondField;
-
-    private third thirdField;
-
-    private forth forthField;
-
     /// <remarks/>
     public first first
     {
-      get
-      {
-        return this.firstField;
-      }
-      set
-      {
-        this.firstField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public second second
     {
-      get
-      {
-        return this.secondField;
-      }
-      set
-      {
-        this.secondField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public third third
     {
-      get
-      {
-        return this.thirdField;
-      }
-      set
-      {
-        this.thirdField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public forth forth
     {
-      get
-      {
-        return this.forthField;
-      }
-      set
-      {
-        this.forthField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class first
   {
-
-    private uint pgField;
-
-    private uint sgField;
-
-    private uint sfField;
-
-    private uint pfField;
-
-    private uint cField;
-
     /// <remarks/>
     public uint pg
     {
-      get
-      {
-        return this.pgField;
-      }
-      set
-      {
-        this.pgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sg
     {
-      get
-      {
-        return this.sgField;
-      }
-      set
-      {
-        this.sgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sf
     {
-      get
-      {
-        return this.sfField;
-      }
-      set
-      {
-        this.sfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint pf
     {
-      get
-      {
-        return this.pfField;
-      }
-      set
-      {
-        this.pfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint c
     {
-      get
-      {
-        return this.cField;
-      }
-      set
-      {
-        this.cField = value;
-      }
+      get;
+      set;
     }
   }
 
-  /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class second
   {
-
-    private uint pgField;
-
-    private uint sgField;
-
-    private uint sfField;
-
-    private uint pfField;
-
-    private uint cField;
-
     /// <remarks/>
     public uint pg
     {
-      get
-      {
-        return this.pgField;
-      }
-      set
-      {
-        this.pgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sg
     {
-      get
-      {
-        return this.sgField;
-      }
-      set
-      {
-        this.sgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sf
     {
-      get
-      {
-        return this.sfField;
-      }
-      set
-      {
-        this.sfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint pf
     {
-      get
-      {
-        return this.pfField;
-      }
-      set
-      {
-        this.pfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint c
     {
-      get
-      {
-        return this.cField;
-      }
-      set
-      {
-        this.cField = value;
-      }
+      get;
+      set;
     }
   }
 
-  /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class third
   {
-
-    private uint pgField;
-
-    private uint sgField;
-
-    private uint sfField;
-
-    private uint pfField;
-
-    private uint cField;
-
     /// <remarks/>
     public uint pg
     {
-      get
-      {
-        return this.pgField;
-      }
-      set
-      {
-        this.pgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sg
     {
-      get
-      {
-        return this.sgField;
-      }
-      set
-      {
-        this.sgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sf
     {
-      get
-      {
-        return this.sfField;
-      }
-      set
-      {
-        this.sfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint pf
     {
-      get
-      {
-        return this.pfField;
-      }
-      set
-      {
-        this.pfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint c
     {
-      get
-      {
-        return this.cField;
-      }
-      set
-      {
-        this.cField = value;
-      }
+      get;
+      set;
     }
   }
 
-  /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-  [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
+  [XmlRoot(Namespace = "", IsNullable = false)]
   public partial class forth
   {
-
-    private uint pgField;
-
-    private uint sgField;
-
-    private uint sfField;
-
-    private uint pfField;
-
-    private uint cField;
-
     /// <remarks/>
     public uint pg
     {
-      get
-      {
-        return this.pgField;
-      }
-      set
-      {
-        this.pgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sg
     {
-      get
-      {
-        return this.sgField;
-      }
-      set
-      {
-        this.sgField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint sf
     {
-      get
-      {
-        return this.sfField;
-      }
-      set
-      {
-        this.sfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint pf
     {
-      get
-      {
-        return this.pfField;
-      }
-      set
-      {
-        this.pfField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public uint c
     {
-      get
-      {
-        return this.cField;
-      }
-      set
-      {
-        this.cField = value;
-      }
+      get;
+      set;
     }
   }
 
   /// <remarks/>
-  [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-  [System.SerializableAttribute()]
-  [System.Diagnostics.DebuggerStepThroughAttribute()]
-  [System.ComponentModel.DesignerCategoryAttribute("code")]
-  [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+  [GeneratedCode("xsd", "4.0.30319.1")]
+  [Serializable]
+  [DebuggerStepThrough]
+  [DesignerCategory("code")]
+  [XmlType(AnonymousType = true)]
   public partial class lineupAway
   {
 
-    private first firstField;
-
-    private second secondField;
-
-    private third thirdField;
-
-    private forth forthField;
-
     /// <remarks/>
     public first first
     {
-      get
-      {
-        return this.firstField;
-      }
-      set
-      {
-        this.firstField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public second second
     {
-      get
-      {
-        return this.secondField;
-      }
-      set
-      {
-        this.secondField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public third third
     {
-      get
-      {
-        return this.thirdField;
-      }
-      set
-      {
-        this.thirdField = value;
-      }
+      get;
+      set;
     }
 
     /// <remarks/>
     public forth forth
     {
-      get
-      {
-        return this.forthField;
-      }
-      set
-      {
-        this.forthField = value;
-      }
+      get;
+      set;
     }
   }
 }

@@ -8,7 +8,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   using System.Xml;
     
   /// <summary>
-  /// keeps m cache of player & team names
+  /// keeps player, team and matches names handy
   /// </summary>
   public class CacheManager
   {
@@ -19,7 +19,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     private static Dictionary<uint, string> _teams = null;
     private static Dictionary<uint, string> _matches = null;
 
-    private string path()
+    private string SerializedCacheFilePath()
     {
       AssemblyInfo asInfo = new AssemblyInfo();
       if (!Directory.Exists(asInfo.ApplicationFolder))
@@ -38,6 +38,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     #region Singleton
     private static CacheManager _instance = null;
+    private static volatile object _syncObject = new object();
     private static bool _isFinalized = false;
 
     private CacheManager()
@@ -48,7 +49,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
       _teams = new Dictionary<uint, string>();
       _matches = new Dictionary<uint, string>();
 
-      using (FileStream fs = new FileStream(path(), FileMode.Open, FileAccess.Read))
+      using (FileStream fs = new FileStream(SerializedCacheFilePath(), FileMode.Open, FileAccess.Read))
       {
         cache cache = null;
         cache = (cache)(new XmlSerializer(typeof(cache)).Deserialize(fs));
@@ -72,7 +73,13 @@ namespace AndreiPopescu.CharazayPlus.Utils
       get
       {
         if (_instance == null)
-          _instance = new CacheManager();
+        {
+          lock (_syncObject)
+          {
+            if (_instance == null)
+              _instance = new CacheManager();  
+          }
+        }          
         return _instance;
       }
     } 
@@ -86,8 +93,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
     {
       if (_isFinalized)
         return;
+      
+      lock (_syncObject)
+      {
 
-      using (FileStream fs = new FileStream(path(), FileMode.Truncate, FileAccess.Write))
+      using (FileStream fs = new FileStream(SerializedCacheFilePath(), FileMode.Truncate, FileAccess.Write))
       {
         XmlSerializer serializer = new XmlSerializer(typeof(cache));
         cache cache = new cache();
@@ -121,8 +131,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
         cache.matches = lm.ToArray();
         //
         serializer.Serialize(fs, cache);
-        _isFinalized = true;
-
+        //
+        _isFinalized = true; 
+      }
       }
     }
 
@@ -201,37 +212,16 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public string TeamName(uint id)
     {
-      return _teams.ContainsKey(id) ? System.Net.WebUtility.HtmlDecode(_teams[id]) : id.ToString();
+      return _teams.ContainsKey(id) ? XmlConvert.DecodeName(_teams[id]) : id.ToString();
     }
 
     internal string MatchName (uint mid)
     {
       return _matches.ContainsKey(mid) ? _matches[mid] : mid.ToString();
     }
-
-    //public string PlayerName(uint id)
-    //    {
-
-    //  //playersField.Where (p => p.id == id)
-    //      player plyr = (from p in this.players
-    //                        where p.id == id
-    //                        select p).FirstOrDefault();
-    //      return plyr.name;
-    //    }
-
-    //    public string LastBidByTeamName(ushort id)
-    //    {
-    //      //playersField.Where (p => p.id == id)
-    //      team tm = (from m in this.teams
-    //                      where m.id == id
-    //                      select m).FirstOrDefault();
-    //      return tm.name;
-    //    } 
+    
     #endregion
 
-
-
-    
   }
 
 }

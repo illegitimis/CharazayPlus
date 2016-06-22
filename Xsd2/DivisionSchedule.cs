@@ -13,90 +13,64 @@
 // 
 namespace AndreiPopescu.CharazayPlus.Xsd2 {
     using System.Xml.Serialization;
+  using System.Diagnostics;
+  using System.CodeDom.Compiler;
+  using System;
+  using System.ComponentModel;
     
     
     public partial class charazay {
         
-        private charazayRound[] scheduleField;
-        
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("round", IsNullable=false)]
+        [XmlArrayItem("round", IsNullable=false)]
         public charazayRound[] schedule {
-            get {
-                return this.scheduleField;
-            }
-            set {
-                this.scheduleField = value;
-            }
+          get;
+          set;
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [GeneratedCode("xsd", "4.0.30319.1")]
+    [Serializable]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType=true)]
     public partial class charazayRound {
-        
-        private charazayRoundMatch matchField;
-        
-        private byte numberField;
-        
-        private uint dateField;
         
         /// <remarks/>
         public charazayRoundMatch match {
-            get {
-                return this.matchField;
-            }
-            set {
-                this.matchField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public byte number {
-            get {
-                return this.numberField;
-            }
-            set {
-                this.numberField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public uint date {
-            get {
-                return this.dateField;
-            }
-            set {
-                this.dateField = value;
-            }
+          get;
+          set;
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [GeneratedCode("xsd", "4.0.30319.1")]
+    [Serializable]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType=true)]
     public partial class charazayRoundMatch {
         
-        private uint idField;
-        
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public uint id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
+          get;
+          set;
         }
     }
 }

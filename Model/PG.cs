@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Utils;
+﻿
 
 namespace AndreiPopescu.CharazayPlus
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+  using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Interpolate;
+  using AndreiPopescu.CharazayPlus.Model;
 
   /// <summary>
   /// Point guard
@@ -54,7 +57,7 @@ namespace AndreiPopescu.CharazayPlus
     /// </summary>
     protected override internal byte[] TrainingPlan { get { return new byte[] { 4, 3, 4, 4, 0, 0, 1, 1 }; } }
 
-    public override PlayerPosition PositionEnum { get { return PlayerPosition.PG; } }
+    public override ST_PlayerPositionEnum PositionEnum { get { return ST_PlayerPositionEnum.PG; } }
 
     internal static double[] StoredAssessedValues
     {
@@ -354,16 +357,15 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    public override double ValueIndex { get { return TotalScore / PG.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double ValueIndex { get { 
+      return TotalScore / PG.StoredAssessedValues[TrainingWeekIndex]; 
+    } }
 
     public override double TransferMarketValue
     {
       //get { return Interpolation112.GetTMValue(this.Age, 'G', this.ValueIndex); }
-      get { return MatlabInterpolant201507.Instance.GetTMValue(this.Age, 'G', this.ValueIndex); }
+      get { return MatlabInterpolant201606.Instance.GetTMValue(this.Age, 'G', this.ValueIndex); }
     }
   }
-
   
- 
-
 }

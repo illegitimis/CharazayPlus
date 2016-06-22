@@ -14,6 +14,7 @@ namespace AndreiPopescu.CharazayPlus.UI
   public partial class ChartUserControl : UserControl
   {
     const string CHART_AREA_NAME = "Chart Area Main";
+    const string SERIES_NAME_FORMAT = "Exponential fit A*e^(B*x) as of {2}, A={0} B={1}";
 
     #region Component Designer generated code
 
@@ -93,8 +94,8 @@ namespace AndreiPopescu.CharazayPlus.UI
       legend1.Name = "Legend1";
       this.chart.Legends.Add(legend1);
       //
-      this.legend2 = new Legend() { Docking = Docking.Top, LegendStyle = LegendStyle.Row, Name = "Legend2" };
-      this.chart.Legends.Add(legend2);
+      //this.legend2 = new Legend() { Docking = Docking.Top, LegendStyle = LegendStyle.Row, Name = "Legend2" };
+      //this.chart.Legends.Add(legend2);
       //
       this.chart.Location = new System.Drawing.Point(0, 0);
       this.chart.Name = "chart";
@@ -458,7 +459,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     #region generated members
     ChartArea _chartArea;
     Legend legend1;
-    Legend legend2;
+    //Legend legend2;
 
     private GroupBox groupBox1;
     private RadioButton rdC;
@@ -495,7 +496,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     Series series4;
     Series series5;
     Series series6;
-    //Series series7;
+    Series series7;
     #endregion
 
     #region fields
@@ -522,12 +523,16 @@ namespace AndreiPopescu.CharazayPlus.UI
 
 #if DOTNET30
 
-      var ths = Data.DbEnvironment.Instance.TransferHistoryDC.History.Where(x => x.Age == this._currentAge && x.PosId == this._pos).ToList();
+      var ths = Data.DbEnvironment.Instance.TransferHistoryDC.History
+        .Where(x => x.Age == this._currentAge && x.PosId == this._pos && x.AgeValueIndex >= 0.7m)
+        .ToList();
       //
       // set axes ranges
       //
-      double xmin = Math.Max(0.7d, (double)ths.Select(x => x.AgeValueIndex).Min());
-      double xmax = Math.Min(1.4d, (double)ths.Select(x => x.AgeValueIndex).Max());
+      //double xmin = Math.Max(0.7d, (double)ths.Select(x => x.AgeValueIndex).Min());
+      double xmin = (double)ths.Select(x => x.AgeValueIndex).Min();
+      //double xmax = Math.Min(1.4d, (double)ths.Select(x => x.AgeValueIndex).Max());
+      double xmax = (double)ths.Select(x => x.AgeValueIndex).Max();
       double ymin = 0d;
       double ymax = (double)Math.Ceiling(ths.Select(y => y.Price).Max());
       //
@@ -574,30 +579,45 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       // add historic interpolation data 
       //
-      double a1, b1, a2, b2, a3, b3, a4, b4;
-      var i1 = new Utils.MatlabInterpolant20140909();
-      i1.GetAB(this._currentAge, this._pos, out a1, out b1);
-      Utils.MatlabInterpolant20141124.Instance.GetAB(this._currentAge, this._pos, out a2, out b2);
-      Utils.MatlabInterpolant20150504.Instance.GetAB(this._currentAge, this._pos, out a3, out b3);
+      double a1, b1, a2, b2, a3, b3, a4, b4, a5, b5;
+      //var i1 = new Utils.MatlabInterpolant20140909();
+      //i1.GetAB(this._currentAge, this._pos, out a1, out b1);
+      //Utils.MatlabInterpolant20141124.Instance.GetAB(this._currentAge, this._pos, out a2, out b2);
+      //Utils.MatlabInterpolant20150504.Instance.GetAB(this._currentAge, this._pos, out a3, out b3);
       Utils.MatlabInterpolant201507.Instance.GetAB(this._currentAge, this._pos, out a4, out b4);
+      Interpolate.MatlabInterpolant201511.Instance.GetAB(this._currentAge, this._pos, out a5, out b5);
+      Interpolate.MatlabInterpolant201601.Instance.GetAB(this._currentAge, this._pos, out a1, out b1);
+      Interpolate.MatlabInterpolant201604.Instance.GetAB(this._currentAge, this._pos, out a2, out b2);
+      Interpolate.MatlabInterpolant201606.Instance.GetAB(this._currentAge, this._pos, out a3, out b3);
       //
       for (double x = xmin; x < xmax + 0.01d; x = x + 0.01d)
       {
+        // newer data
         series3.Points.AddXY(x, a1 * Math.Exp(x * b1));
         series4.Points.AddXY(x, a2 * Math.Exp(x * b2));
+        // older data
         series5.Points.AddXY(x, a3 * Math.Exp(x * b3));
         series6.Points.AddXY(x, a4 * Math.Exp(x * b4));
+        series7.Points.AddXY(x, a5 * Math.Exp(x * b5));
       }
       //AddRectangleAnnotation(f2);
       //AddEllipseAnnotation(f1);
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f1.ToString());
       //this.chart.Legends[0].CustomItems.Add(Color.Black, f2.ToString());
-      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of September 2014, A={0} B={1}", a1, b1));
-      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of November 2014, A={0} B={1}", a2, b2));
-      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of May 2015, A={0} B={1}", a3, b3));
-      this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of July 2015, A={0} B={1}", a4, b4));
-      this.legend1.CustomItems.Add(Color.Tan, string.Format("Series has: {0} data points", ths.Count));
+
+      //this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of May 2015, A={0} B={1}", a3, b3));
+      //this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of July 2015, A={0} B={1}", a4, b4));
+      //this.legend2.CustomItems.Add(Color.Black, string.Format("Exponential fit (A*e^(B*x)) as of November 2015, A={0} B={1}", a5, b5));
+      //this.legend2.CustomItems.Add(Color.SaddleBrown, string.Format("Exponential fit (A*e^(B*x)) as of January 2016, A={0} B={1}", a1, b1));
+      //this.legend2.CustomItems.Add(Color.RosyBrown, string.Format("Exponential fit (A*e^(B*x)) as of APRIL 2014, A={0} B={1}", a2, b2));
+      series3.Name = String.Format(SERIES_NAME_FORMAT, a1, b1, series3.Tag);
+      series4.Name = String.Format(SERIES_NAME_FORMAT, a2, b2, series4.Tag);
+      series5.Name = String.Format(SERIES_NAME_FORMAT, a3, b3, series5.Tag);
+      series6.Name = String.Format(SERIES_NAME_FORMAT, a4, b4, series6.Tag);
+      series7.Name = String.Format(SERIES_NAME_FORMAT, a5, b5, series7.Tag);
       //
+      this.legend1.CustomItems.Add(Color.Tan, string.Format("Series has: {0} data points", ths.Count));
+      
 
 #else
       var ds = new Objects.TransferHistoryDataSet();
@@ -671,13 +691,16 @@ namespace AndreiPopescu.CharazayPlus.UI
     { // 
       series0 = new Series("Scatter data") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 7, MarkerStyle = MarkerStyle.Circle };
       series1 = new Series("Average price") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 10, MarkerStyle = MarkerStyle.Triangle };
-      series2 = new Series("Weighted average price") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 11, MarkerStyle = MarkerStyle.Cross };
-      series3 = new Series("Sep 2014") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Star10 };
-      series4 = new Series("Nov 2014") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Diamond };
-      series5 = new Series("May 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Square };
-      series6 = new Series("July 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 10, MarkerStyle = MarkerStyle.Star4 };
-      
-      foreach (var s in new[] { series0, series1, series2, series3, series4, series5, series6 })
+      series2 = new Series("Weighted average price") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Point, MarkerSize = 12, MarkerStyle = MarkerStyle.Cross };
+
+      series3 = new Series("JAN 2016") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 11, MarkerStyle = MarkerStyle.Square, Tag = "JAN 2016" };
+      series4 = new Series("APRIL 2016") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 14, MarkerStyle = MarkerStyle.Diamond, Tag = "APRIL 2016" };
+      series5 = new Series("JUNE 2016") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 18, MarkerStyle = MarkerStyle.Star4, Tag = "JUNE 2016" };
+
+      series6 = new Series("July 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Star5, Tag = "July 2015" };
+      series7 = new Series("Nov 2015") { ChartArea = CHART_AREA_NAME, ChartType = SeriesChartType.Spline, MarkerSize = 8, MarkerStyle = MarkerStyle.Star6, Tag = "Nov 2015" };
+
+      foreach (var s in new[] { series0, series1, series2, series3, series4, series5, series6, series7 })
         this.chart.Series.Add(s);
       //
       // Set auto minimum and maximum values.    

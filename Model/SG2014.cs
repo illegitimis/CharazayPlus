@@ -91,7 +91,9 @@ namespace AndreiPopescu.CharazayPlus
     /// classic players use their own stored assessed values
     /// these are averages so that position total score variance is removed
     /// </summary>
-    public override double ValueIndex { get { return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double ValueIndex { get { 
+      return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; 
+    } }
 
   }
 }

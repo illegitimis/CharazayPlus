@@ -12,6 +12,7 @@ namespace AndreiPopescu.CharazayPlus.UI
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Extensions;
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Model;
 
   public partial class PlayerPositionUserControl : UserControl
   {
@@ -224,6 +225,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucEvaluatePlayer.EvaluationType = Evaluation.season30;
     }
 
+
     private void tsmiTransferBookmark_Click (object sender, EventArgs e)
     {
       // object type attached is Player
@@ -232,30 +234,40 @@ namespace AndreiPopescu.CharazayPlus.UI
       //
       // search for bookmarks with same id and court position
       //
-      var found = Data.TransferList.Bookmarks.FirstOrDefault(tlp => tlp.PlayerId == crtPlayer.Id && tlp.Pos == crtPlayer.PositionEnum);
+      //var found = Data.TransferList.Bookmarks.FirstOrDefault(tlp => tlp.PlayerId == crtPlayer.Id && tlp.Pos == crtPlayer.PositionEnum);
+      var found = Data.TransferList.Bookmarks.FirstOrDefault(tb => tb.PlayerId == crtPlayer.Id && (byte)tb.Position == (byte)crtPlayer.PositionEnum);
       if (found == null)
       { //
-        // not found => add
+        // not found => add,
+        // price is equal to scale so remove it
         //
-        Data.TransferList.Bookmarks.Add(new Objects.TLPlayer()
-        {
-          Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm"),
-          AgeValueIndex = crtPlayer.ValueIndex,
-          Price = 1000000u,
-          Profitability = Math.Pow(10d, 6d) * crtPlayer.TransferMarketValue / 1000000d,
-          Position = crtPlayer.PositionEnum.ToString(),
-          Name = crtPlayer.FullName,
-          PlayerId = crtPlayer.Id
-        });
+        Data.TransferList.Bookmarks.Add(
+          //new Objects.TLPlayer()
+          new CT_TransferBookmark()
+          {
+            // Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm"),
+            Deadline = DateTime.UtcNow,
+            // AgeValueIndex = crtPlayer.ValueIndex,
+            AgeValueIndex = Math.Round (crtPlayer.ValueIndex),
+            Price = 1000000u,
+            // Profitability = Math.Pow(10d, 6d) * crtPlayer.TransferMarketValue / 1000000d,
+            Profitability = Math.Round (crtPlayer.TransferMarketValue, 2),
+            // Position = crtPlayer.PositionEnum.ToString(),
+            Position = crtPlayer.PositionEnum,
+            Name = crtPlayer.FullName,
+            PlayerId = crtPlayer.Id
+          }
+        );
       }
       else
       { //
         // found => update
         //
-        found.Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm");
-        found.AgeValueIndex = crtPlayer.ValueIndex;
+        //found.Deadline = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm");
+        found.Deadline = DateTime.UtcNow;
+        found.AgeValueIndex = Math.Round (crtPlayer.ValueIndex, 2);
         found.Price = 1000000u;
-        found.Profitability = Math.Pow(10d, 6d) * crtPlayer.TransferMarketValue / 1000000d;
+        found.Profitability = Math.Round(crtPlayer.TransferMarketValue, 2);
       }
       
     }

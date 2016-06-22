@@ -45,7 +45,7 @@ namespace AndreiPopescu.CharazayPlus.Data
     {
       static NestedInfo ( )
       {
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+        var objects = Utils.SerializeHelper.GoGetXml(new Web.XmlDownloadItem[] {
           new Web.ArenaXml(WebServiceUsers.Instance.MainUser)
           ,
           new Web.CountryDivisionListXml(WebServiceUsers.Instance.MainUser) 
@@ -74,8 +74,8 @@ namespace AndreiPopescu.CharazayPlus.Data
         //var downloadList = XmlDownloadItemGenerator.ProduceDownloadList(new[] { XmlSerializationType.MyInfo, XmlSerializationType.MyTeamInfo });
         //var downloadItems = downloadList.Select(x => x.DownloadItem);
         var objects =   
-          //Utils.Deserializer.GoGetXml(downloadItems.ToArray())
-          Utils.Deserializer.GoGetXml(
+          //Utils.SerializeHelper.GoGetXml(downloadItems.ToArray())
+          Utils.SerializeHelper.GoGetXml(
             new Web.XmlDownloadItem[] {
               new Web.MyInfoXml(WebServiceUsers.Instance.MainUser)
             , new Web.MyTeamInfoXml(WebServiceUsers.Instance.MainUser) 
@@ -104,7 +104,7 @@ namespace AndreiPopescu.CharazayPlus.Data
 
       static NestedStandings ( )
       {
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+        var objects = Utils.SerializeHelper.GoGetXml(new Web.XmlDownloadItem[] {
            new Web.DivisionStandingsXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
@@ -123,7 +123,7 @@ namespace AndreiPopescu.CharazayPlus.Data
 
       static NestedSchedule ( )
       {
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] 
+        var objects = Utils.SerializeHelper.GoGetXml(new Web.XmlDownloadItem[] 
         {
           new Web.MyScheduleXml(WebServiceUsers.Instance.MainUser)
           ,
@@ -144,7 +144,7 @@ namespace AndreiPopescu.CharazayPlus.Data
 
       static NestedMoney ( )
       {
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+        var objects = Utils.SerializeHelper.GoGetXml(new Web.XmlDownloadItem[] {
           new Web.EconomyXml(WebServiceUsers.Instance.MainUser)
         ,new Web.MyTransfersXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();

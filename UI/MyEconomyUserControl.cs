@@ -503,7 +503,7 @@
       if (this._runMode == RunMode.Week)
       {
         this.chart.Titles[0].Text = "Weekly Balance History";
-        var history = Deserializer.GetEconomyHistory(this._days).ToList();
+        var history = SerializeHelper.GetEconomyHistory(this._days).ToList();
         var ca = this.chart.ChartAreas[MAIN_CHART_AREA_NAME];
         ca.AxisY.Minimum = -history.Select(tuple => tuple.Item2.economy_week.expences.Total).Max();
         ca.AxisY.Maximum = history.Select(tuple => tuple.Item2.economy_week.income.Total).Max();
@@ -517,7 +517,7 @@
       else if (this._runMode == RunMode.Season)
       {
         this.chart.Titles[0].Text = "Season Balance History";
-        var history = Deserializer.GetEconomyHistory(this._days).ToList();
+        var history = SerializeHelper.GetEconomyHistory(this._days).ToList();
         var ca = this.chart.ChartAreas[MAIN_CHART_AREA_NAME];
 
         double maxExpences = history.Select(tuple => tuple.Item2.economy_season.expences.Total).Max();

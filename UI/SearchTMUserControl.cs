@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using BrightIdeasSoftware;
 using AndreiPopescu.CharazayPlus.Utils;
+using AndreiPopescu.CharazayPlus.Model;
 
 namespace AndreiPopescu.CharazayPlus.UI
 {
@@ -207,7 +208,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       if (tlp == null) return;
       //
       Xsd2.error err = null;
-      var xsdp = Utils.Deserializer.GoGetPlayerXml(tlp.PlayerId, out err);
+      var xsdp = Utils.SerializeHelper.GoGetPlayerXml(tlp.PlayerId, out err);
       if (PlayerError != null && err != null)
         PlayerError(this, new PlayerEventArgs() { ErrorMessage = err.message });
       else if (DownloadPlayerData != null)
@@ -291,16 +292,16 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    private IEnumerable<Player> FrontBackCourtDeduction (IEnumerable <PlayerPosition> futureCourtPositions)
+    private IEnumerable<Player> FrontBackCourtDeduction (IEnumerable<ST_PlayerPositionEnum> futureCourtPositions)
     {
       var allPositions = _playerFacets.Select(facet => facet.PositionEnum).Union(futureCourtPositions).ToList();
       var min = allPositions.Min();
       var max = allPositions.Max();
-      foreach (var pos in (PlayerPosition[])Enum.GetValues(typeof(PlayerPosition)))
+      foreach (var pos in (ST_PlayerPositionEnum[])Enum.GetValues(typeof(ST_PlayerPositionEnum)))
       {
         if (pos >= min && pos <= max)
         {
-          yield return Deserializer.GetPlayerFromIdAndPosition(_playerFacets[0].Id, pos, Evaluation.season30);
+          yield return SerializeHelper.GetPlayerFromIdAndPosition(_playerFacets[0].Id, pos, Evaluation.season30);
         }
       }
       
@@ -309,7 +310,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       //  return _playerFacets[0];                      
       //else if (_playerFacets[0].PositionEnum > ppmax)
       //  // score for frontcourt, height for backcourt
-      //  return Deserializer.GetPlayerFromIdAndPosition(_playerFacets[0].Id, ppmax, Evaluation.season30);
+      //  return SerializeHelper.GetPlayerFromIdAndPosition(_playerFacets[0].Id, ppmax, Evaluation.season30);
       //else
       //  throw new Exception("FrontBackCourtDeduction");
     }
@@ -1233,27 +1234,30 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       Objects.TransferListedPlayer searchTlp = (Objects.TransferListedPlayer)this.folvTM.SelectedObject;
       if (searchTlp == null) return;
-      //
-      string ddl = searchTlp.Deadline.ToString("yyyy/MM/dd HH:mm");
+      
+      //string ddl = searchTlp.Deadline.ToString("yyyy/MM/dd HH:mm");
       uint prc = Math.Max (searchTlp.CurrentPrice,10000u);
+      
       //
       // search for bookmarks with same id and court position
       //
-      //foreach (var p in DecideCourtPosition (this.ucBasicPlayer.PlayerByValueIndex, this.ucBasicPlayer.PlayerByScore).ToList())
       foreach (var p in DecideCourtPosition().Distinct().ToList())
       {
-        var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && x.Pos == p.PositionEnum);
+        // var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && x.Pos == p.PositionEnum);
+        var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && (byte)x.Position == (byte)p.PositionEnum);
+        
         if (found == null)
         { //
           // not found => add
           //
-          Data.TransferList.Bookmarks.Add(new Objects.TLPlayer()
+          Data.TransferList.Bookmarks.Add(//new Objects.TLPlayer()
+            new CT_TransferBookmark()
           {
-            Deadline = ddl,
-            AgeValueIndex = p.ValueIndex,
+            Deadline = searchTlp.Deadline,                                              //Deadline = ddl,
+            AgeValueIndex = Math.Round(p.ValueIndex,2),
             Price = prc,
-            Profitability = Math.Pow(10d, 6d) * p.TransferMarketValue / (double)prc,
-            Position = p.PositionEnum.ToString(),
+            Profitability = Math.Round (Math.Pow(10d, 6d) * p.TransferMarketValue / prc,2),
+            Position = p.PositionEnum,
             Name = p.FullName,
             PlayerId = p.Id
           });
@@ -1262,10 +1266,10 @@ namespace AndreiPopescu.CharazayPlus.UI
         { //
           // found => update
           //
-          found.Deadline = ddl;
-          found.AgeValueIndex = p.ValueIndex;
+          found.Deadline = searchTlp.Deadline;
+          found.AgeValueIndex = Math.Round (p.ValueIndex, 2);
           found.Price = prc;
-          found.Profitability = Math.Pow(10d, 6d) * p.TransferMarketValue / (double)prc;
+          found.Profitability = Math.Round (Math.Pow(10d, 6d) * p.TransferMarketValue / prc, 2);
         }
       }
       

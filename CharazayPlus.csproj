@@ -105,7 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201606.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201604.cs" />
+    <Compile Include="Interpolate\SimpleStats.cs" />
     <Compile Include="Interpolate\MatlabInterpolant201507.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201511.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201601.cs" />
     <Compile Include="Model\C.cs" />
     <Compile Include="Model\C2014.cs" />
     <Compile Include="Model\PG2014.cs" />
@@ -113,14 +118,17 @@
     <Compile Include="Data\DbEnvironment.cs" />
     <Compile Include="Data\PlayersEnvironment.cs" />
     <Compile Include="Data\TrainingEnvironment.cs" />
-    <Compile Include="Data\TransferBookmarks.cs" />
+    <Compile Include="Data\TransferList.cs" />
     <Compile Include="Data\XmlTeam.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ParsingExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="Model\PlayerDevelopment.cs">
+      <DependentUpon>PlayerDevelopment.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Objects\TransferHistory.partial.cs" />
-    <Compile Include="Objects\PlayerTL.cs">
+    <Compile Include="Model\PlayerTL.cs">
       <DependentUpon>PlayerTL.xsd</DependentUpon>
     </Compile>
     <Compile Include="Objects\TransferHistoryDataSet.Designer.cs">
@@ -174,6 +182,9 @@
     </Compile>
     <Compile Include="UI\Definitions.cs" />
     <Compile Include="Extensions\DataGridExtensions.cs" />
+    <Compile Include="UI\DevelopmentHistoryUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\DivisionScheduleUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -255,7 +266,8 @@
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
     <Compile Include="Interpolate\IInterpolate.cs" />
-    <Compile Include="Utils\Deserializer.cs" />
+    <Compile Include="Utils\SerializeHelper.cs" />
+    <Compile Include="Utils\DevelopmentHistory.cs" />
     <Compile Include="Utils\Interpolation112.cs" />
     <Compile Include="Interpolate\MatlabInterpolant20140909.cs" />
     <Compile Include="Interpolate\MatlabInterpolant20141124.cs" />
@@ -295,6 +307,7 @@
     <Compile Include="Utils\Compute.cs" />
     <Compile Include="Utils\Defines.cs" />
     <Compile Include="Utils\Enums.cs" />
+    <Compile Include="Utils\ValuesListDictionary.cs" />
     <Compile Include="Web\CharazayDownloadItem.cs" />
     <Compile Include="Objects\PlayerPageInfo.cs" />
     <Compile Include="Web\CharazayUserData.cs" />
@@ -365,6 +378,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Model\PlayerDevelopment.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Objects\TransferHistory.dbml.layout">
       <DependentUpon>TransferHistory.dbml</DependentUpon>
     </None>
@@ -376,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ChartUserControl.resx">
       <DependentUpon>ChartUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DevelopmentHistoryUserControl.resx">
+      <DependentUpon>DevelopmentHistoryUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
       <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
@@ -462,7 +481,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Objects\PlayerTL.xsd">
+    <None Include="Model\PlayerTL.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Objects\TransferHistoryDataSet.xsc">

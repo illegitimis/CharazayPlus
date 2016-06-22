@@ -60,12 +60,12 @@ namespace AndreiPopescu.CharazayPlus.Objects
       PlayerId = uint.Parse(strings[1].Replace("?act=player&code=1&id=", string.Empty));
       PlayerName = strings[2].Trim();
       OwnerTeamId = TeamId(strings[3]);
-      OwnerTeamName = strings[4].Trim();
+      OwnerTeamName = TeamName(strings[4]);
       SkillsIndex = uint.Parse(strings[5], NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
       StartingPrice = uint.Parse(strings[6], NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
       Bid = uint.Parse(strings[7], NumberStyles.AllowThousands | NumberStyles.Integer, CultureInfo.InvariantCulture);
       BidHolderTeamId = TeamId(strings[8]);
-      BidHolderTeamName = strings[9] ?? strings[9].Trim();
+      BidHolderTeamName = TeamName(strings[9]);
     }
 
     public TransferListedPlayer (string date, string pn, string pid, string teamown, string teamownid, string si, string prc, string bid, string teambid, string teambidid)
@@ -97,7 +97,7 @@ namespace AndreiPopescu.CharazayPlus.Objects
     {
       return string.IsNullOrWhiteSpace(input)
         ? string.Empty
-        : input.Trim();
+        : System.Net.WebUtility.HtmlDecode (input.Trim());
     }
     
     

@@ -5,13 +5,14 @@ namespace AndreiPopescu.CharazayPlus.Extensions
   using System;
   using System.Collections.Generic;
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Model;
 
   internal static class PlayerExtensions
   {
     #region assessed total player values
     
     /// <summary>
-    /// stored values of player development from age 15 to 32
+    /// stored values of player Development from age 15 to 32
     /// each week with training contribution, meaning 289 weeks of training
     /// </summary>
     internal static double[] StoredAssessedValues = new double[]
@@ -315,35 +316,35 @@ namespace AndreiPopescu.CharazayPlus.Extensions
     /// </summary>
     /// <param name="Height">player height</param>
     /// <returns>most adequate player position</returns>
-    public static PlayerPosition PlayerPositionFromHeight (byte Height)
+    public static ST_PlayerPositionEnum PlayerPositionFromHeight (byte Height)
     {
       if (Height < Defines.AverageHeightPg)
-        return PlayerPosition.PG;
+        return ST_PlayerPositionEnum.PG;
       else
       {
         if (Height < Defines.AverageHeightSg)
         {
-          return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? PlayerPosition.PG : PlayerPosition.SG;
+          return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? ST_PlayerPositionEnum.PG : ST_PlayerPositionEnum.SG;
         }
         else
         {
           if (Height < Defines.AverageHeightSf)
           {
-            return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? PlayerPosition.SG : PlayerPosition.SF;
+            return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? ST_PlayerPositionEnum.SG : ST_PlayerPositionEnum.SF;
           }
           else
           {
             if (Height < Defines.AverageHeightPf)
             {
-              return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? PlayerPosition.SF : PlayerPosition.PF;
+              return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? ST_PlayerPositionEnum.SF : ST_PlayerPositionEnum.PF;
             }
             else
             {
               if (Height < Defines.AverageHeightC)
               {
-                return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? PlayerPosition.PF : PlayerPosition.C;
+                return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? ST_PlayerPositionEnum.PF : ST_PlayerPositionEnum.C;
               }
-              else return PlayerPosition.C;
+              else return ST_PlayerPositionEnum.C;
             }
           }
         }

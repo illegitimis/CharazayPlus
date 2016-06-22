@@ -65,6 +65,8 @@
     <Compile Include="TransferMarket112Test.cs" />
     <Compile Include="TransferMarketTest.cs" />
     <Compile Include="OutliersTest.cs" />
+    <Compile Include="PlayerDevelopmentTest.cs" />
+    <Compile Include="WebParseTest.cs" />
     <Compile Include="Xsd2Test.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fatigue_Minus1_20140215.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PlayerDevelopment.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

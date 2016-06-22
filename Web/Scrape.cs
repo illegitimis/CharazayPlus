@@ -56,7 +56,7 @@ namespace AndreiPopescu.CharazayPlus.Web
       //browser.Cookies.Add(new Cookie("__atuvc", "6%7C51%2C2%7C52", "/", "www.charazay.com"));
       browser.Cookies.Add(new Cookie("language", "en", "/", ".charazay.com"));
       browser.Cookies.Add(new Cookie("charazay_unq", "96ff73712d0112586b52587dee44dcf4", "/", ".charazay.com"));
-			//
+      //
     }
     #endregion
 
@@ -64,6 +64,8 @@ namespace AndreiPopescu.CharazayPlus.Web
     #region simple browser automation
 
     Browser browser = null;
+    private bool _isLoginSuccesful = false;
+    IDictionary<int, Uri> _paginationUris = new Dictionary<int, Uri>();
 
     public void Login ( )
     {
@@ -84,20 +86,33 @@ namespace AndreiPopescu.CharazayPlus.Web
         {
           user = browser.Find("input", new { name = "username", placeholder = "Username", size =7, maxlength=30});
         }
+
+        //<input name="username" maxlength="30" class="loginform" type="text">
+        if (! user.Exists)
+        {
+          user = browser.Find("input", new { name = "username", type = "text", maxlength = 30 /*, class = "loginform"*/ });
+        }
+
         // 
         if (!user.Exists) return;
-        user.Value = "elphy";
+        user.Value = "stergein";
 
         //<input class="form_small" name="password" type="password" size="7" maxlength="30">
         //<input name="password" size="7" maxlength="30" placeholder="Password" type="password">
         var pasw = browser.Find(ElementType.TextField, "name", "password");
-        if (!pasw.Exists || pasw.TotalElementsFound > 1)
+        if (! pasw.Exists || pasw.TotalElementsFound > 1)
         {
           pasw = browser.Find("input", new { name = "password", placeholder = "Password", size = 7, maxlength = 30 });
         }
-        //
+
+        //<input name="password" maxlength="30" class="loginform" type="password">
+        if (! pasw.Exists)
+        {
+          pasw = browser.Find("input", new { name = "password", type = "Password", maxlength = 30 });
+        }
+
         if (!pasw.Exists) return;
-        pasw.Value = "zdreanta123";
+        pasw.Value = "charAz_4IntR";
 
         //<input class="form_small" type="submit" value="Login">
         //<input value="" type="submit">
@@ -119,9 +134,7 @@ namespace AndreiPopescu.CharazayPlus.Web
         }
         else
         {
-
-
-
+          _isLoginSuccesful = true;
         }
 
       }
@@ -132,8 +145,8 @@ namespace AndreiPopescu.CharazayPlus.Web
       }
       finally
       {
-        //var path = WriteFile("log-" + DateTime.UtcNow.Ticks + ".html", browser.RenderHtmlLogFile("SimpleBrowser Sample - Request Log"));
-        //Process.Start(path);
+        //var SerializedCacheFilePath = WriteFile("log-" + DateTime.UtcNow.Ticks + ".html", browser.RenderHtmlLogFile("SimpleBrowser Sample - Request Log"));
+        //Process.Start(SerializedCacheFilePath);
       }
     }
 
@@ -155,22 +168,27 @@ namespace AndreiPopescu.CharazayPlus.Web
     /// <returns></returns>
     public IEnumerable<Objects.TransferListedPlayer> ClassicTransferMarket (Uri uri)
     {
+      if (!_isLoginSuccesful)
+        Login();
+
+      if (!_isLoginSuccesful)
+        yield break;
+
+      _paginationUris.Clear();
+
       // After logging in, we should check that the page contains elements that we recognise
-      if (!browser.ContainsText("Latest News") && !browser.ContainsText("Current Bid"))
-        browser.Log("There wasn't the usual login failure message, but the text we normally expect isn't present on the page");
-      else
-      {
-        browser.Navigate(uri);
-      }
-
-      bool allowPagination = true;
-      IDictionary<int,Uri> paginationUris = new Dictionary<int, Uri>();
-      return ParseClassicTransferMarket(allowPagination, paginationUris);
-
+      //if (!browser.ContainsText("Latest News") && !browser.ContainsText("Current Bid"))
+        //browser.Log("There wasn't the usual login failure message, but the text we normally expect isn't present on the page");
+      //
+      browser.Navigate(uri);
+      //
+      foreach (var x in ParseClassicTransferMarket(allowPagination: true))    
+        yield return x;
     }
 
-    private IEnumerable<Objects.TransferListedPlayer> ParseClassicTransferMarket (bool allowPagination, IDictionary<int, Uri> paginationUris)
-    { //
+    private IEnumerable<Objects.TransferListedPlayer> ParseClassicTransferMarket (bool allowPagination)
+    {
+      //
       var divmcfs = browser.Select("div.mc-fs");
       if (!divmcfs.Exists)
         yield break;
@@ -230,7 +248,7 @@ namespace AndreiPopescu.CharazayPlus.Web
                 if (a.Value != ">>")
                 {
                   int pageno = int.Parse(a.Value);
-                  paginationUris[pageno] = new Uri(browser.Url, a.GetAttribute("href"));
+                  _paginationUris[pageno] = new Uri(browser.Url, a.GetAttribute("href"));
                 }
               }
             }
@@ -245,11 +263,11 @@ namespace AndreiPopescu.CharazayPlus.Web
         // add to the list only the first time
         // prevent multiple loops over pagination uris
         allowPagination = false;
-        foreach (var pagUri in paginationUris)
+        foreach (var pagUri in _paginationUris)
         {//a.Click();
           browser.Navigate(pagUri.Value);
           //
-          foreach (var tlp in ParseClassicTransferMarket(allowPagination, paginationUris))
+          foreach (var tlp in ParseClassicTransferMarket(allowPagination))
           {
             yield return tlp;
           }
@@ -266,13 +284,29 @@ namespace AndreiPopescu.CharazayPlus.Web
     /// <returns></returns>
     public IEnumerable<Objects.SitePlayerTransferHistory> ParseTransferHistory (Uri uri)
     {
+      if (!_isLoginSuccesful)
+        Login();
+
+      if (!_isLoginSuccesful)
+        yield break;
+
       this.browser.Navigate(uri);
       if (this.browser.ContainsText("Player ID not found"))
         yield break;
       //
       var table = this.browser.Find("table", FindBy.Id, "players");
-      if (table == null || table.TotalElementsFound > 1)
+      if (! table.Exists)
         table = browser.Select("table#players.adminique-table");
+      //
+      if (!table.Exists)
+      {
+        table = browser.Find("players");
+        table = table.Select("tbody");
+      }
+      
+      if (!table.Exists)
+        yield break;
+
       //
       foreach (var tr in table.Select("tr"))
       {
@@ -341,6 +375,14 @@ namespace AndreiPopescu.CharazayPlus.Web
 
     }
     
+    
+    //http://www.charazay.com/index.php?act=player&code=1&id=1
+    public DateTime GetServerTime ()
+    {
+      PlayerPageInfo info = PlayerPage(new Uri("http://www.charazay.com/index.php?act=player&code=1&id=1"));
+      return info.Servertime;
+    }
+    
     /// <summary>
     /// parse player page
     /// </summary>
@@ -348,21 +390,34 @@ namespace AndreiPopescu.CharazayPlus.Web
     /// <returns></returns>
     internal PlayerPageInfo PlayerPage (Uri uri)
     {
+      if (!_isLoginSuccesful)
+        Login();
+
+      if (!_isLoginSuccesful)
+        return null;
+      
       lock (sync)
       {
         this.browser.Navigate(uri);
-        if (!browser.ContainsText("Team Name:"))
-        {
-          Login();
-          this.browser.Navigate(uri);
-        }
         //
         PlayerPageInfo ppi = new PlayerPageInfo();
         //
 
         // September 02, 2014 12:53:34
-        ppi.Servertime = DateTime.ParseExact(browser.Select("span#servertime").Value
-          , "MMMM dd, yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        var srvTime = browser.Select("span#servertime");
+        if (srvTime.Exists)
+        {
+          ppi.Servertime = DateTime.ParseExact(srvTime.Value, "MMMM dd, yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        }
+        else
+        {
+          //<div class="date" id="servertime">March 18, 2016 03:00:30</div>
+          srvTime = browser.Find("servertime");
+          //browser.Find("div", new { });
+          ppi.Servertime = DateTime.ParseExact(srvTime.Value, "MMMM dd, yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        }
+        
+
         //
         var form = GetPlayerBidForm();
         if (form == null || !form.Exists)

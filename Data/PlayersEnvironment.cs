@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AndreiPopescu.CharazayPlus.Web;
-
-namespace AndreiPopescu.CharazayPlus.Data
+﻿namespace AndreiPopescu.CharazayPlus.Data
 {
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System.Text;
+  using AndreiPopescu.CharazayPlus.Web;
+  using AndreiPopescu.CharazayPlus.Utils;
+
   /// <summary>
   /// static own team player related data
   /// </summary>
@@ -46,12 +47,15 @@ namespace AndreiPopescu.CharazayPlus.Data
         //
         //init from charazay xml
         //
-        var objects = Utils.Deserializer.GoGetXml(new Web.XmlDownloadItem[] {
+        var objects = Utils.SerializeHelper.GoGetXml(new Web.XmlDownloadItem[] {
           new Web.MyPlayersXml(WebServiceUsers.Instance.MainUser)
         , new Web.CoachesXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
         //
         var players = (Xsd2.charazayPlayer[])objects[0];
+        // update development data
+        DevelopmentHistory.Instance.Players = players;
+        //
         var coaches = (Xsd2.charazayCoach[])objects[1];
         //
         foreach (var p in players)

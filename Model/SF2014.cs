@@ -85,7 +85,9 @@ namespace AndreiPopescu.CharazayPlus
       }
     }
 
-    public override double ValueIndex { get { return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; } }
+    public override double ValueIndex { get { 
+      return TotalScore / Extensions.PlayerExtensions.StoredAssessedValues[TrainingWeekIndex]; 
+    } }
 
 
   }

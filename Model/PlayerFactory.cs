@@ -5,6 +5,7 @@ namespace AndreiPopescu.CharazayPlus
   using System.Collections.Generic;
   using System.Text;
   using AndreiPopescu.CharazayPlus.Utils;
+  using AndreiPopescu.CharazayPlus.Model;
 
   public static class PlayerFactory
   {
@@ -42,15 +43,15 @@ namespace AndreiPopescu.CharazayPlus
 
 
 
-    public static Player GetPlayerByPosition (PlayerPosition pos)
+    public static Player GetPlayerByPosition (ST_PlayerPositionEnum pos)
     {
       switch (pos)
       {
-        case PlayerPosition.PG: return new PG();
-        case PlayerPosition.SG: return new SG();
-        case PlayerPosition.SF: return new SF();
-        case PlayerPosition.PF: return new PF();
-        case PlayerPosition.C: return new C();
+        case ST_PlayerPositionEnum.PG: return new PG();
+        case ST_PlayerPositionEnum.SG: return new SG();
+        case ST_PlayerPositionEnum.SF: return new SF();
+        case ST_PlayerPositionEnum.PF: return new PF();
+        case ST_PlayerPositionEnum.C: return new C();
         default: throw new NotSupportedException("GetPlayerByPosition");
       }
     }
@@ -59,16 +60,16 @@ namespace AndreiPopescu.CharazayPlus
     /// assign active skills and age
     /// </summary>
     /// <returns>valiant 15 yo player, no matter the position</returns>
-    public static Player GetWorthy15YearOld (PlayerPosition pos)
+    public static Player GetWorthy15YearOld (ST_PlayerPositionEnum pos)
     {
       Player p = null;
       switch (pos)
       {
-        case PlayerPosition.PG: p = new PG(s_15); break;
-        case PlayerPosition.SG: p = new SG(s_15); break;
-        case PlayerPosition.SF: p = new SF(s_15); break;
-        case PlayerPosition.PF: p = new PF(s_15); break;
-        case PlayerPosition.C: p = new C(s_15); break;
+        case ST_PlayerPositionEnum.PG: p = new PG(s_15); break;
+        case ST_PlayerPositionEnum.SG: p = new SG(s_15); break;
+        case ST_PlayerPositionEnum.SF: p = new SF(s_15); break;
+        case ST_PlayerPositionEnum.PF: p = new PF(s_15); break;
+        case ST_PlayerPositionEnum.C: p = new C(s_15); break;
         default: throw new NotSupportedException("GetPlayerByPosition");
       }
       p.IsHW = false;
@@ -86,7 +87,7 @@ namespace AndreiPopescu.CharazayPlus
     /// <param name="week">desired assessment week</param>
     /// <param name="pos">player type</param>
     /// <returns></returns>
-    public static double PredictValue (ushort week, PlayerPosition pos)
+    public static double PredictValue (ushort week, ST_PlayerPositionEnum pos)
     {
       if (week < 0 || week > 17 * 17)
         throw new ArgumentException("week");

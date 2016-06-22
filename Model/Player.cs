@@ -5,6 +5,7 @@
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Utils;
   using System.Collections.Generic;
+  using AndreiPopescu.CharazayPlus.Model;
 
   /// <summary>
   /// The base model class for a Charazay player
@@ -316,7 +317,7 @@
       }
     }
 
-    public PlayerPosition PositionHeightBased
+    public /*PlayerPosition*/ ST_PlayerPositionEnum PositionHeightBased
     {
       get
       {
@@ -328,7 +329,7 @@
     /// Method returns an enumerable of future court positions suitable for the player
     /// considering his height and yearly juniors height raise
     /// </summary>
-    public System.Collections.Generic.IEnumerable<PlayerPosition> FuturePositionsHeightBased
+    public System.Collections.Generic.IEnumerable<ST_PlayerPositionEnum> FuturePositionsHeightBased
     {
       get
       {
@@ -352,7 +353,7 @@
        
     #endregion
 
-    #region User Interface Values
+    #region User Interface ItemValues
     [OLVColumn(DisplayIndex = 0, IsEditable = false, Width = 130, MinimumWidth = 100, MaximumWidth = 200, Tag = "Position|Status|Skills")]
     public string FullName { get { return string.Format("{0} {1}", Name, Surname); } }
 
@@ -472,10 +473,12 @@
     }
     
     /// <summary>
-    /// age/value factor or value index 
+    /// age/value factor or value index
+    /// overridden for position classes, identical for 2014 classes
     /// </summary>
     [OLVColumn(DisplayIndex = 28, IsEditable = false, Width = 65, MinimumWidth = 40, MaximumWidth = 80, Tag = "Position", AspectToStringFormat = "{0:F02}")]
     public abstract double ValueIndex { get; }
+        
     /// <summary>
     /// 
     /// </summary>
@@ -701,11 +704,11 @@
       Player increasePlayer = null;
       switch (PositionHeightBased)
       {
-        case PlayerPosition.PG: increasePlayer = new PG(); break;
-        case PlayerPosition.SG: increasePlayer = new SG(); break;
-        case PlayerPosition.SF: increasePlayer = new SF(); break;
-        case PlayerPosition.PF: increasePlayer = new PF(); break;
-        case PlayerPosition.C: increasePlayer = new C(); break;
+        case ST_PlayerPositionEnum.PG: increasePlayer = new PG(); break;
+        case ST_PlayerPositionEnum.SG: increasePlayer = new SG(); break;
+        case ST_PlayerPositionEnum.SF: increasePlayer = new SF(); break;
+        case ST_PlayerPositionEnum.PF: increasePlayer = new PF(); break;
+        case ST_PlayerPositionEnum.C: increasePlayer = new C(); break;
       }
 
 
@@ -866,7 +869,7 @@
    /// COURT POSITION as defined by enumeration, overridden in each specialized class
    /// Works as a type discriminator
    /// </summary>
-    public abstract PlayerPosition PositionEnum { get; }
+    public abstract /*PlayerPosition*/ ST_PlayerPositionEnum PositionEnum { get; }
 
     #region Suggested body mass index and height
     protected internal abstract byte MinimumBMI { get; }

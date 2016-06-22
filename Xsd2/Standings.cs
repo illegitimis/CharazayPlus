@@ -13,239 +13,141 @@
 // 
 namespace AndreiPopescu.CharazayPlus.Xsd2 {
     using System.Xml.Serialization;
+  using System.Diagnostics;
+  using System.ComponentModel;
+  using System.CodeDom.Compiler;
+  using System;
     
     
     public partial class charazay {
         
-        private charazayDivision divisionField;
         
-        /// <remarks/>
         public charazayDivision division {
-            get {
-                return this.divisionField;
-            }
-            set {
-                this.divisionField = value;
-            }
+          get;
+          set;
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [GeneratedCode("xsd", "4.0.30319.1")]
+    [Serializable]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType=true)]
     public partial class charazayDivision {
         
-        private string nameField;
         
-        private charazayDivisionStanding[] standingsField;
-        
-        private uint idField;
-        
-        private byte levelField;
-        
-        private ushort lhField;
-        
-        private byte countryidField;
-        
-        /// <remarks/>
         public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("standing", IsNullable=false)]
+        [XmlArrayItem("standing", IsNullable=false)]
         public charazayDivisionStanding[] standings {
-            get {
-                return this.standingsField;
-            }
-            set {
-                this.standingsField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public uint id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public byte level {
-            get {
-                return this.levelField;
-            }
-            set {
-                this.levelField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public ushort lh {
-            get {
-                return this.lhField;
-            }
-            set {
-                this.lhField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public byte countryid {
-            get {
-                return this.countryidField;
-            }
-            set {
-                this.countryidField = value;
-            }
+          get;
+          set;
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.1")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    [GeneratedCode("xsd", "4.0.30319.1")]
+    [Serializable]
+    [DebuggerStepThrough]
+    [DesignerCategory("code")]
+    [XmlType(AnonymousType=true)]
     public partial class charazayDivisionStanding {
         
-        private byte playedField;
         
-        private ushort points_madeField;
-        
-        private ushort points_againstField;
-        
-        private byte pointsField;
-        
-        private byte winsField;
-        
-        private byte lossField;
-        
-        private byte positionField;
-        
-        private uint teamidField;
-        
-        private string nameField;
-        
-        private uint ownerField;
-        
-        /// <remarks/>
         public byte played {
-            get {
-                return this.playedField;
-            }
-            set {
-                this.playedField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
         public ushort points_made {
-            get {
-                return this.points_madeField;
-            }
-            set {
-                this.points_madeField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
         public ushort points_against {
-            get {
-                return this.points_againstField;
-            }
-            set {
-                this.points_againstField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
         public byte points {
-            get {
-                return this.pointsField;
-            }
-            set {
-                this.pointsField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
         public byte wins {
-            get {
-                return this.winsField;
-            }
-            set {
-                this.winsField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
         public byte loss {
-            get {
-                return this.lossField;
-            }
-            set {
-                this.lossField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public byte position {
-            get {
-                return this.positionField;
-            }
-            set {
-                this.positionField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public uint teamid {
-            get {
-                return this.teamidField;
-            }
-            set {
-                this.teamidField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
+          get;
+          set;
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [XmlAttribute]
         public uint owner {
-            get {
-                return this.ownerField;
-            }
-            set {
-                this.ownerField = value;
-            }
+          get;
+          set;
         }
     }
 }
