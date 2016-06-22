@@ -84,33 +84,33 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ArenaInfo_20120726_21191.xml" />
-    <EmbeddedResource Include="Coaches_stergein_20140128.xml" />
-    <EmbeddedResource Include="CountryInfo_20140128_5_1.xml" />
-    <EmbeddedResource Include="DivisionInfo_20140128_1013.xml" />
-    <EmbeddedResource Include="DivisionSchedule_20140128_1013.xml" />
-    <EmbeddedResource Include="Economy_stergein_20140128.xml" />
-    <EmbeddedResource Include="Match_18611008.xml" />
-    <EmbeddedResource Include="PlayerInfo_2459629.xml" />
-    <EmbeddedResource Include="Players_stergein_20140128.xml" />
-    <EmbeddedResource Include="Schedule_stergein_20140128.xml" />
-    <EmbeddedResource Include="TeamInfo_20140128.xml" />
-    <EmbeddedResource Include="TeamInfo_Cvbe.xml" />
-    <EmbeddedResource Include="TeamTransfers_20140128.xml" />
-    <EmbeddedResource Include="UserInfo_20140128.xml" />
-    <EmbeddedResource Include="UserInfo_Cvbe.xml" />
+    <EmbeddedResource Include="EmbeddedXml\ArenaInfo_20120726_21191.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Coaches_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\CountryInfo_20140128_5_1.xml" />
+    <EmbeddedResource Include="EmbeddedXml\DivisionInfo_20140128_1013.xml" />
+    <EmbeddedResource Include="EmbeddedXml\DivisionSchedule_20140128_1013.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Economy_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Match_18611008.xml" />
+    <EmbeddedResource Include="EmbeddedXml\PlayerInfo_2459629.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Players_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Schedule_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamInfo_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamInfo_Cvbe.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamTransfers_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\UserInfo_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\UserInfo_Cvbe.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Error.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Error.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Fatigue_Minus1_20140215.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Fatigue_Minus1_20140215.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PlayerDevelopment.xml" />
+    <EmbeddedResource Include="EmbeddedXml\PlayerDevelopment.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

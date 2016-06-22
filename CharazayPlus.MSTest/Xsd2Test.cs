@@ -78,7 +78,7 @@
     private chrzyobj DeserializeEmbeddedXml (string fileName)
     {
       var assembly = Assembly.GetExecutingAssembly();
-      var resourceName = "CharazayPlus.MSTest." + fileName;
+      var resourceName = "CharazayPlus.MSTest.EmbeddedXml." + fileName;
       chrzyobj obj = null;
       using (Stream stream = assembly.GetManifestResourceStream(resourceName))
       {
@@ -124,7 +124,7 @@
 
      
 
-//ArenaInfo_20120726_21191.xml
+    //ArenaInfo_20120726_21191.xml
     [TestMethod()]
     public void Deserialize_ArenaInfo_20120726_21191()
     {
