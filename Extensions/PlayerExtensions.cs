@@ -398,14 +398,22 @@ namespace AndreiPopescu.CharazayPlus.Extensions
         /// <param name="Age"></param>
         /// <param name="Height"></param>
         /// <returns></returns>
-        public static List<ST_PlayerPositionEnum> MostAdequatePositionsForAgeAndHeight(byte Age, byte Height)
+        public static List<ST_PlayerPositionEnum> MostAdequatePositionsForAgeAndHeight(byte Age, byte Height, bool mostProbableOnly = false)
         {
             var list = new List<ST_PlayerPositionEnum>();
             if (Age < 18)
             {
-                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin)));
-                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg)));
-                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax)));
+                if (mostProbableOnly)
+                {
+                    list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg)));
+                }
+                else
+                {
+                    list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin)));
+                    list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg)));
+                    list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax)));
+                }
+                
             }
             else
             {
@@ -474,19 +482,29 @@ namespace AndreiPopescu.CharazayPlus.Extensions
             else yield return QualitativePositionHeight.TallC;
         }
 
-        public static IEnumerable<QualitativePositionHeight> QualitativePositionsForAgeAndHeight(byte Age, byte Height)
+        public static IEnumerable<QualitativePositionHeight> QualitativePositionsForAgeAndHeight(byte Age, byte Height, bool mostProbableOnly = false)
         {
             if (Age < 18)
             {
                 var lo = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
                 var avg = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
                 var hi = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
-                foreach (var qph in lo.Union(avg).Union(hi).Distinct())
-                    yield return qph;
+                if (mostProbableOnly)
+                {
+                    foreach (var qph in avg.Distinct())
+                        yield return qph;
+                }
+                else
+                { 
+                    foreach (var qph in lo.Union(avg).Union(hi).Distinct())
+                        yield return qph;
+                }
             }
-            else
+            else 
+            { 
                 foreach (var qph in QualitativePositionsForHeight(Height))
                     yield return qph;
+            }
         }
 
         /// <summary>
@@ -496,7 +514,7 @@ namespace AndreiPopescu.CharazayPlus.Extensions
         /// <returns></returns>
         public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForHeight(byte Height)
         {
-            return QualitativePositionsForHeight(Height).Select(qph => GetPositionFromQualitativePositionHeight(qph));
+            return QualitativePositionsForHeight(Height).Select(qph => GetPositionFromQualitativePositionHeight(qph)).Distinct();
         }
 
         /// <summary>
@@ -505,19 +523,11 @@ namespace AndreiPopescu.CharazayPlus.Extensions
         /// <param name="Age"></param>
         /// <param name="Height"></param>
         /// <returns></returns>
-        public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForAgeAndHeight(byte Age, byte Height)
+        public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForAgeAndHeight(byte Age, byte Height, bool mostProbableOnly = false)
         {
-            if (Age < 18)
-            {
-                var lo = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
-                var avg = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
-                var hi = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
-                foreach (var pos in lo.Union(avg).Union(hi).Distinct())
-                    yield return pos;
-            }
-            else
-                foreach (var pos in PotentialPositionsForHeight(Height))
-                    yield return pos;
+            return QualitativePositionsForAgeAndHeight (Age, Height, mostProbableOnly )
+                    .Select(qph => GetPositionFromQualitativePositionHeight(qph))
+                    .Distinct();
         }
 
         /// <summary>
