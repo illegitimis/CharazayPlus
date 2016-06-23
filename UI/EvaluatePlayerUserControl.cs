@@ -723,8 +723,7 @@
       {
         if (value == null || value.skills == null) return;
         _p = value;
-        if (_p == null) 
-          return;
+        if (_p == null) return;
         //
         if (!this.tlp.Enabled) this.tlp.Enabled = true;
         //
@@ -773,40 +772,17 @@
 
     internal Evaluation EvaluationType { get; set; }
 
-    internal Player GetPlayer (ST_PlayerPositionEnum pos)
+    public PlayerEvaluator Evaluator
     {
-      switch (pos)
-      {
-        case ST_PlayerPositionEnum.C: return _c;
-        case ST_PlayerPositionEnum.PF: return _pf;
-        case ST_PlayerPositionEnum.SF: return _sf;
-        case ST_PlayerPositionEnum.SG: return _sg;
-        case ST_PlayerPositionEnum.PG: return _pg;
-        default: return null;
-      }
+      get { return this._evaluator; }
     }
-
-    internal IEnumerable<Player> GetPlayers ()
-    {
-        yield return _c;
-        yield return _pf;
-        yield return _sf;
-        yield return _sg;
-        yield return _pg;      
-      
-    }
+        
     #endregion
     
     #region fields
-    
-    Player _pg = null;
-    Player _sg = null;
-    Player _sf = null;
-    Player _pf = null;
-    Player _c = null;
-    
+
     Xsd2.charazayPlayer _p = null;
-    
+    PlayerEvaluator _evaluator;
     bool _isHw = false;
     bool _isFatigue = false;
     bool _isForm = false;
@@ -826,47 +802,46 @@
         }
       }
       this.tlp.Enabled = false;
-      //this.tlp.Visible = false;
     }
 
     private void AssignLabelValues ( )
     {
       //
-      AssignValue(hli1, _pg.DefensiveScore);
-      AssignValue(hli2, _sg.DefensiveScore);
-      AssignValue(hli3, _sf.DefensiveScore);
-      AssignValue(hli4, _pf.DefensiveScore);
-      AssignValue(hli5, _c.DefensiveScore);
+      AssignValue(hli1, _evaluator.PG.DefensiveScore);
+      AssignValue(hli2, _evaluator.SG.DefensiveScore);
+      AssignValue(hli3, _evaluator.SF.DefensiveScore);
+      AssignValue(hli4, _evaluator.PF.DefensiveScore);
+      AssignValue(hli5, _evaluator.C.DefensiveScore);
       //
-      AssignValue(hli6, _pg.OffensiveAbilityScore);
-      AssignValue(hli7, _sg.OffensiveAbilityScore);
-      AssignValue(hli8, _sf.OffensiveAbilityScore);
-      AssignValue(hli9, _pf.OffensiveAbilityScore);
-      AssignValue(hli10, _c.OffensiveAbilityScore);
+      AssignValue(hli6, _evaluator.PG.OffensiveAbilityScore);
+      AssignValue(hli7, _evaluator.SG.OffensiveAbilityScore);
+      AssignValue(hli8, _evaluator.SF.OffensiveAbilityScore);
+      AssignValue(hli9, _evaluator.PF.OffensiveAbilityScore);
+      AssignValue(hli10, _evaluator.C.OffensiveAbilityScore);
       //
-      AssignValue(hli11, _pg.ShootingScore);
-      AssignValue(hli12, _sg.ShootingScore);
-      AssignValue(hli13, _sf.ShootingScore);
-      AssignValue(hli14, _pf.ShootingScore);
-      AssignValue(hli15, _c.ShootingScore);
+      AssignValue(hli11, _evaluator.PG.ShootingScore);
+      AssignValue(hli12, _evaluator.SG.ShootingScore);
+      AssignValue(hli13, _evaluator.SF.ShootingScore);
+      AssignValue(hli14, _evaluator.PF.ShootingScore);
+      AssignValue(hli15, _evaluator.C.ShootingScore);
       //
-      AssignValue(hli16, _pg.OffensiveScore);
-      AssignValue(hli17, _sg.OffensiveScore);
-      AssignValue(hli18, _sf.OffensiveScore);
-      AssignValue(hli19, _pf.OffensiveScore);
-      AssignValue(hli20, _c.OffensiveScore);
+      AssignValue(hli16, _evaluator.PG.OffensiveScore);
+      AssignValue(hli17, _evaluator.SG.OffensiveScore);
+      AssignValue(hli18, _evaluator.SF.OffensiveScore);
+      AssignValue(hli19, _evaluator.PF.OffensiveScore);
+      AssignValue(hli20, _evaluator.C.OffensiveScore);
       //
-      AssignValue(hli21, _pg.TotalScore);
-      AssignValue(hli22, _sg.TotalScore);
-      AssignValue(hli23, _sf.TotalScore);
-      AssignValue(hli24, _pf.TotalScore);
-      AssignValue(hli25, _c.TotalScore);
+      AssignValue(hli21, _evaluator.PG.TotalScore);
+      AssignValue(hli22, _evaluator.SG.TotalScore);
+      AssignValue(hli23, _evaluator.SF.TotalScore);
+      AssignValue(hli24, _evaluator.PF.TotalScore);
+      AssignValue(hli25, _evaluator.C.TotalScore);
       //
-      AssignValueIndex(hli26, _pg);
-      AssignValueIndex(hli27, _sg);
-      AssignValueIndex(hli28, _sf);
-      AssignValueIndex(hli29, _pf);
-      AssignValueIndex(hli30, _c);
+      AssignValueIndex(hli26, _evaluator.PG);
+      AssignValueIndex(hli27, _evaluator.SG);
+      AssignValueIndex(hli28, _evaluator.SF);
+      AssignValueIndex(hli29, _evaluator.PF);
+      AssignValueIndex(hli30, _evaluator.C);
     }
 
     private void AssignValueIndex (HorizontalLevelIndicatorLabel hli, Player p)
@@ -878,39 +853,16 @@
     void AssignValue (HorizontalLevelIndicatorLabel hli, double val)
     {
       hli.Level = (float)Math.Round(val, 2);
-    } 
-
-    private void EvaluatePositions ( )
-    {
-      switch (EvaluationType)
-      {
-        case Evaluation.old:
-          {
-            _pg = new PG(_p, _isHw, _isFatigue, _isForm);
-            _sg = new SG(_p, _isHw, _isFatigue, _isForm);
-            _sf = new SF(_p, _isHw, _isFatigue, _isForm);
-            _pf = new PF(_p, _isHw, _isFatigue, _isForm);
-            _c = new C(_p, _isHw, _isFatigue, _isForm);
-          } break;
-
-        case Evaluation.season30:
-          {
-            _pg = new PG2014(_p, _isHw, _isFatigue, _isForm);
-            _sg = new SG2014(_p, _isHw, _isFatigue, _isForm);
-            _sf = new SF2014(_p, _isHw, _isFatigue, _isForm);
-            _pf = new PF2014(_p, _isHw, _isFatigue, _isForm);
-            _c = new C2014(_p, _isHw, _isFatigue, _isForm);
-          } break;
-      }
-    
     }
+
+    
 
     private void OnPropertyChange ( )
     {
       if (_p == null)
         return;
 
-      EvaluatePositions();
+      _evaluator = new PlayerEvaluator(_p, _isHw, _isFatigue, _isForm, EvaluationType);
       //
       this.SuspendLayout();
       //

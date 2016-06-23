@@ -1,7 +1,7 @@
 ﻿namespace AndreiPopescu.CharazayPlus
 {
   using System;
-  //using System.Linq;
+  using System.Linq;
   using BrightIdeasSoftware;
   using AndreiPopescu.CharazayPlus.Utils;
   using System.Collections.Generic;
@@ -321,7 +321,7 @@
     {
       get
       {
-        return Extensions.PlayerExtensions.PlayerPositionFromHeight(this.Height);
+        return Extensions.PlayerExtensions.MostAdequatePositionForHeight(this.Height);
       }
     }
 
@@ -329,22 +329,11 @@
     /// Method returns an enumerable of future court positions suitable for the player
     /// considering his height and yearly juniors height raise
     /// </summary>
-    public System.Collections.Generic.IEnumerable<ST_PlayerPositionEnum> FuturePositionsHeightBased
+    public ST_PlayerPositionEnum[] FuturePositionsHeightBased
     {
       get
       {
-        if (Age<18)
-        {
-          byte h = (byte)(this.Height + (18-Age) * Defines.HeighRaiseMin);
-          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
-          h = (byte)(this.Height + (18 - Age) * Defines.HeighRaiseAvg);
-          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
-          h = (byte)(this.Height + (18 - Age) * Defines.HeighRaiseMax);
-          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(h);
-        }
-          
-        else
-          yield return Extensions.PlayerExtensions.PlayerPositionFromHeight(this.Height);
+        return Extensions.PlayerExtensions.PotentialPositionsForAgeAndHeight (this.Age, this.Height).ToArray();
       }
     }
 

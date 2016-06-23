@@ -183,7 +183,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     {
       var pos = GetPosition();
       //
-      Player basePlayer = ucEvaluatePlayer.GetPlayer(pos);
+      Player basePlayer = ucEvaluatePlayer.Evaluator.GetPlayer(pos);
       //     
       if (basePlayer != null)
       { //
@@ -339,7 +339,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       {
         this.ucBasicPlayerInfo.CurrentPrice = crt.Price;
         this.ucEvaluatePlayer.SelectedObject = xsdp;
-        this.ucBasicPlayerInfo.Init(this.ucEvaluatePlayer.GetPlayer(crt.Position));
+        this.ucBasicPlayerInfo.Init(this.ucEvaluatePlayer.Evaluator.GetPlayer(crt.Position));
       }
               
     }

@@ -16,12 +16,36 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public const byte ActiveHeight = 190;
     public const byte ActiveWeight = 90;
+    
+    
+    #region //Suggested height for each position:
 
+    //PG: 180cm to 195cm
+    public const byte MinHeightPg = 180;
     public const byte AverageHeightPg = 186;
+    public const byte MaxHeightPg = 195;
+
+    //SG: 190cm to 200cm
+    public const byte MinHeightSg = 190;
     public const byte AverageHeightSg = 195;
-    public const byte AverageHeightSf = 204;
-    public const byte AverageHeightPf = 211;
-    public const byte AverageHeightC  = 220;
+    public const byte MaxHeightSg = 200;
+
+    //SF: 200cm to 210cm
+    public const byte MinHeightSf = 200;
+    public const byte AverageHeightSf = 205;
+    public const byte MaxHeightSf = 210;
+
+    //PF: 205cm to 220cm
+    public const byte MinHeightPf = 205;
+    public const byte AverageHeightPf = 213;
+    public const byte MaxHeightPf = 220;
+
+    //C: 210cm to 230cm
+    public const byte MinHeightC = 210;
+    public const byte AverageHeightC = 220;
+    public const byte MaxHeightC = 230; 
+    #endregion
+
 
     public const double HeightDribblingScaleFactor = 0.1;
     public const double HeightReboundsScaleFactor = 0.1;

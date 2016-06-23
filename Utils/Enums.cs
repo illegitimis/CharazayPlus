@@ -198,6 +198,15 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
   internal enum PositionHeight { TooShort, Adequate, TooTall }
 
+  public enum QualitativePositionHeight
+  {
+    ShortPG, BelowAveragePG, AboveAveragePG, TallPG,
+    ShortSG, BelowAverageSG, AboveAverageSG, TallSG,
+    ShortSF, BelowAverageSF, AboveAverageSF, TallSF,
+    ShortPF, BelowAveragePF, AboveAveragePF, TallPF,
+    ShortC, BelowAverageC, AboveAverageC, TallC,
+  }
+
   /// <summary>
   /// todo: fatigue for each match type
   /// </summary>
@@ -245,7 +254,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
   /// <summary>
   /// player instance evaluation type
   /// </summary>
-  internal enum Evaluation
+  public enum Evaluation
   {
     /// <summary>
     /// before season 30, only 3 skills compose defense score

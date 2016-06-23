@@ -226,7 +226,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       {
         this.ucBasicPlayer.CurrentPrice = tlp.CurrentPrice;
         //
-        var evaluatedPlayers = this.ucEvaluatePlayer.GetPlayers().ToArray();
+        var evaluatedPlayers = this.ucEvaluatePlayer.Evaluator.GetPlayers().ToArray();
         var top2facets = TrainingEfficiencyCalculator.TopN(evaluatedPlayers, 2).ToArray();
         _playerFacets = FacetsDeduction(top2facets[0], top2facets[1]).ToArray();
         //        
