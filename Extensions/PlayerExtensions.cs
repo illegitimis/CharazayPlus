@@ -2,21 +2,21 @@
 
 namespace AndreiPopescu.CharazayPlus.Extensions
 {
-  using System;
-  using System.Linq;
-  using System.Collections.Generic;
-  using AndreiPopescu.CharazayPlus.Utils;
-  using AndreiPopescu.CharazayPlus.Model;
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using AndreiPopescu.CharazayPlus.Utils;
+    using AndreiPopescu.CharazayPlus.Model;
 
-  internal static class PlayerExtensions
-  {
-    #region assessed total player values
-    
-    /// <summary>
-    /// stored values of player Development from age 15 to 32
-    /// each week with training contribution, meaning 289 weeks of training
-    /// </summary>
-    internal static double[] StoredAssessedValues = new double[]
+    internal static class PlayerExtensions
+    {
+        #region assessed total player values
+
+        /// <summary>
+        /// stored values of player Development from age 15 to 32
+        /// each week with training contribution, meaning 289 weeks of training
+        /// </summary>
+        internal static double[] StoredAssessedValues = new double[]
     {
      
    4.78     //4.81	4.63	4.80	4.82	4.86	
@@ -310,255 +310,277 @@ namespace AndreiPopescu.CharazayPlus.Extensions
   ,15.93    //16.62	15.86	15.10	15.64	16.43	
     };
 
-    #endregion
+        #endregion
 
-    static ST_PlayerPositionEnum GetPositionFromQualitativePositionHeight (QualitativePositionHeight qph)
-    {
-      switch (qph)
-      {
-        case QualitativePositionHeight.ShortPG:
-        case QualitativePositionHeight.BelowAveragePG:
-        case QualitativePositionHeight.AboveAveragePG:
-        case QualitativePositionHeight.TallPG:
-          return ST_PlayerPositionEnum.PG;
-
-        case QualitativePositionHeight.ShortSG:
-        case QualitativePositionHeight.BelowAverageSG:
-        case QualitativePositionHeight.AboveAverageSG:
-        case QualitativePositionHeight.TallSG:
-          return ST_PlayerPositionEnum.SG;
-
-        case QualitativePositionHeight.ShortSF:
-        case QualitativePositionHeight.BelowAverageSF:
-        case QualitativePositionHeight.AboveAverageSF:
-        case QualitativePositionHeight.TallSF:
-          return ST_PlayerPositionEnum.SF;
-
-        case QualitativePositionHeight.ShortPF:
-        case QualitativePositionHeight.BelowAveragePF:
-        case QualitativePositionHeight.AboveAveragePF:
-        case QualitativePositionHeight.TallPF:
-          return ST_PlayerPositionEnum.PF;
-
-        case QualitativePositionHeight.ShortC:
-        case QualitativePositionHeight.BelowAverageC:
-        case QualitativePositionHeight.AboveAverageC:
-        case QualitativePositionHeight.TallC:
-          return ST_PlayerPositionEnum.C;
-
-        default:
-          return ST_PlayerPositionEnum.Unknown;
-      }
-    }
-
-    /// <summary>
-    /// Method gets most adequate <see cref="PlayerPosition"/> based on height
-    /// by balancing position height averages
-    /// </summary>
-    /// <param name="Height">player height</param>
-    /// <returns>most adequate player position</returns>
-    public static ST_PlayerPositionEnum MostAdequatePositionForHeight (byte Height)
-    {
-      if (Height < Defines.AverageHeightPg)
-        return ST_PlayerPositionEnum.PG;
-      else
-      {
-        if (Height < Defines.AverageHeightSg)
+        static ST_PlayerPositionEnum GetPositionFromQualitativePositionHeight(QualitativePositionHeight qph)
         {
-          return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? ST_PlayerPositionEnum.PG : ST_PlayerPositionEnum.SG;
-        }
-        else
-        {
-          if (Height < Defines.AverageHeightSf)
-          {
-            return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? ST_PlayerPositionEnum.SG : ST_PlayerPositionEnum.SF;
-          }
-          else
-          {
-            if (Height < Defines.AverageHeightPf)
+            switch (qph)
             {
-              return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? ST_PlayerPositionEnum.SF : ST_PlayerPositionEnum.PF;
+                case QualitativePositionHeight.ShortPG:
+                case QualitativePositionHeight.BelowAveragePG:
+                case QualitativePositionHeight.AboveAveragePG:
+                case QualitativePositionHeight.TallPG:
+                    return ST_PlayerPositionEnum.PG;
+
+                case QualitativePositionHeight.ShortSG:
+                case QualitativePositionHeight.BelowAverageSG:
+                case QualitativePositionHeight.AboveAverageSG:
+                case QualitativePositionHeight.TallSG:
+                    return ST_PlayerPositionEnum.SG;
+
+                case QualitativePositionHeight.ShortSF:
+                case QualitativePositionHeight.BelowAverageSF:
+                case QualitativePositionHeight.AboveAverageSF:
+                case QualitativePositionHeight.TallSF:
+                    return ST_PlayerPositionEnum.SF;
+
+                case QualitativePositionHeight.ShortPF:
+                case QualitativePositionHeight.BelowAveragePF:
+                case QualitativePositionHeight.AboveAveragePF:
+                case QualitativePositionHeight.TallPF:
+                    return ST_PlayerPositionEnum.PF;
+
+                case QualitativePositionHeight.ShortC:
+                case QualitativePositionHeight.BelowAverageC:
+                case QualitativePositionHeight.AboveAverageC:
+                case QualitativePositionHeight.TallC:
+                    return ST_PlayerPositionEnum.C;
+
+                default:
+                    return ST_PlayerPositionEnum.Unknown;
+            }
+        }
+
+        /// <summary>
+        /// Method gets most adequate <see cref="PlayerPosition"/> based on height
+        /// by balancing position height averages
+        /// </summary>
+        /// <param name="Height">player height</param>
+        /// <returns>most adequate player position</returns>
+        public static ST_PlayerPositionEnum MostAdequatePositionForHeight(byte Height)
+        {
+            if (Height < Defines.AverageHeightPg)
+                return ST_PlayerPositionEnum.PG;
+            else
+            {
+                if (Height < Defines.AverageHeightSg)
+                {
+                    return Math.Abs(Height - Defines.AverageHeightPg) < Math.Abs(Height - Defines.AverageHeightSg) ? ST_PlayerPositionEnum.PG : ST_PlayerPositionEnum.SG;
+                }
+                else
+                {
+                    if (Height < Defines.AverageHeightSf)
+                    {
+                        return Math.Abs(Height - Defines.AverageHeightSg) < Math.Abs(Height - Defines.AverageHeightSf) ? ST_PlayerPositionEnum.SG : ST_PlayerPositionEnum.SF;
+                    }
+                    else
+                    {
+                        if (Height < Defines.AverageHeightPf)
+                        {
+                            return Math.Abs(Height - Defines.AverageHeightSf) < Math.Abs(Height - Defines.AverageHeightPf) ? ST_PlayerPositionEnum.SF : ST_PlayerPositionEnum.PF;
+                        }
+                        else
+                        {
+                            if (Height < Defines.AverageHeightC)
+                            {
+                                return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? ST_PlayerPositionEnum.PF : ST_PlayerPositionEnum.C;
+                            }
+                            else return ST_PlayerPositionEnum.C;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Age"></param>
+        /// <param name="Height"></param>
+        /// <returns></returns>
+        public static List<ST_PlayerPositionEnum> MostAdequatePositionsForAgeAndHeight(byte Age, byte Height)
+        {
+            var list = new List<ST_PlayerPositionEnum>();
+            if (Age < 18)
+            {
+                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin)));
+                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg)));
+                list.Add(MostAdequatePositionForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax)));
             }
             else
             {
-              if (Height < Defines.AverageHeightC)
-              {
-                return Math.Abs(Height - Defines.AverageHeightPf) < Math.Abs(Height - Defines.AverageHeightC) ? ST_PlayerPositionEnum.PF : ST_PlayerPositionEnum.C;
-              }
-              else return ST_PlayerPositionEnum.C;
+                list.Add(MostAdequatePositionForHeight(Height));
             }
-          }
+            return list.Distinct().ToList();
         }
-      }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="Height"></param>
-    /// <returns></returns>
-    public static IEnumerable<QualitativePositionHeight> QualitativePositionsForHeight (byte Height)
-    {
-      if (Height < Defines.MinHeightPg) yield return QualitativePositionHeight.ShortPG;
-      else if (Height >= Defines.MinHeightPg && Height < Defines.AverageHeightPg)
-      {
-        yield return QualitativePositionHeight.BelowAveragePG;
-        yield return QualitativePositionHeight.ShortSG;
-      }
-      else if (Height >= Defines.AverageHeightPg && Height < Defines.MinHeightSg)
-      {
-        yield return QualitativePositionHeight.AboveAveragePG;
-        yield return QualitativePositionHeight.ShortSG;
-      }
-      else if (Height >= Defines.MinHeightSg && Height < Defines.AverageHeightSg)
-      {
-        yield return QualitativePositionHeight.AboveAveragePG;
-        yield return QualitativePositionHeight.BelowAverageSG;
-      }
-      else if (Height >= Defines.AverageHeightSg && Height < Defines.MinHeightSf)
-      {
-        yield return QualitativePositionHeight.TallPG;
-        yield return QualitativePositionHeight.AboveAverageSG;
-        yield return QualitativePositionHeight.ShortSF;
-      }
-      else if (Height >= Defines.MinHeightSf && Height < Defines.AverageHeightSf)
-      {
-        yield return QualitativePositionHeight.TallSG;
-        yield return QualitativePositionHeight.BelowAverageSF;
-      }
-      else if (Height >= Defines.AverageHeightSf && Height < Defines.MaxHeightSf /* == Defines.MinHeightC*/ )
-      {
-        yield return QualitativePositionHeight.AboveAverageSF;
-        yield return QualitativePositionHeight.BelowAveragePF;
-        yield return QualitativePositionHeight.ShortC;
-      }
-      else if (Height >= Defines.MaxHeightSf && Height < Defines.AverageHeightPf)
-      {
-        yield return QualitativePositionHeight.TallSF;
-        yield return QualitativePositionHeight.BelowAveragePF;
-        yield return QualitativePositionHeight.BelowAverageC;
-      }
-      else if (Height >= Defines.AverageHeightPf && Height < Defines.MaxHeightPf)
-      {
-        yield return QualitativePositionHeight.TallSF;
-        yield return QualitativePositionHeight.AboveAveragePF;
-        yield return QualitativePositionHeight.BelowAverageC;
-      }
-      else if (Height >= Defines.MaxHeightPf && Height < Defines.MaxHeightC)
-      {
-        yield return QualitativePositionHeight.TallPF;
-        yield return QualitativePositionHeight.AboveAverageC;
-      }
-      else yield return QualitativePositionHeight.TallC;
-    }
-
-    public static IEnumerable<QualitativePositionHeight> QualitativePositionsForAgeAndHeight (byte Age, byte Height)
-    {
-      if (Age < 18)
-      {
-        var lo = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
-        var avg = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
-        var hi = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
-        foreach (var qph in lo.Union(avg).Union(hi).Distinct())
-          yield return qph;
-      }
-      else
-        foreach (var qph in QualitativePositionsForHeight(Height))
-          yield return qph;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="Height"></param>
-    /// <returns></returns>
-    public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForHeight (byte Height)
-    {
-      return QualitativePositionsForHeight(Height).Select(qph => GetPositionFromQualitativePositionHeight(qph));
-    }    
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="Age"></param>
-    /// <param name="Height"></param>
-    /// <returns></returns>
-    public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForAgeAndHeight (byte Age, byte Height)
-    {
-      if (Age < 18)
-      {
-        var lo = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
-        var avg= PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
-        var hi = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
-        foreach (var pos in lo.Union(avg).Union(hi).Distinct())
-          yield return pos;
-      }
-      else
-        foreach (var pos in PotentialPositionsForHeight(Height))
-          yield return pos;
-    }
-
-    /// <summary>
-    /// Best position for a player based on total score
-    /// </summary>
-    /// <param name="pg">PG aspect</param>
-    /// <param name="sg">SG Aspect</param>
-    /// <param name="sf">SF aspect</param>
-    /// <param name="pf">PF aspect</param>
-    /// <param name="M">C aspect</param>
-    /// <returns></returns>
-    public static Player DecideOnTotalScore (PG pg, SG sg, SF sf, PF pf, C c)
-    {
-      double maxTotalScore = pg.TotalScore;
-      Player p = pg;
-
-      if (sg.TotalScore > maxTotalScore)
-      {
-        p = sg;
-        maxTotalScore = sg.TotalScore;
-      }
-
-      if (sf.TotalScore > maxTotalScore)
-      {
-        p = sf;
-        maxTotalScore = sf.TotalScore;
-      }
-
-      if (pf.TotalScore > maxTotalScore)
-      {
-        p = pf;
-        maxTotalScore = pf.TotalScore;
-      }
-
-      if (c.TotalScore > maxTotalScore)
-      {
-        p = c;
-        maxTotalScore = c.TotalScore;
-      }
-
-      return p;
-    }
-
-    /// <summary>
-    /// Best position for a player based on total score
-    /// </summary>
-    /// <param name="players">player pool</param>
-    /// <returns>player whose total score is max</returns>
-    public static Player DecideOnTotalScore (IEnumerable<Player> players)
-    {
-      double maxTotalScore = 0;
-      Player pmax = null;
-
-      foreach (var p in players)
-      {
-        if (p.TotalScore > maxTotalScore)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Height"></param>
+        /// <returns></returns>
+        public static IEnumerable<QualitativePositionHeight> QualitativePositionsForHeight(byte Height)
         {
-          pmax = p;
-          maxTotalScore = p.TotalScore;
+            if (Height < Defines.MinHeightPg) yield return QualitativePositionHeight.ShortPG;
+            else if (Height >= Defines.MinHeightPg && Height < Defines.AverageHeightPg)
+            {
+                yield return QualitativePositionHeight.BelowAveragePG;
+                yield return QualitativePositionHeight.ShortSG;
+            }
+            else if (Height >= Defines.AverageHeightPg && Height < Defines.MinHeightSg)
+            {
+                yield return QualitativePositionHeight.AboveAveragePG;
+                yield return QualitativePositionHeight.ShortSG;
+            }
+            else if (Height >= Defines.MinHeightSg && Height < Defines.AverageHeightSg)
+            {
+                yield return QualitativePositionHeight.AboveAveragePG;
+                yield return QualitativePositionHeight.BelowAverageSG;
+            }
+            else if (Height >= Defines.AverageHeightSg && Height < Defines.MinHeightSf)
+            {
+                yield return QualitativePositionHeight.TallPG;
+                yield return QualitativePositionHeight.AboveAverageSG;
+                yield return QualitativePositionHeight.ShortSF;
+            }
+            else if (Height >= Defines.MinHeightSf && Height < Defines.AverageHeightSf)
+            {
+                yield return QualitativePositionHeight.TallSG;
+                yield return QualitativePositionHeight.BelowAverageSF;
+            }
+            else if (Height >= Defines.AverageHeightSf && Height < Defines.MaxHeightSf /* == Defines.MinHeightC*/ )
+            {
+                yield return QualitativePositionHeight.AboveAverageSF;
+                yield return QualitativePositionHeight.BelowAveragePF;
+                yield return QualitativePositionHeight.ShortC;
+            }
+            else if (Height >= Defines.MaxHeightSf && Height < Defines.AverageHeightPf)
+            {
+                yield return QualitativePositionHeight.TallSF;
+                yield return QualitativePositionHeight.BelowAveragePF;
+                yield return QualitativePositionHeight.BelowAverageC;
+            }
+            else if (Height >= Defines.AverageHeightPf && Height < Defines.MaxHeightPf)
+            {
+                yield return QualitativePositionHeight.TallSF;
+                yield return QualitativePositionHeight.AboveAveragePF;
+                yield return QualitativePositionHeight.BelowAverageC;
+            }
+            else if (Height >= Defines.MaxHeightPf && Height < Defines.MaxHeightC)
+            {
+                yield return QualitativePositionHeight.TallPF;
+                yield return QualitativePositionHeight.AboveAverageC;
+            }
+            else yield return QualitativePositionHeight.TallC;
         }
-      }
-      return pmax;
+
+        public static IEnumerable<QualitativePositionHeight> QualitativePositionsForAgeAndHeight(byte Age, byte Height)
+        {
+            if (Age < 18)
+            {
+                var lo = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
+                var avg = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
+                var hi = QualitativePositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
+                foreach (var qph in lo.Union(avg).Union(hi).Distinct())
+                    yield return qph;
+            }
+            else
+                foreach (var qph in QualitativePositionsForHeight(Height))
+                    yield return qph;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Height"></param>
+        /// <returns></returns>
+        public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForHeight(byte Height)
+        {
+            return QualitativePositionsForHeight(Height).Select(qph => GetPositionFromQualitativePositionHeight(qph));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Age"></param>
+        /// <param name="Height"></param>
+        /// <returns></returns>
+        public static IEnumerable<ST_PlayerPositionEnum> PotentialPositionsForAgeAndHeight(byte Age, byte Height)
+        {
+            if (Age < 18)
+            {
+                var lo = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMin));
+                var avg = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseAvg));
+                var hi = PotentialPositionsForHeight((byte)(Height + (18 - Age) * Defines.HeighRaiseMax));
+                foreach (var pos in lo.Union(avg).Union(hi).Distinct())
+                    yield return pos;
+            }
+            else
+                foreach (var pos in PotentialPositionsForHeight(Height))
+                    yield return pos;
+        }
+
+        /// <summary>
+        /// Best position for a player based on total score
+        /// </summary>
+        /// <param name="pg">PG aspect</param>
+        /// <param name="sg">SG Aspect</param>
+        /// <param name="sf">SF aspect</param>
+        /// <param name="pf">PF aspect</param>
+        /// <param name="M">C aspect</param>
+        /// <returns></returns>
+        public static Player DecideOnTotalScore(PG pg, SG sg, SF sf, PF pf, C c)
+        {
+            double maxTotalScore = pg.TotalScore;
+            Player p = pg;
+
+            if (sg.TotalScore > maxTotalScore)
+            {
+                p = sg;
+                maxTotalScore = sg.TotalScore;
+            }
+
+            if (sf.TotalScore > maxTotalScore)
+            {
+                p = sf;
+                maxTotalScore = sf.TotalScore;
+            }
+
+            if (pf.TotalScore > maxTotalScore)
+            {
+                p = pf;
+                maxTotalScore = pf.TotalScore;
+            }
+
+            if (c.TotalScore > maxTotalScore)
+            {
+                p = c;
+                maxTotalScore = c.TotalScore;
+            }
+
+            return p;
+        }
+
+        /// <summary>
+        /// Best position for a player based on total score
+        /// </summary>
+        /// <param name="players">player pool</param>
+        /// <returns>player whose total score is max</returns>
+        public static Player DecideOnTotalScore(IEnumerable<Player> players)
+        {
+            double maxTotalScore = 0;
+            Player pmax = null;
+
+            foreach (var p in players)
+            {
+                if (p.TotalScore > maxTotalScore)
+                {
+                    pmax = p;
+                    maxTotalScore = p.TotalScore;
+                }
+            }
+            return pmax;
+        }
+
     }
-    
-  }
 }

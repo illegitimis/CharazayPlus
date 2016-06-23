@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using LeastSquares;
+//using LeastSquares;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AndreiPopescu.CharazayPlus.UI
@@ -639,11 +639,12 @@ namespace AndreiPopescu.CharazayPlus.UI
 
     }
 
-    private void AddRectangleAnnotation (ExponentialOptimum eo)
+    private void AddRectangleAnnotation (/*ExponentialOptimum eo*/ string text)
     {
       var annotation = new RectangleAnnotation();
       annotation.AnchorDataPoint = new DataPoint(200, 200);
-      annotation.Text = eo.ToString();
+      //annotation.Text = eo.ToString();
+      annotation.Text = text;
       annotation.ForeColor = Color.Black;
       annotation.Font = new Font("Arial", 12);
       annotation.LineWidth = 2;
@@ -653,11 +654,12 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.chart.Annotations.Add(annotation);
     }
 
-    private void AddEllipseAnnotation (Exponential e)
+    private void AddEllipseAnnotation (/*Exponential e*/ string text)
     {
       var annotation = new EllipseAnnotation();
       annotation.AnchorDataPoint = new DataPoint(200, 400);
-      annotation.Text = e.ToString();
+      //annotation.Text = e.ToString();
+      annotation.Text = text;
       annotation.ForeColor = Color.Black;
       annotation.Font = new Font("Arial", 12);
       annotation.LineWidth = 2;
@@ -668,6 +670,7 @@ namespace AndreiPopescu.CharazayPlus.UI
 
       this.chart.Annotations.Add(annotation);
     }
+    
     #endregion
 
     #region event handlers

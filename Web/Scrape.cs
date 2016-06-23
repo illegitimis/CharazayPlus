@@ -44,7 +44,7 @@ namespace AndreiPopescu.CharazayPlus.Web
       browser.RequestLogged += (/*Browser*/ req, /*HttpRequestLog*/ log) =>
       {
         Console.WriteLine(" -> " + log.Method + " request to " + log.Url);
-        Console.WriteLine(" <- Response status code: " + log.StatusCode);
+        Console.WriteLine(" <- Response status code: " + log.ResponseCode);
       };
       browser.MessageLogged += (/*Browser*/ _browser, /*string*/ log) => Console.WriteLine(log);
 

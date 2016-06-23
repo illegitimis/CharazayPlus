@@ -35,7 +35,14 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="SimpleBrowser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\RazorHosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.79.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\SimpleBrowser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -73,10 +80,6 @@
     <Compile Include="Xsd2Test.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LeastSquaresFitting\LeastSquares\LeastSquares.csproj">
-      <Project>{DB9F4DD4-9591-4AD5-B0AF-2AB4DE5B60C1}</Project>
-      <Name>LeastSquares</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CharazayPlus.csproj">
       <Project>{DDC0124B-95B7-4FBF-B09F-7E82AA823725}</Project>
       <Name>CharazayPlus</Name>
@@ -108,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedXml\Fatigue_Minus1_20140215.xml" />

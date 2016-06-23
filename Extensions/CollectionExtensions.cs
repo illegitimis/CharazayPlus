@@ -1,7 +1,11 @@
 ﻿
 namespace AndreiPopescu.CharazayPlus.Extensions
 {
-
+#if DOTNET30
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+#endif
  
    public static class CollectionExtensions
   {
@@ -18,7 +22,7 @@ namespace AndreiPopescu.CharazayPlus.Extensions
     
 
 #if DOTNET30
-    public static bool IsNullOrEmpty (this System.Array ar)
+    public static bool IsNullOrEmpty (this Array ar)
 #else
     public static bool IsNullOrEmpty (System.Array ar)
 #endif
@@ -28,9 +32,9 @@ namespace AndreiPopescu.CharazayPlus.Extensions
 
     
 #if DOTNET30
-    public static bool IsNullOrEmpty<T> (this System.Collections.Generic.IEnumerable<T> enumerable)
+    public static bool IsNullOrEmpty<T> (this IEnumerable<T> enumerable)
     {
-      return enumerable == null || enumerable.Empty();
+        return enumerable == null || enumerable.Count() == 0;
     }
 #else
     public static bool IsNullOrEmpty<T> (System.Collections.Generic.IEnumerable<T> ar)

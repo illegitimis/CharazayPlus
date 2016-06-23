@@ -84,6 +84,61 @@ namespace CharazayPlus.MSTest
       Assert.AreEqual(ST_PlayerPositionEnum.C, PlayerExtensions.MostAdequatePositionForHeight(230));
     }
 
+    [TestMethod()]
+    public void MostAdequatePositionsForAge17AndHeightTests ( )
+    {
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 160).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 165).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 170).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 175).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 180).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 185).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 190).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG, POS.SF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 195).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 200).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF, POS.PF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 205).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 210).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 215).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 220).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(17, 224).ToArray());
+    }
+
+    [TestMethod()]
+    public void MostAdequatePositionsForAge16AndHeightTests()
+    {
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 160).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 165).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 170).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 175).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 180).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 185).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG, POS.SF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 190).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG, POS.SF, POS.PF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 195).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF, POS.PF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 200).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF, POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 205).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 210).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 215).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(16, 217).ToArray());
+    }
+
+    [TestMethod()]
+    public void MostAdequatePositionsForAge15AndHeightTests()
+    {
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 150).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 155).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 160).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 165).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 170).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 175).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG, POS.SF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 180).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PG, POS.SG, POS.SF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 185).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG, POS.SF, POS.PF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 190).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SG, POS.SF, POS.PF }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 195).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF, POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 200).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.SF, /*POS.PF,*/ POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 205).ToArray());
+        CollectionAssert.AreEqual(new POS[] { POS.PF, POS.C }, PlayerExtensions.MostAdequatePositionsForAgeAndHeight(15, 210).ToArray());
+    }
+
     /// <summary>
     ///A test for QualitativePositionsForHeight
     ///</summary>
@@ -116,25 +171,66 @@ namespace CharazayPlus.MSTest
     public void QualitativePositionsForAge17AndHeightTests ( )
     {
       CollectionAssert.AreEqual(new QPH[] { QPH.ShortPG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,170).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.BelowAveragePG, QPH.AboveAveragePG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,179).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.BelowAveragePG, QPH.ShortSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,180).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.BelowAveragePG, QPH.ShortSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,185).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.ShortSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,186).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.ShortSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,189).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.BelowAverageSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,190).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.BelowAverageSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,194).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,195).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,199).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSG, QPH.BelowAverageSF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,200).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSG, QPH.BelowAverageSF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,204).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAverageSF, QPH.BelowAveragePF, QPH.ShortC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,205).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAverageSF, QPH.BelowAveragePF, QPH.ShortC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,209).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF, QPH.BelowAveragePF, QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,210).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF, QPH.BelowAveragePF, QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,212).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF, QPH.AboveAveragePF, QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,213).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF, QPH.AboveAveragePF, QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,219).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallPF, QPH.AboveAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,220).ToArray());
-      CollectionAssert.AreEqual(new QPH[] { QPH.TallC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,230).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.BelowAveragePG, QPH.ShortSG, QPH.AboveAveragePG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,179).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.BelowAveragePG, QPH.ShortSG, QPH.AboveAveragePG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 180).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.ShortSG, QPH.BelowAverageSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17,185).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.ShortSG, QPH.BelowAverageSG }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 186).ToArray());
+      
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.BelowAverageSG, QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF }
+            , PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 189).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAveragePG, QPH.BelowAverageSG, QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF }
+            , PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 190).ToArray());
+
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF, QPH.TallSG, QPH.BelowAverageSF }, 
+          PlayerExtensions.QualitativePositionsForAgeAndHeight(17,194).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallPG, QPH.AboveAverageSG, QPH.ShortSF, QPH.TallSG, QPH.BelowAverageSF },
+        PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 195).ToArray());
+
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSG
+    , QPH.BelowAverageSF
+    , QPH.AboveAverageSF
+    , QPH.BelowAveragePF
+    , QPH.ShortC }
+          , PlayerExtensions.QualitativePositionsForAgeAndHeight(17,199).ToArray(), "199");
+
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSG
+    , QPH.BelowAverageSF
+    , QPH.AboveAverageSF
+    , QPH.BelowAveragePF
+    , QPH.ShortC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 200).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAverageSF
+    , QPH.BelowAveragePF
+    , QPH.ShortC
+    , QPH.TallSF
+    , QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 204).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.AboveAverageSF
+    , QPH.BelowAveragePF
+    , QPH.ShortC
+    , QPH.TallSF
+    , QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 205).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF
+    , QPH.BelowAveragePF
+    , QPH.BelowAverageC
+    , QPH.AboveAveragePF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 209).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF
+    , QPH.BelowAveragePF
+    , QPH.BelowAverageC
+    , QPH.AboveAveragePF }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 210).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF
+    , QPH.AboveAveragePF
+    , QPH.BelowAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 212).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallSF
+    , QPH.AboveAveragePF
+    , QPH.BelowAverageC
+    , QPH.TallPF
+    , QPH.AboveAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 213).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallPF
+    , QPH.AboveAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 219).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallPF
+    , QPH.AboveAverageC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 220).ToArray());
+      CollectionAssert.AreEqual(new QPH[] { QPH.TallPF
+    , QPH.AboveAverageC
+    , QPH.TallC }, PlayerExtensions.QualitativePositionsForAgeAndHeight(17, 224).ToArray());
     }
 
     [TestMethod()]
@@ -163,7 +259,7 @@ namespace CharazayPlus.MSTest
     }
 
     [TestMethod()]
-    public void AllPossiblePositionsBasedOnAgeOver18AndHeightTests()
+    public void PotentialPositionsBasedOnAgeOver18AndHeightTests()
     {
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(18, 170).ToArray());
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(19, 175).ToArray());
@@ -181,7 +277,7 @@ namespace CharazayPlus.MSTest
     }
 
     [TestMethod()]
-    public void AllPossiblePositionsBasedOnAge15AndHeightTests ( )
+    public void PotentialPositionsBasedOnAge15AndHeightTests()
     {     
         CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(15, 150).ToArray());
         CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(15, 155).ToArray());
@@ -199,7 +295,7 @@ namespace CharazayPlus.MSTest
     }
 
     [TestMethod()]
-    public void AllPossiblePositionsBasedOnAge16AndHeightTests ( )
+    public void PotentialPositionsBasedOnAge16AndHeightTests()
     {
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(16, 150).ToArray());
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(16, 155).ToArray());
@@ -218,7 +314,7 @@ namespace CharazayPlus.MSTest
     }
 
     [TestMethod()]
-    public void AllPossiblePositionsBasedOnAge17AndHeightTests ( )
+    public void PotentialPositionsBasedOnAge17AndHeightTests()
     {
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(17, 150).ToArray());
       CollectionAssert.AreEqual(new POS[] { POS.PG }, PlayerExtensions.PotentialPositionsForAgeAndHeight(17, 155).ToArray());

@@ -1,5 +1,4 @@
 ﻿
-
 namespace CharazayPlus.MSTest
 {
   using System;
@@ -10,7 +9,7 @@ namespace CharazayPlus.MSTest
   using AndreiPopescu.CharazayPlus.Utils;
   using AndreiPopescu.CharazayPlus.Objects;
   using AndreiPopescu.CharazayPlus.Interpolate;
-
+    using AndreiPopescu.CharazayPlus.Extensions;
 
 
   [TestClass]
@@ -53,14 +52,14 @@ namespace CharazayPlus.MSTest
                 && (i.Price > 1 || i.AgeValueIndex > 1)
                 ).ToList();
             }
-            if (!outliers.Empty())
+            if (!outliers.IsNullOrEmpty() )
             { 
               DbEnvironment.Instance.TransferHistoryDC.Outliers.InsertAllOnSubmit(
                 //outliers.Cast<Outliers>()
                 outliers.Select(o=>(Outliers)o)
                 );
               // Add renamed to insert on submit
-              DbEnvironment.Instance.TransferHistoryDC.History.DeleteAllOnSubmit (outliers);              
+              DbEnvironment.Instance.TransferHistoryDC.History.DeleteAllOnSubmit (outliers);
             }
           }
 
