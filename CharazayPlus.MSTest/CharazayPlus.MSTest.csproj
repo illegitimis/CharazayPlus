@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="DateTest.cs" />
     <Compile Include="LinearAlgebraTest.cs" />
+    <Compile Include="PlayerEvaluatorTest.cs" />
     <Compile Include="PlayerExtensionsTest.cs" />
     <Compile Include="PlayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

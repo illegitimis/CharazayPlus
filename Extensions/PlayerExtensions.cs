@@ -530,46 +530,7 @@ namespace AndreiPopescu.CharazayPlus.Extensions
                     .Distinct();
         }
 
-        /// <summary>
-        /// Best position for a player based on total score
-        /// </summary>
-        /// <param name="pg">PG aspect</param>
-        /// <param name="sg">SG Aspect</param>
-        /// <param name="sf">SF aspect</param>
-        /// <param name="pf">PF aspect</param>
-        /// <param name="M">C aspect</param>
-        /// <returns></returns>
-        public static Player DecideOnTotalScore(PG pg, SG sg, SF sf, PF pf, C c)
-        {
-            double maxTotalScore = pg.TotalScore;
-            Player p = pg;
-
-            if (sg.TotalScore > maxTotalScore)
-            {
-                p = sg;
-                maxTotalScore = sg.TotalScore;
-            }
-
-            if (sf.TotalScore > maxTotalScore)
-            {
-                p = sf;
-                maxTotalScore = sf.TotalScore;
-            }
-
-            if (pf.TotalScore > maxTotalScore)
-            {
-                p = pf;
-                maxTotalScore = pf.TotalScore;
-            }
-
-            if (c.TotalScore > maxTotalScore)
-            {
-                p = c;
-                maxTotalScore = c.TotalScore;
-            }
-
-            return p;
-        }
+        
 
         /// <summary>
         /// Best position for a player based on total score

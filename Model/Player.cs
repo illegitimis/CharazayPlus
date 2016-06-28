@@ -234,7 +234,6 @@
         return (m_player == null || m_player.skills == null)
           ? (byte)Math.Floor(m_dExperience)
           : m_player.skills.experience;
-
       }
     }
     #endregion
