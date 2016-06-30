@@ -17,7 +17,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
         readonly bool _isForm;
         readonly Evaluation _evaluationType;
 
-        public PlayerEvaluator(Xsd2.charazayPlayer p, bool isHw = false, bool isFatigue = false, bool isForm = false, Evaluation evaluationType = Evaluation.season30)
+        public PlayerEvaluator(
+            Xsd2.charazayPlayer p, 
+            bool isHw = false, 
+            bool isFatigue = false, 
+            bool isForm = false, 
+            Evaluation evaluationType = Evaluation.season30)
         {
             _p = p;
             _isHw = isHw;
@@ -83,92 +88,14 @@ namespace AndreiPopescu.CharazayPlus.Utils
             return x.Decide(this);
         }
 
+        internal IEnumerable<Player> Best2(IDecidePlayerPositionAlgorithm x)
+        {
+            return x.Decide(this, 2);
+        }
+
         public byte Age { get { return _sg.Age; } }
 
         public byte Height { get { return _pg.Height; } }
-    }
-
-    public interface IDecidePlayerPositionAlgorithm
-    {
-        /*ST_PlayerPositionEnum*/
-        Player Decide(PlayerEvaluator eval);
-        IEnumerable<Player> Decide(PlayerEvaluator eval, int top);
-    }
-    /// <summary>
-    /// Best position for a player based on total score
-    /// </summary>  
-    class DecidePlayerPositionByTotalScoreAlgorithm : IDecidePlayerPositionAlgorithm
-    {
-
-        public /*ST_PlayerPositionEnum*/Player Decide(PlayerEvaluator eval)
-        {
-            //double maxTotalScore = _pg.TotalScore;
-            //Player p = _pg;
-
-            //if (_sg.TotalScore > maxTotalScore)
-            //{
-            //    p = _sg;
-            //    maxTotalScore = _sg.TotalScore;
-            //}
-
-            //if (_sf.TotalScore > maxTotalScore)
-            //{
-            //    p = _sf;
-            //    maxTotalScore = _sf.TotalScore;
-            //}
-
-            //if (_pf.TotalScore > maxTotalScore)
-            //{
-            //    p = _pf;
-            //    maxTotalScore = _pf.TotalScore;
-            //}
-
-            //if (_c.TotalScore > maxTotalScore)
-            //{
-            //    p = _c;
-            //    maxTotalScore = _c.TotalScore;
-            //}
-
-            //return p;
-
-            return eval.GetPlayers().OrderByDescending(x => x.TotalScore).First();
-
-        }
-
-        public IEnumerable<Player> Decide(PlayerEvaluator eval, int top)
-        {
-            return eval.GetPlayers().OrderByDescending(x => x.TotalScore).Take(top);
-        }
-    }
-
-    class DecideMostAdequatePlayerPositionByHeightAlgorithm : IDecidePlayerPositionAlgorithm
-    {
-        public Player Decide(PlayerEvaluator eval)
-        {
-            List<ST_PlayerPositionEnum> positions = PlayerExtensions.MostAdequatePositionsForAgeAndHeight(eval.Age, eval.Height, true);
-            return positions.Select(pos => eval.GetPlayer(pos)).OrderByDescending(x => x.TotalScore).First();
-        }
-        
-        public IEnumerable<Player> Decide(PlayerEvaluator eval, int top)
-        {
-            List<ST_PlayerPositionEnum> positions = PlayerExtensions.MostAdequatePositionsForAgeAndHeight(eval.Age, eval.Height, true);
-            return positions.Select(pos => eval.GetPlayer(pos)).OrderByDescending(x => x.TotalScore).Take(top);
-        }
-    }
-
-    class DecidePotentialPlayerPositionAlgorithm : IDecidePlayerPositionAlgorithm
-    {
-        public Player Decide(PlayerEvaluator eval)
-        {
-            List<ST_PlayerPositionEnum> positions = PlayerExtensions.PotentialPositionsForAgeAndHeight(eval.Age, eval.Height, true).ToList();
-            return positions.Select(pos => eval.GetPlayer(pos)).OrderByDescending(x => x.TotalScore).First();
-        }
-
-        public IEnumerable<Player> Decide(PlayerEvaluator eval, int top)
-        {
-            List<ST_PlayerPositionEnum> positions = PlayerExtensions.PotentialPositionsForAgeAndHeight(eval.Age, eval.Height, true).ToList();
-            return positions.Select(pos => eval.GetPlayer(pos)).OrderByDescending(x => x.TotalScore).Take(top);
-        }
     }
 
 }

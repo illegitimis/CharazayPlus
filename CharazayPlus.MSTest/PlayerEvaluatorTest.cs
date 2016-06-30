@@ -451,7 +451,7 @@ Rebounds: 	4 		Experience: 	1");
             Eval(p, a3, ST_PlayerPositionEnum.SF, 6.58);
         }
 
-[TestMethod]
+        [TestMethod]
         public void GuglielmoDowntownFerrero41823184()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	16 		Fatigue: 	5 %
@@ -465,6 +465,127 @@ Rebounds: 	7 		Experience: 	3");
             Eval(p, a1, ST_PlayerPositionEnum.PG, 7.28);
             Eval(p, a2, ST_PlayerPositionEnum.SF, 7.19);
             Eval(p, a3, ST_PlayerPositionEnum.SF, 7.19);
+        }
+
+        [TestMethod]
+        public void AdolisPacenka_41884742()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
+Height: 	185 		Weight: 	83,17
+Skills Index: 	19.355 		Salary: 	€ 26.928
+Defence: 	6 		Free Throws: 	5
+Two Point: 	7 		Three Point: 	5
+Dribbling: 	7 		Passing: 	3
+Speed: 	9 		Footwork: 	4
+Rebounds: 	4 		Experience: 	2");
+            Eval(p, a1, ST_PlayerPositionEnum.SG, 6.75);
+            Eval(p, a2, ST_PlayerPositionEnum.SG, 6.75);
+            Eval(p, a3, ST_PlayerPositionEnum.SG, 6.75);
+        }
+
+        [TestMethod]
+        public void NachoCancino_41886522()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
+Height: 	189 		Weight: 	87,87
+Skills Index: 	21.177 		Salary: 	€ 29.384
+Defence: 	7 		Free Throws: 	5
+Two Point: 	6 		Three Point: 	7
+Dribbling: 	6 		Passing: 	4
+Speed: 	9 		Footwork: 	4
+Rebounds: 	6 		Experience: 	0");
+            Eval(p, a1, ST_PlayerPositionEnum.SG, 6.52);
+            Eval(p, a2, ST_PlayerPositionEnum.SF, 6.5);
+            Eval(p, a3, ST_PlayerPositionEnum.SG, 6.52);
+        }
+
+        [TestMethod]
+        public void ManueleBonvicini_41832680()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	2 %
+Height: 	193 		Weight: 	88,65
+Skills Index: 	23.589 		Salary: 	€ 27.825
+Defence: 	6 		Free Throws: 	5
+Two Point: 	7 		Three Point: 	5
+Dribbling: 	7 		Passing: 	4
+Speed: 	11 		Footwork: 	3
+Rebounds: 	6 		Experience: 	2");
+            Eval(p, a1, ST_PlayerPositionEnum.SG, 7.48);
+            Eval(p, a2, ST_PlayerPositionEnum.SF, 7.34);
+            Eval(p, a3, ST_PlayerPositionEnum.SF, 7.34);
+
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+            var smart = new Smart();
+            var x = smart.Decide(eval, 2, false).ToList();
+            var y = smart.Decide(eval, 2, true).ToList();
+
+        }
+
+        [TestMethod]
+        public void EgeSavçýn_41890289()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
+Height: 	196 		Weight: 	87,97
+Skills Index: 	7.462 		Salary: 	€ 9.850
+Defence: 	3 		Free Throws: 	6
+Two Point: 	1 		Three Point: 	2
+Dribbling: 	2 		Passing: 	5
+Speed: 	6 		Footwork: 	4
+Rebounds: 	4 		Experience: 	0");
+            Eval(p, a1, ST_PlayerPositionEnum.SF, 3.97);
+            Eval(p, a2, ST_PlayerPositionEnum.SF, 3.97);
+            Eval(p, a3, ST_PlayerPositionEnum.SF, 3.97);
+        }
+
+        [TestMethod]
+        public void MassimilianoDeZotti_41849918()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
+Height: 	202 		Weight: 	110,10
+Skills Index: 	24.626 		Salary: 	€ 29.005
+Defence: 	7 		Free Throws: 	5
+Two Point: 	7 		Three Point: 	5
+Dribbling: 	3 		Passing: 	5
+Speed: 	8 		Footwork: 	10
+Rebounds: 	5 		Experience: 	2");
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+            var l1 = eval.Best2(a1).ToList();
+            var l2 = eval.Best2(a2).ToList();
+            var l3 = eval.Best2(a3).ToList();
+        }
+
+        class Pair
+        {
+            public ST_PlayerPositionEnum Pos { get; set; }
+            public double Score { get; set; }
+        }
+
+        [TestMethod]
+        public void xxx ()
+        {
+           
+            Pair p1 = new Pair() { Pos = ST_PlayerPositionEnum.PG, Score = 1 };
+            Pair p2 = new Pair() { Pos = ST_PlayerPositionEnum.SG, Score = 1 };
+            Pair p3 = new Pair() { Pos = ST_PlayerPositionEnum.SF, Score = 1 };
+            var l = new[] { p1, p1, p1, p2, p2, p3, p3, p3 };
+
+            var grouped = l.ToLookup(x => x);
+            var maxRepetitions = grouped.Max(x => x.Count());
+            var maxRepeatedItems = grouped
+                .Where(x => x.Count() == maxRepetitions)
+                .Select(x => x.Key);
+            var maxScore = maxRepeatedItems.Max(x => x.Score);
+            var pair = maxRepeatedItems
+                .Where(x => x.Score == maxScore)
+                .First();
+
+            var q = from p in l
+                    group p by p.Pos into g
+                    orderby g.Count() descending
+                    select new { Count = g.Count(), Item = g } ;
+
+            var t = q.Take(2);
+
         }
 
     }

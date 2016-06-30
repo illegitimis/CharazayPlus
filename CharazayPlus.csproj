@@ -252,6 +252,7 @@
     </Compile>
     <Compile Include="Utils\CharazayDate.cs" />
     <Compile Include="Interpolate\IInterpolate.cs" />
+    <Compile Include="Utils\DecidePlayerPositionAlgorithm.cs" />
     <Compile Include="Utils\PlayerEvaluator.cs" />
     <Compile Include="Utils\SerializeHelper.cs" />
     <Compile Include="Utils\DevelopmentHistory.cs" />
