@@ -221,7 +221,7 @@ namespace AndreiPopescu.CharazayPlus.UI
             else
             {
                 this.ucBasicPlayer.CurrentPrice = tlp.CurrentPrice;
-                _playerFacets = _algo.Decide(eval: this.ucEvaluatePlayer.Evaluator, top: 3, mostProbableOnly: false).ToArray();
+                _playerFacets = this.ucEvaluatePlayer.Evaluator.Best2(_algo).ToArray();
                 //
                 this.ucBasicPlayer.Init(_playerFacets[0], this.ImageListCountries);
                 //

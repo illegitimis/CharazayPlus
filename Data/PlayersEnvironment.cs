@@ -58,19 +58,15 @@
         //
         var coaches = (Xsd2.charazayCoach[])objects[1];
         //
+        var facetsAlgorithm = new FacetsAlgorithm();
         foreach (var p in players)
         {
-          PG2014 pg = new PG2014(p); PGs.Add(pg);
-          SG2014 sg = new SG2014(p); SGs.Add(sg);
-          SF2014 sf = new SF2014(p); SFs.Add(sf);
-          PF2014 pf = new PF2014(p); PFs.Add(pf);
-          C2014 c = new C2014(p); Cs.Add(c);
-          Player opt = Extensions.PlayerExtensions.DecideOnTotalScore(new Player[]{pg, sg, sf, pf, c});
-          OptimumPlayers.Add(opt);
+            PlayerEvaluator evaluator = new PlayerEvaluator(p);
+            Player opt = evaluator.Best(facetsAlgorithm);
+            OptimumPlayers.Add(opt);
         }
         // 
-        InitCoachesData(coaches);
-        
+        InitCoachesData(coaches);        
       }
 
       // coaches file

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AndreiPopescu.CharazayPlus.Utils;
 
 namespace AndreiPopescu.CharazayPlus.UI
 {
@@ -63,12 +64,11 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.ucEvaluatePlayer.SelectedObject = p;
       this.ucEvaluatePlayer2014.SelectedObject = p;
       //
-      Player[] olds = this.ucEvaluatePlayer.Evaluator.GetPlayers().ToArray();
-      var oldp = Extensions.PlayerExtensions.DecideOnTotalScore(olds);
+      var algo = new FacetsAlgorithm();
+      var oldp = this.ucEvaluatePlayer.Evaluator.Best(algo);
       this.lblValOld.Text = String.Format("BEFORE SEASON 30\r\nPosition: {0}\r\nValue: {1:F02}€\r\n", oldp.PositionEnum, oldp.TransferMarketValue);
       //
-      Player[] news = this.ucEvaluatePlayer2014.Evaluator.GetPlayers().ToArray();
-      var newp = Extensions.PlayerExtensions.DecideOnTotalScore(news);
+      var newp = this.ucEvaluatePlayer2014.Evaluator.Best(algo);
       this.lblValNew.Text = String.Format("AFTER SEASON 30\r\nPosition: {0}\r\nValue: {1:F02}€\r\n", newp.PositionEnum, newp.TransferMarketValue);
     }
 

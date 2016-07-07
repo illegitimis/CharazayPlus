@@ -530,8 +530,8 @@ namespace AndreiPopescu.CharazayPlus.Extensions
                     .Distinct();
         }
 
-        
 
+        /*
         /// <summary>
         /// Best position for a player based on total score
         /// </summary>
@@ -552,6 +552,6 @@ namespace AndreiPopescu.CharazayPlus.Extensions
             }
             return pmax;
         }
-
+        */
     }
 }
