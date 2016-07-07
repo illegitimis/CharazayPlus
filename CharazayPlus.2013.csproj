@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DDC0124B-95B7-4FBF-B09F-7E82AA823725}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AndreiPopescu.CharazayPlus</RootNamespace>
+    <AssemblyName>CharazayPlus</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;XSDMERGE, DOTNET30</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\CharazayDoctor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DOTNET30</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\CharazayDoctor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SimpleBrowser.0.5.79.0\lib\net40\RazorHosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.79.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SimpleBrowser.0.5.79.0\lib\net40\SimpleBrowser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201606.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201604.cs" />
+    <Compile Include="Interpolate\SimpleStats.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201507.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201511.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant201601.cs" />
+    <Compile Include="Model\C.cs" />
+    <Compile Include="Model\C2014.cs" />
+    <Compile Include="Model\PG2014.cs" />
+    <Compile Include="Model\Coach.cs" />
+    <Compile Include="Data\DbEnvironment.cs" />
+    <Compile Include="Data\PlayersEnvironment.cs" />
+    <Compile Include="Data\TrainingEnvironment.cs" />
+    <Compile Include="Data\TransferList.cs" />
+    <Compile Include="Data\XmlTeam.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\ParsingExtensions.cs" />
+    <Compile Include="Extensions\PlayerExtensions.cs" />
+    <Compile Include="Extensions\UIExtensions.cs" />
+    <Compile Include="Model\PlayerDevelopment.cs">
+      <DependentUpon>PlayerDevelopment.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferHistory.partial.cs" />
+    <Compile Include="Model\PlayerTL.cs">
+      <DependentUpon>PlayerTL.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferHistoryDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferHistory.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransferHistory.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\TransferListedPlayerPropertyGridObject.cs" />
+    <Compile Include="Objects\InfoPropertyGridObject.cs" />
+    <Compile Include="Objects\TrainingItems.cs" />
+    <Compile Include="Objects\ScoreIncreaseItem.cs" />
+    <Compile Include="Objects\SkillIncreaseItem.cs" />
+    <Compile Include="Objects\TransferListedPlayer.cs" />
+    <Compile Include="Model\PF.cs" />
+    <Compile Include="Model\PG.cs" />
+    <Compile Include="Obsolete.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model\PF2014.cs" />
+    <Compile Include="Model\Player2014.cs" />
+    <Compile Include="Model\PlayerFactory.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SF2014.cs" />
+    <Compile Include="Model\SG.cs" />
+    <Compile Include="Model\SG2014.cs" />
+    <Compile Include="Splash\EnironmentValidators.cs" />
+    <Compile Include="Splash\MandatoryInfoValidators.cs" />
+    <Compile Include="Splash\XmlValidators.cs" />
+    <Compile Include="Splash\BaseValidator.cs" />
+    <Compile Include="Splash\PreflightController.cs" />
+    <Compile Include="Splash\ValidationService.cs" />
+    <Compile Include="Splash\ValidatorCollection.cs" />
+    <Compile Include="Splash\ValidatorExcpetion.cs" />
+    <Compile Include="UI\AssessPlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ButtonHigherLower.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ChartUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Definitions.cs" />
+    <Compile Include="Extensions\DataGridExtensions.cs" />
+    <Compile Include="UI\DevelopmentHistoryUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\DivisionScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\InfoTabUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MyEconomyUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Extensions\ObjectListViewExtensions.cs" />
+    <Compile Include="UI\MyTeamScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\PlayerEventArgs.cs" />
+    <Compile Include="UI\PlayerPositionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RangeBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SearchTMUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StatusUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TeamScheduleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TrainingPlanUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\HorizontalLevelIndicatorLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\EvaluatePlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\PlayerSkillsTabUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TrainingTabUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TransferListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\TransferListUserControl.Designer.cs">
+      <DependentUpon>TransferListUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DivisionStandingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\BasicPlayerUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\VLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\WebBrowserUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\Assembly.cs" />
+    <Compile Include="Utils\Cache.cs">
+      <DependentUpon>Cache.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CacheManager.cs" />
+    <Compile Include="Properties\Settings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\BalanceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\CharazayDate.cs" />
+    <Compile Include="Interpolate\IInterpolate.cs" />
+    <Compile Include="Utils\DecidePlayerPositionAlgorithm.cs" />
+    <Compile Include="Utils\PlayerEvaluator.cs" />
+    <Compile Include="Utils\SerializeHelper.cs" />
+    <Compile Include="Utils\DevelopmentHistory.cs" />
+    <Compile Include="Utils\Interpolation112.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20140909.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20141124.cs" />
+    <Compile Include="Interpolate\MatlabInterpolant20150504.cs" />
+    <Compile Include="Interpolate\MatlabInterpolator.cs" />
+    <Compile Include="Utils\TransferMarket112.cs" />
+    <Compile Include="Utils\TransferMarket.cs" />
+    <Compile Include="Utils\Linear.cs" />
+    <Compile Include="Utils\TrainingEfficiencyCalculator.cs" />
+    <Compile Include="Utils\FilteredBindingList.cs" />
+    <Compile Include="UI\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\LabelDescriptionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\LineupHomeAwayUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MatchDetailsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RatingBballUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\SortableBindingList.cs" />
+    <Compile Include="UI\TheForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\SF.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\SideTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\Compute.cs" />
+    <Compile Include="Utils\Defines.cs" />
+    <Compile Include="Utils\Enums.cs" />
+    <Compile Include="Utils\ValuesListDictionary.cs" />
+    <Compile Include="Web\CharazayDownloadItem.cs" />
+    <Compile Include="Objects\PlayerPageInfo.cs" />
+    <Compile Include="Web\CharazayUserData.cs" />
+    <Compile Include="Web\Scrape.cs" />
+    <Compile Include="Web\Downloader.cs" />
+    <Compile Include="Objects\SitePlayerTransferHistory.cs" />
+    <Compile Include="Web\XmlDownloadItemGenerator.cs" />
+    <Compile Include="Web\XmlDownloadItems.cs" />
+    <Compile Include="Web\Enums.cs" />
+    <Compile Include="Web\WebServiceUser.cs" />
+    <Compile Include="Xsd2\ArenaInfo.cs">
+      <SubType>code</SubType>
+      <DependentUpon>ArenaInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Coaches.cs">
+      <SubType>code</SubType>
+      <DependentUpon>coaches.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Country.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Country.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\DivisionSchedule.cs">
+      <SubType>code</SubType>
+      <DependentUpon>DivisionSchedule.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Economy.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Economy.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Error.cs">
+      <DependentUpon>Error.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\match.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Match.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Partial.cs">
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Xsd2\Player.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Player.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Players.cs">
+      <SubType>code</SubType>
+      <DependentUpon>players.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Schedule.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Schedule.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Standings.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Standings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\TeamInfo.cs">
+      <SubType>code</SubType>
+      <DependentUpon>TeamInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\Transfers.cs">
+      <SubType>code</SubType>
+      <DependentUpon>Transfers.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Xsd2\UserInfo.cs">
+      <SubType>code</SubType>
+      <DependentUpon>UserInfo.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Model\PlayerDevelopment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Objects\TransferHistory.dbml.layout">
+      <DependentUpon>TransferHistory.dbml</DependentUpon>
+    </None>
+    <EmbeddedResource Include="UI\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AssessPlayerUserControl.resx">
+      <DependentUpon>AssessPlayerUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ChartUserControl.resx">
+      <DependentUpon>ChartUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DevelopmentHistoryUserControl.resx">
+      <DependentUpon>DevelopmentHistoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DivisionScheduleUserControl.resx">
+      <DependentUpon>DivisionScheduleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\BalanceUserControl.resx">
+      <DependentUpon>BalanceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\InfoTabUserControl.resx">
+      <DependentUpon>InfoTabUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LabelDescriptionUserControl.resx">
+      <DependentUpon>LabelDescriptionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\LineupHomeAwayUserControl.resx">
+      <DependentUpon>LineupHomeAwayUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MatchDetailsUserControl.resx">
+      <DependentUpon>MatchDetailsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MyEconomyUserControl.resx">
+      <DependentUpon>MyEconomyUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MyTeamScheduleUserControl.resx">
+      <DependentUpon>MyTeamScheduleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PlayerPositionUserControl.resx">
+      <DependentUpon>PlayerPositionUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RatingBballUserControl.resx">
+      <DependentUpon>RatingBballUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SearchTMUserControl.resx">
+      <DependentUpon>SearchTMUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StatusUserControl.resx">
+      <DependentUpon>StatusUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TeamScheduleUserControl.resx">
+      <DependentUpon>TeamScheduleUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TheForm.resx">
+      <DependentUpon>TheForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UI\EvaluatePlayerUserControl.resx">
+      <DependentUpon>EvaluatePlayerUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TrainingPlanUserControl.resx">
+      <DependentUpon>TrainingPlanUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PlayerSkillsTabUserControl.resx">
+      <DependentUpon>PlayerSkillsTabUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TrainingTabUserControl.resx">
+      <DependentUpon>TrainingTabUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TransferListUserControl.resx">
+      <DependentUpon>TransferListUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DivisionStandingsUserControl.resx">
+      <DependentUpon>DivisionStandingsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\BasicPlayerUserControl.resx">
+      <DependentUpon>BasicPlayerUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\WebBrowserUserControl.resx">
+      <DependentUpon>WebBrowserUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Model\PlayerTL.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xsc">
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TransferHistoryDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Objects\TransferHistoryDataSet.xss">
+      <DependentUpon>TransferHistoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Objects\TransferHistory.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TransferHistory.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Utils\Cache.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\ArenaInfo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\coaches.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Country.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\DivisionSchedule.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Economy.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Error.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Match.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Player.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\players.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Schedule.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Standings.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\TeamInfo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\Transfers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Xsd2\UserInfo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Weekly Value Index.txt" />
+    <Content Include="Content\Info.txt" />
+    <Content Include="Content\Obsolete Age Value Index V10.txt" />
+    <Content Include="Content\PGOlder.txt" />
+    <Content Include="Content\TMDB.txt" />
+    <Content Include="Content\TODO.txt" />
+    <Content Include="Resources\app.ico" />
+    <None Include="Resources\tick16.png" />
+    <None Include="Resources\star16.png" />
+    <None Include="Resources\down16.png" />
+    <None Include="Resources\Charazay+.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ObjectListView\ObjectListView2010.csproj">
+      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
+      <Name>ObjectListView2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

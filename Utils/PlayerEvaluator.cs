@@ -83,12 +83,12 @@ namespace AndreiPopescu.CharazayPlus.Utils
         #endregion
 
 
-        internal Player Best(IDecidePlayerPositionAlgorithm x)
+        public Player Best(IDecidePlayerPositionAlgorithm x)
         {
             return x.Decide(this);
         }
 
-        internal IEnumerable<Player> Best2(IDecidePlayerPositionAlgorithm x)
+        public IEnumerable<Player> Best2(IDecidePlayerPositionAlgorithm x)
         {
             return x.Decide(this, 2);
         }

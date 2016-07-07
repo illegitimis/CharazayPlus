@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D625D24E-6083-4662-8C6F-DF5462C34C7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CharazayPlus.MSTest</RootNamespace>
+    <AssemblyName>CharazayPlus.MSTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\RazorHosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.79.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.79.0\lib\net40\SimpleBrowser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DateTest.cs" />
+    <Compile Include="LinearAlgebraTest.cs" />
+    <Compile Include="PlayerEvaluatorTest.cs" />
+    <Compile Include="PlayerExtensionsTest.cs" />
+    <Compile Include="PlayerTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransferListedPlayerTest.cs" />
+    <Compile Include="TransferMarket112Test.cs" />
+    <Compile Include="TransferMarketTest.cs" />
+    <Compile Include="OutliersTest.cs" />
+    <Compile Include="PlayerDevelopmentTest.cs" />
+    <Compile Include="WebParseTest.cs" />
+    <Compile Include="Xsd2Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CharazayPlus.csproj">
+      <Project>{DDC0124B-95B7-4FBF-B09F-7E82AA823725}</Project>
+      <Name>CharazayPlus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectListView\ObjectListView2010.csproj">
+      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
+      <Name>ObjectListView2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedXml\ArenaInfo_20120726_21191.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Coaches_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\CountryInfo_20140128_5_1.xml" />
+    <EmbeddedResource Include="EmbeddedXml\DivisionInfo_20140128_1013.xml" />
+    <EmbeddedResource Include="EmbeddedXml\DivisionSchedule_20140128_1013.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Economy_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Match_18611008.xml" />
+    <EmbeddedResource Include="EmbeddedXml\PlayerInfo_2459629.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Players_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\Schedule_stergein_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamInfo_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamInfo_Cvbe.xml" />
+    <EmbeddedResource Include="EmbeddedXml\TeamTransfers_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\UserInfo_20140128.xml" />
+    <EmbeddedResource Include="EmbeddedXml\UserInfo_Cvbe.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedXml\Error.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedXml\Fatigue_Minus1_20140215.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedXml\PlayerDevelopment.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

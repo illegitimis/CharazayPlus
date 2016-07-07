@@ -15,9 +15,11 @@ namespace CharazayPlus.MSTest
     [TestClass]
     public class PlayerEvaluatorTest
     {
-        static readonly IDecidePlayerPositionAlgorithm a1 = new DecidePlayerPositionByTotalScoreAlgorithm();
-        static readonly IDecidePlayerPositionAlgorithm a2 = new DecideMostAdequatePlayerPositionByHeightAlgorithm();
-        static readonly IDecidePlayerPositionAlgorithm a3 = new DecidePotentialPlayerPositionAlgorithm();
+        static readonly IDecidePlayerPositionAlgorithm a1 = new TotalScoreAlgorithm();
+        static readonly IDecidePlayerPositionAlgorithm a2 = new MostAdequatePositionByHeightAlgorithm();
+        static readonly IDecidePlayerPositionAlgorithm a3 = new PotentialPlayerPositionAlgorithm();
+        static readonly IDecidePlayerPositionAlgorithm smart = new DecidePlayerPositionAggregatorAlgorithm();
+        static readonly IDecidePlayerPositionAlgorithm facets = new FacetsAlgorithm();
 
         [TestMethod]
         public void AldoMariani()
@@ -352,6 +354,7 @@ namespace CharazayPlus.MSTest
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void TahaMungar_41778287()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"
@@ -374,6 +377,7 @@ Rebounds: 	3 		Experience: 	2");
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void LuigiPinelli41809360()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Team Name: 	3Soldi
@@ -398,6 +402,7 @@ Rebounds: 	5 		Experience: 	3");
         {
             var basic = new charazayPlayerBasic() { };
             var skills = new charazayPlayerSkills() { };
+            var status = new charazayPlayerStatus() { };
 
             string pattern = @"(?<left>[^\r\n\t:]+):\s+(?<right>[^:\r\n\t]+)";
             Regex rgx = new Regex(pattern, RegexOptions.Multiline);
@@ -408,7 +413,9 @@ Rebounds: 	5 		Experience: 	3");
                 switch (grp0.Value)
                 {
                     case "Age": basic.age = byte.Parse(grp1.Value); break;
-                    case "Weight": basic.weight = decimal.Parse(grp1.Value, System.Globalization.CultureInfo.CreateSpecificCulture("ro-RO")); ; break;
+                    case "Weight": 
+                        basic.weight = decimal.Parse(grp1.Value, System.Globalization.CultureInfo.CreateSpecificCulture("ro-RO")); 
+                        break;
                     case "Height": basic.height = byte.Parse(grp1.Value); break;
 
                     case "Defence": skills.defence = byte.Parse(grp1.Value); break;
@@ -422,15 +429,19 @@ Rebounds: 	5 		Experience: 	3");
                     case "Rebounds": skills.rebounds = byte.Parse(grp1.Value); break;
                     case "Experience": skills.experience = byte.Parse(grp1.Value); break;
 
+                    case "Form": status.form = byte.Parse (grp1.Value); break;
+                    case "Fatigue": status.fatigue = int.Parse (grp1.Value.Replace(" %","")); break;
+
                     default: break;
                 }
 
             }
 
-            return new charazayPlayer() { skills = skills, basic = basic };
+            return new charazayPlayer() { skills = skills, basic = basic, status = status };
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void ManuelTeixeira_41850561()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Team Name: 	Burning Lions
@@ -452,6 +463,7 @@ Rebounds: 	4 		Experience: 	1");
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void GuglielmoDowntownFerrero41823184()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	16 		Fatigue: 	5 %
@@ -468,6 +480,7 @@ Rebounds: 	7 		Experience: 	3");
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void AdolisPacenka_41884742()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
@@ -484,6 +497,7 @@ Rebounds: 	4 		Experience: 	2");
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void NachoCancino_41886522()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
@@ -500,6 +514,8 @@ Rebounds: 	6 		Experience: 	0");
         }
 
         [TestMethod]
+        [TestCategory("smart")]
+        [TestCategory("RegexParse")]
         public void ManueleBonvicini_41832680()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	2 %
@@ -515,13 +531,140 @@ Rebounds: 	6 		Experience: 	2");
             Eval(p, a3, ST_PlayerPositionEnum.SF, 7.34);
 
             PlayerEvaluator eval = new PlayerEvaluator(p);
-            var smart = new Smart();
-            var x = smart.Decide(eval, 2, false).ToList();
-            var y = smart.Decide(eval, 2, true).ToList();
-
+            
+            var x = smart.Decide(eval, 3, false).ToList();
+            Assert.IsNotNull(x);
+            CollectionAssert.AllItemsAreInstancesOfType(x, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+            
+            var y = smart.Decide(eval, 3, true).ToList();
+            Assert.IsNotNull(y);
+            CollectionAssert.AllItemsAreInstancesOfType(y, typeof(Player));
+            Assert.AreEqual(3, x.Count);
         }
 
         [TestMethod]
+        [TestCategory("smart")]
+        public void SorinDasanu_205946()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	23 %
+Height: 	207 		Weight: 	116,55
+Skills Index: 	18.042 		Salary: 	€ 21.196
+Defence: 	5 		Free Throws: 	4
+Two Point: 	5 		Three Point: 	7
+Dribbling: 	2 		Passing: 	4
+Speed: 	5 		Footwork: 	9
+Rebounds: 	7 		Experience: 	1");
+            
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+
+            var x = smart.Decide(eval, 3, false).ToList();
+            Assert.IsNotNull(x);
+            CollectionAssert.AllItemsAreInstancesOfType(x, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+            Assert.AreEqual(x[0].PositionEnum, ST_PlayerPositionEnum.C);
+            Assert.AreEqual(x[0].ValueIndex, 1.1, 0.01);
+            Assert.AreEqual(x[1].PositionEnum, ST_PlayerPositionEnum.PF);
+            Assert.AreEqual(x[1].ValueIndex, 1.07, 0.01);
+
+            var y = smart.Decide(eval, 3, true).ToList();
+            Assert.IsNotNull(y);
+            CollectionAssert.AllItemsAreInstancesOfType(y, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+        }
+
+        [TestMethod]
+        [TestCategory("smart")]
+        public void Ilea_Enescu_90435()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	16 		Fatigue: 	7 %
+Height: 	173 		Weight: 	76,02
+Skills Index: 	26.243 		Salary: 	€ 35.614
+Defence: 	7 		Free Throws: 	7
+Two Point: 	5 		Three Point: 	7
+Dribbling: 	9 		Passing: 	6
+Speed: 	9 		Footwork: 	3
+Rebounds: 	4 		Experience: 	3");
+
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+
+            var x = smart.Decide(eval, 3, false).ToList();
+            Assert.IsNotNull(x);
+            CollectionAssert.AllItemsAreInstancesOfType(x, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+            Assert.AreEqual(x[0].PositionEnum, ST_PlayerPositionEnum.PG);
+            Assert.AreEqual(x[0].ValueIndex, 1.12, 0.01);
+            Assert.AreEqual(x[1].PositionEnum, ST_PlayerPositionEnum.SG);
+            Assert.AreEqual(x[1].ValueIndex, 1.08, 0.01);
+
+            var y = smart.Decide(eval, 3, true).ToList();
+            Assert.IsNotNull(y);
+            CollectionAssert.AllItemsAreInstancesOfType(y, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+        }
+
+        [TestMethod]
+        [TestCategory("smart")]
+        public void NicolaeIoanovici_167552()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	16 		Fatigue: 	7 %
+Height: 	203 		Weight: 	113,33
+Skills Index: 	28.639 		Salary: 	€ 43.742
+Defence: 	8 		Free Throws: 	7
+Two Point: 	6 		Three Point: 	7
+Dribbling: 	5 		Passing: 	4
+Speed: 	9 		Footwork: 	7
+Rebounds: 	7 		Experience: 	3");
+
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+
+            var x = smart.Decide(eval, 3, false).ToList();
+            Assert.IsNotNull(x);
+            CollectionAssert.AllItemsAreInstancesOfType(x, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+            Assert.AreEqual(x[0].PositionEnum, ST_PlayerPositionEnum.SF);
+            Assert.AreEqual(x[0].ValueIndex, 1.13, 0.01);
+            Assert.AreEqual(x[1].PositionEnum, ST_PlayerPositionEnum.PF);
+            Assert.AreEqual(x[1].ValueIndex, 1.10, 0.01);
+
+            var y = smart.Decide(eval, 3, true).ToList();
+            Assert.IsNotNull(y);
+            CollectionAssert.AllItemsAreInstancesOfType(y, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+        }
+
+        [TestMethod]
+        [TestCategory("smart")]
+        public void CristianMavrocordat_90434()
+        {
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	16 		Fatigue: 	7 %
+Height: 	188 		Weight: 	77,76
+Skills Index: 	34.526 		Salary: 	€ 41.894
+Defence: 	8 		Free Throws: 	5
+Two Point: 	6 		Three Point: 	6
+Dribbling: 	10 		Passing: 	6
+Speed: 	9 		Footwork: 	4
+Rebounds: 	5 		Experience: 	3");
+
+            PlayerEvaluator eval = new PlayerEvaluator(p);
+
+            var x = smart.Decide(eval, 3, false).ToList();
+            Assert.IsNotNull(x);
+            CollectionAssert.AllItemsAreInstancesOfType(x, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+            Assert.AreEqual(x[0].PositionEnum, ST_PlayerPositionEnum.PG);
+            Assert.AreEqual(x[0].ValueIndex, 1.19, 0.01);
+            Assert.AreEqual(x[1].PositionEnum, ST_PlayerPositionEnum.SG);
+            Assert.AreEqual(x[1].ValueIndex, 1.16, 0.01);
+
+            var y = smart.Decide(eval, 3, true).ToList();
+            Assert.IsNotNull(y);
+            CollectionAssert.AllItemsAreInstancesOfType(y, typeof(Player));
+            Assert.AreEqual(3, x.Count);
+        }
+
+        [TestMethod]
+        [TestCategory("RegexParse")]
         public void EgeSavçýn_41890289()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
@@ -538,6 +681,7 @@ Rebounds: 	4 		Experience: 	0");
         }
 
         [TestMethod]
+        [TestCategory("RegexParse")]
         public void MassimilianoDeZotti_41849918()
         {
             charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
@@ -554,39 +698,126 @@ Rebounds: 	5 		Experience: 	2");
             var l3 = eval.Best2(a3).ToList();
         }
 
-        class Pair
+        [TestMethod]
+        public void StateBytes_SorinDasanu ()
         {
-            public ST_PlayerPositionEnum Pos { get; set; }
-            public double Score { get; set; }
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Form: 4
+Age: 	15 		Fatigue: 	37 %
+Height: 	207 		Weight: 	116,55
+Skills Index: 	18.504 		Salary: 	€ 21.196
+Defence: 	5 		Free Throws: 	4
+Two Point: 	5 		Three Point: 	7
+Dribbling: 	2 		Passing: 	4
+Speed: 	5 		Footwork: 	9
+Rebounds: 	7 		Experience: 	1");
+
+            byte[] byteArray = new byte[15] { 
+                p.basic.age,                //0
+                p.basic.height,             //1
+                (byte)p.basic.weight,       //2
+                p.status.form,              //3
+                (byte)p.status.fatigue,     //4 
+                p.skills.defence,           //5
+                p.skills.freethrow,         //6
+                p.skills.twopoint,          //7
+                p.skills.threepoint,        //8
+                p.skills.dribling,          //9
+                p.skills.passing,           //10
+                p.skills.speed,             //11
+                p.skills.footwork,          //12
+                p.skills.rebounds,          //13
+                p.skills.experience         //14
+            };
+
+            string b64s = Convert.ToBase64String(byteArray, 0, 15, Base64FormattingOptions.None);
+            Assert.AreEqual("D890BCUFBAUHAgQFCQcB", b64s);
+            byte[] result = Convert.FromBase64String(b64s);
+            CollectionAssert.AreEqual(byteArray, result);
+
+            byteArray = new byte[] { 15, 207, 116, 4, 37, 5, 4, 5, 7, 2, 4, 5, 9, 7, 1 };
+            b64s = Convert.ToBase64String(byteArray, 0, 15, Base64FormattingOptions.None);
+            Assert.AreEqual("D890BCUFBAUHAgQFCQcB", b64s);
+            result = Convert.FromBase64String(b64s);
+            CollectionAssert.AreEqual(byteArray, result);
         }
 
         [TestMethod]
-        public void xxx ()
+        public void StateBytes_EmilioDiaz()
         {
-           
-            Pair p1 = new Pair() { Pos = ST_PlayerPositionEnum.PG, Score = 1 };
-            Pair p2 = new Pair() { Pos = ST_PlayerPositionEnum.SG, Score = 1 };
-            Pair p3 = new Pair() { Pos = ST_PlayerPositionEnum.SF, Score = 1 };
-            var l = new[] { p1, p1, p1, p2, p2, p3, p3, p3 };
+            charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	27 		Fatigue: 	11 %
+Height: 	190 		Weight: 	81,17
+Skills Index: 	488.306 		Salary: 	€ 274.899
+Defence: 	17 		Free Throws: 	9
+Two Point: 	6 		Three Point: 	7
+Dribbling: 	16 		Passing: 	6
+Speed: 	24 		Footwork: 	5
+Rebounds: 	4 		Experience: 	19");
 
-            var grouped = l.ToLookup(x => x);
-            var maxRepetitions = grouped.Max(x => x.Count());
-            var maxRepeatedItems = grouped
-                .Where(x => x.Count() == maxRepetitions)
-                .Select(x => x.Key);
-            var maxScore = maxRepeatedItems.Max(x => x.Score);
-            var pair = maxRepeatedItems
-                .Where(x => x.Score == maxScore)
-                .First();
+            byte[] byteArray = new byte[15] { 
+                p.basic.age,                //0
+                p.basic.height,             //1
+                (byte)p.basic.weight,       //2
+                p.status.form,              //3
+                (byte)p.status.fatigue,     //4 
+                p.skills.defence,           //5
+                p.skills.freethrow,         //6
+                p.skills.twopoint,          //7
+                p.skills.threepoint,        //8
+                p.skills.dribling,          //9
+                p.skills.passing,           //10
+                p.skills.speed,             //11
+                p.skills.footwork,          //12
+                p.skills.rebounds,          //13
+                p.skills.experience         //14
+            };
 
-            var q = from p in l
-                    group p by p.Pos into g
-                    orderby g.Count() descending
-                    select new { Count = g.Count(), Item = g } ;
-
-            var t = q.Take(2);
-
+            string b64s = Convert.ToBase64String(byteArray, 0, 15, Base64FormattingOptions.None);
+            Assert.AreEqual("G75RAAsRCQYHEAYYBQQT", b64s);
+            byte[] result = Convert.FromBase64String(b64s);
+            CollectionAssert.AreEqual(byteArray, result);
         }
 
+        [TestMethod]
+        public void EmilioDiaz_Facets()
+        {
+            PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Age: 	27 		Fatigue: 	11 %
+Height: 	190 		Weight: 	81,17
+Skills Index: 	488.306 		Salary: 	€ 274.899
+Defence: 	17 		Free Throws: 	9
+Two Point: 	6 		Three Point: 	7
+Dribbling: 	16 		Passing: 	6
+Speed: 	24 		Footwork: 	5
+Rebounds: 	4 		Experience: 	19"));
+
+            var best2 = eval.Best2(facets).ToArray();
+            Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
+            Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
+
+            best2 = eval.Best2(smart).ToArray();
+            Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
+            Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
+        }
+
+        [TestMethod]
+        public void SorinDasanu_Facets()
+        {
+            PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 4
+Age: 	15 		Fatigue: 	37 %
+Height: 	207 		Weight: 	116,55
+Skills Index: 	18.504 		Salary: 	€ 21.196
+Defence: 	5 		Free Throws: 	4
+Two Point: 	5 		Three Point: 	7
+Dribbling: 	2 		Passing: 	4
+Speed: 	5 		Footwork: 	9
+Rebounds: 	7 		Experience: 	1"));
+            
+            var best2 = eval.Best2(facets).ToArray();
+            Assert.AreEqual(ST_PlayerPositionEnum.C, best2[0].PositionEnum);
+            Assert.AreEqual(ST_PlayerPositionEnum.PF, best2[1].PositionEnum);
+
+            best2 = eval.Best2(smart).ToArray();
+            Assert.AreEqual(ST_PlayerPositionEnum.C, best2[0].PositionEnum);
+            Assert.AreEqual(ST_PlayerPositionEnum.PF, best2[1].PositionEnum);
+        }
     }
 }

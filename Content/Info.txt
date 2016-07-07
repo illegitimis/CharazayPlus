@@ -225,4 +225,24 @@ new float[] {0,  0,  0,  0, 1}};    // three translations of 0.2
 <img src="images/FAPercent_back.gif" alt="16 %" title="16 %" class="FAPercent" style="background-position: -65.2px 0pt;">
 	(-79 0) (0	100) mx+n, m=0.79, n=-79 
 	
-	
+/////////////
+var byteArray = new Uint8Array([ 15, 207, 116, 4, 37, 5, 4, 5, 7, 2, 4, 5, 9, 7, 1 ]);
+var int8Array = new Int8Array ([ 15, 207, 116, 4, 37, 5, 4, 5, 7, 2, 4, 5, 9, 7, 1 ]);
+var buffer = new ArrayBuffer  ([ 15, 207, 116, 4, 37, 5, 4, 5, 7, 2, 4, 5, 9, 7, 1 ]);
+var b64s = btoa(String.fromCharCode.apply(null, byteArray));
+alert (btoa (byteArray) +'\n'+ 
+        b64s +'\n'+ 
+       'D890BCUFBAUHAgQFCQcB\n'+
+       btoa (int8Array) +'\n'+ 
+       btoa(buffer) + '\n' );
+
+var u8_2 = new Uint8Array(atob(b64s).split("").map(function(c) {return c.charCodeAt(0); }));
+for (var i = 0; i < u8_2.length; i++)   alert (u8_2[i]);
+
+// From a length
+var uint8 = new Uint8Array(15);
+uint8[0] = parseInt("15");
+uint8[1] = parseInt("207");
+uint8[2] = parseInt("116,55");
+uint8[3] = parseInt("4");
+uint8[4] = parseInt("37 %");
