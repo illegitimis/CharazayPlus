@@ -922,8 +922,8 @@ Speed: 	9 		Footwork: 	4
 Rebounds: 	5 		Experience: 	0"));
 
       var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
+      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
+      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
 
       best2 = eval.Best2(smart).ToArray();
       Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
