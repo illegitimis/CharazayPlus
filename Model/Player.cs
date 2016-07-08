@@ -6,6 +6,7 @@
   using AndreiPopescu.CharazayPlus.Utils;
   using System.Collections.Generic;
   using AndreiPopescu.CharazayPlus.Model;
+  using AndreiPopescu.CharazayPlus.Extensions;
 
   /// <summary>
   /// The base model class for a Charazay player
@@ -316,7 +317,10 @@
       }
     }
 
-    public /*PlayerPosition*/ ST_PlayerPositionEnum PositionHeightBased
+    /// <summary>
+    /// height determines position
+    /// </summary>
+    public ST_PlayerPositionEnum PositionHeightBased
     {
       get
       {
@@ -325,17 +329,19 @@
     }
 
     /// <summary>
-    /// Method returns an enumerable of future court positions suitable for the player
-    /// considering his height and yearly juniors height raise
+    /// future court positions suitable for the player considering his height and yearly juniors height raise
     /// </summary>
-    public ST_PlayerPositionEnum[] FuturePositionsHeightBased
-    {
-      get
-      {
-        return Extensions.PlayerExtensions.PotentialPositionsForAgeAndHeight (this.Age, this.Height).ToArray();
-      }
-    }
+    public ST_PlayerPositionEnum[] PotentialPositions 
+    { get { return PlayerExtensions.PotentialPositionsForAgeAndHeight (this.Age, this.Height).ToArray(); } }
 
+    public ST_PlayerPositionEnum[] PossiblePositions 
+    { get { return PlayerExtensions.PotentialPositionsForAgeAndHeight(this.Age, this.Height, true).ToArray(); } }
+
+    public ST_PlayerPositionEnum[] AdequatePositions
+    { get { return PlayerExtensions.MostAdequatePositionsForAgeAndHeight(this.Age, this.Height).ToArray(); } }
+
+    public ST_PlayerPositionEnum[] ProbablePositions
+    { get { return PlayerExtensions.MostAdequatePositionsForAgeAndHeight(this.Age, this.Height, true).ToArray(); } }
 
     public bool Injury { get { return InjuryDays != 0; } }
        
@@ -642,6 +648,9 @@
 
     }
 
+    /// <summary>
+    /// Computes the weekly increase in score for a training category and specified coach
+    /// </summary>
     internal double GetScoreTrainingDelta (TrainingCategory eTC, Coach coach)
     {
       Skill skill = (Skill)eTC;
@@ -687,8 +696,6 @@
       #endregion
 
 
-      //Player increasePlayer = (Player)Activator.CreateInstance (this.GetType());
-      //Player increasePlayer = (Player)Activator.CreateInstance (Position);
       Player increasePlayer = null;
       switch (PositionHeightBased)
       {
@@ -730,6 +737,9 @@
       return increasePlayer.TotalScore;
     }
 
+    /// <summary>
+    /// Computes the weekly skill raise with an assistant coach
+    /// </summary>
     public double SkillTrainingDelta (Skill skill, Coach coach)
     {
       switch (skill)
@@ -788,8 +798,9 @@
     private double HeightShootingInfluence ( )
     {
       byte averageHeight = (byte)((MaximumHeight + MinimumHeight) / 2);
-      return (Height > averageHeight) ? 1.0
-        : 1.0 - (averageHeight - Height) / 100.0;
+      return (Height > averageHeight) 
+          ? 1.0
+          : 1.0 - (averageHeight - Height) / 100.0;
     }
 
     #endregion
@@ -798,16 +809,16 @@
     ///////////////////////////////////////////////////////////////////////////
     // partition the time (no weeks of skill training) per training categories
     //////////////////////////////////////////////////////////////////////////
-    //POSITION            PG	SG	SF	PF	C
+    //POSITION            PG  SG  SF  PF  C
     //////////////////////////////////////////////////////////////////////////
     //defense     	      4	  4	  3	  3	  3
     //dribling	          3	  3	  3	  1	  0
-    //passing	            4	  2	  1	  1	  2
+    //passing	          4	  2	  1	  1	  2
     //speed	              4	  4	  4	  3	  2
     //footwork	          0	  0	  2	  4	  4
     //rebounds	          0	  0	  1	  4	  5
-    //insideShooting	    1	  2	  2	  1	  1
-    //outsideShooting	    1	  2	  1	  0	  0
+    //insideShooting	  1	  2	  2	  1	  1
+    //outsideShooting	  1	  2	  1	  0	  0
     //////////////////////////////////////////////////////////////////////////
     //TOTAL               17	17	17	17	17
     //////////////////////////////////////////////////////////////////////////

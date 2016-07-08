@@ -530,28 +530,5 @@ namespace AndreiPopescu.CharazayPlus.Extensions
                     .Distinct();
         }
 
-
-        /*
-        /// <summary>
-        /// Best position for a player based on total score
-        /// </summary>
-        /// <param name="players">player pool</param>
-        /// <returns>player whose total score is max</returns>
-        public static Player DecideOnTotalScore(IEnumerable<Player> players)
-        {
-            double maxTotalScore = 0;
-            Player pmax = null;
-
-            foreach (var p in players)
-            {
-                if (p.TotalScore > maxTotalScore)
-                {
-                    pmax = p;
-                    maxTotalScore = p.TotalScore;
-                }
-            }
-            return pmax;
-        }
-        */
     }
 }
