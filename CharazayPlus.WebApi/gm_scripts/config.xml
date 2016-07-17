@@ -1,0 +1,9 @@
+<UserScriptConfig>
+	<Script basedir="Player" checkRemoteUpdates="1" dependhash="1cbd3088f8436f956bc4d418275caeb0e24cf365" description="Charazay Plus Player Evaluator" enabled="true" filename="Player.user.js" installTime="1466530435743" modified="1468790959342" name="PlayerEvaluator" namespace="CharazayPlus" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="f1f3cc0a-141a-4890-ac0b-58b3bd7abd16" version="1" installurl="file:///C:/Users/Illegitimis/AppData/Roaming/Mozilla/Firefox/Profiles/yewnkbio.default/gm_scripts/Player/Player.user.js" updateurl="file:///C:/Users/Illegitimis/AppData/Roaming/Mozilla/Firefox/Profiles/yewnkbio.default/gm_scripts/Player/Player.user.js">
+		<Grant>none</Grant>
+		<Grant>GM_xmlhttpRequest</Grant>
+		<Include>http://www.charazay.com/index.php?act=player&amp;code=1&amp;id=*</Include>
+		<Include>http://www.charazay.com/?act=player&amp;code=1&amp;id=*</Include>
+		<Require filename="jquery.min.js"/>
+	</Script>
+</UserScriptConfig>

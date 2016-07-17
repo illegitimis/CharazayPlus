@@ -64,14 +64,21 @@ namespace AndreiPopescu.CharazayPlus.Utils
      static readonly DateTime S35W16D1 = new DateTime(2016, 3, 11);
 
     //S35 W17 D7
-     static readonly DateTime S35W17D17 = new DateTime(2016, 3, 24);
+    static readonly DateTime S35W17D7 = new DateTime(2016, 3, 24);
 
     //S36.W1.D1 (25/03)
-     static readonly CharazaySeason season36 = new CharazaySeason(new DateTime(2016, 03, 25), 36);
+    static readonly CharazaySeason season36 = new CharazaySeason(new DateTime(2016, 03, 25), 36);
+
+    //S36.W16.D1 (15/07): First day of the off season.Off season sponsors income will be handed out. 
+    // First day to choose the next season sponsor. First day to choose between Rookie Academy and Youth League.
+    static readonly DateTime S36W16D1 = new DateTime(2016, 7, 15);
+    static readonly DateTime S36W17D7 = new DateTime(2016, 7, 28);
+
+    static readonly CharazaySeason season37 = new CharazaySeason(new DateTime(2016, 7, 29), 37);
 
     #endregion
 
-     internal static readonly LinkedList<CharazaySeason> Seasons = 
+    internal static readonly LinkedList<CharazaySeason> Seasons = 
        new LinkedList<CharazaySeason>(new[] { season23, season24, season25, season26, season27, season28, season29, season30, season31, season32, season33, season34 });
 
      static readonly IDictionary<DateTime, CharazayDate> DatesCache = new Dictionary<DateTime, CharazayDate>();
@@ -127,12 +134,30 @@ namespace AndreiPopescu.CharazayPlus.Utils
         cd._week = (byte)(16 + x.Days / 7);
       }
 
-      // HOPING seasons should be well alligned from now on (s36+)
-      else if (dt >= season36.StartDate)
+      // crash again season 36
+      else if (dt >= season36.StartDate && dt < S36W16D1)
       {
-        int noSeasons = (int)((dt - season36.StartDate).TotalDays) / Defines.DaysInSeason;
-        cd._season = (byte)(36 + noSeasons);
-        DateTime seasonStart = season36.StartDate + TimeSpan.FromDays(Defines.DaysInSeason * noSeasons);
+        cd._season = 36;
+        x = dt - season36.StartDate;
+        //
+        cd._day = (byte)(1 + x.Days % 7);
+        cd._week = (byte)Math.Min ((1 + x.Days / 7), 15);
+      }
+      else if (dt >= S36W16D1 && dt < season37.StartDate)
+      {
+        cd._season = 36;
+        x = dt - S36W16D1;
+        //
+        cd._day = (byte)(1 + x.Days % 7);
+        cd._week = (byte)(16 + x.Days / 7);
+      }
+
+      // HOPING seasons should be well alligned from now on (s37+)
+      else if (dt >= season37.StartDate)
+      {
+        int noSeasons = (int)((dt - season37.StartDate).TotalDays) / Defines.DaysInSeason;
+        cd._season = (byte)(37 + noSeasons);
+        DateTime seasonStart = season37.StartDate + TimeSpan.FromDays(Defines.DaysInSeason * noSeasons);
         x = dt - seasonStart;
         //
         cd._day = (byte)(1 + x.Days % 7);

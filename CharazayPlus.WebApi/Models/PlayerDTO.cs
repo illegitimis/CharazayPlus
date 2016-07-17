@@ -22,16 +22,16 @@
         public double TotalScore { get; set; }
 
         [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
-        public double DefScore { get; set; }
+        public double DefensiveScore { get; set; }
 
         [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
-        public double OfScore { get; set; }
+        public double OffensiveScore { get; set; }
 
         [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
-        public double OfAbility { get; set; }
+        public double OffensiveAbility { get; set; }
 
         [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
-        public double Shoot { get; set; }
+        public double ShootingScore { get; set; }
 
         [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
         public double TransferMarketValue { get; set; }

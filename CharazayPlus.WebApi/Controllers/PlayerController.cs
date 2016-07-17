@@ -14,8 +14,25 @@
         static readonly IDecidePlayerPositionAlgorithm smart = new DecidePlayerPositionAggregatorAlgorithm();
         static readonly IDecidePlayerPositionAlgorithm facets = new FacetsAlgorithm();
 
-        //GET /player/aggregate?base64StringState=D890BCUFBAUHAgQFCQcB
-        [Route("player/aggregate/{base64StringState}")]
+    [HttpGet]
+    [Route("player/test1")]
+    public IHttpActionResult Test1()
+    {
+      // return a Json Object, you could define a new class
+      //return Json(new { Success = true, Message = "Success" });
+      return Ok(new { Success = true, Message = "test 1" });
+    }
+
+    [HttpGet]
+    [Route("player/test2")]
+    public IHttpActionResult Test2()
+    {
+      // return a Json Object, you could define a new class
+      return Json(new { Success = true, Message = "test 2" });      
+    }
+
+    //GET /player/aggregate?base64StringState=D890BCUFBAUHAgQFCQcB
+    [Route("player/aggregate/{base64StringState}")]
         public IHttpActionResult GetAggregatedBestPlayers(string base64StringState)
         {
             return JsonCreator(base64StringState, eval => eval.Best2(smart).Select(PlayerDTOCreator));
@@ -111,18 +128,20 @@
             ,
             TotalScore = best.TotalScore
             ,
-            DefScore = best.DefensiveScore
+            DefensiveScore = best.DefensiveScore
             ,
-            OfScore = best.OffensiveScore
+            OffensiveScore = best.OffensiveScore
             ,
-            OfAbility = best.OffensiveAbilityScore
+            OffensiveAbility = best.OffensiveAbilityScore
             ,
-            Shoot = best.ShootingScore
+            ShootingScore = best.ShootingScore
             ,
             TransferMarketValue = best.TransferMarketValue
         };
 
-        [NonAction]
+    static readonly JsonSerializerSettings _jss = new JsonSerializerSettings() { Formatting = Formatting.Indented };
+
+    [NonAction]
         public IHttpActionResult JsonCreator(string base64StringState, Func<PlayerEvaluator, object> objectSelector)
         {
             // http://stackoverflow.com/questions/16527742/web-api-get-route-values
@@ -143,7 +162,10 @@
 
             var @object = objectSelector(eval);
 
-            return Json(@object, new JsonSerializerSettings() { Formatting = Formatting.Indented });
+            return Ok(@object);
+
+            //return Json(@object, _jss);
+
         }
     }
     

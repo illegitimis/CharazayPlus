@@ -6,9 +6,6 @@ namespace AndreiPopescu.CharazayPlus
   using System.Windows.Forms;
   using System.Threading;
   using System.Runtime.InteropServices;
-  using System.Data.SqlClient;
-  using System.Data;
-  using System.Collections.Generic;
   using System.Diagnostics;
   using AndreiPopescu.CharazayPlus.UI;
   using AndreiPopescu.CharazayPlus.Splash;
