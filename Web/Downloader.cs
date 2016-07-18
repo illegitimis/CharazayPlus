@@ -13,7 +13,7 @@ namespace AndreiPopescu.CharazayPlus.Web
   internal class Downloader : IDisposable
   {
     const string dnsErrorMessage = @"The remote name could not be resolved: 'www.charazay.com'";
-    readonly string[] charazayIPs = new string[] { @"54.229.122.56", "54.194.193.243" };
+    readonly string[] charazayIPs = new string[] { @"54.229.122.56", @"54.194.193.243" };
 
     #region fields
     private WebClient webClient = new WebClient();
