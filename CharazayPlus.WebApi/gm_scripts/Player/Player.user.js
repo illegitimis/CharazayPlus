@@ -30,11 +30,6 @@
 
 this.$ = this.jQuery = jQuery.noConflict(true);
 
-//'head > style:nth-child(26)'
-/* <style type="text/css">.ita {font-style:italic;}</style> */
-console.log ("No styles in head", $('head > style').length);
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // Base64: tuple definition
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,33 +61,13 @@ var TUPLES_LENGTH = tuples.length;
 ///////////////////////////////////////////////////////////////////////////////
 
 var rcs =  $("<div/>").attr ({class: "rc-s", id: "cpe"});
-var rct = $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluator");
-$(rcs).append(rct);
-$(rcs).append($("<ul/>").attr ({id: "ulimg"}));
+$(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluator") );
 
-//.concat(i.toString())
-//$("#ulimg").append($("<li/>").attr ({ class: "imgli", id: "imgli" }));		
-//$("#ulimg").append($("<li>test</li>");		
-/* var percents = [0,10,20,30,40,50,60,70,80,90,100];
-for(var i=0; i<11 ; i++) {
-	//addULProgressBar (ul, percents[i]);
-	var li =  $("<li/>").attr ({ class: "imgli", id: "imgli".concat(i.toString()) });
-    $('#ulimg').append(li);		
-} */
-
-//addParagraph(rcs,"greeting-id","The ID is ");
-//addParagraph(rcs,"greeting-content","The content is ");
-// var JSON_CATEGORIES = [,"Position","ValueIndex","TotalScore","DefensiveScore","OffensiveScore","OffensiveAbility","ShootingScore","TransferMarketValue"];
-// for (var c=0; c<JSON_CATEGORIES.length; c++) {
-	// $(rcs).append($('<p />').attr ("id", "cpe".concat(JSON_CATEGORIES[c])).text(JSON_CATEGORIES[c]));	
-// }
-
+// http://stackoverflow.com/questions/18190148/create-span-tag-and-insert-with-jquery
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
 var b64s = Base64Skills();
 ajaxCallCharazayPlusWebApi(b64s);
-
-//ajaxCallHelloSvc();
 
 $('#rc').prepend(rcs);
 
@@ -134,8 +109,10 @@ function ajaxCallHelloSvc(){
 function ajaxCallCharazayPlusWebApi(b64s){
 	
 	//contentType: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-	//var surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64s);
-	var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
+	var surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64s);
+	//var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
+	console.log(surl);
+	
     $.getJSON(surl, function (data) { console.log(data); })
 	.done(function(data) {
 		$('#cpePosition').append( $("<strong/>").attr ({align: "right"}).text(data.Position) );
@@ -154,22 +131,7 @@ function ajaxCallCharazayPlusWebApi(b64s){
     })
 	.fail(function(jqxhr, textStatus, error) { 
 		console.log( surl, " getJSON failed ", jqxhr.statusText, "readyState:", jqxhr.readyState, "status:", textStatus, "error:", error);
-	});
-	
-	/*
-	//$.getJSON("https://api.github.com/users/jeresig?callback=?",function(json){ console.log(json); });
-	$.getJSON(
-		"http://172.18.19.244:8080/player/test1", function (data) { 
-		console.log(data); 
-	})
-	.done(function(data) {
-       $('#greeting-id').append(data.Success);
-       $('#greeting-content').append(data.Message);
-    })
-	.fail(function(jqxhr, textStatus, error) { 
-		console.log( "getJSON failed", "jqxhr:", jqxhr.statusText, "readyState:", jqxhr.readyState, "status:", textStatus, "error:", error);
-	})
-    .always(function() { console.log( "complete" ); });*/
+	});	
 	
 	/*
 	$.ajax({
@@ -189,35 +151,8 @@ function ajaxCallCharazayPlusWebApi(b64s){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// adds a li with progress bar to a ul
-///////////////////////////////////////////////////////////////////////////////
-function addULProgressBar (ul, value)
-{
-var li = document.createElement("li");
-addProgressBar(li, value);
-ul.appendChild(li);	
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // add a progress bar to a parent element
 ///////////////////////////////////////////////////////////////////////////////
-function addProgressBar(parentElem, value) {
-	var percent=value.toString().concat(" %");
-	var px = 0.79*value-79;
-	var style= "background-position: ".concat(px.toString()).concat("px 0pt;");
-  //<img ="" alt="16 %" title="16 %" ="" style="background-position: -65.2px 0pt;">
-  
-  var img = document.createElement("img");
-  img.setAttribute("src", "images/FAPercent_back.gif");
-  img.setAttribute("alt", percent);
-  img.setAttribute("title", percent);
-  img.setAttribute("class", "FAPercent");
-  img.setAttribute("style", style);
-  
-  parentElem.appendChild(img);
-}
-
-
 function jqProgress(imgId, value) {		
 	//
 	var normalizedValue = (value/30*100).toFixed(2);
@@ -235,25 +170,6 @@ function jqProgress(imgId, value) {
 		"style": style
 	}));
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// http://stackoverflow.com/questions/18190148/create-span-tag-and-insert-with-jquery#18190187
-///////////////////////////////////////////////////////////////////////////////
-function addParagraph(rcs, id, innerText){
-	//var p = document.createElement("p");
-	//p.setAttribute("id",id);
-	//p.innerText = innerText;	
-	var p =  $('<p />').attr ("id", id).text(innerText);
-	//rcs.appendChild(p);	
-	$(rcs).append(p);	
-}
-
-// load jQuery and execute the callback
-//addJQuery(function () {
-  // Note, jQ replaces $ to avoid conflicts.
-  //alert("There are " + jQ('a').length + " links on this page.");
-  //alert("There are " + $('a').length + " links on this page.");
-//});
 
 ///////////////////////////////////////////////////////////////////////////////
 // Base64Skills: convert skills array to base 64
@@ -301,32 +217,3 @@ console.log ("Base64: ", b64s);
 
 return b64s;
 }
-
-////
-/* GM_xmlhttpRequest({
-  method: "GET",
-  url: "http://rest-service.guides.spring.io/greeting",
-  headers: {
-    "User-Agent": "Mozilla/5.0",    // If not specified, navigator.userAgent will be used.
-    "Accept": "text/json"           // If not specified, browser defaults will be used.
-  },
-  onload: function(response) {
-    var responseXML = null;
-    // Inject responseXML into existing Object (only appropriate for XML content).
-    if (!response.responseXML) {
-      responseXML = new DOMParser()
-        .parseFromString(response.responseText, "text/xml");
-    }
-
-    GM_log([
-      response.status,
-      response.statusText,
-      response.readyState,
-      response.responseHeaders,
-      response.responseText,
-      response.finalUrl,
-      responseXML
-    ].join("\n"));
-  }
-}); */
-
