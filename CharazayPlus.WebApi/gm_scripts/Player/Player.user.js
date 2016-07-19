@@ -58,7 +58,11 @@ var TUPLES_LENGTH = tuples.length;
 
 ///////////////////////////////////////////////////////////////////////////////
 //console.info("the guts of this userscript");
+// if no skills available => nothing ...
+// <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="80%">
 ///////////////////////////////////////////////////////////////////////////////
+
+if ($('table[width="80%"] tr').length == 11) {
 
 var rcs =  $("<div/>").attr ({class: "rc-s", id: "cpe"});
 $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluator") );
@@ -70,6 +74,8 @@ var b64s = Base64Skills();
 ajaxCallCharazayPlusWebApi(b64s);
 
 $('#rc').prepend(rcs);
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // calls a rest service at
@@ -157,15 +163,14 @@ function jqProgress(imgId, value) {
 	//
 	var normalizedValue = (value/30*100).toFixed(2);
 	var percent=normalizedValue.toString().concat(" %");
+	var dscr = value.toString().concat("/30 ").concat(percent);
 	var px = 0.79*normalizedValue-79;
 	var style= "background-position: ".concat(px.toString()).concat("px 0pt;");
     
-	//$("#ulimg").append($("<li/>").attr ({ class: "imgli", id: "imgli" }));	
-	//$("#imgTotalScore")
 	$(imgId).append($("<img/>").attr({
 		"src": "images/FAPercent_back.gif",
-		"alt": percent,
-		"title": percent,
+		"alt": dscr,
+		"title": dscr,
 		"class": "FAPercent",
 		"style": style
 	}));
