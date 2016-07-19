@@ -62,7 +62,9 @@ var TUPLES_LENGTH = tuples.length;
 // <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="80%">
 ///////////////////////////////////////////////////////////////////////////////
 
-if ($('table[width="80%"] tr').length == 11) {
+
+var DATA_LENGTH = $('table[width="80%"] tr').length;
+if (DATA_LENGTH == 11 || DATA_LENGTH == 13) {
 
 var rcs =  $("<div/>").attr ({class: "rc-s", id: "cpe"});
 $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluator") );
@@ -70,10 +72,20 @@ $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluat
 // http://stackoverflow.com/questions/18190148/create-span-tag-and-insert-with-jquery
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
+$(rcs).append( $("<p/>").attr ("id", "pselect") );
+
 var b64s = Base64Skills();
-ajaxCallCharazayPlusWebApi(b64s);
+
+ajaxCallCharazayPlusWebApi(b64s, 1, "");
 
 $('#rc').prepend(rcs);
+
+$("#pselect").html('<u>As</u>: <select id="selected_position" class="form_small"><option value="PG" selected="">Point Guard</option><option value="SG">Shooting Guard</option><option value="SF">Small Forward</option><option value="PF">Power Forward</option><option value="C">Center</option></select>');
+$('#selected_position').change(function() {
+  //alert('The option with value ' + $(this).val() + ' and text ' + $(this).text() + ' was selected.');
+  // onchange="ajaxCallCharazayPlusWebApi(b64s, 2, this.options[this.selectedIndex].value)"
+  ajaxCallCharazayPlusWebApi(b64s, 2, $(this).val());
+});
 
 }
 
@@ -112,28 +124,45 @@ function ajaxCallHelloSvc(){
 // Get-Project CharazayPlus.WebApi | Install-Package Microsoft.AspNet.WebApi.Cors -Verbose
 // http://enable-cors.org/server_aspnet.html
 ///////////////////////////////////////////////////////////////////////////////
-function ajaxCallCharazayPlusWebApi(b64s){
+function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
 	
 	//contentType: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-	var surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64s);
+	var surl = "";
+		
+	switch(expression) {
+    case 1:
 	//var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64s);
+        break;
+    case 2:
+        //http://localhost/CharazayPlus.WebApi/player/c/F85nBgQOBwUEBwUNFwYL
+		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat("/").concat(b64s);
+        break;
+	case 3:
+		//http://localhost/CharazayPlus.WebApi/player/aggregate/F85nBgQOBwUEBwUNFwYL
+		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top/".concat(b64s);
+		break;	
+    default:
+        ;
+	} 
+	
 	console.log(surl);
 	
     $.getJSON(surl, function (data) { console.log(data); })
 	.done(function(data) {
-		$('#cpePosition').append( $("<strong/>").attr ({align: "right"}).text(data.Position) );
-		$('#cpeValueIndex').append( $("<strong/>").text(data.ValueIndex) );
-		$("#cpeTotalScore").append(data.TotalScore);
+		$('#cpePosition').html( $("<strong/>").attr ({align: "right"}).text(data.Position) );
+		$('#cpeValueIndex').html( $("<strong/>").text(data.ValueIndex) );
+		$("#cpeTotalScore").html(data.TotalScore);
 		jqProgress ("#imgTotalScore", data.TotalScore);
-		$("#cpeDefensiveScore").append(data.DefensiveScore);
+		$("#cpeDefensiveScore").html(data.DefensiveScore);
 		jqProgress ("#imgDefensiveScore", data.DefensiveScore);
-		$("#cpeOffensiveScore").append(data.OffensiveScore);
+		$("#cpeOffensiveScore").html(data.OffensiveScore);
 		jqProgress ("#imgOffensiveScore", data.OffensiveScore);
-		$("#cpeOffensiveAbility").append(data.OffensiveAbility);
+		$("#cpeOffensiveAbility").html(data.OffensiveAbility);
 		//jqProgress ("#imgOffensiveScore", data.OffensiveAbility);
-		$("#cpeShootingScore").append(data.ShootingScore);
+		$("#cpeShootingScore").html(data.ShootingScore);
 		//jqProgress ("#imgShootingScore", data.ShootingScore);
-		$("#cpeTransferMarketValue").append($("<strong/>").text(data.TransferMarketValue) );
+		$("#cpeTransferMarketValue").html($("<strong/>").text(data.TransferMarketValue) );
     })
 	.fail(function(jqxhr, textStatus, error) { 
 		console.log( surl, " getJSON failed ", jqxhr.statusText, "readyState:", jqxhr.readyState, "status:", textStatus, "error:", error);
@@ -157,7 +186,7 @@ function ajaxCallCharazayPlusWebApi(b64s){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// add a progress bar to a parent element
+// add/replace existing a progress bar to a parent element
 ///////////////////////////////////////////////////////////////////////////////
 function jqProgress(imgId, value) {		
 	//
@@ -167,7 +196,7 @@ function jqProgress(imgId, value) {
 	var px = 0.79*normalizedValue-79;
 	var style= "background-position: ".concat(px.toString()).concat("px 0pt;");
     
-	$(imgId).append($("<img/>").attr({
+	$(imgId).html($("<img/>").attr({
 		"src": "images/FAPercent_back.gif",
 		"alt": dscr,
 		"title": dscr,
