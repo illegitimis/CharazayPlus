@@ -2,7 +2,7 @@
 // @name        PlayerEvaluator
 // @namespace   CharazayPlus
 // @description Charazay Plus Player Evaluator
-// @version     1.1
+// @version     1.2.3
 // @grant       none
 // @grant 		  GM_xmlhttpRequest
 // @include     http://www.charazay.com/index.php?act=player&code=1&id=*
@@ -128,19 +128,28 @@ function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
 	
 	//contentType: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 	var surl = "";
-		
+	var postfix = "";
+
+	if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0)
+	    postfix = "/".concat(b64s);
+	else
+	    postfix = "?base64StringState=".concat(b64s);
+
 	switch(expression) {
     case 1:
-	//var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
-        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64s);
+        //var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
+        // http://localhost/CharazayPlus.WebApi/player/facets/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top".concat(postfix);
         break;
     case 2:
         //http://localhost/CharazayPlus.WebApi/player/c/F85nBgQOBwUEBwUNFwYL
-		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat("/").concat(b64s);
+        //http://localhost/CharazayPlus.WebApi/player/sg?base64StringState=Gqw/BAQXCAUDCwkXBgYR
+		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat(postfix);
         break;
 	case 3:
-		//http://localhost/CharazayPlus.WebApi/player/aggregate/F85nBgQOBwUEBwUNFwYL
-		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top/".concat(b64s);
+	    //http://localhost/CharazayPlus.WebApi/player/aggregate/F85nBgQOBwUEBwUNFwYL
+	    //http://localhost/CharazayPlus.WebApi/player/aggregate/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
+		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top".concat(b64s);
 		break;	
     default:
         ;
