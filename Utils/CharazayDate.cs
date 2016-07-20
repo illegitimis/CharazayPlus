@@ -61,7 +61,9 @@ namespace AndreiPopescu.CharazayPlus.Utils
      
      static readonly CharazaySeason season34 = new CharazaySeason(new DateTime(2015, 07, 24), 34, new DateTime(2015,11,20));
 
-     static readonly DateTime S35W16D1 = new DateTime(2016, 3, 11);
+    static readonly CharazaySeason season35 = new CharazaySeason(new DateTime(2015, 11, 21), 35);
+
+    static readonly DateTime S35W16D1 = new DateTime(2016, 3, 11);
 
     //S35 W17 D7
     static readonly DateTime S35W17D7 = new DateTime(2016, 3, 24);
@@ -79,7 +81,8 @@ namespace AndreiPopescu.CharazayPlus.Utils
     #endregion
 
     internal static readonly LinkedList<CharazaySeason> Seasons = 
-       new LinkedList<CharazaySeason>(new[] { season23, season24, season25, season26, season27, season28, season29, season30, season31, season32, season33, season34 });
+       new LinkedList<CharazaySeason>(new[] { season23, season24, season25, season26, season27, season28, season29
+         , season30, season31, season32, season33, season34, season35, season36, season37 });
 
      static readonly IDictionary<DateTime, CharazayDate> DatesCache = new Dictionary<DateTime, CharazayDate>();
     

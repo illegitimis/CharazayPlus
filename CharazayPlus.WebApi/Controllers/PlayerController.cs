@@ -41,6 +41,7 @@
     }
 
     //GET /player/aggregate?base64StringState=D890BCUFBAUHAgQFCQcB
+    [Route("player/aggregate/")]
     [Route("player/aggregate/{base64StringState}")]
     public IHttpActionResult GetAggregatedBestPlayers(string base64StringState)
     {
@@ -49,48 +50,56 @@
 
 
     //GET /player/aggregate/top?base64StringState=G75RAAsRCQYHEAYYBQQT
+    [Route("player/aggregate/top/")]
     [Route("player/aggregate/top/{base64StringState}")]
     public IHttpActionResult GetAggregatedBestPlayer(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.Best(smart)));
     }
 
+    [Route("player/facets/")]
     [Route("player/facets/{base64StringState}")]
     public IHttpActionResult GetFacetsBestPlayers(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => eval.Best2(facets).Select(PlayerDTOCreator));
     }
 
+    [Route("player/facets/top/")]
     [Route("player/facets/top/{base64StringState}")]
     public IHttpActionResult GetFacetsBestPlayer(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.Best(facets)));
     }
 
+    [Route("player/C/")]
     [Route("player/C/{base64StringState}")]
     public IHttpActionResult GetCenter(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.C));
     }
 
+    [Route("player/PF/")]
     [Route("player/PF/{base64StringState}")]
     public IHttpActionResult GetPowerForward(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.PF));
     }
 
+    [Route("player/SF/")]
     [Route("player/SF/{base64StringState}")]
     public IHttpActionResult GetSmallForward(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.SF));
     }
 
+    [Route("player/SG/")]
     [Route("player/SG/{base64StringState}")]
     public IHttpActionResult GetShootingGuard(string base64StringState)
     {
       return JsonCreator(base64StringState, eval => PlayerDTOCreator(eval.SG));
     }
 
+    [Route("player/PG/")]
     [Route("player/PG/{base64StringState}")]
     public IHttpActionResult GetPointGuard(string base64StringState)
     {
@@ -159,6 +168,11 @@
 
       //byteArray = new byte[] { 15, 207, 116, 4, 37, 5, 4, 5, 7, 2, 4, 5, 9, 7, 1 };
       //D890BCUFBAUHAgQFCQcB
+
+      // replaces whitespace with + (autocorrected by route), 
+      // e.g. Base64:  Hdh+BQAOBwYFBgcKGg0Z1 becomes "http://localhost/CharazayPlus.WebApi/player/facets/top?base64StringState=Hdh+BQAOBwYFBgcKGg0Z"
+      // which routes to Hdh BQAOBwYFBgcKGg0Z1
+      base64StringState=base64StringState.Replace(' ', '+');
 
       byte[] result = Convert.FromBase64String(base64StringState);
 
