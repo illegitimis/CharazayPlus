@@ -12,35 +12,35 @@
   /// </summary>
   class PlayersEnvironment
   {
-    public static IList<PG2014> PointGuards { get { return Nested.PGs; } }
-    public static IList<SG2014> ShootingGuards { get { return Nested.SGs; } }
-    public static IList<SF2014> SmallForwards { get { return Nested.SFs; } }
-    public static IList<PF2014> PowerForwards { get { return Nested.PFs; } }
-    public static IList<C2014> Centers { get { return Nested.Cs; } }
+    public static IList<Player> PointGuards { get { return Nested.PGs; } }
+    public static IList<Player> ShootingGuards { get { return Nested.SGs; } }
+    public static IList<Player> SmallForwards { get { return Nested.SFs; } }
+    public static IList<Player> PowerForwards { get { return Nested.PFs; } }
+    public static IList<Player> Centers { get { return Nested.Cs; } }
 
     public static IList<Player> OptimumPlayers { get { return Nested.OptimumPlayers; } }
-    
+
     public static IList<Coach> Coaches { get { return Nested.Coaches; } }
     public static Coach MaxCoach { get { return Coaches[Coaches.Count - 1]; } }
-    
+
 
     private class Nested
     {
-      internal static readonly IList<PG2014> PGs;
-      internal static readonly IList<SG2014> SGs;
-      internal static readonly IList<SF2014> SFs;
-      internal static readonly IList<PF2014> PFs;
-      internal static readonly IList<C2014> Cs;
+      internal static readonly IList<Player> PGs;
+      internal static readonly IList<Player> SGs;
+      internal static readonly IList<Player> SFs;
+      internal static readonly IList<Player> PFs;
+      internal static readonly IList<Player> Cs;
       internal static readonly IList<Player> OptimumPlayers;
-      internal static readonly  IList<Coach> Coaches;
-      
-      static Nested ()
+      internal static readonly IList<Coach> Coaches;
+
+      static Nested()
       {
-        PGs = new List<PG2014>();
-        SGs = new List<SG2014>();
-        PFs = new List<PF2014>();
-        SFs = new List<SF2014>();
-        Cs = new List<C2014>();
+        PGs = new List<Player>();
+        SGs = new List<Player>();
+        PFs = new List<Player>();
+        SFs = new List<Player>();
+        Cs = new List<Player>();
         OptimumPlayers = new List<Player>();
         Coaches = new List<Coach>();
 
@@ -51,26 +51,32 @@
           new Web.MyPlayersXml(WebServiceUsers.Instance.MainUser)
         , new Web.CoachesXml(WebServiceUsers.Instance.MainUser)
         }).ToArray();
+
         //
         var players = (Xsd2.charazayPlayer[])objects[0];
-        // update development data
-        DevelopmentHistory.Instance.Players = players;
-        //
-        var coaches = (Xsd2.charazayCoach[])objects[1];
-        //
         var facetsAlgorithm = new FacetsAlgorithm();
         foreach (var p in players)
         {
-            PlayerEvaluator evaluator = new PlayerEvaluator(p);
-            Player opt = evaluator.Best(facetsAlgorithm);
-            OptimumPlayers.Add(opt);
+          PlayerEvaluator evaluator = new PlayerEvaluator(p);
+          Player opt = evaluator.Best(facetsAlgorithm);
+          OptimumPlayers.Add(opt);
+          PGs.Add(evaluator.PG);
+          SGs.Add(evaluator.SG);
+          SFs.Add(evaluator.SF);
+          PFs.Add(evaluator.PF);
+          Cs.Add(evaluator.C);
         }
+
+        // update development data
+        DevelopmentHistory.Instance.Players = players;
+
         // 
-        InitCoachesData(coaches);        
+        var coaches = (Xsd2.charazayCoach[])objects[1];
+        InitCoachesData(coaches);
       }
 
-      // coaches file
-      private static void InitCoachesData (Xsd2.charazayCoach[] xsdCoaches)
+      // coaches file       
+      private static void InitCoachesData(Xsd2.charazayCoach[] xsdCoaches)
       { //
         // alloc max coach (inner struct)
         //      
