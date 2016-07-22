@@ -130,26 +130,35 @@ function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
 	var surl = "";
 	var postfix = "";
 
-	if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0)
-	    postfix = "/".concat(b64s);
-	else
-	    postfix = "?base64StringState=".concat(b64s);
+	// var postfix = "";
+	// if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0) postfix = "/".concat(b64s);
+	// else 												postfix = "?base64StringState=".concat(b64s);
+	//RIGHT WAY TO DO THIS IS WITH URL ENCODING
+	// +, /, = in base64 will get url encoded
+	// on webapi side of things use HttpUtility.UrlDecode
+	var postfix = encodeURIComponent(b64s);
 
 	switch(expression) {
     case 1:
         //var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
         // http://localhost/CharazayPlus.WebApi/player/facets/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top".concat(postfix);
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(postfix);
         break;
     case 2:
         //http://localhost/CharazayPlus.WebApi/player/c/F85nBgQOBwUEBwUNFwYL
         //http://localhost/CharazayPlus.WebApi/player/sg?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat(postfix);
+		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat("/").concat(postfix);
         break;
 	case 3:
 	    //http://localhost/CharazayPlus.WebApi/player/aggregate/F85nBgQOBwUEBwUNFwYL
 	    //http://localhost/CharazayPlus.WebApi/player/aggregate/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top".concat(b64s);
+		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top/".concat(postfix);
+		break;	
+	case 4:		
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/".concat(postfix);
+        break;
+	case 5:		
+        surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/".concat(postfix);
 		break;	
     default:
         ;

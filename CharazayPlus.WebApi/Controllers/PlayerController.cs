@@ -2,6 +2,7 @@
 {
   using System;
   using System.Linq;
+  using System.Web;
   using System.Web.Http;
   using AndreiPopescu.CharazayPlus;
   using AndreiPopescu.CharazayPlus.Utils;
@@ -172,9 +173,23 @@
       // replaces whitespace with + (autocorrected by route), 
       // e.g. Base64:  Hdh+BQAOBwYFBgcKGg0Z1 becomes "http://localhost/CharazayPlus.WebApi/player/facets/top?base64StringState=Hdh+BQAOBwYFBgcKGg0Z"
       // which routes to Hdh BQAOBwYFBgcKGg0Z1
-      base64StringState=base64StringState.Replace(' ', '+');
+      //base64StringState=base64StringState.Replace(' ', '+');
 
-      byte[] result = Convert.FromBase64String(base64StringState);
+      string b64s = "";
+      byte[] result = null;
+      try
+      {
+        b64s = HttpUtility.UrlDecode(base64StringState);
+        result = Convert.FromBase64String(b64s);
+      }
+      catch (ArgumentNullException)
+      {
+        return BadRequest(String.Format("ArgumentNullException [{0}] [{1}]", base64StringState, b64s));        
+      }
+      catch (FormatException)
+      {
+        return BadRequest(String.Format("FormatException [{0}] [{1}]", base64StringState, b64s));
+      }
 
       if (result == null || result.Length != 15)
         return BadRequest(string.Join("; ", result));
