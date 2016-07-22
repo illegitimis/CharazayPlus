@@ -73,6 +73,14 @@ $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluat
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
 $(rcs).append( $("<p/>").attr ("id", "pselect") );
+  $(rcs).append($("<input/>").attr({
+    id: "bukmark",
+    style: "display: inline-block",
+    class: "inputSubmit",
+    type: "submit",
+    value: "Bookmark"
+  }));
+  $(rcs).append($("<i/>").attr("id", "imark").text(''));
 
 var b64s = Base64Skills();
 
@@ -86,6 +94,50 @@ $('#selected_position').change(function() {
   // onchange="ajaxCallCharazayPlusWebApi(b64s, 2, this.options[this.selectedIndex].value)"
   ajaxCallCharazayPlusWebApi(b64s, 2, $(this).val());
 });
+
+  $('#bukmark').click(function () {
+
+    //https://weblog.west-wind.com/posts/2012/May/08/Passing-multiple-POST-parameters-to-Web-API-Controller-Methods
+
+    var intPrice = parseInt($("#new_bid").attr("value").replace(/\./g,''));
+    var bookmarkData = {
+      Position: $('#cpePosition').text(),
+      ValueIndex: parseFloat($('#cpeValueIndex').text()),
+      TotalScore: parseFloat($('#cpeTotalScore').text()),
+      DefensiveScore: parseFloat($('#cpeDefensiveScore').text()),
+      OffensiveScore: parseFloat($('#cpeOffensiveScore').text()),
+      OffensiveAbility: parseFloat($('#cpeOffensiveAbility').text()),
+      ShootingScore: parseFloat($('#cpeShootingScore').text()),
+      TransferMarketValue: parseFloat($('#cpeTransferMarketValue').text()),
+
+      CharazayId: parseInt($(".number_id").text().replace('(', '').replace(')', '')),
+      FullName: $("#pagetitle a:nth-child(1)").text(),
+      When: $("#now").text(),
+      Deadline: $("#deadline").text(),
+      Price: intPrice/1000000
+    };
+    console.log(bookmarkData);
+
+    
+    $.ajax(
+    {
+      url: "http://localhost/CharazayPlus.WebApi/bookmark",
+      type: "POST",
+      data: bookmarkData,
+      success: function (result) {
+        console.info(result);
+        $('#imark').html('&#10004;')
+      },
+      error: function (xhr, status, p3, p4) {
+        var err = "Error " + " " + status + " " + p3;
+        if (xhr.responseText && xhr.responseText[0] == "{")
+          err = JSON.parse(xhr.responseText).message;
+        alert(err);
+      }
+    });
+    
+  });
+
 
 }
 
@@ -128,7 +180,6 @@ function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
 	
 	//contentType: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 	var surl = "";
-	var postfix = "";
 
 	// var postfix = "";
 	// if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0) postfix = "/".concat(b64s);
@@ -226,8 +277,7 @@ function jqProgress(imgId, value) {
 ///////////////////////////////////////////////////////////////////////////////
 // Base64Skills: convert skills array to base 64
 ///////////////////////////////////////////////////////////////////////////////
-function Base64Skills ()
-{
+function Base64Skills() {
 	var trOffset = 0;
 	if ( $('.mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1)').attr("class") == "center highlight")
 		trOffset = 2;
