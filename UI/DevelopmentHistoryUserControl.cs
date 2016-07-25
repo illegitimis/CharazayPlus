@@ -16,6 +16,8 @@ namespace AndreiPopescu.CharazayPlus.UI
   public partial class DevelopmentHistoryUserControl : UserControl
   {
     const string LegendName = "_legend";
+    private CheckBox chkActiveOnly;
+
     /// <summary> 
     /// Required designer variable.
     /// </summary>
@@ -25,7 +27,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// Clean up any resources being used.
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose (bool disposing)
+    protected override void Dispose(bool disposing)
     {
       if (disposing && (components != null))
       {
@@ -40,25 +42,27 @@ namespace AndreiPopescu.CharazayPlus.UI
     /// Required method for Designer support - do not modify 
     /// the contents of this method with the code editor.
     /// </summary>
-    private void InitializeComponent ( )
+    private void InitializeComponent()
     {
-      this.flp = new FlowLayoutPanel();
-      this.lblPlayer = new Label();
-      this.cmbPlayer = new ComboBox();
-      this.label1 = new Label();
-      this.lblSelectedPlayer = new Label();
-      this.lnkSelectedPlayer = new LinkLabel();
-      this.label2 = new Label();
-      this.cmbCategory = new ComboBox();
-      this.label4 = new Label();
-      this.lblSelectedCategory = new Label();
-      this._chart = new Chart();
+      this.flp = new System.Windows.Forms.FlowLayoutPanel();
+      this.lblPlayer = new System.Windows.Forms.Label();
+      this.cmbPlayer = new System.Windows.Forms.ComboBox();
+      this.label1 = new System.Windows.Forms.Label();
+      this.lblSelectedPlayer = new System.Windows.Forms.Label();
+      this.lnkSelectedPlayer = new System.Windows.Forms.LinkLabel();
+      this.label2 = new System.Windows.Forms.Label();
+      this.cmbCategory = new System.Windows.Forms.ComboBox();
+      this.label4 = new System.Windows.Forms.Label();
+      this.lblSelectedCategory = new System.Windows.Forms.Label();
+      this._chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+      this.chkActiveOnly = new System.Windows.Forms.CheckBox();
       this.flp.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this._chart)).BeginInit();
       this.SuspendLayout();
       // 
       // flp
       // 
+      this.flp.Controls.Add(this.chkActiveOnly);
       this.flp.Controls.Add(this.lblPlayer);
       this.flp.Controls.Add(this.cmbPlayer);
       this.flp.Controls.Add(this.label1);
@@ -68,137 +72,147 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.flp.Controls.Add(this.cmbCategory);
       this.flp.Controls.Add(this.label4);
       this.flp.Controls.Add(this.lblSelectedCategory);
-      this.flp.Dock = DockStyle.Left;
-      this.flp.FlowDirection = FlowDirection.TopDown;
-      this.flp.Location = new Point(0, 0);
+      this.flp.Dock = System.Windows.Forms.DockStyle.Left;
+      this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.flp.Location = new System.Drawing.Point(0, 0);
       this.flp.Name = "flp";
-      this.flp.Size = new Size(195, 320);
+      this.flp.Size = new System.Drawing.Size(195, 320);
       this.flp.TabIndex = 0;
       // 
       // lblPlayer
       // 
       this.lblPlayer.AutoSize = true;
-      this.lblPlayer.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
-      this.lblPlayer.Location = new Point(3, 0);
+      this.lblPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblPlayer.Location = new System.Drawing.Point(3, 28);
       this.lblPlayer.Name = "lblPlayer";
-      this.lblPlayer.Size = new Size(41, 15);
+      this.lblPlayer.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+      this.lblPlayer.Size = new System.Drawing.Size(41, 25);
       this.lblPlayer.TabIndex = 0;
       this.lblPlayer.Text = "Player";
       // 
       // cmbPlayer
       // 
-      this.cmbPlayer.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
+      this.cmbPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.cmbPlayer.FormattingEnabled = true;
-      this.cmbPlayer.Location = new Point(3, 18);
+      this.cmbPlayer.Location = new System.Drawing.Point(3, 56);
       this.cmbPlayer.Name = "cmbPlayer";
-      this.cmbPlayer.Size = new Size(192, 24);
+      this.cmbPlayer.Size = new System.Drawing.Size(192, 24);
       this.cmbPlayer.TabIndex = 1;
-      this.cmbPlayer.SelectedIndexChanged += new System.EventHandler(this.cmbPlayer_SelectedIndexChanged);
       // 
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
-      this.label1.Location = new Point(3, 45);
+      this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label1.Location = new System.Drawing.Point(3, 83);
       this.label1.Name = "label1";
-      this.label1.Size = new Size(95, 15);
+      this.label1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+      this.label1.Size = new System.Drawing.Size(95, 25);
       this.label1.TabIndex = 4;
       this.label1.Text = "Selected Player:";
       // 
       // lblSelectedPlayer
       // 
       this.lblSelectedPlayer.AutoSize = true;
-      this.lblSelectedPlayer.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(238)));
-      this.lblSelectedPlayer.Location = new Point(3, 60);
+      this.lblSelectedPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblSelectedPlayer.Location = new System.Drawing.Point(3, 108);
       this.lblSelectedPlayer.Name = "lblSelectedPlayer";
-      this.lblSelectedPlayer.Size = new Size(14, 18);
+      this.lblSelectedPlayer.Size = new System.Drawing.Size(14, 18);
       this.lblSelectedPlayer.TabIndex = 5;
       this.lblSelectedPlayer.Text = "-";
       // 
       // lnkSelectedPlayer
       // 
-      this.lnkSelectedPlayer.ActiveLinkColor = Color.LimeGreen;
+      this.lnkSelectedPlayer.ActiveLinkColor = System.Drawing.Color.LimeGreen;
       this.lnkSelectedPlayer.AutoSize = true;
-      this.lnkSelectedPlayer.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(238)));
-      this.lnkSelectedPlayer.LinkBehavior = LinkBehavior.HoverUnderline;
-      this.lnkSelectedPlayer.Location = new Point(3, 78);
+      this.lnkSelectedPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lnkSelectedPlayer.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+      this.lnkSelectedPlayer.Location = new System.Drawing.Point(3, 126);
       this.lnkSelectedPlayer.Name = "lnkSelectedPlayer";
-      this.lnkSelectedPlayer.Size = new Size(14, 18);
+      this.lnkSelectedPlayer.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+      this.lnkSelectedPlayer.Size = new System.Drawing.Size(14, 28);
       this.lnkSelectedPlayer.TabIndex = 8;
       this.lnkSelectedPlayer.TabStop = true;
       this.lnkSelectedPlayer.Text = "-";
-      this.lnkSelectedPlayer.LinkClicked += new LinkLabelLinkClickedEventHandler(this.lnkSelectedPlayer_LinkClicked);
+      this.lnkSelectedPlayer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelectedPlayer_LinkClicked);
       // 
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
-      this.label2.Location = new Point(3, 96);
+      this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label2.Location = new System.Drawing.Point(3, 154);
       this.label2.Name = "label2";
-      this.label2.Size = new Size(55, 15);
+      this.label2.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+      this.label2.Size = new System.Drawing.Size(55, 35);
       this.label2.TabIndex = 2;
       this.label2.Text = "Category";
       // 
       // cmbCategory
       // 
-      this.cmbCategory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-      this.cmbCategory.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
+      this.cmbCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.cmbCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
       this.cmbCategory.FormattingEnabled = true;
-      this.cmbCategory.Location = new Point(3, 114);
+      this.cmbCategory.Location = new System.Drawing.Point(3, 192);
       this.cmbCategory.Name = "cmbCategory";
-      this.cmbCategory.Size = new Size(192, 24);
+      this.cmbCategory.Size = new System.Drawing.Size(192, 24);
       this.cmbCategory.TabIndex = 3;
-      this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
       // 
       // label4
       // 
       this.label4.AutoSize = true;
-      this.label4.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
-      this.label4.Location = new Point(3, 141);
+      this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.label4.Location = new System.Drawing.Point(3, 219);
       this.label4.Name = "label4";
-      this.label4.Size = new Size(109, 15);
+      this.label4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+      this.label4.Size = new System.Drawing.Size(109, 25);
       this.label4.TabIndex = 6;
       this.label4.Text = "Selected Category:";
       // 
       // lblSelectedCategory
       // 
       this.lblSelectedCategory.AutoSize = true;
-      this.lblSelectedCategory.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(238)));
-      this.lblSelectedCategory.Location = new Point(3, 156);
+      this.lblSelectedCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+      this.lblSelectedCategory.Location = new System.Drawing.Point(3, 244);
       this.lblSelectedCategory.Name = "lblSelectedCategory";
-      this.lblSelectedCategory.Size = new Size(14, 18);
+      this.lblSelectedCategory.Size = new System.Drawing.Size(14, 18);
       this.lblSelectedCategory.TabIndex = 7;
       this.lblSelectedCategory.Text = "-";
       // 
       // _chart
       // 
-      InitChartArea();
-      InitLegend();
-      InitSeries();
-      //
-      this._chart.Dock = DockStyle.Fill;      
-      this._chart.Location = new Point(195, 0);
-      this._chart.Name = "_chart";      
-      this._chart.Size = new Size(480, 320);
-      this._chart.TabIndex = 1;
-      this._chart.Text = "chart1";
-      //
       this._chart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
       this._chart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
       this._chart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
       this._chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
       this._chart.BorderlineWidth = 2;
       this._chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-      
+      this._chart.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._chart.Location = new System.Drawing.Point(195, 0);
+      this._chart.Name = "_chart";
+      this._chart.Size = new System.Drawing.Size(480, 320);
+      this._chart.TabIndex = 1;
+      this._chart.Text = "chart1";
+      // 
+      // chkActiveOnly
+      // 
+      this.chkActiveOnly.AutoSize = true;
+      this.chkActiveOnly.Location = new System.Drawing.Point(3, 3);
+      this.chkActiveOnly.Name = "chkActiveOnly";
+      this.chkActiveOnly.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+      this.chkActiveOnly.Size = new System.Drawing.Size(141, 22);
+      this.chkActiveOnly.TabIndex = 9;
+      this.chkActiveOnly.Text = "Keep only active players";
+      this.chkActiveOnly.UseVisualStyleBackColor = true;
+      this.chkActiveOnly.CheckedChanged += new System.EventHandler(this.chkActiveOnly_CheckedChanged);
       // 
       // DevelopmentHistoryUserControl
       // 
-      this.AutoScaleDimensions = new SizeF(6F, 13F);
-      this.AutoScaleMode = AutoScaleMode.Font;
+      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(this._chart);
       this.Controls.Add(this.flp);
       this.Name = "DevelopmentHistoryUserControl";
-      this.Size = new Size(675, 320);
+      this.Size = new System.Drawing.Size(675, 320);
       this.Load += new System.EventHandler(this.DevelopmentHistoryUserControl_Load);
       this.flp.ResumeLayout(false);
       this.flp.PerformLayout();
@@ -223,7 +237,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     ChartArea _chartArea;
     Series _series;
 
-    public DevelopmentHistoryUserControl ( )
+    public DevelopmentHistoryUserControl()
     {
       InitializeComponent();
     }
@@ -237,7 +251,7 @@ namespace AndreiPopescu.CharazayPlus.UI
     };
 
     #region utility
-    private void SetCustomLabels ( )
+    private void SetCustomLabels()
     {
       //      
       // set second row of labels
@@ -261,20 +275,23 @@ namespace AndreiPopescu.CharazayPlus.UI
           currentSeason = nextSeason;
           nextSeason = enumSeasons.Current;
 
-          //visitor(previousSeason, current);
           _chartArea.AxisX.CustomLabels.Add(
-           currentSeason.StartDate.ToOADate(),
-           currentSeason.EndDate.HasValue ? currentSeason.EndDate.Value.ToOADate() : nextSeason.StartDate.ToOADate(),
-           "Season " + currentSeason.Number.ToString()
-           , 1, LabelMarkStyle.LineSideMark);
+             fromPosition: currentSeason.StartDate.ToOADate(),
+             toPosition: (currentSeason.EndDate.ToOADate() + nextSeason.StartDate.ToOADate()) / 2,
+             text: "S " + currentSeason.Number.ToString(),
+             rowIndex: 1,
+             markStyle: LabelMarkStyle.LineSideMark
+          );
         }
       }
-      //visitor(prev, default(CharazaySeason)); // Are you sure you want this?
+      
       _chartArea.AxisX.CustomLabels.Add(
-           nextSeason.StartDate.ToOADate(),
-           nextSeason.EndDate.Value.ToOADate(),
-           "Season " + nextSeason.Number.ToString()
-           , 1, LabelMarkStyle.LineSideMark);
+          nextSeason.StartDate.ToOADate(),
+          nextSeason.EndDate.ToOADate(),
+          "S " + nextSeason.Number.ToString(), 
+          1, 
+          LabelMarkStyle.LineSideMark
+      );
 
       //
       // One more row of labels
@@ -283,7 +300,7 @@ namespace AndreiPopescu.CharazayPlus.UI
         _chartArea.AxisX.CustomLabels.Add(years[i].ToOADate(), years[i + 1].ToOADate(), years[i].Year.ToString(), 2, LabelMarkStyle.LineSideMark);
     }
 
-    private void UpdateChart (PlayerDevelopment pd, ST_VALUE_TYPE valueType)
+    private void UpdateChart(PlayerDevelopment pd, ST_VALUE_TYPE valueType)
     {
       foreach (var s in this._chart.Series)
         s.Points.Clear();
@@ -311,7 +328,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    private void SetAxesProperties (ST_VALUE_TYPE valueType, List<CT_VALUE_AT_DATE> sourceValues)
+    private void SetAxesProperties(ST_VALUE_TYPE valueType, List<CT_VALUE_AT_DATE> sourceValues)
     {
       var min = sourceValues.Min(ct => ct.When);
       var max = sourceValues.Max(ct => ct.When);
@@ -345,7 +362,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    void InitChartArea ( )
+    void InitChartArea()
     {
       _chartArea = new ChartArea();
       _chartArea.AxisX.LabelStyle.Interval = 28D;
@@ -367,10 +384,15 @@ namespace AndreiPopescu.CharazayPlus.UI
       _chartArea.Area3DStyle.Rotation = 10;
       _chartArea.Area3DStyle.WallWidth = 0;
       //
+      this._chartArea.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+      this._chartArea.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+      this._chartArea.AxisX2.Enabled = AxisEnabled.False;
+      this._chartArea.AxisY2.Enabled = AxisEnabled.False;
+      //
       this._chart.ChartAreas.Add(_chartArea);
     }
 
-    void InitLegend ( )
+    void InitLegend()
     {
       var _legend = new Legend();
       _legend.Name = LegendName;
@@ -382,7 +404,7 @@ namespace AndreiPopescu.CharazayPlus.UI
       this._chart.Legends.Add(_legend);
     }
 
-    void InitSeries ( )
+    void InitSeries()
     {
       _series = new Series()
       {
@@ -401,23 +423,35 @@ namespace AndreiPopescu.CharazayPlus.UI
     #endregion
 
     #region events 
-    private void DevelopmentHistoryUserControl_Load (object sender, EventArgs e)
+    private void DevelopmentHistoryUserControl_Load(object sender, EventArgs e)
     {
+      //
       //this.cmbPlayer.DataBindings.Add(new Binding("Items", DevelopmentHistory.Instance.Development.PlayerItems, "FullName", true, DataSourceUpdateMode.OnPropertyChanged, string.Empty));
-      //this.cmbCategory.DataBindings.Add(new Binding("Items", Properties.Settings.Default, "SecurityCode", false, DataSourceUpdateMode.OnPropertyChanged));
+      //
+      this.cmbPlayer.SelectedIndexChanged -= new System.EventHandler(this.cmbPlayer_SelectedIndexChanged);
       this.cmbPlayer.DataSource = DevelopmentHistory.Instance.Development.PlayerItems;
       this.cmbPlayer.DisplayMember = "FullName";
-      this.cmbCategory.DataSource = (ST_VALUE_TYPE[])Enum.GetValues(typeof(ST_VALUE_TYPE));
-      //
-      this._chartArea.AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
-      this._chartArea.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
-      this._chartArea.AxisX2.Enabled = AxisEnabled.False;
-      this._chartArea.AxisY2.Enabled = AxisEnabled.False;
-      SetCustomLabels();
+      this.cmbPlayer.SelectedIndexChanged += new System.EventHandler(this.cmbPlayer_SelectedIndexChanged);
 
+      //
+      //this.cmbCategory.DataBindings.Add(new Binding("Items", Properties.Settings.Default, "SecurityCode", false, DataSourceUpdateMode.OnPropertyChanged));
+      //
+      this.cmbCategory.SelectedIndexChanged -= new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
+      this.cmbCategory.DataSource = (ST_VALUE_TYPE[])Enum.GetValues(typeof(ST_VALUE_TYPE));
+      this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
+
+      // 
+      // _chart
+      // 
+      InitChartArea();
+      InitLegend();
+      InitSeries();
+
+      //
+      SetCustomLabels();
     }
 
-    private void lnkSelectedPlayer_LinkClicked (object sender, LinkLabelLinkClickedEventArgs e)
+    private void lnkSelectedPlayer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       // Determine which link was clicked within the LinkLabel.
       this.lnkSelectedPlayer.Links[lnkSelectedPlayer.Links.IndexOf(e.Link)].Visited = true;
@@ -434,14 +468,14 @@ namespace AndreiPopescu.CharazayPlus.UI
       }
     }
 
-    private void cmbCategory_SelectedIndexChanged (object sender, EventArgs e)
+    private void cmbCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
       lblSelectedCategory.Text = cmbCategory.SelectedItem.ToString();
       //
       UpdateChart(this.cmbPlayer.SelectedItem as PlayerDevelopment, (ST_VALUE_TYPE)this.cmbCategory.SelectedItem);
     }
 
-    private void cmbPlayer_SelectedIndexChanged (object sender, EventArgs e)
+    private void cmbPlayer_SelectedIndexChanged(object sender, EventArgs e)
     {
       PlayerDevelopment pd = (cmbPlayer.SelectedItem as PlayerDevelopment);
       lblSelectedPlayer.Text = pd.ToString();
@@ -451,7 +485,17 @@ namespace AndreiPopescu.CharazayPlus.UI
       this.lnkSelectedPlayer.Links.Add(0, 1000, string.Format("www.charazay.com/?act=player&code=1&id={0}", pd.id));
       //
       UpdateChart(this.cmbPlayer.SelectedItem as PlayerDevelopment, (ST_VALUE_TYPE)this.cmbCategory.SelectedItem);
-    } 
+    }
     #endregion
+
+    private void chkActiveOnly_CheckedChanged(object sender, EventArgs e)
+    {
+      this.cmbPlayer.SelectedIndexChanged -= new System.EventHandler(this.cmbPlayer_SelectedIndexChanged);
+      this.cmbPlayer.DataSource = ((CheckBox)sender).Checked
+        ? DevelopmentHistory.Instance.Development.PlayerItems.Where (x=>x.active==true).ToList()
+        : DevelopmentHistory.Instance.Development.PlayerItems;
+      this.cmbPlayer.DisplayMember = "FullName";
+      this.cmbPlayer.SelectedIndexChanged += new System.EventHandler(this.cmbPlayer_SelectedIndexChanged);
+    }
   }
 }

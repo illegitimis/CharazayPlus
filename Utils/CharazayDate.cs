@@ -218,9 +218,15 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
   public class CharazaySeason
   {
-    public CharazaySeason (DateTime s, byte no, DateTime? e=null) { StartDate = s; Number = no; EndDate=e;}
+    public CharazaySeason (DateTime s, byte no, DateTime? e=null)
+    {
+      StartDate = s;
+      Number = no;
+      EndDate = (e.HasValue) ? e.Value : s.AddDays(7*17) ;
+    }
+
     public DateTime StartDate { get; private set; }
-    public DateTime? EndDate { get; private set; }
+    public DateTime EndDate { get; private set; }
     public byte Number { get; private set; }
 
 

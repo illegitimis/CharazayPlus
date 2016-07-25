@@ -179,7 +179,8 @@
       byte[] result = null;
       try
       {
-        b64s = HttpUtility.UrlDecode(base64StringState);
+        //b64s = HttpUtility.UrlDecode(base64StringState);
+        b64s = base64StringState.Replace('~','/').Replace('_', '+').Replace('|', '=');
         result = Convert.FromBase64String(b64s);
       }
       catch (ArgumentNullException)

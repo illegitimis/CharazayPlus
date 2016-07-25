@@ -67,7 +67,7 @@ namespace AndreiPopescu.CharazayPlus.Splash
         catch (ValidatorExcpetion ex)
         {
           result = ValidationResult.Error;
-          validator.ErrorString = ex.Message;
+          validator.ErrorString = string.Format ("{0} {1}", validator.ErrorString, ex.Message);
         }
         if (result == ValidationResult.Success)
         {

@@ -62,11 +62,6 @@ namespace AndreiPopescu.CharazayPlus.Data
     // user and team info
     private static class NestedMandatory
     {
-      //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
-      //static SingletonCreator() { }
-
-      //internal static readonly NestedSingleton PrivateInstance = new NestedSingleton();
-
       static NestedMandatory ( )
       { //
         // mandatory first

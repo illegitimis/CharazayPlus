@@ -20,8 +20,9 @@ namespace AndreiPopescu.CharazayPlus.Model
   using System.ComponentModel;
 
 
-  /// <remarks/>
-
+  /// <summary>
+  /// list of <see cref="PlayerDevelopment"/> wrapper
+  /// </summary>
   [Serializable]
   [DebuggerStepThrough]
   [DesignerCategory("code")]

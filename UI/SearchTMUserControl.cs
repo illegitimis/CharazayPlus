@@ -1126,8 +1126,9 @@ namespace AndreiPopescu.CharazayPlus.UI
             //
             // search for bookmarks with same id and court position
             //
-            foreach (var p in _playerFacets)
+            //foreach (var p in _playerFacets)
             {
+                var p = _playerFacets[0];
                 // var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && x.Pos == p.PositionEnum);
                 var found = Data.TransferList.Bookmarks.FirstOrDefault(x => x.PlayerId == p.Id && (byte)x.Position == (byte)p.PositionEnum);
 

@@ -7,6 +7,8 @@
 // @grant 		  GM_xmlhttpRequest
 // @include     http://www.charazay.com/index.php?act=player&code=1&id=*
 // @include     http://www.charazay.com/?act=player&code=1&id=*
+// @include     http://www.charazay.com/index.php?act=youthplayer&code=1&id=*
+// @include     http://www.charazay.com/?act=youthplayer&code=1&id=*
 // @require 	  https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 // ==/UserScript==
 
@@ -64,6 +66,8 @@ var TUPLES_LENGTH = tuples.length;
 
 
 var DATA_LENGTH = $('table[width="80%"] tr').length;
+console.log ('DATA_LENGTH', DATA_LENGTH);
+
 if (DATA_LENGTH == 11 || DATA_LENGTH == 13) {
 
 var rcs =  $("<div/>").attr ({class: "rc-s", id: "cpe"});
@@ -73,7 +77,7 @@ $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluat
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
 $(rcs).append( $("<p/>").attr ("id", "pselect") );
-  $(rcs).append($("<input/>").attr({
+$(rcs).append($("<input/>").attr({
     id: "bukmark",
     style: "display: inline-block",
     class: "inputSubmit",
@@ -83,22 +87,25 @@ $(rcs).append( $("<p/>").attr ("id", "pselect") );
   $(rcs).append($("<i/>").attr("id", "imark").text(''));
 
 var b64s = Base64Skills();
-
-ajaxCallCharazayPlusWebApi(b64s, 1, "");
+var b64 = Base64ReplaceCharacters(b64s); 
+console.info(b64);
+ajax_CharazayPlusWebApi_GetEvaluation(b64, 1, "");
 
 $('#rc').prepend(rcs);
 
-$("#pselect").html('<u>As</u>: <select id="selected_position" class="form_small"><option value="PG" selected="">Point Guard</option><option value="SG">Shooting Guard</option><option value="SF">Small Forward</option><option value="PF">Power Forward</option><option value="C">Center</option></select>');
+$("#pselect").html('<u>As</u>: <select id="selected_position" class="form_small"><option value="PG">Point Guard</option><option value="SG">Shooting Guard</option><option value="SF">Small Forward</option><option value="PF">Power Forward</option><option value="C">Center</option></select>');
 $('#selected_position').change(function() {
-  //alert('The option with value ' + $(this).val() + ' and text ' + $(this).text() + ' was selected.');
-  // onchange="ajaxCallCharazayPlusWebApi(b64s, 2, this.options[this.selectedIndex].value)"
-  ajaxCallCharazayPlusWebApi(b64s, 2, $(this).val());
+  ajax_CharazayPlusWebApi_GetEvaluation(b64, 2, $(this).val());
 });
 
-  $('#bukmark').click(function () {
+$('#bukmark').click(ajax_CharazayPlusWebApi_PostBookmark);
+}
 
-    //https://weblog.west-wind.com/posts/2012/May/08/Passing-multiple-POST-parameters-to-Web-API-Controller-Methods
-
+///////////////////////////////////////////////////////////////////////////////
+// ajax_CharazayPlusWebApi_PostBookmark
+//https://weblog.west-wind.com/posts/2012/May/08/Passing-multiple-POST-parameters-to-Web-API-Controller-Methods
+///////////////////////////////////////////////////////////////////////////////
+function ajax_CharazayPlusWebApi_PostBookmark() {
     var intPrice = parseInt($("#new_bid").attr("value").replace(/\./g,''));
     var bookmarkData = {
       Position: $('#cpePosition').text(),
@@ -136,10 +143,8 @@ $('#selected_position').change(function() {
       }
     });
     
-  });
+  }
 
-
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // calls a rest service at
@@ -176,46 +181,37 @@ function ajaxCallHelloSvc(){
 // Get-Project CharazayPlus.WebApi | Install-Package Microsoft.AspNet.WebApi.Cors -Verbose
 // http://enable-cors.org/server_aspnet.html
 ///////////////////////////////////////////////////////////////////////////////
-function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
+function ajax_CharazayPlusWebApi_GetEvaluation(b64, expression, pos){
 	
 	//contentType: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 	var surl = "";
-
-	// var postfix = "";
-	// if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0) postfix = "/".concat(b64s);
-	// else 												postfix = "?base64StringState=".concat(b64s);
-	//RIGHT WAY TO DO THIS IS WITH URL ENCODING
-	// +, /, = in base64 will get url encoded
-	// on webapi side of things use HttpUtility.UrlDecode
-	var postfix = encodeURIComponent(b64s);
 
 	switch(expression) {
     case 1:
         //var surl = "http://172.18.19.244:8080/player/facets/top/".concat(b64s);
         // http://localhost/CharazayPlus.WebApi/player/facets/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(postfix);
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/top/".concat(b64);
         break;
     case 2:
         //http://localhost/CharazayPlus.WebApi/player/c/F85nBgQOBwUEBwUNFwYL
         //http://localhost/CharazayPlus.WebApi/player/sg?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat("/").concat(postfix);
+		surl = "http://localhost/CharazayPlus.WebApi/player/".concat(pos).concat("/").concat(b64);
         break;
 	case 3:
 	    //http://localhost/CharazayPlus.WebApi/player/aggregate/F85nBgQOBwUEBwUNFwYL
 	    //http://localhost/CharazayPlus.WebApi/player/aggregate/top?base64StringState=Gqw/BAQXCAUDCwkXBgYR
-		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top/".concat(postfix);
+		surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/top/".concat(b64);
 		break;	
 	case 4:		
-        surl = "http://localhost/CharazayPlus.WebApi/player/facets/".concat(postfix);
+        surl = "http://localhost/CharazayPlus.WebApi/player/facets/".concat(b64);
         break;
 	case 5:		
-        surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/".concat(postfix);
+        surl = "http://localhost/CharazayPlus.WebApi/player/aggregate/".concat(b64);
 		break;	
     default:
         ;
-	} 
-	
-	console.log(surl);
+	}	
+	console.log("surl", surl);
 	
     $.getJSON(surl, function (data) { console.log(data); })
 	.done(function(data) {
@@ -232,6 +228,9 @@ function ajaxCallCharazayPlusWebApi(b64s, expression, pos){
 		$("#cpeShootingScore").html(data.ShootingScore);
 		//jqProgress ("#imgShootingScore", data.ShootingScore);
 		$("#cpeTransferMarketValue").html($("<strong/>").text(data.TransferMarketValue) );
+		//http://stackoverflow.com/questions/16627203/how-to-set-the-selected-option-of-a-select-list-by-value-not-by-selectedindex-us#16627236
+		var jqs = "#selected_position option[value='".concat(data.Position).concat("']");   
+		$(jqs).prop('selected', true);
     })
 	.fail(function(jqxhr, textStatus, error) { 
 		console.log( surl, " getJSON failed ", jqxhr.statusText, "readyState:", jqxhr.readyState, "status:", textStatus, "error:", error);
@@ -310,12 +309,29 @@ function Base64Skills() {
 		bytes[i] = parseInt ($(selector).text());
 	}
 }    
-//console.log("Index:", i, "Value", bytes[i]);	           
-console.log (bytes);
+//console.log (bytes);
 
 // byte array to base 64 string
 var b64s = btoa(String.fromCharCode.apply(null, bytes));
-console.log ("Base64: ", b64s);
+console.log ("Base64", b64s);
 
 return b64s;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// for some reason webapi discards the url encoding sometimes, going back to replacing problematic characters
+    // var postfix = "";
+	// if (b64s.indexOf("/") < 0 && b64s.indexOf("+") < 0) postfix = "/".concat(b64s);
+	// else 												postfix = "?base64StringState=".concat(b64s);
+	//RIGHT WAY TO DO THIS IS WITH URL ENCODING
+	// +, /, = in base64 will get url encoded
+	// on webapi side of things use HttpUtility.UrlDecode
+	//var postfix = encodeURIComponent(b64s);
+	//console.log("postfix", postfix);
+///////////////////////////////////////////////////////////////////////////////
+function Base64ReplaceCharacters(b64s) {
+	var s = b64s.replace('/','~');
+	s = s.replace ('+','_');
+	s = s.replace('=', '|');
+	return s;	
 }

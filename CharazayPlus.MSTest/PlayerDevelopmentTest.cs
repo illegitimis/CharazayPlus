@@ -94,6 +94,10 @@ namespace CharazayPlus.MSTest
       
     }
 
+    /// <summary>
+    /// recreates Development.xml from player history (Players/yyyyMMdd.xml)
+    /// can be used to recreate file on crashes
+    /// </summary>
     [TestMethod]
     public void TestBuildDevelopmentFull ( )
     {
@@ -112,8 +116,7 @@ namespace CharazayPlus.MSTest
           //
           d.DecorateFromPlayers(api, sdate);
           //
-          Trace.WriteLine(sdate);
-          Debug.WriteLine(sdate);
+          Trace.WriteLine(sdate);          
         }
         //
         var srlz = new XmlSerializer(typeof(Development));

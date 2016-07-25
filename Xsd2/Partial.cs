@@ -359,6 +359,9 @@ namespace AndreiPopescu.CharazayPlus.Model
     }
   }
   
+  /// <summary>
+  /// wrapper for a list of player developments
+  /// </summary>
   public partial class Development
   {
     public void DecorateFromPlayers (ApiPlayer[] players, string sdate)

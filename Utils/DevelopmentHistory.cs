@@ -22,20 +22,23 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
     public void Validate ( ) { }
 
-    private string SerializedDevelopmentFilePath ( )
+    private string SerializedDevelopmentFilePath
     {
-      AssemblyInfo asInfo = new AssemblyInfo();
-      if (!Directory.Exists(asInfo.ApplicationFolder))
-        Directory.CreateDirectory(asInfo.ApplicationFolder);
+      get {
+        AssemblyInfo asInfo = new AssemblyInfo();
+        if (!Directory.Exists(asInfo.ApplicationFolder))
+          Directory.CreateDirectory(asInfo.ApplicationFolder);
 
-      string path = Path.Combine(asInfo.ApplicationFolder, "Development.xml");
-      if (!File.Exists(path))
-      {
-        StreamWriter sw = File.CreateText(path);
-        sw.WriteLine("<?xml version=\"1.0\"?><development />");
-        sw.Close();
+        string path = Path.Combine(asInfo.ApplicationFolder, "Development.xml");
+        if (!File.Exists(path))
+        {
+          StreamWriter sw = File.CreateText(path);
+          sw.WriteLine("<?xml version=\"1.0\"?><development />");
+          sw.Close();
+        }
+        return path;
       }
-      return path;
+      
     }
 
     #region Singleton
@@ -47,7 +50,7 @@ namespace AndreiPopescu.CharazayPlus.Utils
     { //
       // deserialize from Development.xml
       //
-      using (FileStream fs = new FileStream(SerializedDevelopmentFilePath(), FileMode.Open, FileAccess.Read))
+      using (FileStream fs = new FileStream(SerializedDevelopmentFilePath, FileMode.Open, FileAccess.Read))
       {
         Development = (Development)(new XmlSerializer(typeof(Development)).Deserialize(fs));
       }
@@ -81,8 +84,11 @@ namespace AndreiPopescu.CharazayPlus.Utils
 
       lock (_syncObject)
       {
+        // backup
+        var fn = SerializedDevelopmentFilePath;
+        File.Copy(sourceFileName: fn, destFileName: fn + ".bak", overwrite: true);
 
-        using (FileStream fs = new FileStream(SerializedDevelopmentFilePath(), FileMode.Truncate, FileAccess.Write))
+        using (FileStream fs = new FileStream(fn, FileMode.Truncate, FileAccess.Write))
         {
           XmlSerializer serializer = new XmlSerializer(typeof(Development));
           //
