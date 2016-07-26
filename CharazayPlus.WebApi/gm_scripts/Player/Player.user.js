@@ -2,7 +2,7 @@
 // @name        PlayerEvaluator
 // @namespace   CharazayPlus
 // @description Charazay Plus Player Evaluator
-// @version     1.2.3
+// @version     1.2.7
 // @grant       none
 // @grant 		  GM_xmlhttpRequest
 // @include     http://www.charazay.com/index.php?act=player&code=1&id=*
@@ -30,16 +30,18 @@
   document.body.appendChild(script);
 } */
 
+console.info ('Charazay Plus Player Evaluator', 'v 1.2.7');
 this.$ = this.jQuery = jQuery.noConflict(true);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Base64: tuple definition
+// .mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(<NTR>) > td:nth-child(<NTD>)
 ///////////////////////////////////////////////////////////////////////////////
-var tuples = [
-{ name: "Age", 			ntr: 3 , ntd: 2}  ,   //.mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(5) > td:nth-child(2)
-{ name: "Height", 		ntr: 4 , ntd: 2}  ,   //.mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(6) > td:nth-child(2)
+var TUPLES = [
+{ name: "Age", ntr: 3, ntd: 2 },   
+{ name: "Height", ntr: 4, ntd: 2 },
 { name: "Weight", 		ntr: 4 , ntd: 5}  , 
-{ name: "Form", 		ntr: 2 , ntd: 1}  ,   //.mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(1)
+{ name: "Form", ntr: 2, ntd: 1 },  
 { name: "Fatigue", 		ntr: 3 , ntd: 5}  , 
 { name: "Defence", 		ntr: 7 , ntd: 2}  , 
 { name: "FreeThrows", 	ntr: 7 , ntd: 5}  , 
@@ -56,7 +58,26 @@ var tuples = [
 //{ name: "Salary", 		ntr: 5 , ntd: 5}  , 
 ];
 
-var TUPLES_LENGTH = tuples.length;
+var TUPLES_LENGTH = TUPLES.length;
+
+var BKHDR = [
+	  {a:"Position" , b:"POS" },
+	  {a:"Value Index" , b:"VI" },
+	  {a:"Total Score" , b:"TOT" },
+//	  {a:"Defensive Score" , b:"DEF" },
+//	  {a:"Offensive Score" , b:"OFF" },
+//	  {a:"Offensive Ability" , b:"AB" },
+//	  {a:"Shooting Score" , b:"SH" },
+    { a: "Price", b: "$" },
+	  { a: "Transfer Market Value", b: "VAL" },
+//	  {a:"Charazay Id" , b:"ID" },
+	  {a:"Full Name" , b:"Name" },
+//	  {a:"When" , b:"@" },
+	  {a:"Deadline" , b:"DDL" },	  
+  ];
+var BKHDR_LENGTH = BKHDR.length;  
+
+console.log ('TUPLES_LENGTH', TUPLES_LENGTH, 'BKHDR_LENGTH', BKHDR_LENGTH);
 
 ///////////////////////////////////////////////////////////////////////////////
 //console.info("the guts of this userscript");
@@ -76,6 +97,7 @@ $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluat
 // http://stackoverflow.com/questions/18190148/create-span-tag-and-insert-with-jquery
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
+  // position combo placeholder
 $(rcs).append( $("<p/>").attr ("id", "pselect") );
  
   // bookmark button
@@ -111,6 +133,99 @@ $('#bukmark').click(ajax_CharazayPlusWebApi_PostBookmark);
   $('#vwbkmrk').click(onViewBookmarks);
 }
 
+//addTableCss();
+//<script type="text/javascript" charset="utf-8">var TgTableSort = window.TgTableSort || function (n, t) { "use strict"; function r(n, t) { for (var e = [], o = n.childNodes, i = 0; i < o.length; ++i) { var u = o[i]; if ("." == t.substring(0, 1)) { var a = t.substring(1); f(u, a) && e.push(u) } else u.nodeName.toLowerCase() == t && e.push(u); var c = r(u, t); e = e.concat(c) } return e } function e(n, t) { var e = [], o = r(n, "tr"); return o.forEach(function (n) { var o = r(n, "td"); t >= 0 && t < o.length && e.push(o[t]) }), e } function o(n) { return n.textContent || n.innerText || "" } function i(n) { return n.innerHTML || "" } function u(n, t) { var r = e(n, t); return r.map(o) } function a(n, t) { var r = e(n, t); return r.map(i) } function c(n) { var t = n.className || ""; return t.match(/\S+/g) || [] } function f(n, t) { return -1 != c(n).indexOf(t) } function s(n, t) { f(n, t) || (n.className += " " + t) } function d(n, t) { if (f(n, t)) { var r = c(n), e = r.indexOf(t); r.splice(e, 1), n.className = r.join(" ") } } function v(n) { d(n, L), d(n, E) } function l(n, t, e) { r(n, "." + E).map(v), r(n, "." + L).map(v), e == T ? s(t, E) : s(t, L) } function g(n) { return function (t, r) { var e = n * t.str.localeCompare(r.str); return 0 == e && (e = t.index - r.index), e } } function h(n) { return function (t, r) { var e = +t.str, o = +r.str; return e == o ? t.index - r.index : n * (e - o) } } function m(n, t, r) { var e = u(n, t), o = e.map(function (n, t) { return { str: n, index: t } }), i = e && -1 == e.map(isNaN).indexOf(!0), a = i ? h(r) : g(r); return o.sort(a), o.map(function (n) { return n.index }) } function p(n, t, r, o) { for (var i = f(o, E) ? N : T, u = m(n, r, i), c = 0; t > c; ++c) { var s = e(n, c), d = a(n, c); s.forEach(function (n, t) { n.innerHTML = d[u[t]] }) } l(n, o, i) } function x(n, t) { var r = t.length; t.forEach(function (t, e) { t.addEventListener("click", function () { p(n, r, e, t) }), s(t, "tg-sort-header") }) } var T = 1, N = -1, E = "tg-sort-asc", L = "tg-sort-desc"; return function (t) { var e = n.getElementById(t), o = r(e, "tr"), i = o.length > 0 ? r(o[0], "td") : []; 0 == i.length && (i = r(o[0], "th")); for (var u = 1; u < o.length; ++u) { var a = r(o[u], "td"); if (a.length != i.length) return } x(e, i) } }(document); document.addEventListener("DOMContentLoaded", function (n) { TgTableSort("tg-u08Te") });</script>
+
+///////////////////////////////////////////////////////////////////////////////
+/*
+function addTableCss() {
+  
+  $('head').append ( $('<link/>').attr({
+    rel: "stylesheet",
+    type: "text/css",
+    href: "mytable.css" 
+  }));
+  
+  
+  var CSS = 
+    '.tg {' +
+  ''+    border-collapse: collapse;
+  ''+ border-spacing: 0;
+  ''+}
+''+.tg td {
+  ''+ font-family: Arial, sans-serif;
+  ''+font-size: 14px;
+  ''+padding: 10px 5px;
+  ''+border-style: solid;
+  ''+border-width: 1px;
+  ''+overflow: hidden;
+  ''+word-break: normal;
+  ''+}
+''+.tg th {
+  ''+ font-family: Arial, sans-serif;
+  ''+font-size: 14px;
+  ''+font-weight: normal;
+  ''+padding: 10px 5px;
+  ''+border-style: solid;
+  ''+border-width: 1px;
+  ''+overflow: hidden;
+  ''+word-break: normal;
+  ''+}
+''+.tg .tg-yw4l {
+  ''+ vertical-align: top;
+  ''+}
+''+th.tg-sort-header::-moz-selection {
+  ''+ background: transparent;
+  ''+}
+''+th.tg-sort-header::selection {
+  ''+ background: transparent;
+  ''+}
+''+th.tg-sort-header {
+  ''+ cursor: pointer;
+  ''+}
+''+table th.tg-sort-header:after {
+  ''+ content: '';
+  ''+    float: right;
+  ''+margin-top: 7px;
+  ''+ border-width: 0 4px 4px;
+  ''+border-style: solid;
+  ''+border-color: #404040 transparent;
+  ''+visibility: hidden;
+  ''+}
+
+''+table th.tg-sort-header:hover:after {
+  ''+ visibility: visible;
+  ''+}
+
+  table th.tg-sort-desc:after, table th.tg-sort-asc:after, table th.tg-sort-asc:hover:after {
+    visibility: visible;
+    opacity: 0.4;
+  }
+
+  table th.tg-sort-desc:after {
+    border-bottom: none;
+    border-width: 4px 4px 0;
+  }
+
+@media screen and (max-width: 767px) {
+  .tg {
+    width: auto !important;
+  }
+
+  .tg col {
+    width: auto !important;
+  }
+
+  .tg-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+    ;
+
+  $('<style type="text/css"></style>').text(CSS).appendTo('head');
+}
+*/
 ///////////////////////////////////////////////////////////////////////////////
 // ajax_CharazayPlusWebApi_PostBookmark
 //https://weblog.west-wind.com/posts/2012/May/08/Passing-multiple-POST-parameters-to-Web-API-Controller-Methods
@@ -359,7 +474,7 @@ function onViewBookmarks () {
 		
 	$('.mc-ls').append ( 
 	  $("<div/>").attr("class","tg-wrap")
-	  .html('<table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="80%" id="tblbkmrk" class="tg"></table>')
+	  .html('<table style="margin: 1 auto;" cellpadding="1" cellspacing="1" width="100%" id="tblbkmrk" class="tg"></table>')
 	); 
 	
 	// header row
@@ -380,18 +495,21 @@ function onViewBookmarks () {
 	    var tr = $('<tr/>');
 
 	    $(tr).append($('<td/>').text(val.Position));
-	    $(tr).append($('<td/>').text(val.ValueIndex));
+	    $(tr).append($('<td/>').append($('<strong/>').text(val.ValueIndex)));
 	    $(tr).append($('<td/>').text(val.TotalScore));
-	    $(tr).append($('<td/>').text(val.DefensiveScore));
-	    $(tr).append($('<td/>').text(val.OffensiveScore));
-	    $(tr).append($('<td/>').text(val.OffensiveAbility));
-	    $(tr).append($('<td/>').text(val.ShootingScore));
+	    //$(tr).append($('<td/>').text(val.DefensiveScore));
+	    //$(tr).append($('<td/>').text(val.OffensiveScore));
+	    //$(tr).append($('<td/>').text(val.OffensiveAbility));
+	    //$(tr).append($('<td/>').text(val.ShootingScore));	    
+	    $(tr).append($('<td/>').append($('<strong/>').text(val.Price)));
 	    $(tr).append($('<td/>').text(val.TransferMarketValue));
-	    $(tr).append($('<td/>').text(val.CharazayId));
-	    $(tr).append($('<td/>').text(val.FullName));
-	    $(tr).append($('<td/>').text(val.When));
+
+	    //<a href="index.php?act=player&code=1&id=30308369">Emilio Diaz</a>
+	    var href = "index.php?act=player&code=1&id=".concat(val.CharazayId.toString());
+	    $(tr).append($('<td/>').append( $('<a/>').attr('href', href).text(val.FullName) ));
+
+	    //$(tr).append($('<td/>').text(val.When));
 	    $(tr).append($('<td/>').text(val.Deadline));
-	    $(tr).append($('<td/>').text(val.Price));	    
 
 	    $('#tblbkmrk').append(tr);
 	  });
