@@ -2,13 +2,16 @@
 namespace CharazayPlus.WebApi.Models
 {
   using System;
-  using AndreiPopescu.CharazayPlus.Model;
-  using ProtoBuf;
+using AndreiPopescu.CharazayPlus.Model;
+using CharazayPlus.WebApi.Infrastructure;
+using ProtoBuf;
 
   [ProtoContract]
-  public class ProtoBookmark
+  public class ProtoBookmark : ConvertibleTo<BookmarkDTO>
   {
-    [ProtoMember(1, IsRequired=true)]
+    #region protobuf poco
+
+    [ProtoMember(1, IsRequired = true)]
     public ST_PlayerPositionEnum Position { get; set; }
 
     [ProtoMember(2, IsRequired = true)]
@@ -53,9 +56,34 @@ namespace CharazayPlus.WebApi.Models
     [ProtoMember(13, IsRequired = true)]
     public double Price { get; set; }
 
+    #endregion
+
+
     internal static ProtoBookmark CreateProto(string value)
     {
       throw new NotImplementedException();
     }
+
+    public override BookmarkDTO Convert()
+    {
+      return new BookmarkDTO()
+      {
+        CharazayId = this.CharazayId,
+        Deadline = this.Deadline.ToString(BookmarkDTO.DATE_FORMAT),
+        DefensiveScore = this.DefensiveScore,
+        FullName = this.FullName,
+        OffensiveAbility = this.OffensiveAbility,
+        OffensiveScore = this.OffensiveScore,
+        Position = this.Position,
+        Price = this.Price,
+        ShootingScore = this.ShootingScore,
+        TotalScore = this.TotalScore,
+        TransferMarketValue = this.TransferMarketValue,
+        ValueIndex = this.ValueIndex,
+        When = this.When.ToString(BookmarkDTO.DATE_FORMAT)
+      };
+    }
+
+   
   }
 }

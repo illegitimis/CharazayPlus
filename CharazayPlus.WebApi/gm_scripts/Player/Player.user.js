@@ -77,6 +77,8 @@ $(rcs).append( $("<div/>").attr ("class", "rc-t").text("Charazay+ Player Evaluat
 $(rcs).append($('<table />').html('<tbody><tr><td>Position</td><td id="cpePosition"></td></tr><tr><td>ValueIndex</td><td id="cpeValueIndex"></td></tr><tr><td>TotalScore</td><td id="cpeTotalScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgTotalScore"></td></tr><tr><td>DefensiveScore</td><td id="cpeDefensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgDefensiveScore"></td></tr><tr><td>OffensiveScore</td><td id="cpeOffensiveScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>OffensiveAbility</td><td id="cpeOffensiveAbility"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgOffensiveScore"></td></tr><tr><td>ShootingScore</td><td id="cpeShootingScore"></td><td>&nbsp;&nbsp;&nbsp;</td><td id="imgShootingScore"></td></tr><tr><td>TransferMarketValue</td><td id="cpeTransferMarketValue"></td><td>M</td></tr></tbody>'));	
 
 $(rcs).append( $("<p/>").attr ("id", "pselect") );
+ 
+  // bookmark button
 $(rcs).append($("<input/>").attr({
     id: "bukmark",
     style: "display: inline-block",
@@ -86,19 +88,27 @@ $(rcs).append($("<input/>").attr({
   }));
   $(rcs).append($("<i/>").attr("id", "imark").text(''));
 
+  // view bookamrks
+  $(rcs).append( $("<a/>").attr({ id: "vwbkmrk", href: "#" }).text('View bookmarks') );
+
+  // evaluate
 var b64s = Base64Skills();
 var b64 = Base64ReplaceCharacters(b64s); 
-console.info(b64);
 ajax_CharazayPlusWebApi_GetEvaluation(b64, 1, "");
 
+  // yo
 $('#rc').prepend(rcs);
 
+  // after evaluation
+  // position combo 
 $("#pselect").html('<u>As</u>: <select id="selected_position" class="form_small"><option value="PG">Point Guard</option><option value="SG">Shooting Guard</option><option value="SF">Small Forward</option><option value="PF">Power Forward</option><option value="C">Center</option></select>');
-$('#selected_position').change(function() {
-  ajax_CharazayPlusWebApi_GetEvaluation(b64, 2, $(this).val());
-});
+  $('#selected_position').change(function () { ajax_CharazayPlusWebApi_GetEvaluation(b64, 2, $(this).val()); });    
 
+  // CLICK EVENT FOR BOOKMARK BUTTON
 $('#bukmark').click(ajax_CharazayPlusWebApi_PostBookmark);
+   
+  // click event for bookmark view
+  $('#vwbkmrk').click(onViewBookmarks);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -231,6 +241,7 @@ function ajax_CharazayPlusWebApi_GetEvaluation(b64, expression, pos){
 		//http://stackoverflow.com/questions/16627203/how-to-set-the-selected-option-of-a-select-list-by-value-not-by-selectedindex-us#16627236
 		var jqs = "#selected_position option[value='".concat(data.Position).concat("']");   
 		$(jqs).prop('selected', true);
+  $('#imark').text('');
     })
 	.fail(function(jqxhr, textStatus, error) { 
 		console.log( surl, " getJSON failed ", jqxhr.statusText, "readyState:", jqxhr.readyState, "status:", textStatus, "error:", error);
@@ -280,7 +291,7 @@ function Base64Skills() {
 	var trOffset = 0;
 	if ( $('.mc-ls > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(1)').attr("class") == "center highlight")
 		trOffset = 2;
-	//console.log("trOffset: ", trOffset);
+  console.log("trOffset: ", trOffset);
 		
 	// From a length
 	var bytes = new Uint8Array(15);
@@ -290,9 +301,9 @@ function Base64Skills() {
 	//".mc-ls table:nth-child(2) tbody:nth-child(1)  tr:nth-child(NTR) td:nth-child(NTD)", 
 	var selector = ".mc-ls table:nth-child(2) tbody:nth-child(1) ";
 	selector = selector.concat("tr:nth-child(");
-	selector = selector.concat( (tuples[i].ntr+trOffset).toString());
+    selector = selector.concat((TUPLES[i].ntr + trOffset).toString());
 	selector = selector.concat (") td:nth-child(");
-	selector = selector.concat(tuples[i].ntd.toString());
+    selector = selector.concat(TUPLES[i].ntd.toString());
 	selector = selector.concat(")");
 	// append values to labels jquery id selector
 	//var id = "#id".concat(tuples[i].name);
@@ -309,7 +320,7 @@ function Base64Skills() {
 		bytes[i] = parseInt ($(selector).text());
 	}
 }    
-//console.log (bytes);
+  console.log (bytes);
 
 // byte array to base 64 string
 var b64s = btoa(String.fromCharCode.apply(null, bytes));
@@ -333,5 +344,56 @@ function Base64ReplaceCharacters(b64s) {
 	var s = b64s.replace('/','~');
 	s = s.replace ('+','_');
 	s = s.replace('=', '|');
+	console.log('Base64ReplaceCharacters',s);
 	return s;	
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//$('form[name="bid"]').before ("<p>http://api.jquery.com/before/</p>");
+///////////////////////////////////////////////////////////////////////////////
+function onViewBookmarks () {    
+	//console.log ('onViewBookmarks ()', $('.mc-ls .mc-t').length, $('.mc-ls table[width="100%"]').length);
+    
+	$('.mc-ls .mc-t').remove(); 
+    $('.mc-ls table[width="100%"]').remove();
+		
+	$('.mc-ls').append ( 
+	  $("<div/>").attr("class","tg-wrap")
+	  .html('<table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="80%" id="tblbkmrk" class="tg"></table>')
+	); 
+	
+	// header row
+	var tr = $('<tr/>');
+	for (var i = 0; i < BKHDR_LENGTH; i++) {
+		console.log(i, BKHDR[i].a, BKHDR[i].b);
+		 var abbr = $('<abbr/>').attr("title", BKHDR[i].a).text(BKHDR[i].b);
+		 var th = $('<th/>').attr("class","tg-yw4l");		 
+		 $(th).append ( abbr );
+		 $(tr).append ( th );	     	
+	} 
+	$('#tblbkmrk').append (tr);
+	
+  // http://localhost/CharazayPlus.WebApi/bookmarks/0/5
+	$.getJSON('http://localhost/CharazayPlus.WebApi/bookmarks/0/5', function (data) {
+    // key is the array index, val is the actual object
+	  $.each(data, function (key, val) {
+	    var tr = $('<tr/>');
+
+	    $(tr).append($('<td/>').text(val.Position));
+	    $(tr).append($('<td/>').text(val.ValueIndex));
+	    $(tr).append($('<td/>').text(val.TotalScore));
+	    $(tr).append($('<td/>').text(val.DefensiveScore));
+	    $(tr).append($('<td/>').text(val.OffensiveScore));
+	    $(tr).append($('<td/>').text(val.OffensiveAbility));
+	    $(tr).append($('<td/>').text(val.ShootingScore));
+	    $(tr).append($('<td/>').text(val.TransferMarketValue));
+	    $(tr).append($('<td/>').text(val.CharazayId));
+	    $(tr).append($('<td/>').text(val.FullName));
+	    $(tr).append($('<td/>').text(val.When));
+	    $(tr).append($('<td/>').text(val.Deadline));
+	    $(tr).append($('<td/>').text(val.Price));	    
+
+	    $('#tblbkmrk').append(tr);
+	  });
+	});
 }

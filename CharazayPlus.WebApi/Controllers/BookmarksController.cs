@@ -1,8 +1,10 @@
 ﻿
 namespace CharazayPlus.WebApi.Controllers
 {
-  using System.Collections.Generic;
+  using System;
   using System.IO;
+  using System.Linq;
+  using System.Collections.Generic;
   using System.Web.Http;
   using CharazayPlus.WebApi.Infrastructure;
   using CharazayPlus.WebApi.Models;
@@ -17,37 +19,92 @@ namespace CharazayPlus.WebApi.Controllers
   ///  If you want to bind a simple type from the request body, you'll use [FromBody] in your action parameter.
   ///  public IHttpActionResult Put([FromBody] string name) { ... }
   /// </summary>
-  public class BookmarksController : ApiController
+  public class BookmarksController : BaseController
   {
     private static readonly object _lock = new object();
 
-    // GET: api/Bookmarks
-    public IEnumerable<string> Get()
+    /// <summary>
+    /// GET: /Bookmarks
+    /// </summary>
+    /// <returns>json array</returns>
+    [HttpGet]
+    [Route("bookmarks")]
+    public IHttpActionResult Get()
     {
-      return new string[] { "value1", "value2" };
+      var bookmarks = ProtoBookmarksContext.Instance.GetBookmarks();
+      Func<ProtoBookmark, BookmarkDTO> bookmarkAdapter = x => x.Convert();
+      
+      return JsonCreator(bookmarks, bookmarkAdapter);
     }
 
-    // GET: api/Bookmarks/5
-    public string Get(int id)
+    [HttpGet]
+    [Route("bookmarks/{pageIndex}/{pageSize}")]
+    public IHttpActionResult Get(int pageIndex, int pageSize)
     {
-      return "value";
+      var bookmarks = ProtoBookmarksContext.Instance.GetBookmarks(pageIndex, pageSize);
+      Func<ProtoBookmark, BookmarkDTO> bookmarkAdapter = x => x.Convert();
+
+      return JsonCreator(bookmarks, bookmarkAdapter);
     }
 
-    // POST: api/Bookmarks
+    //// GET: api/Bookmarks/5
+    //public string Get(int id)
+    //{
+    //  return "value";
+    //}
+
     [NonAction]
-    public void Post([FromBody]string value)
+    public IHttpActionResult JsonCreator(
+      IEnumerable<ProtoBookmark> bks, 
+      Func<ProtoBookmark, BookmarkDTO> bookmarkAdapter
+    )
     {
-      ProtoBookmark pb = ProtoBookmark.CreateProto(value);
-      PostData(pb);
+      try
+      {
+        var dtos = bks.Select(x => bookmarkAdapter(x));
+        return Json(dtos, _jss);
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
     }
 
+
+    [NonAction]
+    public IHttpActionResult JsonCreator(ProtoBookmark pbk, Func<ProtoBookmark, BookmarkDTO> bookmarkAdapter)
+    {
+      try
+      {
+        BookmarkDTO dto = bookmarkAdapter(pbk);
+        return Json(dto, _jss);
+      }
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
+    }
+
+    #region POST
+
+    /// <summary>
+    /// POST: /bookmark
+    /// <para>
+    ///   $.ajax( { 
+    ///   url: "http://localhost/CharazayPlus.WebApi/bookmark",
+    ///   type: "POST",
+    ///   data: bookmarkData 
+    ///   });
+    /// </para>
+    /// </summary>
+    /// <param name="bdto">dto built from JS e.g.</param>
+    /// <returns></returns>
     [Route("bookmark")]
     [HttpPost]
     public IHttpActionResult PostJson([FromBody]BookmarkDTO bdto)
     {
       try
       {
-
         ProtoBookmark pb = bdto.CreateProto();
         PostData(pb);
 
@@ -59,13 +116,20 @@ namespace CharazayPlus.WebApi.Controllers
       }
     }
 
-    //[Route("bookmark")]
-    //[HttpPost]
     [NonAction]
     public void PostData([FromBody]ProtoBookmark pb)
     {
-      ProtoBookmarksContext.Instance.Upsert(pb);      
+      ProtoBookmarksContext.Instance.Upsert(pb);
     }
+
+    [NonAction]
+    public void Post([FromBody]string value)
+    {
+      ProtoBookmark pb = ProtoBookmark.CreateProto(value);
+      PostData(pb);
+    }
+    
+    #endregion
 
     // PUT: api/Bookmarks/5
     public void Put(int id, [FromBody]string value)

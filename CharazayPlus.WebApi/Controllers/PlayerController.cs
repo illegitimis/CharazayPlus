@@ -19,7 +19,7 @@
   /// Get-Project CharazayPlus.WebApi | Install-Package Microsoft.AspNet.WebApi.Cors -Verbose
   /// </para>  
   /// </remarks>
-  public class PlayerController : ApiController
+  public class PlayerController : BaseController
   {
     static readonly IDecidePlayerPositionAlgorithm smart = new DecidePlayerPositionAggregatorAlgorithm();
     static readonly IDecidePlayerPositionAlgorithm facets = new FacetsAlgorithm();
@@ -157,8 +157,6 @@
         ,
       TransferMarketValue = best.TransferMarketValue
     };
-
-    static readonly JsonSerializerSettings _jss = new JsonSerializerSettings() { Formatting = Formatting.Indented };
 
     [NonAction]
     public IHttpActionResult JsonCreator(string base64StringState, Func<PlayerEvaluator, object> objectSelector)

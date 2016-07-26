@@ -59,5 +59,15 @@ namespace CharazayPlus.WebApi.Infrastructure
       Bookmarks.TryRemove(pb.CharazayId, out value);
       Bookmarks.TryAdd(pb.CharazayId, pb);
     }
+
+    internal IEnumerable<ProtoBookmark> GetBookmarks()
+    {
+      return Bookmarks.Values.OrderByDescending (pb => pb.Deadline);
+    }
+
+    internal IEnumerable<ProtoBookmark> GetBookmarks(int pageIndex, int pageSize)
+    {
+      return GetBookmarks ().Skip (pageIndex * pageSize).Take(pageSize);
+    }
   }
 }

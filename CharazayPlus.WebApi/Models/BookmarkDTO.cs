@@ -11,9 +11,11 @@ namespace CharazayPlus.WebApi.Models
   /// <summary>
   /// bookmark json data transfer object
   /// </summary>
-  public class BookmarkDTO
+  public class BookmarkDTO : ConvertibleTo <ProtoBookmark>
   {
-    const string DATE_FORMAT = "yyyy-MM-dd HH:mm";  
+    public const string DATE_FORMAT = "yyyy-MM-dd HH:mm";
+
+    #region json poco
 
     [JsonConverter(typeof(StringEnumConverter))]
     public ST_PlayerPositionEnum Position { get; set; }
@@ -52,6 +54,7 @@ namespace CharazayPlus.WebApi.Models
     [JsonConverter(typeof(DoubleRound2DecimalsJsonConverter))]
     public double Price { get; set; }
 
+    #endregion
 
     /// <summary>
     /// spaces replaced with + in form data params 
@@ -75,5 +78,16 @@ namespace CharazayPlus.WebApi.Models
         When = DateTime.ParseExact(this.When, DATE_FORMAT, CultureInfo.InvariantCulture),
       };
     }
+
+    public static implicit operator ProtoBookmark(BookmarkDTO dto)
+    {
+      return dto.CreateProto();
+    }
+
+    public override ProtoBookmark Convert()
+    {
+      return CreateProto();
+    }
+
   }
 }
