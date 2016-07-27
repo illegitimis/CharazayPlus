@@ -1,0 +1,104 @@
+/*
+  table id: #tblbkmrk
+  table class: .tg
+  th class: .tg-hc
+*/ 
+
+.tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+    }
+
+      .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 8px 4px;
+        border-color: #bbbbbb;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+      }
+
+      .tg th {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #999999;
+        overflow: hidden;
+        word-break: normal;
+        background: #bbbbbb;
+      }
+
+      /*  Define the background color for all the ODD table columns  */
+      .tg tr:nth-child(odd) {
+        background: #dddddd;
+      }
+      /*  Define the background color for all the EVEN table columns  */
+      .tg tr:nth-child(even) {
+        background: #eeeeee;
+      }
+
+      .tg .tg-hc {
+        vertical-align: top;
+        /* (first radius values) / top-left | top-right | bottom-right | bottom-left */
+        /*border-top-left-radius: 1em;
+        border-top-right-radius: 2em;
+        border-bottom-right-radius: 1em;
+        border-bottom-left-radius: 2em;*/
+      }
+
+    th.tg-sort-header::-moz-selection {
+      background: transparent;
+    }
+
+    th.tg-sort-header::selection {
+      background: transparent;
+    }
+
+    th.tg-sort-header {
+      cursor: pointer;
+    }
+
+    table th.tg-sort-header:after {
+      content: '';
+      float: right;
+      margin-top: 7px;
+      border-width: 0 4px 4px;
+      border-style: solid;
+      border-color: #404040 transparent;
+      visibility: hidden;
+    }
+
+    table th.tg-sort-header:hover:after {
+      visibility: visible;
+    }
+
+    table th.tg-sort-desc:after, table th.tg-sort-asc:after, table th.tg-sort-asc:hover:after {
+      visibility: visible;
+      opacity: 0.4;
+    }
+
+    table th.tg-sort-desc:after {
+      border-bottom: none;
+      border-width: 4px 4px 0;
+    }
+
+    @media screen and (max-width: 767px) {
+      .tg {
+        width: auto !important;
+      }
+
+        .tg col {
+          width: auto !important;
+        }
+
+      .tg-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
