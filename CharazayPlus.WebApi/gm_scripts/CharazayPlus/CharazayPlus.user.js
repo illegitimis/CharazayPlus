@@ -2,13 +2,16 @@
 // @name        CharazayPlus
 // @namespace   http://charazayplus.ml/
 // @description Charazay Plus Player Evaluator
-// @version     1.2.8.1
+// @version     1.2.11
 // @include     http://www.charazay.com/index.php?act=player&code=1&id=*
 // @include     http://www.charazay.com/?act=player&code=1&id=*
 // @include     http://www.charazay.com/index.php?act=youthplayer&code=1&id=*
 // @include     http://www.charazay.com/?act=youthplayer&code=1&id=*
 // @require 	  https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
+// @require 	  https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/js/jquery.tablesorter.js
 // @grant       none
+// @grant       GM_addStyle
+// @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
 
@@ -52,6 +55,7 @@ var BKHDR = [
 //	  {a:"Shooting Score" , b:"SH" },
     { a: "Current price / bid", b: "Price" },
 	  { a: "Estimated Transfer Market Value", b: "Value" },
+    { a: "Profitability", b: "Prof" },
 //	  {a:"Charazay Id" , b:"ID" },
 	  {a:"Full Name" , b:"Name" },
 //	  {a:"When" , b:"@" },
@@ -120,32 +124,6 @@ tryTablesorter();
 styleBookmarkTableCss();
 */
 
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-// http://stackoverflow.com/a/12093551/2239678
-// JavaScript can be referenced from any domain, but can only enact changes to the exact domain of the document that is executing it. 
-// By exact domain I mean everything from the protocol to just before the first directory must be identical.
-///////////////////////////////////////////////////////////////////////////////
-function externalLinkBookmarkTableCss(externalHref) {
-  var head = $("head");
-  var headlinklast = head.find("link[rel='stylesheet']:last");
-  var linkElement = $('<link/>').attr({
-    rel: "stylesheet",
-    type: "text/css",
-    //href: "https://raw.githubusercontent.com/illegitimis/CharazayPlus/master/CharazayPlus.WebApi/gm_scripts/Player/tblbkmrk.css"
-    href: externalHref
-  });
-  if (headlinklast.length) {
-    headlinklast.after(linkElement);
-  }
-  else {
-    head.append(linkElement);
-  } 
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 //http://jquery-howto.blogspot.ro/2013/09/jquery-cross-domain-ajax-request.html
@@ -421,39 +399,45 @@ function Base64ReplaceCharacters(b64s) {
 
 ///////////////////////////////////////////////////////////////////////////////
 // http://localhost/CharazayPlus.WebApi/bookmarks/0/5
+// Charazay css classes {table: gtable, tr: detail, td:right }
+// Tablesorter css classes {table: tablesorter}
+// add tablesorter default theme css
+// externalLinkCss("https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/css/theme.default.min.css")
+//direct table sorter trigger
+//$(function () { $("#tblbkmrk").tablesorter({ theme: "default" }); });
 ///////////////////////////////////////////////////////////////////////////////
 function onViewBookmarks () {    
 
-  console.log('onViewBookmarks ()', $('.mc-ls .mc-t').length, $('.mc-ls table[width="100%"]').length);
-    
+  // remove 'last 10 performance' table    
 	$('.mc-ls .mc-t').remove(); 
   $('.mc-ls table[width="100%"]').remove();
 		
 	$('.mc-ls').append ( 
 	  $("<div/>").attr("class","tg-wrap")
 	  //.html('<table style="margin: 1 auto;" cellpadding="1" cellspacing="1" width="100%" id="tblbkmrk" class="tg"><thead></thead><tbody></tbody></table>')
-    //.html('<table id="tblbkmrk" class="tg"><thead></thead><tbody></tbody></table>')
-    .html('<table id="tblbkmrk" class="gtable" width="100%"><thead></thead><tbody></tbody></table>')
+    .html('<table id="tblbkmrk" class="gtable"><thead></thead><tbody></tbody></table>')
+    //.html('<table id="tblbkmrk" class="tablesorter" width="100%"><thead></thead><tbody></tbody></table>')
 	); 
 	
 	// header row
 	var tr = $('<tr/>');
-	for (var i = 0; i < BKHDR_LENGTH; i++) {
-		//console.log(i, BKHDR[i].a, BKHDR[i].b);
+	for (var i = 0; i < BKHDR_LENGTH; i++)
+	{		
 		 var abbr = $('<abbr/>').attr("title", BKHDR[i].a).text(BKHDR[i].b);
-		 var th = $('<th/>').attr("class","tg-hc tg-sort-header");		 
-		 $(th).append ( abbr );
+	  var th = $('<th/>').append(abbr);
 		 $(tr).append ( th );	     	
 	}
-	$(tr).append($('<th/>'));
+	$(tr).append($('<th/>').text('del?'));
 	$('#tblbkmrk thead').append(tr);
 	  
+  // ajax call to get bookmarks
 	$.getJSON('http://localhost/CharazayPlus.WebApi/bookmarks/', function (data) {
     // key is the array index, val is the actual object
 	  $.each(data, function (key, val) {
 	    appendBookmarkRow(val);
 	  });
 	});
+  
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -499,33 +483,83 @@ function ajax_CharazayPlusWebApi_DeleteBookmark(playerId) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// todo
+// https://raw.githubusercontent.com/Mottie/tablesorter/master/js/jquery.tablesorter.js
+// https://raw.githubusercontent.com/Mottie/tablesorter/master/js/jquery.tablesorter.widgets.js    
+// https://mottie.github.io/tablesorter/docs/#Examples
+// https://cdnjs.com/libraries/jquery.tablesorter
+// https://github.com/Mottie/tablesorter/blob/master/css/theme.default.css
+// https://jsfiddle.net/Mottie/bbxxomhx/
+// https://github.com/Mottie/tablesorter/tree/master/js
+// http://stackoverflow.com/questions/610995/cant-append-script-element
+// @require 	  https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/js/jquery.tablesorter.widgets.js
+///////////////////////////////////////////////////////////////////////////////
+// body trigger
+//var script = $('<script/>').attr(type, "text/javascript").text('$(document).ready(function () { $("#myTable").tablesorter({ theme: "default" }); });');
+//var script = document.createElement('script');
+//script.type = 'text/javascript';
+//script.innerHTML = '$(document).ready(function () { $("#myTable").tablesorter({ theme: "default" }); });';
+//$('body').prepend(script);
 ///////////////////////////////////////////////////////////////////////////////
 function appendBookmarkRow(bookmarkDTO) {
   var sid = bookmarkDTO.CharazayId.toString();
   var tr = $('<tr/>').attr({id: 'tr' + sid, class: "detail"});
 
-  $(tr).append($('<td/>').text(bookmarkDTO.Position));
-  $(tr).append($('<td/>').append($('<strong/>').text(bookmarkDTO.ValueIndex)));
-  $(tr).append($('<td/>').text(bookmarkDTO.TotalScore));
+  $(tr).append($('<td/>').attr('class', 'right').text(bookmarkDTO.Position));
+  $(tr).append($('<td/>').attr('class', 'right').append($('<strong/>').text(bookmarkDTO.ValueIndex)));
+  $(tr).append($('<td/>').attr('class', 'right').text(bookmarkDTO.TotalScore));
   //$(tr).append($('<td/>').text(bookmarkDTO.DefensiveScore));
   //$(tr).append($('<td/>').text(bookmarkDTO.OffensiveScore));
   //$(tr).append($('<td/>').text(bookmarkDTO.OffensiveAbility));
   //$(tr).append($('<td/>').text(bookmarkDTO.ShootingScore));	    
-  $(tr).append($('<td/>').append($('<strong/>').text(bookmarkDTO.Price)));
-  $(tr).append($('<td/>').text(bookmarkDTO.TransferMarketValue));
+  $(tr).append($('<td/>').attr('class', 'right').append($('<strong/>').text(bookmarkDTO.Price)));
+  $(tr).append($('<td/>').attr('class', 'right').text(bookmarkDTO.TransferMarketValue));
+
+  var profitability = Math.max(0.01, bookmarkDTO.TransferMarketValue / bookmarkDTO.Price).toFixed(2);
+  console.log('prof', profitability);
+  $(tr).append($('<td/>').attr('class', 'right').append($('<i/>').text(profitability.toString())));
 
   //<a href="index.php?act=player&code=1&id=30308369">Emilio Diaz</a>
   var href = "index.php?act=player&code=1&id=".concat(sid);
-  $(tr).append($('<td/>').append($('<a/>').attr('href', href).text(bookmarkDTO.FullName)));
+  $(tr).append($('<td/>').attr('class', 'right').append($('<a/>').attr('href', href).text(bookmarkDTO.FullName)));
 
   //$(tr).append($('<td/>').text(bookmarkDTO.When));
-  $(tr).append($('<td/>').text(bookmarkDTO.Deadline));
+  $(tr).append($('<td/>').attr('class', 'right').text(bookmarkDTO.Deadline));
 
+  // delete bookmark action
   var a = $('<a/>').attr('href', '#').click(function () { ajax_CharazayPlusWebApi_DeleteBookmark(bookmarkDTO.CharazayId); });
   var img = $("<img/>").attr({ src: "/images/delete.png", title: "Delete Bookmark" });
   $(a).html(img);
-  $(tr).append(a);
+  $(tr).append($('<td/>').attr('class', 'right').html(a));
 
+  // append table row
   $('#tblbkmrk tbody').append(tr);
 }
+
+
+///////////////////////////////////////////////////////////////////////////////
+// http://stackoverflow.com/a/12093551/2239678
+// JavaScript can be referenced from any domain, but can only enact changes to the exact domain of the document that is executing it. 
+// By exact domain I mean everything from the protocol to just before the first directory must be identical.
+// href: "https://raw.githubusercontent.com/illegitimis/CharazayPlus/master/CharazayPlus.WebApi/gm_scripts/Player/tblbkmrk.css"
+///////////////////////////////////////////////////////////////////////////////
+// this should have worked
+// @resource 	  TABLE_SORTER_DEFAULT_THEME https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/css/theme.default.min.css
+// var newCSS = GM_getResourceText("TABLE_SORTER_DEFAULT_THEME");
+// GM_addStyle(newCSS);
+///////////////////////////////////////////////////////////////////////////////
+function externalLinkCss(externalHref) {
+  var head = $("head");
+  var headlinklast = head.find("link[rel='stylesheet']:last");
+  var linkElement = $('<link/>').attr({
+    rel: "stylesheet",
+    type: "text/css",
+    href: externalHref
+  });
+  if (headlinklast.length) {
+    headlinklast.after(linkElement);
+  }
+  else {
+    head.append(linkElement);
+  }
+}
+
