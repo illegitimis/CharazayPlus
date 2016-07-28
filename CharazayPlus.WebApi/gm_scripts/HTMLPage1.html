@@ -1,0 +1,949 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+  
+  <style type="text/css">
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+    }
+
+      .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 8px 4px;
+        border-color: #bbbbbb;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+      }
+
+      .tg th {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #999999;
+        overflow: hidden;
+        word-break: normal;
+        background: #bbbbbb;
+      }
+
+      /*  Define the background color for all the ODD table columns  */
+      .tg tr:nth-child(odd) {
+        background: #dddddd;
+      }
+      /*  Define the background color for all the EVEN table columns  */
+      .tg tr:nth-child(even) {
+        background: #eeeeee;
+      }
+
+      .tg .tg-hc {
+        vertical-align: top;
+        /* (first radius values) / top-left | top-right | bottom-right | bottom-left */
+        /*border-top-left-radius: 1em;
+        border-top-right-radius: 2em;
+        border-bottom-right-radius: 1em;
+        border-bottom-left-radius: 2em;*/
+      }
+
+    th.tg-sort-header::-moz-selection {
+      background: transparent;
+    }
+
+    th.tg-sort-header::selection {
+      background: transparent;
+    }
+
+    th.tg-sort-header {
+      cursor: pointer;
+    }
+
+    table th.tg-sort-header:after {
+      content: '';
+      float: right;
+      margin-top: 7px;
+      border-width: 0 4px 4px;
+      border-style: solid;
+      border-color: #404040 transparent;
+      visibility: hidden;
+    }
+
+    table th.tg-sort-header:hover:after {
+      visibility: visible;
+    }
+
+    table th.tg-sort-desc:after, table th.tg-sort-asc:after, table th.tg-sort-asc:hover:after {
+      visibility: visible;
+      opacity: 0.4;
+    }
+
+    table th.tg-sort-desc:after {
+      border-bottom: none;
+      border-width: 4px 4px 0;
+    }
+
+    @media screen and (max-width: 767px) {
+      .tg {
+        width: auto !important;
+      }
+
+        .tg col {
+          width: auto !important;
+        }
+
+      .tg-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+
+  <script type="text/javascript" charset="utf-8">var TgTableSort = window.TgTableSort || function (n, t) { "use strict"; function r(n, t) { for (var e = [], o = n.childNodes, i = 0; i < o.length; ++i) { var u = o[i]; if ("." == t.substring(0, 1)) { var a = t.substring(1); f(u, a) && e.push(u) } else u.nodeName.toLowerCase() == t && e.push(u); var c = r(u, t); e = e.concat(c) } return e } function e(n, t) { var e = [], o = r(n, "tr"); return o.forEach(function (n) { var o = r(n, "td"); t >= 0 && t < o.length && e.push(o[t]) }), e } function o(n) { return n.textContent || n.innerText || "" } function i(n) { return n.innerHTML || "" } function u(n, t) { var r = e(n, t); return r.map(o) } function a(n, t) { var r = e(n, t); return r.map(i) } function c(n) { var t = n.className || ""; return t.match(/\S+/g) || [] } function f(n, t) { return -1 != c(n).indexOf(t) } function s(n, t) { f(n, t) || (n.className += " " + t) } function d(n, t) { if (f(n, t)) { var r = c(n), e = r.indexOf(t); r.splice(e, 1), n.className = r.join(" ") } } function v(n) { d(n, L), d(n, E) } function l(n, t, e) { r(n, "." + E).map(v), r(n, "." + L).map(v), e == T ? s(t, E) : s(t, L) } function g(n) { return function (t, r) { var e = n * t.str.localeCompare(r.str); return 0 == e && (e = t.index - r.index), e } } function h(n) { return function (t, r) { var e = +t.str, o = +r.str; return e == o ? t.index - r.index : n * (e - o) } } function m(n, t, r) { var e = u(n, t), o = e.map(function (n, t) { return { str: n, index: t } }), i = e && -1 == e.map(isNaN).indexOf(!0), a = i ? h(r) : g(r); return o.sort(a), o.map(function (n) { return n.index }) } function p(n, t, r, o) { for (var i = f(o, E) ? N : T, u = m(n, r, i), c = 0; t > c; ++c) { var s = e(n, c), d = a(n, c); s.forEach(function (n, t) { n.innerHTML = d[u[t]] }) } l(n, o, i) } function x(n, t) { var r = t.length; t.forEach(function (t, e) { t.addEventListener("click", function () { p(n, r, e, t) }), s(t, "tg-sort-header") }) } var T = 1, N = -1, E = "tg-sort-asc", L = "tg-sort-desc"; return function (t) { var e = n.getElementById(t), o = r(e, "tr"), i = o.length > 0 ? r(o[0], "td") : []; 0 == i.length && (i = r(o[0], "th")); for (var u = 1; u < o.length; ++u) { var a = r(o[u], "td"); if (a.length != i.length) return } x(e, i) } }(document); document.addEventListener("DOMContentLoaded", function (n) { TgTableSort("tg-table-id") });</script>
+  
+  <!-- choose a theme file -->
+  
+  <!--
+    https://raw.githubusercontent.com/Mottie/tablesorter/master/css/theme.default.css
+  https://cdnjs.com/libraries/jquery.tablesorter    
+    -->
+    
+  <!--<link rel="stylesheet" href=".\Player\theme.default.css">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/css/theme.default.min.css">
+  
+  <!-- load jQuery and tablesorter scripts -->
+  <!--<script type="text/javascript" src=".\Player\jquery.min.js"></script>-->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>  
+
+  <!--<script type="text/javascript" src=".\Player\jquery.tablesorter.js"></script>-->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/js/jquery.tablesorter.js"></script>
+
+  <!-- 
+    tablesorter widgets (optional) 
+    c:\Users\apopescu\AppData\Roaming\Mozilla\Firefox\Profiles\e2xo9miv.default-1467128340150\gm_scripts
+  -->
+  <!--<script type="text/javascript" src=".\Player\jquery.tablesorter.widgets.js"></script>-->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.26.6/js/jquery.tablesorter.widgets.js"></script>    
+
+</head>
+<body>
+
+  <!--http://www.tablesgenerator.com/html_tables-->
+  <!--<div class="tg-wrap">
+    <table id="tg-table-id" class="tg">
+      <thead>
+        <tr>
+          <th class="tg-hc">
+            <abbr title="Position">POS</abbr>
+          </th>
+          <th class="tg-hc">ValueIndex</th>
+          <th class="tg-hc">TotalScore</th>
+          <th class="tg-hc">DefensiveScore</th>
+          <th class="tg-hc">OffensiveScore</th>
+          <th class="tg-hc">OffensiveAbility</th>
+          <th class="tg-hc">ShootingScore</th>
+          <th class="tg-hc">TransferMarketValue</th>
+          <th class="tg-hc">CharazayId</th>
+          <th class="tg-hc">FullName</th>
+          <th class="tg-hc">When</th>
+          <th class="tg-hc">Deadline</th>
+          <th class="tg-hc">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>asd</td>
+          <td>2012</td>
+          <td>2013</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>60</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>asd</td>
+          <td>2012</td>
+          <td>2013</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>200</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>asd</td>
+          <td>2010</td>
+          <td>2016</td>
+          <td>300</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>30</td>
+          <td>40</td>
+          <td>50</td>
+          <td>60</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>asd</td>
+          <td>2012</td>
+          <td>2019</td>
+          <td>10000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>-->
+
+  <!--script default-->
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $("#myTable")
+      .tablesorter({
+        theme: 'default'
+      });
+  });
+  </script>
+
+  <!--script metro-->
+  <script id="js">
+ $(function () {
+   $("#metro")
+   .tablesorter({
+     //theme: 'metro-dark',
+     sortList: [[0, 0], [1, 0], [2, 0]],
+     widthFixed: true,
+     widgets: ['zebra', 'columns', 'filter']
+   })
+   .tablesorterPager({
+     // target the pager markup - see the HTML block below
+     container: $(".pager"),
+     output: '{startRow} to {endRow} ({totalRows})'
+   });
+ });
+  </script>
+
+   <!--Documentation for this tablesorter FORK can be found at  http://mottie.github.io/tablesorter/docs/--> 
+  <script>
+    
+    $(function () {
+      $('#bbxxomhx').tablesorter({
+
+        // *** APPEARANCE ***
+        // Add a theme - 'blackice', 'blue', 'dark', 'default', 'dropbox',
+        // 'green', 'grey' or 'ice' stylesheets have all been loaded
+        // to use 'bootstrap' or 'jui', you'll need to include "uitheme"
+        // in the widgets option - To modify the class names, extend from
+        // themes variable. Look for "$.extend($.tablesorter.themes.jui"
+        // at the bottom of this window
+        // this option only adds a table class name "tablesorter-{theme}"
+        theme: 'default',
+
+        // fix the column widths
+        widthFixed: false,
+
+        // Show an indeterminate timer icon in the header when the table
+        // is sorted or filtered
+        showProcessing: false,
+
+        // header layout template (HTML ok); {content} = innerHTML,
+        // {icon} = <i/> (class from cssIcon)
+        headerTemplate: '{content}{icon}',
+
+        // return the modified template string
+        onRenderTemplate: null, // function(index, tmpl){ return tmpl; },
+
+        // called after each header cell is rendered, use index to target
+        // the column customize header HTML
+        onRenderHeader: function (index) {
+          // the span wrapper is added by default
+          $(this)
+            .find('div.tablesorter-header-inner')
+            .addClass('roundedCorners');
+        },
+
+        // *** FUNCTIONALITY ***
+        // prevent text selection in header
+        cancelSelection: true,
+
+        // add tabindex to header for keyboard accessibility
+        tabIndex: true,
+
+        // other options: "ddmmyyyy" & "yyyymmdd"
+        dateFormat: "mmddyyyy",
+
+        // The key used to select more than one column for multi-column
+        // sorting.
+        sortMultiSortKey: "shiftKey",
+
+        // key used to remove sorting on a column
+        sortResetKey: 'ctrlKey',
+
+        // false for German "1.234.567,89" or French "1 234 567,89"
+        usNumberFormat: true,
+
+        // If true, parsing of all table cell data will be delayed
+        // until the user initializes a sort
+        delayInit: false,
+
+        // if true, server-side sorting should be performed because
+        // client-side sorting will be disabled, but the ui and events
+        // will still be used.
+        serverSideSorting: false,
+
+        // default setting to trigger a resort after an "update",
+        // "addRows", "updateCell", etc has completed
+        resort: true,
+
+        // *** SORT OPTIONS ***
+        // These are detected by default,
+        // but you can change or disable them
+        // these can also be set using data-attributes or class names
+        headers: {
+          // set "sorter : false" (no quotes) to disable the column
+          0: {
+            sorter: "text"
+          },
+          1: {
+            sorter: "text"
+          }
+        },
+
+        // ignore case while sorting
+        ignoreCase: true,
+
+        // forces the user to have this/these column(s) sorted first
+        sortForce: null,
+        // initial sort order of the columns,
+        // example sortList: [[0,0],[1,0]],
+        // [[columnIndex, sortDirection], ... ]
+        sortList: [
+          [0, 0],
+          [1, 0],
+          [2, 0]
+        ],
+        // default sort that is added to the end of the users sort
+        // selection.
+        sortAppend: null,
+
+        // when sorting two rows with exactly the same content,
+        // the original sort order is maintained
+        sortStable: false,
+
+        // starting sort direction "asc" or "desc"
+        sortInitialOrder: "asc",
+
+        // Replace equivalent character (accented characters) to allow
+        // for alphanumeric sorting
+        sortLocaleCompare: false,
+
+        // third click on the header will reset column to default - unsorted
+        sortReset: false,
+
+        // restart sort to "sortInitialOrder" when clicking on previously
+        // unsorted columns
+        sortRestart: false,
+
+        // sort empty cell to bottom, top, none, zero, emptyMax, emptyMin
+        emptyTo: "bottom",
+
+        // sort strings in numerical column as max, min, top, bottom, zero
+        stringTo: "max",
+
+        // colspan cells in the tbody will have duplicated content in the
+        // cache for each spanned column
+        duplicateSpan: true,
+
+        // extract text from the table
+        textExtraction: {
+          0: function (node, table) {
+            // this is how it is done by default
+            return $(node).attr(table.config.textAttribute) ||
+              node.textContent ||
+              node.innerText ||
+              $(node).text() ||
+              '';
+          },
+          1: function (node) {
+            return $(node).text();
+          }
+        },
+
+        // data-attribute that contains alternate cell text
+        // (used in default textExtraction function)
+        textAttribute: 'data-text',
+
+        // use custom text sorter
+        // function(a,b){ return a.sort(b); } // basic sort
+        textSorter: null,
+
+        // choose overall numeric sorter
+        // function(a, b, direction, maxColumnValue)
+        numberSorter: null,
+
+        // *** WIDGETS ***
+        // apply widgets on tablesorter initialization
+        initWidgets: true,
+
+        // table class name template to match to include a widget
+        widgetClass: 'widget-{name}',
+
+        // include zebra and any other widgets, options:
+        // 'columns', 'filter', 'stickyHeaders' & 'resizable'
+        // 'uitheme' is another widget, but requires loading
+        // a different skin and a jQuery UI theme.
+        widgets: ['zebra', 'columns'],
+
+        widgetOptions: {
+
+          // *** COLUMNS WIDGET ***
+          // change the default column class names primary is the 1st column
+          // sorted, secondary is the 2nd, etc
+          columns: [
+            "primary",
+            "secondary",
+            "tertiary"
+          ],
+
+          // If true, the class names from the columns option will also be added
+          // to the table tfoot
+          columns_tfoot: true,
+
+          // If true, the class names from the columns option will also be added
+          // to the table thead
+          columns_thead: true,
+
+          // *** FILTER WIDGET ***
+          // css class name added to the filter cell (string or array)
+          filter_cellFilter: '',
+
+          // If there are child rows in the table (rows with class name from
+          // "cssChildRow" option) and this option is true and a match is found
+          // anywhere in the child row, then it will make that row visible;
+          // default is false
+          filter_childRows: false,
+
+          // ( filter_childRows must be true ) if true = search
+          // child rows by column; false = search all child row text grouped
+          filter_childByColumn: false,
+
+          // if true, include matching child row siblings
+          filter_childWithSibs: true,
+
+          // if true, allows using '#:{query}' in AnyMatch searches
+          // ( column:query )
+          filter_columnAnyMatch: true,
+
+          // If true, a filter will be added to the top of each table column.
+          filter_columnFilters: true,
+
+          // css class name added to the filter row & each input in the row
+          // (tablesorter-filter is ALWAYS added)
+          filter_cssFilter: '',
+
+          // data attribute in the header cell that contains the default (initial)
+          // filter value
+          filter_defaultAttrib: 'data-value',
+
+          // add a default column filter type "~{query}" to make fuzzy searches
+          // default; "{q1} AND {q2}" to make all searches use a logical AND.
+          filter_defaultFilter: {},
+
+          // filters to exclude, per column
+          filter_excludeFilter: {},
+
+          // jQuery selector string (or jQuery object)
+          // of external filters
+          filter_external: '',
+
+          // class added to filtered rows; needed by pager plugin
+          filter_filteredRow: 'filtered',
+
+          // add custom filter elements to the filter row
+          filter_formatter: null,
+
+          // Customize the filter widget by adding a select dropdown with content,
+          // custom options or custom filter functions;
+          // see http://goo.gl/HQQLW for more details
+          filter_functions: null,
+
+          // hide filter row when table is empty
+          filter_hideEmpty: true,
+
+          // Set this option to true to hide the filter row initially. The row is
+          // revealed by hovering over the filter row or giving any filter
+          // input/select focus.
+          filter_hideFilters: false,
+
+          // Set this option to false to keep the searches case sensitive
+          filter_ignoreCase: true,
+
+          // if true, search column content while the user types (with a delay)
+          // or, set a minimum number of characters that must be present before
+          // a search is initiated
+          filter_liveSearch: true,
+
+          // global query settings ('exact' or 'match'); overridden by
+          // "filter-match" or "filter-exact" class
+          filter_matchType: {
+            'input': 'exact',
+            'select': 'exact'
+          },
+
+          // a header with a select dropdown & this class name will only show
+          // available (visible) options within the drop down
+          filter_onlyAvail: 'filter-onlyAvail',
+
+          // default placeholder text (overridden by any header
+          // "data-placeholder" setting)
+          filter_placeholder: {
+            search: '',
+            select: ''
+          },
+
+          // jQuery selector string of an element used to reset the filters.
+          filter_reset: null,
+
+          // Reset filter input when the user presses escape
+          // normalized across browsers
+          filter_resetOnEsc: true,
+
+          // Use the $.tablesorter.storage utility to save the most recent filters
+          filter_saveFilters: false,
+
+          // Delay in milliseconds before the filter widget starts searching;
+          // This option prevents searching for every character while typing
+          // and should make searching large tables faster.
+          filter_searchDelay: 300,
+
+          // allow searching through already filtered rows in special
+          // circumstances; will speed up searching in large tables if true
+          filter_searchFiltered: true,
+
+          // include a function to return an array of values to be added to the
+          // column filter select
+          filter_selectSource: null,
+
+          // filter_selectSource array text left of the separator is added to
+          // the option value, right into the option text
+          filter_selectSourceSeparator: '|',
+
+          // Set this option to true if filtering is performed on the
+          // server-side.
+          filter_serversideFiltering: false,
+
+          // Set this option to true to use the filter to find text from the
+          // start of the column. So typing in "a" will find "albert" but not
+          // "frank", both have a's; default is false
+          filter_startsWith: false,
+
+          // If true, ALL filter searches will only use parsed data. To only
+          // use parsed data in specific columns, set this option to false
+          // and add class name "filter-parsed" to the header
+          filter_useParsedData: false,
+
+          // *** RESIZABLE WIDGET ***
+          // If this option is set to false, resized column widths will not
+          // be saved. Previous saved values will be restored on page reload
+          resizable: true,
+
+          // If this option is set to true, a resizing anchor
+          // will be included in the last column of the table
+          resizable_addLastColumn: false,
+
+          // Set this option to the starting & reset header widths
+          resizable_widths: [],
+
+          // Set this option to throttle the resizable events
+          // set to true (5ms) or any number 0-10 range
+          resizable_throttle: false,
+
+          // When true, the last column will be targeted for resizing,
+          // which is the same has holding the shift and resizing a column
+          resizable_targetLast: false,
+
+          // *** SAVESORT WIDGET ***
+          // If this option is set to false, new sorts will not be saved.
+          // Any previous saved sort will be restored on page reload.
+          saveSort: true,
+
+          // *** STICKYhEADERS WIDGET ***
+          // stickyHeaders widget: extra class name added to the sticky header
+          // row
+          stickyHeaders: '',
+
+          // jQuery selector or object to attach sticky header to
+          stickyHeaders_attachTo: null,
+
+          // jQuery selector or object to monitor horizontal scroll position
+          // (defaults: xScroll > attachTo > window)
+          stickyHeaders_xScroll: null,
+
+          // jQuery selector or object to monitor vertical scroll position
+          // (defaults: yScroll > attachTo > window)
+          stickyHeaders_yScroll: null,
+
+          // number or jquery selector targeting the position:fixed element
+          stickyHeaders_offset: 0,
+
+          // scroll table top into view after filtering
+          stickyHeaders_filteredToTop: true,
+
+          // added to table ID, if it exists
+          stickyHeaders_cloneId: '-sticky',
+
+          // trigger "resize" event on headers
+          stickyHeaders_addResizeEvent: true,
+
+          // if false and a caption exist, it won't be included in the
+          // sticky header
+          stickyHeaders_includeCaption: true,
+
+          // The zIndex of the stickyHeaders, allows the user to adjust this
+          // to their needs
+          stickyHeaders_zIndex: 2,
+
+          // *** STORAGE WIDGET ***
+          // allows switching between using local & session storage
+          storage_useSessionStorage: false,
+          // alternate table id (set if grouping multiple tables together)
+          storage_tableId: '',
+          // table attribute to get the table ID, if storage_tableId
+          // is undefined
+          storage_group: '', // defaults to "data-table-group"
+          // alternate url to use (set if grouping tables across
+          // multiple pages)
+          storage_fixedUrl: '',
+          // table attribute to get the fixedUrl, if storage_fixedUrl
+          // is undefined
+          storage_page: '',
+
+          // *** ZEBRA WIDGET ***
+          // class names to add to alternating rows
+          // [ "even", "odd" ]
+          zebra: [
+            "even",
+            "odd"
+          ]
+
+        },
+
+        // *** CALLBACKS ***
+        // function called after tablesorter has completed initialization
+        initialized: null, // function (table) {}
+
+        // *** extra css class names
+        tableClass: '',
+        cssAsc: '',
+        cssDesc: '',
+        cssNone: '',
+        cssHeader: '',
+        cssHeaderRow: '',
+        // processing icon applied to header during sort/filter
+        cssProcessing: '',
+
+        // class name indiciating that a row is to be attached to its
+        // parent
+        cssChildRow: 'tablesorter-childRow',
+        // don't sort tbody with this class name
+        // (only one class name allowed here!)
+        cssInfoBlock: 'tablesorter-infoOnly',
+        // class name added to element inside header; clicking on it
+        // won't cause a sort
+        cssNoSort: 'tablesorter-noSort',
+        // header row to ignore; cells within this row will not be added
+        // to table.config.$headers
+        cssIgnoreRow: 'tablesorter-ignoreRow',
+
+        // if this class does not exist, the {icon} will not be added from
+        // the headerTemplate
+        cssIcon: 'tablesorter-icon',
+        // class name added to the icon when there is no column sort
+        cssIconNone: '',
+        // class name added to the icon when the column has an ascending sort
+        cssIconAsc: '',
+        // class name added to the icon when the column has a descending sort
+        cssIconDesc: '',
+
+        // *** header events ***
+        pointerClick: 'click',
+        pointerDown: 'mousedown',
+        pointerUp: 'mouseup',
+
+        // *** SELECTORS ***
+        // jQuery selectors used to find the header cells.
+        selectorHeaders: '> thead th, > thead td',
+
+        // jQuery selector of content within selectorHeaders
+        // that is clickable to trigger a sort.
+        selectorSort: "th, td",
+
+        // rows with this class name will be removed automatically
+        // before updating the table cache - used by "update",
+        // "addRows" and "appendCache"
+        selectorRemove: ".remove-me",
+
+        // *** DEBUGING ***
+        // send messages to console
+        debug: false
+
+      });
+    });
+
+    // Extend the themes to change any of the default class names
+    // this example modifies the jQuery UI theme class names
+    $.extend($.tablesorter.themes.jui, {
+      /* change default jQuery uitheme icons - find the full list of icons
+      here: http://jqueryui.com/themeroller/
+      (hover over them for their name)
+      */
+      // table classes
+      table: 'ui-widget ui-widget-content ui-corner-all',
+      caption: 'ui-widget-content',
+      // *** header class names ***
+      // header classes
+      header: 'ui-widget-header ui-corner-all ui-state-default',
+      sortNone: '',
+      sortAsc: '',
+      sortDesc: '',
+      // applied when column is sorted
+      active: 'ui-state-active',
+      // hover class
+      hover: 'ui-state-hover',
+      // *** icon class names ***
+      // icon class added to the <i> in the header
+      icons: 'ui-icon',
+      // class name added to icon when column is not sorted
+      iconSortNone: 'ui-icon-carat-2-n-s',
+      // class name added to icon when column has ascending sort
+      iconSortAsc: 'ui-icon-carat-1-n',
+      // class name added to icon when column has descending sort
+      iconSortDesc: 'ui-icon-carat-1-s',
+      filterRow: '',
+      footerRow: '',
+      footerCells: '',
+      // even row zebra striping
+      even: 'ui-widget-content',
+      // odd row zebra striping
+      odd: 'ui-state-default'
+    });
+
+  </script>
+
+  <!--https://mottie.github.io/tablesorter/docs/-->
+  <div>
+    <table id="myTable" class="tablesorter">
+      <thead> <tr> <th>Last Name</th> <th>First Name</th> <th>Email</th> <th>Due</th> <th>Web Site</th> </tr> </thead>
+      <tbody> <tr> <td>Smith</td> <td>John</td> <td>jsmith@gmail.com</td> <td>$50.00</td> <td>http://www.jsmith.com</td> </tr> <tr> <td>Bach</td> <td>Frank</td> <td>fbach@yahoo.com</td> <td>$50.00</td> <td>http://www.frank.com</td> </tr> <tr> <td>Doe</td> <td>Jason</td> <td>jdoe@hotmail.com</td> <td>$100.00</td> <td>http://www.jdoe.com</td> </tr> <tr> <td>Conway</td> <td>Tim</td> <td>tconway@earthlink.net</td> <td>$50.00</td> <td>http://www.timconway.com</td> </tr> </tbody>
+    </table>
+  </div>
+
+  <!--https://mottie.github.io/tablesorter/docs/example-option-theme-metro-style.html-->
+  <div>
+    <table id="metro" class="tablesorter">
+      <thead>
+        <tr class="dark-row">
+          <th colspan="7" class="sorter-false">
+            <h2 class="table-title">Table Title</h2>
+          </th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Major</th>
+          <th>Sex</th>
+          <th>English</th>
+          <th>Japanese</th>
+          <th>Calculus</th>
+          <th class="sorter-false">Geometry</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>Name</th>
+          <th>Major</th>
+          <th>Sex</th>
+          <th>English</th>
+          <th>Japanese</th>
+          <th>Calculus</th>
+          <th>Geometry</th>
+        </tr>
+        <tr class="dark-row">
+          <th colspan="7">
+            <div class="pager">
+              <button type="button" class="first"><<</button>
+              <button type="button" class="prev"><</button>
+              <span class="pagedisplay"></span>
+              <button type="button" class="next">></button>
+              <button type="button" class="last">>></button>
+              <select class="pagesize" title="Select page size">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+              <select class="gotoPage" title="Select page number"></select>
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr><td>Student01</td><td>Languages</td><td>male</td><td>80</td><td>70</td><td>75</td><td>80</td></tr>
+        <tr><td>Student02</td><td>Mathematics</td><td>male</td><td>90</td><td>88</td><td>100</td><td>90</td></tr>
+        <tr><td>Student03</td><td>Languages</td><td>female</td><td>85</td><td>95</td><td>80</td><td>85</td></tr>
+        <tr><td>Student04</td><td>Languages</td><td>male</td><td>60</td><td>55</td><td>100</td><td>100</td></tr>
+        <tr><td>Student05</td><td>Languages</td><td>female</td><td>68</td><td>80</td><td>95</td><td>80</td></tr>
+        <tr><td>Student06</td><td>Mathematics</td><td>male</td><td>100</td><td>99</td><td>100</td><td>90</td></tr>
+        <tr><td>Student07</td><td>Mathematics</td><td>male</td><td>85</td><td>68</td><td>90</td><td>90</td></tr>
+        <tr><td>Student08</td><td>Languages</td><td>male</td><td>100</td><td>90</td><td>90</td><td>85</td></tr>
+        <tr><td>Student09</td><td>Mathematics</td><td>male</td><td>80</td><td>50</td><td>65</td><td>75</td></tr>
+        <tr><td>Student10</td><td>Languages</td><td>male</td><td>85</td><td>100</td><td>100</td><td>90</td></tr>
+        <tr><td>Student11</td><td>Languages</td><td>male</td><td>86</td><td>85</td><td>100</td><td>100</td></tr>
+        <tr><td>Student12</td><td>Mathematics</td><td>female</td><td>100</td><td>75</td><td>70</td><td>85</td></tr>
+        <tr><td>Student13</td><td>Languages</td><td>female</td><td>100</td><td>80</td><td>100</td><td>90</td></tr>
+        <tr><td>Student14</td><td>Languages</td><td>female</td><td>50</td><td>45</td><td>55</td><td>90</td></tr>
+        <tr><td>Student15</td><td>Languages</td><td>male</td><td>95</td><td>35</td><td>100</td><td>90</td></tr>
+        <tr><td>Student16</td><td>Languages</td><td>female</td><td>100</td><td>50</td><td>30</td><td>70</td></tr>
+        <tr><td>Student17</td><td>Languages</td><td>female</td><td>80</td><td>100</td><td>55</td><td>65</td></tr>
+        <tr><td>Student18</td><td>Mathematics</td><td>male</td><td>30</td><td>49</td><td>55</td><td>75</td></tr>
+        <tr><td>Student19</td><td>Languages</td><td>male</td><td>68</td><td>90</td><td>88</td><td>70</td></tr>
+        <tr><td>Student20</td><td>Mathematics</td><td>male</td><td>40</td><td>45</td><td>40</td><td>80</td></tr>
+        <tr><td>Student21</td><td>Languages</td><td>male</td><td>50</td><td>45</td><td>100</td><td>100</td></tr>
+        <tr><td>Student22</td><td>Mathematics</td><td>male</td><td>100</td><td>99</td><td>100</td><td>90</td></tr>
+        <tr><td>Student23</td><td>Mathematics</td><td>male</td><td>82</td><td>77</td><td>0</td><td>79</td></tr>
+        <tr><td>Student24</td><td>Languages</td><td>female</td><td>100</td><td>91</td><td>13</td><td>82</td></tr>
+        <tr><td>Student25</td><td>Mathematics</td><td>male</td><td>22</td><td>96</td><td>82</td><td>53</td></tr>
+        <tr><td>Student26</td><td>Languages</td><td>female</td><td>37</td><td>29</td><td>56</td><td>59</td></tr>
+        <tr><td>Student27</td><td>Mathematics</td><td>male</td><td>86</td><td>82</td><td>69</td><td>23</td></tr>
+        <tr><td>Student28</td><td>Languages</td><td>female</td><td>44</td><td>25</td><td>43</td><td>1</td></tr>
+        <tr><td>Student29</td><td>Mathematics</td><td>male</td><td>77</td><td>47</td><td>22</td><td>38</td></tr>
+        <tr><td>Student30</td><td>Languages</td><td>female</td><td>19</td><td>35</td><td>23</td><td>10</td></tr>
+        <tr><td>Student31</td><td>Mathematics</td><td>male</td><td>90</td><td>27</td><td>17</td><td>50</td></tr>
+        <tr><td>Student32</td><td>Languages</td><td>female</td><td>60</td><td>75</td><td>33</td><td>38</td></tr>
+        <tr><td>Student33</td><td>Mathematics</td><td>male</td><td>4</td><td>31</td><td>37</td><td>15</td></tr>
+        <tr><td>Student34</td><td>Languages</td><td>female</td><td>77</td><td>97</td><td>81</td><td>44</td></tr>
+        <tr><td>Student35</td><td>Mathematics</td><td>male</td><td>5</td><td>81</td><td>51</td><td>95</td></tr>
+        <tr><td>Student36</td><td>Languages</td><td>female</td><td>70</td><td>61</td><td>70</td><td>94</td></tr>
+        <tr><td>Student37</td><td>Mathematics</td><td>male</td><td>60</td><td>3</td><td>61</td><td>84</td></tr>
+        <tr><td>Student38</td><td>Languages</td><td>female</td><td>63</td><td>39</td><td>0</td><td>11</td></tr>
+        <tr><td>Student39</td><td>Mathematics</td><td>male</td><td>50</td><td>46</td><td>32</td><td>38</td></tr>
+        <tr><td>Student40</td><td>Languages</td><td>female</td><td>51</td><td>75</td><td>25</td><td>3</td></tr>
+        <tr><td>Student41</td><td>Mathematics</td><td>male</td><td>43</td><td>34</td><td>28</td><td>78</td></tr>
+        <tr><td>Student42</td><td>Languages</td><td>female</td><td>11</td><td>89</td><td>60</td><td>95</td></tr>
+        <tr><td>Student43</td><td>Mathematics</td><td>male</td><td>48</td><td>92</td><td>18</td><td>88</td></tr>
+        <tr><td>Student44</td><td>Languages</td><td>female</td><td>82</td><td>2</td><td>59</td><td>73</td></tr>
+        <tr><td>Student45</td><td>Mathematics</td><td>male</td><td>91</td><td>73</td><td>37</td><td>39</td></tr>
+        <tr><td>Student46</td><td>Languages</td><td>female</td><td>4</td><td>8</td><td>12</td><td>10</td></tr>
+        <tr><td>Student47</td><td>Mathematics</td><td>male</td><td>89</td><td>10</td><td>6</td><td>11</td></tr>
+        <tr><td>Student48</td><td>Languages</td><td>female</td><td>90</td><td>32</td><td>21</td><td>18</td></tr>
+        <tr><td>Student49</td><td>Mathematics</td><td>male</td><td>42</td><td>49</td><td>49</td><td>72</td></tr>
+        <tr><td>Student50</td><td>Languages</td><td>female</td><td>56</td><td>37</td><td>67</td><td>54</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--http://jsfiddle.net/Mottie/bbxxomhx/-->
+  <div>
+    <table id="bbxxomhx" class="tablesorter">
+      <thead>
+        <tr>
+          <th>AlphaNumeric</th>
+          <th>Numeric</th>
+          <th>Animals</th>
+          <th>Sites</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>abc 123</td>
+          <td>10</td>
+          <td>Koala</td>
+          <td>http://www.google.com</td>
+        </tr>
+        <tr>
+          <td>abc 1</td>
+          <td>234</td>
+          <td>Ox</td>
+          <td>http://www.yahoo.com</td>
+        </tr>
+        <tr>
+          <td>abc 9</td>
+          <td>10</td>
+          <td>Girafee</td>
+          <td>http://www.facebook.com</td>
+        </tr>
+        <tr>
+          <td>zyx 24</td>
+          <td>767</td>
+          <td>Bison</td>
+          <td>http://www.whitehouse.gov/</td>
+        </tr>
+        <tr>
+          <td>abc 11</td>
+          <td>3</td>
+          <td>Chimp</td>
+          <td>http://www.ucla.edu/</td>
+        </tr>
+        <tr>
+          <td>abc 2</td>
+          <td>56</td>
+          <td>Elephant</td>
+          <td>http://www.wikipedia.org/</td>
+        </tr>
+        <tr>
+          <td>abc 9</td>
+          <td>155</td>
+          <td>Lion</td>
+          <td>http://www.nytimes.com/</td>
+        </tr>
+        <tr>
+          <td>ABC 10</td>
+          <td>87</td>
+          <td>Zebra</td>
+          <td>http://www.google.com</td>
+        </tr>
+        <tr>
+          <td>zyx 1</td>
+          <td>999</td>
+          <td>Koala</td>
+          <td>http://www.mit.edu/</td>
+        </tr>
+        <tr>
+          <td>zyx 12</td>
+          <td>0</td>
+          <td>Llama</td>
+          <td>http://www.nasa.gov/</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+</html>

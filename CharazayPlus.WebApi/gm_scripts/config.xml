@@ -1,9 +1,18 @@
 <UserScriptConfig>
-	<Script basedir="Player" checkRemoteUpdates="1" dependhash="1cbd3088f8436f956bc4d418275caeb0e24cf365" description="Charazay Plus Player Evaluator" enabled="true" filename="Player.user.js" installTime="1466530435743" modified="1468790959342" name="PlayerEvaluator" namespace="CharazayPlus" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="f1f3cc0a-141a-4890-ac0b-58b3bd7abd16" version="1" installurl="file:///C:/Users/Illegitimis/AppData/Roaming/Mozilla/Firefox/Profiles/yewnkbio.default/gm_scripts/Player/Player.user.js" updateurl="file:///C:/Users/Illegitimis/AppData/Roaming/Mozilla/Firefox/Profiles/yewnkbio.default/gm_scripts/Player/Player.user.js">
+	<Script basedir="CharazayPlus" checkRemoteUpdates="1" dependhash="1cbd3088f8436f956bc4d418275caeb0e24cf365" description="Charazay Plus Player Evaluator" enabled="true" filename="CharazayPlus.user.js" installTime="1469638230332" modified="1469711293025" name="CharazayPlus" namespace="http://charazayplus.ml/" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="4babe014-ddeb-4df4-9ce4-4e6bbf3cf92c" version="1.2.8.1" installurl="file:///C:/Users/apopescu/AppData/Roaming/Mozilla/Firefox/Profiles/e2xo9miv.default-1467128340150/gm_scripts/CharazayPlus/CharazayPlus.user.js" updateurl="file:///C:/Users/apopescu/AppData/Roaming/Mozilla/Firefox/Profiles/e2xo9miv.default-1467128340150/gm_scripts/CharazayPlus/CharazayPlus.user.js">
 		<Grant>none</Grant>
 		<Grant>GM_xmlhttpRequest</Grant>
 		<Include>http://www.charazay.com/index.php?act=player&amp;code=1&amp;id=*</Include>
 		<Include>http://www.charazay.com/?act=player&amp;code=1&amp;id=*</Include>
+		<Include>http://www.charazay.com/index.php?act=youthplayer&amp;code=1&amp;id=*</Include>
+		<Include>http://www.charazay.com/?act=youthplayer&amp;code=1&amp;id=*</Include>
 		<Require filename="jquery.min.js"/>
+	</Script>
+	<Script basedir="TestTableSorter" checkRemoteUpdates="1" dependhash="bf37fab5f8fdc10cf490ab2bacaed1fe650de253" description="" enabled="true" filename="TestTableSorter.user.js" installTime="1469702033534" modified="1469703940246" name="TestTableSorter" namespace="http://charazayplus.ml/" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="ba5487dd-bae8-4f29-8b1e-da0128693932" version="1" installurl="file:///C:/Users/apopescu/AppData/Roaming/Mozilla/Firefox/Profiles/e2xo9miv.default-1467128340150/gm_scripts/TestTableSorter/TestTableSorter.user.js" updateurl="file:///C:/Users/apopescu/AppData/Roaming/Mozilla/Firefox/Profiles/e2xo9miv.default-1467128340150/gm_scripts/TestTableSorter/TestTableSorter.user.js">
+		<Grant>GM_addStyle</Grant>
+		<Grant>GM_getResourceText</Grant>
+		<Include>https://notepad-plus-plus.org/features/</Include>
+		<Require filename="jquery.min.js"/>
+		<Require filename="jquery.tablesorter.js"/>
 	</Script>
 </UserScriptConfig>

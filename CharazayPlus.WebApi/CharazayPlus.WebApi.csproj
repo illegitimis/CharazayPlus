@@ -170,6 +170,7 @@
     <Compile Include="Infrastructure\ConvertibleTo.cs" />
     <Compile Include="Infrastructure\DoubleRoundJsonConverter.cs" />
     <Compile Include="Infrastructure\ProtoBookmarksContext.cs" />
+    <Compile Include="Infrastructure\TaskExtensions.cs" />
     <Compile Include="Models\BookmarkDTO.cs" />
     <Compile Include="Models\PlayerDTO.cs" />
     <Compile Include="Models\ProtoBookmark.cs" />

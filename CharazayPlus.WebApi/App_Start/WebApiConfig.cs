@@ -13,12 +13,15 @@ namespace CharazayPlus.WebApi
     {
       // Web API configuration and services
       // http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+      // https://connect.microsoft.com/VisualStudio/feedback/details/1692403/enablecors-attribute-with-methods-doesnt-seem-to-include-patch
       //
       var corsAttr = new EnableCorsAttribute(
         origins: "http://www.charazay.com,http://54.229.122.56,http://54.194.193.243",
         headers: "*",
-        methods: "get,post"
-      ) { SupportsCredentials = false };
+        methods: "OPTIONS,POST,PUT,PATCH,GET,DELETE"
+      ) {
+        SupportsCredentials = false 
+      };
       config.EnableCors(corsAttr);
 
       // Web API routes

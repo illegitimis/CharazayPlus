@@ -137,8 +137,18 @@ namespace CharazayPlus.WebApi.Controllers
     }
 
     // DELETE: api/Bookmarks/5
-    public void Delete(int id)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    [Route("bookmark/{id}")]
+    [HttpDelete]
+    public IHttpActionResult /*void*/ Delete(int id)
     {
+      if (ProtoBookmarksContext.Instance.Delete(id))
+        return Ok("deleted");
+      else
+        return NotFound();
     }
   }
 }
