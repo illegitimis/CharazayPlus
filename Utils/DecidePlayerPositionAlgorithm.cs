@@ -158,7 +158,7 @@
     /// </summary>
     public class FacetsAlgorithm : IDecidePlayerPositionAlgorithm
     {
-        const double INCREASE = 0.7d;
+        const double INCREASE = 0.49d;
 
         static readonly IDecidePlayerPositionAlgorithm totalScoreAlgo = new TotalScoreAlgorithm();
         static readonly IDecidePlayerPositionAlgorithm potentialPositionsAlgo = new PotentialPlayerPositionAlgorithm();
@@ -210,9 +210,14 @@
             }
             
             // get back player list sorted by score
-            return positionScores
-                .OrderByDescending(kvp => kvp.Value)
-                .Select(x => eval.GetPlayer(x.Key));            
+            var ordered = positionScores.OrderByDescending(kvp => kvp.Value).ToArray ();
+            var posDifference = (int)ordered[0].Key - (int)ordered[1].Key;
+            if (Math.Abs (posDifference) > 1)
+            {
+              return (new int[] { 2, 0, 1, 3, 4 }).Select(i => eval.GetPlayer(ordered[i].Key));                
+            }
+            else
+              return ordered.Select(x => eval.GetPlayer(x.Key));            
         }
 
         /*

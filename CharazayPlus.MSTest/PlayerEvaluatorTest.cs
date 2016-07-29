@@ -11,6 +11,7 @@ namespace CharazayPlus.MSTest
   using AndreiPopescu.CharazayPlus;
   using AndreiPopescu.CharazayPlus.Model;
   using System.Text.RegularExpressions;
+  using POS = AndreiPopescu.CharazayPlus.Model.ST_PlayerPositionEnum;
 
   [TestClass]
   public class PlayerEvaluatorTest
@@ -682,23 +683,44 @@ Rebounds: 	4 		Experience: 	0");
 
     [TestMethod]
     [TestCategory("RegexParse")]
+    [TestCategory("TotalScore")]
+    [TestCategory("MostAdequatePositionByHeight")]
+    [TestCategory("PotentialPlayerPosition")]
     public void MassimilianoDeZotti_41849918()
     {
-      charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	15 		Fatigue: 	0 %
+      RegexParse_Total_Adequate_Position_Evaluation( @"Age: 	15 		Fatigue: 	0 %
 Height: 	202 		Weight: 	110,10
 Skills Index: 	24.626 		Salary: 	€ 29.005
 Defence: 	7 		Free Throws: 	5
 Two Point: 	7 		Three Point: 	5
 Dribbling: 	3 		Passing: 	5
 Speed: 	8 		Footwork: 	10
-Rebounds: 	5 		Experience: 	2");
+Rebounds: 	5 		Experience: 	2"
+        , new POS[] { POS.C, POS.PF }
+        , new POS[] { POS.PF }
+        , new POS[] { POS.C, POS.PF }
+);
+    }
+
+    void RegexParse_Total_Adequate_Position_Evaluation(string charazayText
+      , ST_PlayerPositionEnum[] ts, ST_PlayerPositionEnum[] adeq, ST_PlayerPositionEnum[] pot)
+    {
+      charazayPlayer p = ParseHtmlTextToPlayer(charazayText);
       PlayerEvaluator eval = new PlayerEvaluator(p);
-      var l1 = eval.Best2(a1).ToList();
-      var l2 = eval.Best2(a2).ToList();
-      var l3 = eval.Best2(a3).ToList();
+      
+      // arrange
+      var l1 = eval.Best2(a1).Select(x => x.PositionEnum).ToArray();
+      var l2 = eval.Best2(a2).Select(x => x.PositionEnum).ToArray();
+      var l3 = eval.Best2(a3).Select(x => x.PositionEnum).ToArray();
+
+      // act
+      CollectionAssert.AreEqual(ts, l1);
+      CollectionAssert.AreEqual(adeq, l2);
+      CollectionAssert.AreEqual(pot, l3);      
     }
 
     [TestMethod]
+    [TestCategory("StateBytes")]
     public void StateBytes_SorinDasanu()
     {
       charazayPlayer p = ParseHtmlTextToPlayer(@"Form: 4
@@ -742,6 +764,7 @@ Rebounds: 	7 		Experience: 	1");
     }
 
     [TestMethod]
+    [TestCategory("StateBytes")]
     public void StateBytes_EmilioDiaz()
     {
       charazayPlayer p = ParseHtmlTextToPlayer(@"Age: 	27 		Fatigue: 	11 %
@@ -778,30 +801,74 @@ Rebounds: 	4 		Experience: 	19");
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void EmilioDiaz_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Age: 	27 		Fatigue: 	11 %
+      string s = @"Age: 	27 		Fatigue: 	11 %
 Height: 	190 		Weight: 	81,17
 Skills Index: 	488.306 		Salary: 	€ 274.899
 Defence: 	17 		Free Throws: 	9
 Two Point: 	6 		Three Point: 	7
 Dribbling: 	16 		Passing: 	6
 Speed: 	24 		Footwork: 	5
-Rebounds: 	4 		Experience: 	19"));
+Rebounds: 	4 		Experience: 	19";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation (s
+        , ST_PlayerPositionEnum.PG, ST_PlayerPositionEnum.SG
+        , ST_PlayerPositionEnum.PG, ST_PlayerPositionEnum.SF);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
+    public void GiorgioDiFrancesco_34563741()
+    {
+      string charazayText = @"Form: 5
+Age: 	24 		Fatigue: 	0 %
+Height: 	206 		Weight: 	103,36
+Skills Index: 	211.190 		Salary: 	€ 180.583
+Defence: 	14 		Free Throws: 	7
+Two Point: 	5 		Three Point: 	4
+Dribbling: 	7 		Passing: 	5
+Speed: 	14 		Footwork: 	23
+Rebounds: 	6 		Experience: 	11";
+
+      RegexParse_Smart_Facets_Evaluation(charazayText
+        , ST_PlayerPositionEnum.PF, ST_PlayerPositionEnum.SF
+        , ST_PlayerPositionEnum.C, ST_PlayerPositionEnum.PF);      
+    }
+
+    public void RegexParse_Smart_Facets_Evaluation(
+      string charazayText, 
+      ST_PlayerPositionEnum f0pos, 
+      ST_PlayerPositionEnum f1pos,
+      ST_PlayerPositionEnum s0pos, 
+      ST_PlayerPositionEnum s1pos)
+    {
+       
+      var xsdp = ParseHtmlTextToPlayer(charazayText);
+      PlayerEvaluator eval = new PlayerEvaluator(xsdp);
+
+      var best2 = eval.Best2(facets).ToArray();
+      Assert.AreEqual(f0pos, best2[0].PositionEnum);
+      Assert.AreEqual(f1pos, best2[1].PositionEnum);
+
+      best2 = eval.Best2(smart).ToArray();
+      Assert.AreEqual(s0pos, best2[0].PositionEnum);
+      Assert.AreEqual(s1pos, best2[1].PositionEnum);
+    }
+
+
+    [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void SorinDasanu_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 4
+      string s = @"Form: 4
 Age: 	15 		Fatigue: 	37 %
 Height: 	207 		Weight: 	116,55
 Skills Index: 	18.504 		Salary: 	€ 21.196
@@ -809,21 +876,18 @@ Defence: 	5 		Free Throws: 	4
 Two Point: 	5 		Three Point: 	7
 Dribbling: 	2 		Passing: 	4
 Speed: 	5 		Footwork: 	9
-Rebounds: 	7 		Experience: 	1"));
+Rebounds: 	7 		Experience: 	1";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.C, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.PF, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.C, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.PF, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation (s, ST_PlayerPositionEnum.C, ST_PlayerPositionEnum.PF, ST_PlayerPositionEnum.C, ST_PlayerPositionEnum.PF);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void ArnoMeyer_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 5
+      string s = @"Form: 5
 Age: 	25 		Fatigue: 	11 %
 Height: 	201 		Weight: 	91,22
 Skills Index: 	212.207 		Salary: 	€ 165.796
@@ -831,21 +895,18 @@ Defence: 	19 		Free Throws: 	5
 Two Point: 	5 		Three Point: 	4
 Dribbling: 	10 		Passing: 	6
 Speed: 	20 		Footwork: 	6
-Rebounds: 	7 		Experience: 	15"));
+Rebounds: 	7 		Experience: 	15";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation(s,ST_PlayerPositionEnum.SF,ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SF,ST_PlayerPositionEnum.PG);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void SlobodanRistić_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 6
+      string s = @"Form: 6
 Age: 	26 		Fatigue: 	11 %
 Height: 	198 		Weight: 	95,21
 Skills Index: 	295.726 		Salary: 	€ 232.515
@@ -853,21 +914,18 @@ Defence: 	22 		Free Throws: 	5
 Two Point: 	8 		Three Point: 	6
 Dribbling: 	9 		Passing: 	6
 Speed: 	22 		Footwork: 	7
-Rebounds: 	6 		Experience: 	17"));
+Rebounds: 	6 		Experience: 	17";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation (s, ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SF,ST_PlayerPositionEnum.SF, ST_PlayerPositionEnum.PG);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void TymoteuszMucha_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 5
+      string s = @"Form: 5
 Age: 	17 		Fatigue: 	4 %
 Height: 	180 		Weight: 	74,52
 Skills Index: 	47.907 		Salary: 	€ 57.688
@@ -875,21 +933,17 @@ Defence: 	14 		Free Throws: 	6
 Two Point: 	6 		Three Point: 	7
 Dribbling: 	7 		Passing: 	9
 Speed: 	8 		Footwork: 	3
-Rebounds: 	5 		Experience: 	4"));
-
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.PG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
+Rebounds: 	5 		Experience: 	4";
+      RegexParse_Smart_Facets_Evaluation (s, ST_PlayerPositionEnum.PG, ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.PG,ST_PlayerPositionEnum.SG);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void Alex_Jeffery_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 5
+      string s = @"Form: 5
 Age: 	15 		Fatigue: 	0 %
 Height: 	188 		Weight: 	77,53
 Skills Index: 	21.864 		Salary: 	€ 28.567
@@ -897,21 +951,18 @@ Defence: 	9 		Free Throws: 	5
 Two Point: 	7 		Three Point: 	5
 Dribbling: 	7 		Passing: 	3
 Speed: 	8 		Footwork: 	4
-Rebounds: 	4 		Experience: 	2"));
+Rebounds: 	4 		Experience: 	2";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation (s,ST_PlayerPositionEnum.SF,ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SF);
     }
 
     [TestMethod]
+    [TestCategory("smart")]
+    [TestCategory("facets")]
+    [TestCategory("RegexParse")]
     public void Ferdinando_Ipsale_Facets()
     {
-      PlayerEvaluator eval = new PlayerEvaluator(ParseHtmlTextToPlayer(@"Form: 1
+      string s =  @"Form: 1
 Age: 	15 		Fatigue: 	0 %
 Height: 	185 		Weight: 	88,64
 Skills Index: 	14.941 		Salary: 	€ 21.030
@@ -919,15 +970,9 @@ Defence: 	6 		Free Throws: 	4
 Two Point: 	5 		Three Point: 	7
 Dribbling: 	4 		Passing: 	4
 Speed: 	9 		Footwork: 	4
-Rebounds: 	5 		Experience: 	0"));
+Rebounds: 	5 		Experience: 	0";
 
-      var best2 = eval.Best2(facets).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
-
-      best2 = eval.Best2(smart).ToArray();
-      Assert.AreEqual(ST_PlayerPositionEnum.SG, best2[0].PositionEnum);
-      Assert.AreEqual(ST_PlayerPositionEnum.SF, best2[1].PositionEnum);
+      RegexParse_Smart_Facets_Evaluation (s, ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SF,ST_PlayerPositionEnum.SG,ST_PlayerPositionEnum.SF);      
     }
   }
 }

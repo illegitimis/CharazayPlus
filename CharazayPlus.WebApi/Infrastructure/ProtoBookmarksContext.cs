@@ -8,7 +8,6 @@ namespace CharazayPlus.WebApi.Infrastructure
   using System.Linq;
   using System.Threading;
   using System.Threading.Tasks;
-  using System.Web;
   using CharazayPlus.WebApi.Models;
 
   public class ProtoBookmarksContext
@@ -42,19 +41,34 @@ namespace CharazayPlus.WebApi.Infrastructure
         DeserializeProtobuf(CacheBackup);
       }
 
-      //Action WaitToPersist =() => {
-      //  Thread.Sleep(TimeSpan.FromMinutes(MINUTES_BETWEEN_SERIALIZATION));
-      //  Persist();
-      //}; 
+      Action DelayPersist =() => {
+        Thread.Sleep(TimeSpan.FromMinutes(MINUTES_SERIALIZATION_DELAY));
+        Persist();
+      }; 
+
+      Action RepeatPersist =() => {
+        Thread.Sleep(TimeSpan.FromMinutes(MINUTES_BETWEEN_SERIALIZATION));
+        Persist();
+      };
+
+      // fire and forget
+      Task.Run(() =>
+      {
+        DelayPersist();
+        while (true)
+        {
+          RepeatPersist();
+        }
+      });
 
 #pragma warning disable
-      // fire and forget
-      TaskExtensions.RepeatDelayAsync(
-        TimeSpan.FromMinutes(MINUTES_SERIALIZATION_DELAY),
-        TimeSpan.FromMinutes(MINUTES_BETWEEN_SERIALIZATION),
-        CancellationToken.None,
-        () => Persist()
-      );
+      
+      //TaskExtensions.RepeatDelayAsync(
+      //  TimeSpan.FromMinutes(MINUTES_SERIALIZATION_DELAY),
+      //  TimeSpan.FromMinutes(MINUTES_BETWEEN_SERIALIZATION),
+      //  CancellationToken.None,
+      //  () => Persist()
+      //);
 #pragma warning enable
 
 

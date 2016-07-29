@@ -1,18 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
-using System.IO;
-using System.Xml.Serialization;
-using AndreiPopescu.CharazayPlus.Model;
-using API = AndreiPopescu.CharazayPlus.Xsd2.charazay;
-using AndreiPopescu.CharazayPlus.Utils;
-using System.Diagnostics;
-
-namespace CharazayPlus.MSTest
+﻿namespace CharazayPlus.MSTest
 {
+  using System.Collections.Generic;
+  using Microsoft.VisualStudio.TestTools.UnitTesting;
+  using System.Reflection;
+  using System.IO;
+  using System.Xml.Serialization;
+  using AndreiPopescu.CharazayPlus.Model;
+  using API = AndreiPopescu.CharazayPlus.Xsd2.charazay;
+  using AndreiPopescu.CharazayPlus.Utils;
+  using System.Diagnostics;
+
   [TestClass]
   public class PlayerDevelopmentTest
   {

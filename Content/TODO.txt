@@ -52,9 +52,10 @@ outlier detection
 PlayerEvaluator (OK)
 DecidePlayerPositionAlgorithm (OK)
 SearchTMUC.FacetsDeduction (infers possible facets for a player, maximum 2 court positions) REMOVED
-SearchTMUserControl.FrontBackCourtDeduction (move to algorithm..)
-SerializeHelper.GetPlayerFromIdAndPosition (separate xml down/parse & evaluation part)
+SearchTMUserControl.FrontBackCourtDeduction (move to algorithm..) OK
+SerializeHelper.GetPlayerFromIdAndPosition (separate xml down/parse & evaluation part) 
 FacetsAlgorithm (OK)
+Fix facets for DiFrancesco
 
 =========================================
 ===        VERSION 1.1.6.10           ===
